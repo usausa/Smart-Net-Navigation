@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Smart.Navigation", "Smart.Navigation\Smart.Navigation.shproj", "{F714BB82-D565-4157-B6E7-1568AE4EABF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.PCL", "Smart.Navigation.PCL\Smart.Navigation.PCL.csproj", "{6FFDB7C0-DC6A-4890-9E3E-44845E50E320}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.Net4", "Smart.Navigation.Net4\Smart.Navigation.Net4.csproj", "{C0015C08-2A1C-48E2-8640-885BDB6DEA3E}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Smart.Navigation\Smart.Navigation.projitems*{f714bb82-d565-4157-b6e7-1568ae4eabf6}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FFDB7C0-DC6A-4890-9E3E-44845E50E320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FFDB7C0-DC6A-4890-9E3E-44845E50E320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FFDB7C0-DC6A-4890-9E3E-44845E50E320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FFDB7C0-DC6A-4890-9E3E-44845E50E320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0015C08-2A1C-48E2-8640-885BDB6DEA3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0015C08-2A1C-48E2-8640-885BDB6DEA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0015C08-2A1C-48E2-8640-885BDB6DEA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0015C08-2A1C-48E2-8640-885BDB6DEA3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
