@@ -1,0 +1,3 @@
+[submodule "Smart.CE"]
+	path = Smart.CE
+	url = https://github.com/usausa/Smart-Net-CE.git
