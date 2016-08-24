@@ -6,8 +6,20 @@
     <SharedGUID>f714bb82-d565-4157-b6e7-1568ae4eabf6</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Smart.Navigation</Import_RootNamespace>
+    <Import_RootNamespace>Smart</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\DefaultNavigationResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigatorAware.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Navigator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigatorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Context\INavigationContextLifecycle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Context\NavigationContextAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\IAttributeMember.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Parameter\Direction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Parameter\NavigationParameterAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageAttribute.cs" />
   </ItemGroup>
 </Project>
