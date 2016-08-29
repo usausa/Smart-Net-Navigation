@@ -9,10 +9,9 @@
     <Import_RootNamespace>Smart</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\DefaultNavigationResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\DefaultServiceProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigatorAware.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationResolver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Navigator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Context\INavigationContextLifecycle.cs" />

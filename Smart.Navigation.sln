@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.Net4", "Sm
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Smart.Navigation\Smart.Navigation.projitems*{6ffdb7c0-dc6a-4890-9e3e-44845e50e320}*SharedItemsImports = 4
+		Smart.Navigation\Smart.Navigation.projitems*{c0015c08-2a1c-48e2-8640-885bdb6dea3e}*SharedItemsImports = 4
 		Smart.Navigation\Smart.Navigation.projitems*{f714bb82-d565-4157-b6e7-1568ae4eabf6}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
