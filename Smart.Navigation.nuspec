@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Usa.Smart.Navigation</id>
+    <version>0.8.0.0</version>
+    <title>Smart.Navigation .NET</title>
+    <authors>machi_pon</authors>
+    <owners>machi_pon</owners>
+    <description>Smart navigation library for .NET</description>
+    <releaseNotes></releaseNotes>
+    <summary>Smart navigation library for .NET</summary>
+    <projectUrl>https://github.com/usausa/Smart-Net-Navigation</projectUrl>
+    <copyright></copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+      <dependency id="Usa.Smart.Core" version="0.5.0" />
+    </dependencies>
+    <tags>smart pcl navigation</tags>
+  </metadata>
+  <files>
+    <!-- .NET 4.6.2 -->
+    <file src="Smart.Navigation.NET4\bin\Release\Smart.Navigation.dll" target="lib\net462\Smart.Navigation.dll" />
+    <file src="Smart.Navigation.NET4\bin\Release\Smart.Navigation.pdb" target="lib\net462\Smart.Navigation.pdb" />
+    <!--<file src="Smart.Navigation.NET4\bin\Release\Smart.Navigation.xml" target="lib\net462\Smart.Navigation.xml" />-->
+
+    <!-- PCL -->
+    <file src="Smart.Navigation.PCL\bin\Release\Smart.Navigation.dll" target="lib\portable-net45+win8+wpa81\Smart.Navigation.dll" />
+    <file src="Smart.Navigation.PCL\bin\Release\Smart.Navigation.pdb" target="lib\portable-net45+win8+wpa81\Smart.Navigation.pdb" />
+    <!--<file src="Smart.Navigation.PCL\bin\Release\Smart.Navigation.xml" target="lib\portable-net45+win8+wpa81\Smart.Navigation.xml" />-->
+  </files>
+</package>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Smart.Navigation Rules" Description="Smart.Navigation Rules" ToolsVersion="14.0">
+  <IncludeAll Action="Warning" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA1004" Action="None" />
+    <Rule Id="CA1020" Action="None" />
+    <Rule Id="CA2210" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1005" Action="Hidden" />
+    <Rule Id="SA1009" Action="Hidden" />
+    <Rule Id="SA1101" Action="Hidden" />
+    <Rule Id="SA1111" Action="Hidden" />
+    <Rule Id="SA1115" Action="Hidden" />
+    <Rule Id="SA1201" Action="Hidden" />
+    <Rule Id="SA1506" Action="Hidden" />
+    <Rule Id="SA1512" Action="Hidden" />
+    <Rule Id="SA1606" Action="Hidden" />
+    <Rule Id="SA1614" Action="Hidden" />
+    <Rule Id="SA1623" Action="Hidden" />
+    <Rule Id="SA1633" Action="Hidden" />
+    <Rule Id="SA1642" Action="Hidden" />
+    <Rule Id="SA1652" Action="Hidden" />
+  </Rules>
+</RuleSet>
