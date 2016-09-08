@@ -3,11 +3,12 @@
     /// <summary>
     ///
     /// </summary>
-    public interface INavigatorAware
+    public interface INotifySupport
     {
         /// <summary>
         ///
         /// </summary>
-        INavigator Navigator { get; set; }
+        /// <param name="parameter"></param>
+        void NavigatorNotify(object parameter);
     }
 }

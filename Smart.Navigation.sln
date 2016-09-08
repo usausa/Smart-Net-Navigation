@@ -31,11 +31,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		desktop.ini = desktop.ini
 		Example.ruleset = Example.ruleset
 		README.md = README.md
 		Smart.Navigation.nuspec = Smart.Navigation.nuspec
 		Smart.Navigation.ruleset = Smart.Navigation.ruleset
+		Smart.Navigation.sln.DotSettings = Smart.Navigation.sln.DotSettings
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.Universal", "Smart.Navigation.Universal\Smart.Navigation.Universal.csproj", "{78150FD3-EC52-437F-AC78-11B5F67D04D7}"
