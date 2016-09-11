@@ -5,7 +5,7 @@
     /// <summary>
     ///
     /// </summary>
-    internal class PageDescripter
+    public class PageDescripter : IPageDescriptor
     {
         public object Id { get; }
 

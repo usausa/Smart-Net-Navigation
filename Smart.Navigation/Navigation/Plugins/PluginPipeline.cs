@@ -12,7 +12,7 @@
             Plugins = plusing.ToList();
         }
 
-        public void OnCreate(PluginContext context, object page, object target)
+        public void OnCreate(IPluginContext context, object page, object target)
         {
             foreach (var plugin in Plugins)
             {
@@ -20,15 +20,15 @@
             }
         }
 
-        public void OnDispose(PluginContext context, object page, object target)
+        public void OnClose(IPluginContext context, object page, object target)
         {
             foreach (var plugin in Plugins)
             {
-                plugin.OnDispose(context, page, target);
+                plugin.OnClose(context, page, target);
             }
         }
 
-        public void OnNavigatedFrom(PluginContext context, object page, object target)
+        public void OnNavigatedFrom(IPluginContext context, object page, object target)
         {
             foreach (var plugin in Plugins)
             {
@@ -36,7 +36,7 @@
             }
         }
 
-        public void OnNavigatedTo(PluginContext context, object page, object target)
+        public void OnNavigatedTo(IPluginContext context, object page, object target)
         {
             foreach (var plugin in Plugins)
             {

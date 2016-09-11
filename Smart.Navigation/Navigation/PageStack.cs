@@ -3,7 +3,7 @@
     /// <summary>
     ///
     /// </summary>
-    internal class PageStack
+    public class PageStack
     {
         public PageDescripter Descripter { get; }
 

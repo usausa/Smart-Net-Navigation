@@ -9,6 +9,7 @@
     <Import_RootNamespace>Smart</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\CallbackActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\ConfirmEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\ConfirmOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\IActivator.cs" />
@@ -16,13 +17,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\StandardActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\StandardConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\IConfirmRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationEventSupport.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INavigatorAware.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\INotifySupport.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\IPageDescriptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigatorExtensions.Navigation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageDescriptorAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigationParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Navigator.cs" />
@@ -46,5 +53,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\IScopeLifecycle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\ScopeAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\ScopePlugin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\ForwardStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\INavigationStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\IStrategyCreateContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\PopAndForwardStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\PopStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\PushStrategy.cs" />
   </ItemGroup>
 </Project>

@@ -12,6 +12,6 @@
         /// </summary>
         /// <param name="context"></param>
         /// <param name="operation"></param>
-        void NavigationConfirm(NavigationContext context, ConfirmOperation operation);
+        void NavigationConfirm(INavigationContext context, ConfirmOperation operation);
     }
 }

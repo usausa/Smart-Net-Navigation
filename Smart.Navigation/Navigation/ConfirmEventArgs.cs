@@ -4,9 +4,9 @@
 
     public class ConfirmEventArgs : CancelEventArgs
     {
-        public NavigationContext Context { get; }
+        public INavigationContext Context { get; }
 
-        public ConfirmEventArgs(NavigationContext context)
+        public ConfirmEventArgs(INavigationContext context)
         {
             Context = context;
         }

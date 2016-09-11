@@ -44,6 +44,11 @@
             return navigator;
         }
 
+        public static Navigator UseActivator(this Navigator navigator, Func<Type, object> callback)
+        {
+            return navigator.UseActivator(new CallbackActivator(callback));
+        }
+
         public static Navigator UseConverter(this Navigator navigator, IConverter converter)
         {
             if (navigator == null)

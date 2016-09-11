@@ -18,7 +18,7 @@
         private readonly Dictionary<string, Reference> store = new Dictionary<string, Reference>();
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnCreate(PluginContext context, object page, object target)
+        public override void OnCreate(IPluginContext context, object page, object target)
         {
             var activator = context.Components.Get<IActivator>();
 
@@ -46,7 +46,7 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnDispose(PluginContext context, object page, object target)
+        public override void OnClose(IPluginContext context, object page, object target)
         {
             foreach (var property in factory.GetAttributeProperties(target.GetType()))
             {

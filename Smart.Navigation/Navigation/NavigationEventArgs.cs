@@ -4,9 +4,9 @@
 
     public class NavigationEventArgs : EventArgs
     {
-        public NavigationContext Context { get; }
+        public INavigationContext Context { get; }
 
-        public NavigationEventArgs(NavigationContext context)
+        public NavigationEventArgs(INavigationContext context)
         {
             Context = context;
         }

@@ -9,12 +9,12 @@
         ///
         /// </summary>
         /// <param name="context"></param>
-        void OnNavigatedFrom(NavigationContext context);
+        void OnNavigatedFrom(INavigationContext context);
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="context"></param>
-        void OnNavigatedTo(NavigationContext context);
+        void OnNavigatedTo(INavigationContext context);
     }
 }

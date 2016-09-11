@@ -1,6 +1,6 @@
 ﻿namespace Smart.Navigation
 {
-    public class NavigationContext
+    public class NavigationContext : INavigationContext
     {
         public object FromPageId { get; }
 

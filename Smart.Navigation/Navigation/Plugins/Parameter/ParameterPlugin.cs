@@ -9,13 +9,13 @@
         private readonly AttributePropertyFactory<ParameterAttribute> factory = new AttributePropertyFactory<ParameterAttribute>();
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnNavigatedFrom(PluginContext context, object page, object target)
+        public override void OnNavigatedFrom(IPluginContext context, object page, object target)
         {
             context.Save(GetType(), GatherExportParameters(target));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnNavigatedTo(PluginContext context, object page, object target)
+        public override void OnNavigatedTo(IPluginContext context, object page, object target)
         {
             var parameters = context.LoadOr(GetType(), default(Dictionary<string, object>));
             if (parameters != null)
