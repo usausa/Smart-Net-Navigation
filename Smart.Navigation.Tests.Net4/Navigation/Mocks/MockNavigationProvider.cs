@@ -21,22 +21,24 @@
 
         public void OpenPage(object page)
         {
-            throw new NotImplementedException();
+            (page as MockPageBase)?.Open();
         }
 
         public void ClosePage(object page)
         {
-            throw new NotImplementedException();
+            (page as MockPageBase)?.Close();
         }
 
         public void ActivePage(object page, object parameter)
         {
-            throw new NotImplementedException();
+            (page as MockPageBase)?.Active();
         }
 
         public object DectivePage(object page)
         {
-            throw new NotImplementedException();
+            var mockPage = page as MockPageBase;
+            mockPage?.Deactive();
+            return mockPage?.Focused;
         }
     }
 }

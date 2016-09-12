@@ -1,7 +1,5 @@
 ﻿namespace Smart.Navigation
 {
-    using System;
-
     /// <summary>
     ///
     /// </summary>
