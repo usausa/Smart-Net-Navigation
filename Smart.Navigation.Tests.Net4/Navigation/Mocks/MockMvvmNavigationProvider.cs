@@ -16,27 +16,29 @@
 
         public object ResolveTarget(object page)
         {
-            return page;
+            return (page as MockViewBase)?.DataContext;
         }
 
         public void OpenPage(object page)
         {
-            throw new NotImplementedException();
+            (page as MockViewBase)?.Open();
         }
 
         public void ClosePage(object page)
         {
-            throw new NotImplementedException();
+            (page as MockViewBase)?.Close();
         }
 
         public void ActivePage(object page, object parameter)
         {
-            throw new NotImplementedException();
+            (page as MockViewBase)?.Active();
         }
 
         public object DectivePage(object page)
         {
-            throw new NotImplementedException();
+            var mockView = page as MockViewBase;
+            mockView?.Deactive();
+            return mockView?.Focused;
         }
     }
 }
