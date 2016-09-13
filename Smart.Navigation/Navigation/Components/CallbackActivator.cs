@@ -13,7 +13,7 @@
 
         public object Create(Type type)
         {
-            return callback;
+            return callback(type);
         }
     }
 }

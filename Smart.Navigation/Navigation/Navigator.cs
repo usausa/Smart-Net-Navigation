@@ -450,9 +450,10 @@
         {
             // TODO static or Controller
             var page = components.Get<IActivator>().Create(type);
-            var target = controller.Provider.ResolveTarget(page);
 
             controller.Provider.OpenPage(page);
+
+            var target = controller.Provider.ResolveTarget(page);
 
             var aware = target as INavigatorAware;
             if (aware != null)
