@@ -5,7 +5,7 @@
     /// <summary>
     ///
     /// </summary>
-    public class PageDescripter : IPageDescriptor
+    public class PageDescriptor : IPageDescriptor
     {
         public object Id { get; }
 
@@ -13,7 +13,7 @@
 
         public Type Type { get; }
 
-        public PageDescripter(object id, object domain, Type type)
+        public PageDescriptor(object id, object domain, Type type)
         {
             Id = id;
             Domain = domain;

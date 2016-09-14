@@ -37,7 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigatorExtensions.Notify.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigatorExtensions.Config.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\NavigatorExtensions.Register.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageDescripter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageDescriptor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\PageStack.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\AttributeProperty.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\AttributePropertyFactory.cs" />

@@ -33,7 +33,7 @@
 
         private static readonly NavigationParameter EmptyParameter = new NavigationParameter();
 
-        private readonly Dictionary<object, PageDescripter> descripters = new Dictionary<object, PageDescripter>();
+        private readonly Dictionary<object, IPageDescriptor> descriptors = new Dictionary<object, IPageDescriptor>();
 
         private readonly List<PageStack> stacked = new List<PageStack>();
 
@@ -53,12 +53,12 @@
         /// <summary>
         ///
         /// </summary>
-        public object CurrentPageId => CurrentStack?.Descripter.Id;
+        public object CurrentPageId => CurrentStack?.Descriptor.Id;
 
         /// <summary>
         ///
         /// </summary>
-        public object CurrentPageDomain => CurrentStack?.Descripter.Domain;
+        public object CurrentPageDomain => CurrentStack?.Descriptor.Domain;
 
         /// <summary>
         ///
@@ -130,7 +130,7 @@
 
         public void Register(object id, object domain, Type type)
         {
-            descripters.Add(id, new PageDescripter(id, domain, type));
+            descriptors.Add(id, new PageDescriptor(id, domain, type));
         }
 
         // ------------------------------------------------------------
@@ -233,8 +233,8 @@
                 return;
             }
 
-            PageDescripter descripter;
-            if (!descripters.TryGetValue(id, out descripter))
+            IPageDescriptor descriptor;
+            if (!descriptors.TryGetValue(id, out descriptor))
             {
                 return;
             }
@@ -248,7 +248,7 @@
                     stacked.RemoveAt(stacked.Count - 1);
                 }
 
-                stacked.Add(new PageStack(descripter, CreatePage(controller, descripter.Type)));
+                stacked.Add(new PageStack(descriptor, CreatePage(controller, descriptor.Type)));
             });
         }
 
@@ -262,8 +262,8 @@
                 return;
             }
 
-            PageDescripter descripter;
-            if (!descripters.TryGetValue(id, out descripter))
+            IPageDescriptor descriptor;
+            if (!descriptors.TryGetValue(id, out descriptor))
             {
                 return;
             }
@@ -273,13 +273,13 @@
                 var exist = false;
                 var first = -1;
                 var last = -1;
-                if ((descripter.Domain != null) && !Equals(CurrentPageDomain, descripter.Domain))
+                if ((descriptor.Domain != null) && !Equals(CurrentPageDomain, descriptor.Domain))
                 {
-                    first = stacked.FindIndex(_ => Equals(_.Descripter.Domain, descripter.Domain));
+                    first = stacked.FindIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
                     if (first >= 0)
                     {
-                        last = stacked.FindLastIndex(_ => Equals(_.Descripter.Domain, descripter.Domain));
-                        exist = stacked.Skip(first).Take(last - first + 1).Any(_ => Equals(_.Descripter.Id, descripter.Id));
+                        last = stacked.FindLastIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
+                        exist = stacked.Skip(first).Take(last - first + 1).Any(_ => Equals(_.Descriptor.Id, descriptor.Id));
                     }
                 }
 
@@ -301,7 +301,7 @@
 
                 if (!exist)
                 {
-                    stacked.Add(new PageStack(descripter, CreatePage(controller, descripter.Type)));
+                    stacked.Add(new PageStack(descriptor, CreatePage(controller, descriptor.Type)));
                 }
                 else
                 {
@@ -356,8 +356,8 @@
                 return;
             }
 
-            PageDescripter descripter;
-            if (!descripters.TryGetValue(id, out descripter))
+            IPageDescriptor descriptor;
+            if (!descriptors.TryGetValue(id, out descriptor))
             {
                 return;
             }
@@ -371,7 +371,7 @@
 
                 stacked.RemoveRange(stacked.Count - level, level);
 
-                stacked.Add(new PageStack(descripter, CreatePage(controller, descripter.Type)));
+                stacked.Add(new PageStack(descriptor, CreatePage(controller, descriptor.Type)));
             });
         }
 

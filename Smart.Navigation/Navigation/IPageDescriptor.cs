@@ -6,6 +6,8 @@
     {
         object Id { get; }
 
+        object Domain { get; }
+
         Type Type { get; }
     }
 }

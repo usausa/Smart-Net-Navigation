@@ -5,15 +5,15 @@
     /// </summary>
     public class PageStack
     {
-        public PageDescripter Descripter { get; }
+        public IPageDescriptor Descriptor { get; }
 
         public object Page { get; }
 
         public object RestoreParameter { get; set; }
 
-        public PageStack(PageDescripter descripter, object page)
+        public PageStack(IPageDescriptor descriptor, object page)
         {
-            Descripter = descripter;
+            Descriptor = descriptor;
             Page = page;
         }
     }
