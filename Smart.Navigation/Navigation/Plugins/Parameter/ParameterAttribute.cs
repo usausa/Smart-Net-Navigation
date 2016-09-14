@@ -22,7 +22,7 @@
         ///
         /// </summary>
         public ParameterAttribute()
-            : this(Direction.Both)
+            : this(Direction.Both, null)
         {
         }
 
@@ -40,8 +40,8 @@
         /// </summary>
         /// <param name="direction"></param>
         public ParameterAttribute(Direction direction)
+            : this(direction, null)
         {
-            Direction = direction;
         }
 
         /// <summary>

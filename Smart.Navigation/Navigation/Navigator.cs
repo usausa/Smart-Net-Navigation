@@ -389,6 +389,8 @@
                 return;
             }
 
+            controller.Pipeline?.OnPreProcess(controller.PluginContext);
+
             var currentPage = CurrentPage;
             if (currentPage != null)
             {
@@ -404,6 +406,8 @@
             NavigatedTo?.Invoke(this, args);
 
             ProcessNavigatedTo(controller, CurrentPage);
+
+            controller.Pipeline?.OnPostProcess(controller.PluginContext);
         }
 
         // ------------------------------------------------------------

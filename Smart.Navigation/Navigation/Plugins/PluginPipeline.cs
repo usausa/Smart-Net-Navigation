@@ -12,19 +12,11 @@
             Plugins = plusing.ToList();
         }
 
-        public void OnCreate(IPluginContext context, object page, object target)
+        public void OnPreProcess(IPluginContext context)
         {
             foreach (var plugin in Plugins)
             {
-                plugin.OnCreate(context, page, target);
-            }
-        }
-
-        public void OnClose(IPluginContext context, object page, object target)
-        {
-            foreach (var plugin in Plugins)
-            {
-                plugin.OnClose(context, page, target);
+                plugin.OnPreProcess(context);
             }
         }
 
@@ -36,11 +28,35 @@
             }
         }
 
+        public void OnClose(IPluginContext context, object page, object target)
+        {
+            foreach (var plugin in Plugins)
+            {
+                plugin.OnClose(context, page, target);
+            }
+        }
+
+        public void OnCreate(IPluginContext context, object page, object target)
+        {
+            foreach (var plugin in Plugins)
+            {
+                plugin.OnCreate(context, page, target);
+            }
+        }
+
         public void OnNavigatedTo(IPluginContext context, object page, object target)
         {
             foreach (var plugin in Plugins)
             {
                 plugin.OnNavigatedTo(context, page, target);
+            }
+        }
+
+        public void OnPostProcess(IPluginContext context)
+        {
+            foreach (var plugin in Plugins)
+            {
+                plugin.OnPostProcess(context);
             }
         }
     }

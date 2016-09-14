@@ -63,7 +63,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Navigation\Mocks\MockContextBase.cs" />
     <Compile Include="Navigation\MvvmParameterPluginTest.cs" />
+    <Compile Include="Navigation\ScopePluginTest.cs" />
     <Compile Include="Navigation\ParameterPluginTest.cs" />
     <Compile Include="Navigation\Mocks\MockViewBase.cs" />
     <Compile Include="Navigation\Mocks\MockViewModelBase.cs" />

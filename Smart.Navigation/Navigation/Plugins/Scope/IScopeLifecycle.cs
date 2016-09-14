@@ -5,11 +5,7 @@
     /// <summary>
     ///
     /// </summary>
-    public interface IScopeLifecycle : IDisposable
+    public interface IScopeLifecycle : IScopeInitializable, IDisposable
     {
-        /// <summary>
-        ///
-        /// </summary>
-        void Initilize();
     }
 }

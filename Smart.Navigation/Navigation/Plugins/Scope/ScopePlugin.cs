@@ -1,6 +1,8 @@
 ﻿namespace Smart.Navigation.Plugins.Scope
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Smart.Navigation.Components;
 
@@ -16,6 +18,21 @@
         private readonly AttributePropertyFactory<ScopeAttribute> factory = new AttributePropertyFactory<ScopeAttribute>();
 
         private readonly Dictionary<string, Reference> store = new Dictionary<string, Reference>();
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
+        public override void OnClose(IPluginContext context, object page, object target)
+        {
+            foreach (var property in factory.GetAttributeProperties(target.GetType()))
+            {
+                var key = property.Attribute.Key ?? property.Accessor.Type.FullName;
+
+                Reference reference;
+                if (store.TryGetValue(key, out reference))
+                {
+                    reference.Counter--;
+                }
+            }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnCreate(IPluginContext context, object page, object target)
@@ -34,7 +51,7 @@
                         Instance = activator.Create(property.Attribute.ConcreateType ?? property.Accessor.Type)
                     };
 
-                    (reference.Instance as IScopeLifecycle)?.Initilize();
+                    (reference.Instance as IScopeInitializable)?.Initialize();
 
                     store[key] = reference;
                 }
@@ -46,27 +63,14 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnClose(IPluginContext context, object page, object target)
+        public override void OnPostProcess(IPluginContext context)
         {
-            foreach (var property in factory.GetAttributeProperties(target.GetType()))
+            var removes = store.Where(_ => _.Value.Counter == 0).ToList();
+            foreach (var remove in removes)
             {
-                var key = property.Attribute.Key ?? property.Accessor.Type.FullName;
+                store.Remove(remove.Key);
 
-                Reference reference;
-                if (!store.TryGetValue(key, out reference))
-                {
-                    continue;
-                }
-
-                reference.Counter--;
-                if (reference.Counter != 0)
-                {
-                    continue;
-                }
-
-                store.Remove(key);
-
-                (reference.Instance as IScopeLifecycle)?.Dispose();
+                (remove.Value.Instance as IDisposable)?.Dispose();
             }
         }
     }

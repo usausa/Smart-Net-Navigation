@@ -51,6 +51,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\PluginBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\PluginContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\PluginPipeline.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\IScopeInitializable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\IScopeLifecycle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\ScopeAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\ScopePlugin.cs" />

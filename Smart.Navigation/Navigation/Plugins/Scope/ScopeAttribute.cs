@@ -30,8 +30,8 @@
         /// </summary>
         /// <param name="key"></param>
         public ScopeAttribute(string key)
+            : this(key, null)
         {
-            Key = key;
         }
 
         /// <summary>
@@ -39,8 +39,8 @@
         /// </summary>
         /// <param name="concreateType"></param>
         public ScopeAttribute(Type concreateType)
+            : this(null, concreateType)
         {
-            ConcreateType = concreateType;
         }
 
         /// <summary>
