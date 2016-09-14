@@ -57,7 +57,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Plugins\Scope\ScopePlugin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\ForwardStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\INavigationStrategy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\IStrategyCreateContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\PopAndForwardStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\PopStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Strategies\PushStrategy.cs" />

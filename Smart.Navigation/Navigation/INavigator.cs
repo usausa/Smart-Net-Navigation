@@ -1,5 +1,7 @@
 ﻿namespace Smart.Navigation
 {
+    using Smart.Navigation.Strategies;
+
     public interface INavigator
     {
         int StackedCount { get; }
@@ -16,6 +18,10 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", Justification = "Ignore")]
         void Exit();
+
+        // Navigate
+
+        void Navigate(INavigationStrategy strategy, INavigationParameter parameter);
 
         // Forward
 

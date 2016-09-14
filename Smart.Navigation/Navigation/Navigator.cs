@@ -1,4 +1,6 @@
-﻿namespace Smart.Navigation
+﻿using Smart.Navigation.Strategies;
+
+namespace Smart.Navigation
 {
     using System;
     using System.Collections.Generic;
@@ -151,6 +153,11 @@
             stacked.Clear();
 
             Exited?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Navigate(INavigationStrategy strategy, INavigationParameter parameter)
+        {
+            // TODO
         }
 
         public void Forward(object id)
