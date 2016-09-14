@@ -66,7 +66,7 @@
 
                 store.Remove(key);
 
-                (reference.Instance as IScopeLifecycle)?.Cleanup();
+                (reference.Instance as IScopeLifecycle)?.Dispose();
             }
         }
     }
