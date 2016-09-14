@@ -49,8 +49,8 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Smart, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Usa.Smart.Core.0.5.0\lib\portable-net45+win8+wpa81\Smart.dll</HintPath>
+    <Reference Include="Smart, Version=0.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Usa.Smart.Core.0.5.1\lib\portable-net45+win8+wpa81\Smart.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

@@ -27,7 +27,7 @@
         }
 
         [TestMethod]
-        public void TestSimpleFoward()
+        public void PageIsSwitchedByForwardAndExit()
         {
             navigator.Register(1, typeof(Page1));
             navigator.Register(2, typeof(Page2));

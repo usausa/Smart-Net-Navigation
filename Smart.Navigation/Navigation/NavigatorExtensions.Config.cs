@@ -46,6 +46,11 @@
 
         public static Navigator UseActivator(this Navigator navigator, Func<Type, object> callback)
         {
+            if (callback == null)
+            {
+                throw new ArgumentNullException(nameof(callback));
+            }
+
             return navigator.UseActivator(new CallbackActivator(callback));
         }
 
@@ -64,6 +69,16 @@
             navigator.Configure(_ => _.Register(converter));
 
             return navigator;
+        }
+
+        public static Navigator UseConverter(this Navigator navigator, Func<object, Type, object> callback)
+        {
+            if (callback == null)
+            {
+                throw new ArgumentNullException(nameof(callback));
+            }
+
+            return navigator.UseConverter(new CallbackConverter(callback));
         }
 
         public static Navigator UsePlugin(this Navigator navigator, IPlugin plugin)

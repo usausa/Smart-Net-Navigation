@@ -13,7 +13,7 @@
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <dependency id="Usa.Smart.Core" version="0.5.0" />
+      <dependency id="Usa.Smart.Core" version="0.5.1" />
     </dependencies>
     <tags>smart pcl navigation</tags>
   </metadata>

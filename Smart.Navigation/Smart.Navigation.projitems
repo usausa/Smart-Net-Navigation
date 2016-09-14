@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\CallbackActivator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\CallbackConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\ConfirmEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\ConfirmOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\IActivator.cs" />

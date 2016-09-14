@@ -38,12 +38,12 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Smart, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Usa.Smart.Core.0.5.0\lib\net462\Smart.dll</HintPath>
+    <Reference Include="Smart, Version=0.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Usa.Smart.Core.0.5.1\lib\net462\Smart.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Smart.Resolver, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Usa.Smart.Resolver.1.0.1\lib\net462\Smart.Resolver.dll</HintPath>
+    <Reference Include="Smart.Resolver, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Usa.Smart.Resolver.1.0.2\lib\net462\Smart.Resolver.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -63,6 +63,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Navigation\ParameterPluginTest.cs" />
     <Compile Include="Navigation\Mocks\MockViewBase.cs" />
     <Compile Include="Navigation\Mocks\MockViewModelBase.cs" />
     <Compile Include="Navigation\MvvmForwardTest.cs" />

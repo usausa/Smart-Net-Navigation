@@ -2,7 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
+
+    using Smart.Navigation.Components;
 
     public class ParameterPlugin : PluginBase
     {
@@ -20,7 +21,7 @@
             var parameters = context.LoadOr(GetType(), default(Dictionary<string, object>));
             if (parameters != null)
             {
-                ApplyImportParameters(target, parameters);
+                ApplyImportParameters(target, parameters, context.Components.Get<IConverter>());
             }
         }
 
@@ -40,7 +41,7 @@
             return parameters;
         }
 
-        private void ApplyImportParameters(object target, IDictionary<string, object> parameters)
+        private void ApplyImportParameters(object target, IDictionary<string, object> parameters, IConverter converter)
         {
             foreach (var property in factory.GetAttributeProperties(target.GetType()))
             {
@@ -50,7 +51,7 @@
                     object value;
                     if (parameters.TryGetValue(name, out value))
                     {
-                        property.Accessor.SetValue(target, Convert.ChangeType(value, property.Accessor.Type, CultureInfo.InvariantCulture));
+                        property.Accessor.SetValue(target, converter.Convert(value, property.Accessor.Type));
                     }
                 }
             }

@@ -34,7 +34,7 @@
         }
 
         [TestMethod]
-        public void TestMvvmSimpleFoward()
+        public void ViewAndViewModelIsSwitchedByForwardAndExit()
         {
             navigator.Register(1, typeof(View1));
             navigator.Register(2, typeof(View2));
