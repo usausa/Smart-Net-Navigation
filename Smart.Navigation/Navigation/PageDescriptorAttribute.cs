@@ -4,6 +4,6 @@
 
     public abstract class PageDescriptorAttribute : Attribute
     {
-        // TODO
+        public abstract IPageDescriptor CreateDescriptor(Type type);
     }
 }

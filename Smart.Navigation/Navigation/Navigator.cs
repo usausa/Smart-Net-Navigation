@@ -122,15 +122,9 @@
         // Registration
         // ------------------------------------------------------------
 
-        // TODO descriptor, from attribute
-        public void Register(object id, Type type)
+        public void Register(IPageDescriptor descriptor)
         {
-            Register(id, null, type);
-        }
-
-        public void Register(object id, object domain, Type type)
-        {
-            descriptors.Add(id, new PageDescriptor(id, domain, type));
+            descriptors.Add(descriptor.Id, descriptor);
         }
 
         // ------------------------------------------------------------

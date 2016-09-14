@@ -6,7 +6,7 @@
     ///
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class PageAttribute : Attribute
+    public sealed class PageAttribute : PageDescriptorAttribute
     {
         /// <summary>
         ///
@@ -36,6 +36,16 @@
         {
             Id = id;
             Domain = domain;
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public override IPageDescriptor CreateDescriptor(Type type)
+        {
+            return new PageDescriptor(Id, Domain, type);
         }
     }
 }
