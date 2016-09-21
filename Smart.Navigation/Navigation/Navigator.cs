@@ -1,6 +1,4 @@
-﻿using Smart.Navigation.Strategies;
-
-namespace Smart.Navigation
+﻿namespace Smart.Navigation
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +9,7 @@ namespace Smart.Navigation
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Plugins.Parameter;
     using Smart.Navigation.Plugins.Scope;
+    using Smart.Navigation.Strategies;
 
     /// <summary>
     ///
@@ -37,7 +36,7 @@ namespace Smart.Navigation
 
         private readonly Dictionary<object, IPageDescriptor> descriptors = new Dictionary<object, IPageDescriptor>();
 
-        private readonly List<PageStack> stacked = new List<PageStack>();
+        private readonly PageStackManager stackManager = new PageStackManager();
 
         private readonly ComponentContainer components = new ComponentContainer();
 
@@ -45,32 +44,30 @@ namespace Smart.Navigation
         // Property
         // ------------------------------------------------------------
 
-        private PageStack CurrentStack => stacked.Count > 0 ? stacked[stacked.Count - 1] : null;
+        /// <summary>
+        ///
+        /// </summary>
+        public int StackedCount => stackManager.Stacked.Count;
 
         /// <summary>
         ///
         /// </summary>
-        public int StackedCount => stacked.Count;
+        public object CurrentPageId => stackManager.CurrentPageId;
 
         /// <summary>
         ///
         /// </summary>
-        public object CurrentPageId => CurrentStack?.Descriptor.Id;
+        public object CurrentPageDomain => stackManager.CurrentPageDomain;
 
         /// <summary>
         ///
         /// </summary>
-        public object CurrentPageDomain => CurrentStack?.Descriptor.Domain;
+        public object CurrentPage => stackManager.CurrentPage;
 
         /// <summary>
         ///
         /// </summary>
-        public object CurrentPage => CurrentStack?.Page;
-
-        /// <summary>
-        ///
-        /// </summary>
-        public object CurrentTarget => CurrentPage.NullOr(components.Get<INavigationProvider>().ResolveTarget);
+        public object CurrentTarget => stackManager.CurrentPage.NullOr(components.Get<INavigationProvider>().ResolveTarget);
 
         // ------------------------------------------------------------
         // Configuration
@@ -136,9 +133,9 @@ namespace Smart.Navigation
         public void Exit()
         {
             var provider = components.Get<INavigationProvider>();
-            for (var i = stacked.Count - 1; i >= 0; i--)
+            for (var i = stackManager.Stacked.Count - 1; i >= 0; i--)
             {
-                var page = stacked[i].Page;
+                var page = stackManager.Stacked[i].Page;
                 var target = provider.ResolveTarget(page);
 
                 provider.ClosePage(page);
@@ -150,7 +147,7 @@ namespace Smart.Navigation
                 }
             }
 
-            stacked.Clear();
+            stackManager.Stacked.Clear();
 
             Exited?.Invoke(this, EventArgs.Empty);
         }
@@ -202,7 +199,7 @@ namespace Smart.Navigation
 
         public void PopAndForward(object id)
         {
-            InternalPopAndForward(id, stacked.Count, null);
+            InternalPopAndForward(id, stackManager.Stacked.Count, null);
         }
 
         public void PopAndForward(object id, int level)
@@ -212,7 +209,7 @@ namespace Smart.Navigation
 
         public void PopAndForward(object id, INavigationParameter parameter)
         {
-            InternalPopAndForward(id, stacked.Count, parameter);
+            InternalPopAndForward(id, stackManager.Stacked.Count, parameter);
         }
 
         public void PopAndForward(object id, int level, INavigationParameter parameter)
@@ -224,12 +221,15 @@ namespace Smart.Navigation
         // Internal
         // ------------------------------------------------------------
 
+        // TODO Stacked と IPageDescriptorの処理をController内へ
+
         private void InternalForward(object id, INavigationParameter parameter)
         {
-            var provider = components.Get<INavigationProvider>();
+            // TODO controller
             var context = new NavigationContext(CurrentPageId, id, false, false, parameter ?? EmptyParameter);
+            var controller = new NavigationController(components, new PluginContext(components), context, this, stackManager);
 
-            if (!ConfirmNavigation(provider, context))
+            if (!ConfirmNavigation(controller))
             {
                 return;
             }
@@ -240,25 +240,30 @@ namespace Smart.Navigation
                 return;
             }
 
-            InternalNavigate(new NavigationController(provider, components.Get<IPluginPipeline>(), new PluginContext(components), context), controller =>
+            InternalNavigate(controller, _ => InternalForwardAction(_, descriptor));
+        }
+
+        // TODO Refactor
+        private static void InternalForwardAction(INavigationController controller, IPageDescriptor descriptor)
+        {
+            // TODO メソッド化？
+            if (controller.StackManager.CurrentPage != null)
             {
-                if (CurrentPage != null)
-                {
-                    ClosePage(controller, CurrentPage);
+                controller.ClosePage(controller.StackManager.CurrentPage);
 
-                    stacked.RemoveAt(stacked.Count - 1);
-                }
+                controller.StackManager.Stacked.RemoveAt(controller.StackManager.Stacked.Count - 1);
+            }
 
-                stacked.Add(new PageStack(descriptor, CreatePage(controller, descriptor.Type)));
-            });
+            controller.StackManager.Stacked.Add(new PageStack(descriptor, controller.CreatePage(descriptor.Type)));
         }
 
         private void InternalPush(object id, INavigationParameter parameter)
         {
-            var provider = components.Get<INavigationProvider>();
+            // TODO controller
             var context = new NavigationContext(CurrentPageId, id, true, false, parameter ?? EmptyParameter);
+            var controller = new NavigationController(components, new PluginContext(components), context, this, stackManager);
 
-            if (!ConfirmNavigation(provider, context))
+            if (!ConfirmNavigation(controller))
             {
                 return;
             }
@@ -269,90 +274,102 @@ namespace Smart.Navigation
                 return;
             }
 
-            InternalNavigate(new NavigationController(provider, components.Get<IPluginPipeline>(), new PluginContext(components), context), controller =>
+            InternalNavigate(controller, _ =>
+                    InternalPushAction(_, descriptor));
+        }
+
+        // TODO CurrentPageDomainの扱い？
+        private static void InternalPushAction(INavigationController controller, IPageDescriptor descriptor)
+        {
+            var exist = false;
+            var first = -1;
+            var last = -1;
+            if ((descriptor.Domain != null) && !Equals(controller.StackManager.CurrentPageDomain, descriptor.Domain))
             {
-                var exist = false;
-                var first = -1;
-                var last = -1;
-                if ((descriptor.Domain != null) && !Equals(CurrentPageDomain, descriptor.Domain))
-                {
-                    first = stacked.FindIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
-                    if (first >= 0)
-                    {
-                        last = stacked.FindLastIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
-                        exist = stacked.Skip(first).Take(last - first + 1).Any(_ => Equals(_.Descriptor.Id, descriptor.Id));
-                    }
-                }
-
-                stacked[stacked.Count - 1].RestoreParameter = DeactivePage(controller, CurrentPage);
-
+                first = controller.StackManager.Stacked.FindIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
                 if (first >= 0)
                 {
-                    var temp = new PageStack[last - first + 1];
-                    stacked.CopyTo(first, temp, 0, temp.Length);
-                    for (var i = 0; i < stacked.Count - last - 1; i++)
-                    {
-                        stacked[i + first] = stacked[i + last + 1];
-                    }
-                    for (var i = 0; i < temp.Length; i++)
-                    {
-                        stacked[stacked.Count - temp.Length + i] = temp[i];
-                    }
+                    last = controller.StackManager.Stacked.FindLastIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
+                    exist = controller.StackManager.Stacked.Skip(first).Take(last - first + 1).Any(_ => Equals(_.Descriptor.Id, descriptor.Id));
+                }
+            }
+
+            controller.DeactivePage();
+
+            if (first >= 0)
+            {
+                var temp = new PageStack[last - first + 1];
+                controller.StackManager.Stacked.CopyTo(first, temp, 0, temp.Length);
+                for (var i = 0; i < controller.StackManager.Stacked.Count - last - 1; i++)
+                {
+                    controller.StackManager.Stacked[i + first] = controller.StackManager.Stacked[i + last + 1];
                 }
 
-                if (!exist)
+                for (var i = 0; i < temp.Length; i++)
                 {
-                    stacked.Add(new PageStack(descriptor, CreatePage(controller, descriptor.Type)));
+                    controller.StackManager.Stacked[controller.StackManager.Stacked.Count - temp.Length + i] = temp[i];
                 }
-                else
-                {
-                    ActivaPage(controller, CurrentPage, stacked[stacked.Count - 1].RestoreParameter);
-                    stacked[stacked.Count - 1].RestoreParameter = null;
-                }
-            });
+            }
+
+            if (!exist)
+            {
+                controller.StackManager.Stacked.Add(new PageStack(descriptor, controller.CreatePage(descriptor.Type)));
+            }
+            else
+            {
+                controller.ActivaPage();
+                controller.StackManager.CurrentStack.RestoreParameter = null;
+            }
         }
 
         private void InternalPop(int level, INavigationParameter parameter)
         {
-            if ((level < 1) || (level > stacked.Count - 1))
+            if ((level < 1) || (level > stackManager.Stacked.Count - 1))
             {
                 throw new ArgumentOutOfRangeException(nameof(level));
             }
 
+            // TODO controller
             // TODO toPageIdをスタックから決定
-            var provider = components.Get<INavigationProvider>();
             var context = new NavigationContext(CurrentPageId, null, false, true, parameter ?? EmptyParameter);
+            var controller = new NavigationController(components, new PluginContext(components), context, this, stackManager);
 
-            if (!ConfirmNavigation(provider, context))
+            if (!ConfirmNavigation(controller))
             {
                 return;
             }
 
-            InternalNavigate(new NavigationController(provider, components.Get<IPluginPipeline>(), new PluginContext(components), context), controller =>
+            InternalNavigate(controller, _ => InternalPopAction(_, level));
+        }
+
+        // TODO Refactor
+        private static void InternalPopAction(INavigationController controller, int level)
+        {
+            // TODO メソッド化？
+            for (var i = controller.StackManager.Stacked.Count - 1; i >= controller.StackManager.Stacked.Count - level; i--)
             {
-                for (var i = stacked.Count - 1; i >= stacked.Count - level; i--)
-                {
-                    ClosePage(controller, stacked[i].Page);
-                }
+                controller.ClosePage(controller.StackManager.Stacked[i].Page);
+            }
 
-                stacked.RemoveRange(stacked.Count - level, level);
+            controller.StackManager.Stacked.RemoveRange(controller.StackManager.Stacked.Count - level, level);
 
-                ActivaPage(controller, CurrentPage, stacked[stacked.Count - 1].RestoreParameter);
-                stacked[stacked.Count - 1].RestoreParameter = null;
-            });
+            // TODO 内部化
+            controller.ActivaPage();
+            controller.StackManager.CurrentStack.RestoreParameter = null;
         }
 
         private void InternalPopAndForward(object id, int level, INavigationParameter parameter)
         {
-            if ((level < 1) || (level > stacked.Count))
+            if ((level < 1) || (level > stackManager.Stacked.Count))
             {
                 throw new ArgumentOutOfRangeException(nameof(level));
             }
 
-            var provider = components.Get<INavigationProvider>();
+            // TODO providerがControllerと重複、別メソッドかした上でcontrollerにインスタンスはここで定義
             var context = new NavigationContext(CurrentPageId, id, false, false, parameter ?? EmptyParameter);
+            var controller = new NavigationController(components, new PluginContext(components), context, this, stackManager);
 
-            if (!ConfirmNavigation(provider, context))
+            if (!ConfirmNavigation(controller))
             {
                 return;
             }
@@ -363,22 +380,30 @@ namespace Smart.Navigation
                 return;
             }
 
-            InternalNavigate(new NavigationController(provider, components.Get<IPluginPipeline>(), new PluginContext(components), context), controller =>
+            InternalNavigate(controller, _ => InternalPopAndForwardAction(_, level, descriptor));
+        }
+
+        // TODO Redactor
+        private static void InternalPopAndForwardAction(INavigationController controller, int level, IPageDescriptor descriptor)
+        {
+            // TODO メソッド化？
+            for (var i = controller.StackManager.Stacked.Count - 1; i >= controller.StackManager.Stacked.Count - level; i--)
             {
-                for (var i = stacked.Count - 1; i >= stacked.Count - level; i--)
-                {
-                    ClosePage(controller, stacked[i].Page);
-                }
+                controller.ClosePage(controller.StackManager.Stacked[i].Page);
+            }
 
-                stacked.RemoveRange(stacked.Count - level, level);
+            controller.StackManager.Stacked.RemoveRange(controller.StackManager.Stacked.Count - level, level);
 
-                stacked.Add(new PageStack(descriptor, CreatePage(controller, descriptor.Type)));
-            });
+            controller.StackManager.Stacked.Add(new PageStack(descriptor, controller.CreatePage(descriptor.Type)));
         }
 
         // ------------------------------------------------------------
         // Navigation
         // ------------------------------------------------------------
+
+        // TODO Controllerに処理を閉じ込める
+        // TODO Controllerに状態を閉じ込める
+        // TODO StrategyにControllerのみを渡す
 
         private void InternalNavigate(
             INavigationController controller,
@@ -392,21 +417,18 @@ namespace Smart.Navigation
 
             controller.Pipeline?.OnPreProcess(controller.PluginContext);
 
-            var currentPage = CurrentPage;
-            if (currentPage != null)
-            {
-                ProcessNavigatedFrom(controller, currentPage);
-            }
+            controller.ProcessNavigatedFrom();
 
             var args = new NavigationEventArgs(controller.NavigationContext);
 
             NavigatedFrom?.Invoke(this, args);
 
+            // TODO Strategy化
             updateStack(controller);
 
             NavigatedTo?.Invoke(this, args);
 
-            ProcessNavigatedTo(controller, CurrentPage);
+            controller.ProcessNavigatedTo();
 
             controller.Pipeline?.OnPostProcess(controller.PluginContext);
         }
@@ -415,17 +437,17 @@ namespace Smart.Navigation
         // Helper
         // ------------------------------------------------------------
 
-        private bool ConfirmNavigation(INavigationProvider provider, INavigationContext context)
+        private bool ConfirmNavigation(INavigationController controller)
         {
             var page = CurrentPage;
             if (page != null)
             {
-                var target = provider.ResolveTarget(page);
+                var target = controller.Provider.ResolveTarget(page);
                 var confirm = target as IConfirmRequest;
                 if (confirm != null)
                 {
                     var operation = new ConfirmOperation();
-                    confirm.NavigationConfirm(context, operation);
+                    confirm.NavigationConfirm(controller.NavigationContext, operation);
                     if (operation.Cancel)
                     {
                         return false;
@@ -436,7 +458,7 @@ namespace Smart.Navigation
             var handler = Confirm;
             if (handler != null)
             {
-                var args = new ConfirmEventArgs(context);
+                var args = new ConfirmEventArgs(controller.NavigationContext);
                 handler(this, args);
                 if (args.Cancel)
                 {
@@ -445,77 +467,6 @@ namespace Smart.Navigation
             }
 
             return true;
-        }
-
-        // ------------------------------------------------------------
-        // Lifecycle
-        // ------------------------------------------------------------
-
-        private object CreatePage(INavigationController controller, Type type)
-        {
-            // TODO static or Controller
-            var page = components.Get<IActivator>().Create(type);
-
-            controller.Provider.OpenPage(page);
-
-            var target = controller.Provider.ResolveTarget(page);
-
-            var aware = target as INavigatorAware;
-            if (aware != null)
-            {
-                aware.Navigator = this;
-            }
-
-            controller.Pipeline?.OnCreate(controller.PluginContext, page, target);
-
-            return page;
-        }
-
-        private static void ClosePage(INavigationController controller, object page)
-        {
-            var target = controller.Provider.ResolveTarget(page);
-
-            controller.Pipeline?.OnClose(controller.PluginContext, page, target);
-
-            controller.Provider.ClosePage(page);
-
-            (page as IDisposable)?.Dispose();
-            if (page != target)
-            {
-                (target as IDisposable)?.Dispose();
-            }
-        }
-
-        private static void ActivaPage(INavigationController controller, object page, object parameter)
-        {
-            controller.Provider.ActivePage(page, parameter);
-        }
-
-        private static object DeactivePage(INavigationController controller, object page)
-        {
-            return controller.Provider.DectivePage(page);
-        }
-
-        // ------------------------------------------------------------
-        // Navigation
-        // ------------------------------------------------------------
-
-        private static void ProcessNavigatedFrom(INavigationController controller, object page)
-        {
-            var target = controller.Provider.ResolveTarget(page);
-
-            (target as INavigationEventSupport)?.OnNavigatedFrom(controller.NavigationContext);
-
-            controller.Pipeline?.OnNavigatedFrom(controller.PluginContext, page, target);
-        }
-
-        private static void ProcessNavigatedTo(INavigationController controller, object page)
-        {
-            var target = controller.Provider.ResolveTarget(page);
-
-            controller.Pipeline?.OnNavigatedTo(controller.PluginContext, page, target);
-
-            (target as INavigationEventSupport)?.OnNavigatedTo(controller.NavigationContext);
         }
     }
 }
