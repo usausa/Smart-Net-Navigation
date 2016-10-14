@@ -2,7 +2,8 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "StyleCop.Analyzers": "1.0.0",
-    "Usa.Smart.Core": "0.5.1"
+    "Usa.Smart.Core": "0.5.1",
+    "Usa.Smart.WindowsRuntime": "0.1.0"
   },
   "frameworks": {
     "uap10.0": {}
