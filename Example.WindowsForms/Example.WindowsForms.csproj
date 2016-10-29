@@ -63,6 +63,56 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Data\DataDetailPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Data\DataDetailPage.Designer.cs">
+      <DependentUpon>DataDetailPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Data\DataListPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Data\DataListPage.Designer.cs">
+      <DependentUpon>DataListPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PageId.cs" />
+    <Compile Include="Modules\Stack\Stack1Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Stack\Stack1Page.Designer.cs">
+      <DependentUpon>Stack1Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Stack\Stack2Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Stack\Stack2Page.Designer.cs">
+      <DependentUpon>Stack2Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Stack\Stack3Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Stack\Stack3Page.Designer.cs">
+      <DependentUpon>Stack3Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Wizard\Input1Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Wizard\Input1Page.Designer.cs">
+      <DependentUpon>Input1Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Wizard\Input2Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Wizard\Input2Page.Designer.cs">
+      <DependentUpon>Input2Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Wizard\InputConfirmPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Wizard\InputConfirmPage.Designer.cs">
+      <DependentUpon>InputConfirmPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Wizard\InputContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -102,6 +152,10 @@
       <Project>{d5b8a136-9ded-40de-b32c-9a5dd1773981}</Project>
       <Name>Smart.Navigation.Windows.Forms</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\Domain1\" />
+    <Folder Include="Modules\Domain2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
