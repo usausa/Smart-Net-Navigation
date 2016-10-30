@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Example.WindowsForms.Modules.Stack
+﻿namespace Example.WindowsForms.Modules.Stack
 {
+    using System.Windows.Forms;
+
     public partial class Stack1Page : UserControl
     {
         public Stack1Page()

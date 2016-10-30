@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Example.WindowsForms.Modules.Data
+﻿namespace Example.WindowsForms.Modules.Data
 {
+    using System.Windows.Forms;
+
     public partial class DataDetailPage : UserControl
     {
         public DataDetailPage()
