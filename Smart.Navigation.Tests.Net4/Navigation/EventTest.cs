@@ -72,13 +72,13 @@
             Assert.AreEqual(3, navigator.CurrentPageId);
         }
 
-        protected class Page1 : MockPageBase
+        protected class Page1 : MockPageBase, IConfirmRequest
         {
             public bool Cancel { get; set; }
 
-            public override void NavigationConfirm(INavigationContext context, ConfirmOperation operation)
+            public bool NavigationConfirm(INavigationContext context)
             {
-                operation.Cancel = Cancel;
+                return true;
             }
         }
 

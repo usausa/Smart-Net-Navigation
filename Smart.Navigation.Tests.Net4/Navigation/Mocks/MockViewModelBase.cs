@@ -2,7 +2,7 @@
 {
     using Smart.ComponentModel;
 
-    public class MockViewModelBase : DisposableObject, INavigatorAware, INavigationEventSupport, IConfirmRequest, INotifySupport
+    public class MockViewModelBase : DisposableObject, INavigatorAware, INavigationEventSupport, INotifySupport
     {
         public INavigator Navigator { get; set; }
 
@@ -11,10 +11,6 @@
         }
 
         public virtual void OnNavigatedTo(INavigationContext context)
-        {
-        }
-
-        public virtual void NavigationConfirm(INavigationContext context, ConfirmOperation operation)
         {
         }
 

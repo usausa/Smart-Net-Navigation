@@ -9,7 +9,7 @@
         ///
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="operation"></param>
-        void NavigationConfirm(INavigationContext context, ConfirmOperation operation);
+        /// <returns></returns>
+        bool NavigationConfirm(INavigationContext context);
     }
 }

@@ -446,9 +446,8 @@
                 var confirm = target as IConfirmRequest;
                 if (confirm != null)
                 {
-                    var operation = new ConfirmOperation();
-                    confirm.NavigationConfirm(controller.NavigationContext, operation);
-                    if (operation.Cancel)
+                    var cancel = confirm.NavigationConfirm(controller.NavigationContext);
+                    if (cancel)
                     {
                         return false;
                     }

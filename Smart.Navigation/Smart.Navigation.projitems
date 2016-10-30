@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\CallbackActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\CallbackConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\ConfirmEventArgs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Navigation\ConfirmOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\IActivator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\IConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Components\StandardActivator.cs" />
