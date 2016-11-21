@@ -5,6 +5,7 @@
     using System.Linq;
 
     using Smart.ComponentModel;
+    using Smart.Functional;
     using Smart.Navigation.Components;
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Plugins.Parameter;
@@ -67,7 +68,7 @@
         /// <summary>
         ///
         /// </summary>
-        public object CurrentTarget => stackManager.CurrentPage.NullOr(components.Get<INavigationProvider>().ResolveTarget);
+        public object CurrentTarget => stackManager.CurrentPage.Or(components.Get<INavigationProvider>().ResolveTarget);
 
         // ------------------------------------------------------------
         // Configuration
