@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Smart, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Usa.Smart.Core.0.5.2\lib\net462\Smart.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Usa.Smart.Core.0.5.2\lib\net462\Smart.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

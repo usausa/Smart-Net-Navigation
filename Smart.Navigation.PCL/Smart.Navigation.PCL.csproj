@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Smart, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Usa.Smart.Core.0.5.2\lib\portable-net45+win8+wpa81\Smart.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Usa.Smart.Core.0.5.2\lib\portable-net45+win8+wpa81\Smart.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
