@@ -1,101 +1,101 @@
-﻿namespace Smart.Navigation
-{
-    using System;
+﻿//namespace Smart.Navigation
+//{
+//    using System;
 
-    using Smart.Navigation.Components;
-    using Smart.Navigation.Plugins;
+//    using Smart.Navigation.Components;
+//    using Smart.Navigation.Plugins;
 
-    /// <summary>
-    ///
-    /// </summary>
-    public static partial class NavigatorExtensions
-    {
-        public static Navigator UseProvider(this Navigator navigator, INavigationProvider provider)
-        {
-            if (navigator == null)
-            {
-                throw new ArgumentNullException(nameof(navigator));
-            }
+//    /// <summary>
+//    ///
+//    /// </summary>
+//    public static partial class NavigatorExtensions
+//    {
+//        public static Navigator UseProvider(this Navigator navigator, INavigationProvider provider)
+//        {
+//            if (navigator == null)
+//            {
+//                throw new ArgumentNullException(nameof(navigator));
+//            }
 
-            if (provider == null)
-            {
-                throw new ArgumentNullException(nameof(provider));
-            }
+//            if (provider == null)
+//            {
+//                throw new ArgumentNullException(nameof(provider));
+//            }
 
-            navigator.Configure(_ => _.Register(provider));
+//            navigator.Configure(_ => _.Register(provider));
 
-            return navigator;
-        }
+//            return navigator;
+//        }
 
-        public static Navigator UseActivator(this Navigator navigator, IActivator activator)
-        {
-            if (navigator == null)
-            {
-                throw new ArgumentNullException(nameof(navigator));
-            }
+//        public static Navigator UseActivator(this Navigator navigator, IActivator activator)
+//        {
+//            if (navigator == null)
+//            {
+//                throw new ArgumentNullException(nameof(navigator));
+//            }
 
-            if (activator == null)
-            {
-                throw new ArgumentNullException(nameof(activator));
-            }
+//            if (activator == null)
+//            {
+//                throw new ArgumentNullException(nameof(activator));
+//            }
 
-            navigator.Configure(_ => _.Register(activator));
+//            navigator.Configure(_ => _.Register(activator));
 
-            return navigator;
-        }
+//            return navigator;
+//        }
 
-        public static Navigator UseActivator(this Navigator navigator, Func<Type, object> callback)
-        {
-            if (callback == null)
-            {
-                throw new ArgumentNullException(nameof(callback));
-            }
+//        public static Navigator UseActivator(this Navigator navigator, Func<Type, object> callback)
+//        {
+//            if (callback == null)
+//            {
+//                throw new ArgumentNullException(nameof(callback));
+//            }
 
-            return navigator.UseActivator(new CallbackActivator(callback));
-        }
+//            return navigator.UseActivator(new CallbackActivator(callback));
+//        }
 
-        public static Navigator UseConverter(this Navigator navigator, IConverter converter)
-        {
-            if (navigator == null)
-            {
-                throw new ArgumentNullException(nameof(navigator));
-            }
+//        public static Navigator UseConverter(this Navigator navigator, IConverter converter)
+//        {
+//            if (navigator == null)
+//            {
+//                throw new ArgumentNullException(nameof(navigator));
+//            }
 
-            if (converter == null)
-            {
-                throw new ArgumentNullException(nameof(converter));
-            }
+//            if (converter == null)
+//            {
+//                throw new ArgumentNullException(nameof(converter));
+//            }
 
-            navigator.Configure(_ => _.Register(converter));
+//            navigator.Configure(_ => _.Register(converter));
 
-            return navigator;
-        }
+//            return navigator;
+//        }
 
-        public static Navigator UseConverter(this Navigator navigator, Func<object, Type, object> callback)
-        {
-            if (callback == null)
-            {
-                throw new ArgumentNullException(nameof(callback));
-            }
+//        public static Navigator UseConverter(this Navigator navigator, Func<object, Type, object> callback)
+//        {
+//            if (callback == null)
+//            {
+//                throw new ArgumentNullException(nameof(callback));
+//            }
 
-            return navigator.UseConverter(new CallbackConverter(callback));
-        }
+//            return navigator.UseConverter(new CallbackConverter(callback));
+//        }
 
-        public static Navigator UsePlugin(this Navigator navigator, IPlugin plugin)
-        {
-            if (navigator == null)
-            {
-                throw new ArgumentNullException(nameof(navigator));
-            }
+//        public static Navigator UsePlugin(this Navigator navigator, IPlugin plugin)
+//        {
+//            if (navigator == null)
+//            {
+//                throw new ArgumentNullException(nameof(navigator));
+//            }
 
-            if (plugin == null)
-            {
-                throw new ArgumentNullException(nameof(plugin));
-            }
+//            if (plugin == null)
+//            {
+//                throw new ArgumentNullException(nameof(plugin));
+//            }
 
-            navigator.Configure(_ => _.Get<IPluginPipeline>().Plugins.Add(plugin));
+//            navigator.Configure(_ => _.Get<IPluginPipeline>().Plugins.Add(plugin));
 
-            return navigator;
-        }
-    }
-}
+//            return navigator;
+//        }
+//    }
+//}

@@ -16,8 +16,9 @@
         [TestInitialize]
         public void TestInitialize()
         {
-            navigator = new Navigator();
-            navigator.UseProvider(new MockNavigationProvider());
+            // TODO
+            //navigator = new Navigator();
+            //navigator.UseProvider(new MockNavigationProvider());
         }
 
         [TestCleanup]

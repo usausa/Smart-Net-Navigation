@@ -39,7 +39,7 @@
 
         private readonly PageStackManager stackManager = new PageStackManager();
 
-        private readonly ComponentContainer components = new ComponentContainer();
+        private readonly ComponentContainer components;
 
         // ------------------------------------------------------------
         // Property
@@ -77,13 +77,15 @@
         /// <summary>
         ///
         /// </summary>
-        public Navigator()
+        /// <param name="components"></param>
+        public Navigator(ComponentContainer components)
         {
-            components.Register<IActivator>(new StandardActivator());
-            components.Register<IConverter>(new StandardConverter());
-            components.Register<IPluginPipeline>(new PluginPipeline(
-                new ParameterPlugin(),
-                new ScopePlugin()));
+            this.components = components;
+            //components.Register<IActivator>(new StandardActivator());
+            //components.Register<IConverter>(new StandardConverter());
+            //components.Register<IPluginPipeline>(new PluginPipeline(
+            //    new ParameterPlugin(),
+            //    new ScopePlugin()));
         }
 
         /// <summary>

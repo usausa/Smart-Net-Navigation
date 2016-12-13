@@ -19,11 +19,12 @@
         [TestInitialize]
         public void TestInitialize()
         {
+            // TODO
             resolver = new StandardResolver();
-            navigator = new Navigator();
-            navigator
-                .UseProvider(new MockMvvmNavigationProvider())
-                .UseActivator(type => resolver.Get(type));
+            //navigator = new Navigator(null);
+            //navigator
+            //    .UseProvider(new MockMvvmNavigationProvider())
+            //    .UseActivator(type => resolver.Get(type));
         }
 
         [TestCleanup]
