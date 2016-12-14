@@ -22,7 +22,7 @@
 //                throw new ArgumentNullException(nameof(provider));
 //            }
 
-//            navigator.Configure(_ => _.Register(provider));
+//            navigator.Configure(c => c.Register(provider));
 
 //            return navigator;
 //        }
@@ -39,7 +39,7 @@
 //                throw new ArgumentNullException(nameof(activator));
 //            }
 
-//            navigator.Configure(_ => _.Register(activator));
+//            navigator.Configure(c => c.Register(activator));
 
 //            return navigator;
 //        }
@@ -66,7 +66,7 @@
 //                throw new ArgumentNullException(nameof(converter));
 //            }
 
-//            navigator.Configure(_ => _.Register(converter));
+//            navigator.Configure(c => c.Register(converter));
 
 //            return navigator;
 //        }
@@ -93,7 +93,7 @@
 //                throw new ArgumentNullException(nameof(plugin));
 //            }
 
-//            navigator.Configure(_ => _.Get<IPluginPipeline>().Plugins.Add(plugin));
+//            navigator.Configure(c => c.Get<IPluginPipeline>().Plugins.Add(plugin));
 
 //            return navigator;
 //        }

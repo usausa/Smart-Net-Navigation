@@ -65,7 +65,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnPostProcess(IPluginContext context)
         {
-            var removes = store.Where(_ => _.Value.Counter == 0).ToList();
+            var removes = store.Where(x => x.Value.Counter == 0).ToList();
             foreach (var remove in removes)
             {
                 store.Remove(remove.Key);

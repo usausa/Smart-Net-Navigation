@@ -243,7 +243,7 @@
                 return;
             }
 
-            InternalNavigate(controller, _ => InternalForwardAction(_, descriptor));
+            InternalNavigate(controller, c => InternalForwardAction(c, descriptor));
         }
 
         // TODO Refactor
@@ -277,8 +277,7 @@
                 return;
             }
 
-            InternalNavigate(controller, _ =>
-                    InternalPushAction(_, descriptor));
+            InternalNavigate(controller, c => InternalPushAction(c, descriptor));
         }
 
         // TODO CurrentPageDomainの扱い？
@@ -289,11 +288,11 @@
             var last = -1;
             if ((descriptor.Domain != null) && !Equals(controller.StackManager.CurrentPageDomain, descriptor.Domain))
             {
-                first = controller.StackManager.Stacked.FindIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
+                first = controller.StackManager.Stacked.FindIndex(p => Equals(p.Descriptor.Domain, descriptor.Domain));
                 if (first >= 0)
                 {
-                    last = controller.StackManager.Stacked.FindLastIndex(_ => Equals(_.Descriptor.Domain, descriptor.Domain));
-                    exist = controller.StackManager.Stacked.Skip(first).Take(last - first + 1).Any(_ => Equals(_.Descriptor.Id, descriptor.Id));
+                    last = controller.StackManager.Stacked.FindLastIndex(p => Equals(p.Descriptor.Domain, descriptor.Domain));
+                    exist = controller.StackManager.Stacked.Skip(first).Take(last - first + 1).Any(p => Equals(p.Descriptor.Id, descriptor.Id));
                 }
             }
 
@@ -342,7 +341,7 @@
                 return;
             }
 
-            InternalNavigate(controller, _ => InternalPopAction(_, level));
+            InternalNavigate(controller, c => InternalPopAction(c, level));
         }
 
         // TODO Refactor
@@ -383,7 +382,7 @@
                 return;
             }
 
-            InternalNavigate(controller, _ => InternalPopAndForwardAction(_, level, descriptor));
+            InternalNavigate(controller, c => InternalPopAndForwardAction(c, level, descriptor));
         }
 
         // TODO Redactor
