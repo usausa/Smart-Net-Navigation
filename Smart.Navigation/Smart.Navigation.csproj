@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="1.1.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
-    <PackageReference Include="Usa.Smart.Core" Version="1.0.5" />
+    <PackageReference Include="Usa.Smart.Core" Version="1.1.1" />
   </ItemGroup>
 
 </Project>
