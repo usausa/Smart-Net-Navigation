@@ -49,8 +49,7 @@
 
             Prepare();
 
-            object value;
-            return store.TryGetValue(type, out value) ? (T)value : defaultValue;
+            return store.TryGetValue(type, out var value) ? (T)value : defaultValue;
         }
 
         public T LoadOr<T>(Type type, Func<T> defaultValueFactory)
@@ -67,8 +66,7 @@
 
             Prepare();
 
-            object value;
-            return store.TryGetValue(type, out value) ? (T)value : defaultValueFactory();
+            return store.TryGetValue(type, out var value) ? (T)value : defaultValueFactory();
         }
     }
 }
