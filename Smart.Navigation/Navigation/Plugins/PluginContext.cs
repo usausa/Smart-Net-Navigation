@@ -9,13 +9,6 @@
     {
         private Dictionary<Type, object> store;
 
-        public IComponentContainer Components { get; }
-
-        public PluginContext(IComponentContainer components)
-        {
-            Components = components;
-        }
-
         private void Prepare()
         {
             if (store == null)

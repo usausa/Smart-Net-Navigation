@@ -6,8 +6,6 @@
 
     public interface IPluginContext
     {
-        IComponentContainer Components { get; }
-
         void Save<T>(Type type, T value);
 
         T Load<T>(Type type);
