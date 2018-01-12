@@ -18,21 +18,11 @@
 
             foreach (var type in assembly.ExportedTypes)
             {
-                foreach (var attr in type.GetTypeInfo().GetCustomAttributes<PageDescriptorAttribute>())
+                foreach (var attr in type.GetTypeInfo().GetCustomAttributes<PageAttribute>())
                 {
-                    navigator.Register(attr.CreateDescriptor(type));
+                    navigator.Register(attr.Id, type);
                 }
             }
-        }
-
-        public static void Register(this Navigator navigator, object id, Type type)
-        {
-            navigator.Register(new PageDescriptor(id, null, type));
-        }
-
-        public static void Register(this Navigator navigator, object id, object domain, Type type)
-        {
-            navigator.Register(new PageDescriptor(id, domain, type));
         }
     }
 }

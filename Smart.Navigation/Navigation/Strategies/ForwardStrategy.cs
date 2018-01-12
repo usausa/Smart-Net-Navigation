@@ -6,13 +6,16 @@
     {
         private readonly object id;
 
-        public object ToId => id;
-
-        public NavigationAttribute Attribute => NavigationAttribute.None;
-
         public ForwardStrategy(object id)
         {
             this.id = id;
+        }
+
+        public StragtegyResult Initialize(INavigationController controller)
+        {
+            // TODO descrpitor check
+
+            return new StragtegyResult(id, NavigationAttribute.None);
         }
 
         public void Process(INavigationController controller)

@@ -8,8 +8,6 @@
 
         object CurrentPageId { get; }
 
-        object CurrentPageDomain { get; }
-
         object CurrentPage { get; }
 
         object CurrentTarget { get; }
@@ -21,6 +19,6 @@
 
         // Navigate
 
-        void Navigate(INavigationStrategy strategy, INavigationParameter parameter);
+        bool Navigate(INavigationStrategy strategy, INavigationParameter parameter);
     }
 }

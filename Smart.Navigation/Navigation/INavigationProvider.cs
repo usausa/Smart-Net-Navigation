@@ -1,7 +1,5 @@
 ﻿namespace Smart.Navigation
 {
-    using System;
-
     public interface INavigationProvider
     {
         object ResolveTarget(object page);

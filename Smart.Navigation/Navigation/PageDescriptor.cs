@@ -2,18 +2,15 @@
 {
     using System;
 
-    public class PageDescriptor : IPageDescriptor
+    public class PageDescriptor
     {
         public object Id { get; }
 
-        public object Domain { get; }
-
         public Type Type { get; }
 
-        public PageDescriptor(object id, object domain, Type type)
+        public PageDescriptor(object id, Type type)
         {
             Id = id;
-            Domain = domain;
             Type = type;
         }
     }

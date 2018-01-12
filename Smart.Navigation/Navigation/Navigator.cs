@@ -34,7 +34,7 @@
 
         private readonly ComponentContainer components;
 
-        private readonly Dictionary<object, IPageDescriptor> descriptors = new Dictionary<object, IPageDescriptor>();
+        private readonly Dictionary<object, PageDescriptor> descriptors = new Dictionary<object, PageDescriptor>();
 
         private readonly PageStackManager stackManager = new PageStackManager();
 
@@ -49,8 +49,6 @@
         public int StackedCount => stackManager.Stacked.Count;
 
         public object CurrentPageId => stackManager.CurrentPageId;
-
-        public object CurrentPageDomain => stackManager.CurrentPageDomain;
 
         public object CurrentPage => stackManager.CurrentPage;
 
@@ -87,9 +85,9 @@
         // Registration
         // ------------------------------------------------------------
 
-        public void Register(IPageDescriptor descriptor)
+        public void Register(object id, Type type)
         {
-            descriptors.Add(descriptor.Id, descriptor);
+            descriptors.Add(id, new PageDescriptor(id, type));
         }
 
         // ------------------------------------------------------------
@@ -117,14 +115,15 @@
             Exited?.Invoke(this, EventArgs.Empty);
         }
 
-        public void Navigate(INavigationStrategy strategy, INavigationParameter parameter)
+        public bool Navigate(INavigationStrategy strategy, INavigationParameter parameter)
         {
-            // TODO 1,2,3 to
-            var context = new NavigationContext(CurrentPageId, strategy.ToId, strategy.Attribute, parameter ?? EmptyParameter);
+            // TODO controller
+            var result = strategy.Initialize(null);
+            var context = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
 
             if (!ConfirmNavigation(context))
             {
-                return;
+                return false;
             }
 
             // TODO

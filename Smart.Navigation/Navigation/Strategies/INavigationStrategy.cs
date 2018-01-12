@@ -2,11 +2,7 @@
 {
     public interface INavigationStrategy
     {
-        // TODO WithController
-        object ToId { get; }
-
-        // TODO WithController
-        NavigationAttribute Attribute { get; }
+        StragtegyResult Initialize(INavigationController controller);
 
         void Process(INavigationController controller);
     }

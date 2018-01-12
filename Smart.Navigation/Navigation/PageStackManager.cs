@@ -10,8 +10,6 @@
 
         public object CurrentPageId => CurrentStack?.Descriptor.Id;
 
-        public object CurrentPageDomain => CurrentStack?.Descriptor.Domain;
-
         public object CurrentPage => CurrentStack?.Page;
     }
 }

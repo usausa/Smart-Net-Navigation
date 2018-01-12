@@ -2,13 +2,13 @@
 {
     public class PageStack
     {
-        public IPageDescriptor Descriptor { get; }
+        public PageDescriptor Descriptor { get; }
 
         public object Page { get; }
 
         public object RestoreParameter { get; set; }
 
-        public PageStack(IPageDescriptor descriptor, object page)
+        public PageStack(PageDescriptor descriptor, object page)
         {
             Descriptor = descriptor;
             Page = page;
