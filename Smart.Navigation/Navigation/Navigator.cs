@@ -119,11 +119,53 @@
 
         public void Navigate(INavigationStrategy strategy, INavigationParameter parameter)
         {
+            // TODO 1,2,3 to
+            var context = new NavigationContext(CurrentPageId, null, false, false, parameter ?? EmptyParameter);
+
+            if (!ConfirmNavigation(context))
+            {
+                return;
+            }
+
+            // TODO
+
             throw new System.NotImplementedException();
         }
+
+        // TODO async?
 
         // ------------------------------------------------------------
         // Helper
         // ------------------------------------------------------------
+
+        private bool ConfirmNavigation(NavigationContext context)
+        {
+            var page = CurrentPage;
+            if (page != null)
+            {
+                var target = provider.ResolveTarget(page);
+                if (target is IConfirmRequest confirm)
+                {
+                    var cancel = confirm.NavigationConfirm(context);
+                    if (cancel)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            var handler = Confirm;
+            if (handler != null)
+            {
+                var args = new ConfirmEventArgs(context);
+                handler(this, args);
+                if (args.Cancel)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
