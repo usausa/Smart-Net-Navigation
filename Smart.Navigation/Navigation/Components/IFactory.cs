@@ -5,7 +5,7 @@
     /// <summary>
     ///
     /// </summary>
-    public interface IActivator
+    public interface IFactory
     {
         /// <summary>
         ///

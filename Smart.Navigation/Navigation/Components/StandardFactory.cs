@@ -5,7 +5,7 @@
     /// <summary>
     ///
     /// </summary>
-    public class StandardActivator : IActivator
+    public class StandardFactory : IFactory
     {
         /// <summary>
         ///

@@ -8,13 +8,13 @@
 
     public class ParameterPlugin : PluginBase
     {
-        private readonly AttributePropertyFactory<ParameterAttribute> factory;
+        private readonly AttributePropertyFactory<ParameterAttribute> attributePropertyFactory;
 
         private readonly IConverter converter;
 
         public ParameterPlugin(IAccessorFactory accessorFactory, IConverter converter)
         {
-            factory = new AttributePropertyFactory<ParameterAttribute>(accessorFactory);
+            attributePropertyFactory = new AttributePropertyFactory<ParameterAttribute>(accessorFactory);
             this.converter = converter;
         }
 
@@ -38,7 +38,7 @@
         {
             var parameters = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
-            foreach (var property in factory.GetAttributeProperties(target.GetType()))
+            foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {
                 if ((property.Attribute.Direction & Direction.Export) != 0)
                 {
@@ -52,7 +52,7 @@
 
         private void ApplyImportParameters(object target, IDictionary<string, object> parameters)
         {
-            foreach (var property in factory.GetAttributeProperties(target.GetType()))
+            foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {
                 if ((property.Attribute.Direction & Direction.Import) != 0)
                 {
