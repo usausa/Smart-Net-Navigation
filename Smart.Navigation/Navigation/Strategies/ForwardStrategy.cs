@@ -11,7 +11,7 @@
             this.id = id;
         }
 
-        public void Process()
+        public void Process(INavigationController controller)
         {
             // TODO
             if (id == null)

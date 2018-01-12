@@ -2,6 +2,6 @@
 {
     public interface INavigationStrategy
     {
-        void Process();
+        void Process(INavigationController controller);
     }
 }
