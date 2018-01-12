@@ -2,6 +2,6 @@
 {
     public interface INavigationStrategy
     {
-        void Update();
+        void Process();
     }
 }
