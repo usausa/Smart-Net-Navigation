@@ -1,20 +1,20 @@
-﻿//namespace Smart.Navigation
-//{
-//    using System;
+﻿namespace Smart.Navigation
+{
+    //    using System;
 
-//    using Smart.Navigation.Strategies;
+    using Smart.Navigation.Strategies;
 
-//    public static partial class NavigatorExtensions
-//    {
-//        public static void Forward2(this INavigator navigator, object id)
-//        {
-//            navigator.Navigate(new ForwardStrategy(id), null);
-//        }
+    public static partial class NavigatorExtensions
+    {
+        public static void Forward(this INavigator navigator, object id)
+        {
+            navigator.Navigate(new ForwardStrategy(id), null);
+        }
 
-//        public static void Forward2(this INavigator navigator, object id, INavigationParameter parameter)
-//        {
-//            navigator.Navigate(new ForwardStrategy(id), parameter);
-//        }
+        public static void Forward(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            navigator.Navigate(new ForwardStrategy(id), parameter);
+        }
 
 //        public static void Push2(this INavigator navigator, object id)
 //        {
@@ -66,5 +66,5 @@
 //        {
 //            throw new NotImplementedException();
 //        }
-//    }
-//}
+    }
+}

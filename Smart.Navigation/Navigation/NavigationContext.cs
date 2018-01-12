@@ -2,22 +2,19 @@
 {
     public class NavigationContext : INavigationContext
     {
-        public object FromPageId { get; }
+        public object FromId { get; }
 
-        public object ToPageId { get; }
+        public object ToId { get; }
 
-        public bool IsStacked { get; }
-
-        public bool IsRestore { get; }
+        public NavigationAttribute Attribute { get; }
 
         public INavigationParameter Parameter { get; }
 
-        public NavigationContext(object fromPageId, object toPageId, bool isStacked, bool isRestore, INavigationParameter parameter)
+        public NavigationContext(object fromId, object toId, NavigationAttribute attribute, INavigationParameter parameter)
         {
-            FromPageId = fromPageId;
-            ToPageId = toPageId;
-            IsStacked = isStacked;
-            IsRestore = isRestore;
+            FromId = fromId;
+            ToId = toId;
+            Attribute = attribute;
             Parameter = parameter;
         }
     }

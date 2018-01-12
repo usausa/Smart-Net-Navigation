@@ -120,7 +120,7 @@
         public void Navigate(INavigationStrategy strategy, INavigationParameter parameter)
         {
             // TODO 1,2,3 to
-            var context = new NavigationContext(CurrentPageId, null, false, false, parameter ?? EmptyParameter);
+            var context = new NavigationContext(CurrentPageId, strategy.ToId, strategy.Attribute, parameter ?? EmptyParameter);
 
             if (!ConfirmNavigation(context))
             {

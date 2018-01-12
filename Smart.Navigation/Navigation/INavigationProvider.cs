@@ -4,10 +4,6 @@
 
     public interface INavigationProvider
     {
-        bool IsAsync { get; }
-
-        void BeginInvoke(Action action);
-
         object ResolveTarget(object page);
 
         void OpenPage(object page);

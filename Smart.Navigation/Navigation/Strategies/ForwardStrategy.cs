@@ -6,6 +6,10 @@
     {
         private readonly object id;
 
+        public object ToId => id;
+
+        public NavigationAttribute Attribute => NavigationAttribute.None;
+
         public ForwardStrategy(object id)
         {
             this.id = id;

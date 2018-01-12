@@ -2,13 +2,11 @@
 {
     public interface INavigationContext
     {
-        object FromPageId { get; }
+        object FromId { get; }
 
-        object ToPageId { get; }
+        object ToId { get; }
 
-        bool IsStacked { get; }
-
-        bool IsRestore { get; }
+        NavigationAttribute Attribute { get; }
 
         INavigationParameter Parameter { get; }
     }
