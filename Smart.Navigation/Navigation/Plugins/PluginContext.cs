@@ -11,10 +11,6 @@
 
         public IComponentContainer Components { get; }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="components"></param>
         public PluginContext(IComponentContainer components)
         {
             Components = components;
