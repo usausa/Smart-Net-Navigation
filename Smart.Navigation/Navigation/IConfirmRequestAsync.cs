@@ -1,15 +1,17 @@
 ﻿namespace Smart.Navigation
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     ///
     /// </summary>
-    public interface IConfirmRequest
+    public interface IConfirmRequestAsync
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        bool CanNavigate(INavigationContext context);
+        Task<bool> CanNavigateAsync(INavigationContext context);
     }
 }

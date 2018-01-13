@@ -198,7 +198,7 @@
                 var target = provider.ResolveTarget(page);
                 if (target is IConfirmRequest confirm)
                 {
-                    var cancel = confirm.NavigationConfirm(context);
+                    var cancel = confirm.CanNavigate(context);
                     if (cancel)
                     {
                         return false;
