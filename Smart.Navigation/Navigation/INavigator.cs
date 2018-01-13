@@ -1,5 +1,7 @@
 ﻿namespace Smart.Navigation
 {
+    using System.Threading.Tasks;
+
     using Smart.Navigation.Strategies;
 
     public interface INavigator
@@ -20,5 +22,7 @@
         // Navigate
 
         bool Navigate(INavigationStrategy strategy, INavigationParameter parameter);
+
+        Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter);
     }
 }

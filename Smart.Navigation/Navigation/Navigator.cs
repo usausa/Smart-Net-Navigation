@@ -1,4 +1,6 @@
-﻿namespace Smart.Navigation
+﻿using System.Threading.Tasks;
+
+namespace Smart.Navigation
 {
     using System;
     using System.Collections.Generic;
@@ -184,7 +186,10 @@
             return true;
         }
 
-        // TODO async?
+        public Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter)
+        {
+            throw new NotImplementedException();
+        }
 
         // ------------------------------------------------------------
         // Helper
@@ -192,17 +197,12 @@
 
         private bool ConfirmNavigation(NavigationContext context)
         {
-            var page = CurrentPage;
-            if (page != null)
+            if (CurrentTarget is IConfirmRequest confirm)
             {
-                var target = provider.ResolveTarget(page);
-                if (target is IConfirmRequest confirm)
+                var cancel = confirm.CanNavigate(context);
+                if (cancel)
                 {
-                    var cancel = confirm.CanNavigate(context);
-                    if (cancel)
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
@@ -219,6 +219,8 @@
 
             return true;
         }
+
+        // TODO async version
 
         // ------------------------------------------------------------
         // Controller
