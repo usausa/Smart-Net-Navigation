@@ -6,6 +6,8 @@
     {
         private readonly object id;
 
+        private PageDescriptor descriptor;
+
         public ForwardStrategy(object id)
         {
             this.id = id;
@@ -13,20 +15,34 @@
 
         public StragtegyResult Initialize(INavigationController controller)
         {
-            // TODO descrpitor check
+            if (!controller.Descriptors.TryGetValue(id, out descriptor))
+            {
+                throw new ArgumentException($"{id} is not found in descriptors.");
+            }
 
             return new StragtegyResult(id, NavigationAttribute.None);
         }
 
-        public void Process(INavigationController controller)
+        public void UpdateStack(INavigationController controller)
         {
-            // TODO
-            if (id == null)
+            var count = controller.StackManager.Stacked.Count;
+            if (count > 0)
             {
-                throw new InvalidOperationException();
+                controller.ClosePage(controller.StackManager.Stacked[count - 1]);
+
+                controller.StackManager.Stacked.RemoveAt(count - 1);
             }
 
-            throw new System.NotImplementedException();
+            var page = controller.CreatePage(descriptor.Type);
+            controller.StackManager.Stacked.Add(new PageStack(descriptor, page));
+        }
+
+        public void PostProcess(INavigationController controller, object previousPage)
+        {
+            if (previousPage != null)
+            {
+                controller.ClosePage(previousPage);
+            }
         }
     }
 }

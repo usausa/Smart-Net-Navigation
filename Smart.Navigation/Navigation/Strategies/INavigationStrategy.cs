@@ -4,6 +4,8 @@
     {
         StragtegyResult Initialize(INavigationController controller);
 
-        void Process(INavigationController controller);
+        void UpdateStack(INavigationController controller);
+
+        void PostProcess(INavigationController controller, object previousPage);
     }
 }

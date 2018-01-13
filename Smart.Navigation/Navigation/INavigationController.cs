@@ -2,14 +2,20 @@
 {
     using System;
 
+    using System.Collections.Generic;
+
     public interface INavigationController
     {
+        IDictionary<object, PageDescriptor> Descriptors { get; }
+
+        PageStackManager StackManager { get; }
+
         object CreatePage(Type type);
 
         void ClosePage(object page);
 
-        void ActivaPage(PageStack stack);
+        void ActivaPage(object page);
 
-        void DeactivePage(PageStack stack);
+        void DeactivePage(object page);
     }
 }
