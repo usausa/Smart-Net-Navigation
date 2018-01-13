@@ -12,10 +12,12 @@
 
         object CreatePage(Type type);
 
+        void OpenPage(object page);
+
         void ClosePage(object page);
 
-        void ActivaPage(object page);
+        void ActivaPage(object page, object parameter);
 
-        void DeactivePage(object page);
+        object DeactivePage(object page);
     }
 }

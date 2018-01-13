@@ -14,7 +14,7 @@
         {
         }
 
-        public virtual void OnNavigaingTo(IPluginContext context, object page, object target)
+        public virtual void OnNavigatingTo(IPluginContext context, object page, object target)
         {
         }
 

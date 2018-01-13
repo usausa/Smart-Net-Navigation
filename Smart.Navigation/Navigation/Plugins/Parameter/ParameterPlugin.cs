@@ -25,7 +25,7 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnNavigaingTo(IPluginContext context, object page, object target)
+        public override void OnNavigatingTo(IPluginContext context, object page, object target)
         {
             var parameters = context.LoadOr(GetType(), default(Dictionary<string, object>));
             if (parameters != null)

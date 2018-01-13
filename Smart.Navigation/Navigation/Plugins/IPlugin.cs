@@ -8,7 +8,7 @@
 
         void OnNavigatedFrom(IPluginContext context, object page, object target);
 
-        void OnNavigaingTo(IPluginContext context, object page, object target);
+        void OnNavigatingTo(IPluginContext context, object page, object target);
 
         void OnNavigatedTo(IPluginContext context, object page, object target);
     }

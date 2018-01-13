@@ -6,6 +6,7 @@
 
     using Smart.ComponentModel;
     using Smart.Functional;
+    using Smart.Navigation.Components;
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Strategies;
 
@@ -21,6 +22,8 @@
         public event EventHandler<ConfirmEventArgs> Confirm;
 
         public event EventHandler<NavigationEventArgs> NavigatedFrom;
+
+        public event EventHandler<NavigationEventArgs> NavigatingTo;
 
         public event EventHandler<NavigationEventArgs> NavigatedTo;
 
@@ -39,6 +42,8 @@
         private readonly PageStackManager stackManager = new PageStackManager();
 
         private readonly INavigationProvider provider;
+
+        private readonly IFactory factory;
 
         private readonly IPlugin[] plugins;
 
@@ -68,6 +73,7 @@
             components = config.ResolveComponents();
 
             provider = components.Get<INavigationProvider>();
+            factory = components.Get<IFactory>();
             plugins = components.GetAll<IPlugin>().ToArray();
         }
 
@@ -117,18 +123,63 @@
 
         public bool Navigate(INavigationStrategy strategy, INavigationParameter parameter)
         {
-            // TODO controller
-            var result = strategy.Initialize(null);
-            var context = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+            var controller = new Controller(this);
+            var result = strategy.Initialize(controller);
+            var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
 
-            if (!ConfirmNavigation(context))
+            if (!ConfirmNavigation(navigationContext))
             {
                 return false;
             }
 
-            // TODO
+            var args = new NavigationEventArgs(navigationContext);
+            var pluginContext = new PluginContext();
+            controller.PluginContext = pluginContext;
 
-            throw new System.NotImplementedException();
+            var fromPage = CurrentPage;
+            var fromTarget = CurrentTarget;
+
+            // Process from page
+            if (fromPage != null)
+            {
+                (fromTarget as INavigationEventSupport)?.OnNavigatedFrom(navigationContext);
+
+                foreach (var plugin in plugins)
+                {
+                    plugin.OnNavigatedFrom(pluginContext, fromPage, fromTarget);
+                }
+
+                NavigatedFrom?.Invoke(this, args);
+            }
+
+            // Create to page
+            var toPage = strategy.ResolveToPage(controller);
+            var toTarget = provider.ResolveTarget(toPage);
+
+            // Process navigating
+            NavigatingTo?.Invoke(this, args);
+
+            foreach (var plugin in plugins)
+            {
+                plugin.OnNavigatingTo(pluginContext, toPage, toTarget);
+            }
+
+            (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
+
+            // Update stack
+            strategy.UpdateStack(controller, toPage);
+
+            // Process navigated
+            NavigatedTo?.Invoke(this, args);
+
+            foreach (var plugin in plugins)
+            {
+                plugin.OnNavigatedTo(pluginContext, toPage, toTarget);
+            }
+
+            (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
+
+            return true;
         }
 
         // TODO async?
@@ -165,6 +216,77 @@
             }
 
             return true;
+        }
+
+        // ------------------------------------------------------------
+        // Controller
+        // ------------------------------------------------------------
+
+        private class Controller : INavigationController
+        {
+            private readonly Navigator navigator;
+
+            public IDictionary<object, PageDescriptor> Descriptors => navigator.descriptors;
+
+            public PageStackManager StackManager => navigator.stackManager;
+
+            public PluginContext PluginContext { private get; set; }
+
+            public Controller(Navigator navigator)
+            {
+                this.navigator = navigator;
+            }
+
+            public object CreatePage(Type type)
+            {
+                var page = navigator.factory.Create(type);
+
+                var target = navigator.provider.ResolveTarget(page);
+
+                if (target is INavigatorAware aware)
+                {
+                    aware.Navigator = navigator;
+                }
+
+                foreach (var plugin in navigator.plugins)
+                {
+                    plugin.OnCreate(PluginContext, page, target);
+                }
+
+                return page;
+            }
+
+            public void OpenPage(object page)
+            {
+                navigator.provider.OpenPage(page);
+            }
+
+            public void ClosePage(object page)
+            {
+                var target = navigator.provider.ResolveTarget(page);
+
+                foreach (var plugin in navigator.plugins)
+                {
+                    plugin.OnClose(PluginContext, page, target);
+                }
+
+                navigator.provider.ClosePage(page);
+
+                if (page != target)
+                {
+                    (target as IDisposable)?.Dispose();
+                }
+            }
+
+            public void ActivaPage(object page, object parameter)
+            {
+                navigator.provider.ActivePage(page, parameter);
+            }
+
+            public object DeactivePage(object page)
+            {
+                return navigator.provider.DectivePage(page);
+            }
         }
     }
 }

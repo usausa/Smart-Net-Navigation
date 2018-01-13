@@ -23,25 +23,25 @@
             return new StragtegyResult(id, NavigationAttribute.None);
         }
 
-        public void UpdateStack(INavigationController controller)
+        public object ResolveToPage(INavigationController controller)
         {
-            var count = controller.StackManager.Stacked.Count;
-            if (count > 0)
-            {
-                controller.ClosePage(controller.StackManager.Stacked[count - 1]);
-
-                controller.StackManager.Stacked.RemoveAt(count - 1);
-            }
-
-            var page = controller.CreatePage(descriptor.Type);
-            controller.StackManager.Stacked.Add(new PageStack(descriptor, page));
+            return controller.CreatePage(descriptor.Type);
         }
 
-        public void PostProcess(INavigationController controller, object previousPage)
+        public void UpdateStack(INavigationController controller, object toPage)
         {
-            if (previousPage != null)
+            // Stack new
+            controller.StackManager.Stacked.Add(new PageStack(descriptor, toPage));
+
+            controller.OpenPage(toPage);
+
+            // Remove old
+            var count = controller.StackManager.Stacked.Count;
+            if (count > 1)
             {
-                controller.ClosePage(previousPage);
+                controller.ClosePage(controller.StackManager.Stacked[count - 2]);
+
+                controller.StackManager.Stacked.RemoveAt(count - 2);
             }
         }
     }
