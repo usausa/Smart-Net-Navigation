@@ -1,6 +1,6 @@
 ﻿namespace Smart.Navigation
 {
-    public class PageStack
+    public class PageStackInfo
     {
         public PageDescriptor Descriptor { get; }
 
@@ -8,7 +8,7 @@
 
         public object RestoreParameter { get; set; }
 
-        public PageStack(PageDescriptor descriptor, object page)
+        public PageStackInfo(PageDescriptor descriptor, object page)
         {
             Descriptor = descriptor;
             Page = page;

@@ -1,70 +1,75 @@
 ﻿namespace Smart.Navigation
 {
-    //    using System;
-
     using Smart.Navigation.Strategies;
 
     public static partial class NavigatorExtensions
     {
-        public static void Forward(this INavigator navigator, object id)
+        // Forward
+
+        public static bool Forward(this INavigator navigator, object id)
         {
-            navigator.Navigate(new ForwardStrategy(id), null);
+            return navigator.Navigate(new ForwardStrategy(id), null);
         }
 
-        public static void Forward(this INavigator navigator, object id, INavigationParameter parameter)
+        public static bool Forward(this INavigator navigator, object id, INavigationParameter parameter)
         {
-            navigator.Navigate(new ForwardStrategy(id), parameter);
+            return navigator.Navigate(new ForwardStrategy(id), parameter);
         }
 
-//        public static void Push(this INavigator navigator, object id)
-//        {
-//            throw new NotImplementedException();
-//        }
+        // Push
 
-//        public static void Push(this INavigator navigator, object id, INavigationParameter parameter)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public static bool Push(this INavigator navigator, object id)
+        {
+            return navigator.Navigate(new PushStrategy(id), null);
+        }
 
-//        public static void Pop(this INavigator navigator)
-//        {
-//            // TODO level nullable?
-//            throw new NotImplementedException();
-//        }
+        public static bool Push(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new PushStrategy(id), parameter);
+        }
 
-//        public static void Pop(this INavigator navigator, INavigationParameter parameter)
-//        {
-//            throw new NotImplementedException();
-//        }
+        // Pop
 
-//        public static void Pop(this INavigator navigator, int level)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public static bool Pop(this INavigator navigator)
+        {
+            return navigator.Navigate(new PopStrategy(1), null);
+        }
 
-//        public static void Pop(this INavigator navigator, int level, INavigationParameter parameter)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public static bool Pop(this INavigator navigator, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new PopStrategy(1), parameter);
+        }
 
-//        public static void PopAndForward(this INavigator navigator, object id)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public static bool Pop(this INavigator navigator, int level)
+        {
+            return navigator.Navigate(new PopStrategy(level), null);
+        }
 
-//        public static void PopAndForward(this INavigator navigator, object id, int level)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public static bool Pop(this INavigator navigator, int level, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new PopStrategy(level), parameter);
+        }
 
-//        public static void PopAndForward(this INavigator navigator, object id, INavigationParameter parameter)
-//        {
-//            throw new NotImplementedException();
-//        }
+        // PopAndForward
 
-//        public static void PopAndForward(this INavigator navigator, object id, int level, INavigationParameter parameter)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public static bool PopAndForward(this INavigator navigator, object id)
+        {
+            return navigator.Navigate(new PopAndForwardStrategy(id, 1), null);
+        }
+
+        public static bool PopAndForward(this INavigator navigator, object id, int level)
+        {
+            return navigator.Navigate(new PopAndForwardStrategy(id, level), null);
+        }
+
+        public static bool PopAndForward(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new PopAndForwardStrategy(id, 1), parameter);
+        }
+
+        public static bool PopAndForward(this INavigator navigator, object id, int level, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new PopAndForwardStrategy(id, level), parameter);
+        }
     }
 }

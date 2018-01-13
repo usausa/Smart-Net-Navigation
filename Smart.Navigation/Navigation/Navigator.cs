@@ -39,7 +39,7 @@
 
         private readonly Dictionary<object, PageDescriptor> descriptors = new Dictionary<object, PageDescriptor>();
 
-        private readonly PageStackManager stackManager = new PageStackManager();
+        private readonly List<PageStackInfo> pageStack = new List<PageStackInfo>();
 
         private readonly INavigationProvider provider;
 
@@ -51,13 +51,15 @@
         // Property
         // ------------------------------------------------------------
 
-        public int StackedCount => stackManager.Stacked.Count;
+        private PageStackInfo CurrentStack => pageStack.Count > 0 ? pageStack[pageStack.Count - 1] : null;
 
-        public object CurrentPageId => stackManager.CurrentPageId;
+        public int StackedCount => pageStack.Count;
 
-        public object CurrentPage => stackManager.CurrentPage;
+        public object CurrentPageId => CurrentStack?.Descriptor.Id;
 
-        public object CurrentTarget => stackManager.CurrentPage.MapOrDefalut(x => provider.ResolveTarget(x));
+        public object CurrentPage => CurrentStack?.Page;
+
+        public object CurrentTarget => CurrentStack?.Page.MapOrDefalut(x => provider.ResolveTarget(x));
 
         // ------------------------------------------------------------
         // Constructor
@@ -102,9 +104,9 @@
 
         public void Exit()
         {
-            for (var i = stackManager.Stacked.Count - 1; i >= 0; i--)
+            for (var i = pageStack.Count - 1; i >= 0; i--)
             {
-                var page = stackManager.Stacked[i].Page;
+                var page = pageStack[i].Page;
                 var target = provider.ResolveTarget(page);
 
                 provider.ClosePage(page);
@@ -116,7 +118,7 @@
                 }
             }
 
-            stackManager.Stacked.Clear();
+            pageStack.Clear();
 
             Exited?.Invoke(this, EventArgs.Empty);
         }
@@ -228,7 +230,7 @@
 
             public IDictionary<object, PageDescriptor> Descriptors => navigator.descriptors;
 
-            public PageStackManager StackManager => navigator.stackManager;
+            public IList<PageStackInfo> PageStack => navigator.pageStack;
 
             public PluginContext PluginContext { private get; set; }
 

@@ -17,7 +17,7 @@
         {
             if (!controller.Descriptors.TryGetValue(id, out descriptor))
             {
-                throw new ArgumentException($"{id} is not found in descriptors.");
+                throw new InvalidOperationException($"Page id is not found in descriptors. id=[{id}]");
             }
 
             return new StragtegyResult(id, NavigationAttribute.None);
@@ -31,17 +31,19 @@
         public void UpdateStack(INavigationController controller, object toPage)
         {
             // Stack new
-            controller.StackManager.Stacked.Add(new PageStack(descriptor, toPage));
+            controller.PageStack.Add(new PageStackInfo(descriptor, toPage));
 
             controller.OpenPage(toPage);
 
             // Remove old
-            var count = controller.StackManager.Stacked.Count;
+            var count = controller.PageStack.Count;
             if (count > 1)
             {
-                controller.ClosePage(controller.StackManager.Stacked[count - 2]);
+                var index = count - 2;
 
-                controller.StackManager.Stacked.RemoveAt(count - 2);
+                controller.ClosePage(controller.PageStack[index]);
+
+                controller.PageStack.RemoveAt(index);
             }
         }
     }
