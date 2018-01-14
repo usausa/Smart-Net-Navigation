@@ -20,7 +20,11 @@
                 throw new ArgumentNullException(nameof(provider));
             }
 
-            config.Configure(c => c.Add(provider));
+            config.Configure(c =>
+            {
+                c.RemoveAll<INavigationProvider>();
+                c.Add(provider);
+            });
 
             return config;
         }
