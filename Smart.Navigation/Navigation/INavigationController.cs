@@ -8,7 +8,7 @@
     {
         IDictionary<object, PageDescriptor> Descriptors { get; }
 
-        IList<PageStackInfo> PageStack { get; }
+        List<PageStackInfo> PageStack { get; }
 
         object CreatePage(Type type);
 

@@ -231,7 +231,7 @@
 
             public IDictionary<object, PageDescriptor> Descriptors => navigator.descriptors;
 
-            public IList<PageStackInfo> PageStack => navigator.pageStack;
+            public List<PageStackInfo> PageStack => navigator.pageStack;
 
             public PluginContext PluginContext { private get; set; }
 
