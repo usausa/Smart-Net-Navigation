@@ -281,7 +281,7 @@
                 }
             }
 
-            public void ActivaPage(object page, object parameter)
+            public void ActivePage(object page, object parameter)
             {
                 navigator.provider.ActivePage(page, parameter);
             }

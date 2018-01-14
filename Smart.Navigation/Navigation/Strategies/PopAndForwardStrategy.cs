@@ -38,7 +38,18 @@
 
         public void UpdateStack(INavigationController controller, object toPage)
         {
-            throw new NotImplementedException();
+            // Stack new
+            controller.PageStack.Add(new PageStackInfo(descriptor, toPage));
+
+            controller.OpenPage(toPage);
+
+            // Remove old
+            for (var i = controller.PageStack.Count - 2; i > controller.PageStack.Count - level - 2; i--)
+            {
+                controller.ClosePage(controller.PageStack[i]);
+            }
+
+            controller.PageStack.RemoveRange(controller.PageStack.Count - level - 1, level);
         }
     }
 }

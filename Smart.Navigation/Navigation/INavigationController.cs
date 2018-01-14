@@ -16,7 +16,7 @@
 
         void ClosePage(object page);
 
-        void ActivaPage(object page, object parameter);
+        void ActivePage(object page, object parameter);
 
         object DeactivePage(object page);
     }
