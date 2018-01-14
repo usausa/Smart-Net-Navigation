@@ -7,7 +7,7 @@
 
     using Smart.Reflection;
 
-    public class AttributePropertyFactory<T>
+    public sealed class AttributePropertyFactory<T>
         where T : Attribute
     {
         private readonly Dictionary<Type, AttributeProperty<T>[]> cache = new Dictionary<Type, AttributeProperty<T>[]>();

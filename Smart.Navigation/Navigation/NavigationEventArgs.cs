@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class NavigationEventArgs : EventArgs
+    public sealed class NavigationEventArgs : EventArgs
     {
         public INavigationContext Context { get; }
 

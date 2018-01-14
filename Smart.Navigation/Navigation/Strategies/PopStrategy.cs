@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class PopStrategy : INavigationStrategy
+    public sealed class PopStrategy : INavigationStrategy
     {
         private readonly int level;
 

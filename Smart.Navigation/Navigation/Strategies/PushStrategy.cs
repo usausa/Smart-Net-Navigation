@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class PushStrategy : INavigationStrategy
+    public sealed class PushStrategy : INavigationStrategy
     {
         private readonly object id;
 

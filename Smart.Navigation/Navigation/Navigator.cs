@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-
-namespace Smart.Navigation
+﻿namespace Smart.Navigation
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Smart.ComponentModel;
     using Smart.Functional;
@@ -15,7 +14,7 @@ namespace Smart.Navigation
     /// <summary>
     ///
     /// </summary>
-    public class Navigator : DisposableObject, INavigator
+    public sealed class Navigator : DisposableObject, INavigator
     {
         // ------------------------------------------------------------
         // Event
@@ -226,7 +225,7 @@ namespace Smart.Navigation
         // Controller
         // ------------------------------------------------------------
 
-        private class Controller : INavigationController
+        private sealed class Controller : INavigationController
         {
             private readonly Navigator navigator;
 

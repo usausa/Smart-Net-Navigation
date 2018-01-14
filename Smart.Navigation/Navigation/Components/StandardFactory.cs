@@ -2,10 +2,7 @@
 {
     using System;
 
-    /// <summary>
-    ///
-    /// </summary>
-    public class StandardFactory : IFactory
+    public sealed class StandardFactory : IFactory
     {
         /// <summary>
         ///

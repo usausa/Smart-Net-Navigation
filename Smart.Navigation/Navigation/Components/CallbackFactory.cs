@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class CallbackFactory : IFactory
+    public sealed class CallbackFactory : IFactory
     {
         private readonly Func<Type, object> callback;
 

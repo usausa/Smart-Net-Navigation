@@ -1,6 +1,6 @@
 ﻿namespace Smart.Navigation.Strategies
 {
-    public class StragtegyResult
+    public sealed class StragtegyResult
     {
         public object ToId { get; }
 

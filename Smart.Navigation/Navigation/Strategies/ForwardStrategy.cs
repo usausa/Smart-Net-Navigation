@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ForwardStrategy : INavigationStrategy
+    public sealed class ForwardStrategy : INavigationStrategy
     {
         private readonly object id;
 

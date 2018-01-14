@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class CallbackConverter : IConverter
+    public sealed class CallbackConverter : IConverter
     {
         private readonly Func<object, Type, object> callback;
 

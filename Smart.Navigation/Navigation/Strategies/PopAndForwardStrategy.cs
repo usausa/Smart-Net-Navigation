@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class PopAndForwardStrategy : INavigationStrategy
+    public sealed class PopAndForwardStrategy : INavigationStrategy
     {
         private readonly object id;
 

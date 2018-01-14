@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    public class ConfirmEventArgs : CancelEventArgs
+    public sealed class ConfirmEventArgs : CancelEventArgs
     {
         public INavigationContext Context { get; }
 

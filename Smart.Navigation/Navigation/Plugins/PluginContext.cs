@@ -5,7 +5,7 @@
 
     using Smart.ComponentModel;
 
-    public class PluginContext : IPluginContext
+    public sealed class PluginContext : IPluginContext
     {
         private Dictionary<Type, object> store;
 

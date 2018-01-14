@@ -1,6 +1,6 @@
 ﻿namespace Smart.Navigation
 {
-    public class PageStackInfo
+    public sealed class PageStackInfo
     {
         public PageDescriptor Descriptor { get; }
 

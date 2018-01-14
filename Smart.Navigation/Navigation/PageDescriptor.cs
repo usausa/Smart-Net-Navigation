@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class PageDescriptor
+    public sealed class PageDescriptor
     {
         public object Id { get; }
 

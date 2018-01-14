@@ -6,9 +6,9 @@
     using Smart.Navigation.Components;
     using Smart.Reflection;
 
-    public class ScopePlugin : PluginBase
+    public sealed class ScopePlugin : PluginBase
     {
-        private class Reference
+        private sealed class Reference
         {
             public object Instance { get; set; }
 

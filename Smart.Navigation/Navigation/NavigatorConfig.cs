@@ -9,7 +9,7 @@
     using Smart.Navigation.Plugins.Scope;
     using Smart.Reflection;
 
-    public class NavigatorConfig : INavigatorConfig
+    public sealed class NavigatorConfig : INavigatorConfig
     {
         private readonly ComponentConfig config = new ComponentConfig();
 
