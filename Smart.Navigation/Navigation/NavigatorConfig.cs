@@ -16,7 +16,7 @@
         public NavigatorConfig()
         {
             config.Add<IFactory, StandardFactory>();
-            config.Add<IConverter, StandardConverter>();
+            config.Add<IConverter, SmartConverter>();
             config.Add<IActivatorFactory>(TypeMetadataFactory.Default);
             config.Add<IAccessorFactory>(TypeMetadataFactory.Default);
             config.Add<IArrayOperatorFactory>(TypeMetadataFactory.Default);
