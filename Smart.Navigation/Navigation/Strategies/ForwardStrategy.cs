@@ -41,7 +41,7 @@
             {
                 var index = count - 2;
 
-                controller.ClosePage(controller.PageStack[index]);
+                controller.ClosePage(controller.PageStack[index].Page);
 
                 controller.PageStack.RemoveAt(index);
             }

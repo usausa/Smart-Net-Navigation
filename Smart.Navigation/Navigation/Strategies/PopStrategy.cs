@@ -33,7 +33,7 @@
             // Remove old
             for (var i = controller.PageStack.Count - 1; i > controller.PageStack.Count - level - 1; i--)
             {
-                controller.ClosePage(controller.PageStack[i]);
+                controller.ClosePage(controller.PageStack[i].Page);
             }
 
             controller.PageStack.RemoveRange(controller.PageStack.Count - level, level);
