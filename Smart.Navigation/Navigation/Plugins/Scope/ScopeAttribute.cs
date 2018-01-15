@@ -5,7 +5,7 @@
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class ScopeAttribute : Attribute
     {
-        public string Key { get; }
+        public string Name { get; }
 
         public Type RequestType { get; }
 
@@ -13,8 +13,8 @@
         {
         }
 
-        public ScopeAttribute(string key)
-            : this(key, null)
+        public ScopeAttribute(string name)
+            : this(name, null)
         {
         }
 
@@ -23,9 +23,9 @@
         {
         }
 
-        public ScopeAttribute(string key, Type requestType)
+        public ScopeAttribute(string name, Type requestType)
         {
-            Key = key;
+            Name = name;
             RequestType = requestType;
         }
     }

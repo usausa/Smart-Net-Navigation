@@ -32,7 +32,7 @@
         {
             foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {
-                var key = property.Attribute.Key ?? property.Accessor.Type.FullName;
+                var key = property.Attribute.Name ?? property.Accessor.Name;
 
                 if (!store.TryGetValue(key, out var reference))
                 {
@@ -55,7 +55,7 @@
         {
             foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {
-                var key = property.Attribute.Key ?? property.Accessor.Type.FullName;
+                var key = property.Attribute.Name ?? property.Accessor.Name;
 
                 if (!store.TryGetValue(key, out var reference))
                 {
