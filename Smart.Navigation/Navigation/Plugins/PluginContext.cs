@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
 
-    using Smart.ComponentModel;
-
     public sealed class PluginContext : IPluginContext
     {
         private Dictionary<Type, object> store;

@@ -2,8 +2,6 @@
 {
     using System;
 
-    using Smart.ComponentModel;
-
     public interface IPluginContext
     {
         void Save<T>(Type type, T value);
