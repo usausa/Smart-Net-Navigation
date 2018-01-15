@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class MockPage : IDisposable
+    public abstract class MockPage : IDisposable
     {
         public bool IsDisposed { get; private set; }
 
