@@ -28,7 +28,7 @@
                 throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.PageStack.Count}]");
             }
 
-            return new StragtegyResult(id, NavigationAttribute.None);
+            return new StragtegyResult(id, NavigationAttributes.None);
         }
 
         public object ResolveToPage(INavigationController controller)

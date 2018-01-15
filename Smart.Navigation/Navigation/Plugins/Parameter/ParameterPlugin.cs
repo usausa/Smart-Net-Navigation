@@ -40,7 +40,7 @@
 
             foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {
-                if ((property.Attribute.Direction & Direction.Export) != 0)
+                if ((property.Attribute.Direction & Directions.Export) != 0)
                 {
                     var name = property.Attribute.Name ?? property.Accessor.Name;
                     parameters.Add(name, property.Accessor.GetValue(target));
@@ -54,7 +54,7 @@
         {
             foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {
-                if ((property.Attribute.Direction & Direction.Import) != 0)
+                if ((property.Attribute.Direction & Directions.Import) != 0)
                 {
                     var name = property.Attribute.Name ?? property.Accessor.Name;
                     if (parameters.TryGetValue(name, out var value))

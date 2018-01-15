@@ -4,9 +4,9 @@
     {
         public object ToId { get; }
 
-        public NavigationAttribute Attribute { get; }
+        public NavigationAttributes Attribute { get; }
 
-        public StragtegyResult(object toId, NavigationAttribute attribute)
+        public StragtegyResult(object toId, NavigationAttributes attribute)
         {
             ToId = toId;
             Attribute = attribute;

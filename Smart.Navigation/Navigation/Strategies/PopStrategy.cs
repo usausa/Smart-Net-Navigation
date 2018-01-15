@@ -19,7 +19,7 @@
             }
 
             var toInfo = controller.PageStack[controller.PageStack.Count - level - 1];
-            return new StragtegyResult(toInfo.Descriptor.Id, NavigationAttribute.Restore);
+            return new StragtegyResult(toInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
         public object ResolveToPage(INavigationController controller)

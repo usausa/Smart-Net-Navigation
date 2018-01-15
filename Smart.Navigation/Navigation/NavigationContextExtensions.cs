@@ -4,12 +4,12 @@
     {
         public static bool IsStacked(this INavigationContext context)
         {
-            return (context.Attribute & NavigationAttribute.Stacked) == NavigationAttribute.Stacked;
+            return (context.Attribute & NavigationAttributes.Stacked) == NavigationAttributes.Stacked;
         }
 
         public static bool IsRestore(this INavigationContext context)
         {
-            return (context.Attribute & NavigationAttribute.Restore) == NavigationAttribute.Restore;
+            return (context.Attribute & NavigationAttributes.Restore) == NavigationAttributes.Restore;
         }
     }
 }

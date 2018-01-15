@@ -6,11 +6,11 @@
 
         public object ToId { get; }
 
-        public NavigationAttribute Attribute { get; }
+        public NavigationAttributes Attribute { get; }
 
         public INavigationParameter Parameter { get; }
 
-        public NavigationContext(object fromId, object toId, NavigationAttribute attribute, INavigationParameter parameter)
+        public NavigationContext(object fromId, object toId, NavigationAttributes attribute, INavigationParameter parameter)
         {
             FromId = fromId;
             ToId = toId;

@@ -6,7 +6,7 @@
 
         object ToId { get; }
 
-        NavigationAttribute Attribute { get; }
+        NavigationAttributes Attribute { get; }
 
         INavigationParameter Parameter { get; }
     }

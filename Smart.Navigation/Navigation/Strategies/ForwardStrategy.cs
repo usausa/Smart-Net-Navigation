@@ -20,7 +20,7 @@
                 throw new InvalidOperationException($"Page id is not found in descriptors. id=[{id}]");
             }
 
-            return new StragtegyResult(id, NavigationAttribute.None);
+            return new StragtegyResult(id, NavigationAttributes.None);
         }
 
         public object ResolveToPage(INavigationController controller)
