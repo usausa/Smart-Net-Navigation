@@ -69,7 +69,7 @@
             }
         }
 
-        public object DectivePage(object page)
+        public object DeactivePage(object page)
         {
             var control = (Control)page;
 

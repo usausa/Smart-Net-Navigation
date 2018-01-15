@@ -288,7 +288,7 @@
 
             public object DeactivePage(object page)
             {
-                return navigator.provider.DectivePage(page);
+                return navigator.provider.DeactivePage(page);
             }
         }
     }

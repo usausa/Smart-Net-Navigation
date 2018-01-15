@@ -41,7 +41,7 @@
             {
                 var index = count - 2;
 
-                controller.PageStack[index].RestoreParameter = controller.DeactivePage(controller.PageStack[index]);
+                controller.PageStack[index].RestoreParameter = controller.DeactivePage(controller.PageStack[index].Page);
             }
         }
     }

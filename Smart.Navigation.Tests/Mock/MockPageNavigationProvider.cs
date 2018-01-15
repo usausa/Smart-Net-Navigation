@@ -31,7 +31,7 @@
             mock.Focused = parameter;
         }
 
-        public object DectivePage(object page)
+        public object DeactivePage(object page)
         {
             var mock = (MockPage)page;
 

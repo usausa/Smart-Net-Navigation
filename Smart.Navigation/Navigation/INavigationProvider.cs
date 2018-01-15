@@ -10,6 +10,6 @@
 
         void ActivePage(object page, object parameter);
 
-        object DectivePage(object page);
+        object DeactivePage(object page);
     }
 }
