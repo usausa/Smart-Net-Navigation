@@ -16,53 +16,90 @@
                 .UseMockProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
-            navigator.Register(Pages.Page3, typeof(Page3));
+            navigator.Register(Pages.DataPage1, typeof(DataPage1));
+            navigator.Register(Pages.DataPage2, typeof(DataPage2));
+            navigator.Register(Pages.DataPage3, typeof(DataPage3));
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(Pages.DataPage1);
 
-            navigator.Forward(Pages.Page2);
+            navigator.Forward(Pages.DataPage2);
 
-            var page2 = (Page2)navigator.CurrentPage;
+            var page2 = (DataPage2)navigator.CurrentPage;
             Assert.NotNull(page2.Data);
             Assert.True(page2.Data.IsInitialized);
             Assert.False(page2.Data.IsDisposed);
 
-            navigator.Forward(Pages.Page3);
+            navigator.Forward(Pages.DataPage3);
 
-            var page3 = (Page3)navigator.CurrentPage;
+            var page3 = (DataPage3)navigator.CurrentPage;
             Assert.Same(page3.Data, page2.Data);
             Assert.True(page3.Data.IsInitialized);
             Assert.False(page3.Data.IsDisposed);
 
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(Pages.DataPage1);
 
             Assert.True(page3.Data.IsDisposed);
         }
 
+        [Fact]
+        public static void TestScopeByRequestType()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.ObjectPage1, typeof(ObjectPage1));
+            navigator.Register(Pages.ObjectPage2, typeof(ObjectPage2));
+
+            // test
+            navigator.Forward(Pages.ObjectPage1);
+
+            var page1 = (ObjectPage1)navigator.CurrentPage;
+            Assert.NotNull(page1.Object);
+
+            navigator.Forward(Pages.ObjectPage2);
+
+            var page2 = (ObjectPage2)navigator.CurrentPage;
+            Assert.Same(page2.Object, page1.Object);
+        }
+
         public enum Pages
         {
-            Page1,
-            Page2,
-            Page3
+            DataPage1,
+            DataPage2,
+            DataPage3,
+            ObjectPage1,
+            ObjectPage2
         }
 
-        public class Page1 : MockPage
+        public class DataPage1 : MockPage
         {
         }
 
-        public class Page2 : MockPage
+        public class DataPage2 : MockPage
+        {
+            [Scope]
+            public ScopeData Data { get; set; }
+        }
+
+        public class DataPage3 : MockPage
         {
             [Scope]
             public ScopeData Data { get; set; }
         }
 
-        public class Page3 : MockPage
+        public class ObjectPage1 : MockPage
+        {
+            [Scope(typeof(ScopeObject))]
+            public IScopeObject Object { get; set; }
+        }
+
+        public class ObjectPage2 : MockPage
         {
             [Scope]
-            public ScopeData Data { get; set; }
+            public ScopeObject Object { get; set; }
         }
 
         public sealed class ScopeData : IInitializable, IDisposable
@@ -80,6 +117,16 @@
             {
                 IsDisposed = true;
             }
+        }
+
+        public interface IScopeObject
+        {
+            int Value { get; set; }
+        }
+
+        public class ScopeObject : IScopeObject
+        {
+            public int Value { get; set; }
         }
     }
 }
