@@ -1,4 +1,6 @@
-﻿namespace Smart.Navigation
+﻿using System;
+
+namespace Smart.Navigation
 {
     using System.Reflection;
 
@@ -21,6 +23,17 @@
             // test
             Assert.True(navigator.Forward(Pages.Page1));
             Assert.True(navigator.Forward(Pages.Page2));
+        }
+
+        [Fact]
+        public static void TestNavigatorRegistrationFailed()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockProvider()
+                .ToNavigator();
+
+            Assert.Throws<ArgumentNullException>(() => navigator.AutoRegister(null));
         }
 
         public enum Pages

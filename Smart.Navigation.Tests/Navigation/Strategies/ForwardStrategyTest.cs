@@ -19,6 +19,9 @@
             navigator.Register(Pages.Page1, typeof(Page1));
             navigator.Register(Pages.Page2, typeof(Page2));
 
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
             // test
             navigator.Forward(Pages.Page1);
 
@@ -27,6 +30,10 @@
             Assert.Equal(typeof(Page1), page1.GetType());
             Assert.True(page1.IsOpen);
 
+            Assert.Null(context.Value.FromId);
+            Assert.Equal(Pages.Page1, context.Value.ToId);
+            Assert.Equal(NavigationAttributes.None, context.Value.Attribute);
+
             navigator.Forward(Pages.Page2);
 
             Assert.Equal(1, navigator.StackedCount);
@@ -34,6 +41,10 @@
             Assert.Equal(typeof(Page2), page2.GetType());
             Assert.True(page2.IsOpen);
             Assert.False(page1.IsOpen);
+
+            Assert.Equal(Pages.Page1, context.Value.FromId);
+            Assert.Equal(Pages.Page2, context.Value.ToId);
+            Assert.Equal(NavigationAttributes.None, context.Value.Attribute);
         }
 
         [Fact]

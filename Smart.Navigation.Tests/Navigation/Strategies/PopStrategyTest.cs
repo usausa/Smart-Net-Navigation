@@ -19,6 +19,9 @@
             navigator.Register(Pages.Page1, typeof(Page1));
             navigator.Register(Pages.Page2, typeof(Page2));
 
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
             // test
             navigator.Forward(Pages.Page1);
             navigator.Push(Pages.Page2);
@@ -29,6 +32,10 @@
             Assert.Equal(typeof(Page1), page1.GetType());
             Assert.True(page1.IsOpen);
             Assert.True(page1.IsVisible);
+
+            Assert.Equal(Pages.Page2, context.Value.FromId);
+            Assert.Equal(Pages.Page1, context.Value.ToId);
+            Assert.True(context.Value.IsRestore());
         }
 
         [Fact]
@@ -43,6 +50,9 @@
             navigator.Register(Pages.Page2, typeof(Page2));
             navigator.Register(Pages.Page3, typeof(Page3));
 
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
             // test
             navigator.Forward(Pages.Page1);
             navigator.Push(Pages.Page2);
@@ -54,6 +64,10 @@
             Assert.Equal(typeof(Page1), page1.GetType());
             Assert.True(page1.IsOpen);
             Assert.True(page1.IsVisible);
+
+            Assert.Equal(Pages.Page3, context.Value.FromId);
+            Assert.Equal(Pages.Page1, context.Value.ToId);
+            Assert.True(context.Value.IsRestore());
         }
 
         [Fact]
