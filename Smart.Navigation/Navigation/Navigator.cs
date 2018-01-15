@@ -198,7 +198,7 @@
         {
             if (CurrentTarget is IConfirmRequest confirm)
             {
-                var cancel = confirm.CanNavigate(context);
+                var cancel = !confirm.CanNavigate(context);
                 if (cancel)
                 {
                     return false;
