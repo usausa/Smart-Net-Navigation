@@ -18,11 +18,11 @@
                 args.Cancel = args.Context.Parameter.GetValue<bool>("Cancel");
             };
 
-            navigator.Register(1, typeof(Page1));
+            navigator.Register(Pages.Page1, typeof(Page1));
 
             // test
-            Assert.False(navigator.Forward(1, new NavigationParameter().SetValue("Cancel", true)));
-            Assert.True(navigator.Forward(1, new NavigationParameter().SetValue("Cancel", false)));
+            Assert.False(navigator.Forward(Pages.Page1, new NavigationParameter().SetValue("Cancel", true)));
+            Assert.True(navigator.Forward(Pages.Page1, new NavigationParameter().SetValue("Cancel", false)));
         }
 
         [Fact]
@@ -33,13 +33,19 @@
                 .UseMockProvider()
                 .ToNavigator();
 
-            navigator.Register(1, typeof(CancelPage));
-            navigator.Register(2, typeof(Page2));
+            navigator.Register(Pages.Page1, typeof(CancelPage));
+            navigator.Register(Pages.Page2, typeof(Page2));
 
             // test
-            navigator.Forward(1);
-            Assert.False(navigator.Forward(2, new NavigationParameter().SetValue("CanNavigate", false)));
-            Assert.True(navigator.Forward(2, new NavigationParameter().SetValue("CanNavigate", true)));
+            navigator.Forward(Pages.Page1);
+            Assert.False(navigator.Forward(Pages.Page2, new NavigationParameter().SetValue("CanNavigate", false)));
+            Assert.True(navigator.Forward(Pages.Page2, new NavigationParameter().SetValue("CanNavigate", true)));
+        }
+
+        public enum Pages
+        {
+            Page1,
+            Page2
         }
 
         public class Page1 : MockPage

@@ -16,19 +16,19 @@
                 .UseMockProvider()
                 .ToNavigator();
 
-            navigator.Register(1, typeof(Page1));
-            navigator.Register(2, typeof(Page2));
-            navigator.Register(3, typeof(Page3));
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(Pages.Page3, typeof(Page3));
 
             // test
-            navigator.Forward(1);
+            navigator.Forward(Pages.Page1);
 
             Assert.Equal(1, navigator.StackedCount);
             var page1 = (MockPage)navigator.CurrentPage;
             Assert.Equal(typeof(Page1), page1.GetType());
             Assert.True(page1.IsOpen);
 
-            navigator.Push(2);
+            navigator.Push(Pages.Page2);
 
             Assert.Equal(2, navigator.StackedCount);
             var page2 = (MockPage)navigator.CurrentPage;
@@ -37,7 +37,7 @@
             Assert.True(page1.IsOpen);
             Assert.False(page1.IsVisible);
 
-            navigator.Push(3);
+            navigator.Push(Pages.Page3);
 
             Assert.Equal(3, navigator.StackedCount);
             var page3 = (MockPage)navigator.CurrentPage;
@@ -56,7 +56,14 @@
                 .ToNavigator();
 
             // test
-            Assert.Throws<InvalidOperationException>(() => navigator.Forward(1));
+            Assert.Throws<InvalidOperationException>(() => navigator.Forward(Pages.Page1));
+        }
+
+        public enum Pages
+        {
+            Page1,
+            Page2,
+            Page3
         }
 
         public class Page1 : MockPage
