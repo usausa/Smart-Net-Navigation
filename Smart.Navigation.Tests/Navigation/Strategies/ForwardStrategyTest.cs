@@ -1,5 +1,7 @@
 ﻿namespace Smart.Navigation.Strategies
 {
+    using System;
+
     using Smart.Mock;
 
     using Xunit;
@@ -30,6 +32,18 @@
             Assert.Equal(typeof(Page2), page2.GetType());
             Assert.True(page2.IsOpen);
             Assert.False(page1.IsOpen);
+        }
+
+        [Fact]
+        public static void TestNavigatorForwardFailed()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockProvider()
+                .ToNavigator();
+
+            // test
+            Assert.Throws<InvalidOperationException>(() => navigator.Forward(1));
         }
 
         public class Page1 : MockPage
