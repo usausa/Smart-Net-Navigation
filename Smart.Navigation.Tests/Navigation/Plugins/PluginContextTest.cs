@@ -9,71 +9,71 @@
         [Fact]
         public static void TestPluginContextLoadStoredValue()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            contect.Save(typeof(string), "abc");
-            Assert.Equal("abc", contect.Load<string>(typeof(string)));
+            context.Save(typeof(string), "abc");
+            Assert.Equal("abc", context.Load<string>(typeof(string)));
         }
 
         [Fact]
         public static void TestPluginContextLoadOrDefault()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            contect.Save(typeof(string), "abc");
-            Assert.Equal("abc", contect.LoadOr(typeof(string), string.Empty));
+            context.Save(typeof(string), "abc");
+            Assert.Equal("abc", context.LoadOr(typeof(string), string.Empty));
         }
 
         [Fact]
         public static void TestPluginContextLoadOrDefaultNotPrepared()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            Assert.Equal("abc", contect.LoadOr(typeof(string), "abc"));
+            Assert.Equal("abc", context.LoadOr(typeof(string), "abc"));
         }
 
         [Fact]
         public static void TestPluginContextLoadOrDefaultNotContained()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            contect.Save(typeof(int), 123);
-            Assert.Equal("abc", contect.LoadOr(typeof(string), "abc"));
+            context.Save(typeof(int), 123);
+            Assert.Equal("abc", context.LoadOr(typeof(string), "abc"));
         }
 
         [Fact]
         public static void TestPluginContextLoadOrDefaultByFactory()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            contect.Save(typeof(string), "abc");
-            Assert.Equal("abc", contect.LoadOr(typeof(string), () => string.Empty));
+            context.Save(typeof(string), "abc");
+            Assert.Equal("abc", context.LoadOr(typeof(string), () => string.Empty));
         }
 
         [Fact]
         public static void TestPluginContextLoadOrDefaultNotPreparedByFactory()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            Assert.Equal("abc", contect.LoadOr(typeof(string), () => "abc"));
+            Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
         }
 
         [Fact]
         public static void TestPluginContextLoadOrDefaultNotContainedByFactory()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            contect.Save(typeof(int), 123);
-            Assert.Equal("abc", contect.LoadOr(typeof(string), () => "abc"));
+            context.Save(typeof(int), 123);
+            Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
         }
 
         [Fact]
         public static void TestPluginContextLoadFaiied()
         {
-            var contect = new PluginContext();
+            var context = new PluginContext();
 
-            contect.Save(typeof(int), 123);
-            Assert.Equal("abc", contect.LoadOr(typeof(string), (Func<string>)null));
+            context.Save(typeof(int), 123);
+            Assert.Equal("abc", context.LoadOr(typeof(string), (Func<string>)null));
         }
     }
 }
