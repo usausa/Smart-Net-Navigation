@@ -66,11 +66,6 @@
         // Constructor
         // ------------------------------------------------------------
 
-        public Navigator()
-            : this(new NavigatorConfig())
-        {
-        }
-
         public Navigator(INavigatorConfig config)
         {
             components = config.ResolveComponents();
