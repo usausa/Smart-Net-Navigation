@@ -34,20 +34,18 @@
             {
                 var key = property.Attribute.Name ?? property.Accessor.Name;
 
-                if (!store.TryGetValue(key, out var reference))
+                if (store.TryGetValue(key, out var reference))
                 {
-                    continue;
+                    reference.Counter--;
+                    if (reference.Counter > 0)
+                    {
+                        continue;
+                    }
+
+                    (reference.Instance as IDisposable)?.Dispose();
+
+                    store.Remove(key);
                 }
-
-                reference.Counter--;
-                if (reference.Counter > 0)
-                {
-                    continue;
-                }
-
-                (reference.Instance as IDisposable)?.Dispose();
-
-                store.Remove(key);
             }
         }
 
