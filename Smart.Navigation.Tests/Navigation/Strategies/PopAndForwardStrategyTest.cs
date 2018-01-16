@@ -1,6 +1,7 @@
 ﻿namespace Smart.Navigation.Strategies
 {
     using System;
+    using System.Threading.Tasks;
 
     using Smart.Mock;
 
@@ -121,6 +122,110 @@
             navigator.Push(Pages.Page2);
             navigator.Push(Pages.Page3);
             navigator.PopAndForward(Pages.Page4, 2, new NavigationParameter().SetValue("test"));
+
+            Assert.NotNull(context.Value);
+            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
+        }
+
+        // ------------------------------------------------------------
+        // Async
+        // ------------------------------------------------------------
+
+        [Fact]
+        public static async Task TestNavigatorPopAndForwardAsync()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(Pages.Page3, typeof(Page3));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
+            // test
+            await navigator.ForwardAsync(Pages.Page1);
+            await navigator.PushAsync(Pages.Page2);
+            await navigator.PopAndForwardAsync(Pages.Page3);
+
+            Assert.Equal(2, navigator.StackedCount);
+            Assert.Equal(Pages.Page3, navigator.CurrentPageId);
+        }
+
+        [Fact]
+        public static async Task TestNavigatorPopAndForwardMultipleAsync()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(Pages.Page3, typeof(Page3));
+            navigator.Register(Pages.Page4, typeof(Page4));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
+            // test
+            await navigator.ForwardAsync(Pages.Page1);
+            await navigator.PushAsync(Pages.Page2);
+            await navigator.PushAsync(Pages.Page3);
+            await navigator.PopAndForwardAsync(Pages.Page4, 2);
+
+            Assert.Equal(2, navigator.StackedCount);
+            Assert.Equal(Pages.Page4, navigator.CurrentPageId);
+        }
+
+        [Fact]
+        public static async Task TestNavigatorPopAndForwardWithParameterAsync()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(Pages.Page3, typeof(Page3));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
+            // test
+            await navigator.ForwardAsync(Pages.Page1);
+            await navigator.PushAsync(Pages.Page2);
+            await navigator.PopAndForwardAsync(Pages.Page3, new NavigationParameter().SetValue("test"));
+
+            Assert.NotNull(context.Value);
+            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
+        }
+
+        [Fact]
+        public static async Task TestNavigatorPopAndForwardMultipleWithParameterAsync()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(Pages.Page3, typeof(Page3));
+            navigator.Register(Pages.Page4, typeof(Page4));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
+            // test
+            await navigator.ForwardAsync(Pages.Page1);
+            await navigator.PushAsync(Pages.Page2);
+            await navigator.PushAsync(Pages.Page3);
+            await navigator.PopAndForwardAsync(Pages.Page4, 2, new NavigationParameter().SetValue("test"));
 
             Assert.NotNull(context.Value);
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
