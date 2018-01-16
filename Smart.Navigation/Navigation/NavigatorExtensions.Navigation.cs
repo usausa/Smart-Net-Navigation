@@ -1,10 +1,14 @@
 ﻿namespace Smart.Navigation
 {
+    using System.Threading.Tasks;
+
     using Smart.Navigation.Strategies;
 
     public static partial class NavigatorExtensions
     {
+        // ------------------------------------------------------------
         // Forward
+        // ------------------------------------------------------------
 
         public static bool Forward(this INavigator navigator, object id)
         {
@@ -16,7 +20,21 @@
             return navigator.Navigate(new ForwardStrategy(id), parameter);
         }
 
+        // Async
+
+        public static Task<bool> ForwardAsync(this INavigator navigator, object id)
+        {
+            return navigator.NavigateAsync(new ForwardStrategy(id), null);
+        }
+
+        public static Task<bool> ForwardAsync(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new ForwardStrategy(id), parameter);
+        }
+
+        // ------------------------------------------------------------
         // Push
+        // ------------------------------------------------------------
 
         public static bool Push(this INavigator navigator, object id)
         {
@@ -28,7 +46,21 @@
             return navigator.Navigate(new PushStrategy(id), parameter);
         }
 
+        // Async
+
+        public static Task<bool> PushAsync(this INavigator navigator, object id)
+        {
+            return navigator.NavigateAsync(new PushStrategy(id), null);
+        }
+
+        public static Task<bool> PushAsync(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new PushStrategy(id), parameter);
+        }
+
+        // ------------------------------------------------------------
         // Pop
+        // ------------------------------------------------------------
 
         public static bool Pop(this INavigator navigator)
         {
@@ -50,7 +82,31 @@
             return navigator.Navigate(new PopStrategy(level), parameter);
         }
 
+        // Async
+
+        public static Task<bool> PopAsync(this INavigator navigator)
+        {
+            return navigator.NavigateAsync(new PopStrategy(1), null);
+        }
+
+        public static Task<bool> PopAsync(this INavigator navigator, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new PopStrategy(1), parameter);
+        }
+
+        public static Task<bool> PopAsync(this INavigator navigator, int level)
+        {
+            return navigator.NavigateAsync(new PopStrategy(level), null);
+        }
+
+        public static Task<bool> PopAsync(this INavigator navigator, int level, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new PopStrategy(level), parameter);
+        }
+
+        // ------------------------------------------------------------
         // PopAndForward
+        // ------------------------------------------------------------
 
         public static bool PopAndForward(this INavigator navigator, object id)
         {
@@ -70,6 +126,28 @@
         public static bool PopAndForward(this INavigator navigator, object id, int level, INavigationParameter parameter)
         {
             return navigator.Navigate(new PopAndForwardStrategy(id, level), parameter);
+        }
+
+        // Async
+
+        public static Task<bool> PopAndForwardAsync(this INavigator navigator, object id)
+        {
+            return navigator.NavigateAsync(new PopAndForwardStrategy(id, 1), null);
+        }
+
+        public static Task<bool> PopAndForwardAsync(this INavigator navigator, object id, int level)
+        {
+            return navigator.NavigateAsync(new PopAndForwardStrategy(id, level), null);
+        }
+
+        public static Task<bool> PopAndForwardAsync(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new PopAndForwardStrategy(id, 1), parameter);
+        }
+
+        public static Task<bool> PopAndForwardAsync(this INavigator navigator, object id, int level, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new PopAndForwardStrategy(id, level), parameter);
         }
     }
 }
