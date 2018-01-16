@@ -24,7 +24,7 @@
             config.Add<IPlugin, ScopePlugin>();
         }
 
-        public void Configure(Action<ComponentConfig> action)
+        public NavigatorConfig Configure(Action<ComponentConfig> action)
         {
             if (action == null)
             {
@@ -32,6 +32,8 @@
             }
 
             action(config);
+
+            return this;
         }
 
         public ComponentContainer ResolveComponents()
