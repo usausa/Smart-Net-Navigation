@@ -29,9 +29,25 @@
             Assert.Equal("test", notifyPage.Parameter);
         }
 
+        [Fact]
+        public static void TestPageNavigatorNotifyUnsuported()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.UnsupportPage, typeof(UnsupportPage));
+
+            // test
+            navigator.Forward(Pages.UnsupportPage);
+            navigator.Notify("test");
+        }
+
         public enum Pages
         {
-            NotifyPage
+            NotifyPage,
+            UnsupportPage
         }
 
         public class NotifyPage : MockPage, INotifySupport
@@ -42,6 +58,10 @@
             {
                 Parameter = parameter;
             }
+        }
+
+        public class UnsupportPage
+        {
         }
 
         // ------------------------------------------------------------
