@@ -4,7 +4,7 @@
 
     public static class MockPageNavigatorExtensions
     {
-        public static NavigatorConfig UseMockProvider(this NavigatorConfig config)
+        public static NavigatorConfig UseMockPageProvider(this NavigatorConfig config)
         {
             return config.UseProvider<MockPageNavigationProvider>();
         }

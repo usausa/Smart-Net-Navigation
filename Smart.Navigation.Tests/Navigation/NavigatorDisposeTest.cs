@@ -14,7 +14,7 @@
             // prepare
             var component = new DisposableComponent();
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .Configure(config => config.Add(component))
                 .ToNavigator();
 

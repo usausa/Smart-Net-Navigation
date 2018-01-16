@@ -13,7 +13,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             navigator.Register(Pages.Page1, typeof(Page1));
@@ -63,7 +63,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             // test

@@ -12,7 +12,7 @@
             // prepare
             var called = new Holder<bool>();
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
             navigator.Exited += (sender, args) => called.Value = true;
 
@@ -35,7 +35,7 @@
             // prepare
             var called = new Holder<bool>();
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
             navigator.Exited += (sender, args) => called.Value = true;
 

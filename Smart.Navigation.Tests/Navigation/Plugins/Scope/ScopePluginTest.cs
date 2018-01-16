@@ -13,7 +13,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             navigator.Register(Pages.DataPage1, typeof(DataPage1));
@@ -47,7 +47,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             navigator.Register(Pages.ObjectPage1, typeof(ObjectPage1));
@@ -73,7 +73,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             navigator.Register(Pages.PushPage1, typeof(PushPage1));
@@ -120,7 +120,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             navigator.Register(Pages.NamedPage1, typeof(NamedPage1));

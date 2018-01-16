@@ -20,7 +20,7 @@
             var resolver = config.ToResolver();
 
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .UseResolver(resolver)
                 .ToNavigator();
 

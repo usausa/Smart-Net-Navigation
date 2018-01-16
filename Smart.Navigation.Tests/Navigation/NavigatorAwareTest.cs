@@ -11,7 +11,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             navigator.Register(Pages.AwarePage, typeof(AwarePage));

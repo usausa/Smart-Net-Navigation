@@ -14,7 +14,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             navigator.AutoRegister(Assembly.GetExecutingAssembly());
@@ -29,7 +29,7 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockProvider()
+                .UseMockPageProvider()
                 .ToNavigator();
 
             Assert.Throws<ArgumentNullException>(() => navigator.AutoRegister(null));
