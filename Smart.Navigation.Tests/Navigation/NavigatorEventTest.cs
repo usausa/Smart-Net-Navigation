@@ -8,8 +8,12 @@
 
     public class NavigatorEventTest
     {
+        // ------------------------------------------------------------
+        // Page
+        // ------------------------------------------------------------
+
         [Fact]
-        public static void TestNavigatorEvent()
+        public static void TestPageNavigatorEvent()
         {
             // prepare
             var recorder = new EventRecorder();
@@ -39,7 +43,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorEventSupport()
+        public static void TestPageNavigatorEventSupport()
         {
             // prepare
             var resolver = new ResolverConfig()
@@ -133,6 +137,114 @@
             public void OnNavigatedTo(INavigationContext context)
             {
                 recorder.Events.Add("EventPage2.OnNavigatedTo");
+            }
+        }
+
+        // ------------------------------------------------------------
+        // View
+        // ------------------------------------------------------------
+
+        [Fact]
+        public static void TestViewNavigatorEventSupport()
+        {
+            // prepare
+            var resolver = new ResolverConfig()
+                .UseAutoBinding()
+                .Also(config => config.Bind<EventRecorder>().ToSelf().InSingletonScope())
+                .ToResolver();
+            var recorder = resolver.Get<EventRecorder>();
+            var navigator = new NavigatorConfig()
+                .UseMockViewProvider()
+                .UseResolver(resolver)
+                .ToNavigator();
+
+            navigator.Register(Views.EventView1, typeof(EventView1));
+            navigator.Register(Views.EventView2, typeof(EventView2));
+
+            // test
+            navigator.Forward(Views.EventView1);
+
+            Assert.Equal("EventViewModel1.OnNavigatingTo", recorder.Events[0]);
+            Assert.Equal("EventViewModel1.OnNavigatedTo", recorder.Events[1]);
+
+            recorder.Events.Clear();
+
+            navigator.Forward(Views.EventView2);
+
+            Assert.Equal("EventViewModel1.OnNavigatedFrom", recorder.Events[0]);
+            Assert.Equal("EventViewModel2.OnNavigatingTo", recorder.Events[1]);
+            Assert.Equal("EventViewModel2.OnNavigatedTo", recorder.Events[2]);
+        }
+
+        public enum Views
+        {
+            EventView1,
+            EventView2
+        }
+
+        public class EventViewModel1 : INavigationEventSupport
+        {
+            private readonly EventRecorder recorder;
+
+            public EventViewModel1(EventRecorder recorder)
+            {
+                this.recorder = recorder;
+            }
+
+            public void OnNavigatedFrom(INavigationContext context)
+            {
+                recorder.Events.Add("EventViewModel1.OnNavigatedFrom");
+            }
+
+            public void OnNavigatingTo(INavigationContext context)
+            {
+                recorder.Events.Add("EventViewModel1.OnNavigatingTo");
+            }
+
+            public void OnNavigatedTo(INavigationContext context)
+            {
+                recorder.Events.Add("EventViewModel1.OnNavigatedTo");
+            }
+        }
+
+        public class EventViewModel2 : INavigationEventSupport
+        {
+            private readonly EventRecorder recorder;
+
+            public EventViewModel2(EventRecorder recorder)
+            {
+                this.recorder = recorder;
+            }
+
+            public void OnNavigatedFrom(INavigationContext context)
+            {
+                recorder.Events.Add("EventViewModel2.OnNavigatedFrom");
+            }
+
+            public void OnNavigatingTo(INavigationContext context)
+            {
+                recorder.Events.Add("EventViewModel2.OnNavigatingTo");
+            }
+
+            public void OnNavigatedTo(INavigationContext context)
+            {
+                recorder.Events.Add("EventViewModel2.OnNavigatedTo");
+            }
+        }
+
+        public class EventView1 : MockView
+        {
+            public EventView1(EventViewModel1 vm)
+            {
+                Context = vm;
+            }
+        }
+
+        public class EventView2 : MockView
+        {
+            public EventView2(EventViewModel2 vm)
+            {
+                Context = vm;
             }
         }
     }

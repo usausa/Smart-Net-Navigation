@@ -60,7 +60,7 @@
             }
         }
 
-        public class UnsupportPage
+        public class UnsupportPage : MockPage
         {
         }
 
