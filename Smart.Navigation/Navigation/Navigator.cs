@@ -103,15 +103,7 @@
             for (var i = pageStack.Count - 1; i >= 0; i--)
             {
                 var page = pageStack[i].Page;
-                var target = provider.ResolveTarget(page);
-
                 provider.ClosePage(page);
-
-                (page as IDisposable)?.Dispose();
-                if (page != target)
-                {
-                    (target as IDisposable)?.Dispose();
-                }
             }
 
             pageStack.Clear();
@@ -269,11 +261,6 @@
                 }
 
                 navigator.provider.ClosePage(page);
-
-                if (page != target)
-                {
-                    (target as IDisposable)?.Dispose();
-                }
             }
 
             public void ActivePage(object page, object parameter)
