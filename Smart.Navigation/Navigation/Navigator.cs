@@ -122,6 +122,30 @@
                 return false;
             }
 
+            NavigateCore(strategy, navigationContext, controller);
+
+            return true;
+        }
+
+        public async Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter)
+        {
+            var controller = new Controller(this);
+            var result = strategy.Initialize(controller);
+            var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+
+            var confirmResult = await ConfirmNavigationAsync(navigationContext);
+            if (!confirmResult)
+            {
+                return false;
+            }
+
+            NavigateCore(strategy, navigationContext, controller);
+
+            return true;
+        }
+
+        private void NavigateCore(INavigationStrategy strategy, INavigationContext navigationContext, Controller controller)
+        {
             var args = new NavigationEventArgs(navigationContext);
             var pluginContext = new PluginContext();
             controller.PluginContext = pluginContext;
@@ -168,13 +192,6 @@
             }
 
             (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
-
-            return true;
-        }
-
-        public Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter)
-        {
-            throw new NotImplementedException();
         }
 
         // ------------------------------------------------------------
@@ -185,8 +202,8 @@
         {
             if (CurrentTarget is IConfirmRequest confirm)
             {
-                var cancel = !confirm.CanNavigate(context);
-                if (cancel)
+                var canNavigate = confirm.CanNavigate(context);
+                if (!canNavigate)
                 {
                     return false;
                 }
@@ -206,7 +223,19 @@
             return true;
         }
 
-        // TODO async version
+        private async Task<bool> ConfirmNavigationAsync(NavigationContext context)
+        {
+            if (CurrentTarget is IConfirmRequestAsync confirm)
+            {
+                var canNavigate = await confirm.CanNavigateAsync(context);
+                if (!canNavigate)
+                {
+                    return false;
+                }
+            }
+
+            return ConfirmNavigation(context);
+        }
 
         // ------------------------------------------------------------
         // Controller
