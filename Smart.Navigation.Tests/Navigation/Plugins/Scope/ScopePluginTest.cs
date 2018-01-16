@@ -124,7 +124,7 @@
                 .ToNavigator();
 
             navigator.Register(Pages.NamedPage1, typeof(NamedPage1));
-            navigator.Register(Pages.PushPage2, typeof(PushPage2));
+            navigator.Register(Pages.NamedPage2, typeof(NamedPage2));
 
             // test
             navigator.Forward(Pages.NamedPage1);

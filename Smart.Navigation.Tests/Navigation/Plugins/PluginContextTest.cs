@@ -73,7 +73,7 @@
             var context = new PluginContext();
 
             context.Save(typeof(int), 123);
-            Assert.Equal("abc", context.LoadOr(typeof(string), (Func<string>)null));
+            Assert.Throws<ArgumentNullException>(() => context.LoadOr(typeof(string), (Func<string>)null));
         }
     }
 }
