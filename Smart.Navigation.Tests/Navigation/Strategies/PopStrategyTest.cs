@@ -24,14 +24,20 @@
 
             // test
             navigator.Forward(Pages.Page1);
+
+            var page1 = (MockPage)navigator.CurrentPage;
+            page1.Focused = "text1";
+
             navigator.Push(Pages.Page2);
             navigator.Pop();
 
             Assert.Equal(1, navigator.StackedCount);
-            var page1 = (MockPage)navigator.CurrentPage;
-            Assert.Equal(typeof(Page1), page1.GetType());
-            Assert.True(page1.IsOpen);
-            Assert.True(page1.IsVisible);
+            var page1B = (MockPage)navigator.CurrentPage;
+            Assert.Same(page1, page1B);
+            Assert.Equal(typeof(Page1), page1B.GetType());
+            Assert.True(page1B.IsOpen);
+            Assert.True(page1B.IsVisible);
+            Assert.Equal("text1", page1B.Focused);
 
             Assert.Equal(Pages.Page2, context.Value.FromId);
             Assert.Equal(Pages.Page1, context.Value.ToId);
