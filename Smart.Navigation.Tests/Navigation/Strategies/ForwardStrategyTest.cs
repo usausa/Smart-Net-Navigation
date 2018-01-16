@@ -1,6 +1,7 @@
 ﻿namespace Smart.Navigation.Strategies
 {
     using System;
+    using System.Threading.Tasks;
 
     using Smart.Mock;
 
@@ -8,6 +9,10 @@
 
     public class ForwardStrategyTest
     {
+        // ------------------------------------------------------------
+        // Navigate
+        // ------------------------------------------------------------
+
         [Fact]
         public static void TestNavigatorForward()
         {
@@ -93,6 +98,60 @@
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
         }
 
+        // ------------------------------------------------------------
+        // Async
+        // ------------------------------------------------------------
+
+        [Fact]
+        public static async Task TestNavigatorForwardAsync()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+
+            // test
+            await navigator.ForwardAsync(Pages.Page1);
+
+            Assert.Equal(1, navigator.StackedCount);
+            Assert.Equal(Pages.Page1, navigator.CurrentPageId);
+
+            await navigator.ForwardAsync(Pages.Page2);
+
+            Assert.Equal(1, navigator.StackedCount);
+            Assert.Equal(Pages.Page2, navigator.CurrentPageId);
+        }
+
+        [Fact]
+        public static async Task TestNavigatorForwardAsyncWithParameter()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
+            // test
+            await navigator.ForwardAsync(Pages.Page1);
+
+            await navigator.ForwardAsync(Pages.Page2, new NavigationParameter().SetValue("test"));
+
+            Assert.NotNull(context.Value);
+            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
+        }
+
+        // ------------------------------------------------------------
+        // Failed
+        // ------------------------------------------------------------
+
         [Fact]
         public static void TestNavigatorForwardFailed()
         {
@@ -107,6 +166,10 @@
             navigator.Forward(Pages.Page1);
             Assert.Throws<InvalidOperationException>(() => navigator.Push(Pages.Page2));
         }
+
+        // ------------------------------------------------------------
+        // Mock
+        // ------------------------------------------------------------
 
         public enum Pages
         {

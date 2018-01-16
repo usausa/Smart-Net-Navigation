@@ -8,6 +8,10 @@
 
     public class PopStrategyTest
     {
+        // ------------------------------------------------------------
+        // Navigate
+        // ------------------------------------------------------------
+
         [Fact]
         public static void TestNavigatorPop()
         {
@@ -124,6 +128,10 @@
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
         }
 
+        // ------------------------------------------------------------
+        // Failed
+        // ------------------------------------------------------------
+
         [Fact]
         public static void TestNavigatorPopFailed()
         {
@@ -152,6 +160,10 @@
             // test
             Assert.Throws<InvalidOperationException>(() => navigator.Pop(0));
         }
+
+        // ------------------------------------------------------------
+        // Mock
+        // ------------------------------------------------------------
 
         public enum Pages
         {

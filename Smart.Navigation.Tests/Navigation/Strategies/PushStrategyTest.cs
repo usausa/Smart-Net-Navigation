@@ -8,6 +8,10 @@
 
     public class PushStrategyTest
     {
+        // ------------------------------------------------------------
+        // Navigate
+        // ------------------------------------------------------------
+
         [Fact]
         public static void TestNavigatorPush()
         {
@@ -81,6 +85,10 @@
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
         }
 
+        // ------------------------------------------------------------
+        // Failed
+        // ------------------------------------------------------------
+
         [Fact]
         public static void TestNavigatorPushFailed()
         {
@@ -92,6 +100,10 @@
             // test
             Assert.Throws<InvalidOperationException>(() => navigator.Forward(Pages.Page1));
         }
+
+        // ------------------------------------------------------------
+        // Mock
+        // ------------------------------------------------------------
 
         public enum Pages
         {
