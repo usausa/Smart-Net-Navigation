@@ -71,6 +71,29 @@
         }
 
         [Fact]
+        public static void TestNavigatorForwardWithParameter()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.Page2, typeof(Page2));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
+            // test
+            navigator.Forward(Pages.Page1);
+
+            navigator.Forward(Pages.Page2, new NavigationParameter().SetValue("test"));
+
+            Assert.NotNull(context.Value);
+            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
+        }
+
+        [Fact]
         public static void TestNavigatorForwardFailed()
         {
             // prepare
