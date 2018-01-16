@@ -33,11 +33,9 @@
         public static void TestNavigatorExitStacked()
         {
             // prepare
-            var called = new Holder<bool>();
             var navigator = new NavigatorConfig()
                 .UseMockPageProvider()
                 .ToNavigator();
-            navigator.Exited += (sender, args) => called.Value = true;
 
             navigator.Register(Pages.Page1, typeof(Page1));
             navigator.Register(Pages.Page2, typeof(Page2));
@@ -58,7 +56,6 @@
 
             navigator.Exit();
 
-            Assert.True(called.Value);
             Assert.False(page1.IsOpen);
             Assert.False(page2.IsOpen);
             Assert.False(page3.IsOpen);
