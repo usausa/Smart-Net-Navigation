@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    public class PushOrBringGroupStrategy : INavigationStrategy
+    public class PushAndBringGroupStrategy : INavigationStrategy
     {
         private readonly object id;
 
@@ -18,7 +18,7 @@
 
         private PageStackInfo deactiveStackInfo;
 
-        public PushOrBringGroupStrategy(object id)
+        public PushAndBringGroupStrategy(object id)
         {
             this.id = id;
         }
@@ -37,7 +37,7 @@
                 for (var i = 0; i < controller.PageStack.Count; i++)
                 {
                     var groupOfStack = controller.PageStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-                    if (groupOfStack != null)
+                    if ((groupOfStack != null) && Equals(group.Id, groupOfStack.Id))
                     {
                         if (groups == null)
                         {
@@ -46,7 +46,7 @@
 
                         groups.Add(i);
 
-                        if (Equals(group.Id, groupOfStack.Id))
+                        if (controller.PageStack[i].Descriptor.Id == id)
                         {
                             current = i;
                         }
@@ -102,10 +102,10 @@
             // Replace stack
             if (groups != null)
             {
-                var count = controller.PageStack.Count;
+                var count = controller.PageStack.Count - (exist ? 0 : 1);
 
                 var temp = new PageStackInfo[count];
-                controller.PageStack.CopyTo(temp);
+                controller.PageStack.CopyTo(0, temp, 0, count);
 
                 var index = 0;
                 for (var i = 0; i < count - groups.Count; i++)
