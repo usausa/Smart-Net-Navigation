@@ -24,8 +24,8 @@
 
         public object ResolveToPage(INavigationController controller)
         {
-            var toInfo = controller.PageStack[controller.PageStack.Count - level - 1];
-            return toInfo.Page;
+            var toStackInfo = controller.PageStack[controller.PageStack.Count - level - 1];
+            return toStackInfo.Page;
         }
 
         public void UpdateStack(INavigationController controller, object toPage)
