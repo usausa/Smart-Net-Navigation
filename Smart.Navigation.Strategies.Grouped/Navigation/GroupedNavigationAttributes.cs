@@ -1,6 +1,6 @@
 ﻿namespace Smart.Navigation
 {
-    public static class GroupNavigationAttributes
+    public static class GroupedNavigationAttributes
     {
         public static readonly NavigationAttributes Group = (NavigationAttributes)0x00000100;
 

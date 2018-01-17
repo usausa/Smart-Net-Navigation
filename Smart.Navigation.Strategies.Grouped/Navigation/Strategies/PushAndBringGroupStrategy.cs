@@ -81,8 +81,8 @@
 
         private NavigationAttributes MakeNavigationAttributes(NavigationAttributes attributes)
         {
-            attributes &= GroupNavigationAttributes.Group;
-            return ((groups != null) && (groups.Count > 0)) ? (attributes & GroupNavigationAttributes.Bring) : attributes;
+            attributes &= GroupedNavigationAttributes.Group;
+            return ((groups != null) && (groups.Count > 0)) ? (attributes & GroupedNavigationAttributes.Bring) : attributes;
         }
 
         public object ResolveToPage(INavigationController controller)

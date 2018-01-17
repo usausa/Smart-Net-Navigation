@@ -9,21 +9,21 @@
             return page;
         }
 
-        public void OpenPage(object page)
+        public void OpenPage(NavigationAttributes attributes, object page)
         {
             var view = (MockPage)page;
 
             view.Show();
         }
 
-        public void ClosePage(object page)
+        public void ClosePage(NavigationAttributes attributes, object page)
         {
             var view = (MockPage)page;
 
             view.Dispose();
         }
 
-        public void ActivePage(object page, object parameter)
+        public void ActivePage(NavigationAttributes attributes, object page, object parameter)
         {
             var view = (MockPage)page;
 
@@ -31,7 +31,7 @@
             view.Focused = parameter;
         }
 
-        public object DeactivePage(object page)
+        public object DeactivePage(NavigationAttributes attributes, object page)
         {
             var view = (MockPage)page;
 

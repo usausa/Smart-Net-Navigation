@@ -47,7 +47,7 @@
 
             Assert.Equal(Pages.Page1, context.Value.FromId);
             Assert.Equal(Pages.Page2, context.Value.ToId);
-            Assert.True(context.Value.IsStacked());
+            Assert.True(context.Value.Attribute.IsStacked());
 
             navigator.Push(Pages.Page3);
 
@@ -60,7 +60,7 @@
 
             Assert.Equal(Pages.Page2, context.Value.FromId);
             Assert.Equal(Pages.Page3, context.Value.ToId);
-            Assert.True(context.Value.IsStacked());
+            Assert.True(context.Value.Attribute.IsStacked());
         }
 
         [Fact]

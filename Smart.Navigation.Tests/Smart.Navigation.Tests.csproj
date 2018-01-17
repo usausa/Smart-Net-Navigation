@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj" />
+    <ProjectReference Include="..\Smart.Navigation.Strategies.Grouped\Smart.Navigation.Strategies.Grouped.csproj" />
     <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
   </ItemGroup>
 
