@@ -20,7 +20,7 @@
             return page;
         }
 
-        public void OpenPage(NavigationAttributes attributes, object page)
+        public void OpenPage(object page)
         {
             var control = (Control)page;
 
@@ -36,7 +36,7 @@
             }
         }
 
-        public void ClosePage(NavigationAttributes attributes, object page)
+        public void ClosePage(object page)
         {
             var control = (Control)page;
 
@@ -46,7 +46,7 @@
             control.Dispose();
         }
 
-        public void ActivePage(NavigationAttributes attributes, object page, object parameter)
+        public void ActivePage(object page, object parameter)
         {
             var control = (Control)page;
 
@@ -69,7 +69,7 @@
             }
         }
 
-        public object DeactivePage(NavigationAttributes attributes, object page)
+        public object DeactivePage(object page)
         {
             var control = (Control)page;
 

@@ -4,12 +4,12 @@
     {
         object ResolveTarget(object page);
 
-        void OpenPage(NavigationAttributes attributes, object page);
+        void OpenPage(object page);
 
-        void ClosePage(NavigationAttributes attributes, object page);
+        void ClosePage(object page);
 
-        void ActivePage(NavigationAttributes attributes, object page, object parameter);
+        void ActivePage(object page, object parameter);
 
-        object DeactivePage(NavigationAttributes attributes, object page);
+        object DeactivePage(object page);
     }
 }

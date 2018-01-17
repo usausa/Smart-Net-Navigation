@@ -103,7 +103,7 @@
             for (var i = pageStack.Count - 1; i >= 0; i--)
             {
                 var page = pageStack[i].Page;
-                provider.ClosePage(NavigationAttributes.Exit, page);
+                provider.ClosePage(page);
             }
 
             pageStack.Clear();
@@ -121,7 +121,6 @@
             }
 
             var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
-            controller.NavigationContext = navigationContext;
 
             if (!ConfirmNavigation(navigationContext))
             {
@@ -143,7 +142,6 @@
             }
 
             var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
-            controller.NavigationContext = navigationContext;
 
             var confirmResult = await ConfirmNavigationAsync(navigationContext);
             if (!confirmResult)
@@ -260,8 +258,6 @@
 
             public List<PageStackInfo> PageStack => navigator.pageStack;
 
-            public NavigationContext NavigationContext { private get; set; }
-
             public PluginContext PluginContext { private get; set; }
 
             public Controller(Navigator navigator)
@@ -290,7 +286,7 @@
 
             public void OpenPage(object page)
             {
-                navigator.provider.OpenPage(NavigationContext.Attribute, page);
+                navigator.provider.OpenPage(page);
             }
 
             public void ClosePage(object page)
@@ -302,17 +298,17 @@
                     plugin.OnClose(PluginContext, page, target);
                 }
 
-                navigator.provider.ClosePage(NavigationContext.Attribute, page);
+                navigator.provider.ClosePage(page);
             }
 
             public void ActivePage(object page, object parameter)
             {
-                navigator.provider.ActivePage(NavigationContext.Attribute, page, parameter);
+                navigator.provider.ActivePage(page, parameter);
             }
 
             public object DeactivePage(object page)
             {
-                return navigator.provider.DeactivePage(NavigationContext.Attribute, page);
+                return navigator.provider.DeactivePage(page);
             }
         }
     }
