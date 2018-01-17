@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    public class PushAndBringGroupStrategy : INavigationStrategy
+    public class GroupPushStrategy : INavigationStrategy
     {
         private readonly object id;
 
@@ -18,7 +18,7 @@
 
         private PageStackInfo deactiveStackInfo;
 
-        public PushAndBringGroupStrategy(object id)
+        public GroupPushStrategy(object id)
         {
             this.id = id;
         }

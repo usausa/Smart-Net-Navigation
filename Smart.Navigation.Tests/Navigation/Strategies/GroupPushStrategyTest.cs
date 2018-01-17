@@ -7,7 +7,7 @@
 
     using Xunit;
 
-    public class PushAndBringGroupStrategyTest
+    public class GroupPushStrategyTest
     {
         // ------------------------------------------------------------
         // Navigate
@@ -30,11 +30,11 @@
             // A1 B1 C1    D:B1 C:C1
             navigator.Forward(Pages.PageA1);
 
-            navigator.PushAndBringGroup(Pages.PageB1);
+            navigator.GroupPush(Pages.PageB1);
 
             var pageB1 = (PageB1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageC1);
+            navigator.GroupPush(Pages.PageC1);
 
             Assert.Equal(3, navigator.StackedCount);
             Assert.False(pageB1.IsVisible);
@@ -59,11 +59,11 @@
 
             var pageA1 = (PageA1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageB1);
+            navigator.GroupPush(Pages.PageB1);
 
             var pageB1 = (PageB1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageA2);
+            navigator.GroupPush(Pages.PageA2);
 
             Assert.Equal(3, navigator.StackedCount);
             Assert.False(pageB1.IsVisible);
@@ -98,11 +98,11 @@
 
             var pageA1 = (PageA1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageB1);
+            navigator.GroupPush(Pages.PageB1);
 
             var pageB1 = (PageB1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageB2);
+            navigator.GroupPush(Pages.PageB2);
 
             Assert.Equal(3, navigator.StackedCount);
             Assert.False(pageB1.IsVisible);
@@ -136,11 +136,11 @@
 
             var pageA1 = (PageA1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageB1);
+            navigator.GroupPush(Pages.PageB1);
 
             var pageB1 = (PageB1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageA1);
+            navigator.GroupPush(Pages.PageA1);
 
             Assert.Equal(2, navigator.StackedCount);
             Assert.True(pageA1.IsVisible);
@@ -170,11 +170,11 @@
 
             var pageA1 = (PageA1)navigator.CurrentPage;
 
-            navigator.PushAndBringGroup(Pages.PageB1);
+            navigator.GroupPush(Pages.PageB1);
 
             var pageB1 = (PageB1)navigator.CurrentPage;
 
-            Assert.False(navigator.PushAndBringGroup(Pages.PageB1));
+            Assert.False(navigator.GroupPush(Pages.PageB1));
 
             Assert.Equal(2, navigator.StackedCount);
             Assert.False(pageA1.IsVisible);
@@ -206,25 +206,25 @@
 
             // group A
             // 1:A1
-            navigator.PushAndBringGroup(Pages.PageA1);
+            navigator.GroupPush(Pages.PageA1);
             var pageA1 = (PageA1)navigator.CurrentPage;
 
             // 1:A1:A2
-            navigator.PushAndBringGroup(Pages.PageA2);
+            navigator.GroupPush(Pages.PageA2);
             var pageA2 = (PageA2)navigator.CurrentPage;
 
             // group B
             // 1:A1:A2:B1
-            navigator.PushAndBringGroup(Pages.PageB1);
+            navigator.GroupPush(Pages.PageB1);
             var pageB1 = (PageB1)navigator.CurrentPage;
 
             // 1:A1:A2:B1:B2
-            navigator.PushAndBringGroup(Pages.PageB2);
+            navigator.GroupPush(Pages.PageB2);
             var pageB2 = (PageB2)navigator.CurrentPage;
 
             // group A
             // 1:B1:B2:A1:A2
-            navigator.PushAndBringGroup(Pages.PageA1);
+            navigator.GroupPush(Pages.PageA1);
 
             Assert.True(pageA2.IsVisible);
             Assert.False(pageA1.IsVisible);
@@ -240,7 +240,7 @@
 
             // group B
             // 1:A1:B1:B2
-            navigator.PushAndBringGroup(Pages.PageB1);
+            navigator.GroupPush(Pages.PageB1);
 
             Assert.True(pageB2.IsVisible);
             Assert.False(pageB1.IsVisible);
@@ -270,7 +270,7 @@
             // test
             navigator.Forward(Pages.PageA1);
 
-            navigator.PushAndBringGroup(Pages.PageB1, new NavigationParameter().SetValue("test"));
+            navigator.GroupPush(Pages.PageB1, new NavigationParameter().SetValue("test"));
 
             Assert.NotNull(context.Value);
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
@@ -296,11 +296,11 @@
 
             var pageA1 = (PageA1)navigator.CurrentPage;
 
-            await navigator.PushAndBringGroupAsync(Pages.PageB1);
+            await navigator.GroupPushAsync(Pages.PageB1);
 
             var pageB1 = (PageB1)navigator.CurrentPage;
 
-            Assert.False(await navigator.PushAndBringGroupAsync(Pages.PageB1));
+            Assert.False(await navigator.GroupPushAsync(Pages.PageB1));
 
             Assert.Equal(2, navigator.StackedCount);
             Assert.False(pageA1.IsVisible);
@@ -329,7 +329,7 @@
             // test
             await navigator.ForwardAsync(Pages.PageA1);
 
-            await navigator.PushAndBringGroupAsync(Pages.PageB1, new NavigationParameter().SetValue("test"));
+            await navigator.GroupPushAsync(Pages.PageB1, new NavigationParameter().SetValue("test"));
 
             Assert.NotNull(context.Value);
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
@@ -351,7 +351,7 @@
 
             // test
             navigator.Forward(Pages.Page1);
-            Assert.Throws<InvalidOperationException>(() => navigator.PushAndBringGroup(Pages.Page2));
+            Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(Pages.Page2));
         }
 
         // ------------------------------------------------------------

@@ -10,26 +10,26 @@
         // Push
         // ------------------------------------------------------------
 
-        public static bool PushAndBringGroup(this INavigator navigator, object id)
+        public static bool GroupPush(this INavigator navigator, object id)
         {
-            return navigator.Navigate(new PushAndBringGroupStrategy(id), null);
+            return navigator.Navigate(new GroupPushStrategy(id), null);
         }
 
-        public static bool PushAndBringGroup(this INavigator navigator, object id, INavigationParameter parameter)
+        public static bool GroupPush(this INavigator navigator, object id, INavigationParameter parameter)
         {
-            return navigator.Navigate(new PushAndBringGroupStrategy(id), parameter);
+            return navigator.Navigate(new GroupPushStrategy(id), parameter);
         }
 
         // Async
 
-        public static Task<bool> PushAndBringGroupAsync(this INavigator navigator, object id)
+        public static Task<bool> GroupPushAsync(this INavigator navigator, object id)
         {
-            return navigator.NavigateAsync(new PushAndBringGroupStrategy(id), null);
+            return navigator.NavigateAsync(new GroupPushStrategy(id), null);
         }
 
-        public static Task<bool> PushAndBringGroupAsync(this INavigator navigator, object id, INavigationParameter parameter)
+        public static Task<bool> GroupPushAsync(this INavigator navigator, object id, INavigationParameter parameter)
         {
-            return navigator.NavigateAsync(new PushAndBringGroupStrategy(id), parameter);
+            return navigator.NavigateAsync(new GroupPushStrategy(id), parameter);
         }
     }
 }
