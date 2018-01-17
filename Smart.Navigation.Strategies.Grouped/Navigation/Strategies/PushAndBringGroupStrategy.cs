@@ -68,7 +68,7 @@
                 deactiveStackInfo = controller.PageStack[controller.PageStack.Count - 1];
                 activeStackInfo = controller.PageStack[current];
 
-                return new StragtegyResult(activeStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+                return new StragtegyResult(activeStackInfo.Descriptor.Id, MakeNavigationAttributes(NavigationAttributes.Restore));
             }
 
             if (controller.PageStack.Count > 0)
@@ -76,7 +76,13 @@
                 deactiveStackInfo = controller.PageStack[controller.PageStack.Count - 1];
             }
 
-            return new StragtegyResult(id, NavigationAttributes.Stacked);
+            return new StragtegyResult(id, MakeNavigationAttributes(NavigationAttributes.Stacked));
+        }
+
+        private NavigationAttributes MakeNavigationAttributes(NavigationAttributes attributes)
+        {
+            attributes &= GroupNavigationAttributes.Group;
+            return ((groups != null) && (groups.Count > 0)) ? (attributes & GroupNavigationAttributes.Bring) : attributes;
         }
 
         public object ResolveToPage(INavigationController controller)
