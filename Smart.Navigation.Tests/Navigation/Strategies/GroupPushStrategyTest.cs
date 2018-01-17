@@ -354,6 +354,20 @@
             Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(Pages.Page2));
         }
 
+        [Fact]
+        public static void TestNavigatorGropedPushFailed2()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.Page1, typeof(Page1));
+
+            // test
+            Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(Pages.Page1));
+        }
+
         // ------------------------------------------------------------
         // Mock
         // ------------------------------------------------------------
