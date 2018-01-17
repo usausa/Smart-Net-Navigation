@@ -31,5 +31,51 @@
         {
             return navigator.NavigateAsync(new GroupPushStrategy(id), parameter);
         }
+
+        // ------------------------------------------------------------
+        // Pop
+        // ------------------------------------------------------------
+
+        public static bool GroupPop(this INavigator navigator)
+        {
+            return navigator.Navigate(new GroupPopStragety(false), null);
+        }
+
+        public static bool GroupPop(this INavigator navigator, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new GroupPopStragety(false), parameter);
+        }
+
+        public static bool GroupPop(this INavigator navigator, bool leaveLast)
+        {
+            return navigator.Navigate(new GroupPopStragety(leaveLast), null);
+        }
+
+        public static bool GroupPop(this INavigator navigator, bool leaveLast, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new GroupPopStragety(leaveLast), parameter);
+        }
+
+        // Async
+
+        public static Task<bool> GroupPopAsync(this INavigator navigator)
+        {
+            return navigator.NavigateAsync(new GroupPopStragety(false), null);
+        }
+
+        public static Task<bool> GroupPopAsync(this INavigator navigator, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new GroupPopStragety(false), parameter);
+        }
+
+        public static Task<bool> GroupPopAsync(this INavigator navigator, bool leaveLast)
+        {
+            return navigator.NavigateAsync(new GroupPopStragety(leaveLast), null);
+        }
+
+        public static Task<bool> GroupPopAsync(this INavigator navigator, bool leaveLast, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new GroupPopStragety(leaveLast), parameter);
+        }
     }
 }

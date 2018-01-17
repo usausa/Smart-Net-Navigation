@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    public class GroupPushStrategy : INavigationStrategy
+    public sealed class GroupPushStrategy : INavigationStrategy
     {
         private readonly object id;
 
