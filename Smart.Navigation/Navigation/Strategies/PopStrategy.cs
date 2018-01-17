@@ -18,8 +18,8 @@
                 throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.PageStack.Count}]");
             }
 
-            var toInfo = controller.PageStack[controller.PageStack.Count - level - 1];
-            return new StragtegyResult(toInfo.Descriptor.Id, NavigationAttributes.Restore);
+            var toStackInfo = controller.PageStack[controller.PageStack.Count - level - 1];
+            return new StragtegyResult(toStackInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
         public object ResolveToPage(INavigationController controller)
@@ -38,7 +38,7 @@
 
             controller.PageStack.RemoveRange(controller.PageStack.Count - level, level);
 
-            // Activate new
+            // Activate restored
             var stack = controller.PageStack[controller.PageStack.Count - 1];
             controller.ActivePage(stack.Page, stack.RestoreParameter);
             stack.RestoreParameter = null;

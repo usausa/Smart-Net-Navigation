@@ -111,10 +111,15 @@
             Exited?.Invoke(this, EventArgs.Empty);
         }
 
-        public bool Navigate(INavigationStrategy strategy, INavigationParameter parameter)
+        bool INavigator.Navigate(INavigationStrategy strategy, INavigationParameter parameter)
         {
             var controller = new Controller(this);
             var result = strategy.Initialize(controller);
+            if (result == null)
+            {
+                return false;
+            }
+
             var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
 
             if (!ConfirmNavigation(navigationContext))
@@ -127,10 +132,15 @@
             return true;
         }
 
-        public async Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter)
+        async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter)
         {
             var controller = new Controller(this);
             var result = strategy.Initialize(controller);
+            if (result == null)
+            {
+                return false;
+            }
+
             var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
 
             var confirmResult = await ConfirmNavigationAsync(navigationContext);
@@ -153,6 +163,9 @@
             var fromPage = CurrentPage;
             var fromTarget = CurrentTarget;
 
+            var toPage = strategy.ResolveToPage(controller);
+            var toTarget = provider.ResolveTarget(toPage);
+
             // Process from page
             if (fromPage != null)
             {
@@ -165,10 +178,6 @@
 
                 NavigatedFrom?.Invoke(this, args);
             }
-
-            // Create to page
-            var toPage = strategy.ResolveToPage(controller);
-            var toTarget = provider.ResolveTarget(toPage);
 
             // Process navigating
             NavigatingTo?.Invoke(this, args);
