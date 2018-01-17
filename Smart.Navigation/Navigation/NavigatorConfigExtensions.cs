@@ -11,11 +11,6 @@
         public static NavigatorConfig UseProvider<TProvider>(this NavigatorConfig config)
             where TProvider : INavigationProvider
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             config.Configure(c =>
             {
                 c.RemoveAll<INavigationProvider>();
@@ -27,11 +22,6 @@
 
         public static NavigatorConfig UseProvider(this NavigatorConfig config, INavigationProvider provider)
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             if (provider == null)
             {
                 throw new ArgumentNullException(nameof(provider));
@@ -49,11 +39,6 @@
         public static NavigatorConfig UseFactory<TFactory>(this NavigatorConfig config)
             where TFactory : IFactory
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             config.Configure(c =>
             {
                 c.RemoveAll<IFactory>();
@@ -65,11 +50,6 @@
 
         public static NavigatorConfig UseFactory(this NavigatorConfig config, IFactory factory)
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             if (factory == null)
             {
                 throw new ArgumentNullException(nameof(factory));
@@ -97,11 +77,6 @@
         public static NavigatorConfig UseConverter<TConverter>(this NavigatorConfig config)
             where TConverter : IConverter
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             config.Configure(c =>
             {
                 c.RemoveAll<IConverter>();
@@ -113,11 +88,6 @@
 
         public static NavigatorConfig UseConverter(this NavigatorConfig config, IConverter converter)
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             if (converter == null)
             {
                 throw new ArgumentNullException(nameof(converter));
@@ -134,22 +104,12 @@
 
         public static NavigatorConfig UseConverter(this NavigatorConfig config, Func<object, Type, object> callback)
         {
-            if (callback == null)
-            {
-                throw new ArgumentNullException(nameof(callback));
-            }
-
             return config.UseConverter(new CallbackConverter(callback));
         }
 
         public static NavigatorConfig AddPlugin<TPlugin>(this NavigatorConfig config)
             where TPlugin : IPlugin
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             config.Configure(c => c.Add<IPlugin, TPlugin>());
 
             return config;
@@ -157,11 +117,6 @@
 
         public static NavigatorConfig AddPlugin(this NavigatorConfig config, IPlugin plugin)
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             if (plugin == null)
             {
                 throw new ArgumentNullException(nameof(plugin));
@@ -175,11 +130,6 @@
         public static NavigatorConfig UseActivatorFactory<TActivatorFactory>(this NavigatorConfig config)
             where TActivatorFactory : IActivatorFactory
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             config.Configure(c =>
             {
                 c.RemoveAll<IActivatorFactory>();
@@ -191,11 +141,6 @@
 
         public static NavigatorConfig UseActivatorFactory(this NavigatorConfig config, IActivatorFactory activatorFactory)
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             if (activatorFactory == null)
             {
                 throw new ArgumentNullException(nameof(activatorFactory));
@@ -213,11 +158,6 @@
         public static NavigatorConfig UseAccessorFactory<TAccessorFactory>(this NavigatorConfig config)
             where TAccessorFactory : IAccessorFactory
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             config.Configure(c =>
             {
                 c.RemoveAll<IAccessorFactory>();
@@ -229,11 +169,6 @@
 
         public static NavigatorConfig UseAccessorFactory(this NavigatorConfig config, IAccessorFactory accessorFactory)
         {
-            if (config == null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             if (accessorFactory == null)
             {
                 throw new ArgumentNullException(nameof(accessorFactory));
