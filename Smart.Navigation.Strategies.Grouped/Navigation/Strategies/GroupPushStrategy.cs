@@ -30,26 +30,28 @@
                 throw new InvalidOperationException($"Page id is not found in descriptors. id=[{id}]");
             }
 
-            var current = -1;
             var group = descriptor.Type.GetCustomAttribute<GroupAttribute>();
-            if (group != null)
+            if (group == null)
             {
-                for (var i = 0; i < controller.PageStack.Count; i++)
+                throw new InvalidOperationException($"Page is not grouped. id=[{id}]");
+            }
+
+            var current = -1;
+            for (var i = 0; i < controller.PageStack.Count; i++)
+            {
+                var groupOfStack = controller.PageStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
+                if ((groupOfStack != null) && Equals(group.Id, groupOfStack.Id))
                 {
-                    var groupOfStack = controller.PageStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-                    if ((groupOfStack != null) && Equals(group.Id, groupOfStack.Id))
+                    if (groups == null)
                     {
-                        if (groups == null)
-                        {
-                            groups = new List<int>();
-                        }
+                        groups = new List<int>();
+                    }
 
-                        groups.Add(i);
+                    groups.Add(i);
 
-                        if (Equals(controller.PageStack[i].Descriptor.Id, id))
-                        {
-                            current = i;
-                        }
+                    if (Equals(controller.PageStack[i].Descriptor.Id, id))
+                    {
+                        current = i;
                     }
                 }
             }
