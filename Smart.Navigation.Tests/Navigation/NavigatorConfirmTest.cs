@@ -1,5 +1,7 @@
 ﻿namespace Smart.Navigation
 {
+    using System.Threading.Tasks;
+
     using Smart.Mock;
 
     using Xunit;
@@ -18,11 +20,11 @@
                 args.Cancel = args.Context.Parameter.GetValue<bool>("Cancel");
             };
 
-            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(Pages.ToPage, typeof(ToPage));
 
             // test
-            Assert.False(navigator.Forward(Pages.Page1, new NavigationParameter().SetValue("Cancel", true)));
-            Assert.True(navigator.Forward(Pages.Page1, new NavigationParameter().SetValue("Cancel", false)));
+            Assert.False(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("Cancel", true)));
+            Assert.True(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("Cancel", false)));
         }
 
         [Fact]
@@ -33,26 +35,42 @@
                 .UseMockPageProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(CancelPage));
-            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(Pages.CancelPage, typeof(CancelPage));
+            navigator.Register(Pages.ToPage, typeof(ToPage));
 
             // test
-            navigator.Forward(Pages.Page1);
-            Assert.False(navigator.Forward(Pages.Page2, new NavigationParameter().SetValue("CanNavigate", false)));
-            Assert.True(navigator.Forward(Pages.Page2, new NavigationParameter().SetValue("CanNavigate", true)));
+            navigator.Forward(Pages.CancelPage);
+
+            Assert.False(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", false)));
+            Assert.True(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", true)));
+        }
+
+        [Fact]
+        public static async Task TestNavigatorCanceldByAsyncInterface()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockPageProvider()
+                .ToNavigator();
+
+            navigator.Register(Pages.CancelPage, typeof(CancelAsyncPage));
+            navigator.Register(Pages.ToPage, typeof(ToPage));
+
+            // test
+            await navigator.ForwardAsync(Pages.CancelPage);
+
+            Assert.False(await navigator.ForwardAsync(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", false)));
+            Assert.True(await navigator.ForwardAsync(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", true)));
         }
 
         public enum Pages
         {
-            Page1,
-            Page2
+            ToPage,
+            CancelPage,
+            CancelAsyncPage
         }
 
-        public class Page1 : MockPage
-        {
-        }
-
-        public class Page2 : MockPage
+        public class ToPage : MockPage
         {
         }
 
@@ -60,6 +78,15 @@
         {
             public bool CanNavigate(INavigationContext context)
             {
+                return context.Parameter.GetValue<bool>("CanNavigate");
+            }
+        }
+
+        public class CancelAsyncPage : MockPage, IConfirmRequestAsync
+        {
+            public async Task<bool> CanNavigateAsync(INavigationContext context)
+            {
+                await Task.Delay(0);
                 return context.Parameter.GetValue<bool>("CanNavigate");
             }
         }
