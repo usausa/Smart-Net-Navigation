@@ -46,7 +46,7 @@
 
                         groups.Add(i);
 
-                        if (controller.PageStack[i].Descriptor.Id == id)
+                        if (Equals(controller.PageStack[i].Descriptor.Id, id))
                         {
                             current = i;
                         }
@@ -58,14 +58,14 @@
             if (current != -1)
             {
                 // and last ?
-                if (groups[groups.Count - 1] == current)
+                if (controller.PageStack.Count - 1 == current)
                 {
                     return null;
                 }
 
                 // Deactive top & Active current
                 exist = true;
-                deactiveStackInfo = controller.PageStack[groups[groups.Count - 1]];
+                deactiveStackInfo = controller.PageStack[controller.PageStack.Count - 1];
                 activeStackInfo = controller.PageStack[current];
 
                 return new StragtegyResult(activeStackInfo.Descriptor.Id, NavigationAttributes.Restore);
