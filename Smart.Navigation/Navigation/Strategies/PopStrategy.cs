@@ -6,6 +6,8 @@
     {
         private readonly int level;
 
+        private PageStackInfo restoreStackInfo;
+
         public PopStrategy(int level)
         {
             this.level = level;
@@ -18,14 +20,13 @@
                 throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.PageStack.Count}]");
             }
 
-            var toStackInfo = controller.PageStack[controller.PageStack.Count - level - 1];
-            return new StragtegyResult(toStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+            restoreStackInfo = controller.PageStack[controller.PageStack.Count - level - 1];
+            return new StragtegyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
         public object ResolveToPage(INavigationController controller)
         {
-            var toStackInfo = controller.PageStack[controller.PageStack.Count - level - 1];
-            return toStackInfo.Page;
+            return restoreStackInfo.Page;
         }
 
         public void UpdateStack(INavigationController controller, object toPage)
