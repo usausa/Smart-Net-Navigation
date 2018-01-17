@@ -66,7 +66,7 @@
                 // Deactive top & Active current
                 exist = true;
                 deactiveStackInfo = controller.PageStack[controller.PageStack.Count - 1];
-                activeStackInfo = controller.PageStack[current];
+                activeStackInfo = controller.PageStack[groups[groups.Count - 1]];
 
                 return new StragtegyResult(activeStackInfo.Descriptor.Id, NavigationAttributes.Restore);
             }
