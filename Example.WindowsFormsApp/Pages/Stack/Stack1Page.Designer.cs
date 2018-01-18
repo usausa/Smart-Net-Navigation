@@ -28,10 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.PushButton = new System.Windows.Forms.Button();
+            this.PrevButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // PushButton
+            // 
+            this.PushButton.Location = new System.Drawing.Point(323, 178);
+            this.PushButton.Name = "PushButton";
+            this.PushButton.Size = new System.Drawing.Size(160, 32);
+            this.PushButton.TabIndex = 11;
+            this.PushButton.Text = "Push";
+            this.PushButton.UseVisualStyleBackColor = true;
+            // 
+            // PrevButton
+            // 
+            this.PrevButton.Location = new System.Drawing.Point(157, 178);
+            this.PrevButton.Name = "PrevButton";
+            this.PrevButton.Size = new System.Drawing.Size(160, 32);
+            this.PrevButton.TabIndex = 10;
+            this.PrevButton.Text = "キャンセル";
+            this.PrevButton.UseVisualStyleBackColor = true;
+            // 
+            // Stack1Page
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PushButton);
+            this.Controls.Add(this.PrevButton);
+            this.Name = "Stack1Page";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button PushButton;
+        private System.Windows.Forms.Button PrevButton;
     }
 }

@@ -155,6 +155,45 @@
     <EmbeddedResource Include="Pages\AppPageBase.resx">
       <DependentUpon>AppPageBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Data\DataDetailPage.resx">
+      <DependentUpon>DataDetailPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Data\DataListPage.resx">
+      <DependentUpon>DataListPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MenuPage.resx">
+      <DependentUpon>MenuPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Popup1\Popup1MainPage.resx">
+      <DependentUpon>Popup1MainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Popup1\Popup1SubPage.resx">
+      <DependentUpon>Popup1SubPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Popup2\Popup2MainPage.resx">
+      <DependentUpon>Popup2MainPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Popup2\Popup2SubPage.resx">
+      <DependentUpon>Popup2SubPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Stack\Stack1Page.resx">
+      <DependentUpon>Stack1Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Stack\Stack2Page.resx">
+      <DependentUpon>Stack2Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Stack\Stack3Page.resx">
+      <DependentUpon>Stack3Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Wizard\WizardConfirmPage.resx">
+      <DependentUpon>WizardConfirmPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Wizard\WizardInput1Page.resx">
+      <DependentUpon>WizardInput1Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Wizard\WizardInput2Page.resx">
+      <DependentUpon>WizardInput2Page.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

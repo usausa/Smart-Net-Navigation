@@ -28,10 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.Pop2Button = new System.Windows.Forms.Button();
+            this.PopButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // Pop2Button
+            // 
+            this.Pop2Button.Location = new System.Drawing.Point(323, 178);
+            this.Pop2Button.Name = "Pop2Button";
+            this.Pop2Button.Size = new System.Drawing.Size(160, 32);
+            this.Pop2Button.TabIndex = 11;
+            this.Pop2Button.Text = "Pop2";
+            this.Pop2Button.UseVisualStyleBackColor = true;
+            // 
+            // PopButton
+            // 
+            this.PopButton.Location = new System.Drawing.Point(157, 178);
+            this.PopButton.Name = "PopButton";
+            this.PopButton.Size = new System.Drawing.Size(160, 32);
+            this.PopButton.TabIndex = 10;
+            this.PopButton.Text = "Pop";
+            this.PopButton.UseVisualStyleBackColor = true;
+            // 
+            // Stack3Page
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Pop2Button);
+            this.Controls.Add(this.PopButton);
+            this.Name = "Stack3Page";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button Pop2Button;
+        private System.Windows.Forms.Button PopButton;
     }
 }

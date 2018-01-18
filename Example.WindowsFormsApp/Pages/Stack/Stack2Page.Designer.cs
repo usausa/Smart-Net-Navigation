@@ -28,10 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.PushButton = new System.Windows.Forms.Button();
+            this.PopButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // PushButton
+            // 
+            this.PushButton.Location = new System.Drawing.Point(323, 178);
+            this.PushButton.Name = "PushButton";
+            this.PushButton.Size = new System.Drawing.Size(160, 32);
+            this.PushButton.TabIndex = 11;
+            this.PushButton.Text = "Push";
+            this.PushButton.UseVisualStyleBackColor = true;
+            // 
+            // PopButton
+            // 
+            this.PopButton.Location = new System.Drawing.Point(157, 178);
+            this.PopButton.Name = "PopButton";
+            this.PopButton.Size = new System.Drawing.Size(160, 32);
+            this.PopButton.TabIndex = 10;
+            this.PopButton.Text = "Pop";
+            this.PopButton.UseVisualStyleBackColor = true;
+            // 
+            // Stack2Page
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PushButton);
+            this.Controls.Add(this.PopButton);
+            this.Name = "Stack2Page";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button PushButton;
+        private System.Windows.Forms.Button PopButton;
     }
 }

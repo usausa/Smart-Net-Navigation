@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BackButton = new System.Windows.Forms.Button();
+            this.Popup1Button = new System.Windows.Forms.Button();
             this.Popup2Button = new System.Windows.Forms.Button();
             this.Fn12Button = new System.Windows.Forms.Button();
             this.Fn11Button = new System.Windows.Forms.Button();
@@ -44,8 +46,6 @@
             this.Fn1Button = new System.Windows.Forms.Button();
             this.ViewPanel = new System.Windows.Forms.Panel();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.Popup1Button = new System.Windows.Forms.Button();
-            this.BackButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +62,28 @@
             this.panel1.Size = new System.Drawing.Size(640, 35);
             this.panel1.TabIndex = 2;
             // 
+            // BackButton
+            // 
+            this.BackButton.BackColor = System.Drawing.SystemColors.Control;
+            this.BackButton.Location = new System.Drawing.Point(5, 6);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(80, 24);
+            this.BackButton.TabIndex = 3;
+            this.BackButton.TabStop = false;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = false;
+            // 
+            // Popup1Button
+            // 
+            this.Popup1Button.BackColor = System.Drawing.SystemColors.Control;
+            this.Popup1Button.Location = new System.Drawing.Point(466, 6);
+            this.Popup1Button.Name = "Popup1Button";
+            this.Popup1Button.Size = new System.Drawing.Size(80, 24);
+            this.Popup1Button.TabIndex = 4;
+            this.Popup1Button.TabStop = false;
+            this.Popup1Button.Text = "Option1";
+            this.Popup1Button.UseVisualStyleBackColor = false;
+            // 
             // Popup2Button
             // 
             this.Popup2Button.BackColor = System.Drawing.SystemColors.Control;
@@ -70,7 +92,7 @@
             this.Popup2Button.Size = new System.Drawing.Size(80, 24);
             this.Popup2Button.TabIndex = 5;
             this.Popup2Button.TabStop = false;
-            this.Popup2Button.Text = "オプション2";
+            this.Popup2Button.Text = "Option2";
             this.Popup2Button.UseVisualStyleBackColor = false;
             // 
             // Fn12Button
@@ -230,28 +252,6 @@
             this.TitleLabel.TabIndex = 1;
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Popup1Button
-            // 
-            this.Popup1Button.BackColor = System.Drawing.SystemColors.Control;
-            this.Popup1Button.Location = new System.Drawing.Point(466, 6);
-            this.Popup1Button.Name = "Popup1Button";
-            this.Popup1Button.Size = new System.Drawing.Size(80, 24);
-            this.Popup1Button.TabIndex = 4;
-            this.Popup1Button.TabStop = false;
-            this.Popup1Button.Text = "オプション1";
-            this.Popup1Button.UseVisualStyleBackColor = false;
-            // 
-            // BackButton
-            // 
-            this.BackButton.BackColor = System.Drawing.SystemColors.Control;
-            this.BackButton.Location = new System.Drawing.Point(5, 6);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(80, 24);
-            this.BackButton.TabIndex = 3;
-            this.BackButton.TabStop = false;
-            this.BackButton.Text = "戻る";
-            this.BackButton.UseVisualStyleBackColor = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -273,7 +273,6 @@
             this.Controls.Add(this.ViewPanel);
             this.Controls.Add(this.TitleLabel);
             this.Name = "MainForm";
-            this.Text = "MainForm";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
