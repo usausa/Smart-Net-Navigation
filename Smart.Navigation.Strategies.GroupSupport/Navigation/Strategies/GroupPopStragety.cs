@@ -7,7 +7,7 @@
     {
         private readonly bool leaveLast;
 
-        private int index;
+        private int start;
 
         private PageStackInfo restoreStackInfo;
 
@@ -30,29 +30,34 @@
                 throw new InvalidOperationException("Current page is not grouped.");
             }
 
-            index = controller.PageStack.Count == 1
+            start = controller.PageStack.Count == 1
                 ? 0
                 : controller.PageStack.FindLastIndex(controller.PageStack.Count - 2, stack =>
                 {
                     var groupOfStack = stack.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
                     return (groupOfStack != null) && Equals(group.Id, groupOfStack.Id);
                 });
-            if (leaveLast)
+            if (start == -1)
             {
-                index = Math.Min(index + 1, controller.PageStack.Count - 1);
+                start = controller.PageStack.Count - 1;
             }
 
-            if (index == controller.PageStack.Count - 1)
+            if (leaveLast)
+            {
+                start = Math.Min(start + 1, controller.PageStack.Count);
+            }
+
+            if (start == controller.PageStack.Count)
             {
                 return null;
             }
 
-            if (index < 1)
+            if (start < 1)
             {
                 throw new InvalidOperationException($"Pop group is invalid. group=[{group.Id}]");
             }
 
-            restoreStackInfo = controller.PageStack[index - 1];
+            restoreStackInfo = controller.PageStack[start - 1];
             return new StragtegyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
@@ -64,10 +69,12 @@
         public void UpdateStack(INavigationController controller, object toPage)
         {
             // Remove old
-            for (var i = controller.PageStack.Count - 1; i >= index; i--)
+            for (var i = controller.PageStack.Count - 1; i >= start; i--)
             {
                 controller.ClosePage(controller.PageStack[i].Page);
             }
+
+            controller.PageStack.RemoveRange(start, controller.PageStack.Count - start);
 
             // Activate restored
             controller.ActivePage(restoreStackInfo.Page, restoreStackInfo.RestoreParameter);

@@ -4,7 +4,7 @@
 
     using Smart.Navigation.Strategies;
 
-    public static class GroupedNavigatorExtensions
+    public static class GroupNavigatorExtensions
     {
         // ------------------------------------------------------------
         // Push

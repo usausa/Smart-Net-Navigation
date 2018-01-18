@@ -25,6 +25,9 @@
             navigator.Register(Pages.PageB1, typeof(PageB1));
             navigator.Register(Pages.PageC1, typeof(PageC1));
 
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+
             // test
             // A1 B1       new []
             // A1 B1 C1    D:B1 C:C1
@@ -38,6 +41,10 @@
 
             Assert.Equal(3, navigator.StackedCount);
             Assert.False(pageB1.IsVisible);
+
+            Assert.Equal(Pages.PageB1, context.Value.FromId);
+            Assert.Equal(Pages.PageC1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsStacked());
         }
 
         [Fact]
@@ -51,6 +58,9 @@
             navigator.Register(Pages.PageA1, typeof(PageA1));
             navigator.Register(Pages.PageA2, typeof(PageA2));
             navigator.Register(Pages.PageB1, typeof(PageB1));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new [0]
@@ -68,15 +78,27 @@
             Assert.Equal(3, navigator.StackedCount);
             Assert.False(pageB1.IsVisible);
 
+            Assert.Equal(Pages.PageB1, context.Value.FromId);
+            Assert.Equal(Pages.PageA2, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsStacked());
+
             navigator.Pop();
 
             Assert.True(pageA1.IsVisible);
             Assert.False(pageB1.IsVisible);
 
+            Assert.Equal(Pages.PageA2, context.Value.FromId);
+            Assert.Equal(Pages.PageA1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
+
             navigator.Pop();
 
             Assert.False(pageA1.IsOpen);
             Assert.True(pageB1.IsVisible);
+
+            Assert.Equal(Pages.PageA1, context.Value.FromId);
+            Assert.Equal(Pages.PageB1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
         }
 
         [Fact]
@@ -90,6 +112,9 @@
             navigator.Register(Pages.PageA1, typeof(PageA1));
             navigator.Register(Pages.PageB1, typeof(PageB1));
             navigator.Register(Pages.PageB2, typeof(PageB2));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new [1]
@@ -107,15 +132,27 @@
             Assert.Equal(3, navigator.StackedCount);
             Assert.False(pageB1.IsVisible);
 
+            Assert.Equal(Pages.PageB1, context.Value.FromId);
+            Assert.Equal(Pages.PageB2, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsStacked());
+
             navigator.Pop();
 
             Assert.False(pageA1.IsVisible);
             Assert.True(pageB1.IsVisible);
 
+            Assert.Equal(Pages.PageB2, context.Value.FromId);
+            Assert.Equal(Pages.PageB1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
+
             navigator.Pop();
 
             Assert.True(pageA1.IsVisible);
             Assert.False(pageB1.IsOpen);
+
+            Assert.Equal(Pages.PageB1, context.Value.FromId);
+            Assert.Equal(Pages.PageA1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
         }
 
         [Fact]
@@ -128,6 +165,9 @@
 
             navigator.Register(Pages.PageA1, typeof(PageA1));
             navigator.Register(Pages.PageB1, typeof(PageB1));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       exist [0]
@@ -146,10 +186,18 @@
             Assert.True(pageA1.IsVisible);
             Assert.False(pageB1.IsVisible);
 
+            Assert.Equal(Pages.PageB1, context.Value.FromId);
+            Assert.Equal(Pages.PageA1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
+
             navigator.Pop();
 
             Assert.False(pageA1.IsOpen);
             Assert.True(pageB1.IsVisible);
+
+            Assert.Equal(Pages.PageA1, context.Value.FromId);
+            Assert.Equal(Pages.PageB1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
         }
 
         [Fact]
@@ -162,6 +210,9 @@
 
             navigator.Register(Pages.PageA1, typeof(PageA1));
             navigator.Register(Pages.PageB1, typeof(PageB1));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       exist [1]
@@ -184,6 +235,10 @@
 
             Assert.True(pageA1.IsVisible);
             Assert.False(pageB1.IsOpen);
+
+            Assert.Equal(Pages.PageB1, context.Value.FromId);
+            Assert.Equal(Pages.PageA1, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
         }
 
         [Fact]
@@ -200,6 +255,9 @@
             navigator.Register(Pages.PageA2, typeof(PageA2));
             navigator.Register(Pages.PageB1, typeof(PageB1));
             navigator.Register(Pages.PageB2, typeof(PageB2));
+
+            var context = new Holder<INavigationContext>();
+            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(Pages.Page1);
@@ -230,6 +288,10 @@
             Assert.False(pageA1.IsVisible);
             Assert.False(pageB2.IsVisible);
             Assert.False(pageB1.IsVisible);
+
+            Assert.Equal(Pages.PageB2, context.Value.FromId);
+            Assert.Equal(Pages.PageA2, context.Value.ToId);
+            Assert.True(context.Value.Attribute.IsRestore());
 
             // 1:B1:B2:A1
             navigator.Pop();
