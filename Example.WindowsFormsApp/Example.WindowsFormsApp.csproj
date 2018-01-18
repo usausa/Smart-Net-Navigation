@@ -48,14 +48,110 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FunctionKey.cs" />
+    <Compile Include="IApplicationPage.cs" />
+    <Compile Include="IFunctionControl.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataEntity.cs" />
+    <Compile Include="Pages\AppPageBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\AppPageBase.Designer.cs">
+      <DependentUpon>AppPageBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\DataDetailPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Data\DataDetailPage.Designer.cs">
+      <DependentUpon>DataDetailPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Data\DataListPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Data\DataListPage.Designer.cs">
+      <DependentUpon>DataListPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GroupId.cs" />
+    <Compile Include="Pages\MenuPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\MenuPage.Designer.cs">
+      <DependentUpon>MenuPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageId.cs" />
+    <Compile Include="Pages\Popup1\Popup1MainPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Popup1\Popup1MainPage.Designer.cs">
+      <DependentUpon>Popup1MainPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Popup1\Popup1SubPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Popup1\Popup1SubPage.Designer.cs">
+      <DependentUpon>Popup1SubPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Popup2\Popup2MainPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Popup2\Popup2MainPage.Designer.cs">
+      <DependentUpon>Popup2MainPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Popup2\Popup2SubPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Popup2\Popup2SubPage.Designer.cs">
+      <DependentUpon>Popup2SubPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Stack\Stack1Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Stack\Stack1Page.Designer.cs">
+      <DependentUpon>Stack1Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Stack\Stack2Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Stack\Stack2Page.Designer.cs">
+      <DependentUpon>Stack2Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Stack\Stack3Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Stack\Stack3Page.Designer.cs">
+      <DependentUpon>Stack3Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wizard\WizardConfirmPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Wizard\WizardConfirmPage.Designer.cs">
+      <DependentUpon>WizardConfirmPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wizard\WizardContext.cs" />
+    <Compile Include="Pages\Wizard\WizardInput1Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Wizard\WizardInput1Page.Designer.cs">
+      <DependentUpon>WizardInput1Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Wizard\WizardInput2Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Pages\Wizard\WizardInput2Page.Designer.cs">
+      <DependentUpon>WizardInput2Page.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DataService.cs" />
+    <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -79,6 +175,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj">
+      <Project>{b250d011-1dd5-42ed-98d4-4cf9fef52f6b}</Project>
+      <Name>Smart.Navigation.Resolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Smart.Navigation.Strategies.GroupSupport\Smart.Navigation.Strategies.GroupSupport.csproj">
+      <Project>{73baf03b-7f89-41a6-bfa4-d308f7ac3849}</Project>
+      <Name>Smart.Navigation.Strategies.GroupSupport</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Smart.Navigation.Windows.Forms\Smart.Navigation.Windows.Forms.csproj">
       <Project>{c77cf665-ecd6-4ff5-953c-aae29260f93b}</Project>
       <Name>Smart.Navigation.Windows.Forms</Name>
@@ -99,5 +203,6 @@
       <Version>1.1.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
