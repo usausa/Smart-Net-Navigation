@@ -6,6 +6,8 @@
     {
         string Title { get; }
 
+        bool CanBack { get; }
+
         IFunctionControl FunctionControl { set; }
 
         void OnFunctionKey(Keys key);

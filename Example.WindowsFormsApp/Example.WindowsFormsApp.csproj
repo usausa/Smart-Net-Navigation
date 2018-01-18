@@ -126,11 +126,11 @@
     <Compile Include="Pages\Stack\Stack3Page.Designer.cs">
       <DependentUpon>Stack3Page.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardConfirmPage.cs">
+    <Compile Include="Pages\Wizard\WizardResultPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardConfirmPage.Designer.cs">
-      <DependentUpon>WizardConfirmPage.cs</DependentUpon>
+    <Compile Include="Pages\Wizard\WizardResultPage.Designer.cs">
+      <DependentUpon>WizardResultPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\Wizard\WizardContext.cs" />
     <Compile Include="Pages\Wizard\WizardInput1Page.cs">
@@ -185,8 +185,8 @@
     <EmbeddedResource Include="Pages\Stack\Stack3Page.resx">
       <DependentUpon>Stack3Page.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Wizard\WizardConfirmPage.resx">
-      <DependentUpon>WizardConfirmPage.cs</DependentUpon>
+    <EmbeddedResource Include="Pages\Wizard\WizardResultPage.resx">
+      <DependentUpon>WizardResultPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Wizard\WizardInput1Page.resx">
       <DependentUpon>WizardInput1Page.cs</DependentUpon>

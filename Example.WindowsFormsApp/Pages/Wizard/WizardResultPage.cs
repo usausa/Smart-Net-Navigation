@@ -2,10 +2,10 @@
 {
     using Smart.Navigation;
 
-    [Page(PageId.WizardConfirm)]
-    public partial class WizardConfirmPage : AppPageBase
+    [Page(PageId.WizardResult)]
+    public partial class WizardResultPage : AppPageBase
     {
-        public WizardConfirmPage()
+        public WizardResultPage()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace Example.WindowsFormsApp.Pages.Wizard
 {
-    partial class WizardConfirmPage
+    partial class WizardResultPage
     {
         /// <summary> 
         /// 必要なデザイナー変数です。

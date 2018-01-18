@@ -14,7 +14,7 @@
 
         WizardInput1,
         WizardInput2,
-        WizardConfirm,
+        WizardResult,
 
         Popup1Main,
         Popup1Sub,

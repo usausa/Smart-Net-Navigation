@@ -8,6 +8,8 @@
     {
         public virtual string Title { get; } = string.Empty;
 
+        public virtual bool CanBack { get; } = false;
+
         public IFunctionControl FunctionControl { get; set; }
 
         public INavigator Navigator { get; set; }
