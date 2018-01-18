@@ -8,7 +8,7 @@
 
         bool CanBack { get; }
 
-        IFunctionControl FunctionControl { set; }
+        FunctionKey[] FunctionKeys { get; }
 
         void OnFunctionKey(Keys key);
 

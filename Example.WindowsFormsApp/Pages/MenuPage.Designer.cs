@@ -39,7 +39,7 @@
             this.MenuButton3.Name = "MenuButton3";
             this.MenuButton3.Size = new System.Drawing.Size(160, 32);
             this.MenuButton3.TabIndex = 5;
-            this.MenuButton3.Text = "複数IDサンプル";
+            this.MenuButton3.Text = "Context sample";
             this.MenuButton3.UseVisualStyleBackColor = true;
             // 
             // MenuButton2
@@ -48,7 +48,7 @@
             this.MenuButton2.Name = "MenuButton2";
             this.MenuButton2.Size = new System.Drawing.Size(160, 32);
             this.MenuButton2.TabIndex = 4;
-            this.MenuButton2.Text = "スタックサンプル";
+            this.MenuButton2.Text = "Stack sample";
             this.MenuButton2.UseVisualStyleBackColor = true;
             // 
             // MenuButton1
@@ -57,7 +57,7 @@
             this.MenuButton1.Name = "MenuButton1";
             this.MenuButton1.Size = new System.Drawing.Size(160, 32);
             this.MenuButton1.TabIndex = 3;
-            this.MenuButton1.Text = "コンテキストサンプル";
+            this.MenuButton1.Text = "Multiple id sample";
             this.MenuButton1.UseVisualStyleBackColor = true;
             // 
             // MenuPage

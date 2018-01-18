@@ -4,13 +4,13 @@
 
     using Smart.Navigation;
 
-    public partial class AppPageBase : UserControl, IApplicationPage, INavigatorAware, INavigationEventSupport
+    public partial class AppPageBase : UserControl, IApplicationPage, INavigatorAware, IConfirmRequest, INavigationEventSupport
     {
-        public virtual string Title { get; } = string.Empty;
+        public virtual string Title => string.Empty;
 
-        public virtual bool CanBack { get; } = false;
+        public virtual bool CanBack => false;
 
-        public IFunctionControl FunctionControl { get; set; }
+        public virtual FunctionKey[] FunctionKeys => null;
 
         public INavigator Navigator { get; set; }
 
@@ -25,6 +25,11 @@
 
         public virtual void OnBack()
         {
+        }
+
+        public virtual bool CanNavigate(INavigationContext context)
+        {
+            return true;
         }
 
         public virtual void OnNavigatedFrom(INavigationContext context)

@@ -72,6 +72,7 @@
             this.BackButton.TabStop = false;
             this.BackButton.Text = "Back";
             this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Click += new System.EventHandler(this.OnBackButtonClick);
             //
             // Popup1Button
             //
@@ -83,6 +84,7 @@
             this.Popup1Button.TabStop = false;
             this.Popup1Button.Text = "Option1";
             this.Popup1Button.UseVisualStyleBackColor = false;
+            this.Popup1Button.Click += new System.EventHandler(this.OnPopup1ButtonClick);
             //
             // Popup2Button
             //
@@ -94,6 +96,7 @@
             this.Popup2Button.TabStop = false;
             this.Popup2Button.Text = "Option2";
             this.Popup2Button.UseVisualStyleBackColor = false;
+            this.Popup2Button.Click += new System.EventHandler(this.OnPopup2ButtonClick);
             //
             // Fn12Button
             //

@@ -10,7 +10,7 @@
     using Smart.Navigation;
     using Smart.Resolver;
 
-    public partial class MainForm : Form, IFunctionControl
+    public partial class MainForm : Form
     {
         private readonly StandardResolver resolver;
 
@@ -47,9 +47,10 @@
         {
             var config = new ResolverConfig();
             config.UseAutoBinding();
+
             // TODO ptoperty injection
 
-            // TODO
+            // TODO UpdateKeys
 
             return config.ToResolver();
         }
@@ -61,7 +62,11 @@
 
         private void OnNavigatingTo(object sender, NavigationEventArgs e)
         {
-            // TODO Title,Back,Function
+            var page = navigator.CurrentPage as IApplicationPage;
+
+            Text = page?.Title ?? string.Empty;
+            BackButton.Enabled = page?.CanBack ?? false;
+            UpdateFunctionKeys(page?.FunctionKeys);
         }
 
         private void OnExited(object sender, EventArgs e)
@@ -69,9 +74,23 @@
             Close();
         }
 
-        // TODO back
+        private void OnBackButtonClick(object sender, EventArgs e)
+        {
+            if (navigator.CurrentPage is IApplicationPage page)
+            {
+                page.OnBack();
+            }
+        }
 
-        // TODO option * 2
+        private void OnPopup1ButtonClick(object sender, EventArgs e)
+        {
+            // TODO
+        }
+
+        private void OnPopup2ButtonClick(object sender, EventArgs e)
+        {
+            // TODO
+        }
 
         private void InitializeFunctionKeys()
         {
@@ -101,9 +120,32 @@
             functionButtons.Add(Fn12Button);
         }
 
-        public void UpdateKeys(FunctionKey[] keys)
+        private void UpdateFunctionKeys(FunctionKey[] keys)
         {
-            // TODO Updatefunction, to initial only ?
+            enabledFunctions.Clear();
+            if (keys != null)
+            {
+                foreach (var key in keys)
+                {
+                    enabledFunctions.Add(key.Key, key);
+                }
+            }
+
+            foreach (var button in functionButtons)
+            {
+                var keyData = (Keys)button.Tag;
+                if (enabledFunctions.ContainsKey(keyData))
+                {
+                    var key = enabledFunctions[keyData];
+                    button.Enabled = true;
+                    button.Text = key.Display;
+                }
+                else
+                {
+                    button.Enabled = false;
+                    button.Text = string.Empty;
+                }
+            }
         }
 
         private void OnFunctionClick(object sender, EventArgs e)
