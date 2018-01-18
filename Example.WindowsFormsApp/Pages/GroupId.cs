@@ -2,5 +2,7 @@
 {
     public enum GroupId
     {
+        Popup1,
+        Popup2
     }
 }

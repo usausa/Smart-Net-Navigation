@@ -1,8 +1,9 @@
 ﻿namespace Example.WindowsFormsApp.Pages
 {
-    using System.Windows.Forms;
+    using Smart.Navigation;
 
-    public partial class MenuPage : UserControl
+    [Page(PageId.Menu)]
+    public partial class MenuPage : AppPageBase
     {
         public MenuPage()
         {

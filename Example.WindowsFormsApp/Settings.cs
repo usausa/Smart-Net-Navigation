@@ -1,6 +1,6 @@
 ﻿namespace Example.WindowsFormsApp
 {
-    public class Settings
+    public sealed class Settings
     {
     }
 }
