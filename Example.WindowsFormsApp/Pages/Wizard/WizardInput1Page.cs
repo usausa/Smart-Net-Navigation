@@ -1,8 +1,9 @@
 ﻿namespace Example.WindowsFormsApp.Pages.Wizard
 {
-    using System.Windows.Forms;
+    using Smart.Navigation;
 
-    public partial class WizardInput1Page : UserControl
+    [Page(PageId.WizardInput1)]
+    public partial class WizardInput1Page : AppPageBase
     {
         public WizardInput1Page()
         {

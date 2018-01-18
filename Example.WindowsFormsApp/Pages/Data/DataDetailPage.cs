@@ -1,8 +1,10 @@
 ﻿namespace Example.WindowsFormsApp.Pages.Data
 {
-    using System.Windows.Forms;
+    using Smart.Navigation;
 
-    public partial class DataDetailPage : UserControl
+    [Page(PageId.DataDetailNew)]
+    [Page(PageId.DataDetailEdit)]
+    public partial class DataDetailPage : AppPageBase
     {
         public DataDetailPage()
         {

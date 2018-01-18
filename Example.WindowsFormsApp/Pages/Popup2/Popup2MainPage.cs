@@ -1,8 +1,10 @@
 ﻿namespace Example.WindowsFormsApp.Pages.Popup2
 {
-    using System.Windows.Forms;
+    using Smart.Navigation;
 
-    public partial class Popup2MainPage : UserControl
+    [Group(GroupId.Popup2)]
+    [Page(PageId.Popup2Main)]
+    public partial class Popup2MainPage : AppPageBase
     {
         public Popup2MainPage()
         {

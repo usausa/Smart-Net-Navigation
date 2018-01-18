@@ -1,8 +1,9 @@
 ﻿namespace Example.WindowsFormsApp.Pages.Wizard
 {
-    using System.Windows.Forms;
+    using Smart.Navigation;
 
-    public partial class WizardConfirmPage : UserControl
+    [Page(PageId.WizardConfirm)]
+    public partial class WizardConfirmPage : AppPageBase
     {
         public WizardConfirmPage()
         {

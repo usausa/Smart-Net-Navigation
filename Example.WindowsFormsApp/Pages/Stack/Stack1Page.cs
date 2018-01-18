@@ -1,8 +1,9 @@
 ﻿namespace Example.WindowsFormsApp.Pages.Stack
 {
-    using System.Windows.Forms;
+    using Smart.Navigation;
 
-    public partial class Stack1Page : UserControl
+    [Page(PageId.Stack1)]
+    public partial class Stack1Page : AppPageBase
     {
         public Stack1Page()
         {

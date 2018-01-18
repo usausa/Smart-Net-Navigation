@@ -1,8 +1,9 @@
 ﻿namespace Example.WindowsFormsApp.Pages.Data
 {
-    using System.Windows.Forms;
+    using Smart.Navigation;
 
-    public partial class DataListPage : UserControl
+    [Page(PageId.DataList)]
+    public partial class DataListPage : AppPageBase
     {
         public DataListPage()
         {
