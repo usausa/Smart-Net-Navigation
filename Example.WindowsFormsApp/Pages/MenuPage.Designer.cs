@@ -35,7 +35,7 @@
             // 
             // MenuButton3
             // 
-            this.MenuButton3.Location = new System.Drawing.Point(240, 242);
+            this.MenuButton3.Location = new System.Drawing.Point(240, 240);
             this.MenuButton3.Name = "MenuButton3";
             this.MenuButton3.Size = new System.Drawing.Size(160, 32);
             this.MenuButton3.TabIndex = 2;
@@ -45,7 +45,7 @@
             // 
             // MenuButton2
             // 
-            this.MenuButton2.Location = new System.Drawing.Point(240, 178);
+            this.MenuButton2.Location = new System.Drawing.Point(240, 176);
             this.MenuButton2.Name = "MenuButton2";
             this.MenuButton2.Size = new System.Drawing.Size(160, 32);
             this.MenuButton2.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             // MenuButton1
             // 
-            this.MenuButton1.Location = new System.Drawing.Point(240, 114);
+            this.MenuButton1.Location = new System.Drawing.Point(240, 112);
             this.MenuButton1.Name = "MenuButton1";
             this.MenuButton1.Size = new System.Drawing.Size(160, 32);
             this.MenuButton1.TabIndex = 0;
@@ -68,8 +68,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.MenuButton3);
-            this.Controls.Add(this.MenuButton2);
             this.Controls.Add(this.MenuButton1);
+            this.Controls.Add(this.MenuButton2);
             this.Name = "MenuPage";
             this.ResumeLayout(false);
 

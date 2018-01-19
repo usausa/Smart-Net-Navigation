@@ -42,6 +42,7 @@
             // Forward
             Show();
             navigator.Forward(PageId.Menu);
+            ((Control)navigator.CurrentPage).Focus();
         }
 
         private static StandardResolver CreateResolver()
@@ -65,7 +66,7 @@
         {
             var page = e.ToPage as IApplicationPage;
 
-            Text = page?.Title ?? string.Empty;
+            TitleLabel.Text = page?.Title ?? string.Empty;
             BackButton.Enabled = page?.CanBack ?? false;
             UpdateFunctionKeys(page?.FunctionKeys);
         }

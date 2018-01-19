@@ -34,9 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.White;
             this.Name = "AppPageBase";
-            this.Size = new System.Drawing.Size(640, 388);
+            this.Size = new System.Drawing.Size(640, 384);
             this.ResumeLayout(false);
 
         }
