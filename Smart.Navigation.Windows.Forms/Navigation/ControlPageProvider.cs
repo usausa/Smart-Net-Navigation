@@ -40,8 +40,8 @@
         {
             var control = (Control)page;
 
+            control.Visible = false;
             container.Controls.Remove(control);
-            control.Parent = null;
 
             control.Dispose();
         }
