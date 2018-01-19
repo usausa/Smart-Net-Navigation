@@ -20,9 +20,8 @@
             var navigator = new NavigatorConfig()
                 .UseMockPageProvider()
                 .ToNavigator();
-            navigator.NavigatedFrom += (sender, args) => recorder.Events.Add($"{args.Context.FromId}.NavigatedFrom");
-            navigator.NavigatingTo += (sender, args) => recorder.Events.Add($"{args.Context.ToId}.NavigatingTo");
-            navigator.NavigatedTo += (sender, args) => recorder.Events.Add($"{args.Context.ToId}.NavigatedTo");
+            navigator.Navigating += (sender, args) => recorder.Events.Add($"{args.Context.FromId}.Navigating");
+            navigator.Navigated += (sender, args) => recorder.Events.Add($"{args.Context.ToId}.Navigated");
 
             navigator.Register(Pages.Page1, typeof(Page1));
             navigator.Register(Pages.Page2, typeof(Page2));
@@ -30,16 +29,15 @@
             // test
             navigator.Forward(Pages.Page1);
 
-            Assert.Equal("Page1.NavigatingTo", recorder.Events[0]);
-            Assert.Equal("Page1.NavigatedTo", recorder.Events[1]);
+            Assert.Equal(".Navigating", recorder.Events[0]);
+            Assert.Equal("Page1.Navigated", recorder.Events[1]);
 
             recorder.Events.Clear();
 
             navigator.Forward(Pages.Page2);
 
-            Assert.Equal("Page1.NavigatedFrom", recorder.Events[0]);
-            Assert.Equal("Page2.NavigatingTo", recorder.Events[1]);
-            Assert.Equal("Page2.NavigatedTo", recorder.Events[2]);
+            Assert.Equal("Page1.Navigating", recorder.Events[0]);
+            Assert.Equal("Page2.Navigated", recorder.Events[1]);
         }
 
         [Fact]

@@ -25,7 +25,7 @@
             navigator.Register(Pages.Page2, typeof(Page2));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(Pages.Page1);
@@ -62,7 +62,7 @@
             navigator.Register(Pages.Page3, typeof(Page3));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(Pages.Page1);
@@ -93,7 +93,7 @@
             navigator.Register(Pages.Page2, typeof(Page2));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(Pages.Page1);
@@ -117,7 +117,7 @@
             navigator.Register(Pages.Page3, typeof(Page3));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(Pages.Page1);
@@ -187,7 +187,7 @@
             navigator.Register(Pages.Page2, typeof(Page2));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             await navigator.ForwardAsync(Pages.Page1);
@@ -211,7 +211,7 @@
             navigator.Register(Pages.Page3, typeof(Page3));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             await navigator.ForwardAsync(Pages.Page1);

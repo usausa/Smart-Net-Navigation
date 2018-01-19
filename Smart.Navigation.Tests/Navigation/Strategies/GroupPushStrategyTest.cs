@@ -26,7 +26,7 @@
             navigator.Register(Pages.PageC1, typeof(PageC1));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new []
@@ -60,7 +60,7 @@
             navigator.Register(Pages.PageB1, typeof(PageB1));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new [0]
@@ -114,7 +114,7 @@
             navigator.Register(Pages.PageB2, typeof(PageB2));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new [1]
@@ -167,7 +167,7 @@
             navigator.Register(Pages.PageB1, typeof(PageB1));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       exist [0]
@@ -212,7 +212,7 @@
             navigator.Register(Pages.PageB1, typeof(PageB1));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       exist [1]
@@ -257,7 +257,7 @@
             navigator.Register(Pages.PageB2, typeof(PageB2));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(Pages.Page1);
@@ -327,7 +327,7 @@
             navigator.Register(Pages.PageB1, typeof(PageB1));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(Pages.PageA1);
@@ -386,7 +386,7 @@
             navigator.Register(Pages.PageB1, typeof(PageB1));
 
             var context = new Holder<INavigationContext>();
-            navigator.NavigatedTo += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
             await navigator.ForwardAsync(Pages.PageA1);
