@@ -34,21 +34,23 @@
             // 
             // PushButton
             // 
-            this.PushButton.Location = new System.Drawing.Point(323, 178);
+            this.PushButton.Location = new System.Drawing.Point(320, 176);
             this.PushButton.Name = "PushButton";
             this.PushButton.Size = new System.Drawing.Size(160, 32);
             this.PushButton.TabIndex = 11;
             this.PushButton.Text = "Push";
             this.PushButton.UseVisualStyleBackColor = true;
+            this.PushButton.Click += new System.EventHandler(this.OnPushButtonClick);
             // 
             // PopButton
             // 
-            this.PopButton.Location = new System.Drawing.Point(157, 178);
+            this.PopButton.Location = new System.Drawing.Point(160, 176);
             this.PopButton.Name = "PopButton";
             this.PopButton.Size = new System.Drawing.Size(160, 32);
             this.PopButton.TabIndex = 10;
             this.PopButton.Text = "Pop";
             this.PopButton.UseVisualStyleBackColor = true;
+            this.PopButton.Click += new System.EventHandler(this.OnPopButtonClick);
             // 
             // Stack2Page
             // 
