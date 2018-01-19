@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		README.md = README.md
 		Smart.Navigation.nuspec = Smart.Navigation.nuspec
+		Smart.Navigation.Resolver.nuspec = Smart.Navigation.Resolver.nuspec
 		Smart.Navigation.ruleset = Smart.Navigation.ruleset
+		Smart.Navigation.Windows.Forms.nuspec = Smart.Navigation.Windows.Forms.nuspec
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Resolver", "Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj", "{B250D011-1DD5-42ED-98D4-4CF9FEF52F6B}"
