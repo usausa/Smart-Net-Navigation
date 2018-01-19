@@ -23,7 +23,7 @@
                 throw new InvalidOperationException($"Page id is not found in descriptors. id=[{id}]");
             }
 
-            if ((level < 1) || (level > controller.PageStack.Count))
+            if ((level < 1) || (level > controller.PageStack.Count - 1))
             {
                 throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.PageStack.Count}]");
             }
@@ -44,12 +44,12 @@
             controller.OpenPage(toPage);
 
             // Remove old
-            for (var i = controller.PageStack.Count - 2; i > controller.PageStack.Count - level - 2; i--)
+            for (var i = controller.PageStack.Count - 2; i >= controller.PageStack.Count - level - 2; i--)
             {
                 controller.ClosePage(controller.PageStack[i].Page);
             }
 
-            controller.PageStack.RemoveRange(controller.PageStack.Count - level - 1, level);
+            controller.PageStack.RemoveRange(controller.PageStack.Count - level - 2, level + 1);
         }
     }
 }
