@@ -38,27 +38,30 @@
             this.MenuButton3.Location = new System.Drawing.Point(240, 242);
             this.MenuButton3.Name = "MenuButton3";
             this.MenuButton3.Size = new System.Drawing.Size(160, 32);
-            this.MenuButton3.TabIndex = 5;
+            this.MenuButton3.TabIndex = 2;
             this.MenuButton3.Text = "Context sample";
             this.MenuButton3.UseVisualStyleBackColor = true;
+            this.MenuButton3.Click += new System.EventHandler(this.OnMenuButton3Click);
             // 
             // MenuButton2
             // 
             this.MenuButton2.Location = new System.Drawing.Point(240, 178);
             this.MenuButton2.Name = "MenuButton2";
             this.MenuButton2.Size = new System.Drawing.Size(160, 32);
-            this.MenuButton2.TabIndex = 4;
+            this.MenuButton2.TabIndex = 1;
             this.MenuButton2.Text = "Stack sample";
             this.MenuButton2.UseVisualStyleBackColor = true;
+            this.MenuButton2.Click += new System.EventHandler(this.OnMenuButton2Click);
             // 
             // MenuButton1
             // 
             this.MenuButton1.Location = new System.Drawing.Point(240, 114);
             this.MenuButton1.Name = "MenuButton1";
             this.MenuButton1.Size = new System.Drawing.Size(160, 32);
-            this.MenuButton1.TabIndex = 3;
+            this.MenuButton1.TabIndex = 0;
             this.MenuButton1.Text = "Multiple id sample";
             this.MenuButton1.UseVisualStyleBackColor = true;
+            this.MenuButton1.Click += new System.EventHandler(this.OnMenuButton1Click);
             // 
             // MenuPage
             // 

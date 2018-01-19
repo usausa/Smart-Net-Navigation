@@ -63,7 +63,7 @@
 
         private void OnNavigatingTo(object sender, NavigationEventArgs e)
         {
-            var page = navigator.CurrentPage as IApplicationPage;
+            var page = e.ToPage as IApplicationPage;
 
             Text = page?.Title ?? string.Empty;
             BackButton.Enabled = page?.CanBack ?? false;
