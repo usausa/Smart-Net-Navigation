@@ -6,7 +6,7 @@
     [Page(PageId.WizardInput1)]
     public partial class WizardInput1Page : AppPageBase
     {
-        public override string Title { get; } = "Input1";
+        public override string Title => "Input1";
 
         public override bool CanBack => true;
 

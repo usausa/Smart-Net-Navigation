@@ -39,7 +39,7 @@
             this.NextButton.Location = new System.Drawing.Point(320, 240);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(160, 32);
-            this.NextButton.TabIndex = 7;
+            this.NextButton.TabIndex = 11;
             this.NextButton.Text = "Next";
             this.NextButton.UseVisualStyleBackColor = true;
             this.NextButton.Click += new System.EventHandler(this.OnNextButtonClick);
@@ -49,7 +49,7 @@
             this.PrevButton.Location = new System.Drawing.Point(160, 240);
             this.PrevButton.Name = "PrevButton";
             this.PrevButton.Size = new System.Drawing.Size(160, 32);
-            this.PrevButton.TabIndex = 6;
+            this.PrevButton.TabIndex = 10;
             this.PrevButton.Text = "Cancel";
             this.PrevButton.UseVisualStyleBackColor = true;
             this.PrevButton.Click += new System.EventHandler(this.OnPrevButtonClick);
@@ -60,7 +60,7 @@
             this.Data1Text.Location = new System.Drawing.Point(160, 175);
             this.Data1Text.Name = "Data1Text";
             this.Data1Text.Size = new System.Drawing.Size(320, 34);
-            this.Data1Text.TabIndex = 5;
+            this.Data1Text.TabIndex = 9;
             // 
             // Data1Label
             // 
@@ -68,7 +68,7 @@
             this.Data1Label.Location = new System.Drawing.Point(155, 140);
             this.Data1Label.Name = "Data1Label";
             this.Data1Label.Size = new System.Drawing.Size(100, 32);
-            this.Data1Label.TabIndex = 4;
+            this.Data1Label.TabIndex = 8;
             this.Data1Label.Text = "Data1";
             // 
             // WizardInput1Page

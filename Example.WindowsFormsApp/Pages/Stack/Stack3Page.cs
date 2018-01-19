@@ -5,7 +5,7 @@
     [Page(PageId.Stack3)]
     public partial class Stack3Page : AppPageBase
     {
-        public override string Title { get; } = "Stack3";
+        public override string Title => "Stack3";
 
         public override bool CanBack => true;
 

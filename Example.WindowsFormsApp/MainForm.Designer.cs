@@ -261,6 +261,8 @@
             this.Controls.Add(this.Fn1Button);
             this.Controls.Add(this.ContainerPanel);
             this.Controls.Add(this.TitleLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Example";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);

@@ -7,7 +7,7 @@
     [Page(PageId.Menu)]
     public partial class MenuPage : AppPageBase
     {
-        public override string Title { get; } = "Menu";
+        public override string Title => "Menu";
 
         public override FunctionKey[] FunctionKeys => new[]
         {

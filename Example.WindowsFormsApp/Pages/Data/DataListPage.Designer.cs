@@ -30,30 +30,45 @@
         {
             this.EditButton = new System.Windows.Forms.Button();
             this.NewButton = new System.Windows.Forms.Button();
+            this.DataListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // EditButton
             // 
-            this.EditButton.Location = new System.Drawing.Point(323, 178);
+            this.EditButton.Location = new System.Drawing.Point(320, 240);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(160, 32);
             this.EditButton.TabIndex = 3;
-            this.EditButton.Text = "編集";
+            this.EditButton.Text = "Edit";
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.OnEditButtonClick);
             // 
             // NewButton
             // 
-            this.NewButton.Location = new System.Drawing.Point(157, 178);
+            this.NewButton.Location = new System.Drawing.Point(160, 240);
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(160, 32);
             this.NewButton.TabIndex = 2;
-            this.NewButton.Text = "新規作成";
+            this.NewButton.Text = "New";
             this.NewButton.UseVisualStyleBackColor = true;
+            this.NewButton.Click += new System.EventHandler(this.OnNewButtonClick);
+            // 
+            // DataListBox
+            // 
+            this.DataListBox.DisplayMember = "Name";
+            this.DataListBox.Font = new System.Drawing.Font("MS UI Gothic", 20.25F);
+            this.DataListBox.FormattingEnabled = true;
+            this.DataListBox.ItemHeight = 27;
+            this.DataListBox.Location = new System.Drawing.Point(160, 64);
+            this.DataListBox.Name = "DataListBox";
+            this.DataListBox.Size = new System.Drawing.Size(320, 166);
+            this.DataListBox.TabIndex = 4;
             // 
             // DataListPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.DataListBox);
             this.Controls.Add(this.EditButton);
             this.Controls.Add(this.NewButton);
             this.Name = "DataListPage";
@@ -65,5 +80,6 @@
 
         private System.Windows.Forms.Button EditButton;
         private System.Windows.Forms.Button NewButton;
+        private System.Windows.Forms.ListBox DataListBox;
     }
 }

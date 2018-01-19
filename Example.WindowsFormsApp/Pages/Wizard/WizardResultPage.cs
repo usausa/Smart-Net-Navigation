@@ -6,7 +6,7 @@
     [Page(PageId.WizardResult)]
     public partial class WizardResultPage : AppPageBase
     {
-        public override string Title { get; } = "Result";
+        public override string Title => "Result";
 
         public override bool CanBack => true;
 
