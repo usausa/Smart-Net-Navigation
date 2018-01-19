@@ -36,26 +36,28 @@
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(324, 222);
+            this.NextButton.Location = new System.Drawing.Point(320, 240);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(160, 32);
             this.NextButton.TabIndex = 11;
-            this.NextButton.Text = "次へ";
+            this.NextButton.Text = "Next";
             this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.OnNextButtonClick);
             // 
             // PrevButton
             // 
-            this.PrevButton.Location = new System.Drawing.Point(158, 222);
+            this.PrevButton.Location = new System.Drawing.Point(160, 240);
             this.PrevButton.Name = "PrevButton";
             this.PrevButton.Size = new System.Drawing.Size(160, 32);
             this.PrevButton.TabIndex = 10;
-            this.PrevButton.Text = "前へ";
+            this.PrevButton.Text = "Prev";
             this.PrevButton.UseVisualStyleBackColor = true;
+            this.PrevButton.Click += new System.EventHandler(this.OnPrevButtonClick);
             // 
             // Data2Text
             // 
             this.Data2Text.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Data2Text.Location = new System.Drawing.Point(161, 170);
+            this.Data2Text.Location = new System.Drawing.Point(160, 175);
             this.Data2Text.Name = "Data2Text";
             this.Data2Text.Size = new System.Drawing.Size(320, 34);
             this.Data2Text.TabIndex = 9;
@@ -63,11 +65,11 @@
             // Data2Label
             // 
             this.Data2Label.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Data2Label.Location = new System.Drawing.Point(156, 135);
+            this.Data2Label.Location = new System.Drawing.Point(155, 140);
             this.Data2Label.Name = "Data2Label";
             this.Data2Label.Size = new System.Drawing.Size(100, 32);
             this.Data2Label.TabIndex = 8;
-            this.Data2Label.Text = "データ2";
+            this.Data2Label.Text = "Data2";
             // 
             // WizardInput2Page
             // 

@@ -34,7 +34,7 @@
                 .UseProvider(new ControlPageProvider(ContainerPanel))
                 .UseResolver(resolver)
                 .ToNavigator();
-            navigator.NavigatingTo += OnNavigatingTo;
+            navigator.Navigating += OnNavigating;
             navigator.Exited += OnExited;
 
             navigator.AutoRegister(Assembly.GetExecutingAssembly());
@@ -62,7 +62,7 @@
             resolver.Dispose();
         }
 
-        private void OnNavigatingTo(object sender, NavigationEventArgs e)
+        private void OnNavigating(object sender, NavigationEventArgs e)
         {
             var page = e.ToPage as IApplicationPage;
 
