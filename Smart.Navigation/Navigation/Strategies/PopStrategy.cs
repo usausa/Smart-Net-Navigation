@@ -31,6 +31,10 @@
 
         public void UpdateStack(INavigationController controller, object toPage)
         {
+            // Activate restored
+            controller.ActivePage(restoreStackInfo.Page, restoreStackInfo.RestoreParameter);
+            restoreStackInfo.RestoreParameter = null;
+
             // Remove old
             for (var i = controller.PageStack.Count - 1; i > controller.PageStack.Count - level - 1; i--)
             {
@@ -38,11 +42,6 @@
             }
 
             controller.PageStack.RemoveRange(controller.PageStack.Count - level, level);
-
-            // Activate restored
-            var stack = controller.PageStack[controller.PageStack.Count - 1];
-            controller.ActivePage(stack.Page, stack.RestoreParameter);
-            stack.RestoreParameter = null;
         }
     }
 }
