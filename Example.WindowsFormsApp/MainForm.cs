@@ -6,6 +6,7 @@
     using System.Windows.Forms;
 
     using Example.WindowsFormsApp.Pages;
+    using Example.WindowsFormsApp.Services;
 
     using Smart.Navigation;
     using Smart.Resolver;
@@ -45,12 +46,12 @@
 
         private static StandardResolver CreateResolver()
         {
-            var config = new ResolverConfig();
-            config.UseAutoBinding();
+            var config = new ResolverConfig()
+                .UseAutoBinding()
+                .UsePropertyInjector();
 
-            // TODO ptoperty injection
-
-            // TODO UpdateKeys
+            config.Bind<Settings>().ToSelf().InSingletonScope();
+            config.Bind<DataService>().ToSelf().InSingletonScope();
 
             return config.ToResolver();
         }
