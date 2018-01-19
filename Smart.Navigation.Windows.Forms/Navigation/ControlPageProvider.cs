@@ -77,11 +77,6 @@
 
             if (RestoreFocus)
             {
-                while (control.Parent != null)
-                {
-                    control = control.Parent;
-                }
-
                 parameter = GetFocused(control);
             }
 
