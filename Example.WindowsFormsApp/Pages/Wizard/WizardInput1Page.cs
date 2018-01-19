@@ -8,7 +8,7 @@
     {
         public override string Title => "Input1";
 
-        public override bool CanBack => true;
+        public override bool CanGoHome => true;
 
         [Scope]
         public WizardContext Context { get; set; }
@@ -23,7 +23,7 @@
             Data1Text.Text = Context.Data1;
         }
 
-        public override void OnBack()
+        public override void OnGoHome()
         {
             Navigator.Forward(PageId.Menu);
         }

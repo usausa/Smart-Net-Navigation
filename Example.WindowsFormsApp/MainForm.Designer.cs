@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BackButton = new System.Windows.Forms.Button();
+            this.HomeButton = new System.Windows.Forms.Button();
             this.Fn12Button = new System.Windows.Forms.Button();
             this.Fn11Button = new System.Windows.Forms.Button();
             this.Fn10Button = new System.Windows.Forms.Button();
@@ -52,23 +52,23 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.BackButton);
+            this.panel1.Controls.Add(this.HomeButton);
             this.panel1.Location = new System.Drawing.Point(0, 32);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(640, 32);
             this.panel1.TabIndex = 2;
             // 
-            // BackButton
+            // HomeButton
             // 
-            this.BackButton.BackColor = System.Drawing.SystemColors.Control;
-            this.BackButton.Location = new System.Drawing.Point(0, 0);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(80, 32);
-            this.BackButton.TabIndex = 3;
-            this.BackButton.TabStop = false;
-            this.BackButton.Text = "Back";
-            this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Click += new System.EventHandler(this.OnBackButtonClick);
+            this.HomeButton.BackColor = System.Drawing.SystemColors.Control;
+            this.HomeButton.Location = new System.Drawing.Point(0, 0);
+            this.HomeButton.Name = "HomeButton";
+            this.HomeButton.Size = new System.Drawing.Size(80, 32);
+            this.HomeButton.TabIndex = 3;
+            this.HomeButton.TabStop = false;
+            this.HomeButton.Text = "Home";
+            this.HomeButton.UseVisualStyleBackColor = false;
+            this.HomeButton.Click += new System.EventHandler(this.OnHomeButtonClick);
             // 
             // Fn12Button
             // 
@@ -288,7 +288,7 @@
         private System.Windows.Forms.Button Fn1Button;
         private System.Windows.Forms.Panel ContainerPanel;
         private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.Button HomeButton;
     }
 }
 

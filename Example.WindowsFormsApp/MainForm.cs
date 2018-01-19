@@ -34,8 +34,14 @@
                 .UseProvider(new ControlPageProvider(ContainerPanel))
                 .UseResolver(resolver)
                 .ToNavigator();
-            navigator.Navigating += OnNavigating;
             navigator.Exited += OnExited;
+            navigator.Navigating += OnNavigating;
+            navigator.Navigated += (sender, args) =>
+            {
+                // for debug
+                System.Diagnostics.Debug.WriteLine(
+                    $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
+            };
 
             navigator.AutoRegister(Assembly.GetExecutingAssembly());
 
@@ -67,7 +73,7 @@
             var page = e.ToPage as IApplicationPage;
 
             TitleLabel.Text = page?.Title ?? string.Empty;
-            BackButton.Enabled = page?.CanBack ?? false;
+            HomeButton.Enabled = page?.CanGoHome ?? false;
             UpdateFunctionKeys(page?.FunctionKeys);
         }
 
@@ -76,22 +82,12 @@
             Close();
         }
 
-        private void OnBackButtonClick(object sender, EventArgs e)
+        private void OnHomeButtonClick(object sender, EventArgs e)
         {
             if (navigator.CurrentPage is IApplicationPage page)
             {
-                page.OnBack();
+                page.OnGoHome();
             }
-        }
-
-        private void OnPopup1ButtonClick(object sender, EventArgs e)
-        {
-            // TODO
-        }
-
-        private void OnPopup2ButtonClick(object sender, EventArgs e)
-        {
-            // TODO
         }
 
         private void InitializeFunctionKeys()

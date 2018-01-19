@@ -7,14 +7,14 @@
     {
         public override string Title => "Stack1";
 
-        public override bool CanBack => true;
+        public override bool CanGoHome => true;
 
         public Stack1Page()
         {
             InitializeComponent();
         }
 
-        public override void OnBack()
+        public override void OnGoHome()
         {
             Navigator.Forward(PageId.Menu);
         }

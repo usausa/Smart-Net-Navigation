@@ -7,16 +7,16 @@
     {
         public override string Title => "Stack2";
 
-        public override bool CanBack => true;
+        public override bool CanGoHome => true;
 
         public Stack2Page()
         {
             InitializeComponent();
         }
 
-        public override void OnBack()
+        public override void OnGoHome()
         {
-            Navigator.Pop();
+            Navigator.PopAndForward(PageId.Menu);
         }
 
         private void OnPopButtonClick(object sender, System.EventArgs e)

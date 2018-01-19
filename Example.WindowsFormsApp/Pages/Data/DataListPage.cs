@@ -13,7 +13,7 @@
     {
         public override string Title => "Data List";
 
-        public override bool CanBack => true;
+        public override bool CanGoHome => true;
 
         [Inject]
         public DataService DataService { get; set; }
@@ -28,7 +28,7 @@
             DataListBox.DataSource = DataService.QueryDataList().ToList();
         }
 
-        public override void OnBack()
+        public override void OnGoHome()
         {
             Navigator.Forward(PageId.Menu);
         }

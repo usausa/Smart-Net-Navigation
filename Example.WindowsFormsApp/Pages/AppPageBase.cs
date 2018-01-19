@@ -8,7 +8,7 @@
     {
         public virtual string Title => string.Empty;
 
-        public virtual bool CanBack => false;
+        public virtual bool CanGoHome => false;
 
         public virtual FunctionKey[] FunctionKeys => null;
 
@@ -23,7 +23,7 @@
         {
         }
 
-        public virtual void OnBack()
+        public virtual void OnGoHome()
         {
         }
 

@@ -6,12 +6,12 @@
     {
         string Title { get; }
 
-        bool CanBack { get; }
+        bool CanGoHome { get; }
 
         FunctionKey[] FunctionKeys { get; }
 
         void OnFunctionKey(Keys key);
 
-        void OnBack();
+        void OnGoHome();
     }
 }

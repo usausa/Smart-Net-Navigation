@@ -18,7 +18,7 @@
 
         public override string Title => update ? "Data New" : "Data Edit";
 
-        public override bool CanBack => true;
+        public override bool CanGoHome => true;
 
         [Inject]
         public DataService DataService { get; set; }
@@ -38,9 +38,9 @@
             }
         }
 
-        public override void OnBack()
+        public override void OnGoHome()
         {
-            Navigator.Forward(PageId.DataList);
+            Navigator.Forward(PageId.Menu);
         }
 
         private void OnPrevButtonClick(object sender, System.EventArgs e)
