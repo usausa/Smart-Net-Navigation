@@ -22,11 +22,9 @@
 
         public event EventHandler<ConfirmEventArgs> Confirm;
 
-        public event EventHandler<NavigationEventArgs> NavigatedFrom;
+        public event EventHandler<NavigationEventArgs> Navigating;
 
-        public event EventHandler<NavigationEventArgs> NavigatingTo;
-
-        public event EventHandler<NavigationEventArgs> NavigatedTo;
+        public event EventHandler<NavigationEventArgs> Navigated;
 
         public event EventHandler<EventArgs> Exited;
 
@@ -176,13 +174,9 @@
                 {
                     plugin.OnNavigatedFrom(pluginContext, fromPage, fromTarget);
                 }
-
-                NavigatedFrom?.Invoke(this, args);
             }
 
             // Process navigating
-            NavigatingTo?.Invoke(this, args);
-
             foreach (var plugin in plugins)
             {
                 plugin.OnNavigatingTo(pluginContext, toPage, toTarget);
@@ -190,18 +184,22 @@
 
             (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
 
+            // End pre process
+            Navigating?.Invoke(this, args);
+
             // Update stack
             strategy.UpdateStack(controller, toPage);
 
             // Process navigated
-            NavigatedTo?.Invoke(this, args);
-
             foreach (var plugin in plugins)
             {
                 plugin.OnNavigatedTo(pluginContext, toPage, toTarget);
             }
 
             (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
+
+            // End post process
+            Navigated?.Invoke(this, args);
         }
 
         // ------------------------------------------------------------
