@@ -156,7 +156,6 @@
 
         private void NavigateCore(INavigationStrategy strategy, INavigationContext navigationContext, Controller controller)
         {
-            var args = new NavigationEventArgs(navigationContext);
             var pluginContext = new PluginContext();
             controller.PluginContext = pluginContext;
 
@@ -165,6 +164,8 @@
 
             var toPage = strategy.ResolveToPage(controller);
             var toTarget = provider.ResolveTarget(toPage);
+
+            var args = new NavigationEventArgs(navigationContext, fromPage, fromTarget, toPage, toTarget);
 
             // Process from page
             if (fromPage != null)
