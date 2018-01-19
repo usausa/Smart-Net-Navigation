@@ -75,7 +75,6 @@
     <Compile Include="Pages\Data\DataListPage.Designer.cs">
       <DependentUpon>DataListPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GroupId.cs" />
     <Compile Include="Pages\MenuPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -83,30 +82,6 @@
       <DependentUpon>MenuPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageId.cs" />
-    <Compile Include="Pages\Popup1\Popup1MainPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pages\Popup1\Popup1MainPage.Designer.cs">
-      <DependentUpon>Popup1MainPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Popup1\Popup1SubPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pages\Popup1\Popup1SubPage.Designer.cs">
-      <DependentUpon>Popup1SubPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Popup2\Popup2MainPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pages\Popup2\Popup2MainPage.Designer.cs">
-      <DependentUpon>Popup2MainPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Popup2\Popup2SubPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Pages\Popup2\Popup2SubPage.Designer.cs">
-      <DependentUpon>Popup2SubPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Stack\Stack1Page.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,18 +138,6 @@
     <EmbeddedResource Include="Pages\MenuPage.resx">
       <DependentUpon>MenuPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Popup1\Popup1MainPage.resx">
-      <DependentUpon>Popup1MainPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Popup1\Popup1SubPage.resx">
-      <DependentUpon>Popup1SubPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Popup2\Popup2MainPage.resx">
-      <DependentUpon>Popup2MainPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Popup2\Popup2SubPage.resx">
-      <DependentUpon>Popup2SubPage.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Stack\Stack1Page.resx">
       <DependentUpon>Stack1Page.cs</DependentUpon>
     </EmbeddedResource>
@@ -219,10 +182,6 @@
     <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj">
       <Project>{b250d011-1dd5-42ed-98d4-4cf9fef52f6b}</Project>
       <Name>Smart.Navigation.Resolver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Smart.Navigation.Strategies.GroupSupport\Smart.Navigation.Strategies.GroupSupport.csproj">
-      <Project>{73baf03b-7f89-41a6-bfa4-d308f7ac3849}</Project>
-      <Name>Smart.Navigation.Strategies.GroupSupport</Name>
     </ProjectReference>
     <ProjectReference Include="..\Smart.Navigation.Windows.Forms\Smart.Navigation.Windows.Forms.csproj">
       <Project>{c77cf665-ecd6-4ff5-953c-aae29260f93b}</Project>

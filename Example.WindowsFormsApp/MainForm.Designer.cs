@@ -44,8 +44,6 @@
             this.Fn1Button = new System.Windows.Forms.Button();
             this.ContainerPanel = new System.Windows.Forms.Panel();
             this.TitleLabel = new System.Windows.Forms.Label();
-            this.Popup2Button = new System.Windows.Forms.Button();
-            this.Popup1Button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,8 +53,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.Controls.Add(this.BackButton);
-            this.panel1.Controls.Add(this.Popup1Button);
-            this.panel1.Controls.Add(this.Popup2Button);
             this.panel1.Location = new System.Drawing.Point(0, 32);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(640, 32);
@@ -244,30 +240,6 @@
             this.TitleLabel.TabIndex = 1;
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Popup2Button
-            // 
-            this.Popup2Button.BackColor = System.Drawing.SystemColors.Control;
-            this.Popup2Button.Location = new System.Drawing.Point(560, 0);
-            this.Popup2Button.Name = "Popup2Button";
-            this.Popup2Button.Size = new System.Drawing.Size(80, 32);
-            this.Popup2Button.TabIndex = 5;
-            this.Popup2Button.TabStop = false;
-            this.Popup2Button.Text = "Option2";
-            this.Popup2Button.UseVisualStyleBackColor = false;
-            this.Popup2Button.Click += new System.EventHandler(this.OnPopup2ButtonClick);
-            // 
-            // Popup1Button
-            // 
-            this.Popup1Button.BackColor = System.Drawing.SystemColors.Control;
-            this.Popup1Button.Location = new System.Drawing.Point(480, 0);
-            this.Popup1Button.Name = "Popup1Button";
-            this.Popup1Button.Size = new System.Drawing.Size(80, 32);
-            this.Popup1Button.TabIndex = 4;
-            this.Popup1Button.TabStop = false;
-            this.Popup1Button.Text = "Option1";
-            this.Popup1Button.UseVisualStyleBackColor = false;
-            this.Popup1Button.Click += new System.EventHandler(this.OnPopup1ButtonClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -315,8 +287,6 @@
         private System.Windows.Forms.Panel ContainerPanel;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Button BackButton;
-        private System.Windows.Forms.Button Popup1Button;
-        private System.Windows.Forms.Button Popup2Button;
     }
 }
 
