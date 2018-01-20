@@ -2,11 +2,11 @@
 {
     using System.Windows.Forms;
 
-    public static class ControlNavigatorConfigExtensions
+    public static class WindowsFormsNavigatorConfigExtensions
     {
         public static NavigatorConfig UseControlNavigationProvider(this NavigatorConfig config, Control container)
         {
-            return config.UseProvider(new ControlNavigationProvider(container));
+            return config.UseProvider(new WindowsFormsNavigationProvider(container));
         }
     }
 }

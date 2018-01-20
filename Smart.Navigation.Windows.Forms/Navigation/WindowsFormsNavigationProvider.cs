@@ -2,7 +2,7 @@
 {
     using System.Windows.Forms;
 
-    public sealed class ControlNavigationProvider : INavigationProvider
+    public sealed class WindowsFormsNavigationProvider : INavigationProvider
     {
         private readonly Control container;
 
@@ -10,7 +10,7 @@
 
         public bool RestoreFocus { get; set; } = true;
 
-        public ControlNavigationProvider(Control container)
+        public WindowsFormsNavigationProvider(Control container)
         {
             this.container = container;
         }
