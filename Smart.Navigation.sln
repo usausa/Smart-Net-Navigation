@@ -28,6 +28,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Strategies
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.Windows", "Smart.Navigation.Windows\Smart.Navigation.Windows.csproj", "{B4EE6BD1-4328-4CB4-BE6A-A618E870309C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.Forms", "Smart.Navigation.Forms\Smart.Navigation.Forms.csproj", "{086FECAF-C05E-43FC-9FF8-EF9D31B31539}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{B4EE6BD1-4328-4CB4-BE6A-A618E870309C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4EE6BD1-4328-4CB4-BE6A-A618E870309C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4EE6BD1-4328-4CB4-BE6A-A618E870309C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086FECAF-C05E-43FC-9FF8-EF9D31B31539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086FECAF-C05E-43FC-9FF8-EF9D31B31539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086FECAF-C05E-43FC-9FF8-EF9D31B31539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086FECAF-C05E-43FC-9FF8-EF9D31B31539}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
