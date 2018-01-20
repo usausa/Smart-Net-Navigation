@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("Smart.Navigation.Windows.Forms")]
+[assembly: AssemblyTitle("Smart.Navigation.Windows")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Smart.Navigation.Windows.Forms")]
+[assembly: AssemblyProduct("Smart.Navigation.Windows")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("c77cf665-ecd6-4ff5-953c-aae29260f93b")]
+[assembly: Guid("b4ee6bd1-4328-4cb4-be6a-a618e870309c")]
 
 // アセンブリのバージョン情報は次の 4 つの値で構成されています:
 //
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // 以下のように '*' を使用します:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("0.9.1.0")]
-[assembly: AssemblyFileVersion("0.9.1.0")]
+[assembly: AssemblyFileVersion("1.9.1.0")]
