@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Usa.Smart.Navigation.Windows.Forms</id>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
     <title>Smart.Navigation.Windows.Forms .NET</title>
     <authors>machi_pon</authors>
     <owners>machi_pon</owners>
@@ -14,7 +14,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="Usa.Smart.Core" version="1.2.0" />
-      <dependency id="Usa.Smart.Navigation" version="0.9.0" />
+      <dependency id="Usa.Smart.Navigation" version="0.9.1" />
     </dependencies>
     <tags>smart navigation windowsforms</tags>
   </metadata>
