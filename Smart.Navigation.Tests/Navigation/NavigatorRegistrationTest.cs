@@ -14,14 +14,14 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
             navigator.AutoRegister(Assembly.GetExecutingAssembly());
 
             // test
-            Assert.True(navigator.Forward(Pages.Page1));
-            Assert.True(navigator.Forward(Pages.Page2));
+            Assert.True(navigator.Forward(ViewId.Form1));
+            Assert.True(navigator.Forward(ViewId.Form2));
         }
 
         [Fact]
@@ -29,25 +29,25 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
             Assert.Throws<ArgumentNullException>(() => navigator.AutoRegister(null));
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            Page1,
-            Page2
+            Form1,
+            Form2
         }
 
-        [Page(Pages.Page1)]
-        public class Page1 : MockPage
+        [View(ViewId.Form1)]
+        public class Form1 : MockForm
         {
         }
 
-        [Page(Pages.Page2)]
-        public class Page2 : MockPage
+        [View(ViewId.Form2)]
+        public class Form2 : MockForm
         {
         }
     }

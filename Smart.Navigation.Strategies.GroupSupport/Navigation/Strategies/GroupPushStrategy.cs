@@ -8,15 +8,15 @@
     {
         private readonly object id;
 
-        private PageDescriptor descriptor;
+        private ViewDescriptor descriptor;
 
         private List<int> groups;
 
         private bool exist;
 
-        private PageStackInfo activeStackInfo;
+        private ViewStackInfo activeStackInfo;
 
-        private PageStackInfo deactiveStackInfo;
+        private ViewStackInfo deactiveStackInfo;
 
         public GroupPushStrategy(object id)
         {
@@ -27,19 +27,19 @@
         {
             if (!controller.Descriptors.TryGetValue(id, out descriptor))
             {
-                throw new InvalidOperationException($"Page id is not found in descriptors. id=[{id}]");
+                throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
             }
 
             var group = descriptor.Type.GetCustomAttribute<GroupAttribute>();
             if (group == null)
             {
-                throw new InvalidOperationException($"Page is not grouped. id=[{id}]");
+                throw new InvalidOperationException($"View is not grouped. id=[{id}]");
             }
 
             var current = -1;
-            for (var i = 0; i < controller.PageStack.Count; i++)
+            for (var i = 0; i < controller.ViewStack.Count; i++)
             {
-                var groupOfStack = controller.PageStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
+                var groupOfStack = controller.ViewStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
                 if ((groupOfStack != null) && Equals(group.Id, groupOfStack.Id))
                 {
                     if (groups == null)
@@ -49,7 +49,7 @@
 
                     groups.Add(i);
 
-                    if (Equals(controller.PageStack[i].Descriptor.Id, id))
+                    if (Equals(controller.ViewStack[i].Descriptor.Id, id))
                     {
                         current = i;
                     }
@@ -60,54 +60,54 @@
             if (current != -1)
             {
                 // and last ?
-                if (controller.PageStack.Count - 1 == current)
+                if (controller.ViewStack.Count - 1 == current)
                 {
                     return null;
                 }
 
                 // Deactive top & Active current
                 exist = true;
-                deactiveStackInfo = controller.PageStack[controller.PageStack.Count - 1];
-                activeStackInfo = controller.PageStack[groups[groups.Count - 1]];
+                deactiveStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
+                activeStackInfo = controller.ViewStack[groups[groups.Count - 1]];
 
                 return new StragtegyResult(activeStackInfo.Descriptor.Id, NavigationAttributes.Restore);
             }
 
-            if (controller.PageStack.Count > 0)
+            if (controller.ViewStack.Count > 0)
             {
-                deactiveStackInfo = controller.PageStack[controller.PageStack.Count - 1];
+                deactiveStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
             }
 
             return new StragtegyResult(id, NavigationAttributes.Stacked);
         }
 
-        public object ResolveToPage(INavigationController controller)
+        public object ResolveToView(INavigationController controller)
         {
             if (!exist)
             {
-                return controller.CreatePage(descriptor.Type);
+                return controller.CreateView(descriptor.Type);
             }
 
-            return controller.PageStack[groups[groups.Count - 1]];
+            return controller.ViewStack[groups[groups.Count - 1]];
         }
 
-        public void UpdateStack(INavigationController controller, object toPage)
+        public void UpdateStack(INavigationController controller, object toView)
         {
             // Stack new
             if (!exist)
             {
-                controller.PageStack.Add(new PageStackInfo(descriptor, toPage));
+                controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
 
-                controller.OpenPage(toPage);
+                controller.OpenView(toView);
             }
 
             // Replace stack
             if (groups != null)
             {
-                var count = controller.PageStack.Count - (exist ? 0 : 1);
+                var count = controller.ViewStack.Count - (exist ? 0 : 1);
 
-                var temp = new PageStackInfo[count];
-                controller.PageStack.CopyTo(0, temp, 0, count);
+                var temp = new ViewStackInfo[count];
+                controller.ViewStack.CopyTo(0, temp, 0, count);
 
                 var index = 0;
                 for (var i = 0; i < count - groups.Count; i++)
@@ -117,27 +117,27 @@
                         index++;
                     }
 
-                    controller.PageStack[i] = temp[index + i];
+                    controller.ViewStack[i] = temp[index + i];
                 }
 
                 var offset = count - groups.Count;
                 for (var i = 0; i < groups.Count; i++)
                 {
-                    controller.PageStack[offset + i] = temp[groups[i]];
+                    controller.ViewStack[offset + i] = temp[groups[i]];
                 }
             }
 
             // Activate restored
             if (activeStackInfo != null)
             {
-                controller.ActivePage(activeStackInfo.Page, activeStackInfo.RestoreParameter);
+                controller.ActiveView(activeStackInfo.View, activeStackInfo.RestoreParameter);
                 activeStackInfo.RestoreParameter = null;
             }
 
             // Deactive old
             if (deactiveStackInfo != null)
             {
-                deactiveStackInfo.RestoreParameter = controller.DeactivePage(deactiveStackInfo.Page);
+                deactiveStackInfo.RestoreParameter = controller.DeactiveView(deactiveStackInfo.View);
             }
         }
     }

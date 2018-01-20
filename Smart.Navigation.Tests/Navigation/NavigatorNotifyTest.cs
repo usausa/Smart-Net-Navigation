@@ -8,49 +8,49 @@
     public class NavigatorNotifyTest
     {
         // ------------------------------------------------------------
-        // Page
+        // View
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestPageNavigatorNotify()
+        public static void TestFormNavigatorNotify()
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.NotifyPage, typeof(NotifyPage));
+            navigator.Register(ViewId.NotifyForm, typeof(NotifyForm));
 
             // test
-            navigator.Forward(Pages.NotifyPage);
+            navigator.Forward(ViewId.NotifyForm);
             navigator.Notify("test");
 
-            var notifyPage = (NotifyPage)navigator.CurrentPage;
-            Assert.Equal("test", notifyPage.Parameter);
+            var notifyForm = (NotifyForm)navigator.CurrentView;
+            Assert.Equal("test", notifyForm.Parameter);
         }
 
         [Fact]
-        public static void TestPageNavigatorNotifyUnsuported()
+        public static void TestFormNavigatorNotifyUnsuported()
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.UnsupportPage, typeof(UnsupportPage));
+            navigator.Register(ViewId.UnsupportForm, typeof(UnsupportForm));
 
             // test
-            navigator.Forward(Pages.UnsupportPage);
+            navigator.Forward(ViewId.UnsupportForm);
             navigator.Notify("test");
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            NotifyPage,
-            UnsupportPage
+            NotifyForm,
+            UnsupportForm
         }
 
-        public class NotifyPage : MockPage, INotifySupport
+        public class NotifyForm : MockForm, INotifySupport
         {
             public object Parameter { get; private set; }
 
@@ -60,7 +60,7 @@
             }
         }
 
-        public class UnsupportPage : MockPage
+        public class UnsupportForm : MockForm
         {
         }
 
@@ -76,27 +76,27 @@
                 .UseAutoBinding()
                 .ToResolver();
             var navigator = new NavigatorConfig()
-                .UseMockViewProvider()
+                .UseMockWindowProvider()
                 .UseResolver(resolver)
                 .ToNavigator();
 
-            navigator.Register(Views.NotifyView, typeof(NotifyView));
+            navigator.Register(WindowIds.NotifyWindow, typeof(NotifyWindow));
 
             // test
-            navigator.Forward(Views.NotifyView);
+            navigator.Forward(WindowIds.NotifyWindow);
             navigator.Notify("test");
 
-            var notifyView = (NotifyView)navigator.CurrentPage;
-            var notifyViewModel = (NotifyViewModel)notifyView.Context;
+            var notifyView = (NotifyWindow)navigator.CurrentView;
+            var notifyViewModel = (NotifyWindowViewModel)notifyView.Context;
             Assert.Equal("test", notifyViewModel.Parameter);
         }
 
-        public enum Views
+        public enum WindowIds
         {
-            NotifyView
+            NotifyWindow
         }
 
-        public class NotifyViewModel : INotifySupport
+        public class NotifyWindowViewModel : INotifySupport
         {
             public object Parameter { get; private set; }
 
@@ -106,9 +106,9 @@
             }
         }
 
-        public class NotifyView : MockView
+        public class NotifyWindow : MockWindow
         {
-            public NotifyView(NotifyViewModel vm)
+            public NotifyWindow(NotifyWindowViewModel vm)
             {
                 Context = vm;
             }

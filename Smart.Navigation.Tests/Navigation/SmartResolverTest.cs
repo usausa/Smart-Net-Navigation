@@ -20,54 +20,54 @@
             var resolver = config.ToResolver();
 
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .UseResolver(resolver)
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(ViewId.Form1);
 
-            var page1 = (Page1)navigator.CurrentPage;
-            Assert.NotNull(page1.Service);
-            Assert.NotNull(page1.ScopeObject);
-            Assert.NotNull(page1.ScopeObject.Setting);
+            var form1 = (Form1)navigator.CurrentView;
+            Assert.NotNull(form1.Service);
+            Assert.NotNull(form1.ScopeObject);
+            Assert.NotNull(form1.ScopeObject.Setting);
 
-            navigator.Forward(Pages.Page2);
+            navigator.Forward(ViewId.Form2);
 
-            var page2 = (Page2)navigator.CurrentPage;
-            Assert.Same(page2.Service, page1.Service);
-            Assert.Same(page2.Setting, page1.ScopeObject.Setting);
+            var form2 = (Form2)navigator.CurrentView;
+            Assert.Same(form2.Service, form1.Service);
+            Assert.Same(form2.Setting, form1.ScopeObject.Setting);
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            Page1,
-            Page2
+            Form1,
+            Form2
         }
 
-        public class Page1 : MockPage
+        public class Form1 : MockForm
         {
             public IService Service { get; }
 
             [Scope]
             public ScopeObject ScopeObject { get; set; }
 
-            public Page1(IService service)
+            public Form1(IService service)
             {
                 Service = service;
             }
         }
 
-        public class Page2 : MockPage
+        public class Form2 : MockForm
         {
             public IService Service { get; }
 
             public Setting Setting { get; set; }
 
-            public Page2(IService service, Setting setting)
+            public Form2(IService service, Setting setting)
             {
                 Service = service;
                 Setting = setting;

@@ -28,7 +28,7 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnClose(IPluginContext context, object page, object target)
+        public override void OnClose(IPluginContext context, object view, object target)
         {
             foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {
@@ -49,7 +49,7 @@
             }
         }
 
-        public override void OnCreate(IPluginContext context, object page, object target)
+        public override void OnCreate(IPluginContext context, object view, object target)
         {
             foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
             {

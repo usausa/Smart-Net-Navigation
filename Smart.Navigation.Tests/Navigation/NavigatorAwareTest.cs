@@ -11,24 +11,24 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.AwarePage, typeof(AwarePage));
+            navigator.Register(ViewId.AwareForm, typeof(AwareForm));
 
             // test
-            navigator.Forward(Pages.AwarePage);
+            navigator.Forward(ViewId.AwareForm);
 
-            var awarePage = (AwarePage)navigator.CurrentPage;
-            Assert.Same(navigator, awarePage.Navigator);
+            var awareForm = (AwareForm)navigator.CurrentView;
+            Assert.Same(navigator, awareForm.Navigator);
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            AwarePage
+            AwareForm
         }
 
-        public class AwarePage : MockPage, INavigatorAware
+        public class AwareForm : MockForm, INavigatorAware
         {
             public INavigator Navigator { get; set; }
         }

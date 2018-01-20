@@ -13,33 +13,33 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.DataPage1, typeof(DataPage1));
-            navigator.Register(Pages.DataPage2, typeof(DataPage2));
-            navigator.Register(Pages.DataPage3, typeof(DataPage3));
+            navigator.Register(ViewId.Data1Form, typeof(Data1Form));
+            navigator.Register(ViewId.Data2Form, typeof(Data2Form));
+            navigator.Register(ViewId.Data3Form, typeof(Data3Form));
 
             // test
-            navigator.Forward(Pages.DataPage1);
+            navigator.Forward(ViewId.Data1Form);
 
-            navigator.Forward(Pages.DataPage2);
+            navigator.Forward(ViewId.Data2Form);
 
-            var page2 = (DataPage2)navigator.CurrentPage;
-            Assert.NotNull(page2.Data);
-            Assert.True(page2.Data.IsInitialized);
-            Assert.False(page2.Data.IsDisposed);
+            var form2 = (Data2Form)navigator.CurrentView;
+            Assert.NotNull(form2.Data);
+            Assert.True(form2.Data.IsInitialized);
+            Assert.False(form2.Data.IsDisposed);
 
-            navigator.Forward(Pages.DataPage3);
+            navigator.Forward(ViewId.Data3Form);
 
-            var page3 = (DataPage3)navigator.CurrentPage;
-            Assert.Same(page3.Data, page2.Data);
-            Assert.True(page3.Data.IsInitialized);
-            Assert.False(page3.Data.IsDisposed);
+            var form3 = (Data3Form)navigator.CurrentView;
+            Assert.Same(form3.Data, form2.Data);
+            Assert.True(form3.Data.IsInitialized);
+            Assert.False(form3.Data.IsDisposed);
 
-            navigator.Forward(Pages.DataPage1);
+            navigator.Forward(ViewId.Data1Form);
 
-            Assert.True(page3.Data.IsDisposed);
+            Assert.True(form3.Data.IsDisposed);
         }
 
         [Fact]
@@ -47,25 +47,25 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.ObjectPage1, typeof(ObjectPage1));
-            navigator.Register(Pages.ObjectPage2, typeof(ObjectPage2));
-            navigator.Register(Pages.ObjectPage3, typeof(ObjectPage3));
+            navigator.Register(ViewId.Object1Form, typeof(Object1Form));
+            navigator.Register(ViewId.Object2Form, typeof(Object2Form));
+            navigator.Register(ViewId.Object3Form, typeof(Object3Form));
 
             // test
-            navigator.Forward(Pages.ObjectPage1);
+            navigator.Forward(ViewId.Object1Form);
 
-            var page1 = (ObjectPage1)navigator.CurrentPage;
-            Assert.NotNull(page1.Object);
+            var form1 = (Object1Form)navigator.CurrentView;
+            Assert.NotNull(form1.Object);
 
-            navigator.Forward(Pages.ObjectPage2);
+            navigator.Forward(ViewId.Object2Form);
 
-            var page2 = (ObjectPage2)navigator.CurrentPage;
-            Assert.Same(page2.Object, page1.Object);
+            var form2 = (Object2Form)navigator.CurrentView;
+            Assert.Same(form2.Object, form1.Object);
 
-            navigator.Forward(Pages.ObjectPage3);
+            navigator.Forward(ViewId.Object3Form);
         }
 
         [Fact]
@@ -73,46 +73,46 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.PushPage1, typeof(PushPage1));
-            navigator.Register(Pages.PushPage2, typeof(PushPage2));
-            navigator.Register(Pages.PushPage3, typeof(PushPage3));
-            navigator.Register(Pages.PushPage4, typeof(PushPage4));
+            navigator.Register(ViewId.Push1Form, typeof(Push1Form));
+            navigator.Register(ViewId.Push2Form, typeof(Push2Form));
+            navigator.Register(ViewId.Push3Form, typeof(Push3Form));
+            navigator.Register(ViewId.Push4Form, typeof(Push4Form));
 
             // test
-            navigator.Forward(Pages.PushPage1);
+            navigator.Forward(ViewId.Push1Form);
 
-            navigator.Push(Pages.PushPage2);
+            navigator.Push(ViewId.Push2Form);
 
-            var page2 = (PushPage2)navigator.CurrentPage;
-            Assert.NotNull(page2.Data);
-            Assert.True(page2.Data.IsInitialized);
-            Assert.False(page2.Data.IsDisposed);
+            var form2 = (Push2Form)navigator.CurrentView;
+            Assert.NotNull(form2.Data);
+            Assert.True(form2.Data.IsInitialized);
+            Assert.False(form2.Data.IsDisposed);
 
-            navigator.Push(Pages.PushPage3);
+            navigator.Push(ViewId.Push3Form);
 
-            Assert.False(page2.Data.IsDisposed);
+            Assert.False(form2.Data.IsDisposed);
 
-            navigator.Push(Pages.PushPage4);
+            navigator.Push(ViewId.Push4Form);
 
-            var page4 = (PushPage4)navigator.CurrentPage;
-            Assert.Same(page4.Data, page2.Data);
-            Assert.True(page4.Data.IsInitialized);
-            Assert.False(page4.Data.IsDisposed);
-
-            navigator.Pop();
-
-            Assert.False(page4.Data.IsDisposed);
+            var form4 = (Push4Form)navigator.CurrentView;
+            Assert.Same(form4.Data, form2.Data);
+            Assert.True(form4.Data.IsInitialized);
+            Assert.False(form4.Data.IsDisposed);
 
             navigator.Pop();
 
-            Assert.False(page4.Data.IsDisposed);
+            Assert.False(form4.Data.IsDisposed);
 
             navigator.Pop();
 
-            Assert.True(page4.Data.IsDisposed);
+            Assert.False(form4.Data.IsDisposed);
+
+            navigator.Pop();
+
+            Assert.True(form4.Data.IsDisposed);
         }
 
         [Fact]
@@ -120,99 +120,99 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.NamedPage1, typeof(NamedPage1));
-            navigator.Register(Pages.NamedPage2, typeof(NamedPage2));
+            navigator.Register(ViewId.Named1Form, typeof(Named1Form));
+            navigator.Register(ViewId.Named2Form, typeof(Named2Form));
 
             // test
-            navigator.Forward(Pages.NamedPage1);
+            navigator.Forward(ViewId.Named1Form);
 
-            var page1 = (NamedPage1)navigator.CurrentPage;
-            Assert.NotNull(page1.ExportData);
+            var form1 = (Named1Form)navigator.CurrentView;
+            Assert.NotNull(form1.ExportData);
 
-            navigator.Forward(Pages.NamedPage2);
+            navigator.Forward(ViewId.Named2Form);
 
-            var page2 = (NamedPage2)navigator.CurrentPage;
-            Assert.Same(page2.ImporttData, page1.ExportData);
+            var form2 = (Named2Form)navigator.CurrentView;
+            Assert.Same(form2.ImporttData, form1.ExportData);
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            DataPage1,
-            DataPage2,
-            DataPage3,
-            ObjectPage1,
-            ObjectPage2,
-            ObjectPage3,
-            PushPage1,
-            PushPage2,
-            PushPage3,
-            PushPage4,
-            NamedPage1,
-            NamedPage2
+            Data1Form,
+            Data2Form,
+            Data3Form,
+            Object1Form,
+            Object2Form,
+            Object3Form,
+            Push1Form,
+            Push2Form,
+            Push3Form,
+            Push4Form,
+            Named1Form,
+            Named2Form
         }
 
-        public class DataPage1 : MockPage
+        public class Data1Form : MockForm
         {
         }
 
-        public class DataPage2 : MockPage
-        {
-            [Scope]
-            public ScopeData Data { get; set; }
-        }
-
-        public class DataPage3 : MockPage
+        public class Data2Form : MockForm
         {
             [Scope]
             public ScopeData Data { get; set; }
         }
 
-        public class ObjectPage1 : MockPage
+        public class Data3Form : MockForm
+        {
+            [Scope]
+            public ScopeData Data { get; set; }
+        }
+
+        public class Object1Form : MockForm
         {
             [Scope(typeof(ScopeObject))]
             public IScopeObject Object { get; set; }
         }
 
-        public class ObjectPage2 : MockPage
+        public class Object2Form : MockForm
         {
             [Scope]
             public ScopeObject Object { get; set; }
         }
 
-        public class ObjectPage3 : MockPage
+        public class Object3Form : MockForm
         {
         }
 
-        public class PushPage1 : MockPage
+        public class Push1Form : MockForm
         {
         }
 
-        public class PushPage2 : MockPage
-        {
-            [Scope]
-            public ScopeData Data { get; set; }
-        }
-
-        public class PushPage3 : MockPage
-        {
-        }
-
-        public class PushPage4 : MockPage
+        public class Push2Form : MockForm
         {
             [Scope]
             public ScopeData Data { get; set; }
         }
 
-        public class NamedPage1 : MockPage
+        public class Push3Form : MockForm
+        {
+        }
+
+        public class Push4Form : MockForm
+        {
+            [Scope]
+            public ScopeData Data { get; set; }
+        }
+
+        public class Named1Form : MockForm
         {
             [Scope("Data")]
             public ScopeData ExportData { get; set; }
         }
 
-        public class NamedPage2 : MockPage
+        public class Named2Form : MockForm
         {
             [Scope("Data")]
             public ScopeData ImporttData { get; set; }

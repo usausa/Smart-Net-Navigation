@@ -6,7 +6,7 @@
     {
         private readonly int level;
 
-        private PageStackInfo restoreStackInfo;
+        private ViewStackInfo restoreStackInfo;
 
         public PopStrategy(int level)
         {
@@ -15,33 +15,33 @@
 
         public StragtegyResult Initialize(INavigationController controller)
         {
-            if ((level < 1) || (level > controller.PageStack.Count - 1))
+            if ((level < 1) || (level > controller.ViewStack.Count - 1))
             {
-                throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.PageStack.Count}]");
+                throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
             }
 
-            restoreStackInfo = controller.PageStack[controller.PageStack.Count - level - 1];
+            restoreStackInfo = controller.ViewStack[controller.ViewStack.Count - level - 1];
             return new StragtegyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
-        public object ResolveToPage(INavigationController controller)
+        public object ResolveToView(INavigationController controller)
         {
-            return restoreStackInfo.Page;
+            return restoreStackInfo.View;
         }
 
-        public void UpdateStack(INavigationController controller, object toPage)
+        public void UpdateStack(INavigationController controller, object toView)
         {
             // Activate restored
-            controller.ActivePage(restoreStackInfo.Page, restoreStackInfo.RestoreParameter);
+            controller.ActiveView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
             restoreStackInfo.RestoreParameter = null;
 
             // Remove old
-            for (var i = controller.PageStack.Count - 1; i > controller.PageStack.Count - level - 1; i--)
+            for (var i = controller.ViewStack.Count - 1; i > controller.ViewStack.Count - level - 1; i--)
             {
-                controller.ClosePage(controller.PageStack[i].Page);
+                controller.CloseView(controller.ViewStack[i].View);
             }
 
-            controller.PageStack.RemoveRange(controller.PageStack.Count - level, level);
+            controller.ViewStack.RemoveRange(controller.ViewStack.Count - level, level);
         }
     }
 }

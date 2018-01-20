@@ -12,21 +12,21 @@
             // prepare
             var called = new Holder<bool>();
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
             navigator.Exited += (sender, args) => called.Value = true;
 
-            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(ViewId.Form1, typeof(Form1));
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(ViewId.Form1);
 
-            var page1 = (Page1)navigator.CurrentPage;
+            var form1 = (Form1)navigator.CurrentView;
 
             navigator.Exit();
 
             Assert.True(called.Value);
-            Assert.False(page1.IsOpen);
+            Assert.False(form1.IsOpen);
         }
 
         [Fact]
@@ -34,49 +34,49 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
-            navigator.Register(Pages.Page3, typeof(Page3));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
+            navigator.Register(ViewId.Form3, typeof(Form3));
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(ViewId.Form1);
 
-            var page1 = (Page1)navigator.CurrentPage;
+            var form1 = (Form1)navigator.CurrentView;
 
-            navigator.Push(Pages.Page2);
+            navigator.Push(ViewId.Form2);
 
-            var page2 = (Page2)navigator.CurrentPage;
+            var form2 = (Form2)navigator.CurrentView;
 
-            navigator.Push(Pages.Page3);
+            navigator.Push(ViewId.Form3);
 
-            var page3 = (Page3)navigator.CurrentPage;
+            var form3 = (Form3)navigator.CurrentView;
 
             navigator.Exit();
 
-            Assert.False(page1.IsOpen);
-            Assert.False(page2.IsOpen);
-            Assert.False(page3.IsOpen);
+            Assert.False(form1.IsOpen);
+            Assert.False(form2.IsOpen);
+            Assert.False(form3.IsOpen);
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            Page1,
-            Page2,
-            Page3
+            Form1,
+            Form2,
+            Form3
         }
 
-        public class Page1 : MockPage
-        {
-        }
-
-        public class Page2 : MockPage
+        public class Form1 : MockForm
         {
         }
 
-        public class Page3 : MockPage
+        public class Form2 : MockForm
+        {
+        }
+
+        public class Form3 : MockForm
         {
         }
     }

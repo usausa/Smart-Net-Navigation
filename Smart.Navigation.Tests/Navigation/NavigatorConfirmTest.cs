@@ -13,18 +13,18 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
             navigator.Confirm += (sender, args) =>
             {
                 args.Cancel = args.Context.Parameter.GetValue<bool>("Cancel");
             };
 
-            navigator.Register(Pages.ToPage, typeof(ToPage));
+            navigator.Register(ViewId.ToForm, typeof(ToForm));
 
             // test
-            Assert.False(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("Cancel", true)));
-            Assert.True(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("Cancel", false)));
+            Assert.False(navigator.Forward(ViewId.ToForm, new NavigationParameter().SetValue("Cancel", true)));
+            Assert.True(navigator.Forward(ViewId.ToForm, new NavigationParameter().SetValue("Cancel", false)));
         }
 
         [Fact]
@@ -32,17 +32,17 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.CancelPage, typeof(CancelPage));
-            navigator.Register(Pages.ToPage, typeof(ToPage));
+            navigator.Register(ViewId.CancelForm, typeof(CancelForm));
+            navigator.Register(ViewId.ToForm, typeof(ToForm));
 
             // test
-            navigator.Forward(Pages.CancelPage);
+            navigator.Forward(ViewId.CancelForm);
 
-            Assert.False(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", false)));
-            Assert.True(navigator.Forward(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", true)));
+            Assert.False(navigator.Forward(ViewId.ToForm, new NavigationParameter().SetValue("CanNavigate", false)));
+            Assert.True(navigator.Forward(ViewId.ToForm, new NavigationParameter().SetValue("CanNavigate", true)));
         }
 
         [Fact]
@@ -50,31 +50,31 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.CancelPage, typeof(CancelAsyncPage));
-            navigator.Register(Pages.ToPage, typeof(ToPage));
+            navigator.Register(ViewId.CancelForm, typeof(CancelAsyncForm));
+            navigator.Register(ViewId.ToForm, typeof(ToForm));
 
             // test
-            await navigator.ForwardAsync(Pages.CancelPage);
+            await navigator.ForwardAsync(ViewId.CancelForm);
 
-            Assert.False(await navigator.ForwardAsync(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", false)));
-            Assert.True(await navigator.ForwardAsync(Pages.ToPage, new NavigationParameter().SetValue("CanNavigate", true)));
+            Assert.False(await navigator.ForwardAsync(ViewId.ToForm, new NavigationParameter().SetValue("CanNavigate", false)));
+            Assert.True(await navigator.ForwardAsync(ViewId.ToForm, new NavigationParameter().SetValue("CanNavigate", true)));
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            ToPage,
-            CancelPage,
-            CancelAsyncPage
+            ToForm,
+            CancelForm,
+            CancelAsyncForm
         }
 
-        public class ToPage : MockPage
+        public class ToForm : MockForm
         {
         }
 
-        public class CancelPage : MockPage, IConfirmRequest
+        public class CancelForm : MockForm, IConfirmRequest
         {
             public bool CanNavigate(INavigationContext context)
             {
@@ -82,7 +82,7 @@
             }
         }
 
-        public class CancelAsyncPage : MockPage, IConfirmRequestAsync
+        public class CancelAsyncForm : MockForm, IConfirmRequestAsync
         {
             public async Task<bool> CanNavigateAsync(INavigationContext context)
             {

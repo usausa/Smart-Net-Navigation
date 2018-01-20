@@ -19,13 +19,13 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnNavigatedFrom(IPluginContext context, object page, object target)
+        public override void OnNavigatedFrom(IPluginContext context, object view, object target)
         {
             context.Save(GetType(), GatherExportParameters(target));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnNavigatingTo(IPluginContext context, object page, object target)
+        public override void OnNavigatingTo(IPluginContext context, object view, object target)
         {
             var parameters = context.LoadOr(GetType(), default(Dictionary<string, object>));
             if (parameters != null)

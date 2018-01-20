@@ -41,8 +41,8 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Navigation\ControlPageNavigatorConfigExtensions.cs" />
-    <Compile Include="Navigation\ControlPageProvider.cs" />
+    <Compile Include="Navigation\ControlNavigatorConfigExtensions.cs" />
+    <Compile Include="Navigation\ControlNavigationProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,9 +8,9 @@
     {
         int StackedCount { get; }
 
-        object CurrentPageId { get; }
+        object CurrentViewId { get; }
 
-        object CurrentPage { get; }
+        object CurrentView { get; }
 
         object CurrentTarget { get; }
 

@@ -11,25 +11,25 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(ViewId.Form1);
 
-            var page1 = (Page1)navigator.CurrentPage;
-            page1.IntParameter = 123;
-            page1.StringParameter = "abc";
+            var form1 = (Form1)navigator.CurrentView;
+            form1.IntParameter = 123;
+            form1.StringParameter = "abc";
 
-            navigator.Forward(Pages.Page2);
+            navigator.Forward(ViewId.Form2);
 
             Assert.Equal(1, navigator.StackedCount);
-            var page2 = (Page2)navigator.CurrentPage;
-            Assert.Equal(123, page2.IntParameter);
-            Assert.Equal("abc", page2.StringParameter);
+            var form2 = (Form2)navigator.CurrentView;
+            Assert.Equal(123, form2.IntParameter);
+            Assert.Equal("abc", form2.StringParameter);
         }
 
         [Fact]
@@ -37,31 +37,31 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.OneWay, typeof(OneWayPage));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.OneWay, typeof(OneWayForm));
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(ViewId.Form1);
 
-            var page1 = (Page1)navigator.CurrentPage;
-            page1.IntParameter = 123;
-            page1.StringParameter = "abc";
+            var form1 = (Form1)navigator.CurrentView;
+            form1.IntParameter = 123;
+            form1.StringParameter = "abc";
 
-            navigator.Push(Pages.OneWay);
+            navigator.Push(ViewId.OneWay);
 
-            var oneWayPage = (OneWayPage)navigator.CurrentPage;
-            Assert.Equal(123, oneWayPage.IntParameter);
-            Assert.Null(oneWayPage.StringParameter);
+            var oneWayForm = (OneWayForm)navigator.CurrentView;
+            Assert.Equal(123, oneWayForm.IntParameter);
+            Assert.Null(oneWayForm.StringParameter);
 
-            oneWayPage.IntParameter = 987;
-            oneWayPage.StringParameter = "xyz";
+            oneWayForm.IntParameter = 987;
+            oneWayForm.StringParameter = "xyz";
 
             navigator.Pop();
-            Assert.Equal(123, page1.IntParameter);
-            Assert.Equal("xyz", page1.StringParameter);
+            Assert.Equal(123, form1.IntParameter);
+            Assert.Equal("xyz", form1.StringParameter);
         }
 
         [Fact]
@@ -69,24 +69,24 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.NamedPage1, typeof(NamedPage1));
-            navigator.Register(Pages.NamedPage2, typeof(NamedPage2));
+            navigator.Register(ViewId.Named1Form, typeof(Named1Form));
+            navigator.Register(ViewId.Named2Form, typeof(Named2Form));
 
             // test
-            navigator.Forward(Pages.NamedPage1);
+            navigator.Forward(ViewId.Named1Form);
 
-            var namedPage1 = (NamedPage1)navigator.CurrentPage;
-            namedPage1.Value1 = 123;
-            namedPage1.Parameter2 = "abc";
+            var namedForm1 = (Named1Form)navigator.CurrentView;
+            namedForm1.Value1 = 123;
+            namedForm1.Parameter2 = "abc";
 
-            navigator.Forward(Pages.NamedPage2);
+            navigator.Forward(ViewId.Named2Form);
 
-            var namedPage2 = (NamedPage2)navigator.CurrentPage;
-            Assert.Equal(123, namedPage2.Parameter1);
-            Assert.Equal("abc", namedPage2.Value2);
+            var namedForm2 = (Named2Form)navigator.CurrentView;
+            Assert.Equal(123, namedForm2.Parameter1);
+            Assert.Equal("abc", namedForm2.Value2);
         }
 
         [Fact]
@@ -94,38 +94,38 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.ConvertPage1, typeof(ConvertPage1));
-            navigator.Register(Pages.ConvertPage2, typeof(ConvertPage2));
+            navigator.Register(ViewId.Convert1Form, typeof(Convert1Form));
+            navigator.Register(ViewId.Convert2Form, typeof(Convert2Form));
 
             // test
-            navigator.Forward(Pages.ConvertPage1);
+            navigator.Forward(ViewId.Convert1Form);
 
-            var convertPage1 = (ConvertPage1)navigator.CurrentPage;
-            convertPage1.Value1 = 123;
-            convertPage1.Value2 = "456";
+            var convertForm1 = (Convert1Form)navigator.CurrentView;
+            convertForm1.Value1 = 123;
+            convertForm1.Value2 = "456";
 
-            navigator.Forward(Pages.ConvertPage2);
+            navigator.Forward(ViewId.Convert2Form);
 
-            var convertPage2 = (ConvertPage2)navigator.CurrentPage;
-            Assert.Equal("123", convertPage2.Value1);
-            Assert.Equal(456, convertPage2.Value2);
+            var convertForm2 = (Convert2Form)navigator.CurrentView;
+            Assert.Equal("123", convertForm2.Value1);
+            Assert.Equal(456, convertForm2.Value2);
         }
 
-        public enum Pages
+        public enum ViewId
         {
-            Page1,
-            Page2,
+            Form1,
+            Form2,
             OneWay,
-            NamedPage1,
-            NamedPage2,
-            ConvertPage1,
-            ConvertPage2
+            Named1Form,
+            Named2Form,
+            Convert1Form,
+            Convert2Form
         }
 
-        public class Page1 : MockPage
+        public class Form1 : MockForm
         {
             [Parameter]
             public int IntParameter { get; set; }
@@ -134,7 +134,7 @@
             public string StringParameter { get; set; }
         }
 
-        public class Page2 : MockPage
+        public class Form2 : MockForm
         {
             [Parameter]
             public int IntParameter { get; set; }
@@ -143,7 +143,7 @@
             public string StringParameter { get; set; }
         }
 
-        public class OneWayPage : MockPage
+        public class OneWayForm : MockForm
         {
             [Parameter(Directions.Import)]
             public int IntParameter { get; set; }
@@ -152,7 +152,7 @@
             public string StringParameter { get; set; }
         }
 
-        public class NamedPage1 : MockPage
+        public class Named1Form : MockForm
         {
             [Parameter("Parameter1")]
             public int Value1 { get; set; }
@@ -161,7 +161,7 @@
             public string Parameter2 { get; set; }
         }
 
-        public class NamedPage2 : MockPage
+        public class Named2Form : MockForm
         {
             [Parameter]
             public int Parameter1 { get; set; }
@@ -170,7 +170,7 @@
             public string Value2 { get; set; }
         }
 
-        public class ConvertPage1 : MockPage
+        public class Convert1Form : MockForm
         {
             [Parameter]
             public int Value1 { get; set; }
@@ -179,7 +179,7 @@
             public string Value2 { get; set; }
         }
 
-        public class ConvertPage2 : MockPage
+        public class Convert2Form : MockForm
         {
             [Parameter]
             public string Value1 { get; set; }

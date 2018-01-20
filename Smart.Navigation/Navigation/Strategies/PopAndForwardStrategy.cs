@@ -8,7 +8,7 @@
 
         private readonly int level;
 
-        private PageDescriptor descriptor;
+        private ViewDescriptor descriptor;
 
         public PopAndForwardStrategy(object id, int level)
         {
@@ -20,36 +20,36 @@
         {
             if (!controller.Descriptors.TryGetValue(id, out descriptor))
             {
-                throw new InvalidOperationException($"Page id is not found in descriptors. id=[{id}]");
+                throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
             }
 
-            if ((level < 1) || (level > controller.PageStack.Count - 1))
+            if ((level < 1) || (level > controller.ViewStack.Count - 1))
             {
-                throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.PageStack.Count}]");
+                throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
             }
 
             return new StragtegyResult(id, NavigationAttributes.None);
         }
 
-        public object ResolveToPage(INavigationController controller)
+        public object ResolveToView(INavigationController controller)
         {
-            return controller.CreatePage(descriptor.Type);
+            return controller.CreateView(descriptor.Type);
         }
 
-        public void UpdateStack(INavigationController controller, object toPage)
+        public void UpdateStack(INavigationController controller, object toView)
         {
             // Stack new
-            controller.PageStack.Add(new PageStackInfo(descriptor, toPage));
+            controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
 
-            controller.OpenPage(toPage);
+            controller.OpenView(toView);
 
             // Remove old
-            for (var i = controller.PageStack.Count - 2; i >= controller.PageStack.Count - level - 2; i--)
+            for (var i = controller.ViewStack.Count - 2; i >= controller.ViewStack.Count - level - 2; i--)
             {
-                controller.ClosePage(controller.PageStack[i].Page);
+                controller.CloseView(controller.ViewStack[i].View);
             }
 
-            controller.PageStack.RemoveRange(controller.PageStack.Count - level - 2, level + 1);
+            controller.ViewStack.RemoveRange(controller.ViewStack.Count - level - 2, level + 1);
         }
     }
 }

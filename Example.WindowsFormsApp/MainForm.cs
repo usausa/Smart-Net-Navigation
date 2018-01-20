@@ -5,8 +5,8 @@
     using System.Reflection;
     using System.Windows.Forms;
 
-    using Example.WindowsFormsApp.Pages;
     using Example.WindowsFormsApp.Services;
+    using Example.WindowsFormsApp.Views;
 
     using Smart.Navigation;
     using Smart.Resolver;
@@ -31,7 +31,7 @@
 
             // Config Navigator
             navigator = new NavigatorConfig()
-                .UseProvider(new ControlPageProvider(ContainerPanel))
+                .UseProvider(new ControlNavigationProvider(ContainerPanel))
                 .UseResolver(resolver)
                 .ToNavigator();
             navigator.Exited += OnExited;
@@ -47,8 +47,8 @@
 
             // Forward
             Show();
-            navigator.Forward(PageId.Menu);
-            ((Control)navigator.CurrentPage).Focus();
+            navigator.Forward(ViewId.Menu);
+            ((Control)navigator.CurrentView).Focus();
         }
 
         private static StandardResolver CreateResolver()
@@ -70,11 +70,11 @@
 
         private void OnNavigating(object sender, NavigationEventArgs e)
         {
-            var page = e.ToPage as IApplicationPage;
+            var view = e.ToView as IApplicationView;
 
-            TitleLabel.Text = page?.Title ?? string.Empty;
-            HomeButton.Enabled = page?.CanGoHome ?? false;
-            UpdateFunctionKeys(page?.FunctionKeys);
+            TitleLabel.Text = view?.Title ?? string.Empty;
+            HomeButton.Enabled = view?.CanGoHome ?? false;
+            UpdateFunctionKeys(view?.FunctionKeys);
         }
 
         private void OnExited(object sender, EventArgs e)
@@ -84,9 +84,9 @@
 
         private void OnHomeButtonClick(object sender, EventArgs e)
         {
-            if (navigator.CurrentPage is IApplicationPage page)
+            if (navigator.CurrentView is IApplicationView view)
             {
-                page.OnGoHome();
+                view.OnGoHome();
             }
         }
 
@@ -148,18 +148,18 @@
 
         private void OnFunctionClick(object sender, EventArgs e)
         {
-            if (navigator.CurrentPage is IApplicationPage page)
+            if (navigator.CurrentView is IApplicationView view)
             {
-                page.OnFunctionKey((Keys)((Button)sender).Tag);
+                view.OnFunctionKey((Keys)((Button)sender).Tag);
             }
         }
 
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if (enabledFunctions.ContainsKey(keyData) &&
-                navigator.CurrentPage is IApplicationPage page)
+                navigator.CurrentView is IApplicationView view)
             {
-                page.OnFunctionKey(keyData);
+                view.OnFunctionKey(keyData);
                 return true;
             }
 

@@ -18,37 +18,37 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
 
             var context = new Holder<INavigationContext>();
             navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(ViewId.Form1);
 
             Assert.Equal(1, navigator.StackedCount);
-            var page1 = (MockPage)navigator.CurrentPage;
-            Assert.Equal(typeof(Page1), page1.GetType());
-            Assert.True(page1.IsOpen);
+            var form1 = (MockForm)navigator.CurrentView;
+            Assert.Equal(typeof(Form1), form1.GetType());
+            Assert.True(form1.IsOpen);
 
             Assert.Null(context.Value.FromId);
-            Assert.Equal(Pages.Page1, context.Value.ToId);
+            Assert.Equal(ViewId.Form1, context.Value.ToId);
             Assert.Equal(NavigationAttributes.None, context.Value.Attribute);
 
-            navigator.Forward(Pages.Page2);
+            navigator.Forward(ViewId.Form2);
 
             Assert.Equal(1, navigator.StackedCount);
-            var page2 = (MockPage)navigator.CurrentPage;
-            Assert.Equal(typeof(Page2), page2.GetType());
-            Assert.True(page2.IsOpen);
-            Assert.False(page1.IsOpen);
+            var form2 = (MockForm)navigator.CurrentView;
+            Assert.Equal(typeof(Form2), form2.GetType());
+            Assert.True(form2.IsOpen);
+            Assert.False(form1.IsOpen);
 
-            Assert.Equal(Pages.Page1, context.Value.FromId);
-            Assert.Equal(Pages.Page2, context.Value.ToId);
+            Assert.Equal(ViewId.Form1, context.Value.FromId);
+            Assert.Equal(ViewId.Form2, context.Value.ToId);
             Assert.Equal(NavigationAttributes.None, context.Value.Attribute);
         }
 
@@ -57,22 +57,22 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
-            navigator.Register(Pages.Page3, typeof(Page3));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
+            navigator.Register(ViewId.Form3, typeof(Form3));
 
             // test
-            navigator.Forward(Pages.Page1);
-            navigator.Push(Pages.Page2);
-            navigator.Forward(Pages.Page3);
+            navigator.Forward(ViewId.Form1);
+            navigator.Push(ViewId.Form2);
+            navigator.Forward(ViewId.Form3);
 
             Assert.Equal(2, navigator.StackedCount);
-            var page3 = (MockPage)navigator.CurrentPage;
-            Assert.Equal(typeof(Page3), page3.GetType());
-            Assert.True(page3.IsOpen);
+            var form3 = (MockForm)navigator.CurrentView;
+            Assert.Equal(typeof(Form3), form3.GetType());
+            Assert.True(form3.IsOpen);
         }
 
         [Fact]
@@ -80,19 +80,19 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
 
             var context = new Holder<INavigationContext>();
             navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
-            navigator.Forward(Pages.Page1);
+            navigator.Forward(ViewId.Form1);
 
-            navigator.Forward(Pages.Page2, new NavigationParameter().SetValue("test"));
+            navigator.Forward(ViewId.Form2, new NavigationParameter().SetValue("test"));
 
             Assert.NotNull(context.Value);
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
@@ -107,22 +107,22 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
 
             // test
-            await navigator.ForwardAsync(Pages.Page1);
+            await navigator.ForwardAsync(ViewId.Form1);
 
             Assert.Equal(1, navigator.StackedCount);
-            Assert.Equal(Pages.Page1, navigator.CurrentPageId);
+            Assert.Equal(ViewId.Form1, navigator.CurrentViewId);
 
-            await navigator.ForwardAsync(Pages.Page2);
+            await navigator.ForwardAsync(ViewId.Form2);
 
             Assert.Equal(1, navigator.StackedCount);
-            Assert.Equal(Pages.Page2, navigator.CurrentPageId);
+            Assert.Equal(ViewId.Form2, navigator.CurrentViewId);
         }
 
         [Fact]
@@ -130,19 +130,19 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
-            navigator.Register(Pages.Page2, typeof(Page2));
+            navigator.Register(ViewId.Form1, typeof(Form1));
+            navigator.Register(ViewId.Form2, typeof(Form2));
 
             var context = new Holder<INavigationContext>();
             navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
             // test
-            await navigator.ForwardAsync(Pages.Page1);
+            await navigator.ForwardAsync(ViewId.Form1);
 
-            await navigator.ForwardAsync(Pages.Page2, new NavigationParameter().SetValue("test"));
+            await navigator.ForwardAsync(ViewId.Form2, new NavigationParameter().SetValue("test"));
 
             Assert.NotNull(context.Value);
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
@@ -157,36 +157,36 @@
         {
             // prepare
             var navigator = new NavigatorConfig()
-                .UseMockPageProvider()
+                .UseMockFormProvider()
                 .ToNavigator();
 
-            navigator.Register(Pages.Page1, typeof(Page1));
+            navigator.Register(ViewId.Form1, typeof(Form1));
 
             // test
-            navigator.Forward(Pages.Page1);
-            Assert.Throws<InvalidOperationException>(() => navigator.Push(Pages.Page2));
+            navigator.Forward(ViewId.Form1);
+            Assert.Throws<InvalidOperationException>(() => navigator.Push(ViewId.Form2));
         }
 
         // ------------------------------------------------------------
         // Mock
         // ------------------------------------------------------------
 
-        public enum Pages
+        public enum ViewId
         {
-            Page1,
-            Page2,
-            Page3
+            Form1,
+            Form2,
+            Form3
         }
 
-        public class Page1 : MockPage
-        {
-        }
-
-        public class Page2 : MockPage
+        public class Form1 : MockForm
         {
         }
 
-        public class Page3 : MockPage
+        public class Form2 : MockForm
+        {
+        }
+
+        public class Form3 : MockForm
         {
         }
     }

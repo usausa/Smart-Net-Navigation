@@ -4,8 +4,8 @@
     {
         StragtegyResult Initialize(INavigationController controller);
 
-        object ResolveToPage(INavigationController controller);
+        object ResolveToView(INavigationController controller);
 
-        void UpdateStack(INavigationController controller, object toPage);
+        void UpdateStack(INavigationController controller, object toView);
     }
 }

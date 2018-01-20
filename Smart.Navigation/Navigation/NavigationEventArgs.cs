@@ -6,25 +6,25 @@
     {
         public INavigationContext Context { get; }
 
-        public object FromPage { get; }
+        public object FromView { get; }
 
         public object FromTarget { get; }
 
-        public object ToPage { get; }
+        public object ToView { get; }
 
         public object ToTarget { get; }
 
         public NavigationEventArgs(
             INavigationContext context,
-            object fromPage,
+            object fromView,
             object fromTarget,
-            object toPage,
+            object toView,
             object toTarget)
         {
             Context = context;
-            FromPage = fromPage;
+            FromView = fromView;
             FromTarget = fromTarget;
-            ToPage = toPage;
+            ToView = toView;
             ToTarget = toTarget;
         }
     }

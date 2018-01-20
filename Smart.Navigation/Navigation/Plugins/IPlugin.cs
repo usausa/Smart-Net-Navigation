@@ -2,14 +2,14 @@
 {
     public interface IPlugin
     {
-        void OnCreate(IPluginContext context, object page, object target);
+        void OnCreate(IPluginContext context, object view, object target);
 
-        void OnClose(IPluginContext context, object page, object target);
+        void OnClose(IPluginContext context, object view, object target);
 
-        void OnNavigatedFrom(IPluginContext context, object page, object target);
+        void OnNavigatedFrom(IPluginContext context, object view, object target);
 
-        void OnNavigatingTo(IPluginContext context, object page, object target);
+        void OnNavigatingTo(IPluginContext context, object view, object target);
 
-        void OnNavigatedTo(IPluginContext context, object page, object target);
+        void OnNavigatedTo(IPluginContext context, object view, object target);
     }
 }

@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FunctionKey.cs" />
-    <Compile Include="IApplicationPage.cs" />
+    <Compile Include="IApplicationView.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,67 +57,67 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DataEntity.cs" />
-    <Compile Include="Pages\AppPageBase.cs">
+    <Compile Include="Views\AppViewBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\AppPageBase.Designer.cs">
-      <DependentUpon>AppPageBase.cs</DependentUpon>
+    <Compile Include="Views\AppViewBase.Designer.cs">
+      <DependentUpon>AppViewBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Data\DataDetailPage.cs">
+    <Compile Include="Views\Data\DataDetailView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Data\DataDetailPage.Designer.cs">
-      <DependentUpon>DataDetailPage.cs</DependentUpon>
+    <Compile Include="Views\Data\DataDetailView.Designer.cs">
+      <DependentUpon>DataDetailView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Data\DataListPage.cs">
+    <Compile Include="Views\Data\DataListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Data\DataListPage.Designer.cs">
-      <DependentUpon>DataListPage.cs</DependentUpon>
+    <Compile Include="Views\Data\DataListView.Designer.cs">
+      <DependentUpon>DataListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MenuPage.cs">
+    <Compile Include="Views\MenuView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\MenuPage.Designer.cs">
-      <DependentUpon>MenuPage.cs</DependentUpon>
+    <Compile Include="Views\MenuView.Designer.cs">
+      <DependentUpon>MenuView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PageId.cs" />
-    <Compile Include="Pages\Stack\Stack1Page.cs">
+    <Compile Include="Views\ViewId.cs" />
+    <Compile Include="Views\Stack\Stack1View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Stack\Stack1Page.Designer.cs">
-      <DependentUpon>Stack1Page.cs</DependentUpon>
+    <Compile Include="Views\Stack\Stack1View.Designer.cs">
+      <DependentUpon>Stack1View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Stack\Stack2Page.cs">
+    <Compile Include="Views\Stack\Stack2View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Stack\Stack2Page.Designer.cs">
-      <DependentUpon>Stack2Page.cs</DependentUpon>
+    <Compile Include="Views\Stack\Stack2View.Designer.cs">
+      <DependentUpon>Stack2View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Stack\Stack3Page.cs">
+    <Compile Include="Views\Stack\Stack3View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Stack\Stack3Page.Designer.cs">
-      <DependentUpon>Stack3Page.cs</DependentUpon>
+    <Compile Include="Views\Stack\Stack3View.Designer.cs">
+      <DependentUpon>Stack3View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardResultPage.cs">
+    <Compile Include="Views\Wizard\WizardResultView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardResultPage.Designer.cs">
-      <DependentUpon>WizardResultPage.cs</DependentUpon>
+    <Compile Include="Views\Wizard\WizardResultView.Designer.cs">
+      <DependentUpon>WizardResultView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardContext.cs" />
-    <Compile Include="Pages\Wizard\WizardInput1Page.cs">
+    <Compile Include="Views\Wizard\WizardContext.cs" />
+    <Compile Include="Views\Wizard\WizardInput1View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardInput1Page.Designer.cs">
-      <DependentUpon>WizardInput1Page.cs</DependentUpon>
+    <Compile Include="Views\Wizard\WizardInput1View.Designer.cs">
+      <DependentUpon>WizardInput1View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardInput2Page.cs">
+    <Compile Include="Views\Wizard\WizardInput2View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Pages\Wizard\WizardInput2Page.Designer.cs">
-      <DependentUpon>WizardInput2Page.cs</DependentUpon>
+    <Compile Include="Views\Wizard\WizardInput2View.Designer.cs">
+      <DependentUpon>WizardInput2View.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,35 +126,35 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\AppPageBase.resx">
-      <DependentUpon>AppPageBase.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AppViewBase.resx">
+      <DependentUpon>AppViewBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Data\DataDetailPage.resx">
-      <DependentUpon>DataDetailPage.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Data\DataDetailView.resx">
+      <DependentUpon>DataDetailView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Data\DataListPage.resx">
-      <DependentUpon>DataListPage.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Data\DataListView.resx">
+      <DependentUpon>DataListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\MenuPage.resx">
-      <DependentUpon>MenuPage.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MenuView.resx">
+      <DependentUpon>MenuView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Stack\Stack1Page.resx">
-      <DependentUpon>Stack1Page.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Stack\Stack1View.resx">
+      <DependentUpon>Stack1View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Stack\Stack2Page.resx">
-      <DependentUpon>Stack2Page.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Stack\Stack2View.resx">
+      <DependentUpon>Stack2View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Stack\Stack3Page.resx">
-      <DependentUpon>Stack3Page.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Stack\Stack3View.resx">
+      <DependentUpon>Stack3View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Wizard\WizardResultPage.resx">
-      <DependentUpon>WizardResultPage.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Wizard\WizardResultView.resx">
+      <DependentUpon>WizardResultView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Wizard\WizardInput1Page.resx">
-      <DependentUpon>WizardInput1Page.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Wizard\WizardInput1View.resx">
+      <DependentUpon>WizardInput1View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Wizard\WizardInput2Page.resx">
-      <DependentUpon>WizardInput2Page.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Wizard\WizardInput2View.resx">
+      <DependentUpon>WizardInput2View.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

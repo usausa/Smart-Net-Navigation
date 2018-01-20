@@ -9,7 +9,7 @@
 
         private int start;
 
-        private PageStackInfo restoreStackInfo;
+        private ViewStackInfo restoreStackInfo;
 
         public GroupPopStragety(bool leaveLast)
         {
@@ -18,36 +18,36 @@
 
         public StragtegyResult Initialize(INavigationController controller)
         {
-            if (controller.PageStack.Count == 0)
+            if (controller.ViewStack.Count == 0)
             {
-                throw new InvalidOperationException("Page is not stacked.");
+                throw new InvalidOperationException("View is not stacked.");
             }
 
-            var lastStackInfo = controller.PageStack[controller.PageStack.Count - 1];
+            var lastStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
             var group = lastStackInfo.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
             if (group == null)
             {
-                throw new InvalidOperationException("Current page is not grouped.");
+                throw new InvalidOperationException("Current view is not grouped.");
             }
 
-            start = controller.PageStack.Count == 1
+            start = controller.ViewStack.Count == 1
                 ? 0
-                : controller.PageStack.FindLastIndex(controller.PageStack.Count - 2, stack =>
+                : controller.ViewStack.FindLastIndex(controller.ViewStack.Count - 2, stack =>
                 {
                     var groupOfStack = stack.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
                     return (groupOfStack != null) && Equals(group.Id, groupOfStack.Id);
                 });
             if (start == -1)
             {
-                start = controller.PageStack.Count - 1;
+                start = controller.ViewStack.Count - 1;
             }
 
             if (leaveLast)
             {
-                start = Math.Min(start + 1, controller.PageStack.Count);
+                start = Math.Min(start + 1, controller.ViewStack.Count);
             }
 
-            if (start == controller.PageStack.Count)
+            if (start == controller.ViewStack.Count)
             {
                 return null;
             }
@@ -57,27 +57,27 @@
                 throw new InvalidOperationException($"Pop group is invalid. group=[{group.Id}]");
             }
 
-            restoreStackInfo = controller.PageStack[start - 1];
+            restoreStackInfo = controller.ViewStack[start - 1];
             return new StragtegyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
-        public object ResolveToPage(INavigationController controller)
+        public object ResolveToView(INavigationController controller)
         {
-            return restoreStackInfo.Page;
+            return restoreStackInfo.View;
         }
 
-        public void UpdateStack(INavigationController controller, object toPage)
+        public void UpdateStack(INavigationController controller, object toView)
         {
             // Remove old
-            for (var i = controller.PageStack.Count - 1; i >= start; i--)
+            for (var i = controller.ViewStack.Count - 1; i >= start; i--)
             {
-                controller.ClosePage(controller.PageStack[i].Page);
+                controller.CloseView(controller.ViewStack[i].View);
             }
 
-            controller.PageStack.RemoveRange(start, controller.PageStack.Count - start);
+            controller.ViewStack.RemoveRange(start, controller.ViewStack.Count - start);
 
             // Activate restored
-            controller.ActivePage(restoreStackInfo.Page, restoreStackInfo.RestoreParameter);
+            controller.ActiveView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
             restoreStackInfo.RestoreParameter = null;
         }
     }

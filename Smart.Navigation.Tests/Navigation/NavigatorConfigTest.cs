@@ -21,7 +21,7 @@
         public static void TestNavigatorConfigUseProviderByInterface()
         {
             var config = new NavigatorConfig()
-                .UseProvider<MockPageNavigationProvider>();
+                .UseProvider<MockFormNavigationProvider>();
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
@@ -32,7 +32,7 @@
         public static void TestNavigatorConfigUseProviderByInstance()
         {
             var config = new NavigatorConfig()
-                .UseProvider(new MockPageNavigationProvider());
+                .UseProvider(new MockFormNavigationProvider());
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 

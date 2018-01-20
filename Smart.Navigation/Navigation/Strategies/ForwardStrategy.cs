@@ -6,7 +6,7 @@
     {
         private readonly object id;
 
-        private PageDescriptor descriptor;
+        private ViewDescriptor descriptor;
 
         public ForwardStrategy(object id)
         {
@@ -17,33 +17,33 @@
         {
             if (!controller.Descriptors.TryGetValue(id, out descriptor))
             {
-                throw new InvalidOperationException($"Page id is not found in descriptors. id=[{id}]");
+                throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
             }
 
             return new StragtegyResult(id, NavigationAttributes.None);
         }
 
-        public object ResolveToPage(INavigationController controller)
+        public object ResolveToView(INavigationController controller)
         {
-            return controller.CreatePage(descriptor.Type);
+            return controller.CreateView(descriptor.Type);
         }
 
-        public void UpdateStack(INavigationController controller, object toPage)
+        public void UpdateStack(INavigationController controller, object toView)
         {
             // Stack new
-            controller.PageStack.Add(new PageStackInfo(descriptor, toPage));
+            controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
 
-            controller.OpenPage(toPage);
+            controller.OpenView(toView);
 
             // Remove old
-            var count = controller.PageStack.Count;
+            var count = controller.ViewStack.Count;
             if (count > 1)
             {
                 var index = count - 2;
 
-                controller.ClosePage(controller.PageStack[index].Page);
+                controller.CloseView(controller.ViewStack[index].View);
 
-                controller.PageStack.RemoveAt(index);
+                controller.ViewStack.RemoveAt(index);
             }
         }
     }

@@ -6,18 +6,18 @@
 
     public interface INavigationController
     {
-        IDictionary<object, PageDescriptor> Descriptors { get; }
+        IDictionary<object, ViewDescriptor> Descriptors { get; }
 
-        List<PageStackInfo> PageStack { get; }
+        List<ViewStackInfo> ViewStack { get; }
 
-        object CreatePage(Type type);
+        object CreateView(Type type);
 
-        void OpenPage(object page);
+        void OpenView(object view);
 
-        void ClosePage(object page);
+        void CloseView(object view);
 
-        void ActivePage(object page, object parameter);
+        void ActiveView(object view, object parameter);
 
-        object DeactivePage(object page);
+        object DeactiveView(object view);
     }
 }

@@ -2,14 +2,14 @@
 {
     public interface INavigationProvider
     {
-        object ResolveTarget(object page);
+        object ResolveTarget(object view);
 
-        void OpenPage(object page);
+        void OpenView(object view);
 
-        void ClosePage(object page);
+        void CloseView(object view);
 
-        void ActivePage(object page, object parameter);
+        void ActiveView(object view, object parameter);
 
-        object DeactivePage(object page);
+        object DeactiveView(object view);
     }
 }

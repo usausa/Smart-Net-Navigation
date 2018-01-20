@@ -36,9 +36,9 @@
 
         private readonly ComponentContainer components;
 
-        private readonly Dictionary<object, PageDescriptor> descriptors = new Dictionary<object, PageDescriptor>();
+        private readonly Dictionary<object, ViewDescriptor> descriptors = new Dictionary<object, ViewDescriptor>();
 
-        private readonly List<PageStackInfo> pageStack = new List<PageStackInfo>();
+        private readonly List<ViewStackInfo> viewStack = new List<ViewStackInfo>();
 
         private readonly INavigationProvider provider;
 
@@ -50,15 +50,15 @@
         // Property
         // ------------------------------------------------------------
 
-        private PageStackInfo CurrentStack => pageStack.Count > 0 ? pageStack[pageStack.Count - 1] : null;
+        private ViewStackInfo CurrentStack => viewStack.Count > 0 ? viewStack[viewStack.Count - 1] : null;
 
-        public int StackedCount => pageStack.Count;
+        public int StackedCount => viewStack.Count;
 
-        public object CurrentPageId => CurrentStack?.Descriptor.Id;
+        public object CurrentViewId => CurrentStack?.Descriptor.Id;
 
-        public object CurrentPage => CurrentStack?.Page;
+        public object CurrentView => CurrentStack?.View;
 
-        public object CurrentTarget => CurrentStack?.Page.MapOrDefalut(x => provider.ResolveTarget(x));
+        public object CurrentTarget => CurrentStack?.View.MapOrDefalut(x => provider.ResolveTarget(x));
 
         // ------------------------------------------------------------
         // Constructor
@@ -89,7 +89,7 @@
 
         public void Register(object id, Type type)
         {
-            descriptors.Add(id, new PageDescriptor(id, type));
+            descriptors.Add(id, new ViewDescriptor(id, type));
         }
 
         // ------------------------------------------------------------
@@ -98,13 +98,13 @@
 
         public void Exit()
         {
-            for (var i = pageStack.Count - 1; i >= 0; i--)
+            for (var i = viewStack.Count - 1; i >= 0; i--)
             {
-                var page = pageStack[i].Page;
-                provider.ClosePage(page);
+                var view = viewStack[i].View;
+                provider.CloseView(view);
             }
 
-            pageStack.Clear();
+            viewStack.Clear();
 
             Exited?.Invoke(this, EventArgs.Empty);
         }
@@ -118,7 +118,7 @@
                 return false;
             }
 
-            var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+            var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
 
             if (!ConfirmNavigation(navigationContext))
             {
@@ -139,7 +139,7 @@
                 return false;
             }
 
-            var navigationContext = new NavigationContext(CurrentPageId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+            var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
 
             var confirmResult = await ConfirmNavigationAsync(navigationContext);
             if (!confirmResult)
@@ -157,29 +157,29 @@
             var pluginContext = new PluginContext();
             controller.PluginContext = pluginContext;
 
-            var fromPage = CurrentPage;
+            var fromView = CurrentView;
             var fromTarget = CurrentTarget;
 
-            var toPage = strategy.ResolveToPage(controller);
-            var toTarget = provider.ResolveTarget(toPage);
+            var toView = strategy.ResolveToView(controller);
+            var toTarget = provider.ResolveTarget(toView);
 
-            var args = new NavigationEventArgs(navigationContext, fromPage, fromTarget, toPage, toTarget);
+            var args = new NavigationEventArgs(navigationContext, fromView, fromTarget, toView, toTarget);
 
-            // Process from page
-            if (fromPage != null)
+            // Process from view
+            if (fromView != null)
             {
                 (fromTarget as INavigationEventSupport)?.OnNavigatedFrom(navigationContext);
 
                 foreach (var plugin in plugins)
                 {
-                    plugin.OnNavigatedFrom(pluginContext, fromPage, fromTarget);
+                    plugin.OnNavigatedFrom(pluginContext, fromView, fromTarget);
                 }
             }
 
             // Process navigating
             foreach (var plugin in plugins)
             {
-                plugin.OnNavigatingTo(pluginContext, toPage, toTarget);
+                plugin.OnNavigatingTo(pluginContext, toView, toTarget);
             }
 
             (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
@@ -188,12 +188,12 @@
             Navigating?.Invoke(this, args);
 
             // Update stack
-            strategy.UpdateStack(controller, toPage);
+            strategy.UpdateStack(controller, toView);
 
             // Process navigated
             foreach (var plugin in plugins)
             {
-                plugin.OnNavigatedTo(pluginContext, toPage, toTarget);
+                plugin.OnNavigatedTo(pluginContext, toView, toTarget);
             }
 
             (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
@@ -253,9 +253,9 @@
         {
             private readonly Navigator navigator;
 
-            public IDictionary<object, PageDescriptor> Descriptors => navigator.descriptors;
+            public IDictionary<object, ViewDescriptor> Descriptors => navigator.descriptors;
 
-            public List<PageStackInfo> PageStack => navigator.pageStack;
+            public List<ViewStackInfo> ViewStack => navigator.viewStack;
 
             public PluginContext PluginContext { private get; set; }
 
@@ -264,11 +264,11 @@
                 this.navigator = navigator;
             }
 
-            public object CreatePage(Type type)
+            public object CreateView(Type type)
             {
-                var page = navigator.factory.Create(type);
+                var view = navigator.factory.Create(type);
 
-                var target = navigator.provider.ResolveTarget(page);
+                var target = navigator.provider.ResolveTarget(view);
 
                 if (target is INavigatorAware aware)
                 {
@@ -277,37 +277,37 @@
 
                 foreach (var plugin in navigator.plugins)
                 {
-                    plugin.OnCreate(PluginContext, page, target);
+                    plugin.OnCreate(PluginContext, view, target);
                 }
 
-                return page;
+                return view;
             }
 
-            public void OpenPage(object page)
+            public void OpenView(object view)
             {
-                navigator.provider.OpenPage(page);
+                navigator.provider.OpenView(view);
             }
 
-            public void ClosePage(object page)
+            public void CloseView(object view)
             {
-                var target = navigator.provider.ResolveTarget(page);
+                var target = navigator.provider.ResolveTarget(view);
 
                 foreach (var plugin in navigator.plugins)
                 {
-                    plugin.OnClose(PluginContext, page, target);
+                    plugin.OnClose(PluginContext, view, target);
                 }
 
-                navigator.provider.ClosePage(page);
+                navigator.provider.CloseView(view);
             }
 
-            public void ActivePage(object page, object parameter)
+            public void ActiveView(object view, object parameter)
             {
-                navigator.provider.ActivePage(page, parameter);
+                navigator.provider.ActiveView(view, parameter);
             }
 
-            public object DeactivePage(object page)
+            public object DeactiveView(object view)
             {
-                return navigator.provider.DeactivePage(page);
+                return navigator.provider.DeactiveView(view);
             }
         }
     }

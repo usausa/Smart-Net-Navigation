@@ -18,7 +18,7 @@
 
             foreach (var type in assembly.ExportedTypes)
             {
-                foreach (var attr in type.GetTypeInfo().GetCustomAttributes<PageAttribute>())
+                foreach (var attr in type.GetTypeInfo().GetCustomAttributes<ViewAttribute>())
                 {
                     navigator.Register(attr.Id, type);
                 }
