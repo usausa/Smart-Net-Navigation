@@ -190,71 +190,37 @@
         }
 
         // ------------------------------------------------------------
-        // IActivatorFactory
-        // ------------------------------------------------------------
-
-        [Fact]
-        public static void TestNavigatorConfigUseActivatorFactoryByInterface()
-        {
-            var config = new NavigatorConfig()
-                .UseActivatorFactory<DummyActivatorFactory>();
-
-            var components = ((INavigatorConfig)config).ResolveComponents();
-
-            var activatorFactory = components.Get<IActivatorFactory>();
-            Assert.NotNull(activatorFactory);
-        }
-
-        [Fact]
-        public static void TestNavigatorConfigUseActivatorFactoryByInstance()
-        {
-            var config = new NavigatorConfig()
-                .UseActivatorFactory(new DummyActivatorFactory());
-
-            var components = ((INavigatorConfig)config).ResolveComponents();
-
-            var activatorFactory = components.Get<IActivatorFactory>();
-            Assert.NotNull(activatorFactory);
-        }
-
-        [Fact]
-        public static void TestNavigatorConfigUseActivatorFactoryByInstanceFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseActivatorFactory(null));
-        }
-
-        // ------------------------------------------------------------
-        // IAccessorrFactory
+        // IDelegateFactory
         // ------------------------------------------------------------
 
         [Fact]
         public static void TestNavigatorConfigUseAccessorByInterface()
         {
             var config = new NavigatorConfig()
-                .UseAccessorFactory<DummyAccessorFactory>();
+                .UseDelegateFactory<DummyDelegateFactory>();
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            var accessorFactory = components.Get<IAccessorFactory>();
-            Assert.NotNull(accessorFactory);
+            var delegateFactory = components.Get<IDelegateFactory>();
+            Assert.NotNull(delegateFactory);
         }
 
         [Fact]
         public static void TestNavigatorConfigUseAccessorByInstance()
         {
             var config = new NavigatorConfig()
-                .UseAccessorFactory(new DummyAccessorFactory());
+                .UseDelegateFactory(new DummyDelegateFactory());
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            var accessorFactory = components.Get<IAccessorFactory>();
-            Assert.NotNull(accessorFactory);
+            var delegateFactory = components.Get<IDelegateFactory>();
+            Assert.NotNull(delegateFactory);
         }
 
         [Fact]
         public static void TestNavigatorConfigUseAccessorByInstanceFailed()
         {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseAccessorFactory(null));
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseDelegateFactory(null));
         }
 
         // ------------------------------------------------------------
@@ -270,7 +236,7 @@
         }
 
         // ------------------------------------------------------------
-        // utiliti\y
+        // utilitity
         // ------------------------------------------------------------
 
         public class Data
@@ -281,29 +247,86 @@
         {
         }
 
-        public class DummyActivatorFactory : IActivatorFactory
+        public class DummyDelegateFactory : IDelegateFactory
         {
-            public IActivator CreateActivator(ConstructorInfo ci)
-            {
-                return null;
-            }
-        }
-
-        public class DummyAccessorFactory : IAccessorFactory
-        {
-            public IActivator CreateActivator(ConstructorInfo ci)
+            public Func<int, Array> CreateArrayAllocator(Type type)
             {
                 return null;
             }
 
-            public IAccessor CreateAccessor(PropertyInfo pi)
+            public Func<object[], object> CreateFactory(ConstructorInfo ci)
             {
                 return null;
             }
 
-            public IAccessor CreateAccessor(PropertyInfo pi, bool extension)
+            public Func<object> CreateFactory0(ConstructorInfo ci)
             {
-                throw new NotImplementedException();
+                return null;
+            }
+
+            public Func<object, object> CreateFactory1(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object, object> CreateFactory2(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object, object, object> CreateFactory3(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object, object, object, object> CreateFactory4(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object, object, object, object, object> CreateFactory5(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object, object, object, object, object, object> CreateFactory6(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object, object, object, object, object, object, object> CreateFactory7(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object, object, object, object, object, object, object, object> CreateFactory8(ConstructorInfo ci)
+            {
+                return null;
+            }
+
+            public Func<object, object> CreateGetter(PropertyInfo pi)
+            {
+                return null;
+            }
+
+            public Func<object, object> CreateGetter(PropertyInfo pi, bool extension)
+            {
+                return null;
+            }
+
+            public Action<object, object> CreateSetter(PropertyInfo pi)
+            {
+                return null;
+            }
+
+            public Action<object, object> CreateSetter(PropertyInfo pi, bool extension)
+            {
+                return null;
+            }
+
+            public Type GetExtendedPropertyType(PropertyInfo pi)
+            {
+                return null;
             }
         }
     }

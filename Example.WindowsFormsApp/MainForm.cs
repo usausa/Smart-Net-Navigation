@@ -13,7 +13,7 @@
 
     public partial class MainForm : Form
     {
-        private readonly StandardResolver resolver;
+        private readonly SmartResolver resolver;
 
         private readonly Navigator navigator;
 
@@ -51,7 +51,7 @@
             ((Control)navigator.CurrentView).Focus();
         }
 
-        private static StandardResolver CreateResolver()
+        private static SmartResolver CreateResolver()
         {
             var config = new ResolverConfig()
                 .UseAutoBinding()

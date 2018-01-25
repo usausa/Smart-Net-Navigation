@@ -200,10 +200,10 @@
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Core">
-      <Version>1.2.0</Version>
+      <Version>1.4.0-beta1</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Resolver">
-      <Version>1.6.0</Version>
+      <Version>1.7.0-beta2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

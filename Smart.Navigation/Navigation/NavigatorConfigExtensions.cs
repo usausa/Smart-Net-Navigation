@@ -127,57 +127,29 @@
             return config;
         }
 
-        public static NavigatorConfig UseActivatorFactory<TActivatorFactory>(this NavigatorConfig config)
-            where TActivatorFactory : IActivatorFactory
+        public static NavigatorConfig UseDelegateFactory<TDelegateFactory>(this NavigatorConfig config)
+            where TDelegateFactory : IDelegateFactory
         {
             config.Configure(c =>
             {
-                c.RemoveAll<IActivatorFactory>();
-                c.Add<IActivatorFactory, TActivatorFactory>();
+                c.RemoveAll<IDelegateFactory>();
+                c.Add<IDelegateFactory, TDelegateFactory>();
             });
 
             return config;
         }
 
-        public static NavigatorConfig UseActivatorFactory(this NavigatorConfig config, IActivatorFactory activatorFactory)
+        public static NavigatorConfig UseDelegateFactory(this NavigatorConfig config, IDelegateFactory delegateFactory)
         {
-            if (activatorFactory == null)
+            if (delegateFactory == null)
             {
-                throw new ArgumentNullException(nameof(activatorFactory));
+                throw new ArgumentNullException(nameof(delegateFactory));
             }
 
             config.Configure(c =>
             {
-                c.RemoveAll<IActivatorFactory>();
-                c.Add(activatorFactory);
-            });
-
-            return config;
-        }
-
-        public static NavigatorConfig UseAccessorFactory<TAccessorFactory>(this NavigatorConfig config)
-            where TAccessorFactory : IAccessorFactory
-        {
-            config.Configure(c =>
-            {
-                c.RemoveAll<IAccessorFactory>();
-                c.Add<IAccessorFactory, TAccessorFactory>();
-            });
-
-            return config;
-        }
-
-        public static NavigatorConfig UseAccessorFactory(this NavigatorConfig config, IAccessorFactory accessorFactory)
-        {
-            if (accessorFactory == null)
-            {
-                throw new ArgumentNullException(nameof(accessorFactory));
-            }
-
-            config.Configure(c =>
-            {
-                c.RemoveAll<IAccessorFactory>();
-                c.Add(accessorFactory);
+                c.RemoveAll<IDelegateFactory>();
+                c.Add(delegateFactory);
             });
 
             return config;

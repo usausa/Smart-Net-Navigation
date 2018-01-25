@@ -2,20 +2,47 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
 
     using Smart.Navigation.Components;
     using Smart.Reflection;
 
     public class ParameterPlugin : PluginBase
     {
-        private readonly AttributePropertyFactory<ParameterAttribute> attributePropertyFactory;
+        private readonly Dictionary<Type, ParameterProperty[]> typePropertieses = new Dictionary<Type, ParameterProperty[]>();
+
+        private readonly IDelegateFactory delegateFactory;
 
         private readonly IConverter converter;
 
-        public ParameterPlugin(IAccessorFactory accessorFactory, IConverter converter)
+        public ParameterPlugin(IDelegateFactory delegateFactory, IConverter converter)
         {
-            attributePropertyFactory = new AttributePropertyFactory<ParameterAttribute>(accessorFactory);
+            this.delegateFactory = delegateFactory;
             this.converter = converter;
+        }
+
+        private ParameterProperty[] GetTypeProperties(Type type)
+        {
+            if (!typePropertieses.TryGetValue(type, out var properties))
+            {
+                properties = type.GetProperties()
+                    .Select(x => new
+                    {
+                        Property = x,
+                        Attribute = (ParameterAttribute)x.GetCustomAttribute(typeof(ParameterAttribute))
+                    })
+                    .Where(x => x.Attribute != null)
+                    .Select(x => new ParameterProperty(
+                        x.Attribute.Name ?? x.Property.Name,
+                        delegateFactory.GetExtendedPropertyType(x.Property),
+                        (x.Attribute.Direction & Directions.Export) != 0 ? delegateFactory.CreateGetter(x.Property, true) : null,
+                        (x.Attribute.Direction & Directions.Import) != 0 ? delegateFactory.CreateSetter(x.Property, true) : null))
+                    .ToArray();
+                typePropertieses[type] = properties;
+            }
+
+            return properties;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
@@ -38,12 +65,11 @@
         {
             var parameters = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
-            foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
+            foreach (var property in GetTypeProperties(target.GetType()))
             {
-                if ((property.Attribute.Direction & Directions.Export) != 0)
+                if (property.Getter != null)
                 {
-                    var name = property.Attribute.Name ?? property.Accessor.Name;
-                    parameters.Add(name, property.Accessor.GetValue(target));
+                    parameters.Add(property.Name, property.Getter(target));
                 }
             }
 
@@ -52,15 +78,12 @@
 
         private void ApplyImportParameters(object target, IDictionary<string, object> parameters)
         {
-            foreach (var property in attributePropertyFactory.GetAttributeProperties(target.GetType()))
+            foreach (var property in GetTypeProperties(target.GetType()))
             {
-                if ((property.Attribute.Direction & Directions.Import) != 0)
+                if ((property.Setter != null) &&
+                    parameters.TryGetValue(property.Name, out var value))
                 {
-                    var name = property.Attribute.Name ?? property.Accessor.Name;
-                    if (parameters.TryGetValue(name, out var value))
-                    {
-                        property.Accessor.SetValue(target, converter.Convert(value, property.Accessor.Type));
-                    }
+                    property.Setter(target, converter.Convert(value, property.PropertyType));
                 }
             }
         }
