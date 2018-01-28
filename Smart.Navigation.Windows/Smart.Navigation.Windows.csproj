@@ -60,5 +60,11 @@
       <Version>1.5.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj">
+      <Project>{DE778293-2659-4185-A67E-B6C710AC2F9E}</Project>
+      <Name>Smart.Navigation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
