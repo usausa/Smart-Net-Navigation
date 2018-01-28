@@ -44,7 +44,7 @@
                     .Where(x => x.Attribute != null)
                     .Select(x => new ScopeProperty(
                         x.Attribute.Name ?? x.Property.Name,
-                        delegateFactory.GetExtendedPropertyType(x.Property),
+                        x.Attribute.RequestType ?? delegateFactory.GetExtendedPropertyType(x.Property),
                         delegateFactory.CreateSetter(x.Property, true)))
                     .ToArray();
                 typePropertieses[type] = properties;
