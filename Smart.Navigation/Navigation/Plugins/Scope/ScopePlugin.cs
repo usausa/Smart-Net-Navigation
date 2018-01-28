@@ -61,15 +61,14 @@
                 if (store.TryGetValue(property.Name, out var reference))
                 {
                     reference.Counter--;
-                    if (reference.Counter > 0)
-                    {
-                        continue;
-                    }
-
-                    (reference.Instance as IDisposable)?.Dispose();
-
-                    store.Remove(property.Name);
                 }
+            }
+
+            foreach (var remove in store.Where(x => x.Value.Counter == 0).ToList())
+            {
+                (remove.Value.Instance as IDisposable)?.Dispose();
+
+                store.Remove(remove.Key);
             }
         }
 
