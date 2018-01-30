@@ -2,24 +2,24 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Usa.Smart.Navigation.Windows.Forms</id>
-    <version>0.9.2</version>
+    <version>0.9.3</version>
     <title>Smart.Navigation.Windows.Forms .NET</title>
     <authors>machi_pon</authors>
     <owners>machi_pon</owners>
-    <description>Smart navigation library Windows.Forms provider</description>
+    <description>Smart navigation library wndows forms provider</description>
     <releaseNotes></releaseNotes>
-    <summary>Smart navigation library Windows.Forms provider</summary>
+    <summary>Smart navigation library wndows forms provider</summary>
     <projectUrl>https://github.com/usausa/Smart-Net-Navigation</projectUrl>
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <dependency id="Usa.Smart.Core" version="1.5.0" />
-      <dependency id="Usa.Smart.Navigation" version="0.9.2" />
+      <dependency id="Usa.Smart.Core" version="1.5.1" />
+      <dependency id="Usa.Smart.Navigation" version="0.9.3" />
     </dependencies>
     <tags>smart navigation windowsforms</tags>
   </metadata>
   <files>
     <!-- net462 -->
-    <file src="Smart.Navigation.Windows.Forms\bin\Release\Smart.Navigation.Windows.Forms.dll" target="lib\net462" />
+    <file src="Smart.Navigation.Windows.Forms\bin\Release\net462\Smart.Navigation.Windows.Forms.dll" target="lib\net462" />
   </files>
 </package>
