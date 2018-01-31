@@ -14,7 +14,7 @@
     /// <summary>
     ///
     /// </summary>
-    public sealed class Navigator : DisposableObject, INavigator
+    public sealed class Navigator : DisposableObject, INavigator, INavigatorComponentSource
     {
         // ------------------------------------------------------------
         // Event
@@ -49,6 +49,8 @@
         // ------------------------------------------------------------
         // Property
         // ------------------------------------------------------------
+
+        ComponentContainer INavigatorComponentSource.Components => components;
 
         private ViewStackInfo CurrentStack => viewStack.Count > 0 ? viewStack[viewStack.Count - 1] : null;
 
