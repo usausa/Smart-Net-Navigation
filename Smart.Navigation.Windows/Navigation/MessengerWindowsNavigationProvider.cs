@@ -2,7 +2,7 @@
 {
     using System.Windows.Controls;
 
-    public class WindowsNavigationProvider : INavigationProvider
+    public class MessengerWindowsNavigationProvider : INavigationProvider
     {
         public object ResolveTarget(object view)
         {
