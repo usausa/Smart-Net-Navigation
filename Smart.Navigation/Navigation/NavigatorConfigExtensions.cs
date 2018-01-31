@@ -37,41 +37,41 @@
         }
 
         public static NavigatorConfig UseFactory<TFactory>(this NavigatorConfig config)
-            where TFactory : IFactory
+            where TFactory : IActivator
         {
             config.Configure(c =>
             {
-                c.RemoveAll<IFactory>();
-                c.Add<IFactory, TFactory>();
+                c.RemoveAll<IActivator>();
+                c.Add<IActivator, TFactory>();
             });
 
             return config;
         }
 
-        public static NavigatorConfig UseFactory(this NavigatorConfig config, IFactory factory)
+        public static NavigatorConfig UseActivator(this NavigatorConfig config, IActivator activator)
         {
-            if (factory == null)
+            if (activator == null)
             {
-                throw new ArgumentNullException(nameof(factory));
+                throw new ArgumentNullException(nameof(activator));
             }
 
             config.Configure(c =>
             {
-                c.RemoveAll<IFactory>();
-                c.Add(factory);
+                c.RemoveAll<IActivator>();
+                c.Add(activator);
             });
 
             return config;
         }
 
-        public static NavigatorConfig UseFactory(this NavigatorConfig config, Func<Type, object> callback)
+        public static NavigatorConfig UseActivator(this NavigatorConfig config, Func<Type, object> callback)
         {
             if (callback == null)
             {
                 throw new ArgumentNullException(nameof(callback));
             }
 
-            return config.UseFactory(new CallbackFactory(callback));
+            return config.UseActivator(new CallbackActivator(callback));
         }
 
         public static NavigatorConfig UseConverter<TConverter>(this NavigatorConfig config)

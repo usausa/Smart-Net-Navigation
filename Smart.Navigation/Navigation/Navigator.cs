@@ -42,7 +42,7 @@
 
         private readonly INavigationProvider provider;
 
-        private readonly IFactory factory;
+        private readonly IActivator activator;
 
         private readonly IPlugin[] plugins;
 
@@ -71,7 +71,7 @@
             components = config.ResolveComponents();
 
             provider = components.Get<INavigationProvider>();
-            factory = components.Get<IFactory>();
+            activator = components.Get<IActivator>();
             plugins = components.GetAll<IPlugin>().ToArray();
         }
 
@@ -268,7 +268,7 @@
 
             public object CreateView(Type type)
             {
-                var view = navigator.factory.Create(type);
+                var view = navigator.activator.Resolve(type);
 
                 var target = navigator.provider.ResolveTarget(view);
 

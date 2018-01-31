@@ -2,16 +2,16 @@
 {
     using System;
 
-    public sealed class StandardFactory : IFactory
+    /// <summary>
+    ///
+    /// </summary>
+    public interface IActivator
     {
         /// <summary>
         ///
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public object Create(Type type)
-        {
-            return Activator.CreateInstance(type);
-        }
+        object Resolve(Type type);
     }
 }

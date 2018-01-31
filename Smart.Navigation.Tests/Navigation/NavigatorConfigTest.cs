@@ -53,51 +53,51 @@
         public static void TestNavigatorConfigUseFactoryByInterface()
         {
             var config = new NavigatorConfig()
-                .UseFactory<StandardFactory>();
+                .UseFactory<StandardActivator>();
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            var factory = components.TryGet<IFactory>();
-            Assert.NotNull(factory);
-            Assert.NotNull(factory.Create(typeof(Data)));
+            var activator = components.TryGet<IActivator>();
+            Assert.NotNull(activator);
+            Assert.NotNull(activator.Resolve(typeof(Data)));
         }
 
         [Fact]
         public static void TestNavigatorConfigUseFactoryByInstance()
         {
             var config = new NavigatorConfig()
-                .UseFactory(new CallbackFactory(Activator.CreateInstance));
+                .UseActivator(new CallbackActivator(Activator.CreateInstance));
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            var factory = components.TryGet<IFactory>();
-            Assert.NotNull(factory);
-            Assert.NotNull(factory.Create(typeof(Data)));
+            var activator = components.TryGet<IActivator>();
+            Assert.NotNull(activator);
+            Assert.NotNull(activator.Resolve(typeof(Data)));
         }
 
         [Fact]
         public static void TestNavigatorConfigUseFactoryByInstanceFailed()
         {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseFactory((IFactory)null));
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseActivator((IActivator)null));
         }
 
         [Fact]
         public static void TestNavigatorConfigUseFactoryByCallback()
         {
             var config = new NavigatorConfig()
-                .UseFactory(Activator.CreateInstance);
+                .UseActivator(Activator.CreateInstance);
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            var factory = components.TryGet<IFactory>();
-            Assert.NotNull(factory);
-            Assert.NotNull(factory.Create(typeof(Data)));
+            var activator = components.TryGet<IActivator>();
+            Assert.NotNull(activator);
+            Assert.NotNull(activator.Resolve(typeof(Data)));
         }
 
         [Fact]
         public static void TestNavigatorConfigUseFactoryByCallbackFailed()
         {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseFactory((Func<Type, object>)null));
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseActivator((Func<Type, object>)null));
         }
 
         // ------------------------------------------------------------

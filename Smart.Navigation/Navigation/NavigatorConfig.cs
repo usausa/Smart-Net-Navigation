@@ -15,7 +15,7 @@
 
         public NavigatorConfig()
         {
-            config.Add<IFactory, StandardFactory>();
+            config.Add<IActivator, StandardActivator>();
             config.Add<IConverter, SmartConverter>();
             config.Add<IDelegateFactory>(DelegateFactory.Default);
             config.Add<IPlugin, ParameterPlugin>();

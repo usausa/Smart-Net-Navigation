@@ -21,14 +21,14 @@
 
         private readonly IDelegateFactory delegateFactory;
 
-        private readonly IFactory factory;
+        private readonly IActivator activator;
 
         private readonly Dictionary<string, Reference> store = new Dictionary<string, Reference>();
 
-        public ScopePlugin(IDelegateFactory delegateFactory, IFactory factory)
+        public ScopePlugin(IDelegateFactory delegateFactory, IActivator activator)
         {
             this.delegateFactory = delegateFactory;
-            this.factory = factory;
+            this.activator = activator;
         }
 
         private ScopeProperty[] GetTypeProperties(Type type)
@@ -80,7 +80,7 @@
                 {
                     reference = new Reference
                     {
-                        Instance = factory.Create(property.RequestType)
+                        Instance = activator.Resolve(property.RequestType)
                     };
 
                     (reference.Instance as IInitializable)?.Initialize();

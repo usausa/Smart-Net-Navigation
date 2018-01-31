@@ -2,16 +2,16 @@
 {
     using System;
 
-    public sealed class CallbackFactory : IFactory
+    public sealed class CallbackActivator : IActivator
     {
         private readonly Func<Type, object> callback;
 
-        public CallbackFactory(Func<Type, object> callback)
+        public CallbackActivator(Func<Type, object> callback)
         {
             this.callback = callback;
         }
 
-        public object Create(Type type)
+        public object Resolve(Type type)
         {
             return callback(type);
         }

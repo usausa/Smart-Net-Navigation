@@ -7,7 +7,7 @@
     {
         public static NavigatorConfig UseResolver(this NavigatorConfig config, IResolver resolver)
         {
-            return config.UseFactory(new SmartResolverFactory(resolver));
+            return config.UseActivator(new SmartResolverActivator(resolver));
         }
     }
 }
