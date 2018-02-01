@@ -56,6 +56,11 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnClose(IPluginContext context, object view, object target)
         {
+            if (target == null)
+            {
+                return;
+            }
+
             foreach (var property in GetTypeProperties(target.GetType()))
             {
                 if (store.TryGetValue(property.Name, out var reference))
@@ -74,6 +79,11 @@
 
         public override void OnCreate(IPluginContext context, object view, object target)
         {
+            if (target == null)
+            {
+                return;
+            }
+
             foreach (var property in GetTypeProperties(target.GetType()))
             {
                 if (!store.TryGetValue(property.Name, out var reference))
