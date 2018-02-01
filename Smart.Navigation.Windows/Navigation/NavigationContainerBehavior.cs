@@ -4,12 +4,14 @@
     using System.Windows.Controls;
     using System.Windows.Interactivity;
 
+    [TypeConstraint(typeof(ContentControl))]
     public class NavigationContainerBehavior : Behavior<ContentControl>
     {
         public static readonly DependencyProperty NavigatorProperty = DependencyProperty.Register(
-            nameof(NavigationContainerBehavior),
+            nameof(Navigator),
             typeof(INavigator),
-            typeof(ContentControl));
+            typeof(NavigationContainerBehavior),
+            new PropertyMetadata(default(INavigator)));
 
         public INavigator Navigator
         {
