@@ -64,9 +64,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Views\AppViewModelBase.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MenuViewViewModel.cs" />
+    <Compile Include="Views\Stack\Stack1View.xaml.cs">
+      <DependentUpon>Stack1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stack\Stack1ViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,6 +86,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stack\Stack1View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,10 +134,10 @@
       <Version>1.7.1</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows">
-      <Version>1.2.0</Version>
+      <Version>1.2.1</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows.Resolver">
-      <Version>1.2.0</Version>
+      <Version>1.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

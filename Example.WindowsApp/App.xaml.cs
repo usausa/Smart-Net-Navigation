@@ -1,6 +1,9 @@
 ﻿namespace Example.WindowsApp
 {
+    using System.Linq;
+    using System.Reflection;
     using System.Windows;
+    using System.Windows.Controls;
 
     using Example.WindowsApp.Views;
 
@@ -29,7 +32,9 @@
                 .UseResolver(resolver)
                 .ToNavigator();
 
-            navigator.Register(typeof(MenuView));
+            navigator.Register(Assembly.GetExecutingAssembly().ExportedTypes
+                .Where(x => x.Namespace.StartsWith("Example.WindowsApp.Views") &&
+                            typeof(UserControl).IsAssignableFrom(x)));
 
             // Show MainWindow
             MainWindow = resolver.Get<MainWindow>();

@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type={x:Type local:MainWindowViewModel}}"
         resolver:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
-        Title="MainWindow" Height="359" Width="496">
+        Title="MainWindow" Height="359" Width="496" ResizeMode="CanMinimize">
     <ContentControl>
         <i:Interaction.Behaviors>
             <navigation:NavigationContainerBehavior Navigator="{Binding Navigator, Mode=OneTime}"/>
