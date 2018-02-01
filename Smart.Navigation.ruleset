@@ -28,6 +28,7 @@
     <Rule Id="SA1623" Action="Hidden" />
     <Rule Id="SA1633" Action="Hidden" />
     <Rule Id="SA1642" Action="Hidden" />
+    <Rule Id="SA1649" Action="Hidden" />
     <Rule Id="SA1652" Action="Hidden" />
   </Rules>
 </RuleSet>
