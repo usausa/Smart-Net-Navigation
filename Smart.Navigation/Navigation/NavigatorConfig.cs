@@ -15,6 +15,7 @@
 
         public NavigatorConfig()
         {
+            config.Add<IDescriptorResolver, MapDescriptorResolver>();
             config.Add<IActivator, StandardActivator>();
             config.Add<IConverter, SmartConverter>();
             config.Add<IDelegateFactory>(DelegateFactory.Default);

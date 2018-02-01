@@ -36,11 +36,11 @@
 
         private readonly ComponentContainer components;
 
-        private readonly Dictionary<object, ViewDescriptor> descriptors = new Dictionary<object, ViewDescriptor>();
-
         private readonly List<ViewStackInfo> viewStack = new List<ViewStackInfo>();
 
         private readonly INavigationProvider provider;
+
+        private readonly IDescriptorResolver descriptorResolver;
 
         private readonly IActivator activator;
 
@@ -71,6 +71,7 @@
             components = config.ResolveComponents();
 
             provider = components.Get<INavigationProvider>();
+            descriptorResolver = components.Get<IDescriptorResolver>();
             activator = components.Get<IActivator>();
             plugins = components.GetAll<IPlugin>().ToArray();
         }
@@ -91,7 +92,7 @@
 
         public void Register(object id, Type type)
         {
-            descriptors.Add(id, new ViewDescriptor(id, type));
+            descriptorResolver.Add(id, type);
         }
 
         // ------------------------------------------------------------
@@ -255,7 +256,7 @@
         {
             private readonly Navigator navigator;
 
-            public IDictionary<object, ViewDescriptor> Descriptors => navigator.descriptors;
+            public IDescriptorResolver DescriptorResolver => navigator.descriptorResolver;
 
             public List<ViewStackInfo> ViewStack => navigator.viewStack;
 

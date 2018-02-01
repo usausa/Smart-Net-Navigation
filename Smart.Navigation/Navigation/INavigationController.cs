@@ -6,7 +6,7 @@
 
     public interface INavigationController
     {
-        IDictionary<object, ViewDescriptor> Descriptors { get; }
+        IDescriptorResolver DescriptorResolver { get; }
 
         List<ViewStackInfo> ViewStack { get; }
 
