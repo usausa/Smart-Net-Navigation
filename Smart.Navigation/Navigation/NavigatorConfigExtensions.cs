@@ -1,4 +1,6 @@
-﻿namespace Smart.Navigation
+﻿using Smart.Converter;
+
+namespace Smart.Navigation
 {
     using System;
 
@@ -36,7 +38,7 @@
             return config;
         }
 
-        public static NavigatorConfig UseFactory<TFactory>(this NavigatorConfig config)
+        public static NavigatorConfig UseActivator<TFactory>(this NavigatorConfig config)
             where TFactory : IActivator
         {
             config.Configure(c =>
@@ -105,6 +107,11 @@
         public static NavigatorConfig UseConverter(this NavigatorConfig config, Func<object, Type, object> callback)
         {
             return config.UseConverter(new CallbackConverter(callback));
+        }
+
+        public static NavigatorConfig UseConverter(this NavigatorConfig config, IObjectConverter converter)
+        {
+            return config.UseConverter(new SmartConverter(converter));
         }
 
         public static NavigatorConfig AddPlugin<TPlugin>(this NavigatorConfig config)

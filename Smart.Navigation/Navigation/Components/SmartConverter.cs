@@ -4,7 +4,7 @@
 
     using Smart.Converter;
 
-    public class SmartConverter : IConverter
+    public sealed class SmartConverter : IConverter
     {
         private readonly IObjectConverter converter;
 
