@@ -1,9 +1,8 @@
-﻿using Smart.Converter;
-
-namespace Smart.Navigation
+﻿namespace Smart.Navigation
 {
     using System;
 
+    using Smart.Converter;
     using Smart.Navigation.Components;
     using Smart.Navigation.Plugins;
     using Smart.Reflection;

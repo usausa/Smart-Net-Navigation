@@ -31,7 +31,7 @@
 
             // Config Navigator
             navigator = new NavigatorConfig()
-                .UseProvider(new WindowsFormsNavigationProvider(ContainerPanel))
+                .UseControlNavigationProvider(ContainerPanel)
                 .UseResolver(resolver)
                 .ToNavigator();
             navigator.Exited += OnExited;

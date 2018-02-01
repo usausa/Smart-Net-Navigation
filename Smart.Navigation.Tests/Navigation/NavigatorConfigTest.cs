@@ -53,7 +53,7 @@
         public static void TestNavigatorConfigUseFactoryByInterface()
         {
             var config = new NavigatorConfig()
-                .UseFactory<StandardActivator>();
+                .UseActivator<StandardActivator>();
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 

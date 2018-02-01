@@ -6,13 +6,12 @@
     {
         private readonly Control container;
 
-        public bool FitToParent { get; set; } = true;
+        private readonly WindowsFormsNavigationProviderOptions options;
 
-        public bool RestoreFocus { get; set; } = true;
-
-        public WindowsFormsNavigationProvider(Control container)
+        public WindowsFormsNavigationProvider(Control container, WindowsFormsNavigationProviderOptions options)
         {
             this.container = container;
+            this.options = options;
         }
 
         public object ResolveTarget(object view)
@@ -24,13 +23,13 @@
         {
             var control = (Control)view;
 
-            if (FitToParent)
+            if (options.FitToParent)
             {
                 control.Size = container.Size;
             }
 
             container.Controls.Add(control);
-            if (FitToParent)
+            if (options.FitToParent)
             {
                 control.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             }
@@ -52,7 +51,7 @@
 
             control.Visible = true;
 
-            if (RestoreFocus)
+            if (options.RestoreFocus)
             {
                 if (parameter is Control focused)
                 {
@@ -63,22 +62,13 @@
                     control.Focus();
                 }
             }
-            else
-            {
-                control.Focus();
-            }
         }
 
         public object DeactiveView(object view)
         {
             var control = (Control)view;
 
-            var parameter = default(object);
-
-            if (RestoreFocus)
-            {
-                parameter = GetFocused(control);
-            }
+            var parameter = options.RestoreFocus ? GetFocused(control) : null;
 
             control.Visible = false;
 
