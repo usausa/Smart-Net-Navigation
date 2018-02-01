@@ -1,6 +1,7 @@
 ﻿namespace Smart.Navigation
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
 
     /// <summary>
@@ -34,6 +35,20 @@
             }
 
             navigator.Register(type, type);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Extensions")]
+        public static void Register(this Navigator navigator, IEnumerable<Type> types)
+        {
+            if (types == null)
+            {
+                throw new ArgumentNullException(nameof(types));
+            }
+
+            foreach (var type in types)
+            {
+                navigator.Register(type, type);
+            }
         }
     }
 }
