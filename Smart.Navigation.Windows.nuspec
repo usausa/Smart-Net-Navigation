@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Usa.Smart.Navigation</id>
+    <id>Usa.Smart.Navigation.Windows</id>
     <version>0.9.4</version>
-    <title>Smart.Navigation .NET</title>
+    <title>Smart.Navigation.Windows .NET</title>
     <authors>machi_pon</authors>
     <owners>machi_pon</owners>
-    <description>Smart navigation library</description>
+    <description>Smart navigation library wpd provider</description>
     <releaseNotes></releaseNotes>
-    <summary>Smart navigation library</summary>
+    <summary>Smart navigation library wpd provider</summary>
     <projectUrl>https://github.com/usausa/Smart-Net-Navigation</projectUrl>
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="Usa.Smart.Core" version="1.5.1" />
+      <dependency id="Usa.Smart.Navigation" version="0.9.4" />
     </dependencies>
-    <tags>smart navigation</tags>
+    <tags>smart navigation wpf mvvm</tags>
   </metadata>
   <files>
-    <!-- netstandard2.0 -->
-    <file src="Smart.Navigation\bin\Release\netstandard2.0\Smart.Navigation.dll" target="lib\netstandard2.0" />
     <!-- net462 -->
-    <file src="Smart.Navigation\bin\Release\net462\Smart.Navigation.dll" target="lib\net462" />
+    <file src="Smart.Navigation.Windows\bin\Release\net462\Smart.Navigation.Windows.dll" target="lib\net462" />
   </files>
 </package>
