@@ -12,9 +12,9 @@
              d:DesignHeight="320" d:DesignWidth="480">
     <Grid>
 
-        <Button Content="Button" HorizontalAlignment="Left" Margin="102,113,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Pop" HorizontalAlignment="Left" Margin="102,113,0,0" VerticalAlignment="Top" Width="75"
             Command="{Binding Pop}" CommandParameter="{extensions:Int32 1}"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="314,113,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Push" HorizontalAlignment="Left" Margin="314,113,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Push}" CommandParameter="{x:Type local:Stack3View}"/>
 
     </Grid>

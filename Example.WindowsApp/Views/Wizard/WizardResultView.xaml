@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Example.WindowsApp.Views.Wizard.WizardResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Example.WindowsApp.Views.Wizard"
+             xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type local:WizardResultViewModel}}"
+             resolver:DataContextResolver.Type="{x:Type local:WizardResultViewModel}"
+             d:DesignHeight="320" d:DesignWidth="480">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding Context.Value.Data1}" IsReadOnly="True" />
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Text="{Binding Context.Value.Data2}" IsReadOnly="True" />
+        <Button Content="Prev" HorizontalAlignment="Left" Margin="92,149,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding Forward}" CommandParameter="{x:Type local:WizardInput2View}"/>
+        <Button Content="Complete" HorizontalAlignment="Left" Margin="285,141,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding Forward}" CommandParameter="{x:Type views:MenuView}"/>
+    </Grid>
+</UserControl>

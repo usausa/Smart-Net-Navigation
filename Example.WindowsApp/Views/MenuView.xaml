@@ -6,13 +6,16 @@
              xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
              xmlns:local="clr-namespace:Example.WindowsApp.Views"
              xmlns:stack="clr-namespace:Example.WindowsApp.Views.Stack"
+             xmlns:wizard="clr-namespace:Example.WindowsApp.Views.Wizard"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type local:MenuViewViewModel}}"
              resolver:DataContextResolver.Type="{x:Type local:MenuViewViewModel}"
              d:DesignHeight="320" d:DesignWidth="480">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="233,84,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Stack" HorizontalAlignment="Left" Margin="233,84,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Forward}" CommandParameter="{x:Type stack:Stack1View}"/>
+        <Button Content="Wizard" HorizontalAlignment="Left" Margin="233,125,0,0" VerticalAlignment="Top" Width="75"
+            Command="{Binding Forward}" CommandParameter="{x:Type wizard:WizardInput1View}"/>
 
     </Grid>
 </UserControl>
