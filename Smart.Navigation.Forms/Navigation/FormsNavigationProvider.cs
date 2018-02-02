@@ -41,6 +41,16 @@
 
         public void ActiveView(object view, object parameter)
         {
+            var v = (View)view;
+
+            var container = resolver.Container;
+            if (container == null)
+            {
+                throw new InvalidOperationException("Container is unresolved.");
+            }
+
+            container.Content = v;
+
             if (options.RestoreFocus)
             {
                 if (parameter is VisualElement focused)
@@ -49,7 +59,7 @@
                 }
                 else
                 {
-                    ((View)view).Focus();
+                    v.Focus();
                 }
             }
         }
