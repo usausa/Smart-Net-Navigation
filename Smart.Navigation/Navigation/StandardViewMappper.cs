@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class MapDescriptorResolver : IDescriptorResolver
+    public class StandardViewMappper : IViewMapper
     {
         private readonly Dictionary<object, ViewDescriptor> descriptors = new Dictionary<object, ViewDescriptor>();
 

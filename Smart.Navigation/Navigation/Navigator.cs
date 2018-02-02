@@ -40,7 +40,7 @@
 
         private readonly INavigationProvider provider;
 
-        private readonly IDescriptorResolver descriptorResolver;
+        private readonly IViewMapper viewMapper;
 
         private readonly IActivator activator;
 
@@ -71,7 +71,7 @@
             components = config.ResolveComponents();
 
             provider = components.Get<INavigationProvider>();
-            descriptorResolver = components.Get<IDescriptorResolver>();
+            viewMapper = components.Get<IViewMapper>();
             activator = components.Get<IActivator>();
             plugins = components.GetAll<IPlugin>().ToArray();
         }
@@ -92,7 +92,7 @@
 
         public void Register(object id, Type type)
         {
-            descriptorResolver.Add(id, type);
+            viewMapper.Add(id, type);
         }
 
         // ------------------------------------------------------------
@@ -256,7 +256,7 @@
         {
             private readonly Navigator navigator;
 
-            public IDescriptorResolver DescriptorResolver => navigator.descriptorResolver;
+            public IViewMapper ViewMapper => navigator.viewMapper;
 
             public List<ViewStackInfo> ViewStack => navigator.viewStack;
 

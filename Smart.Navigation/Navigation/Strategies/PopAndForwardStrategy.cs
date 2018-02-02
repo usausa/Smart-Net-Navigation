@@ -18,7 +18,7 @@
 
         public StragtegyResult Initialize(INavigationController controller)
         {
-            if (!controller.DescriptorResolver.TryGetValue(id, out descriptor))
+            if (!controller.ViewMapper.TryGetValue(id, out descriptor))
             {
                 throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
             }

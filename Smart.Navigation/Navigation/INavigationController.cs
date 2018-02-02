@@ -6,7 +6,7 @@
 
     public interface INavigationController
     {
-        IDescriptorResolver DescriptorResolver { get; }
+        IViewMapper ViewMapper { get; }
 
         List<ViewStackInfo> ViewStack { get; }
 

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IDescriptorResolver
+    public interface IViewMapper
     {
         void Add(object id, Type type);
 
