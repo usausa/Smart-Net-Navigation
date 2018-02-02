@@ -4,15 +4,13 @@
     using Smart.Navigation;
     using Smart.Windows.Input;
 
-    using Smart.Windows.ViewModels;
-
     public class MenuViewViewModel : AppViewModelBase
     {
         public AsyncCommand<Type> Forward { get; }
 
-        public MenuViewViewModel()
+        public MenuViewViewModel(INavigator navigator)
         {
-            Forward = MakeAsyncCommand<Type>(x => Navigator.ForwardAsync(x));
+            Forward = MakeAsyncCommand<Type>(navigator.ForwardAsync);
         }
     }
 }

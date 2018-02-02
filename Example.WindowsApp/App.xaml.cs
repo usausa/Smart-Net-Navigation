@@ -31,6 +31,12 @@
                 .UseWindowsNavigationProvider()
                 .UseResolver(resolver)
                 .ToNavigator();
+            navigator.Navigated += (sender, args) =>
+            {
+                // for debug
+                System.Diagnostics.Debug.WriteLine(
+                    $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
+            };
 
             navigator.Register(Assembly.GetExecutingAssembly().ExportedTypes
                 .Where(x => x.Namespace.StartsWith("Example.WindowsApp.Views") &&

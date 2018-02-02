@@ -11,7 +11,9 @@
              resolver:DataContextResolver.Type="{x:Type local:Stack1ViewModel}"
              d:DesignHeight="320" d:DesignWidth="480">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="215,178,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Button" HorizontalAlignment="Left" Margin="94,58,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Forward}" CommandParameter="{x:Type views:MenuView}"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="289,58,0,0" VerticalAlignment="Top" Width="75"
+            Command="{Binding Push}" CommandParameter="{x:Type local:Stack2View}"/>
     </Grid>
 </UserControl>

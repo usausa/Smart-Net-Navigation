@@ -5,15 +5,15 @@
     using Smart.Navigation;
     using Smart.Windows.Input;
 
-    public class Stack1ViewModel : AppViewModelBase
+    public class Stack2ViewModel : AppViewModelBase
     {
-        public AsyncCommand<Type> Forward { get; }
+        public AsyncCommand<int> Pop { get; }
 
         public AsyncCommand<Type> Push { get; }
 
-        public Stack1ViewModel(INavigator navigator)
+        public Stack2ViewModel(INavigator navigator)
         {
-            Forward = MakeAsyncCommand<Type>(navigator.ForwardAsync);
+            Pop = MakeAsyncCommand<int>(navigator.PopAsync);
             Push = MakeAsyncCommand<Type>(navigator.PushAsync);
         }
     }
