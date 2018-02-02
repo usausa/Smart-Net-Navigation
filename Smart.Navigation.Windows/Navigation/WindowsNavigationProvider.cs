@@ -41,8 +41,15 @@
 
         public void ActiveView(object view, object parameter)
         {
-            var control = (Control)view;
+            var container = resolver.Container;
+            if (container == null)
+            {
+                throw new InvalidOperationException("Container is unresolved.");
+            }
 
+            container.Content = view;
+
+            var control = (Control)view;
             if (options.RestoreFocus)
             {
                 if (parameter is IInputElement focused)
@@ -59,7 +66,6 @@
         public object DeactiveView(object view)
         {
             var control = (Control)view;
-
             return options.RestoreFocus ? FocusManager.GetFocusedElement(control) : null;
         }
     }
