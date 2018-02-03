@@ -42,6 +42,8 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <LangVersion>latest</LangVersion>
     <CodeAnalysisRuleSet>..\..\Smart.Navigation.ruleset</CodeAnalysisRuleSet>
+    <AotAssemblies>true</AotAssemblies>
+    <EnableLLVM>true</EnableLLVM>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
