@@ -58,7 +58,11 @@
                 }
                 else
                 {
-                    control.Focus();
+                    if (!control.Focus())
+                    {
+                        var fs = FocusManager.GetFocusScope(control);
+                        FocusManager.SetFocusedElement(fs, control);
+                    }
                 }
             }
         }
