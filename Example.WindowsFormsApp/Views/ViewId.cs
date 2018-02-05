@@ -15,11 +15,5 @@
         WizardInput1,
         WizardInput2,
         WizardResult,
-
-        Popup1Main,
-        Popup1Sub,
-
-        Popup2Main,
-        Popup2Sub
     }
 }
