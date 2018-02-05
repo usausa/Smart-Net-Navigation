@@ -69,7 +69,7 @@
     <Compile Include="Views\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuViewViewModel.cs" />
+    <Compile Include="Views\MenuViewModel.cs" />
     <Compile Include="Views\Stack\Stack1View.xaml.cs">
       <DependentUpon>Stack1View.xaml</DependentUpon>
     </Compile>

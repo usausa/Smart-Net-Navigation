@@ -8,8 +8,8 @@
              xmlns:stack="clr-namespace:Example.WindowsApp.Views.Stack"
              xmlns:wizard="clr-namespace:Example.WindowsApp.Views.Wizard"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type={x:Type local:MenuViewViewModel}}"
-             resolver:DataContextResolver.Type="{x:Type local:MenuViewViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type local:MenuViewModel}}"
+             resolver:DataContextResolver.Type="{x:Type local:MenuViewModel}"
              d:DesignHeight="320" d:DesignWidth="480">
     <Grid>
         <Button Content="Stack" HorizontalAlignment="Left" Margin="233,84,0,0" VerticalAlignment="Top" Width="75"
