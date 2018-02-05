@@ -1,4 +1,6 @@
-﻿namespace Example.FormsApp
+﻿[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
+
+namespace Example.FormsApp
 {
     using Xamarin.Forms;
 
