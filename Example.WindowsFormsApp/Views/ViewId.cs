@@ -14,6 +14,6 @@
 
         WizardInput1,
         WizardInput2,
-        WizardResult,
+        WizardResult
     }
 }
