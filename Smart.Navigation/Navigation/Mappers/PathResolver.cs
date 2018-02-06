@@ -23,6 +23,8 @@
 
         public static string Normalize(string path)
         {
+            // TODO 通常ケース(絶対かつ上移動なし)？ではなるべくなにもしない
+
             // TODO stringbuilderをメンバに？、ワーク用、スタックも？
 
             // TODO .. , last/ ?
