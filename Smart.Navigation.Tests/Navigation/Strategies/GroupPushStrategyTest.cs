@@ -1,494 +1,516 @@
-﻿namespace Smart.Navigation.Strategies
-{
-    using System;
-    using System.Threading.Tasks;
+﻿//namespace Smart.Navigation.Strategies
+//{
+//    using System;
+//    using System.Threading.Tasks;
 
-    using Smart.Mock;
+//    using Smart.Mock;
+
+//    using Xunit;
 
-    using Xunit;
+//    public class GroupPushStrategyTest
+//    {
+//        // ------------------------------------------------------------
+//        // Navigate
+//        // ------------------------------------------------------------
+
+//        [Fact]
+//        public static void TestNavigatorGropedPushNewGroup()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                    m.Register(ViewId.FormC1, typeof(FormC1));
+//                })
+//                .ToNavigator();
+
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+
+//            // test
+//            // A1 B1       new []
+//            // A1 B1 C1    D:B1 C:C1
+//            navigator.Forward(ViewId.FormA1);
+
+//            navigator.GroupPush(ViewId.FormB1);
+
+//            var formB1 = (FormB1)navigator.CurrentView;
 
-    public class GroupPushStrategyTest
-    {
-        // ------------------------------------------------------------
-        // Navigate
-        // ------------------------------------------------------------
+//            navigator.GroupPush(ViewId.FormC1);
+
+//            Assert.Equal(3, navigator.StackedCount);
+//            Assert.False(formB1.IsVisible);
+
+//            Assert.Equal(ViewId.FormB1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormC1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsStacked());
+//        }
 
-        [Fact]
-        public static void TestNavigatorGropedPushNewGroup()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
+//        [Fact]
+//        public static void TestNavigatorGropedPushNewAndBring()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormA2, typeof(FormA2));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                })
+//                .ToNavigator();
 
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-            navigator.Register(ViewId.FormC1, typeof(FormC1));
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
 
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+//            // test
+//            // A1 B1       new [0]
+//            // B1 A1 A2    D:B1 C:A2
+//            navigator.Forward(ViewId.FormA1);
+
+//            var formA1 = (FormA1)navigator.CurrentView;
+
+//            navigator.GroupPush(ViewId.FormB1);
+
+//            var formB1 = (FormB1)navigator.CurrentView;
+
+//            navigator.GroupPush(ViewId.FormA2);
+
+//            Assert.Equal(3, navigator.StackedCount);
+//            Assert.False(formB1.IsVisible);
+
+//            Assert.Equal(ViewId.FormB1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormA2, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsStacked());
+
+//            navigator.Pop();
+
+//            Assert.True(formA1.IsVisible);
+//            Assert.False(formB1.IsVisible);
 
-            // test
-            // A1 B1       new []
-            // A1 B1 C1    D:B1 C:C1
-            navigator.Forward(ViewId.FormA1);
+//            Assert.Equal(ViewId.FormA2, context.Value.FromId);
+//            Assert.Equal(ViewId.FormA1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
 
-            navigator.GroupPush(ViewId.FormB1);
+//            navigator.Pop();
 
-            var formB1 = (FormB1)navigator.CurrentView;
+//            Assert.False(formA1.IsOpen);
+//            Assert.True(formB1.IsVisible);
 
-            navigator.GroupPush(ViewId.FormC1);
+//            Assert.Equal(ViewId.FormA1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormB1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
+//        }
 
-            Assert.Equal(3, navigator.StackedCount);
-            Assert.False(formB1.IsVisible);
+//        [Fact]
+//        public static void TestNavigatorGropedPushNewAndNotBring()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                    m.Register(ViewId.FormB2, typeof(FormB2));
+//                })
+//                .ToNavigator();
+
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+
+//            // test
+//            // A1 B1       new [1]
+//            // A1 B1 B2    D:B1 C:B2
+//            navigator.Forward(ViewId.FormA1);
+
+//            var formA1 = (FormA1)navigator.CurrentView;
+
+//            navigator.GroupPush(ViewId.FormB1);
+
+//            var formB1 = (FormB1)navigator.CurrentView;
+
+//            navigator.GroupPush(ViewId.FormB2);
 
-            Assert.Equal(ViewId.FormB1, context.Value.FromId);
-            Assert.Equal(ViewId.FormC1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsStacked());
-        }
+//            Assert.Equal(3, navigator.StackedCount);
+//            Assert.False(formB1.IsVisible);
 
-        [Fact]
-        public static void TestNavigatorGropedPushNewAndBring()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
+//            Assert.Equal(ViewId.FormB1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormB2, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsStacked());
 
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormA2, typeof(FormA2));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
+//            navigator.Pop();
 
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+//            Assert.False(formA1.IsVisible);
+//            Assert.True(formB1.IsVisible);
 
-            // test
-            // A1 B1       new [0]
-            // B1 A1 A2    D:B1 C:A2
-            navigator.Forward(ViewId.FormA1);
+//            Assert.Equal(ViewId.FormB2, context.Value.FromId);
+//            Assert.Equal(ViewId.FormB1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
 
-            var formA1 = (FormA1)navigator.CurrentView;
+//            navigator.Pop();
 
-            navigator.GroupPush(ViewId.FormB1);
+//            Assert.True(formA1.IsVisible);
+//            Assert.False(formB1.IsOpen);
 
-            var formB1 = (FormB1)navigator.CurrentView;
-
-            navigator.GroupPush(ViewId.FormA2);
-
-            Assert.Equal(3, navigator.StackedCount);
-            Assert.False(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormB1, context.Value.FromId);
-            Assert.Equal(ViewId.FormA2, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsStacked());
-
-            navigator.Pop();
-
-            Assert.True(formA1.IsVisible);
-            Assert.False(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormA2, context.Value.FromId);
-            Assert.Equal(ViewId.FormA1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-
-            navigator.Pop();
-
-            Assert.False(formA1.IsOpen);
-            Assert.True(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormA1, context.Value.FromId);
-            Assert.Equal(ViewId.FormB1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-        }
-
-        [Fact]
-        public static void TestNavigatorGropedPushNewAndNotBring()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-            navigator.Register(ViewId.FormB2, typeof(FormB2));
-
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
-
-            // test
-            // A1 B1       new [1]
-            // A1 B1 B2    D:B1 C:B2
-            navigator.Forward(ViewId.FormA1);
-
-            var formA1 = (FormA1)navigator.CurrentView;
-
-            navigator.GroupPush(ViewId.FormB1);
-
-            var formB1 = (FormB1)navigator.CurrentView;
-
-            navigator.GroupPush(ViewId.FormB2);
-
-            Assert.Equal(3, navigator.StackedCount);
-            Assert.False(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormB1, context.Value.FromId);
-            Assert.Equal(ViewId.FormB2, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsStacked());
-
-            navigator.Pop();
-
-            Assert.False(formA1.IsVisible);
-            Assert.True(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormB2, context.Value.FromId);
-            Assert.Equal(ViewId.FormB1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-
-            navigator.Pop();
-
-            Assert.True(formA1.IsVisible);
-            Assert.False(formB1.IsOpen);
-
-            Assert.Equal(ViewId.FormB1, context.Value.FromId);
-            Assert.Equal(ViewId.FormA1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-        }
-
-        [Fact]
-        public static void TestNavigatorGropedPushExistAndBring()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
-
-            // test
-            // A1 B1       exist [0]
-            // B1 A1       D:B1 A:A1
-            navigator.Forward(ViewId.FormA1);
-
-            var formA1 = (FormA1)navigator.CurrentView;
-
-            navigator.GroupPush(ViewId.FormB1);
-
-            var formB1 = (FormB1)navigator.CurrentView;
-
-            navigator.GroupPush(ViewId.FormA1);
-
-            Assert.Equal(2, navigator.StackedCount);
-            Assert.True(formA1.IsVisible);
-            Assert.False(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormB1, context.Value.FromId);
-            Assert.Equal(ViewId.FormA1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-
-            navigator.Pop();
-
-            Assert.False(formA1.IsOpen);
-            Assert.True(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormA1, context.Value.FromId);
-            Assert.Equal(ViewId.FormB1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-        }
-
-        [Fact]
-        public static void TestNavigatorGropedPushExistAndNotBring()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
-
-            // test
-            // A1 B1       exist [1]
-            // A1 B1       -
-            navigator.Forward(ViewId.FormA1);
-
-            var formA1 = (FormA1)navigator.CurrentView;
-
-            navigator.GroupPush(ViewId.FormB1);
-
-            var formB1 = (FormB1)navigator.CurrentView;
-
-            Assert.False(navigator.GroupPush(ViewId.FormB1));
-
-            Assert.Equal(2, navigator.StackedCount);
-            Assert.False(formA1.IsVisible);
-            Assert.True(formB1.IsVisible);
-
-            navigator.Pop();
-
-            Assert.True(formA1.IsVisible);
-            Assert.False(formB1.IsOpen);
-
-            Assert.Equal(ViewId.FormB1, context.Value.FromId);
-            Assert.Equal(ViewId.FormA1, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-        }
-
-        [Fact]
-        public static void TestNavigatorGropedPushUseCase()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.Form1, typeof(Form1));
-            navigator.Register(ViewId.Form2, typeof(Form2));
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormA2, typeof(FormA2));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-            navigator.Register(ViewId.FormB2, typeof(FormB2));
-
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
-
-            // test
-            navigator.Forward(ViewId.Form1);
-
-            // group A
-            // 1:A1
-            navigator.GroupPush(ViewId.FormA1);
-            var formA1 = (FormA1)navigator.CurrentView;
-
-            // 1:A1:A2
-            navigator.GroupPush(ViewId.FormA2);
-            var formA2 = (FormA2)navigator.CurrentView;
-
-            // group B
-            // 1:A1:A2:B1
-            navigator.GroupPush(ViewId.FormB1);
-            var formB1 = (FormB1)navigator.CurrentView;
-
-            // 1:A1:A2:B1:B2
-            navigator.GroupPush(ViewId.FormB2);
-            var formB2 = (FormB2)navigator.CurrentView;
-
-            // group A
-            // 1:B1:B2:A1:A2
-            navigator.GroupPush(ViewId.FormA1);
-
-            Assert.True(formA2.IsVisible);
-            Assert.False(formA1.IsVisible);
-            Assert.False(formB2.IsVisible);
-            Assert.False(formB1.IsVisible);
-
-            Assert.Equal(ViewId.FormB2, context.Value.FromId);
-            Assert.Equal(ViewId.FormA2, context.Value.ToId);
-            Assert.True(context.Value.Attribute.IsRestore());
-
-            // 1:B1:B2:A1
-            navigator.Pop();
-
-            Assert.True(formA1.IsVisible);
-            Assert.False(formB2.IsVisible);
-            Assert.False(formB1.IsVisible);
-
-            // group B
-            // 1:A1:B1:B2
-            navigator.GroupPush(ViewId.FormB1);
-
-            Assert.True(formB2.IsVisible);
-            Assert.False(formB1.IsVisible);
-            Assert.False(formA1.IsVisible);
-
-            // 1:A1:B1
-            navigator.Pop();
-
-            Assert.True(formB1.IsVisible);
-            Assert.False(formA1.IsVisible);
-        }
-
-        [Fact]
-        public static void TestNavigatorGropedPushWithParameter()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
-
-            // test
-            navigator.Forward(ViewId.FormA1);
-
-            navigator.GroupPush(ViewId.FormB1, new NavigationParameter().SetValue("test"));
-
-            Assert.NotNull(context.Value);
-            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
-        }
-
-        // ------------------------------------------------------------
-        // Async
-        // ------------------------------------------------------------
-
-        [Fact]
-        public static async Task TestNavigatorGropedPushAsyncExistAndNotBring()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-
-            // test
-            await navigator.ForwardAsync(ViewId.FormA1);
-
-            var formA1 = (FormA1)navigator.CurrentView;
-
-            await navigator.GroupPushAsync(ViewId.FormB1);
-
-            var formB1 = (FormB1)navigator.CurrentView;
-
-            Assert.False(await navigator.GroupPushAsync(ViewId.FormB1));
-
-            Assert.Equal(2, navigator.StackedCount);
-            Assert.False(formA1.IsVisible);
-            Assert.True(formB1.IsVisible);
-
-            await navigator.PopAsync();
-
-            Assert.True(formA1.IsVisible);
-            Assert.False(formB1.IsOpen);
-        }
-
-        [Fact]
-        public static async Task TestNavigatorGropedPushAsyncWithParameter()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.FormA1, typeof(FormA1));
-            navigator.Register(ViewId.FormB1, typeof(FormB1));
-
-            var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
-
-            // test
-            await navigator.ForwardAsync(ViewId.FormA1);
-
-            await navigator.GroupPushAsync(ViewId.FormB1, new NavigationParameter().SetValue("test"));
-
-            Assert.NotNull(context.Value);
-            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
-        }
-
-        // ------------------------------------------------------------
-        // Failed
-        // ------------------------------------------------------------
-
-        [Fact]
-        public static void TestNavigatorGropedPushFailed()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.Form1, typeof(Form1));
-
-            // test
-            navigator.Forward(ViewId.Form1);
-            Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(ViewId.Form2));
-        }
-
-        [Fact]
-        public static void TestNavigatorGropedPushFailed2()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            navigator.Register(ViewId.Form1, typeof(Form1));
-
-            // test
-            Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(ViewId.Form1));
-        }
-
-        // ------------------------------------------------------------
-        // Mock
-        // ------------------------------------------------------------
-
-        public enum ViewId
-        {
-            Form1,
-            Form2,
-            FormA1,
-            FormA2,
-            FormB1,
-            FormB2,
-            FormC1,
-            FormC2
-        }
-
-        public enum Groups
-        {
-            A,
-            B,
-            C
-        }
-
-        public class Form1 : MockForm
-        {
-        }
-
-        public class Form2 : MockForm
-        {
-        }
-
-        [Group(Groups.A)]
-        public class FormA1 : MockForm
-        {
-        }
-
-        [Group(Groups.A)]
-        public class FormA2 : MockForm
-        {
-        }
-
-        [Group(Groups.B)]
-        public class FormB1 : MockForm
-        {
-        }
-
-        [Group(Groups.B)]
-        public class FormB2 : MockForm
-        {
-        }
-
-        [Group(Groups.C)]
-        public class FormC1 : MockForm
-        {
-        }
-
-        [Group(Groups.C)]
-        public class FormC2 : MockForm
-        {
-        }
-    }
-}
+//            Assert.Equal(ViewId.FormB1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormA1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
+//        }
+
+//        [Fact]
+//        public static void TestNavigatorGropedPushExistAndBring()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                })
+//                .ToNavigator();
+
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+
+//            // test
+//            // A1 B1       exist [0]
+//            // B1 A1       D:B1 A:A1
+//            navigator.Forward(ViewId.FormA1);
+
+//            var formA1 = (FormA1)navigator.CurrentView;
+
+//            navigator.GroupPush(ViewId.FormB1);
+
+//            var formB1 = (FormB1)navigator.CurrentView;
+
+//            navigator.GroupPush(ViewId.FormA1);
+
+//            Assert.Equal(2, navigator.StackedCount);
+//            Assert.True(formA1.IsVisible);
+//            Assert.False(formB1.IsVisible);
+
+//            Assert.Equal(ViewId.FormB1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormA1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
+
+//            navigator.Pop();
+
+//            Assert.False(formA1.IsOpen);
+//            Assert.True(formB1.IsVisible);
+
+//            Assert.Equal(ViewId.FormA1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormB1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
+//        }
+
+//        [Fact]
+//        public static void TestNavigatorGropedPushExistAndNotBring()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                })
+//                .ToNavigator();
+
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+
+//            // test
+//            // A1 B1       exist [1]
+//            // A1 B1       -
+//            navigator.Forward(ViewId.FormA1);
+
+//            var formA1 = (FormA1)navigator.CurrentView;
+
+//            navigator.GroupPush(ViewId.FormB1);
+
+//            var formB1 = (FormB1)navigator.CurrentView;
+
+//            Assert.False(navigator.GroupPush(ViewId.FormB1));
+
+//            Assert.Equal(2, navigator.StackedCount);
+//            Assert.False(formA1.IsVisible);
+//            Assert.True(formB1.IsVisible);
+
+//            navigator.Pop();
+
+//            Assert.True(formA1.IsVisible);
+//            Assert.False(formB1.IsOpen);
+
+//            Assert.Equal(ViewId.FormB1, context.Value.FromId);
+//            Assert.Equal(ViewId.FormA1, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
+//        }
+
+//        [Fact]
+//        public static void TestNavigatorGropedPushUseCase()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.Form1, typeof(Form1));
+//                    m.Register(ViewId.Form2, typeof(Form2));
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormA2, typeof(FormA2));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                    m.Register(ViewId.FormB2, typeof(FormB2));
+//                })
+//                .ToNavigator();
+
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+
+//            // test
+//            navigator.Forward(ViewId.Form1);
+
+//            // group A
+//            // 1:A1
+//            navigator.GroupPush(ViewId.FormA1);
+//            var formA1 = (FormA1)navigator.CurrentView;
+
+//            // 1:A1:A2
+//            navigator.GroupPush(ViewId.FormA2);
+//            var formA2 = (FormA2)navigator.CurrentView;
+
+//            // group B
+//            // 1:A1:A2:B1
+//            navigator.GroupPush(ViewId.FormB1);
+//            var formB1 = (FormB1)navigator.CurrentView;
+
+//            // 1:A1:A2:B1:B2
+//            navigator.GroupPush(ViewId.FormB2);
+//            var formB2 = (FormB2)navigator.CurrentView;
+
+//            // group A
+//            // 1:B1:B2:A1:A2
+//            navigator.GroupPush(ViewId.FormA1);
+
+//            Assert.True(formA2.IsVisible);
+//            Assert.False(formA1.IsVisible);
+//            Assert.False(formB2.IsVisible);
+//            Assert.False(formB1.IsVisible);
+
+//            Assert.Equal(ViewId.FormB2, context.Value.FromId);
+//            Assert.Equal(ViewId.FormA2, context.Value.ToId);
+//            Assert.True(context.Value.Attribute.IsRestore());
+
+//            // 1:B1:B2:A1
+//            navigator.Pop();
+
+//            Assert.True(formA1.IsVisible);
+//            Assert.False(formB2.IsVisible);
+//            Assert.False(formB1.IsVisible);
+
+//            // group B
+//            // 1:A1:B1:B2
+//            navigator.GroupPush(ViewId.FormB1);
+
+//            Assert.True(formB2.IsVisible);
+//            Assert.False(formB1.IsVisible);
+//            Assert.False(formA1.IsVisible);
+
+//            // 1:A1:B1
+//            navigator.Pop();
+
+//            Assert.True(formB1.IsVisible);
+//            Assert.False(formA1.IsVisible);
+//        }
+
+//        [Fact]
+//        public static void TestNavigatorGropedPushWithParameter()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                })
+//                .ToNavigator();
+
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+
+//            // test
+//            navigator.Forward(ViewId.FormA1);
+
+//            navigator.GroupPush(ViewId.FormB1, new NavigationParameter().SetValue("test"));
+
+//            Assert.NotNull(context.Value);
+//            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
+//        }
+
+//        // ------------------------------------------------------------
+//        // Async
+//        // ------------------------------------------------------------
+
+//        [Fact]
+//        public static async Task TestNavigatorGropedPushAsyncExistAndNotBring()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                })
+//                .ToNavigator();
+
+//            // test
+//            await navigator.ForwardAsync(ViewId.FormA1);
+
+//            var formA1 = (FormA1)navigator.CurrentView;
+
+//            await navigator.GroupPushAsync(ViewId.FormB1);
+
+//            var formB1 = (FormB1)navigator.CurrentView;
+
+//            Assert.False(await navigator.GroupPushAsync(ViewId.FormB1));
+
+//            Assert.Equal(2, navigator.StackedCount);
+//            Assert.False(formA1.IsVisible);
+//            Assert.True(formB1.IsVisible);
+
+//            await navigator.PopAsync();
+
+//            Assert.True(formA1.IsVisible);
+//            Assert.False(formB1.IsOpen);
+//        }
+
+//        [Fact]
+//        public static async Task TestNavigatorGropedPushAsyncWithParameter()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.FormA1, typeof(FormA1));
+//                    m.Register(ViewId.FormB1, typeof(FormB1));
+//                })
+//                .ToNavigator();
+
+//            var context = new Holder<INavigationContext>();
+//            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+
+//            // test
+//            await navigator.ForwardAsync(ViewId.FormA1);
+
+//            await navigator.GroupPushAsync(ViewId.FormB1, new NavigationParameter().SetValue("test"));
+
+//            Assert.NotNull(context.Value);
+//            Assert.Equal("test", context.Value.Parameter.GetValue<string>());
+//        }
+
+//        // ------------------------------------------------------------
+//        // Failed
+//        // ------------------------------------------------------------
+
+//        [Fact]
+//        public static void TestNavigatorGropedPushFailed()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.Form1, typeof(Form1));
+//                })
+//                .ToNavigator();
+
+//            // test
+//            navigator.Forward(ViewId.Form1);
+//            Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(ViewId.Form2));
+//        }
+
+//        [Fact]
+//        public static void TestNavigatorGropedPushFailed2()
+//        {
+//            // prepare
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .UseIdMapper(m =>
+//                {
+//                    m.Register(ViewId.Form1, typeof(Form1));
+//                })
+//                .ToNavigator();
+
+//            // test
+//            Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(ViewId.Form1));
+//        }
+
+//        // ------------------------------------------------------------
+//        // Mock
+//        // ------------------------------------------------------------
+
+//        public enum ViewId
+//        {
+//            Form1,
+//            Form2,
+//            FormA1,
+//            FormA2,
+//            FormB1,
+//            FormB2,
+//            FormC1,
+//            FormC2
+//        }
+
+//        public enum Groups
+//        {
+//            A,
+//            B,
+//            C
+//        }
+
+//        public class Form1 : MockForm
+//        {
+//        }
+
+//        public class Form2 : MockForm
+//        {
+//        }
+
+//        [Group(Groups.A)]
+//        public class FormA1 : MockForm
+//        {
+//        }
+
+//        [Group(Groups.A)]
+//        public class FormA2 : MockForm
+//        {
+//        }
+
+//        [Group(Groups.B)]
+//        public class FormB1 : MockForm
+//        {
+//        }
+
+//        [Group(Groups.B)]
+//        public class FormB2 : MockForm
+//        {
+//        }
+
+//        [Group(Groups.C)]
+//        public class FormC1 : MockForm
+//        {
+//        }
+
+//        [Group(Groups.C)]
+//        public class FormC2 : MockForm
+//        {
+//        }
+//    }
+//}

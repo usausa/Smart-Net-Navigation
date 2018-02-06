@@ -1,6 +1,7 @@
 ﻿namespace Example.WindowsFormsApp.Views.Stack
 {
     using Smart.Navigation;
+    using Smart.Navigation.Attributes;
 
     [View(ViewId.Stack2)]
     public partial class Stack2View : AppViewBase

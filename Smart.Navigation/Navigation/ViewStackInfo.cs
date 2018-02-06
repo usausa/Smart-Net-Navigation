@@ -1,5 +1,7 @@
 ﻿namespace Smart.Navigation
 {
+    using Smart.Navigation.Descriptors;
+
     public sealed class ViewStackInfo
     {
         public ViewDescriptor Descriptor { get; }

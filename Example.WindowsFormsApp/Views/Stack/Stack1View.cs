@@ -1,6 +1,7 @@
 ﻿namespace Example.WindowsFormsApp.Views.Stack
 {
     using Smart.Navigation;
+    using Smart.Navigation.Attributes;
 
     [View(ViewId.Stack1)]
     public partial class Stack1View : AppViewBase
@@ -16,7 +17,7 @@
 
         public override void OnGoHome()
         {
-            Navigator.Forward(ViewId.Menu);
+            Navigator.PopAllAndForward(ViewId.Menu);
         }
 
         private void OnCancelButtonClick(object sender, System.EventArgs e)

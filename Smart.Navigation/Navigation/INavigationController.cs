@@ -1,8 +1,9 @@
 ﻿namespace Smart.Navigation
 {
     using System;
-
     using System.Collections.Generic;
+
+    using Smart.Navigation.Descriptors;
 
     public interface INavigationController
     {

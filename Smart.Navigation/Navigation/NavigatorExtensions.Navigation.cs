@@ -118,6 +118,11 @@
             return navigator.Navigate(new PopAndForwardStrategy(id, level), null);
         }
 
+        public static bool PopAllAndForward(this INavigator navigator, object id)
+        {
+            return navigator.Navigate(new PopAndForwardStrategy(id), null);
+        }
+
         public static bool PopAndForward(this INavigator navigator, object id, INavigationParameter parameter)
         {
             return navigator.Navigate(new PopAndForwardStrategy(id, 1), parameter);
@@ -126,6 +131,11 @@
         public static bool PopAndForward(this INavigator navigator, object id, int level, INavigationParameter parameter)
         {
             return navigator.Navigate(new PopAndForwardStrategy(id, level), parameter);
+        }
+
+        public static bool PopAllAndForward(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            return navigator.Navigate(new PopAndForwardStrategy(id), parameter);
         }
 
         // Async

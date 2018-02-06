@@ -1,6 +1,7 @@
 ﻿namespace Example.WindowsFormsApp.Views.Wizard
 {
     using Smart.Navigation;
+    using Smart.Navigation.Attributes;
     using Smart.Navigation.Plugins.Scope;
 
     [View(ViewId.WizardInput1)]

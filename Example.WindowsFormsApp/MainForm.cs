@@ -33,6 +33,7 @@
             navigator = new NavigatorConfig()
                 .UseControlNavigationProvider(ContainerPanel)
                 .UseResolver(resolver)
+                .UseIdMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly()))
                 .ToNavigator();
             navigator.Exited += OnExited;
             navigator.Navigating += OnNavigating;
@@ -42,8 +43,6 @@
                 System.Diagnostics.Debug.WriteLine(
                     $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
             };
-
-            navigator.AutoRegister(Assembly.GetExecutingAssembly());
 
             // Forward
             Show();

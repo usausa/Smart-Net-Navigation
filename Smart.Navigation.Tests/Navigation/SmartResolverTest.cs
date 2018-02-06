@@ -24,28 +24,19 @@
                 .UseResolver(resolver)
                 .ToNavigator();
 
-            navigator.Register(ViewId.Form1, typeof(Form1));
-            navigator.Register(ViewId.Form2, typeof(Form2));
-
             // test
-            navigator.Forward(ViewId.Form1);
+            navigator.Forward(typeof(Form1));
 
             var form1 = (Form1)navigator.CurrentView;
             Assert.NotNull(form1.Service);
             Assert.NotNull(form1.ScopeObject);
             Assert.NotNull(form1.ScopeObject.Setting);
 
-            navigator.Forward(ViewId.Form2);
+            navigator.Forward(typeof(Form2));
 
             var form2 = (Form2)navigator.CurrentView;
             Assert.Same(form2.Service, form1.Service);
             Assert.Same(form2.Setting, form1.ScopeObject.Setting);
-        }
-
-        public enum ViewId
-        {
-            Form1,
-            Form2
         }
 
         public class Form1 : MockForm

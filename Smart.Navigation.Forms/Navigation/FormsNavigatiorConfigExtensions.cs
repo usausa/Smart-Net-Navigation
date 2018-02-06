@@ -1,6 +1,9 @@
 ﻿namespace Smart.Navigation
 {
     using System;
+
+    using Smart.Navigation.Descriptors;
+
     using Xamarin.Forms;
 
     public static class FormsNavigatiorConfigExtensions
@@ -15,6 +18,8 @@
                 var resolver = new ContainerResolver();
                 c.Add<IContainerResolver>(resolver);
                 c.Add<IUpdateContainer>(resolver);
+
+                c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(View)));
 
                 c.Add<FormsNavigationProviderOptions>();
             });
@@ -40,6 +45,8 @@
                 var resolver = new ContainerResolver();
                 c.Add<IContainerResolver>(resolver);
                 c.Add<IUpdateContainer>(resolver);
+
+                c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(View)));
 
                 c.Add(options);
             });

@@ -1,9 +1,12 @@
 ﻿namespace Smart.Navigation
 {
     using System;
+    using System.Reflection;
 
     using Smart.Converter;
+    using Smart.Navigation.Attributes;
     using Smart.Navigation.Components;
+    using Smart.Navigation.Descriptors;
     using Smart.Navigation.Plugins;
     using Smart.Reflection;
 
@@ -37,13 +40,70 @@
             return config;
         }
 
-        public static NavigatorConfig UseActivator<TFactory>(this NavigatorConfig config)
-            where TFactory : IActivator
+        public static NavigatorConfig UseViewMapper<TMapper>(this NavigatorConfig config)
+            where TMapper : IViewMapper
+        {
+            config.Configure(c =>
+            {
+                c.RemoveAll<IViewMapper>();
+                c.Add<IViewMapper, TMapper>();
+            });
+
+            return config;
+        }
+
+        public static NavigatorConfig UseViewMapper(this NavigatorConfig config, IViewMapper mapper)
+        {
+            if (mapper == null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
+            config.Configure(c =>
+            {
+                c.RemoveAll<IViewMapper>();
+                c.Add(mapper);
+            });
+
+            return config;
+        }
+
+        public static NavigatorConfig UseIdMapper(this NavigatorConfig config, Action<IViewRegister> action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            var mapper = new IdViewMapper();
+            action(mapper);
+
+            return config.UseViewMapper(mapper);
+        }
+
+        public static void AutoRegister(this IViewRegister register, Assembly assembly)
+        {
+            if (assembly == null)
+            {
+                throw new ArgumentNullException(nameof(assembly));
+            }
+
+            foreach (var type in assembly.ExportedTypes)
+            {
+                foreach (var attr in type.GetTypeInfo().GetCustomAttributes<ViewAttribute>())
+                {
+                    register.Register(attr.Id ?? type, type);
+                }
+            }
+        }
+
+        public static NavigatorConfig UseActivator<TActivator>(this NavigatorConfig config)
+            where TActivator : IActivator
         {
             config.Configure(c =>
             {
                 c.RemoveAll<IActivator>();
-                c.Add<IActivator, TFactory>();
+                c.Add<TActivator>();
             });
 
             return config;

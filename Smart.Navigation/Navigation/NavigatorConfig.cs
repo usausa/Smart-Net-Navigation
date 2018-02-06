@@ -4,6 +4,7 @@
 
     using Smart.ComponentModel;
     using Smart.Navigation.Components;
+    using Smart.Navigation.Descriptors;
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Plugins.Parameter;
     using Smart.Navigation.Plugins.Scope;
@@ -15,7 +16,7 @@
 
         public NavigatorConfig()
         {
-            config.Add<IViewMapper, StandardViewMappper>();
+            config.Add<IViewMapper, DirectViewMapper>();
             config.Add<IActivator, StandardActivator>();
             config.Add<IConverter, SmartConverter>();
             config.Add<IDelegateFactory>(DelegateFactory.Default);

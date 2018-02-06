@@ -8,6 +8,7 @@
     using Smart.ComponentModel;
     using Smart.Functional;
     using Smart.Navigation.Components;
+    using Smart.Navigation.Descriptors;
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Strategies;
 
@@ -84,15 +85,6 @@
             }
 
             base.Dispose(disposing);
-        }
-
-        // ------------------------------------------------------------
-        // Registration
-        // ------------------------------------------------------------
-
-        public void Register(object id, Type type)
-        {
-            viewMapper.Add(id, type);
         }
 
         // ------------------------------------------------------------

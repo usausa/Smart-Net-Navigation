@@ -2,31 +2,46 @@
 {
     using System;
 
+    using Smart.Navigation.Descriptors;
+
     public sealed class PopAndForwardStrategy : INavigationStrategy
     {
+        private readonly bool all;
+
         private readonly object id;
 
-        private readonly int level;
+        private int level;
 
         private ViewDescriptor descriptor;
 
+        public PopAndForwardStrategy(object id)
+        {
+            all = true;
+            this.id = id;
+        }
+
         public PopAndForwardStrategy(object id, int level)
         {
+            all = false;
             this.id = id;
             this.level = level;
         }
 
         public StragtegyResult Initialize(INavigationController controller)
         {
-            if (!controller.ViewMapper.TryGetValue(id, out descriptor))
+            if (all)
             {
-                throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
+                level = controller.ViewStack.Count - 1;
+            }
+            else
+            {
+                if ((level < 1) || (level > controller.ViewStack.Count - 1))
+                {
+                    throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
+                }
             }
 
-            if ((level < 1) || (level > controller.ViewStack.Count - 1))
-            {
-                throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
-            }
+            descriptor = controller.ViewMapper.FindDescriptor(id);
 
             return new StragtegyResult(id, NavigationAttributes.None);
         }

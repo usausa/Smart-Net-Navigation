@@ -3,6 +3,7 @@
     using System.Windows.Forms;
 
     using Smart.Navigation;
+    using Smart.Navigation.Attributes;
 
     [View(ViewId.Menu)]
     public partial class MenuView : AppViewBase

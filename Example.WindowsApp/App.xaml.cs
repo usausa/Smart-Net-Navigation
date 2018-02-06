@@ -38,10 +38,6 @@
                     $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
             };
 
-            navigator.Register(Assembly.GetExecutingAssembly().ExportedTypes
-                .Where(x => x.Namespace.StartsWith("Example.WindowsApp.Views") &&
-                            typeof(UserControl).IsAssignableFrom(x)));
-
             // Show MainWindow
             MainWindow = resolver.Get<MainWindow>();
             MainWindow.Show();

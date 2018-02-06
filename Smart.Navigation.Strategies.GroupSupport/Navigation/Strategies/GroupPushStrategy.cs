@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Reflection;
 
+    using Smart.Navigation.Descriptors;
+
     public sealed class GroupPushStrategy : INavigationStrategy
     {
         private readonly object id;
@@ -25,10 +27,7 @@
 
         public StragtegyResult Initialize(INavigationController controller)
         {
-            if (!controller.ViewMapper.TryGetValue(id, out descriptor))
-            {
-                throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
-            }
+            descriptor = controller.ViewMapper.FindDescriptor(id);
 
             var group = descriptor.Type.GetCustomAttribute<GroupAttribute>();
             if (group == null)

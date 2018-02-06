@@ -3,6 +3,8 @@
     using System;
     using System.Windows.Controls;
 
+    using Smart.Navigation.Descriptors;
+
     public static class WindowsNavigatorConfigExtensions
     {
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config)
@@ -15,6 +17,8 @@
                 var resolver = new ContainerResolver();
                 c.Add<IContainerResolver>(resolver);
                 c.Add<IUpdateContainer>(resolver);
+
+                c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));
 
                 c.Add<WindowsNavigationProviderOptions>();
             });
@@ -40,6 +44,8 @@
                 var resolver = new ContainerResolver();
                 c.Add<IContainerResolver>(resolver);
                 c.Add<IUpdateContainer>(resolver);
+
+                c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));
 
                 c.Add(options);
             });

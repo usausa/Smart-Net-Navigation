@@ -6,6 +6,7 @@
     using Example.WindowsFormsApp.Services;
 
     using Smart.Navigation;
+    using Smart.Navigation.Attributes;
     using Smart.Resolver.Attributes;
 
     [View(ViewId.DataList)]

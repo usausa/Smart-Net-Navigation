@@ -1,37 +1,37 @@
-﻿namespace Smart.Navigation
-{
-    using System;
+﻿//namespace Smart.Navigation
+//{
+//    using System;
 
-    using Smart.Mock;
+//    using Smart.Mock;
 
-    using Xunit;
+//    using Xunit;
 
-    public class NavigatorDisposeTest
-    {
-        [Fact]
-        public static void TestNavigatorDispose()
-        {
-            // prepare
-            var component = new DisposableComponent();
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .Configure(config => config.Add(component))
-                .ToNavigator();
+//    public class NavigatorDisposeTest
+//    {
+//        [Fact]
+//        public static void TestNavigatorDispose()
+//        {
+//            // prepare
+//            var component = new DisposableComponent();
+//            var navigator = new NavigatorConfig()
+//                .UseMockFormProvider()
+//                .Configure(config => config.Add(component))
+//                .ToNavigator();
 
-            // test
-            navigator.Dispose();
+//            // test
+//            navigator.Dispose();
 
-            Assert.True(component.IsDisposed);
-        }
+//            Assert.True(component.IsDisposed);
+//        }
 
-        public sealed class DisposableComponent : IDisposable
-        {
-            public bool IsDisposed { get; private set; }
+//        public sealed class DisposableComponent : IDisposable
+//        {
+//            public bool IsDisposed { get; private set; }
 
-            public void Dispose()
-            {
-                IsDisposed = true;
-            }
-        }
-    }
-}
+//            public void Dispose()
+//            {
+//                IsDisposed = true;
+//            }
+//        }
+//    }
+//}
