@@ -1,117 +1,100 @@
-﻿//namespace Smart.Navigation
-//{
-//    using Smart.Mock;
-//    using Smart.Resolver;
+﻿namespace Smart.Navigation
+{
+    using Smart.Mock;
+    using Smart.Resolver;
 
-//    using Xunit;
+    using Xunit;
 
-//    public class NavigatorNotifyTest
-//    {
-//        // ------------------------------------------------------------
-//        // View
-//        // ------------------------------------------------------------
+    public class NavigatorNotifyTest
+    {
+        // ------------------------------------------------------------
+        // View
+        // ------------------------------------------------------------
 
-//        [Fact]
-//        public static void TestFormNavigatorNotify()
-//        {
-//            // prepare
-//            var navigator = new NavigatorConfig()
-//                .UseMockFormProvider()
-//                .ToNavigator();
+        [Fact]
+        public static void TestFormNavigatorNotify()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockFormProvider()
+                .ToNavigator();
 
-//            navigator.Register(ViewId.NotifyForm, typeof(NotifyForm));
+            // test
+            navigator.Forward(typeof(NotifyForm));
+            navigator.Notify("test");
 
-//            // test
-//            navigator.Forward(ViewId.NotifyForm);
-//            navigator.Notify("test");
+            var notifyForm = (NotifyForm)navigator.CurrentView;
+            Assert.Equal("test", notifyForm.Parameter);
+        }
 
-//            var notifyForm = (NotifyForm)navigator.CurrentView;
-//            Assert.Equal("test", notifyForm.Parameter);
-//        }
+        [Fact]
+        public static void TestFormNavigatorNotifyUnsuported()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockFormProvider()
+                .ToNavigator();
 
-//        [Fact]
-//        public static void TestFormNavigatorNotifyUnsuported()
-//        {
-//            // prepare
-//            var navigator = new NavigatorConfig()
-//                .UseMockFormProvider()
-//                .ToNavigator();
+            // test
+            navigator.Forward(typeof(UnsupportForm));
+            navigator.Notify("test");
+        }
 
-//            navigator.Register(ViewId.UnsupportForm, typeof(UnsupportForm));
+        public class NotifyForm : MockForm, INotifySupport
+        {
+            public object Parameter { get; private set; }
 
-//            // test
-//            navigator.Forward(ViewId.UnsupportForm);
-//            navigator.Notify("test");
-//        }
+            public void NavigatorNotify(object parameter)
+            {
+                Parameter = parameter;
+            }
+        }
 
-//        public enum ViewId
-//        {
-//            NotifyForm,
-//            UnsupportForm
-//        }
+        public class UnsupportForm : MockForm
+        {
+        }
 
-//        public class NotifyForm : MockForm, INotifySupport
-//        {
-//            public object Parameter { get; private set; }
+        // ------------------------------------------------------------
+        // View
+        // ------------------------------------------------------------
 
-//            public void NavigatorNotify(object parameter)
-//            {
-//                Parameter = parameter;
-//            }
-//        }
+        [Fact]
+        public static void TestViewNavigatorNotify()
+        {
+            // prepare
+            var resolver = new ResolverConfig()
+                .UseAutoBinding()
+                .ToResolver();
+            var navigator = new NavigatorConfig()
+                .UseMockWindowProvider()
+                .UseResolver(resolver)
+                .ToNavigator();
 
-//        public class UnsupportForm : MockForm
-//        {
-//        }
+            // test
+            navigator.Forward(typeof(NotifyWindow));
+            navigator.Notify("test");
 
-//        // ------------------------------------------------------------
-//        // View
-//        // ------------------------------------------------------------
+            var notifyView = (NotifyWindow)navigator.CurrentView;
+            var notifyViewModel = (NotifyWindowViewModel)notifyView.Context;
+            Assert.Equal("test", notifyViewModel.Parameter);
+        }
 
-//        [Fact]
-//        public static void TestViewNavigatorNotify()
-//        {
-//            // prepare
-//            var resolver = new ResolverConfig()
-//                .UseAutoBinding()
-//                .ToResolver();
-//            var navigator = new NavigatorConfig()
-//                .UseMockWindowProvider()
-//                .UseResolver(resolver)
-//                .ToNavigator();
+        public class NotifyWindowViewModel : INotifySupport
+        {
+            public object Parameter { get; private set; }
 
-//            navigator.Register(WindowIds.NotifyWindow, typeof(NotifyWindow));
+            public void NavigatorNotify(object parameter)
+            {
+                Parameter = parameter;
+            }
+        }
 
-//            // test
-//            navigator.Forward(WindowIds.NotifyWindow);
-//            navigator.Notify("test");
-
-//            var notifyView = (NotifyWindow)navigator.CurrentView;
-//            var notifyViewModel = (NotifyWindowViewModel)notifyView.Context;
-//            Assert.Equal("test", notifyViewModel.Parameter);
-//        }
-
-//        public enum WindowIds
-//        {
-//            NotifyWindow
-//        }
-
-//        public class NotifyWindowViewModel : INotifySupport
-//        {
-//            public object Parameter { get; private set; }
-
-//            public void NavigatorNotify(object parameter)
-//            {
-//                Parameter = parameter;
-//            }
-//        }
-
-//        public class NotifyWindow : MockWindow
-//        {
-//            public NotifyWindow(NotifyWindowViewModel vm)
-//            {
-//                Context = vm;
-//            }
-//        }
-//    }
-//}
+        public class NotifyWindow : MockWindow
+        {
+            public NotifyWindow(NotifyWindowViewModel vm)
+            {
+                Context = vm;
+            }
+        }
+    }
+}
