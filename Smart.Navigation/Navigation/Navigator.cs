@@ -185,6 +185,9 @@
             // Update stack
             strategy.UpdateStack(controller, toView);
 
+            // Update view mapper
+            viewMapper.Updated(CurrentViewId);
+
             // Process navigated
             foreach (var plugin in plugins)
             {

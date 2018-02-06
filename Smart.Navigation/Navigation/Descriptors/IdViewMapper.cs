@@ -21,5 +21,9 @@
 
             return descriptor;
         }
+
+        public void Updated(object id)
+        {
+        }
     }
 }
