@@ -150,6 +150,11 @@
             return navigator.NavigateAsync(new PopAndForwardStrategy(id, level), null);
         }
 
+        public static Task<bool> PopAllAndForwardAsync(this INavigator navigator, object id)
+        {
+            return navigator.NavigateAsync(new PopAndForwardStrategy(id), null);
+        }
+
         public static Task<bool> PopAndForwardAsync(this INavigator navigator, object id, INavigationParameter parameter)
         {
             return navigator.NavigateAsync(new PopAndForwardStrategy(id, 1), parameter);
@@ -158,6 +163,11 @@
         public static Task<bool> PopAndForwardAsync(this INavigator navigator, object id, int level, INavigationParameter parameter)
         {
             return navigator.NavigateAsync(new PopAndForwardStrategy(id, level), parameter);
+        }
+
+        public static Task<bool> PopAllAndForwardAsync(this INavigator navigator, object id, INavigationParameter parameter)
+        {
+            return navigator.NavigateAsync(new PopAndForwardStrategy(id), parameter);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace Smart.Navigation.Strategies
 {
-    using System;
     using System.Threading.Tasks;
 
     using Smart.Mock;
@@ -126,22 +125,6 @@
 
             Assert.NotNull(context.Value);
             Assert.Equal("test", context.Value.Parameter.GetValue<string>());
-        }
-
-        // ------------------------------------------------------------
-        // Failed
-        // ------------------------------------------------------------
-
-        [Fact]
-        public static void TestNavigatorPushFailed()
-        {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            // test
-            Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(Form1)));
         }
 
         // ------------------------------------------------------------

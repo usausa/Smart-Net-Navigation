@@ -1,83 +1,70 @@
-﻿//namespace Smart.Navigation
-//{
-//    using Smart.Mock;
+﻿namespace Smart.Navigation
+{
+    using Smart.Mock;
 
-//    using Xunit;
+    using Xunit;
 
-//    public class NavigatorExitTest
-//    {
-//        [Fact]
-//        public static void TestNavigatorExit()
-//        {
-//            // prepare
-//            var called = new Holder<bool>();
-//            var navigator = new NavigatorConfig()
-//                .UseMockFormProvider()
-//                .ToNavigator();
-//            navigator.Exited += (sender, args) => called.Value = true;
+    public class NavigatorExitTest
+    {
+        [Fact]
+        public static void TestNavigatorExit()
+        {
+            // prepare
+            var called = new Holder<bool>();
+            var navigator = new NavigatorConfig()
+                .UseMockFormProvider()
+                .ToNavigator();
+            navigator.Exited += (sender, args) => called.Value = true;
 
-//            navigator.Register(ViewId.Form1, typeof(Form1));
+            // test
+            navigator.Forward(typeof(Form1));
 
-//            // test
-//            navigator.Forward(ViewId.Form1);
+            var form1 = (Form1)navigator.CurrentView;
 
-//            var form1 = (Form1)navigator.CurrentView;
+            navigator.Exit();
 
-//            navigator.Exit();
+            Assert.True(called.Value);
+            Assert.False(form1.IsOpen);
+        }
 
-//            Assert.True(called.Value);
-//            Assert.False(form1.IsOpen);
-//        }
+        [Fact]
+        public static void TestNavigatorExitStacked()
+        {
+            // prepare
+            var navigator = new NavigatorConfig()
+                .UseMockFormProvider()
+                .ToNavigator();
 
-//        [Fact]
-//        public static void TestNavigatorExitStacked()
-//        {
-//            // prepare
-//            var navigator = new NavigatorConfig()
-//                .UseMockFormProvider()
-//                .ToNavigator();
+            // test
+            navigator.Forward(typeof(Form1));
 
-//            navigator.Register(ViewId.Form1, typeof(Form1));
-//            navigator.Register(ViewId.Form2, typeof(Form2));
-//            navigator.Register(ViewId.Form3, typeof(Form3));
+            var form1 = (Form1)navigator.CurrentView;
 
-//            // test
-//            navigator.Forward(ViewId.Form1);
+            navigator.Push(typeof(Form2));
 
-//            var form1 = (Form1)navigator.CurrentView;
+            var form2 = (Form2)navigator.CurrentView;
 
-//            navigator.Push(ViewId.Form2);
+            navigator.Push(typeof(Form3));
 
-//            var form2 = (Form2)navigator.CurrentView;
+            var form3 = (Form3)navigator.CurrentView;
 
-//            navigator.Push(ViewId.Form3);
+            navigator.Exit();
 
-//            var form3 = (Form3)navigator.CurrentView;
+            Assert.False(form1.IsOpen);
+            Assert.False(form2.IsOpen);
+            Assert.False(form3.IsOpen);
+        }
 
-//            navigator.Exit();
+        public class Form1 : MockForm
+        {
+        }
 
-//            Assert.False(form1.IsOpen);
-//            Assert.False(form2.IsOpen);
-//            Assert.False(form3.IsOpen);
-//        }
+        public class Form2 : MockForm
+        {
+        }
 
-//        public enum ViewId
-//        {
-//            Form1,
-//            Form2,
-//            Form3
-//        }
-
-//        public class Form1 : MockForm
-//        {
-//        }
-
-//        public class Form2 : MockForm
-//        {
-//        }
-
-//        public class Form3 : MockForm
-//        {
-//        }
-//    }
-//}
+        public class Form3 : MockForm
+        {
+        }
+    }
+}
