@@ -98,6 +98,25 @@
             }
         }
 
+        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config, Type baseType)
+        {
+            if (baseType != null)
+            {
+                config.Configure(c =>
+                {
+                    c.RemoveAll<IViewMapper>();
+                    c.Add<DirectViewMapper>();
+                });
+            }
+
+            return config.UseViewMapper<DirectViewMapper>();
+        }
+
+        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config)
+        {
+            return config.UseDirectMapper(null);
+        }
+
         public static NavigatorConfig UseActivator<TActivator>(this NavigatorConfig config)
             where TActivator : IActivator
         {
