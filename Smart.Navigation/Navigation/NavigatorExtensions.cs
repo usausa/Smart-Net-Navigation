@@ -4,8 +4,24 @@
 
     using Smart.Navigation.Strategies;
 
-    public static partial class NavigatorExtensions
+    public static class NavigatorExtensions
     {
+        // ------------------------------------------------------------
+        // Notify
+        // ------------------------------------------------------------
+
+        public static void Notify<T>(this INavigator navigator, T parameter)
+        {
+            if (navigator.CurrentTarget is INotifySupport<T> notifySupport)
+            {
+                notifySupport.NavigatorNotify(parameter);
+            }
+            else
+            {
+                (navigator.CurrentTarget as INotifySupport)?.NavigatorNotify(parameter);
+            }
+        }
+
         // ------------------------------------------------------------
         // Forward
         // ------------------------------------------------------------

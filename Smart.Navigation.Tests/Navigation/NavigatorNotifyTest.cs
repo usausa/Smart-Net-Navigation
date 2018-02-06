@@ -22,9 +22,11 @@
             // test
             navigator.Forward(typeof(NotifyForm));
             navigator.Notify("test");
+            navigator.Notify(1);
 
             var notifyForm = (NotifyForm)navigator.CurrentView;
             Assert.Equal("test", notifyForm.Parameter);
+            Assert.Equal(1, notifyForm.IntParameter);
         }
 
         [Fact]
@@ -38,15 +40,23 @@
             // test
             navigator.Forward(typeof(UnsupportForm));
             navigator.Notify("test");
+            navigator.Notify(1);
         }
 
-        public class NotifyForm : MockForm, INotifySupport
+        public class NotifyForm : MockForm, INotifySupport, INotifySupport<int>
         {
             public object Parameter { get; private set; }
+
+            public int IntParameter { get; private set; }
 
             public void NavigatorNotify(object parameter)
             {
                 Parameter = parameter;
+            }
+
+            public void NavigatorNotify(int parameter)
+            {
+                IntParameter = parameter;
             }
         }
 
@@ -73,19 +83,28 @@
             // test
             navigator.Forward(typeof(NotifyWindow));
             navigator.Notify("test");
+            navigator.Notify(1);
 
             var notifyView = (NotifyWindow)navigator.CurrentView;
             var notifyViewModel = (NotifyWindowViewModel)notifyView.Context;
             Assert.Equal("test", notifyViewModel.Parameter);
+            Assert.Equal(1, notifyViewModel.IntParameter);
         }
 
-        public class NotifyWindowViewModel : INotifySupport
+        public class NotifyWindowViewModel : INotifySupport, INotifySupport<int>
         {
             public object Parameter { get; private set; }
+
+            public int IntParameter { get; private set; }
 
             public void NavigatorNotify(object parameter)
             {
                 Parameter = parameter;
+            }
+
+            public void NavigatorNotify(int parameter)
+            {
+                IntParameter = parameter;
             }
         }
 
