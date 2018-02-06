@@ -4,8 +4,10 @@
     using System.Linq;
     using System.Reflection;
 
+    using Smart.Converter;
     using Smart.Mock;
     using Smart.Navigation.Components;
+    using Smart.Navigation.Mappers;
     using Smart.Navigation.Plugins;
     using Smart.Reflection;
 
@@ -48,6 +50,48 @@
         // ------------------------------------------------------------
         // ViewMapper
         // ------------------------------------------------------------
+
+        [Fact]
+        public static void TestNavigatorConfigUseViewMapperByInterface()
+        {
+            var config = new NavigatorConfig()
+                .UseViewMapper<DummyViewMapper>();
+
+            var components = ((INavigatorConfig)config).ResolveComponents();
+
+            var viewMapper = components.Get<IViewMapper>();
+            Assert.NotNull(viewMapper);
+        }
+
+        [Fact]
+        public static void TestNavigatorConfigUseViewMapperByInstance()
+        {
+            var config = new NavigatorConfig()
+                .UseViewMapper(new DummyViewMapper());
+
+            var components = ((INavigatorConfig)config).ResolveComponents();
+
+            var viewMapper = components.Get<IViewMapper>();
+            Assert.NotNull(viewMapper);
+        }
+
+        [Fact]
+        public static void TestNavigatorConfigUseViewMapperFailed()
+        {
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseViewMapper(null));
+        }
+
+        [Fact]
+        public static void TestNavigatorConfigUseIdViewMapperFailed()
+        {
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdMapper(null));
+        }
+
+        [Fact]
+        public static void TestNavigatorConfigUseIdViewMapperAutoRegisterFailed()
+        {
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdMapper(r => r.AutoRegister(null)));
+        }
 
         // TODO
 
@@ -128,6 +172,19 @@
         {
             var config = new NavigatorConfig()
                 .UseConverter(new StandardConverter());
+
+            var components = ((INavigatorConfig)config).ResolveComponents();
+
+            var converter = components.TryGet<IConverter>();
+            Assert.NotNull(converter);
+            Assert.Equal(1, converter.Convert("1", typeof(int)));
+        }
+
+        [Fact]
+        public static void TestNavigatorConfigUseConverterByObjectConverter()
+        {
+            var config = new NavigatorConfig()
+                .UseConverter(ObjectConverter.Default);
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
@@ -247,6 +304,18 @@
 
         public class Data
         {
+        }
+
+        public class DummyViewMapper : IViewMapper
+        {
+            public ViewDescriptor FindDescriptor(object id)
+            {
+                return null;
+            }
+
+            public void Updated(object id)
+            {
+            }
         }
 
         public class DummyPlugin : PluginBase

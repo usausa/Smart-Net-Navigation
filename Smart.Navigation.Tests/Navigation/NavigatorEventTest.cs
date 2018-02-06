@@ -10,6 +10,73 @@
     public class NavigatorEventTest
     {
         // ------------------------------------------------------------
+        // EventArgs
+        // ------------------------------------------------------------
+
+        [Fact]
+        public static void TestFormNavigatorEventArgs()
+        {
+            // prepare
+            var resolver = new ResolverConfig()
+                .UseAutoBinding()
+                .ToResolver();
+            var navigator = new NavigatorConfig()
+                .UseMockWindowProvider()
+                .UseResolver(resolver)
+                .ToNavigator();
+
+            var eventArgs = new Holder<NavigationEventArgs>();
+            navigator.Navigating += (sender, args) => eventArgs.Value = args;
+
+            // test
+            navigator.Forward(typeof(EventArgs1Window));
+
+            Assert.NotNull(eventArgs.Value.Context);
+            Assert.Null(eventArgs.Value.FromView);
+            Assert.Null(eventArgs.Value.FromTarget);
+            Assert.NotNull(eventArgs.Value.ToView);
+            Assert.Equal(typeof(EventArgs1Window), eventArgs.Value.ToView.GetType());
+            Assert.NotNull(eventArgs.Value.ToTarget);
+            Assert.Equal(typeof(EventArgs1WindowViewModel), eventArgs.Value.ToTarget.GetType());
+
+            navigator.Forward(typeof(EventArgs2Window));
+
+            Assert.NotNull(eventArgs.Value.Context);
+            Assert.NotNull(eventArgs.Value.FromView);
+            Assert.Equal(typeof(EventArgs1Window), eventArgs.Value.FromView.GetType());
+            Assert.NotNull(eventArgs.Value.FromTarget);
+            Assert.Equal(typeof(EventArgs1WindowViewModel), eventArgs.Value.FromTarget.GetType());
+            Assert.NotNull(eventArgs.Value.ToView);
+            Assert.Equal(typeof(EventArgs2Window), eventArgs.Value.ToView.GetType());
+            Assert.NotNull(eventArgs.Value.ToTarget);
+            Assert.Equal(typeof(EventArgs2WindowViewModel), eventArgs.Value.ToTarget.GetType());
+        }
+
+        public class EventArgs1WindowViewModel
+        {
+        }
+
+        public class EventArgs2WindowViewModel
+        {
+        }
+
+        public class EventArgs1Window : MockWindow
+        {
+            public EventArgs1Window(EventArgs1WindowViewModel vm)
+            {
+                Context = vm;
+            }
+        }
+
+        public class EventArgs2Window : MockWindow
+        {
+            public EventArgs2Window(EventArgs2WindowViewModel vm)
+            {
+                Context = vm;
+            }
+        }
+
+        // ------------------------------------------------------------
         // View
         // ------------------------------------------------------------
 

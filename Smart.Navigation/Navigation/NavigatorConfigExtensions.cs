@@ -93,7 +93,7 @@
             {
                 foreach (var attr in type.GetTypeInfo().GetCustomAttributes<ViewAttribute>())
                 {
-                    register.Register(attr.Id ?? type, type);
+                    register.Register(attr.Id, type);
                 }
             }
         }
@@ -104,8 +104,8 @@
             {
                 config.Configure(c =>
                 {
-                    c.RemoveAll<IViewMapper>();
-                    c.Add<IViewMapper, DirectViewMapper>();
+                    c.RemoveAll<ITypeConstraint>();
+                    c.Add<ITypeConstraint>(new AssignableTypeConstraint(baseType));
                 });
             }
 
