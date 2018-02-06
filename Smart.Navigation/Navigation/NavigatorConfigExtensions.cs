@@ -1,6 +1,7 @@
 ﻿namespace Smart.Navigation
 {
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
 
     using Smart.Converter;
@@ -81,14 +82,14 @@
             return config.UseViewMapper(mapper);
         }
 
-        public static void AutoRegister(this IViewRegister register, Assembly assembly)
+        public static void AutoRegister(this IViewRegister register, IEnumerable<Type> types)
         {
-            if (assembly == null)
+            if (types == null)
             {
-                throw new ArgumentNullException(nameof(assembly));
+                throw new ArgumentNullException(nameof(types));
             }
 
-            foreach (var type in assembly.ExportedTypes)
+            foreach (var type in types)
             {
                 foreach (var attr in type.GetTypeInfo().GetCustomAttributes<ViewAttribute>())
                 {

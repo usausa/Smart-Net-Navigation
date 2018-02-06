@@ -33,7 +33,7 @@
             navigator = new NavigatorConfig()
                 .UseControlNavigationProvider(ContainerPanel)
                 .UseResolver(resolver)
-                .UseIdMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly()))
+                .UseIdMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
                 .ToNavigator();
             navigator.Exited += OnExited;
             navigator.Navigating += OnNavigating;
