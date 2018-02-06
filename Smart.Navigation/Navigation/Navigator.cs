@@ -8,7 +8,7 @@
     using Smart.ComponentModel;
     using Smart.Functional;
     using Smart.Navigation.Components;
-    using Smart.Navigation.Descriptors;
+    using Smart.Navigation.Mappers;
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Strategies;
 

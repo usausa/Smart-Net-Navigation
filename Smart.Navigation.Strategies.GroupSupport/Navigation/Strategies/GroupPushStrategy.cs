@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    using Smart.Navigation.Descriptors;
-
     public sealed class GroupPushStrategy : INavigationStrategy
     {
         private readonly object id;

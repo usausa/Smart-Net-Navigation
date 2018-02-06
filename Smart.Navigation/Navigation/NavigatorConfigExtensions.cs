@@ -7,7 +7,7 @@
     using Smart.Converter;
     using Smart.Navigation.Attributes;
     using Smart.Navigation.Components;
-    using Smart.Navigation.Descriptors;
+    using Smart.Navigation.Mappers;
     using Smart.Navigation.Plugins;
     using Smart.Reflection;
 
@@ -41,13 +41,13 @@
             return config;
         }
 
-        public static NavigatorConfig UseViewMapper<TMapper>(this NavigatorConfig config)
-            where TMapper : IViewMapper
+        public static NavigatorConfig UseViewMapper<TViewMapper>(this NavigatorConfig config)
+            where TViewMapper : IViewMapper
         {
             config.Configure(c =>
             {
                 c.RemoveAll<IViewMapper>();
-                c.Add<IViewMapper, TMapper>();
+                c.Add<IViewMapper, TViewMapper>();
             });
 
             return config;
@@ -105,7 +105,7 @@
                 config.Configure(c =>
                 {
                     c.RemoveAll<IViewMapper>();
-                    c.Add<DirectViewMapper>();
+                    c.Add<IViewMapper, DirectViewMapper>();
                 });
             }
 
@@ -123,7 +123,7 @@
             config.Configure(c =>
             {
                 c.RemoveAll<IActivator>();
-                c.Add<TActivator>();
+                c.Add<IActivator, TActivator>();
             });
 
             return config;

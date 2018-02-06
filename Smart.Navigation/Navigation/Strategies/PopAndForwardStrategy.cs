@@ -2,8 +2,6 @@
 {
     using System;
 
-    using Smart.Navigation.Descriptors;
-
     public sealed class PopAndForwardStrategy : INavigationStrategy
     {
         private readonly bool all;

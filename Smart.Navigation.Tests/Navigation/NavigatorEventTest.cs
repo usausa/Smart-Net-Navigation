@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Smart.Navigation
+﻿namespace Smart.Navigation
 {
+    using System;
     using Smart.Functional;
     using Smart.Mock;
     using Smart.Resolver;

@@ -1,7 +1,7 @@
 ﻿namespace Smart.Mock
 {
     using Smart.Navigation;
-    using Smart.Navigation.Descriptors;
+    using Smart.Navigation.Mappers;
 
     public static class MockWindowNavigatorConfigExtensions
     {

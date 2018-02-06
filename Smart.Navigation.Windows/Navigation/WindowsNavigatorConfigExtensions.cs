@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Controls;
 
-    using Smart.Navigation.Descriptors;
+    using Smart.Navigation.Mappers;
 
     public static class WindowsNavigatorConfigExtensions
     {

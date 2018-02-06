@@ -2,7 +2,7 @@
 {
     using System;
 
-    using Smart.Navigation.Descriptors;
+    using Smart.Navigation.Mappers;
 
     using Xamarin.Forms;
 

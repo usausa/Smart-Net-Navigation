@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    using Smart.Navigation.Descriptors;
+    using Smart.Navigation.Mappers;
 
     public interface INavigationController
     {

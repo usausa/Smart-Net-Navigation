@@ -4,7 +4,7 @@
 
     using Smart.ComponentModel;
     using Smart.Navigation.Components;
-    using Smart.Navigation.Descriptors;
+    using Smart.Navigation.Mappers;
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Plugins.Parameter;
     using Smart.Navigation.Plugins.Scope;

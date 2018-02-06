@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Descriptors
+﻿namespace Smart.Navigation.Mappers
 {
     using System;
     using System.Collections.Generic;

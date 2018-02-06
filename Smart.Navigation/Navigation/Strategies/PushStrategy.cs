@@ -1,7 +1,5 @@
 ﻿namespace Smart.Navigation.Strategies
 {
-    using Smart.Navigation.Descriptors;
-
     public sealed class PushStrategy : INavigationStrategy
     {
         private readonly object id;
