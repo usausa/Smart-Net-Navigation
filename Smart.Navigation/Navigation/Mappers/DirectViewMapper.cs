@@ -33,7 +33,7 @@
                 return descriptor;
             }
 
-            throw new InvalidOperationException($"View id is invalid view type. id=[{id}]");
+            throw new InvalidOperationException($"View id is invalid id type. id=[{id}]");
         }
 
         public void Updated(object id)
