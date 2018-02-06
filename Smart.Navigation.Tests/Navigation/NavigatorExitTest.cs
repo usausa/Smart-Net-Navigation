@@ -7,7 +7,7 @@
     public class NavigatorExitTest
     {
         [Fact]
-        public static void TestNavigatorExit()
+        public static void Exit()
         {
             // prepare
             var called = new Holder<bool>();
@@ -28,7 +28,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorExitStacked()
+        public static void ExitStacked()
         {
             // prepare
             var navigator = new NavigatorConfig()

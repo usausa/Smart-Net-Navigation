@@ -13,7 +13,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorForward()
+        public static void Forward()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -49,7 +49,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorForwardWithStacked()
+        public static void ForwardWithStacked()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -68,7 +68,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorForwardWithParameter()
+        public static void ForwardWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()

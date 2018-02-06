@@ -11,7 +11,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorComponentSource()
+        public static void NavigatorComponentSource()
         {
             var navigator = new NavigatorConfig()
                 .UseProvider<MockFormNavigationProvider>()

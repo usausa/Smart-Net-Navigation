@@ -9,7 +9,7 @@
     public class DirectViewMapperTest
     {
         [Fact]
-        public static void TestDirectViewMapper()
+        public static void DirectViewMapper()
         {
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
@@ -27,7 +27,7 @@
         }
 
         [Fact]
-        public static void TestDirectViewMapperParameterFailed()
+        public static void DirectViewMapperParameterFailed()
         {
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
@@ -39,7 +39,7 @@
         }
 
         [Fact]
-        public static void TestDirectViewMapperWithConstraintFailed()
+        public static void DirectViewMapperWithConstraintFailed()
         {
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()

@@ -9,7 +9,7 @@
     public static class SmartResolverTest
     {
         [Fact]
-        public static void TestUseSmartResolver()
+        public static void UseSmartResolver()
         {
             // prepare
             var config = new ResolverConfig();

@@ -10,7 +10,7 @@
     public class IdViewMapperTest
     {
         [Fact]
-        public static void TestUseIdViewMapper()
+        public static void UseIdViewMapper()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -29,7 +29,7 @@
         }
 
         [Fact]
-        public static void TestUseIdViewMapperFindFailed()
+        public static void UseIdViewMapperFindFailed()
         {
             // prepare
             var navigator = new NavigatorConfig()

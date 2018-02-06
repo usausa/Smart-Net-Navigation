@@ -12,7 +12,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestFormNavigatorNotify()
+        public static void FormNotify()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -30,7 +30,7 @@
         }
 
         [Fact]
-        public static void TestFormNavigatorNotifyUnsuported()
+        public static void FormNotifyUnsuported()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -69,7 +69,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestViewNavigatorNotify()
+        public static void ViewNotify()
         {
             // prepare
             var resolver = new ResolverConfig()

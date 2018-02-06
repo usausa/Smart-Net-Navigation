@@ -14,7 +14,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorPop()
+        public static void Pop()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -47,7 +47,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopMultiple()
+        public static void PopMultiple()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -75,7 +75,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopWithParameter()
+        public static void PopWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -95,7 +95,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopMultipleWithParameter()
+        public static void PopMultipleWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -196,7 +196,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopFailed()
+        public static void PopFailed()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -210,7 +210,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopFailed2()
+        public static void PopFailed2()
         {
             // prepare
             var navigator = new NavigatorConfig()

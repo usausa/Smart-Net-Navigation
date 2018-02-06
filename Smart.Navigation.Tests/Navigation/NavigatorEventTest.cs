@@ -14,7 +14,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestFormNavigatorEventArgs()
+        public static void FormEventArgs()
         {
             // prepare
             var resolver = new ResolverConfig()
@@ -81,7 +81,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestFormNavigatorEvent()
+        public static void FormEvent()
         {
             // prepare
             var recorder = new EventRecorder();
@@ -106,7 +106,7 @@
         }
 
         [Fact]
-        public static void TestFormNavigatorEventSupport()
+        public static void FormEventSupport()
         {
             // prepare
             var resolver = new ResolverConfig()
@@ -197,7 +197,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestViewNavigatorEventSupport()
+        public static void ViewEventSupport()
         {
             // prepare
             var resolver = new ResolverConfig()

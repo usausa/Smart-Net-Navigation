@@ -13,7 +13,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorPush()
+        public static void Push()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -59,7 +59,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPushWithParameter()
+        public static void PushWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()

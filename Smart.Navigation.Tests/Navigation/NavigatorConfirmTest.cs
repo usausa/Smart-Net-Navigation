@@ -9,7 +9,7 @@
     public class NavigatorConfirmTest
     {
         [Fact]
-        public static void TestNavigatorCanceldByEvent()
+        public static void CanceldByEvent()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -26,7 +26,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorCanceldByInterface()
+        public static void CanceldByInterface()
         {
             // prepare
             var navigator = new NavigatorConfig()

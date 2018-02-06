@@ -14,7 +14,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorGropedPop()
+        public static void GropedPop()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -48,7 +48,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPopLeaveLast()
+        public static void GropedPopLeaveLast()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -80,7 +80,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPopLeaveLastNoOperation()
+        public static void GropedPopLeaveLastNoOperation()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -95,7 +95,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPopWithParameter()
+        public static void GropedPopWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -116,7 +116,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPopLeaveLastWithParameter()
+        public static void GropedPopLeaveLastWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -223,7 +223,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorGropedPopFailed1()
+        public static void GropedPopFailed1()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -235,7 +235,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPopFailed2()
+        public static void GropedPopFailed2()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -248,7 +248,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPopFailed3()
+        public static void GropedPopFailed3()
         {
             // prepare
             var navigator = new NavigatorConfig()

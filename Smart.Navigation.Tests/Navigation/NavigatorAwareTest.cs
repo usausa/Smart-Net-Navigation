@@ -7,7 +7,7 @@
     public class NavigatorAwareTest
     {
         [Fact]
-        public static void TestNavigatorAware()
+        public static void NavigatorAware()
         {
             // prepare
             var navigator = new NavigatorConfig()

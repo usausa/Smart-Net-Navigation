@@ -14,7 +14,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorPopAndForward()
+        public static void PopAndForward()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -41,7 +41,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopAndForwardMultiple()
+        public static void PopAndForwardMultiple()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -69,7 +69,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopAllAndForward()
+        public static void PopAllAndForward()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -97,7 +97,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopAndForwardWithParameter()
+        public static void PopAndForwardWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -117,7 +117,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopAndForwardMultipleWithParameter()
+        public static void PopAndForwardMultipleWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -138,7 +138,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopAllAndForwardWithParameter()
+        public static void PopAllAndForwardWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -291,7 +291,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorPopAndForwardFailed2()
+        public static void PopAndForwardFailed2()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -305,7 +305,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorPopAndForwardFailed3()
+        public static void PopAndForwardFailed3()
         {
             // prepare
             var navigator = new NavigatorConfig()

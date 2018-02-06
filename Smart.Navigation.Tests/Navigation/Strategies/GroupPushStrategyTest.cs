@@ -14,7 +14,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorGropedPushNewGroup()
+        public static void GropedPushNewGroup()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -44,7 +44,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPushNewAndBring()
+        public static void GropedPushNewAndBring()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -94,7 +94,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPushNewAndNotBring()
+        public static void GropedPushNewAndNotBring()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -144,7 +144,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPushExistAndBring()
+        public static void GropedPushExistAndBring()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -186,7 +186,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPushExistAndNotBring()
+        public static void GropedPushExistAndNotBring()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -224,7 +224,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPushUseCase()
+        public static void GropedPushUseCase()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -291,7 +291,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPushWithParameter()
+        public static void GropedPushWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -368,7 +368,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorGropedPushFailed()
+        public static void GropedPushFailed()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -381,7 +381,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorGropedPushFailed2()
+        public static void GropedPushFailed2()
         {
             // prepare
             var navigator = new NavigatorConfig()

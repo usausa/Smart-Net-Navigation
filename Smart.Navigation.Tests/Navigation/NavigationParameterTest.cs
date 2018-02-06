@@ -5,7 +5,7 @@
     public static class NavigationParameterTest
     {
         [Fact]
-        public static void TestNavigationParameterGetValueByKey()
+        public static void ParameterGetValueByKey()
         {
             var parameter = new NavigationParameter();
 
@@ -14,7 +14,7 @@
         }
 
         [Fact]
-        public static void TestNavigationParameterGetValue()
+        public static void ParameterGetValue()
         {
             var parameter = new NavigationParameter();
 
@@ -23,7 +23,7 @@
         }
 
         [Fact]
-        public static void TestNavigationParameterGetValueOrDefaultByKey()
+        public static void ParameterGetValueOrDefaultByKey()
         {
             var parameter = new NavigationParameter();
 
@@ -33,7 +33,7 @@
         }
 
         [Fact]
-        public static void TestNavigationParameterGetValueOrDefault()
+        public static void ParameterGetValueOrDefault()
         {
             var parameter = new NavigationParameter();
 
@@ -43,7 +43,7 @@
         }
 
         [Fact]
-        public static void TestNavigationParameterGetValueOrByKey()
+        public static void ParameterGetValueOrByKey()
         {
             var parameter = new NavigationParameter();
 
@@ -53,7 +53,7 @@
         }
 
         [Fact]
-        public static void TestNavigationParameterGetValueOr()
+        public static void ParameterGetValueOr()
         {
             var parameter = new NavigationParameter();
 

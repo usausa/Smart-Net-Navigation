@@ -9,7 +9,7 @@
     public class ScopePluginTest
     {
         [Fact]
-        public static void TestScope()
+        public static void Scope()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -39,7 +39,7 @@
         }
 
         [Fact]
-        public static void TestScopeByRequestType()
+        public static void ScopeByRequestType()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -61,7 +61,7 @@
         }
 
         [Fact]
-        public static void TestScopeSkipInTheMiddle()
+        public static void ScopeSkipInTheMiddle()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -103,7 +103,7 @@
         }
 
         [Fact]
-        public static void TestScopeNamed()
+        public static void ScopeNamed()
         {
             // prepare
             var navigator = new NavigatorConfig()

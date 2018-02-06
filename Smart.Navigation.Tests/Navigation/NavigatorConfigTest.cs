@@ -20,7 +20,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorConfigUseProviderByInterface()
+        public static void ConfigUseProviderByInterface()
         {
             var config = new NavigatorConfig()
                 .UseProvider<MockFormNavigationProvider>();
@@ -31,7 +31,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseProviderByInstance()
+        public static void ConfigUseProviderByInstance()
         {
             var config = new NavigatorConfig()
                 .UseProvider(new MockFormNavigationProvider());
@@ -42,7 +42,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseProviderByInstanceFailed()
+        public static void ConfigUseProviderByInstanceFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseProvider(null));
         }
@@ -52,7 +52,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorConfigUseViewMapperByInterface()
+        public static void ConfigUseViewMapperByInterface()
         {
             var config = new NavigatorConfig()
                 .UseViewMapper<DummyViewMapper>();
@@ -64,7 +64,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseViewMapperByInstance()
+        public static void ConfigUseViewMapperByInstance()
         {
             var config = new NavigatorConfig()
                 .UseViewMapper(new DummyViewMapper());
@@ -76,19 +76,19 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseViewMapperFailed()
+        public static void ConfigUseViewMapperFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseViewMapper(null));
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseIdViewMapperFailed()
+        public static void ConfigUseIdViewMapperFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdMapper(null));
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseIdViewMapperAutoRegisterFailed()
+        public static void ConfigUseIdViewMapperAutoRegisterFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdMapper(r => r.AutoRegister(null)));
         }
@@ -100,7 +100,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorConfigUseActivatorByInterface()
+        public static void ConfigUseActivatorByInterface()
         {
             var config = new NavigatorConfig()
                 .UseActivator<StandardActivator>();
@@ -113,7 +113,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseActivatorByInstance()
+        public static void ConfigUseActivatorByInstance()
         {
             var config = new NavigatorConfig()
                 .UseActivator(new CallbackActivator(Activator.CreateInstance));
@@ -126,13 +126,13 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseActivatorByInstanceFailed()
+        public static void ConfigUseActivatorByInstanceFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseActivator((IActivator)null));
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseActivatorByCallback()
+        public static void ConfigUseActivatorByCallback()
         {
             var config = new NavigatorConfig()
                 .UseActivator(Activator.CreateInstance);
@@ -145,7 +145,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseActivatorByCallbackFailed()
+        public static void ConfigUseActivatorByCallbackFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseActivator((Func<Type, object>)null));
         }
@@ -155,7 +155,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorConfigUseConverterByInterface()
+        public static void ConfigUseConverterByInterface()
         {
             var config = new NavigatorConfig()
                 .UseConverter<StandardConverter>();
@@ -168,7 +168,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseConverterByInstance()
+        public static void ConfigUseConverterByInstance()
         {
             var config = new NavigatorConfig()
                 .UseConverter(new StandardConverter());
@@ -181,7 +181,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseConverterByObjectConverter()
+        public static void ConfigUseConverterByObjectConverter()
         {
             var config = new NavigatorConfig()
                 .UseConverter(ObjectConverter.Default);
@@ -194,13 +194,13 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseConverterByInstanceFailed()
+        public static void ConfigUseConverterByInstanceFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseConverter((IConverter)null));
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseConverterByCallback()
+        public static void ConfigUseConverterByCallback()
         {
             var config = new NavigatorConfig()
                 .UseConverter(Convert.ChangeType);
@@ -213,7 +213,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseConverterByCallbackFailed()
+        public static void ConfigUseConverterByCallbackFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseConverter((IConverter)null));
         }
@@ -223,7 +223,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorConfigAddPluginByInterface()
+        public static void ConfigAddPluginByInterface()
         {
             var config = new NavigatorConfig()
                 .AddPlugin<DummyPlugin>();
@@ -235,7 +235,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigAddPluginByInstance()
+        public static void ConfigAddPluginByInstance()
         {
             var config = new NavigatorConfig()
                 .AddPlugin(new DummyPlugin());
@@ -247,7 +247,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigAddPluginByInstanceFailed()
+        public static void ConfigAddPluginByInstanceFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().AddPlugin(null));
         }
@@ -257,7 +257,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorConfigUseAccessorByInterface()
+        public static void ConfigUseAccessorByInterface()
         {
             var config = new NavigatorConfig()
                 .UseDelegateFactory<DummyDelegateFactory>();
@@ -269,7 +269,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseAccessorByInstance()
+        public static void ConfigUseAccessorByInstance()
         {
             var config = new NavigatorConfig()
                 .UseDelegateFactory(new DummyDelegateFactory());
@@ -281,7 +281,7 @@
         }
 
         [Fact]
-        public static void TestNavigatorConfigUseAccessorByInstanceFailed()
+        public static void ConfigUseAccessorByInstanceFailed()
         {
             Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseDelegateFactory(null));
         }
@@ -291,7 +291,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static void TestNavigatorConfigFailed()
+        public static void ConfigFailed()
         {
             var config = new NavigatorConfig();
 

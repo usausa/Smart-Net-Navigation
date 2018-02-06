@@ -9,7 +9,7 @@
     public class NavigatorDisposeTest
     {
         [Fact]
-        public static void TestNavigatorDispose()
+        public static void NavigatorDispose()
         {
             // prepare
             var component = new DisposableComponent();

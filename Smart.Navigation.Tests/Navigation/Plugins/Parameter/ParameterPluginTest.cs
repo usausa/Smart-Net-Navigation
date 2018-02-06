@@ -7,7 +7,7 @@
     public class ParameterPluginTest
     {
         [Fact]
-        public static void TestParameter()
+        public static void Parameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -30,7 +30,7 @@
         }
 
         [Fact]
-        public static void TestParameterOneWay()
+        public static void ParameterOneWay()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -59,7 +59,7 @@
         }
 
         [Fact]
-        public static void TestParameterNamed()
+        public static void ParameterNamed()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -81,7 +81,7 @@
         }
 
         [Fact]
-        public static void TestParameterConvert()
+        public static void ParameterConvert()
         {
             // prepare
             var navigator = new NavigatorConfig()

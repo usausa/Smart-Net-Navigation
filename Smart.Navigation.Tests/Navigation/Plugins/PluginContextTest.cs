@@ -7,7 +7,7 @@
     public static class PluginContextTest
     {
         [Fact]
-        public static void TestPluginContextLoadStoredValue()
+        public static void LoadStoredValue()
         {
             var context = new PluginContext();
 
@@ -16,7 +16,7 @@
         }
 
         [Fact]
-        public static void TestPluginContextLoadOrDefault()
+        public static void LoadOrDefault()
         {
             var context = new PluginContext();
 
@@ -25,7 +25,7 @@
         }
 
         [Fact]
-        public static void TestPluginContextLoadOrDefaultNotPrepared()
+        public static void LoadOrDefaultNotPrepared()
         {
             var context = new PluginContext();
 
@@ -33,7 +33,7 @@
         }
 
         [Fact]
-        public static void TestPluginContextLoadOrDefaultNotContained()
+        public static void LoadOrDefaultNotContained()
         {
             var context = new PluginContext();
 
@@ -42,7 +42,7 @@
         }
 
         [Fact]
-        public static void TestPluginContextLoadOrDefaultByFactory()
+        public static void LoadOrDefaultByFactory()
         {
             var context = new PluginContext();
 
@@ -51,7 +51,7 @@
         }
 
         [Fact]
-        public static void TestPluginContextLoadOrDefaultNotPreparedByFactory()
+        public static void LoadOrDefaultNotPreparedByFactory()
         {
             var context = new PluginContext();
 
@@ -59,7 +59,7 @@
         }
 
         [Fact]
-        public static void TestPluginContextLoadOrDefaultNotContainedByFactory()
+        public static void LoadOrDefaultNotContainedByFactory()
         {
             var context = new PluginContext();
 
@@ -68,7 +68,7 @@
         }
 
         [Fact]
-        public static void TestPluginContextLoadFaiied()
+        public static void LoadFaiied()
         {
             var context = new PluginContext();
 
