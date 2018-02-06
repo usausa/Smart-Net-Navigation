@@ -1,7 +1,5 @@
 ﻿namespace Smart.Navigation.Strategies
 {
-    using System;
-
     using Smart.Navigation.Descriptors;
 
     public sealed class ForwardStrategy : INavigationStrategy

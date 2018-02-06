@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:Example.FormsApp"
              x:Class="Example.FormsApp.MainPage">
 
-	<Label Text="Welcome to Xamarin.Forms!" 
-           VerticalOptions="Center" 
+	<Label Text="Welcome to Xamarin.Forms!"
+           VerticalOptions="Center"
            HorizontalOptions="Center" />
 
 </ContentPage>
