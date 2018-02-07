@@ -7,8 +7,25 @@
     {
         private readonly Dictionary<object, ViewDescriptor> descriptors = new Dictionary<object, ViewDescriptor>();
 
+        private readonly ITypeConstraint constraint;
+
+        public IdViewMapper()
+            : this(null)
+        {
+        }
+
+        public IdViewMapper(ITypeConstraint constraint)
+        {
+            this.constraint = constraint;
+        }
+
         public void Register(object id, Type type)
         {
+            if (!constraint?.IsValidType(type) ?? false)
+            {
+                throw new ArgumentException($"Type is invalid. type=[{type.FullName}]", nameof(type));
+            }
+
             descriptors[id] = new ViewDescriptor(id, type);
         }
 
@@ -22,7 +39,7 @@
             return descriptor;
         }
 
-        public void Updated(object id)
+        public void CurrentUpdated(object id)
         {
         }
     }

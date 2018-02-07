@@ -36,7 +36,7 @@
             throw new InvalidOperationException($"View id is invalid id type. id=[{id}]");
         }
 
-        public void Updated(object id)
+        public void CurrentUpdated(object id)
         {
         }
     }

@@ -4,6 +4,6 @@
     {
         ViewDescriptor FindDescriptor(object id);
 
-        void Updated(object id);
+        void CurrentUpdated(object id);
     }
 }

@@ -101,6 +101,8 @@
 
             viewStack.Clear();
 
+            viewMapper.CurrentUpdated(null);
+
             Exited?.Invoke(this, EventArgs.Empty);
         }
 
@@ -186,7 +188,7 @@
             strategy.UpdateStack(controller, toView);
 
             // Update view mapper
-            viewMapper.Updated(CurrentViewId);
+            viewMapper.CurrentUpdated(CurrentViewId);
 
             // Process navigated
             foreach (var plugin in plugins)

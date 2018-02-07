@@ -69,6 +69,25 @@
             return config;
         }
 
+        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config, Type baseType)
+        {
+            if (baseType != null)
+            {
+                config.Configure(c =>
+                {
+                    c.RemoveAll<ITypeConstraint>();
+                    c.Add<ITypeConstraint>(new AssignableTypeConstraint(baseType));
+                });
+            }
+
+            return config.UseViewMapper<DirectViewMapper>();
+        }
+
+        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config)
+        {
+            return config.UseDirectMapper(null);
+        }
+
         public static NavigatorConfig UseIdMapper(this NavigatorConfig config, Action<IViewRegister> action)
         {
             if (action == null)
@@ -98,23 +117,51 @@
             }
         }
 
-        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config, Type baseType)
+        public static NavigatorConfig UsePathMapper(this NavigatorConfig config, Action<PathViewMapperOptions> action)
         {
-            if (baseType != null)
+            if (action == null)
             {
-                config.Configure(c =>
-                {
-                    c.RemoveAll<ITypeConstraint>();
-                    c.Add<ITypeConstraint>(new AssignableTypeConstraint(baseType));
-                });
+                throw new ArgumentNullException(nameof(action));
             }
 
-            return config.UseViewMapper<DirectViewMapper>();
+            var options = new PathViewMapperOptions();
+            action(options);
+
+            config.Configure(c =>
+            {
+                c.RemoveAll<PathViewMapperOptions>();
+                c.Add(options);
+            });
+
+            return config.UseViewMapper<PathViewMapper>();
         }
 
-        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config)
+        public static NavigatorConfig UseTypeConstraint<TTypeConstraint>(this NavigatorConfig config)
+            where TTypeConstraint : ITypeConstraint
         {
-            return config.UseDirectMapper(null);
+            config.Configure(c =>
+            {
+                c.RemoveAll<ITypeConstraint>();
+                c.Add<ITypeConstraint, TTypeConstraint>();
+            });
+
+            return config;
+        }
+
+        public static NavigatorConfig UseTypeConstraint(this NavigatorConfig config, ITypeConstraint constraint)
+        {
+            if (constraint == null)
+            {
+                throw new ArgumentNullException(nameof(constraint));
+            }
+
+            config.Configure(c =>
+            {
+                c.RemoveAll<ITypeConstraint>();
+                c.Add(constraint);
+            });
+
+            return config;
         }
 
         public static NavigatorConfig UseActivator<TActivator>(this NavigatorConfig config)
