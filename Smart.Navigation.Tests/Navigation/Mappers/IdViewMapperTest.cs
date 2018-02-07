@@ -15,7 +15,7 @@
             // prepare
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
-                .UseIdMapper(r => r.AutoRegister(new[] { typeof(Form1), typeof(Form2) }))
+                .UseIdViewMapper(r => r.AutoRegister(new[] { typeof(Form1), typeof(Form2) }))
                 .ToNavigator();
 
             // test
@@ -34,7 +34,7 @@
             // prepare
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
-                .UseIdMapper(r => { })
+                .UseIdViewMapper(r => { })
                 .ToNavigator();
 
             // test

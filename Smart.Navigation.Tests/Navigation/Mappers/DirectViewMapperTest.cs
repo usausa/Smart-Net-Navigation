@@ -13,7 +13,7 @@
         {
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
-                .UseDirectMapper()
+                .UseDirectViewMapper()
                 .ToNavigator();
 
             // test
@@ -31,7 +31,7 @@
         {
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
-                .UseDirectMapper()
+                .UseDirectViewMapper()
                 .ToNavigator();
 
             // test
@@ -43,7 +43,7 @@
         {
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
-                .UseDirectMapper(typeof(string))
+                .UseDirectViewMapper<string>()
                 .ToNavigator();
 
             // test

@@ -69,7 +69,7 @@
             return config;
         }
 
-        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config, Type baseType)
+        public static NavigatorConfig UseDirectViewMapper(this NavigatorConfig config, Type baseType)
         {
             if (baseType != null)
             {
@@ -83,12 +83,17 @@
             return config.UseViewMapper<DirectViewMapper>();
         }
 
-        public static NavigatorConfig UseDirectMapper(this NavigatorConfig config)
+        public static NavigatorConfig UseDirectViewMapper<TViewBase>(this NavigatorConfig config)
         {
-            return config.UseDirectMapper(null);
+            return config.UseDirectViewMapper(typeof(TViewBase));
         }
 
-        public static NavigatorConfig UseIdMapper(this NavigatorConfig config, Action<IViewRegister> action)
+        public static NavigatorConfig UseDirectViewMapper(this NavigatorConfig config)
+        {
+            return config.UseDirectViewMapper(null);
+        }
+
+        public static NavigatorConfig UseIdViewMapper(this NavigatorConfig config, Action<IViewRegister> action)
         {
             if (action == null)
             {
@@ -117,7 +122,7 @@
             }
         }
 
-        public static NavigatorConfig UsePathMapper(this NavigatorConfig config, Action<PathViewMapperOptions> action)
+        public static NavigatorConfig UsePathViewMapper(this NavigatorConfig config, Action<PathViewMapperOptions> action)
         {
             if (action == null)
             {

@@ -84,16 +84,20 @@
         [Fact]
         public static void ConfigUseIdViewMapperFailed()
         {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdMapper(null));
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdViewMapper(null));
         }
 
         [Fact]
         public static void ConfigUseIdViewMapperAutoRegisterFailed()
         {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdMapper(r => r.AutoRegister(null)));
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdViewMapper(r => r.AutoRegister(null)));
         }
 
-        // TODO
+        [Fact]
+        public static void ConfigUsePathViewMapperFailed()
+        {
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UsePathViewMapper(null));
+        }
 
         // ------------------------------------------------------------
         // TypeConstraint
