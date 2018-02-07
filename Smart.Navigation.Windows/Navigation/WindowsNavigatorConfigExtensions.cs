@@ -9,21 +9,7 @@
     {
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config)
         {
-            config.Configure(c =>
-            {
-                c.RemoveAll<IContainerResolver>();
-                c.RemoveAll<IUpdateContainer>();
-
-                var resolver = new ContainerResolver();
-                c.Add<IContainerResolver>(resolver);
-                c.Add<IUpdateContainer>(resolver);
-
-                c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));
-
-                c.Add<WindowsNavigationProviderOptions>();
-            });
-
-            return config.UseProvider<WindowsNavigationProvider>();
+            return config.UseWindowsNavigationProvider(action => { });
         }
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Action<WindowsNavigationProviderOptions> setupAction)
@@ -45,6 +31,7 @@
                 c.Add<IContainerResolver>(resolver);
                 c.Add<IUpdateContainer>(resolver);
 
+                c.RemoveAll<ITypeConstraint>();
                 c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));
 
                 c.Add(options);
@@ -55,12 +42,7 @@
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, ContentControl container)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-
-            return config.UseProvider(new WindowsNavigationProvider(new ContainerResolver(container), new WindowsNavigationProviderOptions()));
+            return config.UseWindowsNavigationProvider(container, action => { });
         }
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, ContentControl container, Action<WindowsNavigationProviderOptions> setupAction)
@@ -77,6 +59,12 @@
 
             var options = new WindowsNavigationProviderOptions();
             setupAction(options);
+
+            config.Configure(c =>
+            {
+                c.RemoveAll<ITypeConstraint>();
+                c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));
+            });
 
             return config.UseProvider(new WindowsNavigationProvider(new ContainerResolver(container), options));
         }
