@@ -93,20 +93,28 @@
             return config.UseDirectViewMapper(null);
         }
 
-        public static NavigatorConfig UseIdViewMapper(this NavigatorConfig config, Action<IViewRegister> action)
+        public static NavigatorConfig UseIdViewMapper(this NavigatorConfig config, Action<IIdViewRegister> action)
         {
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
-            var mapper = new IdViewMapper();
-            action(mapper);
+            var options = new IdViewMapperOptions
+            {
+                SetupAction = action
+            };
 
-            return config.UseViewMapper(mapper);
+            config.Configure(c =>
+            {
+                c.RemoveAll<IdViewMapperOptions>();
+                c.Add(options);
+            });
+
+            return config.UseViewMapper<IdViewMapper>();
         }
 
-        public static void AutoRegister(this IViewRegister register, IEnumerable<Type> types)
+        public static void AutoRegister(this IIdViewRegister register, IEnumerable<Type> types)
         {
             if (types == null)
             {

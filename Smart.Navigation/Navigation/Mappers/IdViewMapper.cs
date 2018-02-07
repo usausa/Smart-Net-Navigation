@@ -3,20 +3,22 @@
     using System;
     using System.Collections.Generic;
 
-    public sealed class IdViewMapper : IViewMapper, IViewRegister
+    public sealed class IdViewMapper : IViewMapper, IIdViewRegister
     {
         private readonly Dictionary<object, ViewDescriptor> descriptors = new Dictionary<object, ViewDescriptor>();
 
         private readonly ITypeConstraint constraint;
 
-        public IdViewMapper()
-            : this(null)
+        public IdViewMapper(IdViewMapperOptions options)
+            : this(options, null)
         {
         }
 
-        public IdViewMapper(ITypeConstraint constraint)
+        public IdViewMapper(IdViewMapperOptions options, ITypeConstraint constraint)
         {
             this.constraint = constraint;
+
+            options.SetupAction(this);
         }
 
         public void Register(object id, Type type)

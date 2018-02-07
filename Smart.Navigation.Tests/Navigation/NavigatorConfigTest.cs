@@ -90,7 +90,8 @@
         [Fact]
         public static void ConfigUseIdViewMapperAutoRegisterFailed()
         {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdViewMapper(r => r.AutoRegister(null)));
+            Assert.Throws<TargetInvocationException>(
+                () => new NavigatorConfig().UseMockFormProvider().UseIdViewMapper(r => r.AutoRegister(null)).ToNavigator());
         }
 
         [Fact]
@@ -103,7 +104,35 @@
         // TypeConstraint
         // ------------------------------------------------------------
 
-        // TODO
+        [Fact]
+        public static void ConfigUseTypeConstraintByInterface()
+        {
+            var config = new NavigatorConfig()
+                .UseTypeConstraint<DummyTypeConstraint>();
+
+            var components = ((INavigatorConfig)config).ResolveComponents();
+
+            var activator = components.TryGet<ITypeConstraint>();
+            Assert.NotNull(activator);
+        }
+
+        [Fact]
+        public static void ConfigUseTypeConstraintByInstance()
+        {
+            var config = new NavigatorConfig()
+                .UseTypeConstraint(new DummyTypeConstraint());
+
+            var components = ((INavigatorConfig)config).ResolveComponents();
+
+            var activator = components.TryGet<ITypeConstraint>();
+            Assert.NotNull(activator);
+        }
+
+        [Fact]
+        public static void ConfigUseTypeConstraintByInstanceFailed()
+        {
+            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseTypeConstraint(null));
+        }
 
         // ------------------------------------------------------------
         // Activator
@@ -325,6 +354,14 @@
 
             public void CurrentUpdated(object id)
             {
+            }
+        }
+
+        public class DummyTypeConstraint : ITypeConstraint
+        {
+            public bool IsValidType(Type type)
+            {
+                return true;
             }
         }
 

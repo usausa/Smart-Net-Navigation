@@ -1,6 +1,7 @@
 ﻿namespace Smart.Navigation.Mappers
 {
     using System;
+    using System.Reflection;
 
     using Smart.Mock;
     using Smart.Navigation.Attributes;
@@ -39,6 +40,13 @@
 
             // test
             Assert.Throws<InvalidOperationException>(() => navigator.Forward(ViewId.Form1));
+        }
+
+        [Fact]
+        public static void UseIdViewMapperRegisterFailed()
+        {
+            Assert.Throws<TargetInvocationException>(() =>
+                new NavigatorConfig().UseMockFormProvider().UseIdViewMapper(r => r.Register(1, typeof(string))).ToNavigator());
         }
 
         // ------------------------------------------------------------

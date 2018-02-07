@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IViewRegister
+    public interface IIdViewRegister
     {
         void Register(object id, Type type);
     }
