@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace Smart.Navigation.Mappers
+﻿namespace Smart.Navigation.Mappers
 {
+    using System;
     using System.Text;
 
     public static class PathHelper
