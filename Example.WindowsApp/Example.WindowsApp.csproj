@@ -63,7 +63,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Extensions\Int32Extension.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Views\AppViewModelBase.cs" />
     <Compile Include="Views\MenuView.xaml.cs">
@@ -176,7 +175,7 @@
       <Version>1.7.1</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows">
-      <Version>1.2.1</Version>
+      <Version>1.2.2</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows.Resolver">
       <Version>1.2.1</Version>

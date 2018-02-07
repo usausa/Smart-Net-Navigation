@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Example.WindowsApp.Views.Stack"
+             xmlns:markup="clr-namespace:Smart.Windows.Markup;assembly=Smart.Windows"
              xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
-             xmlns:extensions="clr-namespace:Example.WindowsApp.Extensions"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type local:Stack2ViewModel}}"
              resolver:DataContextResolver.Type="{x:Type local:Stack2ViewModel}"
@@ -13,7 +13,7 @@
     <Grid>
 
         <Button Content="Pop" HorizontalAlignment="Left" Margin="102,113,0,0" VerticalAlignment="Top" Width="75"
-            Command="{Binding Pop}" CommandParameter="{extensions:Int32 1}"/>
+            Command="{Binding Pop}" CommandParameter="{markup:Int32 1}"/>
         <Button Content="Push" HorizontalAlignment="Left" Margin="314,113,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Push}" CommandParameter="{x:Type local:Stack3View}"/>
 
