@@ -9,11 +9,6 @@
 
         private readonly ITypeConstraint constraint;
 
-        public IdViewMapper(IdViewMapperOptions options)
-            : this(options, null)
-        {
-        }
-
         public IdViewMapper(IdViewMapperOptions options, ITypeConstraint constraint)
         {
             this.constraint = constraint;
@@ -23,7 +18,7 @@
 
         public void Register(object id, Type type)
         {
-            if (!constraint?.IsValidType(type) ?? false)
+            if (!constraint.IsValidType(type))
             {
                 throw new ArgumentException($"Type is invalid. type=[{type.FullName}]", nameof(type));
             }

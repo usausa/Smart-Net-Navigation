@@ -21,8 +21,7 @@
 
         public ViewDescriptor FindDescriptor(object id)
         {
-            if (id is Type type &&
-                (constraint?.IsValidType(type) ?? true))
+            if (id is Type type && constraint.IsValidType(type))
             {
                 if (!descriptors.TryGetValue(type, out var descriptor))
                 {

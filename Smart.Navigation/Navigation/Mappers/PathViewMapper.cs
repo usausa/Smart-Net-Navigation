@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     public class PathViewMapper : IViewMapper
     {
@@ -13,11 +12,6 @@
         private readonly ITypeConstraint constraint;
 
         private string lastPath;
-
-        public PathViewMapper(PathViewMapperOptions options)
-            : this(options, null)
-        {
-        }
 
         public PathViewMapper(PathViewMapperOptions options, ITypeConstraint constraint)
         {
@@ -43,7 +37,7 @@
                         throw new InvalidOperationException($"View id is invalid id. id=[{id}]");
                     }
 
-                    if (!constraint?.IsValidType(type) ?? false)
+                    if (!constraint.IsValidType(type))
                     {
                         throw new InvalidOperationException($"View type is invalid type. id=[{id}], type=[{type.FullName}]");
                     }
@@ -64,55 +58,18 @@
 
         private string ResolvePath(string current, string path)
         {
-            if (path.StartsWith("/") || String.IsNullOrEmpty(current))
+            if (path.StartsWith(PathHelper.PathSeparatorString))
             {
-                return NormalizePath(path);
+                return PathHelper.Normalize(path);
             }
 
-            var index = current.LastIndexOf('/');
-            return NormalizePath(current.Substring(0, index + 1) + path);
-        }
-
-        private static string NormalizePath(string path)
-        {
-            var dirs = path.Split('/');
-
-            var length = 0;
-            for (var i = 0; i < dirs.Length; i++)
-            {
-                if ((dirs[i] == ".") || ((i != 0) && (dirs[i].Length == 0)))
-                {
-                }
-                else if (dirs[i] == "..")
-                {
-                    length--;
-                }
-                else
-                {
-                    dirs[length] = dirs[i];
-                    length++;
-                }
-            }
-
-            if ((length <= 0) || ((length == 1) && (dirs[0].Length == 0)))
-            {
-                return "/";
-            }
-
-            var sb = new StringBuilder();
-            var start = dirs[0].Length == 0 ? 1 : 0;
-            for (var i = start; i < length; i++)
-            {
-                sb.Append('/');
-                sb.Append(dirs[i]);
-            }
-
-            return sb.ToString();
+            return PathHelper.Normalize(PathHelper.GetContainer(current) + path);
         }
 
         private Type PathToType(string path)
         {
-            return Type.GetType($"{options.Root}{path.Replace('/', '.')}{options.Suffix}");
+            var typeName = $"{options.Root}{path.Replace(PathHelper.PathSeparatorChar, '.')}{options.Suffix}";
+            return options.FindType(typeName);
         }
 
         public void CurrentUpdated(object id)
