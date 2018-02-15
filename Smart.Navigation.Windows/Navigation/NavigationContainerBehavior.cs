@@ -23,27 +23,22 @@
         {
             base.OnAttached();
 
-            AttachContainer(AssociatedObject);
+            AttachContainer();
         }
 
         protected override void OnDetaching()
         {
-            AttachContainer(null);
+            AttachContainer();
 
             base.OnDetaching();
         }
 
-        private void AttachContainer(ContentControl container)
+        private void AttachContainer()
         {
-            if (container == null)
-            {
-                return;
-            }
-
             if (Navigator is INavigatorComponentSource componentSource)
             {
                 var updateContiner = componentSource.Components.Get<IUpdateContainer>();
-                updateContiner.Attach(container);
+                updateContiner.Attach(AssociatedObject);
             }
         }
     }
