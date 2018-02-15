@@ -9,8 +9,6 @@
 
         public MainPageViewModel(INavigator navigator)
         {
-            System.Diagnostics.Debug.WriteLine("************************");
-
             Navigator = navigator;
         }
     }

@@ -1,10 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
+             xmlns:stack="clr-namespace:Example.FormsApp.Views.Stack;assembly=Example.FormsApp"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type stack:Stack1ViewModel}}"
+             resolver:BindingContextResolver.Type="{x:Type stack:Stack1ViewModel}"
              x:Class="Example.FormsApp.Views.Stack.Stack1View">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+    <StackLayout>
+        <Label Text="Stack1" />
+        <Button Text="Menu"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>
+    </StackLayout>
 </ContentView>

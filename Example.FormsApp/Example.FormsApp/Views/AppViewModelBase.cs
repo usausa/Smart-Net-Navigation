@@ -1,8 +1,17 @@
 ﻿namespace Example.FormsApp.Views
 {
     using Smart.Forms.ViewModels;
+    using Smart.Navigation;
 
-    public class AppViewModelBase : ViewModelBase
+    public class AppViewModelBase : ViewModelBase, INavigatorAware
     {
+        public INavigator Navigator { get; set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            System.Diagnostics.Debug.WriteLine($"{GetType()} is Disposed");
+        }
     }
 }
