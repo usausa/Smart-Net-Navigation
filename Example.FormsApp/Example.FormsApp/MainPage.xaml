@@ -1,11 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Example.FormsApp"
+             xmlns:navigation="clr-namespace:Smart.Navigation;assembly=Smart.Navigation.Forms"
+             xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type local:MainPageViewModel}}"
+             resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
              x:Class="Example.FormsApp.MainPage">
-
-	<Label Text="Welcome to Xamarin.Forms!"
-           VerticalOptions="Center"
-           HorizontalOptions="Center" />
-
+    <StackLayout>
+        <Label Text="Test" VerticalOptions="Center" HorizontalOptions="Center" />
+        <ContentView x:Name="Container">
+            <ContentView.Behaviors>
+                <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
+            </ContentView.Behaviors>
+        </ContentView>
+    </StackLayout>
 </ContentPage>
