@@ -1,5 +1,7 @@
 ﻿namespace Smart.Navigation
 {
+    using System;
+
     using Xamarin.Forms;
 
     public class NavigationContainerBehavior : Behavior<ContentView>
@@ -14,31 +16,54 @@
             set => SetValue(NavigatorProperty, value);
         }
 
+        public ContentView AssociatedObject { get; private set; }
+
         protected override void OnAttachedTo(ContentView bindable)
         {
             base.OnAttachedTo(bindable);
 
-            AttachContainer(bindable);
+            AssociatedObject = bindable;
+
+            if (bindable.BindingContext != null)
+            {
+                BindingContext = bindable.BindingContext;
+            }
+
+            bindable.BindingContextChanged += HandleBindingContextChanged;
+
+            AttachContainer();
         }
 
         protected override void OnDetachingFrom(ContentView bindable)
         {
-            AttachContainer(null);
-
             base.OnDetachingFrom(bindable);
+
+            bindable.BindingContextChanged -= HandleBindingContextChanged;
+            BindingContext = null;
+
+            AttachContainer();
         }
 
-        private void AttachContainer(ContentView container)
+        private void HandleBindingContextChanged(object sender, EventArgs eventArgs)
         {
-            if (container == null)
-            {
-                return;
-            }
+            OnBindingContextChanged();
+        }
 
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            BindingContext = AssociatedObject.BindingContext;
+
+            AttachContainer();
+        }
+
+        private void AttachContainer()
+        {
             if (Navigator is INavigatorComponentSource componentSource)
             {
                 var updateContiner = componentSource.Components.Get<IUpdateContainer>();
-                updateContiner.Attach(container);
+                updateContiner.Attach(AssociatedObject);
             }
         }
     }
