@@ -48,7 +48,7 @@
                 .UseAutoBinding()
                 .UsePropertyInjector();
 
-            config.Bind<INavigator>().ToMethod(kernel => navigator);
+            config.Bind<INavigator>().ToMethod(kernel => navigator).InSingletonScope();
 
             return config.ToResolver();
         }
