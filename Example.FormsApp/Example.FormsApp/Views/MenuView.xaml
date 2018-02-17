@@ -11,7 +11,7 @@
              x:Class="Example.FormsApp.Views.MenuView"
              BackgroundColor="Yellow">
     <StackLayout>
-        <Label Text="Menu" />
+        <Label Text="Menu"/>
         <Button Text="Stack"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Stack1}"/>
         <Button Text="Wizard"

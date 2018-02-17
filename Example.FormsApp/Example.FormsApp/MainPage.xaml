@@ -11,7 +11,7 @@
              resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
              x:Class="Example.FormsApp.MainPage">
     <StackLayout>
-        <Label Text="Test" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Blue" />
+        <Label Text="Test" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="{StaticResource MetroBlue}" />
         <ContentView BackgroundColor="Green">
             <ContentView.Behaviors>
                 <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
