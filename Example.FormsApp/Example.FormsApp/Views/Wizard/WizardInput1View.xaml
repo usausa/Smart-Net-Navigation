@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView x:Class="Example.FormsApp.Views.Wizard.WizardInput1View"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,9 +10,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type wizard:WizardInput1ViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type wizard:WizardInput1ViewModel}"
-             x:Class="Example.FormsApp.Views.Wizard.WizardInput1View">
+             views:ViewProperty.Title="Wizard1">
     <StackLayout>
-        <Label Text="Wizard1" />
         <Button Text="Menu"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>
     </StackLayout>

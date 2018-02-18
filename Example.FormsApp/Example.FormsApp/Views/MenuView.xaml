@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView x:Class="Example.FormsApp.Views.MenuView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,10 +9,9 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type views:MenuViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type views:MenuViewModel}"
-             x:Class="Example.FormsApp.Views.MenuView"
+             views:ViewProperty.Title="Menu"
              BackgroundColor="Yellow">
     <StackLayout>
-        <Label Text="Menu"/>
         <Button Text="Stack"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Stack1}"/>
         <Button Text="Wizard"

@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView x:Class="Example.FormsApp.Views.Stack.Stack2View"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Example.FormsApp.Views.Stack.Stack2View">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
+             xmlns:stack="clr-namespace:Example.FormsApp.Views.Stack;assembly=Example.FormsApp"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type stack:Stack2ViewModel}}"
+             resolver:BindingContextResolver.Type="{x:Type stack:Stack2ViewModel}"
+             views:ViewProperty.Title="Stack2">
   <ContentView.Content>
       <StackLayout>
           <Label Text="Hello Xamarin.Forms!" />
