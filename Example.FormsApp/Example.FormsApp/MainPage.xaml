@@ -10,14 +10,50 @@
              d:DataContext="{d:DesignInstance Type={x:Type local:MainPageViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
              x:Class="Example.FormsApp.MainPage">
-    <StackLayout>
-        <Label Text="{Binding Source={x:Reference Container}, Mode=OneWay, Path=Content, Converter={StaticResource ViewTitleConverter}}"
-               VerticalOptions="Center" HorizontalOptions="Center"
-               BackgroundColor="{StaticResource MetroBlue}" />
-        <ContentView x:Name="Container" BackgroundColor="Green">
+
+    <Grid Style="{StaticResource MainGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <BoxView Grid.Row="0" Style="{StaticResource MainTitleBoxView}"/>
+        <Label Grid.Row="0" Style="{StaticResource MainTitleLabel}"
+               Text="{Binding Source={x:Reference Container}, Mode=OneWay, Path=Content, Converter={StaticResource ViewTitleConverter}}" />
+
+        <ContentView Grid.Row="1" x:Name="Container">
             <ContentView.Behaviors>
                 <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
             </ContentView.Behaviors>
         </ContentView>
-    </StackLayout>
+
+        <Grid Grid.Row="2" Style="{StaticResource MainFunctionGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <BoxView Grid.Column="0" Style="{StaticResource MainFunctionBoxView}"/>
+            <Label Grid.Column="0" Style="{StaticResource MainFunctionLabel}"
+                   Text="F1" />
+
+            <BoxView Grid.Column="1" Style="{StaticResource MainFunctionBoxView}"/>
+            <Label Grid.Column="1" Style="{StaticResource MainFunctionLabel}"
+                   Text="F2" />
+
+            <BoxView Grid.Column="2" Style="{StaticResource MainFunctionBoxView}"/>
+            <Label Grid.Column="2" Style="{StaticResource MainFunctionLabel}"
+                   Text="F3" />
+
+            <BoxView Grid.Column="3" Style="{StaticResource MainFunctionBoxView}"/>
+            <Label Grid.Column="3" Style="{StaticResource MainFunctionLabel}"
+                   Text="F4" />
+
+        </Grid>
+
+    </Grid>
+
 </ContentPage>

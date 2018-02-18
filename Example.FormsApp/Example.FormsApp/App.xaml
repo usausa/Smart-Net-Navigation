@@ -135,7 +135,41 @@
 
             <!-- Layout -->
 
-	        <!-- Converter -->
+	        <Style x:Key="MainGrid" TargetType="Grid">
+	            <Setter Property="RowSpacing" Value="0"/>
+	            <Setter Property="ColumnSpacing" Value="0" />
+	            <Setter Property="Margin" Value="0" />
+	        </Style>
+
+	        <Style x:Key="MainTitleBoxView" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource MetroBlueDark}"/>
+	        </Style>
+
+            <Style x:Key="MainTitleLabel" TargetType="Label">
+	            <Setter Property="TextColor" Value="White" />
+	            <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+	            <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+	        </Style>
+
+	        <Style x:Key="MainFunctionGrid" TargetType="Grid">
+	            <Setter Property="RowSpacing" Value="0"/>
+	            <Setter Property="ColumnSpacing" Value="0" />
+	            <Setter Property="Margin" Value="0" />
+	        </Style>
+
+            <Style x:Key="MainFunctionBoxView" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource MetroBlue}"/>
+	        </Style>
+
+	        <Style x:Key="MainFunctionLabel" TargetType="Label">
+	            <Setter Property="TextColor" Value="White" />
+	            <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+	            <Setter Property="HorizontalOptions" Value="Center" />
+	            <Setter Property="VerticalOptions" Value="Center" />
+	        </Style>
+
+            <!-- Converter -->
 
             <converters:ViewTitleConverter x:Key="ViewTitleConverter" />
 
