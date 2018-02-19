@@ -3,53 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:Example.FormsApp.Converters;assembly=Example.FormsApp"
              x:Class="Example.FormsApp.App">
-	<Application.Resources>
+    <Application.Resources>
 
-	    <ResourceDictionary>
+        <ResourceDictionary>
 
-	        <!-- Size -->
+            <!-- Size -->
 
-	        <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">11</On>
-	            <On Platform="Android">12</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">11</On>
+                <On Platform="Android">12</On>
+            </OnPlatform>
 
-	        <OnPlatform x:Key="MidMediumSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">12</On>
-	            <On Platform="Android">14</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="MidMediumSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">12</On>
+                <On Platform="Android">14</On>
+            </OnPlatform>
 
-	        <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">14</On>
-	            <On Platform="Android">16</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">14</On>
+                <On Platform="Android">16</On>
+            </OnPlatform>
 
-	        <OnPlatform x:Key="LargeSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">16</On>
-	            <On Platform="Android">18</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="LargeSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">16</On>
+                <On Platform="Android">18</On>
+            </OnPlatform>
 
-	        <OnPlatform x:Key="LargerSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">18</On>
-	            <On Platform="Android">20</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="LargerSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">18</On>
+                <On Platform="Android">20</On>
+            </OnPlatform>
 
-	        <OnPlatform x:Key="BigSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">20</On>
-	            <On Platform="Android">24</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="BigSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">20</On>
+                <On Platform="Android">24</On>
+            </OnPlatform>
 
-	        <OnPlatform x:Key="ExtraBigSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">24</On>
-	            <On Platform="Android">32</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="ExtraBigSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">24</On>
+                <On Platform="Android">32</On>
+            </OnPlatform>
 
-	        <OnPlatform x:Key="HugeSize" x:TypeArguments="x:Double">
-	            <On Platform="iOS">32</On>
-	            <On Platform="Android">48</On>
-	        </OnPlatform>
+            <OnPlatform x:Key="HugeSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">32</On>
+                <On Platform="Android">48</On>
+            </OnPlatform>
 
-	        <!-- Color -->
+            <!-- Color -->
 
             <Color x:Key="MetroBlue">#2D89EF</Color>
             <Color x:Key="MetroBlueBrighter">#4AA6FF</Color>
@@ -127,47 +127,57 @@
             <Color x:Key="MetroGrayDarkBrighter">#707070</Color>
             <Color x:Key="MetroGrayDarkDarker">#343434</Color>
 
-	        <!-- Color -->
+            <!-- Color -->
 
-	        <Color x:Key="NoErrorColor">Transparent</Color>
+            <Color x:Key="NoErrorColor">Transparent</Color>
 
-	        <Color x:Key="ErrorColor">#EE1111</Color>
+            <Color x:Key="ErrorColor">#EE1111</Color>
 
             <!-- Layout -->
 
-	        <Style x:Key="MainGrid" TargetType="Grid">
-	            <Setter Property="RowSpacing" Value="0"/>
-	            <Setter Property="ColumnSpacing" Value="0" />
-	            <Setter Property="Margin" Value="0" />
-	        </Style>
+            <Style x:Key="MainGrid" TargetType="Grid">
+                <Setter Property="RowSpacing" Value="0"/>
+                <Setter Property="ColumnSpacing" Value="0" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
 
-	        <Style x:Key="MainTitleBoxView" TargetType="BoxView">
+            <Style x:Key="MainTitleBoxView" TargetType="BoxView">
                 <Setter Property="BackgroundColor" Value="{StaticResource MetroBlueDark}"/>
-	        </Style>
+            </Style>
 
             <Style x:Key="MainTitleLabel" TargetType="Label">
-	            <Setter Property="TextColor" Value="White" />
-	            <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
-	            <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
-	        </Style>
+            </Style>
 
-	        <Style x:Key="MainFunctionGrid" TargetType="Grid">
-	            <Setter Property="RowSpacing" Value="0"/>
-	            <Setter Property="ColumnSpacing" Value="0" />
-	            <Setter Property="Margin" Value="0" />
-	        </Style>
+            <Style x:Key="MainFunctionGrid" TargetType="Grid">
+                <Setter Property="RowSpacing" Value="0"/>
+                <Setter Property="ColumnSpacing" Value="0" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
 
             <Style x:Key="MainFunctionBoxView" TargetType="BoxView">
                 <Setter Property="BackgroundColor" Value="{StaticResource MetroBlue}"/>
-	        </Style>
+            </Style>
 
-	        <Style x:Key="MainFunctionLabel" TargetType="Label">
-	            <Setter Property="TextColor" Value="White" />
-	            <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
-	            <Setter Property="HorizontalOptions" Value="Center" />
-	            <Setter Property="VerticalOptions" Value="Center" />
-	        </Style>
+            <Style x:Key="MainFunctionLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <!-- Button -->
+
+            <Style x:Key="NavigationButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource MetroTeal}"/>
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+                <Setter Property="BorderRadius" Value="0"/>
+                <Setter Property="Margin" Value="3" />
+            </Style>
 
             <!-- Converter -->
 
@@ -175,5 +185,5 @@
 
         </ResourceDictionary>
 
-	</Application.Resources>
+    </Application.Resources>
 </Application>

@@ -5,15 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:markup="clr-namespace:Smart.Forms.Markup;assembly=Smart.Forms"
              xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
              xmlns:stack="clr-namespace:Example.FormsApp.Views.Stack;assembly=Example.FormsApp"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type stack:Stack2ViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type stack:Stack2ViewModel}"
              views:ViewProperty.Title="Stack2">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+    <StackLayout>
+        <Button Text="Pop" Style="{StaticResource NavigationButton}"
+                Command="{Binding Pop}" CommandParameter="{markup:Int32 1}"/>
+        <Button Text="Push" Style="{StaticResource NavigationButton}"
+                Command="{Binding Push}" CommandParameter="{views:ViewId Stack3}"/>
+    </StackLayout>
 </ContentView>

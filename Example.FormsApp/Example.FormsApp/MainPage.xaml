@@ -18,16 +18,19 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- header -->
         <BoxView Grid.Row="0" Style="{StaticResource MainTitleBoxView}"/>
         <Label Grid.Row="0" Style="{StaticResource MainTitleLabel}"
                Text="{Binding Source={x:Reference Container}, Mode=OneWay, Path=Content, Converter={StaticResource ViewTitleConverter}}" />
 
+        <!-- view container -->
         <ContentView Grid.Row="1" x:Name="Container">
             <ContentView.Behaviors>
                 <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
             </ContentView.Behaviors>
         </ContentView>
 
+        <!-- footer -->
         <Grid Grid.Row="2" Style="{StaticResource MainFunctionGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

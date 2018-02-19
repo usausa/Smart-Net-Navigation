@@ -9,12 +9,15 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type views:MenuViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type views:MenuViewModel}"
-             views:ViewProperty.Title="Menu"
-             BackgroundColor="Yellow">
+             views:ViewProperty.Title="Menu">
+
     <StackLayout>
-        <Button Text="Stack"
+        <Button Text="Multiple id" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId DataList}"/>
+        <Button Text="Stack" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Stack1}"/>
-        <Button Text="Wizard"
+        <Button Text="Wizard" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput1}"/>
     </StackLayout>
-</ContentView>
+
+    </ContentView>
