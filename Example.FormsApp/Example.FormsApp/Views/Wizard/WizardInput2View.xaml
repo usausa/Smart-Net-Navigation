@@ -11,9 +11,13 @@
              d:DataContext="{d:DesignInstance Type={x:Type wizard:WizardInput2ViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type wizard:WizardInput2ViewModel}"
              views:ViewProperty.Title="Wizard2">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+    <StackLayout>
+        <Entry Style="{StaticResource DefaultEntry}"
+               Text="{Binding Context.Value.Data2}"
+               Placeholder="Data2"/>
+        <Button Text="Prev" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput1}"/>
+        <Button Text="Next" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardResult}"/>
+    </StackLayout>
 </ContentView>

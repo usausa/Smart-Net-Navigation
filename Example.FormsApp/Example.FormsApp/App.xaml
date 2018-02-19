@@ -10,43 +10,43 @@
             <!-- Size -->
 
             <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">11</On>
-                <On Platform="Android">12</On>
+                <On Platform="iOS">11.0</On>
+                <On Platform="Android, UWP">12.0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="MidMediumSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">12</On>
-                <On Platform="Android">14</On>
+                <On Platform="iOS">12.0</On>
+                <On Platform="Android, UWP">14.0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">14</On>
-                <On Platform="Android">16</On>
+                <On Platform="iOS">14.0</On>
+                <On Platform="Android, UWP">16.0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="LargeSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">16</On>
-                <On Platform="Android">18</On>
+                <On Platform="iOS">16.0</On>
+                <On Platform="Android, UWP">18.0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="LargerSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">18</On>
-                <On Platform="Android">20</On>
+                <On Platform="iOS">18.0</On>
+                <On Platform="Android, UWP">20.0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="BigSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">20</On>
-                <On Platform="Android">24</On>
+                <On Platform="iOS">20.0</On>
+                <On Platform="Android, UWP">24.0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="ExtraBigSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">24</On>
-                <On Platform="Android">32</On>
+                <On Platform="iOS">24.0</On>
+                <On Platform="Android, UWP">32.0</On>
             </OnPlatform>
 
             <OnPlatform x:Key="HugeSize" x:TypeArguments="x:Double">
-                <On Platform="iOS">32</On>
-                <On Platform="Android">48</On>
+                <On Platform="iOS">32.0</On>
+                <On Platform="Android, UWP">48.0</On>
             </OnPlatform>
 
             <!-- Color -->
@@ -147,7 +147,7 @@
 
             <Style x:Key="MainTitleLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraBigSize}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
@@ -164,7 +164,7 @@
 
             <Style x:Key="MainFunctionLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraBigSize}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
@@ -177,6 +177,25 @@
                 <Setter Property="FontSize" Value="{StaticResource BigSize}" />
                 <Setter Property="BorderRadius" Value="0"/>
                 <Setter Property="Margin" Value="3" />
+            </Style>
+
+            <!-- Entry -->
+
+            <Style x:Key="DefaultEntry" TargetType="Entry">
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource MetroLighten}"/>
+                <Setter Property="Opacity" Value="0.6" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Label -->
+
+            <Style x:Key="ResultLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
             </Style>
 
             <!-- Converter -->

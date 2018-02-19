@@ -12,7 +12,12 @@
              resolver:BindingContextResolver.Type="{x:Type wizard:WizardInput1ViewModel}"
              views:ViewProperty.Title="Wizard1">
     <StackLayout>
-        <Button Text="Menu"
+        <Entry Style="{StaticResource DefaultEntry}"
+               Text="{Binding Context.Value.Data1}"
+               Placeholder="Data1"/>
+        <Button Text="Cancel" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>
+        <Button Text="Next" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput2}"/>
     </StackLayout>
 </ContentView>
