@@ -13,7 +13,7 @@
 
     <StackLayout>
         <Button Text="Multiple id" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId DataList}"/>
+                Command="{Binding Forward}" CommandParameter="{views:ViewId EditList}"/>
         <Button Text="Stack" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Stack1}"/>
         <Button Text="Wizard" Style="{StaticResource NavigationButton}"

@@ -4,9 +4,9 @@
     {
         Menu,
 
-        DataList,
-        DataDetailNew,
-        DataDetailEdit,
+        EditList,
+        EditDetailNew,
+        EditDetailUpdate,
 
         Stack1,
         Stack2,

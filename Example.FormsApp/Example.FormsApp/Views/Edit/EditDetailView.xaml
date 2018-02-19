@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Views.Edit.EditDetailView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:interactivity="clr-namespace:Smart.Forms.Interactivity;assembly=Smart.Forms"
+             xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
+             xmlns:edit="clr-namespace:Example.FormsApp.Views.Edit;assembly=Example.FormsApp"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type edit:EditDetailViewModel}}"
+             resolver:BindingContextResolver.Type="{x:Type edit:EditDetailViewModel}"
+             views:ViewProperty.Title="EditDetail*">
+    <StackLayout>
+    </StackLayout>
+</ContentView>
