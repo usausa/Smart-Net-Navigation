@@ -20,8 +20,6 @@
                 Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput1}"/>
         <Button Text="Debug" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Debug}"/>
-        <Button Text="GC" Style="{StaticResource NavigationButton}"
-                Command="{Binding Collect}"/>
     </StackLayout>
 
     </ContentView>

@@ -16,6 +16,7 @@
         WizardInput2,
         WizardResult,
 
-        Debug
+        Debug,
+        DebugLeak,
     }
 }

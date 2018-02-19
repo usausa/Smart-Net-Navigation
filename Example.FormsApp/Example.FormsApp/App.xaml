@@ -175,7 +175,6 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource MetroTeal}"/>
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="{StaticResource BigSize}" />
-                <Setter Property="BorderRadius" Value="0"/>
                 <Setter Property="Margin" Value="3" />
             </Style>
 
@@ -201,6 +200,7 @@
             <!-- Converter -->
 
             <converters:ViewTitleConverter x:Key="ViewTitleConverter" />
+            <converters:ViewIsBusyConverter x:Key="ViewIsBusyConverter" />
 
         </ResourceDictionary>
 
