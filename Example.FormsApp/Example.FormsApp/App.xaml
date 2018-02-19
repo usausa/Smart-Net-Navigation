@@ -182,7 +182,7 @@
             <!-- Entry -->
 
             <Style x:Key="DefaultEntry" TargetType="Entry">
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
                 <Setter Property="PlaceholderColor" Value="{StaticResource MetroLighten}"/>
                 <Setter Property="Opacity" Value="0.6" />
                 <Style.Triggers>
