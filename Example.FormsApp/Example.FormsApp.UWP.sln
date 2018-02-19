@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Forms", ".
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Resolver", "..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj", "{C62CF945-C1E8-4017-8B47-240EFFDDE084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.WindowsFormsApp", "..\Example.WindowsFormsApp\Example.WindowsFormsApp.csproj", "{C529BE58-8685-4EEC-869B-30922D43ADE9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,28 +109,12 @@ Global
 		{C62CF945-C1E8-4017-8B47-240EFFDDE084}.Release|x64.Build.0 = Release|Any CPU
 		{C62CF945-C1E8-4017-8B47-240EFFDDE084}.Release|x86.ActiveCfg = Release|Any CPU
 		{C62CF945-C1E8-4017-8B47-240EFFDDE084}.Release|x86.Build.0 = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|ARM.Build.0 = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|x64.Build.0 = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Debug|x86.Build.0 = Debug|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|ARM.ActiveCfg = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|ARM.Build.0 = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|x64.ActiveCfg = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|x64.Build.0 = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|x86.ActiveCfg = Release|Any CPU
-		{C529BE58-8685-4EEC-869B-30922D43ADE9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {69EB27FB-2999-4201-A378-973F0654F420}
 		        SolutionGuid = {7CCF4AA5-7276-4432-974E-3EF2A9008B24}
+		SolutionGuid = {69EB27FB-2999-4201-A378-973F0654F420}
 	EndGlobalSection
 EndGlobal

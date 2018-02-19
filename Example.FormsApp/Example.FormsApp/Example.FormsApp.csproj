@@ -13,9 +13,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.6.0" />
-    <PackageReference Include="Usa.Smart.Forms" Version="1.0.1" />
-    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="1.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+    <PackageReference Include="Usa.Smart.Forms" Version="1.0.2" />
+    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="1.0.2" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
   </ItemGroup>
 
   <ItemGroup>
