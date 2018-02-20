@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Views.Data
+﻿namespace Example.WindowsFormsApp.Views.Edit
 {
     using System;
 
@@ -9,8 +9,8 @@
     using Smart.Navigation.Attributes;
     using Smart.Resolver.Attributes;
 
-    [View(ViewId.DataDetailNew)]
-    [View(ViewId.DataDetailEdit)]
+    [View(ViewId.EditDetailNew)]
+    [View(ViewId.EditDetailUpdate)]
     public partial class DataDetailView : AppViewBase
     {
         private bool update;
@@ -31,7 +31,7 @@
 
         public override void OnNavigatingTo(INavigationContext context)
         {
-            update = Equals(context.ToId, ViewId.DataDetailEdit);
+            update = Equals(context.ToId, ViewId.EditDetailUpdate);
             if (update)
             {
                 entity = context.Parameter.GetValue<DataEntity>();
@@ -46,7 +46,7 @@
 
         private void OnPrevButtonClick(object sender, System.EventArgs e)
         {
-            Navigator.Forward(ViewId.DataList);
+            Navigator.Forward(ViewId.EditList);
         }
 
         private void OnUpdateButtonClick(object sender, System.EventArgs e)
@@ -67,7 +67,7 @@
                 DataService.InsertData(NameText.Text);
             }
 
-            Navigator.Forward(ViewId.DataList);
+            Navigator.Forward(ViewId.EditList);
         }
     }
 }

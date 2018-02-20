@@ -32,7 +32,7 @@
 
         private void OnMenuButton1Click(object sender, System.EventArgs e)
         {
-            Navigator.Forward(ViewId.DataList);
+            Navigator.Forward(ViewId.EditList);
         }
 
         private void OnMenuButton2Click(object sender, System.EventArgs e)

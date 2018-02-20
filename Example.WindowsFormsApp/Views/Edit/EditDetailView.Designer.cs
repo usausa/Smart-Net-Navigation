@@ -1,13 +1,13 @@
-﻿namespace Example.WindowsFormsApp.Views.Data
+﻿namespace Example.WindowsFormsApp.Views.Edit
 {
     partial class DataDetailView
     {
-        /// <summary> 
+        /// <summary>
         /// 必要なデザイナー変数です。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// 使用中のリソースをすべてクリーンアップします。
         /// </summary>
         /// <param name="disposing">マネージ リソースを破棄する場合は true を指定し、その他の場合は false を指定します。</param>
@@ -22,8 +22,8 @@
 
         #region コンポーネント デザイナーで生成されたコード
 
-        /// <summary> 
-        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を 
+        /// <summary>
+        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent()
@@ -33,9 +33,9 @@
             this.NameText = new System.Windows.Forms.TextBox();
             this.NameLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
+            //
             // UpdateButton
-            // 
+            //
             this.UpdateButton.Location = new System.Drawing.Point(320, 240);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(160, 32);
@@ -43,9 +43,9 @@
             this.UpdateButton.Text = "Update";
             this.UpdateButton.UseVisualStyleBackColor = true;
             this.UpdateButton.Click += new System.EventHandler(this.OnUpdateButtonClick);
-            // 
+            //
             // PrevButton
-            // 
+            //
             this.PrevButton.Location = new System.Drawing.Point(160, 240);
             this.PrevButton.Name = "PrevButton";
             this.PrevButton.Size = new System.Drawing.Size(160, 32);
@@ -53,26 +53,26 @@
             this.PrevButton.Text = "Cancel";
             this.PrevButton.UseVisualStyleBackColor = true;
             this.PrevButton.Click += new System.EventHandler(this.OnPrevButtonClick);
-            // 
+            //
             // NameText
-            // 
+            //
             this.NameText.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.NameText.Location = new System.Drawing.Point(160, 175);
             this.NameText.Name = "NameText";
             this.NameText.Size = new System.Drawing.Size(320, 34);
             this.NameText.TabIndex = 9;
-            // 
+            //
             // NameLabel
-            // 
+            //
             this.NameLabel.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.NameLabel.Location = new System.Drawing.Point(155, 140);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(100, 32);
             this.NameLabel.TabIndex = 8;
             this.NameLabel.Text = "Name";
-            // 
+            //
             // DataDetailView
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.UpdateButton);

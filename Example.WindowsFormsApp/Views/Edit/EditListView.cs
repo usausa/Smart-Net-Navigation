@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Views.Data
+﻿namespace Example.WindowsFormsApp.Views.Edit
 {
     using System.Linq;
 
@@ -9,7 +9,7 @@
     using Smart.Navigation.Attributes;
     using Smart.Resolver.Attributes;
 
-    [View(ViewId.DataList)]
+    [View(ViewId.EditList)]
     public partial class DataListView : AppViewBase
     {
         public override string Title => "Data List";
@@ -36,14 +36,14 @@
 
         private void OnNewButtonClick(object sender, System.EventArgs e)
         {
-            Navigator.Forward(ViewId.DataDetailNew);
+            Navigator.Forward(ViewId.EditDetailNew);
         }
 
         private void OnEditButtonClick(object sender, System.EventArgs e)
         {
             var parameter = new NavigationParameter();
             parameter.SetValue((DataEntity)DataListBox.SelectedItem);
-            Navigator.Forward(ViewId.DataDetailEdit, parameter);
+            Navigator.Forward(ViewId.EditDetailUpdate, parameter);
         }
     }
 }
