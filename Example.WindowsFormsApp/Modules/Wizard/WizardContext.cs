@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Views.Wizard
+﻿namespace Example.WindowsFormsApp.Modules.Wizard
 {
     using System;
 

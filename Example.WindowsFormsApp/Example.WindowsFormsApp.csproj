@@ -57,66 +57,66 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DataEntity.cs" />
-    <Compile Include="Views\AppViewBase.cs">
+    <Compile Include="Modules\AppViewBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\AppViewBase.Designer.cs">
+    <Compile Include="Modules\AppViewBase.Designer.cs">
       <DependentUpon>AppViewBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Edit\EditDetailView.cs">
+    <Compile Include="Modules\Edit\EditDetailView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Edit\EditDetailView.Designer.cs">
+    <Compile Include="Modules\Edit\EditDetailView.Designer.cs">
       <DependentUpon>EditDetailView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Edit\EditListView.cs">
+    <Compile Include="Modules\Edit\EditListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Edit\EditListView.Designer.cs">
+    <Compile Include="Modules\Edit\EditListView.Designer.cs">
       <DependentUpon>EditListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuView.cs">
+    <Compile Include="Modules\MenuView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\MenuView.Designer.cs">
+    <Compile Include="Modules\MenuView.Designer.cs">
       <DependentUpon>MenuView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ViewId.cs" />
-    <Compile Include="Views\Stack\Stack1View.cs">
+    <Compile Include="Modules\ViewId.cs" />
+    <Compile Include="Modules\Stack\Stack1View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Stack\Stack1View.Designer.cs">
+    <Compile Include="Modules\Stack\Stack1View.Designer.cs">
       <DependentUpon>Stack1View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Stack\Stack2View.cs">
+    <Compile Include="Modules\Stack\Stack2View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Stack\Stack2View.Designer.cs">
+    <Compile Include="Modules\Stack\Stack2View.Designer.cs">
       <DependentUpon>Stack2View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Stack\Stack3View.cs">
+    <Compile Include="Modules\Stack\Stack3View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Stack\Stack3View.Designer.cs">
+    <Compile Include="Modules\Stack\Stack3View.Designer.cs">
       <DependentUpon>Stack3View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Wizard\WizardResultView.cs">
+    <Compile Include="Modules\Wizard\WizardResultView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Wizard\WizardResultView.Designer.cs">
+    <Compile Include="Modules\Wizard\WizardResultView.Designer.cs">
       <DependentUpon>WizardResultView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Wizard\WizardContext.cs" />
-    <Compile Include="Views\Wizard\WizardInput1View.cs">
+    <Compile Include="Modules\Wizard\WizardContext.cs" />
+    <Compile Include="Modules\Wizard\WizardInput1View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Wizard\WizardInput1View.Designer.cs">
+    <Compile Include="Modules\Wizard\WizardInput1View.Designer.cs">
       <DependentUpon>WizardInput1View.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Wizard\WizardInput2View.cs">
+    <Compile Include="Modules\Wizard\WizardInput2View.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\Wizard\WizardInput2View.Designer.cs">
+    <Compile Include="Modules\Wizard\WizardInput2View.Designer.cs">
       <DependentUpon>WizardInput2View.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -126,34 +126,34 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AppViewBase.resx">
+    <EmbeddedResource Include="Modules\AppViewBase.resx">
       <DependentUpon>AppViewBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Edit\EditDetailView.resx">
+    <EmbeddedResource Include="Modules\Edit\EditDetailView.resx">
       <DependentUpon>EditDetailView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Edit\EditListView.resx">
+    <EmbeddedResource Include="Modules\Edit\EditListView.resx">
       <DependentUpon>EditListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MenuView.resx">
+    <EmbeddedResource Include="Modules\MenuView.resx">
       <DependentUpon>MenuView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stack\Stack1View.resx">
+    <EmbeddedResource Include="Modules\Stack\Stack1View.resx">
       <DependentUpon>Stack1View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stack\Stack2View.resx">
+    <EmbeddedResource Include="Modules\Stack\Stack2View.resx">
       <DependentUpon>Stack2View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Stack\Stack3View.resx">
+    <EmbeddedResource Include="Modules\Stack\Stack3View.resx">
       <DependentUpon>Stack3View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Wizard\WizardResultView.resx">
+    <EmbeddedResource Include="Modules\Wizard\WizardResultView.resx">
       <DependentUpon>WizardResultView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Wizard\WizardInput1View.resx">
+    <EmbeddedResource Include="Modules\Wizard\WizardInput1View.resx">
       <DependentUpon>WizardInput1View.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Wizard\WizardInput2View.resx">
+    <EmbeddedResource Include="Modules\Wizard\WizardInput2View.resx">
       <DependentUpon>WizardInput2View.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

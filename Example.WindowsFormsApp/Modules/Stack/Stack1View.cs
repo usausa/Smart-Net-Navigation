@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Views.Stack
+﻿namespace Example.WindowsFormsApp.Modules.Stack
 {
     using Smart.Navigation;
     using Smart.Navigation.Attributes;

@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Views.Edit
+﻿namespace Example.WindowsFormsApp.Modules.Edit
 {
     using System.Linq;
 

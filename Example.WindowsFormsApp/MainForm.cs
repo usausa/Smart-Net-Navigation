@@ -5,8 +5,8 @@
     using System.Reflection;
     using System.Windows.Forms;
 
+    using Example.WindowsFormsApp.Modules;
     using Example.WindowsFormsApp.Services;
-    using Example.WindowsFormsApp.Views;
 
     using Smart.Navigation;
     using Smart.Resolver;

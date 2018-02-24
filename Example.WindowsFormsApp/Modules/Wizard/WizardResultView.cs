@@ -1,27 +1,28 @@
-﻿namespace Example.WindowsFormsApp.Views.Wizard
+﻿namespace Example.WindowsFormsApp.Modules.Wizard
 {
     using Smart.Navigation;
     using Smart.Navigation.Attributes;
     using Smart.Navigation.Plugins.Scope;
 
-    [View(ViewId.WizardInput1)]
-    public partial class WizardInput1View : AppViewBase
+    [View(ViewId.WizardResult)]
+    public partial class WizardResultView : AppViewBase
     {
-        public override string Title => "Input1";
+        public override string Title => "Result";
 
         public override bool CanGoHome => true;
 
         [Scope]
         public WizardContext Context { get; set; }
 
-        public WizardInput1View()
+        public WizardResultView()
         {
             InitializeComponent();
         }
 
         public override void OnNavigatingTo(INavigationContext context)
         {
-            Data1Text.Text = Context.Data1;
+            Data1Label.Text = Context.Data1;
+            Data2Label.Text = Context.Data2;
         }
 
         public override void OnGoHome()
@@ -31,14 +32,12 @@
 
         private void OnPrevButtonClick(object sender, System.EventArgs e)
         {
-            Navigator.Forward(ViewId.Menu);
+            Navigator.Forward(ViewId.WizardInput2);
         }
 
         private void OnNextButtonClick(object sender, System.EventArgs e)
         {
-            Context.Data1 = Data1Text.Text;
-
-            Navigator.Forward(ViewId.WizardInput2);
+            Navigator.Forward(ViewId.Menu);
         }
     }
 }

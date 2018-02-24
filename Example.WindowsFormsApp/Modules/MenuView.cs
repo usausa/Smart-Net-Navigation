@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Views
+﻿namespace Example.WindowsFormsApp.Modules
 {
     using System.Windows.Forms;
 
