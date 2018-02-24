@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Views.Stack
+﻿namespace Example.WindowsApp.Modules.Stack
 {
     using Smart.Navigation;
     using Smart.Windows.Input;

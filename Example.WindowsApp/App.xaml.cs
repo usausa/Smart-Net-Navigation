@@ -2,7 +2,7 @@
 {
     using System.Windows;
 
-    using Example.WindowsApp.Views;
+    using Example.WindowsApp.Modules;
 
     using Smart.Navigation;
     using Smart.Resolver;

@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Views.Wizard
+﻿namespace Example.WindowsApp.Modules.Wizard
 {
     using System;
 

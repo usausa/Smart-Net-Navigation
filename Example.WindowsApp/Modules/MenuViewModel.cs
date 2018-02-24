@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Views
+﻿namespace Example.WindowsApp.Modules
 {
     using System;
     using Smart.Navigation;

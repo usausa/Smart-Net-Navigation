@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Views.Wizard
+﻿namespace Example.WindowsApp.Modules.Wizard
 {
     /// <summary>
     /// WizardInput1View.xaml の相互作用ロジック
