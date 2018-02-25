@@ -4,7 +4,7 @@ namespace Example.FormsApp
 {
     using System.Reflection;
 
-    using Example.FormsApp.Views;
+    using Example.FormsApp.Modules;
 
     using Smart.Forms.Resolver;
     using Smart.Navigation;

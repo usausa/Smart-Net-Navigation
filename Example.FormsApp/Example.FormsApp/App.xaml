@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:Example.FormsApp.Converters;assembly=Example.FormsApp"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
              x:Class="Example.FormsApp.App">
     <Application.Resources>
 
@@ -199,8 +199,7 @@
 
             <!-- Converter -->
 
-            <converters:ViewTitleConverter x:Key="ViewTitleConverter" />
-            <converters:ViewIsBusyConverter x:Key="ViewIsBusyConverter" />
+            <views:ViewTitleConverter x:Key="ViewTitleConverter" />
 
         </ResourceDictionary>
 

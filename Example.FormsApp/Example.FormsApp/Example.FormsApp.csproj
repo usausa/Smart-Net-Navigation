@@ -31,19 +31,19 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="MainPage.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Edit\EditListView.xaml.cs">
+    <Compile Update="Modules\Edit\EditListView.xaml.cs">
       <DependentUpon>EditListView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Edit\EditDetailView.xaml.cs">
+    <Compile Update="Modules\Edit\EditDetailView.xaml.cs">
       <DependentUpon>EditDetailView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Edit\EditDetailView.xaml">
+    <EmbeddedResource Update="Modules\Edit\EditDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Edit\EditListView.xaml">
+    <EmbeddedResource Update="Modules\Edit\EditListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Debug\DebugLeakView.xaml">
@@ -52,25 +52,25 @@
     <EmbeddedResource Update="Views\Debug\DebugView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MenuView.xaml">
+    <EmbeddedResource Update="Modules\MenuView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Stack\Stack1View.xaml">
+    <EmbeddedResource Update="Modules\Stack\Stack1View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Stack\Stack2View.xaml">
+    <EmbeddedResource Update="Modules\Stack\Stack2View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Stack\Stack3View.xaml">
+    <EmbeddedResource Update="Modules\Stack\Stack3View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Wizard\WizardInput1View.xaml">
+    <EmbeddedResource Update="Modules\Wizard\WizardInput1View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Wizard\WizardInput2View.xaml">
+    <EmbeddedResource Update="Modules\Wizard\WizardInput2View.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Wizard\WizardResultView.xaml">
+    <EmbeddedResource Update="Modules\Wizard\WizardResultView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

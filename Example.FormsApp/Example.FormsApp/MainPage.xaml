@@ -9,8 +9,7 @@
              xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type local:MainPageViewModel}}"
-             resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
-             IsBusy="{Binding Source={x:Reference Container}, Mode=OneWay, Path=Content, Converter={StaticResource ViewIsBusyConverter}}">
+             resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">

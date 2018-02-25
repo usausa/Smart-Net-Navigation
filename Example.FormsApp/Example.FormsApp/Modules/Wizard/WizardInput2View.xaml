@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Modules.Wizard.WizardInput2View"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:interactivity="clr-namespace:Smart.Forms.Interactivity;assembly=Smart.Forms"
+             xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:wizard="clr-namespace:Example.FormsApp.Modules.Wizard;assembly=Example.FormsApp"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type wizard:WizardInput2ViewModel}}"
+             resolver:BindingContextResolver.Type="{x:Type wizard:WizardInput2ViewModel}"
+             views:ViewProperty.Title="Wizard2">
+    <StackLayout>
+        <Entry Style="{StaticResource DefaultEntry}"
+               Text="{Binding Context.Value.Data2}"
+               Placeholder="Data2">
+            <Entry.Behaviors>
+                <interactivity:SetFocusBehavior/>
+            </Entry.Behaviors>
+        </Entry>
+        <Button Text="Prev" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput1}"/>
+        <Button Text="Next" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardResult}"/>
+    </StackLayout>
+</ContentView>

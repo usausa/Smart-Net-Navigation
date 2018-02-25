@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Modules.MenuView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:modules="clr-namespace:Example.FormsApp.Modules;assembly=Example.FormsApp"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type modules:MenuViewModel}}"
+             resolver:BindingContextResolver.Type="{x:Type modules:MenuViewModel}"
+             views:ViewProperty.Title="Menu">
+
+    <StackLayout>
+        <Button Text="Multiple id" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId EditList}"/>
+        <Button Text="Stack" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId Stack1}"/>
+        <Button Text="Wizard" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput1}"/>
+        <Button Text="Debug" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId Debug}"/>
+    </StackLayout>
+
+    </ContentView>
