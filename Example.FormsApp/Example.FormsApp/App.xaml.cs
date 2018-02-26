@@ -46,10 +46,10 @@ namespace Example.FormsApp
             var config = new ResolverConfig()
                 .UseAutoBinding()
                 .UseArrayBinding()
-                //.UseAssignableBinding()
+                .UseAssignableBinding()
                 .UsePropertyInjector();
 
-            config.Bind<INavigator>().ToMethod(kernel => navigator).InSingletonScope();
+            config.Bind<Navigator>().ToMethod(kernel => navigator).InSingletonScope();
 
             return config.ToResolver();
         }
