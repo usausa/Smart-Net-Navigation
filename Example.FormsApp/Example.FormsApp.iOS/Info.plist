@@ -45,5 +45,9 @@
     <string>LaunchScreen</string>
     <key>CFBundleName</key>
     <string>Example.FormsApp</string>
+    <key>UIAppFonts</key>
+    <array>
+        <string>Fonts/ionicons.ttf</string>
+    </array>
 </dict>
 </plist>
