@@ -107,6 +107,9 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="..\Fonts\ionicons.ttf">
+      <Link>Assets\Fonts\ionicons.ttf</Link>
+    </Content>
     <None Include="Example.FormsApp.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
