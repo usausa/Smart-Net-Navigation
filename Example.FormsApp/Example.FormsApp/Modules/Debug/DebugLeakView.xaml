@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Modules.Debug.DebugLeakView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
+             xmlns:debug="clr-namespace:Example.FormsApp.Modules.Debug;assembly=Example.FormsApp"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type debug:DebugLeakViewModel}}"
+             resolver:BindingContextResolver.Type="{x:Type debug:DebugLeakViewModel}"
+             views:ViewProperty.Title="DebugLeak">
+    <StackLayout>
+        <Button Text="Back" Style="{StaticResource NavigationButton}"
+                Command="{Binding Forward}" CommandParameter="{views:ViewId Debug}"/>
+    </StackLayout>
+</ContentView>

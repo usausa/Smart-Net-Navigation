@@ -46,10 +46,10 @@
     <EmbeddedResource Update="Modules\Edit\EditListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Debug\DebugLeakView.xaml">
+    <EmbeddedResource Update="Modules\Debug\DebugLeakView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Debug\DebugView.xaml">
+    <EmbeddedResource Update="Modules\Debug\DebugView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Modules\MenuView.xaml">
