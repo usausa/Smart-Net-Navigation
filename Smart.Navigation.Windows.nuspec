@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Usa.Smart.Navigation.Windows</id>
-    <version>0.9.7</version>
+    <version>0.9.8</version>
     <title>Smart.Navigation.Windows .NET</title>
     <authors>machi_pon</authors>
     <owners>machi_pon</owners>
@@ -14,7 +14,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="Usa.Smart.Core" version="1.5.1" />
-      <dependency id="Usa.Smart.Navigation" version="0.9.7" />
+      <dependency id="Usa.Smart.Navigation" version="0.9.8" />
     </dependencies>
     <tags>smart navigation wpf mvvm</tags>
   </metadata>
