@@ -44,7 +44,15 @@
             false,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static bool GetIsBusy(BindableObject view)
+        {
+            return (bool)view.GetValue(IsBusyProperty);
+        }
+
+        public static void SetIsBusy(BindableObject view, string value)
+        {
+            view.SetValue(IsBusyProperty, value);
+        }
 
         public static readonly BindableProperty CanGoHomeProperty = BindableProperty.CreateAttached(
             "CanGoHome",
@@ -53,7 +61,15 @@
             true,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static bool GetCanGoHome(BindableObject view)
+        {
+            return (bool)view.GetValue(CanGoHomeProperty);
+        }
+
+        public static void SetCanGoHome(BindableObject view, string value)
+        {
+            view.SetValue(CanGoHomeProperty, value);
+        }
 
         public static readonly BindableProperty Function1TextProperty = BindableProperty.CreateAttached(
             "Function1Text",
@@ -62,7 +78,15 @@
             null,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static string GetFunction1Text(BindableObject view)
+        {
+            return (string)view.GetValue(Function1TextProperty);
+        }
+
+        public static void SetFunction1Text(BindableObject view, string value)
+        {
+            view.SetValue(Function1TextProperty, value);
+        }
 
         public static readonly BindableProperty Function2TextProperty = BindableProperty.CreateAttached(
             "Function2Text",
@@ -71,7 +95,15 @@
             null,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static string GetFunction2Text(BindableObject view)
+        {
+            return (string)view.GetValue(Function2TextProperty);
+        }
+
+        public static void SetFunction2Text(BindableObject view, string value)
+        {
+            view.SetValue(Function2TextProperty, value);
+        }
 
         public static readonly BindableProperty Function3TextProperty = BindableProperty.CreateAttached(
             "Function3Text",
@@ -80,7 +112,15 @@
             null,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static string GetFunction3Text(BindableObject view)
+        {
+            return (string)view.GetValue(Function3TextProperty);
+        }
+
+        public static void SetFunction3Text(BindableObject view, string value)
+        {
+            view.SetValue(Function3TextProperty, value);
+        }
 
         public static readonly BindableProperty Function4TextProperty = BindableProperty.CreateAttached(
             "Function4Text",
@@ -89,7 +129,15 @@
             null,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static string GetFunction4Text(BindableObject view)
+        {
+            return (string)view.GetValue(Function4TextProperty);
+        }
+
+        public static void SetFunction4Text(BindableObject view, string value)
+        {
+            view.SetValue(Function4TextProperty, value);
+        }
 
         public static readonly BindableProperty Function1EnabledProperty = BindableProperty.CreateAttached(
             "Function1Enabled",
@@ -98,7 +146,15 @@
             true,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static bool GetFunction1Enabled(BindableObject view)
+        {
+            return (bool)view.GetValue(Function1EnabledProperty);
+        }
+
+        public static void SetFunction1Enabled(BindableObject view, string value)
+        {
+            view.SetValue(Function1EnabledProperty, value);
+        }
 
         public static readonly BindableProperty Function2EnabledProperty = BindableProperty.CreateAttached(
             "Function2Enabled",
@@ -107,7 +163,15 @@
             true,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static bool GetFunction2Enabled(BindableObject view)
+        {
+            return (bool)view.GetValue(Function2EnabledProperty);
+        }
+
+        public static void SetFunction2Enabled(BindableObject view, string value)
+        {
+            view.SetValue(Function2EnabledProperty, value);
+        }
 
         public static readonly BindableProperty Function3EnabledProperty = BindableProperty.CreateAttached(
             "Function3Enabled",
@@ -116,7 +180,15 @@
             true,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static bool GetFunction3Enabled(BindableObject view)
+        {
+            return (bool)view.GetValue(Function3EnabledProperty);
+        }
+
+        public static void SetFunction3Enabled(BindableObject view, string value)
+        {
+            view.SetValue(Function3EnabledProperty, value);
+        }
 
         public static readonly BindableProperty Function4EnabledProperty = BindableProperty.CreateAttached(
             "Function4Enabled",
@@ -125,7 +197,15 @@
             true,
             propertyChanged: PropertyChanged);
 
-        // TODO
+        public static bool GetFunction4Enabled(BindableObject view)
+        {
+            return (bool)view.GetValue(Function4EnabledProperty);
+        }
+
+        public static void SetFunction4Enabled(BindableObject view, string value)
+        {
+            view.SetValue(Function4EnabledProperty, value);
+        }
 
         private static void PropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -144,7 +224,16 @@
             if (shellControl != null)
             {
                 shellControl.Title = GetTitle(child);
-                // TODO
+                shellControl.IsBusy = GetIsBusy(child);
+                shellControl.CanGoHome = GetCanGoHome(child);
+                shellControl.Function1Text = GetFunction1Text(child);
+                shellControl.Function2Text = GetFunction1Text(child);
+                shellControl.Function3Text = GetFunction1Text(child);
+                shellControl.Function4Text = GetFunction1Text(child);
+                shellControl.Function1Enabled = GetFunction1Enabled(child);
+                shellControl.Function2Enabled = GetFunction2Enabled(child);
+                shellControl.Function3Enabled = GetFunction3Enabled(child);
+                shellControl.Function4Enabled = GetFunction4Enabled(child);
             }
         }
     }
