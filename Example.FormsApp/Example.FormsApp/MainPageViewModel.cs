@@ -19,6 +19,14 @@
 
         private string function4Text;
 
+        private bool function1Enabled;
+
+        private bool function2Enabled;
+
+        private bool function3Enabled;
+
+        private bool function4Enabled;
+
         public string Title
         {
             get => title;
@@ -53,6 +61,30 @@
         {
             get => function4Text;
             set => SetProperty(ref function4Text, value);
+        }
+
+        public bool Function1Enabled
+        {
+            get => function1Enabled;
+            set => SetProperty(ref function1Enabled, value);
+        }
+
+        public bool Function2Enabled
+        {
+            get => function2Enabled;
+            set => SetProperty(ref function2Enabled, value);
+        }
+
+        public bool Function3Enabled
+        {
+            get => function3Enabled;
+            set => SetProperty(ref function3Enabled, value);
+        }
+
+        public bool Function4Enabled
+        {
+            get => function4Enabled;
+            set => SetProperty(ref function4Enabled, value);
         }
 
         public INavigator Navigator { get; }

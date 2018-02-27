@@ -15,5 +15,13 @@
         string Function3Text { get; set; }
 
         string Function4Text { get; set; }
+
+        bool Function1Enabled { get; set; }
+
+        bool Function2Enabled { get; set; }
+
+        bool Function3Enabled { get; set; }
+
+        bool Function4Enabled { get; set; }
     }
 }
