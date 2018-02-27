@@ -29,6 +29,8 @@
 
         public event EventHandler<EventArgs> Exited;
 
+        public event EventHandler<EventArgs> ExexutingChanged;
+
         // ------------------------------------------------------------
         // Member
         // ------------------------------------------------------------
@@ -62,6 +64,8 @@
         public object CurrentView => CurrentStack?.View;
 
         public object CurrentTarget => CurrentStack?.View.MapOrDefalut(x => provider.ResolveTarget(x));
+
+        public bool Executing { get; private set; }
 
         // ------------------------------------------------------------
         // Constructor
@@ -151,55 +155,66 @@
 
         private void NavigateCore(INavigationStrategy strategy, INavigationContext navigationContext, Controller controller)
         {
-            var pluginContext = new PluginContext();
-            controller.PluginContext = pluginContext;
-
-            var fromView = CurrentView;
-            var fromTarget = CurrentTarget;
-
-            var toView = strategy.ResolveToView(controller);
-            var toTarget = provider.ResolveTarget(toView);
-
-            var args = new NavigationEventArgs(navigationContext, fromView, fromTarget, toView, toTarget);
-
-            // Process from view
-            if (fromView != null)
+            try
             {
-                (fromTarget as INavigationEventSupport)?.OnNavigatedFrom(navigationContext);
+                Executing = true;
+                ExexutingChanged?.Invoke(this, EventArgs.Empty);
 
+                var pluginContext = new PluginContext();
+                controller.PluginContext = pluginContext;
+
+                var fromView = CurrentView;
+                var fromTarget = CurrentTarget;
+
+                var toView = strategy.ResolveToView(controller);
+                var toTarget = provider.ResolveTarget(toView);
+
+                var args = new NavigationEventArgs(navigationContext, fromView, fromTarget, toView, toTarget);
+
+                // Process from view
+                if (fromView != null)
+                {
+                    (fromTarget as INavigationEventSupport)?.OnNavigatedFrom(navigationContext);
+
+                    foreach (var plugin in plugins)
+                    {
+                        plugin.OnNavigatedFrom(pluginContext, fromView, fromTarget);
+                    }
+                }
+
+                // Process navigating
                 foreach (var plugin in plugins)
                 {
-                    plugin.OnNavigatedFrom(pluginContext, fromView, fromTarget);
+                    plugin.OnNavigatingTo(pluginContext, toView, toTarget);
                 }
-            }
 
-            // Process navigating
-            foreach (var plugin in plugins)
+                (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
+
+                // End pre process
+                Navigating?.Invoke(this, args);
+
+                // Update stack
+                strategy.UpdateStack(controller, toView);
+
+                // Update view mapper
+                viewMapper.CurrentUpdated(CurrentViewId);
+
+                // Process navigated
+                foreach (var plugin in plugins)
+                {
+                    plugin.OnNavigatedTo(pluginContext, toView, toTarget);
+                }
+
+                (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
+
+                // End post process
+                Navigated?.Invoke(this, args);
+            }
+            finally
             {
-                plugin.OnNavigatingTo(pluginContext, toView, toTarget);
+                Executing = false;
+                ExexutingChanged?.Invoke(this, EventArgs.Empty);
             }
-
-            (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
-
-            // End pre process
-            Navigating?.Invoke(this, args);
-
-            // Update stack
-            strategy.UpdateStack(controller, toView);
-
-            // Update view mapper
-            viewMapper.CurrentUpdated(CurrentViewId);
-
-            // Process navigated
-            foreach (var plugin in plugins)
-            {
-                plugin.OnNavigatedTo(pluginContext, toView, toTarget);
-            }
-
-            (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
-
-            // End post process
-            Navigated?.Invoke(this, args);
         }
 
         // ------------------------------------------------------------
