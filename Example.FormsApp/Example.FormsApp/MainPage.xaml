@@ -28,7 +28,7 @@
         <!-- header -->
         <BoxView Grid.Row="0" Style="{StaticResource MainTitleBoxView}"/>
         <Label Grid.Row="0" Style="{StaticResource MainTitleLabel}"
-               Text="{Binding Source={x:Reference Container}, Mode=OneWay, Path=Content, Converter={StaticResource ViewTitleConverter}}" />
+               Text="{Binding Title}" />
 
         <!-- view container -->
         <ContentView Grid.Row="1" x:Name="Container">

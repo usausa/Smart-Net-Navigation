@@ -11,7 +11,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type stack:Stack3ViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type stack:Stack3ViewModel}"
-             views:ViewProperty.Title="Stack3">
+             views:ShellProperty.Title="Stack3">
   <StackLayout>
         <Button Text="Pop" Style="{StaticResource NavigationButton}"
             Command="{Binding Pop}" CommandParameter="{markup:Int32 1}"/>

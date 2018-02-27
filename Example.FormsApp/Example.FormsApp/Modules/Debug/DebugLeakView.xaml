@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type debug:DebugLeakViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type debug:DebugLeakViewModel}"
-             views:ViewProperty.Title="DebugLeak">
+             views:ShellProperty.Title="DebugLeak">
     <StackLayout>
         <Button Text="Back" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Debug}"/>

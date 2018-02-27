@@ -11,7 +11,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type wizard:WizardInput2ViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type wizard:WizardInput2ViewModel}"
-             views:ViewProperty.Title="Wizard2">
+             views:ShellProperty.Title="Wizard2">
     <StackLayout>
         <Entry Style="{StaticResource DefaultEntry}"
                Text="{Binding Context.Value.Data2}"

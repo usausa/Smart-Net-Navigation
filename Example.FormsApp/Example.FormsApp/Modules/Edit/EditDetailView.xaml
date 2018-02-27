@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type edit:EditDetailViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type edit:EditDetailViewModel}"
-             views:ViewProperty.Title="EditDetail*">
+             views:ShellProperty.Title="EditDetail*">
     <StackLayout>
     </StackLayout>
 </ContentView>

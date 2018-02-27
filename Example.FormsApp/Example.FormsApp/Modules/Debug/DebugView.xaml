@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type debug:DebugViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type debug:DebugViewModel}"
-             views:ViewProperty.Title="Debug">
+             views:ShellProperty.Title="Debug">
     <StackLayout>
         <Button Text="Menu" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>

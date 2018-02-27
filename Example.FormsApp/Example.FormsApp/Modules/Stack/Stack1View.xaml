@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type stack:Stack1ViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type stack:Stack1ViewModel}"
-             views:ViewProperty.Title="Stack1">
+             views:ShellProperty.Title="Stack1">
     <StackLayout>
         <Button Text="Cancel" Style="{StaticResource NavigationButton}"
                 Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>

@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type modules:MenuViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type modules:MenuViewModel}"
-             views:ViewProperty.Title="Menu">
+             views:ShellProperty.Title="Menu">
 
     <StackLayout>
         <Button Text="Multiple id" Style="{StaticResource NavigationButton}"

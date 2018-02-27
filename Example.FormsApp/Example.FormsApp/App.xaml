@@ -199,8 +199,6 @@
 
             <!-- Converter -->
 
-            <views:ViewTitleConverter x:Key="ViewTitleConverter" />
-
         </ResourceDictionary>
 
     </Application.Resources>
