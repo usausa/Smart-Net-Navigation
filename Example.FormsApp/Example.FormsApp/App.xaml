@@ -7,6 +7,14 @@
 
         <ResourceDictionary>
 
+            <!-- Font -->
+
+            <OnPlatform x:Key="Ionicons" x:TypeArguments="x:String">
+                <On Platform="iOS">ionicons</On>
+                <On Platform="Android">Fonts/ionicons.ttf</On>
+                <On Platform="UWP">Assets/Fonts/ionicons.ttf#ionicons</On>
+            </OnPlatform>
+
             <!-- Size -->
 
             <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double">
