@@ -8,6 +8,7 @@
              xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
              xmlns:local="clr-namespace:Example.FormsApp"
              xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
+             xmlns:controls="clr-namespace:Example.FormsApp.Controls;assembly=Example.FormsApp"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type local:MainPageViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}">
@@ -27,9 +28,19 @@
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <BoxView Grid.Row="0" Style="{StaticResource MainTitleBoxView}"/>
-        <Label Grid.Row="0" Style="{StaticResource MainTitleLabel}"
-               Text="{Binding Title}" />
+        <Grid Grid.Row="0" Style="{StaticResource MainTitleGrid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="1" Style="{StaticResource MainTitleLabel}"
+                   Text="{Binding Title}" />
+            <Button Grid.Column="0" Style="{StaticResource MainTitleButton}"
+                    Text="■"/>
+            <Button Grid.Column="2" Style="{StaticResource MainTitleButton}"
+                    Text="■"/>
+        </Grid>
 
         <!-- view container -->
         <ContentView Grid.Row="1" x:Name="Container" views:ShellProperty.ShellControl="{Binding}">
@@ -48,22 +59,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <BoxView Grid.Column="0" Style="{StaticResource MainFunctionBoxView}"/>
-            <Label Grid.Column="0" Style="{StaticResource MainFunctionLabel}"
-                   Text="F1" />
-
-            <BoxView Grid.Column="1" Style="{StaticResource MainFunctionBoxView}"/>
-            <Label Grid.Column="1" Style="{StaticResource MainFunctionLabel}"
-                   Text="F2" />
-
-            <BoxView Grid.Column="2" Style="{StaticResource MainFunctionBoxView}"/>
-            <Label Grid.Column="2" Style="{StaticResource MainFunctionLabel}"
-                   Text="F3" />
-
-            <BoxView Grid.Column="3" Style="{StaticResource MainFunctionBoxView}"/>
-            <Label Grid.Column="3" Style="{StaticResource MainFunctionLabel}"
-                   Text="F4" />
-
+            <controls:FunctionButton
+                Grid.Column="0" Style="{StaticResource MainFunctionButton}"
+                Text="F1" />
+            <controls:FunctionButton
+                Grid.Column="1" Style="{StaticResource MainFunctionButton}"
+                Text="F2" />
+            <controls:FunctionButton
+                Grid.Column="2" Style="{StaticResource MainFunctionButton}"
+                Text="F3" />
+            <controls:FunctionButton
+                Grid.Column="3" Style="{StaticResource MainFunctionButton}"
+                Text="F4" />
         </Grid>
 
     </Grid>
