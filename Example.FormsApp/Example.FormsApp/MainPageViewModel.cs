@@ -1,9 +1,8 @@
 ﻿namespace Example.FormsApp
 {
-    using System.Threading.Tasks;
-
     using Example.FormsApp.Views;
 
+    using Smart.Forms.Components;
     using Smart.Forms.Input;
     using Smart.Forms.ViewModels;
     using Smart.Navigation;
@@ -96,14 +95,36 @@
 
         public AsyncCommand GoHome { get; }
 
-        public MainPageViewModel(ApplicationState applicationState, INavigator navigator)
+        public AsyncCommand Option { get; }
+
+        public AsyncCommand Function1 { get; }
+
+        public AsyncCommand Function2 { get; }
+
+        public AsyncCommand Function3 { get; }
+
+        public AsyncCommand Function4 { get; }
+
+        public MainPageViewModel(
+            ApplicationState applicationState,
+            INavigator navigator,
+            IDialogService dialogService)
             : base(applicationState)
         {
             ApplicationState = applicationState;
             Navigator = navigator;
 
-            // TODO
-            GoHome = MakeAsyncCommand(() => Task.Delay(3000));
+            GoHome = MakeAsyncCommand(() => (Navigator.CurrentTarget as IShellEventSupport)?.GoHomeAsync())
+                .Observe(this, nameof(CanGoHome));
+            Option = MakeAsyncCommand(() => dialogService.DisplayAlert("Option", "Option", "OK"));
+            Function1 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function1), () => Function1Enabled)
+                .Observe(this, nameof(Function1Enabled));
+            Function2 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function2), () => Function2Enabled)
+                .Observe(this, nameof(Function2Enabled));
+            Function3 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function3), () => Function3Enabled)
+                .Observe(this, nameof(Function3Enabled));
+            Function4 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function4), () => Function4Enabled)
+                .Observe(this, nameof(Function4Enabled));
         }
     }
 }

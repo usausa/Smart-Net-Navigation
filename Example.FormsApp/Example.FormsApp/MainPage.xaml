@@ -32,16 +32,17 @@
         <Grid Grid.Row="0" Style="{StaticResource MainTitleGrid}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="1" Style="{StaticResource MainTitleLabel}"
                    Text="{Binding Title}" />
             <Button Grid.Column="0" Style="{StaticResource MainTitleButton}"
                     Command="{Binding GoHome}"
-                    Text="■"/>
+                    Text="&#xf38f;"/>
             <Button Grid.Column="2" Style="{StaticResource MainTitleButton}"
-                    Text="■"/>
+                    Command="{Binding Option}"
+                    Text="&#xf2ad;"/>
         </Grid>
 
         <!-- view container -->
@@ -63,16 +64,20 @@
 
             <controls:FunctionButton
                 Grid.Column="0" Style="{StaticResource MainFunctionButton}"
-                Text="F1" />
+                Command="{Binding Function1}"
+                Text="{Binding Function1Text}" />
             <controls:FunctionButton
                 Grid.Column="1" Style="{StaticResource MainFunctionButton}"
-                Text="F2" />
+                Command="{Binding Function2}"
+                Text="{Binding Function2Text}" />
             <controls:FunctionButton
                 Grid.Column="2" Style="{StaticResource MainFunctionButton}"
-                Text="F3" />
+                Command="{Binding Function3}"
+                Text="{Binding Function3Text}" />
             <controls:FunctionButton
                 Grid.Column="3" Style="{StaticResource MainFunctionButton}"
-                Text="F4" />
+                Command="{Binding Function4}"
+                Text="{Binding Function4Text}" />
         </Grid>
 
     </Grid>

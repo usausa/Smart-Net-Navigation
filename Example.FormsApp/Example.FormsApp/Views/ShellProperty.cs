@@ -58,7 +58,7 @@
             "Function1Text",
             typeof(string),
             typeof(ShellProperty),
-            null,
+            string.Empty,
             propertyChanged: PropertyChanged);
 
         public static string GetFunction1Text(BindableObject view)
@@ -75,7 +75,7 @@
             "Function2Text",
             typeof(string),
             typeof(ShellProperty),
-            null,
+            string.Empty,
             propertyChanged: PropertyChanged);
 
         public static string GetFunction2Text(BindableObject view)
@@ -92,7 +92,7 @@
             "Function3Text",
             typeof(string),
             typeof(ShellProperty),
-            null,
+            string.Empty,
             propertyChanged: PropertyChanged);
 
         public static string GetFunction3Text(BindableObject view)
@@ -109,7 +109,7 @@
             "Function4Text",
             typeof(string),
             typeof(ShellProperty),
-            null,
+            string.Empty,
             propertyChanged: PropertyChanged);
 
         public static string GetFunction4Text(BindableObject view)
@@ -126,7 +126,7 @@
             "Function1Enabled",
             typeof(bool),
             typeof(ShellProperty),
-            true,
+            false,
             propertyChanged: PropertyChanged);
 
         public static bool GetFunction1Enabled(BindableObject view)
@@ -134,7 +134,7 @@
             return (bool)view.GetValue(Function1EnabledProperty);
         }
 
-        public static void SetFunction1Enabled(BindableObject view, string value)
+        public static void SetFunction1Enabled(BindableObject view, bool value)
         {
             view.SetValue(Function1EnabledProperty, value);
         }
@@ -143,7 +143,7 @@
             "Function2Enabled",
             typeof(bool),
             typeof(ShellProperty),
-            true,
+            false,
             propertyChanged: PropertyChanged);
 
         public static bool GetFunction2Enabled(BindableObject view)
@@ -151,7 +151,7 @@
             return (bool)view.GetValue(Function2EnabledProperty);
         }
 
-        public static void SetFunction2Enabled(BindableObject view, string value)
+        public static void SetFunction2Enabled(BindableObject view, bool value)
         {
             view.SetValue(Function2EnabledProperty, value);
         }
@@ -160,7 +160,7 @@
             "Function3Enabled",
             typeof(bool),
             typeof(ShellProperty),
-            true,
+            false,
             propertyChanged: PropertyChanged);
 
         public static bool GetFunction3Enabled(BindableObject view)
@@ -168,7 +168,7 @@
             return (bool)view.GetValue(Function3EnabledProperty);
         }
 
-        public static void SetFunction3Enabled(BindableObject view, string value)
+        public static void SetFunction3Enabled(BindableObject view, bool value)
         {
             view.SetValue(Function3EnabledProperty, value);
         }
@@ -177,7 +177,7 @@
             "Function4Enabled",
             typeof(bool),
             typeof(ShellProperty),
-            true,
+            false,
             propertyChanged: PropertyChanged);
 
         public static bool GetFunction4Enabled(BindableObject view)
@@ -185,7 +185,7 @@
             return (bool)view.GetValue(Function4EnabledProperty);
         }
 
-        public static void SetFunction4Enabled(BindableObject view, string value)
+        public static void SetFunction4Enabled(BindableObject view, bool value)
         {
             view.SetValue(Function4EnabledProperty, value);
         }
@@ -209,9 +209,9 @@
                 shellControl.Title = GetTitle(child);
                 shellControl.CanGoHome = GetCanGoHome(child);
                 shellControl.Function1Text = GetFunction1Text(child);
-                shellControl.Function2Text = GetFunction1Text(child);
-                shellControl.Function3Text = GetFunction1Text(child);
-                shellControl.Function4Text = GetFunction1Text(child);
+                shellControl.Function2Text = GetFunction2Text(child);
+                shellControl.Function3Text = GetFunction3Text(child);
+                shellControl.Function4Text = GetFunction4Text(child);
                 shellControl.Function1Enabled = GetFunction1Enabled(child);
                 shellControl.Function2Enabled = GetFunction2Enabled(child);
                 shellControl.Function3Enabled = GetFunction3Enabled(child);

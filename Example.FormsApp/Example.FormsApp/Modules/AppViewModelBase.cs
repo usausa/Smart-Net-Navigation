@@ -28,7 +28,5 @@
         {
             return Task.CompletedTask;
         }
-
-        // TODO Function
     }
 }

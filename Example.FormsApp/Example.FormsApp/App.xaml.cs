@@ -1,4 +1,6 @@
-﻿[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
+﻿using Smart.Forms.Components;
+
+[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
 
 namespace Example.FormsApp
 {
@@ -51,6 +53,7 @@ namespace Example.FormsApp
 
             config.Bind<ApplicationState>().ToSelf().InSingletonScope();
             config.Bind<Navigator>().ToMethod(kernel => navigator).InSingletonScope();
+            config.Bind<IDialogService>().To<DialogService>().InSingletonScope();
 
             return config.ToResolver();
         }

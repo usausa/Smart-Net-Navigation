@@ -10,7 +10,9 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type wizard:WizardResultViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type wizard:WizardResultViewModel}"
-             views:ShellProperty.Title="WizardResult">
+             views:ShellProperty.Title="WizardResult"
+             views:ShellProperty.Function1Enabled="True" views:ShellProperty.Function1Text="&#xf107;"
+             views:ShellProperty.Function4Enabled="True" views:ShellProperty.Function4Text="&#xf10a;">
     <StackLayout>
         <Label Style="{StaticResource ResultLabel}"
                Text="{Binding Context.Value.Data1}"/>

@@ -167,20 +167,29 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource MetroBlueDarkDarker}"/>
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+                <Setter Property="FontFamily" Value="{StaticResource Ionicons}" />
+                <Setter Property="Margin" Value="3" />
                 <Setter Property="CornerRadius" Value="6" />
             </Style>
+
+            <OnPlatform x:Key="MainFunctionGridHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS">48.0</On>
+                <On Platform="Android, UWP">64.0</On>
+            </OnPlatform>
 
             <Style x:Key="MainFunctionGrid" TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="{StaticResource MetroBlue}"/>
                 <Setter Property="RowSpacing" Value="0"/>
                 <Setter Property="ColumnSpacing" Value="0" />
                 <Setter Property="Margin" Value="0" />
+                <Setter Property="HeightRequest" Value="{StaticResource MainFunctionGridHeight}" />
             </Style>
 
             <Style x:Key="MainFunctionButton" TargetType="controls:FunctionButton">
                 <Setter Property="BackgroundColor" Value="{StaticResource MetroBlue}"/>
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="{StaticResource ExtraBigSize}" />
+                <Setter Property="FontFamily" Value="{StaticResource Ionicons}" />
                 <Setter Property="CornerRadius" Value="0" />
                 <Setter Property="BorderWidth" Value="0" />
             </Style>
