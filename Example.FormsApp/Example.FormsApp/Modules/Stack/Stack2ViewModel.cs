@@ -9,7 +9,8 @@
 
         public AsyncCommand<ViewId> Push { get; }
 
-        public Stack2ViewModel()
+        public Stack2ViewModel(ApplicationState applicationState)
+            : base(applicationState)
         {
             Pop = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
             Push = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));

@@ -4,8 +4,6 @@
     {
         string Title { get; set; }
 
-        bool IsBusy { get; set; }
-
         bool CanGoHome { get; set; }
 
         string Function1Text { get; set; }

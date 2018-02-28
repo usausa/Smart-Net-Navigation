@@ -1,9 +1,9 @@
 ﻿namespace Example.FormsApp
 {
+    using System.Threading.Tasks;
+
     public interface IShellEventSupport
     {
-        void ProcessGoHome();
-
-        void ProcessFunction(FunctionKeys key);
+        Task GoHomeAsync();
     }
 }

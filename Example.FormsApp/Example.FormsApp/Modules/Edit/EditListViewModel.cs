@@ -13,7 +13,8 @@
 
         public AsyncCommand<ViewId> Forward { get; }
 
-        public EditListViewModel()
+        public EditListViewModel(ApplicationState applicationState)
+            : base(applicationState)
         {
             Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
         }

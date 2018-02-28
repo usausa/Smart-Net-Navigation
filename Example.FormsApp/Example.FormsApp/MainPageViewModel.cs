@@ -1,7 +1,10 @@
 ﻿namespace Example.FormsApp
 {
+    using System.Threading.Tasks;
+
     using Example.FormsApp.Views;
 
+    using Smart.Forms.Input;
     using Smart.Forms.ViewModels;
     using Smart.Navigation;
 
@@ -87,11 +90,20 @@
             set => SetProperty(ref function4Enabled, value);
         }
 
+        public ApplicationState ApplicationState { get; }
+
         public INavigator Navigator { get; }
 
-        public MainPageViewModel(INavigator navigator)
+        public AsyncCommand GoHome { get; }
+
+        public MainPageViewModel(ApplicationState applicationState, INavigator navigator)
+            : base(applicationState)
         {
+            ApplicationState = applicationState;
             Navigator = navigator;
+
+            // TODO
+            GoHome = MakeAsyncCommand(() => Task.Delay(3000));
         }
     }
 }

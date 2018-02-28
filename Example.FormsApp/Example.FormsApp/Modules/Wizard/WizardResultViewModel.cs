@@ -12,7 +12,8 @@
 
         public AsyncCommand<ViewId> Forward { get; }
 
-        public WizardResultViewModel()
+        public WizardResultViewModel(ApplicationState applicationState)
+            : base(applicationState)
         {
             Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
         }

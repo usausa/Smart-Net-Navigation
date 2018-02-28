@@ -11,7 +11,8 @@
              xmlns:controls="clr-namespace:Example.FormsApp.Controls;assembly=Example.FormsApp"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type local:MainPageViewModel}}"
-             resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}">
+             resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
+             IsBusy="{Binding ApplicationState.IsBusy}">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -37,6 +38,7 @@
             <Label Grid.Column="1" Style="{StaticResource MainTitleLabel}"
                    Text="{Binding Title}" />
             <Button Grid.Column="0" Style="{StaticResource MainTitleButton}"
+                    Command="{Binding GoHome}"
                     Text="■"/>
             <Button Grid.Column="2" Style="{StaticResource MainTitleButton}"
                     Text="■"/>

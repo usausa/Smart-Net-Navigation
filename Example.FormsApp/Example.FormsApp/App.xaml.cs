@@ -49,6 +49,7 @@ namespace Example.FormsApp
                 .UseAssignableBinding()
                 .UsePropertyInjector();
 
+            config.Bind<ApplicationState>().ToSelf().InSingletonScope();
             config.Bind<Navigator>().ToMethod(kernel => navigator).InSingletonScope();
 
             return config.ToResolver();

@@ -14,7 +14,8 @@
 
         public DelegateCommand Collect { get; }
 
-        public DebugViewModel()
+        public DebugViewModel(ApplicationState applicationState)
+            : base(applicationState)
         {
             Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
             Delay = MakeAsyncCommand(ExecuteDelay);
@@ -29,7 +30,9 @@
         private void ExecuteCollect()
         {
             // TODO async ?
+#pragma warning disable S1215 // "GC.Collect" should not be called
             GC.Collect();
+#pragma warning restore S1215 // "GC.Collect" should not be called
         }
     }
 }

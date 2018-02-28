@@ -7,7 +7,8 @@
     {
         public AsyncCommand<int> Pop { get; }
 
-        public Stack3ViewModel()
+        public Stack3ViewModel(ApplicationState applicationState)
+            : base(applicationState)
         {
             Pop = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
         }

@@ -1,11 +1,15 @@
 ﻿namespace Example.FormsApp.Modules
 {
+    using System.Threading.Tasks;
+
     using Smart.Forms.ViewModels;
     using Smart.Navigation;
 
     public class AppViewModelBase : ViewModelBase, INavigatorAware, IShellEventSupport
     {
         public INavigator Navigator { get; set; }
+
+        protected ApplicationState ApplicationState { get; }
 
         protected override void Dispose(bool disposing)
         {
@@ -14,12 +18,17 @@
             System.Diagnostics.Debug.WriteLine($"{GetType()} is Disposed");
         }
 
-        public virtual void ProcessGoHome()
+        public AppViewModelBase(ApplicationState applicationState)
+            : base(applicationState)
         {
+            ApplicationState = applicationState;
         }
 
-        public virtual void ProcessFunction(FunctionKeys key)
+        public virtual Task GoHomeAsync()
         {
+            return Task.CompletedTask;
         }
+
+        // TODO Function
     }
 }

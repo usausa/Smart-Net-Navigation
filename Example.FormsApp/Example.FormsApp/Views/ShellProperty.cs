@@ -37,23 +37,6 @@
             view.SetValue(TitleProperty, value);
         }
 
-        public static readonly BindableProperty IsBusyProperty = BindableProperty.CreateAttached(
-            "IsBusy",
-            typeof(bool),
-            typeof(ShellProperty),
-            false,
-            propertyChanged: PropertyChanged);
-
-        public static bool GetIsBusy(BindableObject view)
-        {
-            return (bool)view.GetValue(IsBusyProperty);
-        }
-
-        public static void SetIsBusy(BindableObject view, string value)
-        {
-            view.SetValue(IsBusyProperty, value);
-        }
-
         public static readonly BindableProperty CanGoHomeProperty = BindableProperty.CreateAttached(
             "CanGoHome",
             typeof(bool),
@@ -224,7 +207,6 @@
             if (shellControl != null)
             {
                 shellControl.Title = GetTitle(child);
-                shellControl.IsBusy = GetIsBusy(child);
                 shellControl.CanGoHome = GetCanGoHome(child);
                 shellControl.Function1Text = GetFunction1Text(child);
                 shellControl.Function2Text = GetFunction1Text(child);

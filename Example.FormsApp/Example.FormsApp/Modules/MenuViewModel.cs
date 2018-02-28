@@ -7,7 +7,8 @@
     {
         public AsyncCommand<ViewId> Forward { get; }
 
-        public MenuViewModel()
+        public MenuViewModel(ApplicationState applicationState)
+            : base(applicationState)
         {
             Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
         }
