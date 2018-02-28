@@ -1,7 +1,7 @@
 ﻿namespace Example.FormsApp
 {
     using Example.FormsApp.Views;
-
+    using Smart.ComponentModel;
     using Smart.Forms.Components;
     using Smart.Forms.Input;
     using Smart.Forms.ViewModels;
@@ -9,85 +9,25 @@
 
     public class MainPageViewModel : ViewModelBase, IShellControl
     {
-        private string title;
+        public NotificationValue<string> Title { get; } = new NotificationValue<string>();
 
-        private bool canGoHome;
+        public NotificationValue<bool> CanGoHome { get; } = new NotificationValue<bool>();
 
-        private string function1Text;
+        public NotificationValue<string> Function1Text { get; } = new NotificationValue<string>();
 
-        private string function2Text;
+        public NotificationValue<string> Function2Text { get; } = new NotificationValue<string>();
 
-        private string function3Text;
+        public NotificationValue<string> Function3Text { get; } = new NotificationValue<string>();
 
-        private string function4Text;
+        public NotificationValue<string> Function4Text { get; } = new NotificationValue<string>();
 
-        private bool function1Enabled;
+        public NotificationValue<bool> Function1Enabled { get; } = new NotificationValue<bool>();
 
-        private bool function2Enabled;
+        public NotificationValue<bool> Function2Enabled { get; } = new NotificationValue<bool>();
 
-        private bool function3Enabled;
+        public NotificationValue<bool> Function3Enabled { get; } = new NotificationValue<bool>();
 
-        private bool function4Enabled;
-
-        public string Title
-        {
-            get => title;
-            set => SetProperty(ref title, value);
-        }
-
-        public bool CanGoHome
-        {
-            get => canGoHome;
-            set => SetProperty(ref canGoHome, value);
-        }
-
-        public string Function1Text
-        {
-            get => function1Text;
-            set => SetProperty(ref function1Text, value);
-        }
-
-        public string Function2Text
-        {
-            get => function2Text;
-            set => SetProperty(ref function2Text, value);
-        }
-
-        public string Function3Text
-        {
-            get => function3Text;
-            set => SetProperty(ref function3Text, value);
-        }
-
-        public string Function4Text
-        {
-            get => function4Text;
-            set => SetProperty(ref function4Text, value);
-        }
-
-        public bool Function1Enabled
-        {
-            get => function1Enabled;
-            set => SetProperty(ref function1Enabled, value);
-        }
-
-        public bool Function2Enabled
-        {
-            get => function2Enabled;
-            set => SetProperty(ref function2Enabled, value);
-        }
-
-        public bool Function3Enabled
-        {
-            get => function3Enabled;
-            set => SetProperty(ref function3Enabled, value);
-        }
-
-        public bool Function4Enabled
-        {
-            get => function4Enabled;
-            set => SetProperty(ref function4Enabled, value);
-        }
+        public NotificationValue<bool> Function4Enabled { get; } = new NotificationValue<bool>();
 
         public ApplicationState ApplicationState { get; }
 
@@ -114,17 +54,27 @@
             ApplicationState = applicationState;
             Navigator = navigator;
 
-            GoHome = MakeAsyncCommand(() => (Navigator.CurrentTarget as IShellEventSupport)?.GoHomeAsync())
-                .Observe(this, nameof(CanGoHome));
+            GoHome = MakeAsyncCommand(
+                    () => (Navigator.CurrentTarget as IShellEventSupport)?.GoHomeAsync(),
+                    () => CanGoHome.Value)
+                .Observe(CanGoHome);
             Option = MakeAsyncCommand(() => dialogService.DisplayAlert("Option", "Option", "OK"));
-            Function1 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function1), () => Function1Enabled)
-                .Observe(this, nameof(Function1Enabled));
-            Function2 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function2), () => Function2Enabled)
-                .Observe(this, nameof(Function2Enabled));
-            Function3 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function3), () => Function3Enabled)
-                .Observe(this, nameof(Function3Enabled));
-            Function4 = MakeAsyncCommand(() => Navigator.NotifyAsync(FunctionKeys.Function4), () => Function4Enabled)
-                .Observe(this, nameof(Function4Enabled));
+            Function1 = MakeAsyncCommand(
+                    () => Navigator.NotifyAsync(FunctionKeys.Function1),
+                    () => Function1Enabled.Value)
+                .Observe(Function1Enabled);
+            Function2 = MakeAsyncCommand(
+                    () => Navigator.NotifyAsync(FunctionKeys.Function2),
+                    () => Function2Enabled.Value)
+                .Observe(Function2Enabled);
+            Function3 = MakeAsyncCommand(
+                    () => Navigator.NotifyAsync(FunctionKeys.Function3),
+                    () => Function3Enabled.Value)
+                .Observe(Function3Enabled);
+            Function4 = MakeAsyncCommand(
+                    () => Navigator.NotifyAsync(FunctionKeys.Function4),
+                    () => Function4Enabled.Value)
+                .Observe(Function4Enabled);
         }
     }
 }

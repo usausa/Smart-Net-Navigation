@@ -49,7 +49,7 @@
             return (bool)view.GetValue(CanGoHomeProperty);
         }
 
-        public static void SetCanGoHome(BindableObject view, string value)
+        public static void SetCanGoHome(BindableObject view, bool value)
         {
             view.SetValue(CanGoHomeProperty, value);
         }
@@ -206,16 +206,16 @@
             var shellControl = GetShellControl(parent);
             if (shellControl != null)
             {
-                shellControl.Title = GetTitle(child);
-                shellControl.CanGoHome = GetCanGoHome(child);
-                shellControl.Function1Text = GetFunction1Text(child);
-                shellControl.Function2Text = GetFunction2Text(child);
-                shellControl.Function3Text = GetFunction3Text(child);
-                shellControl.Function4Text = GetFunction4Text(child);
-                shellControl.Function1Enabled = GetFunction1Enabled(child);
-                shellControl.Function2Enabled = GetFunction2Enabled(child);
-                shellControl.Function3Enabled = GetFunction3Enabled(child);
-                shellControl.Function4Enabled = GetFunction4Enabled(child);
+                shellControl.Title.Value = GetTitle(child);
+                shellControl.CanGoHome.Value = GetCanGoHome(child);
+                shellControl.Function1Text.Value = GetFunction1Text(child);
+                shellControl.Function2Text.Value = GetFunction2Text(child);
+                shellControl.Function3Text.Value = GetFunction3Text(child);
+                shellControl.Function4Text.Value = GetFunction4Text(child);
+                shellControl.Function1Enabled.Value = GetFunction1Enabled(child);
+                shellControl.Function2Enabled.Value = GetFunction2Enabled(child);
+                shellControl.Function3Enabled.Value = GetFunction3Enabled(child);
+                shellControl.Function4Enabled.Value = GetFunction4Enabled(child);
             }
         }
     }

@@ -163,6 +163,11 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
+            <OnPlatform x:Key="MainTitleButtonWidth" x:TypeArguments="x:Double">
+                <On Platform="iOS">48.0</On>
+                <On Platform="Android, UWP">64.0</On>
+            </OnPlatform>
+
             <Style x:Key="MainTitleButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource MetroBlueDarkDarker}"/>
                 <Setter Property="TextColor" Value="White" />
@@ -170,6 +175,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource Ionicons}" />
                 <Setter Property="Margin" Value="3" />
                 <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="WidthRequest" Value="{StaticResource MainTitleButtonWidth}" />
             </Style>
 
             <OnPlatform x:Key="MainFunctionGridHeight" x:TypeArguments="x:Double">

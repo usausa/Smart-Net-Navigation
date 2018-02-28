@@ -1,25 +1,27 @@
 ﻿namespace Example.FormsApp.Views
 {
+    using Smart.ComponentModel;
+
     public interface IShellControl
     {
-        string Title { get; set; }
+        NotificationValue<string> Title { get; }
 
-        bool CanGoHome { get; set; }
+        NotificationValue<bool> CanGoHome { get; }
 
-        string Function1Text { get; set; }
+        NotificationValue<string> Function1Text { get; }
 
-        string Function2Text { get; set; }
+        NotificationValue<string> Function2Text { get; }
 
-        string Function3Text { get; set; }
+        NotificationValue<string> Function3Text { get; }
 
-        string Function4Text { get; set; }
+        NotificationValue<string> Function4Text { get; }
 
-        bool Function1Enabled { get; set; }
+        NotificationValue<bool> Function1Enabled { get; }
 
-        bool Function2Enabled { get; set; }
+        NotificationValue<bool> Function2Enabled { get; }
 
-        bool Function3Enabled { get; set; }
+        NotificationValue<bool> Function3Enabled { get; }
 
-        bool Function4Enabled { get; set; }
+        NotificationValue<bool> Function4Enabled { get; }
     }
 }

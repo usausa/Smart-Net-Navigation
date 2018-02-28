@@ -12,7 +12,7 @@
              resolver:BindingContextResolver.Type="{x:Type wizard:WizardResultViewModel}"
              views:ShellProperty.Title="WizardResult"
              views:ShellProperty.Function1Enabled="True" views:ShellProperty.Function1Text="&#xf107;"
-             views:ShellProperty.Function4Enabled="True" views:ShellProperty.Function4Text="&#xf10a;">
+             views:ShellProperty.Function4Enabled="True" views:ShellProperty.Function4Text="&#xf122;">
     <StackLayout>
         <Label Style="{StaticResource ResultLabel}"
                Text="{Binding Context.Value.Data1}"/>
