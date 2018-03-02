@@ -225,7 +225,11 @@
             <!-- Label -->
 
             <Style x:Key="ResultLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+            </Style>
+
+            <Style x:Key="ListItemLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
             </Style>
 
             <!-- Converter -->
