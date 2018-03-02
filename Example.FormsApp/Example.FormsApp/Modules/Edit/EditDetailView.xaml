@@ -10,7 +10,11 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type edit:EditDetailViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type edit:EditDetailViewModel}"
-             views:ShellProperty.Title="EditDetail*">
+             views:ShellProperty.Title="{Binding Update.Value, StringFormat='Edit-{0}', Converter={StaticResource EditModeConverter}}"
+             views:ShellProperty.Function1Enabled="True" views:ShellProperty.Function1Text="&#xf107;"
+             views:ShellProperty.Function4Enabled="{Binding Name.Value, Converter={StaticResource HasTextConverter}}" views:ShellProperty.Function4Text="&#xf122;">
     <StackLayout>
+        <Entry Style="{StaticResource DefaultEntry}"
+               Text="{Binding Name.Value}"/>
     </StackLayout>
 </ContentView>

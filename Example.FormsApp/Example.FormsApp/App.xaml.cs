@@ -1,4 +1,5 @@
-﻿using Smart.Forms.Components;
+﻿using Example.FormsApp.Services;
+using Smart.Forms.Components;
 
 [assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
 
@@ -51,9 +52,12 @@ namespace Example.FormsApp
                 .UseAssignableBinding()
                 .UsePropertyInjector();
 
-            config.Bind<ApplicationState>().ToSelf().InSingletonScope();
             config.Bind<Navigator>().ToMethod(kernel => navigator).InSingletonScope();
+
             config.Bind<IDialogService>().To<DialogService>().InSingletonScope();
+
+            config.Bind<DataService>().ToSelf().InSingletonScope();
+            config.Bind<ApplicationState>().ToSelf().InSingletonScope();
 
             return config.ToResolver();
         }

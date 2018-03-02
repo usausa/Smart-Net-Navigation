@@ -2,6 +2,7 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Example.FormsApp.Controls;assembly=Example.FormsApp"
+             xmlns:data="clr-namespace:Smart.Forms.Data;assembly=Smart.Forms"
              x:Class="Example.FormsApp.App">
     <Application.Resources>
 
@@ -233,6 +234,12 @@
             </Style>
 
             <!-- Converter -->
+
+            <data:BoolToTextConverter x:Key="EditModeConverter"
+                                      TrueText="Update"
+                                      FalseText="New"/>
+            <data:HasValueConverter x:Key="HasTextConverter"
+                                    HandleEmptyString="True"/>
 
         </ResourceDictionary>
 
