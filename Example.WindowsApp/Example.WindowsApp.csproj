@@ -94,6 +94,7 @@
     <Compile Include="Modules\Wizard\WizardResultView.xaml.cs">
       <DependentUpon>WizardResultView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ShellProperty.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

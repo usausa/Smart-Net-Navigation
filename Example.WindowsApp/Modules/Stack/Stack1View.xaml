@@ -5,15 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Example.WindowsApp.Modules.Stack"
              xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
-             xmlns:views="clr-namespace:Example.WindowsApp.Modules"
+             xmlns:modules="clr-namespace:Example.WindowsApp.Modules"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
              mc:Ignorable="d"
+             d:DesignHeight="320" d:DesignWidth="480"
              d:DataContext="{d:DesignInstance Type={x:Type local:Stack1ViewModel}}"
              resolver:DataContextResolver.Type="{x:Type local:Stack1ViewModel}"
-             d:DesignHeight="320" d:DesignWidth="480">
+             views:ShellProperty.Title="Stack1">
     <Grid>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="94,58,0,0" VerticalAlignment="Top" Width="75"
-                Command="{Binding Forward}" CommandParameter="{x:Type views:MenuView}"/>
-        <Button Content="Push" HorizontalAlignment="Left" Margin="289,58,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding Forward}" CommandParameter="{x:Type modules:MenuView}"/>
+        <Button Content="Push" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Push}" CommandParameter="{x:Type local:Stack2View}"/>
     </Grid>
 </UserControl>

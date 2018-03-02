@@ -3,15 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Example.WindowsApp"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:navigation="clr-namespace:Smart.Navigation;assembly=Smart.Navigation.Windows"
         xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:Example.WindowsApp"
+        xmlns:views="clr-namespace:Example.WindowsApp.Views"
         mc:Ignorable="d"
+        Height="359" Width="496"
+        ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance Type={x:Type local:MainWindowViewModel}}"
         resolver:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
-        Title="MainWindow" Height="359" Width="496" ResizeMode="CanMinimize">
-    <ContentControl>
+        Title="{Binding Source={x:Reference Container}, Path=Content.(views:ShellProperty.Title)}">
+    <ContentControl x:Name="Container">
         <i:Interaction.Behaviors>
             <navigation:NavigationContainerBehavior Navigator="{Binding Navigator, Mode=OneTime}"/>
         </i:Interaction.Behaviors>

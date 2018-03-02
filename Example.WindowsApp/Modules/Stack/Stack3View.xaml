@@ -6,15 +6,17 @@
              xmlns:local="clr-namespace:Example.WindowsApp.Modules.Stack"
              xmlns:markup="clr-namespace:Smart.Windows.Markup;assembly=Smart.Windows"
              xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
              mc:Ignorable="d"
+             d:DesignHeight="320" d:DesignWidth="480"
              d:DataContext="{d:DesignInstance Type={x:Type local:Stack3ViewModel}}"
              resolver:DataContextResolver.Type="{x:Type local:Stack3ViewModel}"
-             d:DesignHeight="320" d:DesignWidth="480">
+             views:ShellProperty.Title="Stack3">
     <Grid>
 
-        <Button Content="Pop" HorizontalAlignment="Left" Margin="106,199,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Pop" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Pop}" CommandParameter="{markup:Int32 1}"/>
-        <Button Content="Pop2" HorizontalAlignment="Left" Margin="312,199,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Pop2" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Pop}" CommandParameter="{markup:Int32 2}"/>
 
     </Grid>

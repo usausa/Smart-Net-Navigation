@@ -5,19 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Example.WindowsApp.Modules.Wizard"
              xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
-             xmlns:views="clr-namespace:Example.WindowsApp.Modules"
+             xmlns:modules="clr-namespace:Example.WindowsApp.Modules"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
              mc:Ignorable="d"
+             d:DesignHeight="320" d:DesignWidth="480"
              d:DataContext="{d:DesignInstance Type={x:Type local:WizardResultViewModel}}"
              resolver:DataContextResolver.Type="{x:Type local:WizardResultViewModel}"
-             d:DesignHeight="320" d:DesignWidth="480">
+             views:ShellProperty.Title="WizardResult">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155"
                  Text="{Binding Context.Value.Data1}" IsReadOnly="True" />
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155"
                  Text="{Binding Context.Value.Data2}" IsReadOnly="True" />
-        <Button Content="Prev" HorizontalAlignment="Left" Margin="92,149,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Prev" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Forward}" CommandParameter="{x:Type local:WizardInput2View}"/>
-        <Button Content="Complete" HorizontalAlignment="Left" Margin="285,141,0,0" VerticalAlignment="Top" Width="75"
-                Command="{Binding Forward}" CommandParameter="{x:Type views:MenuView}"/>
+        <Button Content="Complete" HorizontalAlignment="Left" Margin="90,66,0,0" VerticalAlignment="Top" Width="75"
+                Command="{Binding Forward}" CommandParameter="{x:Type modules:MenuView}"/>
     </Grid>
 </UserControl>

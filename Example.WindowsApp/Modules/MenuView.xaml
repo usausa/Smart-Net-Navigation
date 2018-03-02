@@ -7,14 +7,16 @@
              xmlns:local="clr-namespace:Example.WindowsApp.Modules"
              xmlns:stack="clr-namespace:Example.WindowsApp.Modules.Stack"
              xmlns:wizard="clr-namespace:Example.WindowsApp.Modules.Wizard"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
              mc:Ignorable="d"
+             d:DesignHeight="320" d:DesignWidth="480"
              d:DataContext="{d:DesignInstance Type={x:Type local:MenuViewModel}}"
              resolver:DataContextResolver.Type="{x:Type local:MenuViewModel}"
-             d:DesignHeight="320" d:DesignWidth="480">
+             views:ShellProperty.Title="Menu">
     <Grid>
-        <Button Content="Stack" HorizontalAlignment="Left" Margin="233,84,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Stack" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Forward}" CommandParameter="{x:Type stack:Stack1View}"/>
-        <Button Content="Wizard" HorizontalAlignment="Left" Margin="233,125,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Wizard" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75"
             Command="{Binding Forward}" CommandParameter="{x:Type wizard:WizardInput1View}"/>
 
     </Grid>

@@ -5,16 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Example.WindowsApp.Modules.Wizard"
              xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
              mc:Ignorable="d"
+             d:DesignHeight="320" d:DesignWidth="480"
              d:DataContext="{d:DesignInstance Type={x:Type local:WizardInput2ViewModel}}"
              resolver:DataContextResolver.Type="{x:Type local:WizardInput2ViewModel}"
-             d:DesignHeight="320" d:DesignWidth="480">
+             views:ShellProperty.Title="WizardInput2">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="132,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155"
                  Text="{Binding Context.Value.Data2}" />
-        <Button Content="Prev" HorizontalAlignment="Left" Margin="95,162,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Prev" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Forward}" CommandParameter="{x:Type local:WizardInput1View}"/>
-        <Button Content="Next" HorizontalAlignment="Left" Margin="267,162,0,0" VerticalAlignment="Top" Width="75"
+        <Button Content="Next" HorizontalAlignment="Left" Margin="90,38,0,0" VerticalAlignment="Top" Width="75"
                 Command="{Binding Forward}" CommandParameter="{x:Type local:WizardResultView}"/>
     </Grid>
 </UserControl>
