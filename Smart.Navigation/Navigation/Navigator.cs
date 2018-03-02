@@ -29,7 +29,7 @@
 
         public event EventHandler<EventArgs> Exited;
 
-        public event EventHandler<EventArgs> ExexutingChanged;
+        public event EventHandler<EventArgs> ExecutingChanged;
 
         // ------------------------------------------------------------
         // Member
@@ -158,7 +158,7 @@
             try
             {
                 Executing = true;
-                ExexutingChanged?.Invoke(this, EventArgs.Empty);
+                ExecutingChanged?.Invoke(this, EventArgs.Empty);
 
                 var pluginContext = new PluginContext();
                 controller.PluginContext = pluginContext;
@@ -213,7 +213,7 @@
             finally
             {
                 Executing = false;
-                ExexutingChanged?.Invoke(this, EventArgs.Empty);
+                ExecutingChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
