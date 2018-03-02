@@ -5,7 +5,7 @@
     using Smart.Forms.ViewModels;
     using Smart.Navigation;
 
-    public class AppViewModelBase : ViewModelBase, INavigatorAware, INotifySupportAsync<FunctionKeys>
+    public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport, INotifySupportAsync<FunctionKeys>
     {
         public INavigator Navigator { get; set; }
 
@@ -22,6 +22,18 @@
             : base(applicationState)
         {
             ApplicationState = applicationState;
+        }
+
+        public virtual void OnNavigatedFrom(INavigationContext context)
+        {
+        }
+
+        public virtual void OnNavigatingTo(INavigationContext context)
+        {
+        }
+
+        public virtual void OnNavigatedTo(INavigationContext context)
+        {
         }
 
         public Task NavigatorNotifyAsync(FunctionKeys parameter)

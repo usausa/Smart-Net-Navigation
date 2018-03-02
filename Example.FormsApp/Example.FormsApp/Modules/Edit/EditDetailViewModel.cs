@@ -9,7 +9,7 @@
     using Smart.Navigation;
     using Smart.Resolver.Attributes;
 
-    public class EditDetailViewModel : AppViewModelBase, INavigationEventSupport
+    public class EditDetailViewModel : AppViewModelBase
     {
         private DataEntity entity;
 
@@ -25,11 +25,7 @@
         {
         }
 
-        public void OnNavigatedFrom(INavigationContext context)
-        {
-        }
-
-        public void OnNavigatingTo(INavigationContext context)
+        public override void OnNavigatingTo(INavigationContext context)
         {
             Update.Value = Equals(context.ToId, ViewId.EditDetailUpdate);
             if (Update.Value)
@@ -37,10 +33,6 @@
                 entity = context.Parameter.GetValue<DataEntity>();
                 Name.Value = entity.Name;
             }
-        }
-
-        public void OnNavigatedTo(INavigationContext context)
-        {
         }
 
         protected override Task OnNotifyFunction1Async()

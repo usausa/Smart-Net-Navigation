@@ -11,7 +11,7 @@
     using Smart.Navigation;
     using Smart.Resolver.Attributes;
 
-    public class EditListViewModel : AppViewModelBase, INavigationEventSupport
+    public class EditListViewModel : AppViewModelBase
     {
         [Inject]
         public DataService DataService { get; set; }
@@ -27,15 +27,7 @@
                 Navigator.ForwardAsync(ViewId.EditDetailUpdate, new NavigationParameter().SetValue(x)));
         }
 
-        public void OnNavigatedFrom(INavigationContext context)
-        {
-        }
-
-        public void OnNavigatingTo(INavigationContext context)
-        {
-        }
-
-        public void OnNavigatedTo(INavigationContext context)
+        public override void OnNavigatedTo(INavigationContext context)
         {
             Items.AddRange(DataService.QueryDataList());
         }
