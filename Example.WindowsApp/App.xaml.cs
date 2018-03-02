@@ -46,9 +46,11 @@
         {
             var config = new ResolverConfig()
                 .UseAutoBinding()
+                .UseArrayBinding()
+                .UseAssignableBinding()
                 .UsePropertyInjector();
 
-            config.Bind<INavigator>().ToMethod(kernel => navigator).InSingletonScope();
+            config.Bind<Navigator>().ToMethod(kernel => navigator).InSingletonScope();
 
             return config.ToResolver();
         }

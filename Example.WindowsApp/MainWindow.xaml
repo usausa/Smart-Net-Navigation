@@ -8,12 +8,17 @@
         xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
         xmlns:local="clr-namespace:Example.WindowsApp"
         xmlns:views="clr-namespace:Example.WindowsApp.Views"
+        xmlns:interactivity="clr-namespace:Smart.Windows.Interactivity;assembly=Smart.Windows"
         mc:Ignorable="d"
-        Height="359" Width="496"
-        ResizeMode="CanMinimize"
+        Height="359" Width="496" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance Type={x:Type local:MainWindowViewModel}}"
         resolver:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
         Title="{Binding Source={x:Reference Container}, Path=Content.(views:ShellProperty.Title)}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <interactivity:CancelEventHandleAction Cancel="{Binding BusyState.IsBusy}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <ContentControl x:Name="Container">
         <i:Interaction.Behaviors>
             <navigation:NavigationContainerBehavior Navigator="{Binding Navigator, Mode=OneTime}"/>
