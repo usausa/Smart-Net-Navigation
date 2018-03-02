@@ -20,7 +20,7 @@
             return Navigator.PopAsync();
         }
 
-        protected override Task OnNotifyFunction4Async()
+        protected override Task OnNotifyFunction2Async()
         {
             return Navigator.PopAsync(2);
         }
