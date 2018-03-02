@@ -5,7 +5,7 @@
     using Smart.Forms.ViewModels;
     using Smart.Navigation;
 
-    public class AppViewModelBase : ViewModelBase, INavigatorAware, IShellEventSupport
+    public class AppViewModelBase : ViewModelBase, INavigatorAware
     {
         public INavigator Navigator { get; set; }
 

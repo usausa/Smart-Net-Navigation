@@ -1,6 +1,8 @@
 ﻿namespace Example.FormsApp
 {
+    using Example.FormsApp.Modules;
     using Example.FormsApp.Views;
+
     using Smart.ComponentModel;
     using Smart.Forms.Components;
     using Smart.Forms.Input;
@@ -55,7 +57,7 @@
             Navigator = navigator;
 
             GoHome = MakeAsyncCommand(
-                    () => (Navigator.CurrentTarget as IShellEventSupport)?.GoHomeAsync(),
+                    () => Navigator.PopAllAndForwardAsync(ViewId.Menu),
                     () => CanGoHome.Value)
                 .Observe(CanGoHome);
             Option = MakeAsyncCommand(() => dialogService.DisplayAlert("Option", "Option", "OK"));
