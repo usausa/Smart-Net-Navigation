@@ -13,12 +13,12 @@
              views:ShellProperty.Title="Debug">
     <StackLayout>
         <Button Text="Menu" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>
+                Command="{Binding ForwardCommand}" CommandParameter="{views:ViewId Menu}"/>
         <Button Text="Delay" Style="{StaticResource NavigationButton}"
-                Command="{Binding Delay}"/>
+                Command="{Binding DelayCommand}"/>
         <Button Text="Leak" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId DebugLeak}"/>
+                Command="{Binding ForwardCommand}" CommandParameter="{views:ViewId DebugLeak}"/>
         <Button Text="GC" Style="{StaticResource NavigationButton}"
-                Command="{Binding Collect}"/>
+                Command="{Binding CollectCommand}"/>
     </StackLayout>
 </ContentView>

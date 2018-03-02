@@ -7,15 +7,15 @@
 
     public class Stack1ViewModel : AppViewModelBase, INotifySupportAsync<FunctionKeys>
     {
-        public AsyncCommand<ViewId> Forward { get; }
+        public AsyncCommand<ViewId> ForwardCommand { get; }
 
-        public AsyncCommand<ViewId> Push { get; }
+        public AsyncCommand<ViewId> PushCommand { get; }
 
         public Stack1ViewModel(ApplicationState applicationState)
             : base(applicationState)
         {
-            Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
-            Push = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));
+            ForwardCommand = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
+            PushCommand = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));
         }
 
         public Task NavigatorNotifyAsync(FunctionKeys parameter)

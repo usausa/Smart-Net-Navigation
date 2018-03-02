@@ -19,8 +19,8 @@
         <Label Style="{StaticResource ResultLabel}"
                Text="{Binding Context.Value.Data2}"/>
         <Button Text="Prev" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput2}"/>
+                Command="{Binding ForwardCommand}" CommandParameter="{views:ViewId WizardInput2}"/>
         <Button Text="Complete" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>
+                Command="{Binding ForwardCommand}" CommandParameter="{views:ViewId Menu}"/>
     </StackLayout>
 </ContentView>

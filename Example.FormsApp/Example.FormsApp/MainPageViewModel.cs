@@ -35,17 +35,17 @@
 
         public INavigator Navigator { get; }
 
-        public AsyncCommand GoHome { get; }
+        public AsyncCommand GoHomeCommand { get; }
 
-        public AsyncCommand Option { get; }
+        public AsyncCommand OptionCommand { get; }
 
-        public AsyncCommand Function1 { get; }
+        public AsyncCommand Function1Command { get; }
 
-        public AsyncCommand Function2 { get; }
+        public AsyncCommand Function2Command { get; }
 
-        public AsyncCommand Function3 { get; }
+        public AsyncCommand Function3Command { get; }
 
-        public AsyncCommand Function4 { get; }
+        public AsyncCommand Function4Command { get; }
 
         public MainPageViewModel(
             ApplicationState applicationState,
@@ -56,24 +56,24 @@
             ApplicationState = applicationState;
             Navigator = navigator;
 
-            GoHome = MakeAsyncCommand(
+            GoHomeCommand = MakeAsyncCommand(
                     () => Navigator.PopAllAndForwardAsync(ViewId.Menu),
                     () => CanGoHome.Value)
                 .Observe(CanGoHome);
-            Option = MakeAsyncCommand(() => dialogService.DisplayAlert("Option", "Option", "OK"));
-            Function1 = MakeAsyncCommand(
+            OptionCommand = MakeAsyncCommand(() => dialogService.DisplayAlert("Option", "Option", "OK"));
+            Function1Command = MakeAsyncCommand(
                     () => Navigator.NotifyAsync(FunctionKeys.Function1),
                     () => Function1Enabled.Value)
                 .Observe(Function1Enabled);
-            Function2 = MakeAsyncCommand(
+            Function2Command = MakeAsyncCommand(
                     () => Navigator.NotifyAsync(FunctionKeys.Function2),
                     () => Function2Enabled.Value)
                 .Observe(Function2Enabled);
-            Function3 = MakeAsyncCommand(
+            Function3Command = MakeAsyncCommand(
                     () => Navigator.NotifyAsync(FunctionKeys.Function3),
                     () => Function3Enabled.Value)
                 .Observe(Function3Enabled);
-            Function4 = MakeAsyncCommand(
+            Function4Command = MakeAsyncCommand(
                     () => Navigator.NotifyAsync(FunctionKeys.Function4),
                     () => Function4Enabled.Value)
                 .Observe(Function4Enabled);

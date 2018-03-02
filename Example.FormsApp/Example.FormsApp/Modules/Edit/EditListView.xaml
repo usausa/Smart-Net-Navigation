@@ -17,7 +17,7 @@
     <StackLayout>
         <ListView ItemsSource="{Binding Items}">
             <ListView.Behaviors>
-                <interactivity:ListViewSelectedToCommandBehavior Command="{Binding Select}" />
+                <interactivity:ListViewSelectedToCommandBehavior Command="{Binding SelectCommand}" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -15,8 +15,8 @@
              views:ShellProperty.Function4Enabled="True" views:ShellProperty.Function4Text="+1">
     <StackLayout>
         <Button Text="Cancel" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>
+                Command="{Binding ForwardCommand}" CommandParameter="{views:ViewId Menu}"/>
         <Button Text="Push" Style="{StaticResource NavigationButton}"
-                Command="{Binding Push}" CommandParameter="{views:ViewId Stack2}"/>
+                Command="{Binding PushCommand}" CommandParameter="{views:ViewId Stack2}"/>
     </StackLayout>
 </ContentView>

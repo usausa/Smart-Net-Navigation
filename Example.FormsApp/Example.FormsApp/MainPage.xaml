@@ -38,10 +38,10 @@
             <Label Grid.Column="1" Style="{StaticResource MainTitleLabel}"
                    Text="{Binding Title.Value}" />
             <Button Grid.Column="0" Style="{StaticResource MainTitleButton}"
-                    Command="{Binding GoHome}"
+                    Command="{Binding GoHomeCommand}"
                     Text="&#xf38f;"/>
             <Button Grid.Column="2" Style="{StaticResource MainTitleButton}"
-                    Command="{Binding Option}"
+                    Command="{Binding OptionCommand}"
                     Text="&#xf2ad;"/>
         </Grid>
 
@@ -64,19 +64,19 @@
 
             <controls:FunctionButton
                 Grid.Column="0" Style="{StaticResource MainFunctionButton}"
-                Command="{Binding Function1}"
+                Command="{Binding Function1Command}"
                 Text="{Binding Function1Text.Value}" />
             <controls:FunctionButton
                 Grid.Column="1" Style="{StaticResource MainFunctionButton}"
-                Command="{Binding Function2}"
+                Command="{Binding Function2Command}"
                 Text="{Binding Function2Text.Value}" />
             <controls:FunctionButton
                 Grid.Column="2" Style="{StaticResource MainFunctionButton}"
-                Command="{Binding Function3}"
+                Command="{Binding Function3Command}"
                 Text="{Binding Function3Text.Value}" />
             <controls:FunctionButton
                 Grid.Column="3" Style="{StaticResource MainFunctionButton}"
-                Command="{Binding Function4}"
+                Command="{Binding Function4Command}"
                 Text="{Binding Function4Text.Value}" />
         </Grid>
 

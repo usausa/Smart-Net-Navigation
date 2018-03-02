@@ -18,15 +18,12 @@
 
         public ObservableCollection<DataEntity> Items { get; } = new ObservableCollection<DataEntity>();
 
-        public AsyncCommand<ViewId> Forward { get; }
-
-        public AsyncCommand<DataEntity> Select { get; }
+        public AsyncCommand<DataEntity> SelectCommand { get; }
 
         public EditListViewModel(ApplicationState applicationState)
             : base(applicationState)
         {
-            Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
-            Select = MakeAsyncCommand<DataEntity>(x =>
+            SelectCommand = MakeAsyncCommand<DataEntity>(x =>
                 Navigator.ForwardAsync(ViewId.EditDetailUpdate, new NavigationParameter().SetValue(x)));
         }
 

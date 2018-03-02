@@ -16,8 +16,8 @@
              views:ShellProperty.Function4Enabled="True" views:ShellProperty.Function4Text="+1">
     <StackLayout>
         <Button Text="Pop" Style="{StaticResource NavigationButton}"
-                Command="{Binding Pop}" CommandParameter="{markup:Int32 1}"/>
+                Command="{Binding PopCommand}" CommandParameter="{markup:Int32 1}"/>
         <Button Text="Push" Style="{StaticResource NavigationButton}"
-                Command="{Binding Push}" CommandParameter="{views:ViewId Stack3}"/>
+                Command="{Binding PushCommand}" CommandParameter="{views:ViewId Stack3}"/>
     </StackLayout>
 </ContentView>

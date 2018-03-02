@@ -8,18 +8,18 @@
 
     public class DebugViewModel : AppViewModelBase
     {
-        public AsyncCommand<ViewId> Forward { get; }
+        public AsyncCommand<ViewId> ForwardCommand { get; }
 
-        public AsyncCommand Delay { get; }
+        public AsyncCommand DelayCommand { get; }
 
-        public DelegateCommand Collect { get; }
+        public DelegateCommand CollectCommand { get; }
 
         public DebugViewModel(ApplicationState applicationState)
             : base(applicationState)
         {
-            Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
-            Delay = MakeAsyncCommand(ExecuteDelay);
-            Collect = MakeDelegateCommand(ExecuteCollect);
+            ForwardCommand = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
+            DelayCommand = MakeAsyncCommand(ExecuteDelay);
+            CollectCommand = MakeDelegateCommand(ExecuteCollect);
         }
 
         private Task ExecuteDelay()

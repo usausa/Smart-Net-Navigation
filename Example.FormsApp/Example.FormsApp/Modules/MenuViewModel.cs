@@ -5,12 +5,12 @@
 
     public class MenuViewModel : AppViewModelBase
     {
-        public AsyncCommand<ViewId> Forward { get; }
+        public AsyncCommand<ViewId> ForwardCommand { get; }
 
         public MenuViewModel(ApplicationState applicationState)
             : base(applicationState)
         {
-            Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
+            ForwardCommand = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
         }
     }
 }

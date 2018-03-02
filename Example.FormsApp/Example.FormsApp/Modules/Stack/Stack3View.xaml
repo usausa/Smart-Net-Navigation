@@ -16,8 +16,8 @@
              views:ShellProperty.Function2Enabled="True" views:ShellProperty.Function2Text="-2">
   <StackLayout>
         <Button Text="Pop" Style="{StaticResource NavigationButton}"
-            Command="{Binding Pop}" CommandParameter="{markup:Int32 1}"/>
+            Command="{Binding PopCommand}" CommandParameter="{markup:Int32 1}"/>
         <Button Text="Pop2" Style="{StaticResource NavigationButton}"
-            Command="{Binding Pop}" CommandParameter="{markup:Int32 2}"/>
+            Command="{Binding PopCommand}" CommandParameter="{markup:Int32 2}"/>
   </StackLayout>
 </ContentView>

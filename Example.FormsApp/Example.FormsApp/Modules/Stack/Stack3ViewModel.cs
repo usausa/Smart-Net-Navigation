@@ -7,12 +7,12 @@
 
     public class Stack3ViewModel : AppViewModelBase, INotifySupportAsync<FunctionKeys>
     {
-        public AsyncCommand<int> Pop { get; }
+        public AsyncCommand<int> PopCommand { get; }
 
         public Stack3ViewModel(ApplicationState applicationState)
             : base(applicationState)
         {
-            Pop = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
+            PopCommand = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
         }
 
         public Task NavigatorNotifyAsync(FunctionKeys parameter)

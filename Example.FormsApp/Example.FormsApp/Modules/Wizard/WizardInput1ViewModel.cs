@@ -12,12 +12,12 @@
         [Scope]
         public NotificationValue<WizardContext> Context { get; } = new NotificationValue<WizardContext>();
 
-        public AsyncCommand<ViewId> Forward { get; }
+        public AsyncCommand<ViewId> ForwardCommand { get; }
 
         public WizardInput1ViewModel(ApplicationState applicationState)
             : base(applicationState)
         {
-            Forward = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
+            ForwardCommand = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
         }
 
         public Task NavigatorNotifyAsync(FunctionKeys parameter)

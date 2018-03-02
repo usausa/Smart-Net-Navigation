@@ -23,8 +23,8 @@
             </Entry.Behaviors>
         </Entry>
         <Button Text="Cancel" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId Menu}"/>
+                Command="{Binding ForwardCommand}" CommandParameter="{views:ViewId Menu}"/>
         <Button Text="Next" Style="{StaticResource NavigationButton}"
-                Command="{Binding Forward}" CommandParameter="{views:ViewId WizardInput2}"/>
+                Command="{Binding ForwardCommand}" CommandParameter="{views:ViewId WizardInput2}"/>
     </StackLayout>
 </ContentView>

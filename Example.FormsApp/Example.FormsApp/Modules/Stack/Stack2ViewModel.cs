@@ -7,15 +7,15 @@
 
     public class Stack2ViewModel : AppViewModelBase, INotifySupportAsync<FunctionKeys>
     {
-        public AsyncCommand<int> Pop { get; }
+        public AsyncCommand<int> PopCommand { get; }
 
-        public AsyncCommand<ViewId> Push { get; }
+        public AsyncCommand<ViewId> PushCommand { get; }
 
         public Stack2ViewModel(ApplicationState applicationState)
             : base(applicationState)
         {
-            Pop = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
-            Push = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));
+            PopCommand = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
+            PushCommand = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));
         }
 
         public Task NavigatorNotifyAsync(FunctionKeys parameter)
