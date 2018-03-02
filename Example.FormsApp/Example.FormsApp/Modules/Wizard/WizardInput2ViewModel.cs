@@ -7,7 +7,7 @@
     using Smart.Navigation;
     using Smart.Navigation.Plugins.Scope;
 
-    public class WizardInput2ViewModel : AppViewModelBase, INotifySupportAsync<FunctionKeys>
+    public class WizardInput2ViewModel : AppViewModelBase
     {
         [Scope]
         public NotificationValue<WizardContext> Context { get; } = new NotificationValue<WizardContext>();
@@ -20,17 +20,14 @@
             ForwardCommand = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
         }
 
-        public Task NavigatorNotifyAsync(FunctionKeys parameter)
+        protected override Task OnNotifyFunction1Async()
         {
-            switch (parameter)
-            {
-                case FunctionKeys.Function1:
-                    return Navigator.ForwardAsync(ViewId.WizardInput1);
-                case FunctionKeys.Function4:
-                    return Navigator.ForwardAsync(ViewId.WizardResult);
-                default:
-                    return Task.CompletedTask;
-            }
+            return Navigator.ForwardAsync(ViewId.WizardInput1);
+        }
+
+        protected override Task OnNotifyFunction4Async()
+        {
+            return Navigator.ForwardAsync(ViewId.WizardResult);
         }
     }
 }

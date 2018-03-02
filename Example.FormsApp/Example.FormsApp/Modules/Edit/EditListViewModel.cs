@@ -11,7 +11,7 @@
     using Smart.Navigation;
     using Smart.Resolver.Attributes;
 
-    public class EditListViewModel : AppViewModelBase, INavigationEventSupport, INotifySupportAsync<FunctionKeys>
+    public class EditListViewModel : AppViewModelBase, INavigationEventSupport
     {
         [Inject]
         public DataService DataService { get; set; }
@@ -40,17 +40,14 @@
             Items.AddRange(DataService.QueryDataList());
         }
 
-        public Task NavigatorNotifyAsync(FunctionKeys parameter)
+        protected override Task OnNotifyFunction1Async()
         {
-            switch (parameter)
-            {
-                case FunctionKeys.Function1:
-                    return Navigator.ForwardAsync(ViewId.Menu);
-                case FunctionKeys.Function4:
-                    return Navigator.ForwardAsync(ViewId.EditDetailNew);
-                default:
-                    return Task.CompletedTask;
-            }
+            return Navigator.ForwardAsync(ViewId.Menu);
+        }
+
+        protected override Task OnNotifyFunction4Async()
+        {
+            return Navigator.ForwardAsync(ViewId.EditDetailNew);
         }
     }
 }

@@ -5,7 +5,7 @@
     using Smart.Forms.ViewModels;
     using Smart.Navigation;
 
-    public class AppViewModelBase : ViewModelBase, INavigatorAware
+    public class AppViewModelBase : ViewModelBase, INavigatorAware, INotifySupportAsync<FunctionKeys>
     {
         public INavigator Navigator { get; set; }
 
@@ -24,7 +24,39 @@
             ApplicationState = applicationState;
         }
 
-        public virtual Task GoHomeAsync()
+        public Task NavigatorNotifyAsync(FunctionKeys parameter)
+        {
+            switch (parameter)
+            {
+                case FunctionKeys.Function1:
+                    return OnNotifyFunction1Async();
+                case FunctionKeys.Function2:
+                    return OnNotifyFunction2Async();
+                case FunctionKeys.Function3:
+                    return OnNotifyFunction3Async();
+                case FunctionKeys.Function4:
+                    return OnNotifyFunction4Async();
+                default:
+                    return Task.CompletedTask;
+            }
+        }
+
+        protected virtual Task OnNotifyFunction1Async()
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task OnNotifyFunction2Async()
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task OnNotifyFunction3Async()
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task OnNotifyFunction4Async()
         {
             return Task.CompletedTask;
         }

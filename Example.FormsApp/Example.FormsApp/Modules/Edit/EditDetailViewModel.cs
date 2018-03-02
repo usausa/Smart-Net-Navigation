@@ -9,7 +9,7 @@
     using Smart.Navigation;
     using Smart.Resolver.Attributes;
 
-    public class EditDetailViewModel : AppViewModelBase, INavigationEventSupport, INotifySupportAsync<FunctionKeys>
+    public class EditDetailViewModel : AppViewModelBase, INavigationEventSupport
     {
         private DataEntity entity;
 
@@ -43,27 +43,24 @@
         {
         }
 
-        public Task NavigatorNotifyAsync(FunctionKeys parameter)
+        protected override Task OnNotifyFunction1Async()
         {
-            switch (parameter)
-            {
-                case FunctionKeys.Function1:
-                    return Navigator.ForwardAsync(ViewId.EditList);
-                case FunctionKeys.Function4:
-                    if (Update.Value)
-                    {
-                        entity.Name = Name.Value;
-                        DataService.UpdateData(entity);
-                    }
-                    else
-                    {
-                        DataService.InsertData(Name.Value);
-                    }
+            return Navigator.ForwardAsync(ViewId.EditList);
+        }
 
-                    return Navigator.ForwardAsync(ViewId.EditList);
-                default:
-                    return Task.CompletedTask;
+        protected override Task OnNotifyFunction4Async()
+        {
+            if (Update.Value)
+            {
+                entity.Name = Name.Value;
+                DataService.UpdateData(entity);
             }
+            else
+            {
+                DataService.InsertData(Name.Value);
+            }
+
+            return Navigator.ForwardAsync(ViewId.EditList);
         }
     }
 }

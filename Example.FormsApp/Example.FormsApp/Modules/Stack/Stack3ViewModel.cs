@@ -5,7 +5,7 @@
     using Smart.Forms.Input;
     using Smart.Navigation;
 
-    public class Stack3ViewModel : AppViewModelBase, INotifySupportAsync<FunctionKeys>
+    public class Stack3ViewModel : AppViewModelBase
     {
         public AsyncCommand<int> PopCommand { get; }
 
@@ -15,17 +15,14 @@
             PopCommand = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
         }
 
-        public Task NavigatorNotifyAsync(FunctionKeys parameter)
+        protected override Task OnNotifyFunction1Async()
         {
-            switch (parameter)
-            {
-                case FunctionKeys.Function1:
-                    return Navigator.PopAsync();
-                case FunctionKeys.Function2:
-                    return Navigator.PopAsync(2);
-                default:
-                    return Task.CompletedTask;
-            }
+            return Navigator.PopAsync();
+        }
+
+        protected override Task OnNotifyFunction4Async()
+        {
+            return Navigator.PopAsync(2);
         }
     }
 }

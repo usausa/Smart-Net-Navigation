@@ -5,7 +5,7 @@
     using Smart.Forms.Input;
     using Smart.Navigation;
 
-    public class Stack1ViewModel : AppViewModelBase, INotifySupportAsync<FunctionKeys>
+    public class Stack1ViewModel : AppViewModelBase
     {
         public AsyncCommand<ViewId> ForwardCommand { get; }
 
@@ -18,17 +18,14 @@
             PushCommand = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));
         }
 
-        public Task NavigatorNotifyAsync(FunctionKeys parameter)
+        protected override Task OnNotifyFunction1Async()
         {
-            switch (parameter)
-            {
-                case FunctionKeys.Function1:
-                    return Navigator.ForwardAsync(ViewId.Menu);
-                case FunctionKeys.Function4:
-                    return Navigator.PushAsync(ViewId.Stack2);
-                default:
-                    return Task.CompletedTask;
-            }
+            return Navigator.ForwardAsync(ViewId.Menu);
+        }
+
+        protected override Task OnNotifyFunction4Async()
+        {
+            return Navigator.PushAsync(ViewId.Stack2);
         }
     }
 }
