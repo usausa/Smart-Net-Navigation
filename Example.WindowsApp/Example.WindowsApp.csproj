@@ -182,13 +182,13 @@
       <Version>1.7.1</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows">
-      <Version>1.4.4</Version>
+      <Version>1.4.5</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows.Reactive">
-      <Version>1.4.4</Version>
+      <Version>1.4.5</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows.Resolver">
-      <Version>1.4.3</Version>
+      <Version>1.4.5</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
