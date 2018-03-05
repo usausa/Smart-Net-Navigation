@@ -5,7 +5,7 @@
 * Navigation by control switching.
 * Navigationg to view by id.
 * Multiplatform support.
-* MVVM support with WPF and Xamarin provider.
+* MVVM support with WPF and Xamarin.Forms provider.
 * Parameter support between target.
 * Stacked navigation support.
 * Lifecycle event support.
@@ -33,7 +33,7 @@ navigator.Forward(ViewId.Menu);
 |------------------------------------|----------------------------|
 | Usa.Smart.Navigation               | Core libyrary              |
 | Usa.Smart.Navigation.Resolver      | Smart.Resolver integration |
-| Usa.Smart.Navigation.Forms         | Xamarin provider           |
+| Usa.Smart.Navigation.Forms         | Xamarin.Forms provider     |
 | Usa.Smart.Navigation.Windows       | WPF provider               |
 | Usa.Smart.Navigation.Windows.Forms | Windows Forms provider     |
 
@@ -67,7 +67,7 @@ navigator = new NavigatorConfig()
 </ContentControl>
 ```
 
-### Xamarin
+### Xamarin.Forms
 
 ``ContentView`` is a container and ``View`` is a view.
 
