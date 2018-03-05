@@ -16,8 +16,10 @@
             {
                 notifySupport.NavigatorNotify(parameter);
             }
-
-            (navigator.CurrentTarget as INotifySupport)?.NavigatorNotify(parameter);
+            else
+            {
+                (navigator.CurrentTarget as INotifySupport)?.NavigatorNotify(parameter);
+            }
         }
 
         public static Task NotifyAsync<T>(this INavigator navigator, T parameter)
