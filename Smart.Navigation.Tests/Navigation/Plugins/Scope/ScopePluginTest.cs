@@ -29,7 +29,7 @@
             navigator.Forward(typeof(Data3Form));
 
             var form3 = (Data3Form)navigator.CurrentView;
-            Assert.Same(form3.Data, form2.Data);
+            Assert.Equal(form3.Data, form2.Data);
             Assert.True(form3.Data.IsInitialized);
             Assert.False(form3.Data.IsDisposed);
 
@@ -55,7 +55,7 @@
             navigator.Forward(typeof(Object2Form));
 
             var form2 = (Object2Form)navigator.CurrentView;
-            Assert.Same(form2.Object, form1.Object);
+            Assert.Equal(form2.Object, form1.Object);
 
             navigator.Forward(typeof(Object3Form));
         }
@@ -85,7 +85,7 @@
             navigator.Push(typeof(Push4Form));
 
             var form4 = (Push4Form)navigator.CurrentView;
-            Assert.Same(form4.Data, form2.Data);
+            Assert.Equal(form4.Data, form2.Data);
             Assert.True(form4.Data.IsInitialized);
             Assert.False(form4.Data.IsDisposed);
 
@@ -119,7 +119,7 @@
             navigator.Forward(typeof(Named2Form));
 
             var form2 = (Named2Form)navigator.CurrentView;
-            Assert.Same(form2.ImporttData, form1.ExportData);
+            Assert.Equal(form2.ImporttData, form1.ExportData);
         }
 
         public class Data1Form : MockForm
