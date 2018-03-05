@@ -8,9 +8,9 @@
 
     public class MainWindowViewModel : ViewModelBase
     {
-        public Navigator Navigator { get; }
+        public INavigator Navigator { get; }
 
-        public MainWindowViewModel(Navigator navigator)
+        public MainWindowViewModel(INavigator navigator)
         {
             Navigator = navigator;
 

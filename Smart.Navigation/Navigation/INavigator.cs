@@ -1,11 +1,22 @@
 ﻿namespace Smart.Navigation
 {
+    using System;
     using System.Threading.Tasks;
 
     using Smart.Navigation.Strategies;
 
     public interface INavigator
     {
+        event EventHandler<ConfirmEventArgs> Confirm;
+
+        event EventHandler<NavigationEventArgs> Navigating;
+
+        event EventHandler<NavigationEventArgs> Navigated;
+
+        event EventHandler<EventArgs> Exited;
+
+        event EventHandler<EventArgs> ExecutingChanged;
+
         int StackedCount { get; }
 
         object CurrentViewId { get; }
@@ -13,6 +24,8 @@
         object CurrentView { get; }
 
         object CurrentTarget { get; }
+
+        bool Executing { get; }
 
         // Exit
 

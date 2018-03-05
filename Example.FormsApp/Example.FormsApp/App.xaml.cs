@@ -52,7 +52,7 @@ namespace Example.FormsApp
                 .UseAssignableBinding()
                 .UsePropertyInjector();
 
-            config.Bind<Navigator>().ToMethod(kernel => navigator).InSingletonScope();
+            config.Bind<INavigator>().ToMethod(kernel => navigator).InSingletonScope();
 
             config.Bind<IDialogService>().To<DialogService>().InSingletonScope();
 
