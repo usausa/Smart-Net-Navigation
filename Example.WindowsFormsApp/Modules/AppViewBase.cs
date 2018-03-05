@@ -32,7 +32,7 @@
             return true;
         }
 
-        public virtual void OnNavigatedFrom(INavigationContext context)
+        public virtual void OnNavigatingFrom(INavigationContext context)
         {
         }
 

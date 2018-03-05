@@ -9,7 +9,7 @@
         ///
         /// </summary>
         /// <param name="context"></param>
-        void OnNavigatedFrom(INavigationContext context);
+        void OnNavigatingFrom(INavigationContext context);
 
         /// <summary>
         ///

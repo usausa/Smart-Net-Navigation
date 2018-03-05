@@ -24,7 +24,7 @@
             ApplicationState = applicationState;
         }
 
-        public virtual void OnNavigatedFrom(INavigationContext context)
+        public virtual void OnNavigatingFrom(INavigationContext context)
         {
         }
 

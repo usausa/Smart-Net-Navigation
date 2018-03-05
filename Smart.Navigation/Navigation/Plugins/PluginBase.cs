@@ -10,7 +10,7 @@
         {
         }
 
-        public virtual void OnNavigatedFrom(IPluginContext context, object view, object target)
+        public virtual void OnNavigatingFrom(IPluginContext context, object view, object target)
         {
         }
 

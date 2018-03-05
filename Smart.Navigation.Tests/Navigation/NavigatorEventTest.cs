@@ -129,7 +129,7 @@
 
             navigator.Forward(typeof(Event2Form));
 
-            Assert.Equal("Event1Form.OnNavigatedFrom", recorder.Events[0]);
+            Assert.Equal("Event1Form.OnNavigatingFrom", recorder.Events[0]);
             Assert.Equal("Event2Form.OnNavigatingTo", recorder.Events[1]);
             Assert.Equal("Event2Form.OnNavigatedTo", recorder.Events[2]);
         }
@@ -151,9 +151,9 @@
                 this.recorder = recorder;
             }
 
-            public void OnNavigatedFrom(INavigationContext context)
+            public void OnNavigatingFrom(INavigationContext context)
             {
-                recorder.Events.Add("Event1Form.OnNavigatedFrom");
+                recorder.Events.Add("Event1Form.OnNavigatingFrom");
             }
 
             public void OnNavigatingTo(INavigationContext context)
@@ -176,9 +176,9 @@
                 this.recorder = recorder;
             }
 
-            public void OnNavigatedFrom(INavigationContext context)
+            public void OnNavigatingFrom(INavigationContext context)
             {
-                recorder.Events.Add("Event2Form.OnNavigatedFrom");
+                recorder.Events.Add("Event2Form.OnNavigatingFrom");
             }
 
             public void OnNavigatingTo(INavigationContext context)
@@ -220,7 +220,7 @@
 
             navigator.Forward(typeof(Event2Window));
 
-            Assert.Equal("Event1WindowViewModel.OnNavigatedFrom", recorder.Events[0]);
+            Assert.Equal("Event1WindowViewModel.OnNavigatingFrom", recorder.Events[0]);
             Assert.Equal("Event2WindowViewModel.OnNavigatingTo", recorder.Events[1]);
             Assert.Equal("Event2WindowViewModel.OnNavigatedTo", recorder.Events[2]);
         }
@@ -234,9 +234,9 @@
                 this.recorder = recorder;
             }
 
-            public void OnNavigatedFrom(INavigationContext context)
+            public void OnNavigatingFrom(INavigationContext context)
             {
-                recorder.Events.Add("Event1WindowViewModel.OnNavigatedFrom");
+                recorder.Events.Add("Event1WindowViewModel.OnNavigatingFrom");
             }
 
             public void OnNavigatingTo(INavigationContext context)
@@ -259,9 +259,9 @@
                 this.recorder = recorder;
             }
 
-            public void OnNavigatedFrom(INavigationContext context)
+            public void OnNavigatingFrom(INavigationContext context)
             {
-                recorder.Events.Add("Event2WindowViewModel.OnNavigatedFrom");
+                recorder.Events.Add("Event2WindowViewModel.OnNavigatingFrom");
             }
 
             public void OnNavigatingTo(INavigationContext context)

@@ -46,7 +46,7 @@
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
-        public override void OnNavigatedFrom(IPluginContext context, object view, object target)
+        public override void OnNavigatingFrom(IPluginContext context, object view, object target)
         {
             if (target == null)
             {

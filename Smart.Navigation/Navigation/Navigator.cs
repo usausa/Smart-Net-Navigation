@@ -174,11 +174,11 @@
                 // Process from view
                 if (fromView != null)
                 {
-                    (fromTarget as INavigationEventSupport)?.OnNavigatedFrom(navigationContext);
+                    (fromTarget as INavigationEventSupport)?.OnNavigatingFrom(navigationContext);
 
                     foreach (var plugin in plugins)
                     {
-                        plugin.OnNavigatedFrom(pluginContext, fromView, fromTarget);
+                        plugin.OnNavigatingFrom(pluginContext, fromView, fromTarget);
                     }
                 }
 
