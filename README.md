@@ -78,7 +78,7 @@ navigator = new NavigatorConfig()
 ```
 
 ```xml
-<ContentView">
+<ContentView>
     <ContentView.Behaviors>
         <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
     </ContentView.Behaviors>
@@ -588,7 +588,7 @@ public class Data3View
 // Test
 navigator.Forward(typeof(Data1View));
 
-navigator.Forward(typeof(Data2View)); // ScopeDate creat and initialized
+navigator.Forward(typeof(Data2View)); // ScopeDate create and initialized
 var view2 = (Data2View)navigator.CurrentView;
 
 navigator.Forward(typeof(Data3View));
