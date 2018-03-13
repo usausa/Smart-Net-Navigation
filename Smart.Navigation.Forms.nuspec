@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Usa.Smart.Navigation.Forms</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>Smart.Navigation.Forms .NET</title>
     <authors>machi_pon</authors>
     <owners>machi_pon</owners>
@@ -15,7 +15,7 @@
     <dependencies>
       <dependency id="Xamarin.Forms" version="2.5.0.122203" />
       <dependency id="Usa.Smart.Core" version="1.5.1" />
-      <dependency id="Usa.Smart.Navigation" version="1.0.0" />
+      <dependency id="Usa.Smart.Navigation" version="1.0.1" />
     </dependencies>
     <tags>smart navigation xamarin mvvm</tags>
   </metadata>
