@@ -155,6 +155,11 @@
 
         private void NavigateCore(INavigationStrategy strategy, INavigationContext navigationContext, Controller controller)
         {
+            if (Executing)
+            {
+                throw new InvalidOperationException("Navigator is already executing.");
+            }
+
             try
             {
                 Executing = true;
