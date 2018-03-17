@@ -4,6 +4,6 @@
 
     public interface INavigatorComponentSource
     {
-        ComponentContainer Components { get; }
+        IComponentContainer Components { get; }
     }
 }

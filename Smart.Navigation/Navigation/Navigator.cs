@@ -37,7 +37,7 @@
 
         private static readonly NavigationParameter EmptyParameter = new NavigationParameter();
 
-        private readonly ComponentContainer components;
+        private readonly IComponentContainer components;
 
         private readonly List<ViewStackInfo> viewStack = new List<ViewStackInfo>();
 
@@ -53,7 +53,7 @@
         // Property
         // ------------------------------------------------------------
 
-        ComponentContainer INavigatorComponentSource.Components => components;
+        IComponentContainer INavigatorComponentSource.Components => components;
 
         private ViewStackInfo CurrentStack => viewStack.Count > 0 ? viewStack[viewStack.Count - 1] : null;
 
