@@ -466,6 +466,91 @@
                 return null;
             }
 
+            public Func<T> CreateFactory<T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, T> CreateFactory<TP1, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, T> CreateFactory<TP1, TP2, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, T> CreateFactory<TP1, TP2, TP3, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, T> CreateFactory<TP1, TP2, TP3, TP4, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, T>()
+            {
+                return null;
+            }
+
+            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, TP16, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, TP16, T>()
+            {
+                return null;
+            }
+
             public Func<object, object> CreateGetter(PropertyInfo pi)
             {
                 return null;
@@ -482,6 +567,26 @@
             }
 
             public Action<object, object> CreateSetter(PropertyInfo pi, bool extension)
+            {
+                return null;
+            }
+
+            public Func<T, TMember> CreateGetter<T, TMember>(PropertyInfo pi)
+            {
+                return null;
+            }
+
+            public Func<T, TMember> CreateGetter<T, TMember>(PropertyInfo pi, bool extension)
+            {
+                return null;
+            }
+
+            public Action<T, TMember> CreateSetter<T, TMember>(PropertyInfo pi)
+            {
+                return null;
+            }
+
+            public Action<T, TMember> CreateSetter<T, TMember>(PropertyInfo pi, bool extension)
             {
                 return null;
             }
