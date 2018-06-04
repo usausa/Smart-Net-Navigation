@@ -62,9 +62,6 @@
     <PackageReference Include="Usa.Smart.Core">
       <Version>1.5.7</Version>
     </PackageReference>
-    <PackageReference Include="Usa.Smart.Resolver">
-      <Version>1.7.4</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2" />
