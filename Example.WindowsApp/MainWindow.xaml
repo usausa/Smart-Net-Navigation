@@ -16,7 +16,7 @@
         Title="{Binding Source={x:Reference Container}, Path=Content.(views:ShellProperty.Title)}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
-            <interactivity:CancelEventHandleAction Cancel="{Binding BusyState.IsBusy}"/>
+            <interactivity:CancelEventAction Cancel="{Binding BusyState.IsBusy}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <ContentControl x:Name="Container">
