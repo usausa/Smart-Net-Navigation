@@ -46,10 +46,10 @@
                 return;
             }
 
-            var shellControl = GetShellControl(parent);
-            if (shellControl != null)
+            var shell = GetShellControl(parent);
+            if (shell != null)
             {
-                UpdateShellControl(shellControl, d);
+                UpdateShellControl(shell, d);
             }
         }
 
