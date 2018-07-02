@@ -13,15 +13,15 @@
         Height="359" Width="496" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance Type={x:Type local:MainWindowViewModel}}"
         resolver:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
-        Title="{Binding Source={x:Reference Container}, Path=Content.(views:ShellProperty.Title)}">
+        Title="...">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <interactivity:CancelEventAction Cancel="{Binding BusyState.IsBusy}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <ContentControl x:Name="Container">
+    <Canvas x:Name="Container">
         <i:Interaction.Behaviors>
             <navigation:NavigationContainerBehavior Navigator="{Binding Navigator, Mode=OneTime}"/>
         </i:Interaction.Behaviors>
-    </ContentControl>
+    </Canvas>
 </Window>

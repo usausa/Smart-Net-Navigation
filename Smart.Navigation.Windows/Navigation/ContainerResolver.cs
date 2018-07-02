@@ -4,18 +4,18 @@
 
     public class ContainerResolver : IContainerResolver, IUpdateContainer
     {
-        public ContentControl Container { get; private set; }
+        public Canvas Container { get; private set; }
 
         public ContainerResolver()
         {
         }
 
-        public ContainerResolver(ContentControl container)
+        public ContainerResolver(Canvas container)
         {
             Container = container;
         }
 
-        void IUpdateContainer.Attach(ContentControl container)
+        void IUpdateContainer.Attach(Canvas container)
         {
             Container = container;
         }

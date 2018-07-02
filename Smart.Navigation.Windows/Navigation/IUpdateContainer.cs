@@ -4,6 +4,6 @@
 
     public interface IUpdateContainer
     {
-        void Attach(ContentControl container);
+        void Attach(Canvas container);
     }
 }

@@ -4,6 +4,6 @@
 
     public interface IContainerResolver
     {
-        ContentControl Container { get; }
+        Canvas Container { get; }
     }
 }

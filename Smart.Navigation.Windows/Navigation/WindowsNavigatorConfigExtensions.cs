@@ -40,12 +40,12 @@
             return config.UseProvider<WindowsNavigationProvider>();
         }
 
-        public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, ContentControl container)
+        public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container)
         {
             return config.UseWindowsNavigationProvider(container, action => { });
         }
 
-        public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, ContentControl container, Action<WindowsNavigationProviderOptions> setupAction)
+        public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container, Action<WindowsNavigationProviderOptions> setupAction)
         {
             if (container == null)
             {

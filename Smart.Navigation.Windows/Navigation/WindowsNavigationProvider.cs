@@ -19,7 +19,7 @@
 
         public object ResolveTarget(object view)
         {
-            return ((Control)view).DataContext;
+            return ((FrameworkElement)view).DataContext;
         }
 
         public void OpenView(object view)
@@ -30,24 +30,33 @@
                 throw new InvalidOperationException("Container is unresolved.");
             }
 
-            container.Content = view;
+            var element = (FrameworkElement)view;
+
+            container.Children.Add(element);
+            element.Height = container.ActualHeight;
+            element.Width = container.ActualWidth;
         }
 
         public void CloseView(object view)
         {
             (view as IDisposable)?.Dispose();
             (ResolveTarget(view) as IDisposable)?.Dispose();
-        }
 
-        public void ActiveView(object view, object parameter)
-        {
             var container = resolver.Container;
             if (container == null)
             {
                 throw new InvalidOperationException("Container is unresolved.");
             }
 
-            container.Content = view;
+            var element = (FrameworkElement)view;
+            container.Children.Remove(element);
+        }
+
+        public void ActiveView(object view, object parameter)
+        {
+            var element = (FrameworkElement)view;
+
+            element.Visibility = Visibility.Visible;
 
             var control = (Control)view;
             if (options.RestoreFocus)
@@ -69,8 +78,13 @@
 
         public object DeactiveView(object view)
         {
-            var control = (Control)view;
-            return options.RestoreFocus ? FocusManager.GetFocusedElement(control) : null;
+            var element = (FrameworkElement)view;
+
+            var parameter = options.RestoreFocus ? FocusManager.GetFocusedElement(element) : null;
+
+            element.Visibility = Visibility.Hidden;
+
+            return parameter;
         }
     }
 }

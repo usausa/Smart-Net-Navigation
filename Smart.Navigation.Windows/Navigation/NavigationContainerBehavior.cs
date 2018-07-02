@@ -4,8 +4,8 @@
     using System.Windows.Controls;
     using System.Windows.Interactivity;
 
-    [TypeConstraint(typeof(ContentControl))]
-    public class NavigationContainerBehavior : Behavior<ContentControl>
+    [TypeConstraint(typeof(Canvas))]
+    public class NavigationContainerBehavior : Behavior<Canvas>
     {
         public static readonly DependencyProperty NavigatorProperty = DependencyProperty.Register(
             nameof(Navigator),
