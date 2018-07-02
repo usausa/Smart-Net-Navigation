@@ -8,11 +8,16 @@
         xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
         xmlns:local="clr-namespace:Example.WindowsApp"
         xmlns:interactivity="clr-namespace:Smart.Windows.Interactivity;assembly=Smart.Windows"
+        xmlns:views="clr-namespace:Example.WindowsApp.Views"
         mc:Ignorable="d"
         Height="359" Width="496" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance Type={x:Type local:MainWindowViewModel}}"
         resolver:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
-        Title="{Binding CurrentView.Value, Converter={StaticResource ShellTitleConverter}}">
+        Title="{Binding Title.Value}">
+
+    <i:Interaction.Behaviors>
+        <views:ShellUpdateBehavior Navigator="{Binding Navigator, Mode=OneTime}"/>
+    </i:Interaction.Behaviors>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">

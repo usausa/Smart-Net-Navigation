@@ -63,7 +63,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Views\ShellTitleConverter.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Modules\AppViewModelBase.cs" />
     <Compile Include="Modules\MenuView.xaml.cs">
@@ -95,7 +94,9 @@
     <Compile Include="Modules\Wizard\WizardResultView.xaml.cs">
       <DependentUpon>WizardResultView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IShellControl.cs" />
     <Compile Include="Views\ShellProperty.cs" />
+    <Compile Include="Views\ShellUpdateBehavior.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
