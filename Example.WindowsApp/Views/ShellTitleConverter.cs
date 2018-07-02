@@ -1,11 +1,9 @@
-﻿namespace Example.WindowsApp.Converters
+﻿namespace Example.WindowsApp.Views
 {
     using System;
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
-
-    using Example.WindowsApp.Views;
 
     [ValueConversion(typeof(object), typeof(string))]
     public sealed class ShellTitleConverter : IValueConverter

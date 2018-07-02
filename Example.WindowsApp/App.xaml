@@ -1,13 +1,13 @@
 ﻿<Application x:Class="Example.WindowsApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="clr-namespace:Example.WindowsApp.Converters"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
 
         <ResourceDictionary>
 
-            <converters:ShellTitleConverter x:Key="ShellTitleConverter" />
+            <views:ShellTitleConverter x:Key="ShellTitleConverter" />
 
         </ResourceDictionary>
 
