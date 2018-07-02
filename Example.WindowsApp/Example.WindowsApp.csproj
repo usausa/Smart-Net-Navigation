@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ShellTitleConverter.cs" />
     <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Modules\AppViewModelBase.cs" />
     <Compile Include="Modules\MenuView.xaml.cs">

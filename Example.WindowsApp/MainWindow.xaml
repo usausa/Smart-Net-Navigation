@@ -7,21 +7,23 @@
         xmlns:navigation="clr-namespace:Smart.Navigation;assembly=Smart.Navigation.Windows"
         xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
         xmlns:local="clr-namespace:Example.WindowsApp"
-        xmlns:views="clr-namespace:Example.WindowsApp.Views"
         xmlns:interactivity="clr-namespace:Smart.Windows.Interactivity;assembly=Smart.Windows"
         mc:Ignorable="d"
         Height="359" Width="496" ResizeMode="CanMinimize"
         d:DataContext="{d:DesignInstance Type={x:Type local:MainWindowViewModel}}"
         resolver:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
-        Title="...">
+        Title="{Binding CurrentView.Value, Converter={StaticResource ShellTitleConverter}}">
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <interactivity:CancelEventAction Cancel="{Binding BusyState.IsBusy}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Canvas x:Name="Container">
+
+    <Canvas>
         <i:Interaction.Behaviors>
             <navigation:NavigationContainerBehavior Navigator="{Binding Navigator, Mode=OneTime}"/>
         </i:Interaction.Behaviors>
     </Canvas>
+
 </Window>
