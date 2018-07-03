@@ -29,6 +29,7 @@
                 BindingContext = bindable.BindingContext;
             }
 
+            bindable.SizeChanged += BindableOnSizeChanged;
             bindable.BindingContextChanged += HandleBindingContextChanged;
 
             AttachContainer(bindable);
@@ -38,10 +39,20 @@
         {
             base.OnDetachingFrom(bindable);
 
+            bindable.SizeChanged -= BindableOnSizeChanged;
             bindable.BindingContextChanged -= HandleBindingContextChanged;
             BindingContext = null;
 
             AttachContainer(null);
+        }
+
+        private void BindableOnSizeChanged(object sender, EventArgs e)
+        {
+            if (Navigator?.CurrentView is View view)
+            {
+                view.WidthRequest = AssociatedObject.Width;
+                view.HeightRequest = AssociatedObject.Height;
+            }
         }
 
         private void HandleBindingContextChanged(object sender, EventArgs eventArgs)
