@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Usa.Smart.Navigation.Resolver</id>
-    <version>1.0.3</version>
+    <version>1.1.0-beta1</version>
     <title>Smart.Navigation.Resolver .NET</title>
     <authors>machi_pon</authors>
     <owners>machi_pon</owners>
@@ -14,7 +14,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="Usa.Smart.Core" version="1.5.7" />
-      <dependency id="Usa.Smart.Navigation" version="1.0.3" />
+      <dependency id="Usa.Smart.Navigation" version="1.1.0-beta1" />
       <dependency id="Usa.Smart.Resolver" version="1.7.4" />
     </dependencies>
     <tags>smart navigation ioc di dependencyinjection</tags>
