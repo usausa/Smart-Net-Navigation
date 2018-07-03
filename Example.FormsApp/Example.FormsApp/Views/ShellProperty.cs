@@ -4,22 +4,6 @@
 
     public static class ShellProperty
     {
-        public static readonly BindableProperty ShellControlProperty = BindableProperty.CreateAttached(
-            "ShellControl",
-            typeof(IShellControl),
-            typeof(ShellProperty),
-            null);
-
-        public static IShellControl GetShellControl(BindableObject view)
-        {
-            return (IShellControl)view.GetValue(ShellControlProperty);
-        }
-
-        public static void SetShellControl(BindableObject view, IShellControl value)
-        {
-            view.SetValue(ShellControlProperty, value);
-        }
-
         public static readonly BindableProperty TitleProperty = BindableProperty.CreateAttached(
             "Title",
             typeof(string),
@@ -198,8 +182,7 @@
                 return;
             }
 
-            var shell = GetShellControl(parent);
-            if (shell != null)
+            if (parent.BindingContext is IShellControl shell)
             {
                 UpdateShellControl(shell, bindable);
             }

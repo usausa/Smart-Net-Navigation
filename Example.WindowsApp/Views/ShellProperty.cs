@@ -5,23 +5,6 @@
     public static class ShellProperty
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.StyleCop.CSharp.Maintainability", "SA1401:FieldsMustBePrivate", Justification = "Ignore")]
-        public static DependencyProperty ShellControlProperty = DependencyProperty.RegisterAttached(
-            "ShellControl",
-            typeof(IShellControl),
-            typeof(ShellProperty),
-            new PropertyMetadata(null));
-
-        public static IShellControl GetShellControl(DependencyObject obj)
-        {
-            return (IShellControl)obj.GetValue(ShellControlProperty);
-        }
-
-        public static void SetShellControl(DependencyObject obj, IShellControl value)
-        {
-            obj.SetValue(ShellControlProperty, value);
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.StyleCop.CSharp.Maintainability", "SA1401:FieldsMustBePrivate", Justification = "Ignore")]
         public static DependencyProperty TitleProperty = DependencyProperty.RegisterAttached(
             "Title",
             typeof(string),
@@ -40,14 +23,13 @@
 
         private static void PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var parent = ((FrameworkElement)d).Parent;
+            var parent = ((FrameworkElement)d).Parent as FrameworkElement;
             if (parent == null)
             {
                 return;
             }
 
-            var shell = GetShellControl(parent);
-            if (shell != null)
+            if (parent.DataContext is IShellControl shell)
             {
                 UpdateShellControl(shell, d);
             }
