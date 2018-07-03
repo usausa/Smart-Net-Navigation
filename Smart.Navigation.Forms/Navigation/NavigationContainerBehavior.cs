@@ -4,7 +4,7 @@
 
     using Xamarin.Forms;
 
-    public class NavigationContainerBehavior : Behavior<ContentView>
+    public class NavigationContainerBehavior : Behavior<AbsoluteLayout>
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "BindableProperty")]
         public static readonly BindableProperty NavigatorProperty =
@@ -16,9 +16,9 @@
             set => SetValue(NavigatorProperty, value);
         }
 
-        public ContentView AssociatedObject { get; private set; }
+        public AbsoluteLayout AssociatedObject { get; private set; }
 
-        protected override void OnAttachedTo(ContentView bindable)
+        protected override void OnAttachedTo(AbsoluteLayout bindable)
         {
             base.OnAttachedTo(bindable);
 
@@ -31,17 +31,17 @@
 
             bindable.BindingContextChanged += HandleBindingContextChanged;
 
-            AttachContainer();
+            AttachContainer(bindable);
         }
 
-        protected override void OnDetachingFrom(ContentView bindable)
+        protected override void OnDetachingFrom(AbsoluteLayout bindable)
         {
             base.OnDetachingFrom(bindable);
 
             bindable.BindingContextChanged -= HandleBindingContextChanged;
             BindingContext = null;
 
-            AttachContainer();
+            AttachContainer(null);
         }
 
         private void HandleBindingContextChanged(object sender, EventArgs eventArgs)
@@ -55,15 +55,15 @@
 
             BindingContext = AssociatedObject.BindingContext;
 
-            AttachContainer();
+            AttachContainer(AssociatedObject);
         }
 
-        private void AttachContainer()
+        private void AttachContainer(AbsoluteLayout layout)
         {
             if (Navigator is INavigatorComponentSource componentSource)
             {
                 var updateContiner = componentSource.Components.Get<IUpdateContainer>();
-                updateContiner.Attach(AssociatedObject);
+                updateContiner.Attach(layout);
             }
         }
     }

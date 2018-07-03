@@ -29,27 +29,35 @@
                 throw new InvalidOperationException("Container is unresolved.");
             }
 
-            container.Content = (View)view;
+            var v = (View)view;
+
+            v.HeightRequest = container.Height;
+            v.WidthRequest = container.Width;
+            container.Children.Add(v);
         }
 
         public void CloseView(object view)
         {
-            Cleanup((View)view);
-            (view as IDisposable)?.Dispose();
-            (ResolveTarget(view) as IDisposable)?.Dispose();
-        }
-
-        public void ActiveView(object view, object parameter)
-        {
-            var v = (View)view;
-
             var container = resolver.Container;
             if (container == null)
             {
                 throw new InvalidOperationException("Container is unresolved.");
             }
 
-            container.Content = v;
+            var v = (View)view;
+
+            Cleanup(v);
+            (view as IDisposable)?.Dispose();
+            (v.BindingContext as IDisposable)?.Dispose();
+
+            container.Children.Remove(v);
+        }
+
+        public void ActiveView(object view, object parameter)
+        {
+            var v = (View)view;
+
+            v.IsVisible = true;
 
             if (options.RestoreFocus)
             {
@@ -66,7 +74,13 @@
 
         public object DeactiveView(object view)
         {
-            return options.RestoreFocus ? GetFocused((View)view) : null;
+            var v = (View)view;
+
+            var parameter = options.RestoreFocus ? GetFocused(v) : null;
+
+            v.IsVisible = false;
+
+            return parameter;
         }
 
         private static void Cleanup(Element parent)

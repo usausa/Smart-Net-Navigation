@@ -4,18 +4,18 @@
 
     public class ContainerResolver : IContainerResolver, IUpdateContainer
     {
-        public ContentView Container { get; private set; }
+        public AbsoluteLayout Container { get; private set; }
 
         public ContainerResolver()
         {
         }
 
-        public ContainerResolver(ContentView container)
+        public ContainerResolver(AbsoluteLayout container)
         {
             Container = container;
         }
 
-        void IUpdateContainer.Attach(ContentView container)
+        void IUpdateContainer.Attach(AbsoluteLayout container)
         {
             Container = container;
         }

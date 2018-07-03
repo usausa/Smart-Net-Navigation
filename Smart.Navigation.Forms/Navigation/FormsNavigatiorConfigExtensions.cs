@@ -40,12 +40,12 @@
             return config.UseProvider<FormsNavigationProvider>();
         }
 
-        public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, ContentView container)
+        public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, AbsoluteLayout container)
         {
             return config.UseFormsNavigationProvider(container, action => { });
         }
 
-        public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, ContentView container, Action<FormsNavigationProviderOptions> setupAction)
+        public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, AbsoluteLayout container, Action<FormsNavigationProviderOptions> setupAction)
         {
             if (container == null)
             {

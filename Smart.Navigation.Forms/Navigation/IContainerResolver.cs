@@ -4,6 +4,6 @@
 
     public interface IContainerResolver
     {
-        ContentView Container { get; }
+        AbsoluteLayout Container { get; }
     }
 }

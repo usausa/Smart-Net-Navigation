@@ -50,11 +50,11 @@
         </Grid>
 
         <!-- view container -->
-        <ContentView Grid.Row="1">
-            <ContentView.Behaviors>
+        <AbsoluteLayout Grid.Row="1">
+            <AbsoluteLayout.Behaviors>
                 <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
-            </ContentView.Behaviors>
-        </ContentView>
+            </AbsoluteLayout.Behaviors>
+        </AbsoluteLayout>
 
         <!-- footer -->
         <Grid Grid.Row="2" Style="{StaticResource MainFunctionGrid}">
