@@ -198,24 +198,40 @@
                 return;
             }
 
-            UpdateShellControl(parent, bindable);
+            var shell = GetShellControl(parent);
+            if (shell != null)
+            {
+                UpdateShellControl(shell, bindable);
+            }
         }
 
-        public static void UpdateShellControl(BindableObject parent, BindableObject child)
+        public static void UpdateShellControl(IShellControl shell, BindableObject bindable)
         {
-            var shellControl = GetShellControl(parent);
-            if (shellControl != null)
+            if (bindable == null)
             {
-                shellControl.Title.Value = GetTitle(child);
-                shellControl.CanGoHome.Value = GetCanGoHome(child);
-                shellControl.Function1Text.Value = GetFunction1Text(child);
-                shellControl.Function2Text.Value = GetFunction2Text(child);
-                shellControl.Function3Text.Value = GetFunction3Text(child);
-                shellControl.Function4Text.Value = GetFunction4Text(child);
-                shellControl.Function1Enabled.Value = GetFunction1Enabled(child);
-                shellControl.Function2Enabled.Value = GetFunction2Enabled(child);
-                shellControl.Function3Enabled.Value = GetFunction3Enabled(child);
-                shellControl.Function4Enabled.Value = GetFunction4Enabled(child);
+                shell.Title.Value = string.Empty;
+                shell.CanGoHome.Value = false;
+                shell.Function1Text.Value = string.Empty;
+                shell.Function2Text.Value = string.Empty;
+                shell.Function3Text.Value = string.Empty;
+                shell.Function4Text.Value = string.Empty;
+                shell.Function1Enabled.Value = false;
+                shell.Function2Enabled.Value = false;
+                shell.Function3Enabled.Value = false;
+                shell.Function4Enabled.Value = false;
+            }
+            else
+            {
+                shell.Title.Value = GetTitle(bindable);
+                shell.CanGoHome.Value = GetCanGoHome(bindable);
+                shell.Function1Text.Value = GetFunction1Text(bindable);
+                shell.Function2Text.Value = GetFunction2Text(bindable);
+                shell.Function3Text.Value = GetFunction3Text(bindable);
+                shell.Function4Text.Value = GetFunction4Text(bindable);
+                shell.Function1Enabled.Value = GetFunction1Enabled(bindable);
+                shell.Function2Enabled.Value = GetFunction2Enabled(bindable);
+                shell.Function3Enabled.Value = GetFunction3Enabled(bindable);
+                shell.Function4Enabled.Value = GetFunction4Enabled(bindable);
             }
         }
     }

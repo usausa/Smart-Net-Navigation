@@ -7,8 +7,8 @@
              xmlns:navigation="clr-namespace:Smart.Navigation;assembly=Smart.Navigation.Forms"
              xmlns:resolver="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
              xmlns:local="clr-namespace:Example.FormsApp"
-             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
              xmlns:controls="clr-namespace:Example.FormsApp.Controls;assembly=Example.FormsApp"
+             xmlns:views="clr-namespace:Example.FormsApp.Views;assembly=Example.FormsApp"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type={x:Type local:MainPageViewModel}}"
              resolver:BindingContextResolver.Type="{x:Type local:MainPageViewModel}"
@@ -20,6 +20,10 @@
             <On Platform="iOS">0,20,0,0</On>
         </OnPlatform>
     </ContentPage.Padding>
+
+    <ContentPage.Behaviors>
+        <views:ShellUpdateBehavior Navigator="{Binding Navigator, Mode=OneTime}"/>
+    </ContentPage.Behaviors>
 
     <Grid Style="{StaticResource MainGrid}">
         <Grid.RowDefinitions>
@@ -46,10 +50,9 @@
         </Grid>
 
         <!-- view container -->
-        <ContentView Grid.Row="1" x:Name="Container" views:ShellProperty.ShellControl="{Binding}">
+        <ContentView Grid.Row="1">
             <ContentView.Behaviors>
                 <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
-                <views:ShellUpdateBehavior />
             </ContentView.Behaviors>
         </ContentView>
 

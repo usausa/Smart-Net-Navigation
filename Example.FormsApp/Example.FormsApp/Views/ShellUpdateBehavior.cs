@@ -1,35 +1,56 @@
 ﻿namespace Example.FormsApp.Views
 {
-    using System.ComponentModel;
+    using System;
 
     using Smart.Forms.Interactivity;
+    using Smart.Navigation;
 
     using Xamarin.Forms;
 
-    public class ShellUpdateBehavior : BehaviorBase<ContentView>
+    public class ShellUpdateBehavior : BehaviorBase<ContentPage>
     {
-        protected override void OnAttachedTo(ContentView bindable)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "BindableProperty")]
+        public static readonly BindableProperty NavigatorProperty =
+            BindableProperty.Create(nameof(Navigator), typeof(INavigator), typeof(ShellUpdateBehavior));
+
+        public INavigator Navigator
+        {
+            get => (INavigator)GetValue(NavigatorProperty);
+            set => SetValue(NavigatorProperty, value);
+        }
+
+        protected override void OnAttachedTo(ContentPage bindable)
         {
             base.OnAttachedTo(bindable);
 
-            bindable.PropertyChanged += BindableOnPropertyChanged;
+            Navigator.Navigated += NavigatorOnNavigated;
+            Navigator.Exited += NavigatorOnExited;
         }
 
-        protected override void OnDetachingFrom(ContentView bindable)
+        protected override void OnDetachingFrom(ContentPage bindable)
         {
-            bindable.PropertyChanged -= BindableOnPropertyChanged;
+            Navigator.Navigated -= NavigatorOnNavigated;
+            Navigator.Exited -= NavigatorOnExited;
 
             base.OnDetachingFrom(bindable);
         }
 
-        private void BindableOnPropertyChanged(object sender, PropertyChangedEventArgs args)
+        private void NavigatorOnNavigated(object sender, Smart.Navigation.NavigationEventArgs e)
         {
-            if (args.PropertyName != nameof(ContentView.Content))
-            {
-                return;
-            }
+            UpdateShell(e.ToView);
+        }
 
-            ShellProperty.UpdateShellControl(AssociatedObject, AssociatedObject.Content);
+        private void NavigatorOnExited(object sender, EventArgs e)
+        {
+            UpdateShell(null);
+        }
+
+        private void UpdateShell(object view)
+        {
+            if (AssociatedObject.BindingContext is IShellControl shell)
+            {
+                ShellProperty.UpdateShellControl(shell, (BindableObject)view);
+            }
         }
     }
 }
