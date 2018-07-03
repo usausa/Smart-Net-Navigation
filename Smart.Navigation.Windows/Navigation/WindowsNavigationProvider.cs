@@ -32,16 +32,13 @@
 
             var element = (FrameworkElement)view;
 
-            container.Children.Add(element);
             element.Height = container.ActualHeight;
             element.Width = container.ActualWidth;
+            container.Children.Add(element);
         }
 
         public void CloseView(object view)
         {
-            (view as IDisposable)?.Dispose();
-            (ResolveTarget(view) as IDisposable)?.Dispose();
-
             var container = resolver.Container;
             if (container == null)
             {
@@ -49,6 +46,10 @@
             }
 
             var element = (FrameworkElement)view;
+
+            (view as IDisposable)?.Dispose();
+            (element.DataContext as IDisposable)?.Dispose();
+
             container.Children.Remove(element);
         }
 
