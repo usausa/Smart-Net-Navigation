@@ -1,14 +1,13 @@
-﻿using Example.FormsApp.Services;
-using Smart.Forms.Components;
-
-[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
+﻿[assembly: Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
 
 namespace Example.FormsApp
 {
     using System.Reflection;
 
     using Example.FormsApp.Modules;
+    using Example.FormsApp.Services;
 
+    using Smart.Forms.Components;
     using Smart.Forms.Resolver;
     using Smart.Navigation;
     using Smart.Resolver;
