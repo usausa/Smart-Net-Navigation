@@ -3,6 +3,7 @@
     using System;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Data;
     using System.Windows.Input;
 
     public class WindowsNavigationProvider : INavigationProvider
@@ -32,8 +33,18 @@
 
             var element = (FrameworkElement)view;
 
-            element.Height = container.ActualHeight;
-            element.Width = container.ActualWidth;
+            if (options.FitToParent)
+            {
+                BindingOperations.SetBinding(
+                    element,
+                    FrameworkElement.HeightProperty,
+                    new Binding { Source = container, Path = new PropertyPath("ActualHeight") });
+                BindingOperations.SetBinding(
+                    element,
+                    FrameworkElement.WidthProperty,
+                    new Binding { Source = container, Path = new PropertyPath("ActualWidth") });
+            }
+
             container.Children.Add(element);
         }
 
