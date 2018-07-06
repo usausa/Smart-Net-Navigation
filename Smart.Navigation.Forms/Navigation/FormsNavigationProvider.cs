@@ -31,8 +31,8 @@
 
             var v = (View)view;
 
-            v.HeightRequest = container.Height;
-            v.WidthRequest = container.Width;
+            AbsoluteLayout.SetLayoutFlags(v, AbsoluteLayoutFlags.WidthProportional | AbsoluteLayoutFlags.HeightProportional);
+            AbsoluteLayout.SetLayoutBounds(v, new Rectangle(0, 0, 1, 1));
             container.Children.Add(v);
         }
 
