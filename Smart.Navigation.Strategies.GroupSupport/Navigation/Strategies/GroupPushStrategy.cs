@@ -14,16 +14,16 @@
 
         private bool exist;
 
-        private ViewStackInfo activeStackInfo;
+        private ViewStackInfo activateStackInfo;
 
-        private ViewStackInfo deactiveStackInfo;
+        private ViewStackInfo deactivateStackInfo;
 
         public GroupPushStrategy(object id)
         {
             this.id = id;
         }
 
-        public StragtegyResult Initialize(INavigationController controller)
+        public StrategyResult Initialize(INavigationController controller)
         {
             descriptor = controller.ViewMapper.FindDescriptor(id);
 
@@ -62,20 +62,20 @@
                     return null;
                 }
 
-                // Deactive top & Active current
+                // Deactivate top & Active current
                 exist = true;
-                deactiveStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
-                activeStackInfo = controller.ViewStack[groups[groups.Count - 1]];
+                deactivateStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
+                activateStackInfo = controller.ViewStack[groups[groups.Count - 1]];
 
-                return new StragtegyResult(activeStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+                return new StrategyResult(activateStackInfo.Descriptor.Id, NavigationAttributes.Restore);
             }
 
             if (controller.ViewStack.Count > 0)
             {
-                deactiveStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
+                deactivateStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
             }
 
-            return new StragtegyResult(id, NavigationAttributes.Stacked);
+            return new StrategyResult(id, NavigationAttributes.Stacked);
         }
 
         public object ResolveToView(INavigationController controller)
@@ -125,16 +125,16 @@
             }
 
             // Activate restored
-            if (activeStackInfo != null)
+            if (activateStackInfo != null)
             {
-                controller.ActiveView(activeStackInfo.View, activeStackInfo.RestoreParameter);
-                activeStackInfo.RestoreParameter = null;
+                controller.ActivateView(activateStackInfo.View, activateStackInfo.RestoreParameter);
+                activateStackInfo.RestoreParameter = null;
             }
 
-            // Deactive old
-            if (deactiveStackInfo != null)
+            // Deactivate old
+            if (deactivateStackInfo != null)
             {
-                deactiveStackInfo.RestoreParameter = controller.DeactiveView(deactiveStackInfo.View);
+                deactivateStackInfo.RestoreParameter = controller.DeactivateView(deactivateStackInfo.View);
             }
         }
     }

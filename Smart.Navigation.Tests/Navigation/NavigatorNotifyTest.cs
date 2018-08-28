@@ -30,7 +30,7 @@
         }
 
         [Fact]
-        public static void FormNotifyUnsuported()
+        public static void FormNotifyUnsupported()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -38,7 +38,7 @@
                 .ToNavigator();
 
             // test
-            navigator.Forward(typeof(UnsupportForm));
+            navigator.Forward(typeof(UnsupportedForm));
             navigator.Notify("test");
             navigator.Notify(1);
         }
@@ -60,7 +60,7 @@
             }
         }
 
-        public class UnsupportForm : MockForm
+        public class UnsupportedForm : MockForm
         {
         }
 

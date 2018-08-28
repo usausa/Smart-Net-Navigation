@@ -11,11 +11,11 @@
             this.id = id;
         }
 
-        public StragtegyResult Initialize(INavigationController controller)
+        public StrategyResult Initialize(INavigationController controller)
         {
             descriptor = controller.ViewMapper.FindDescriptor(id);
 
-            return new StragtegyResult(id, NavigationAttributes.Stacked);
+            return new StrategyResult(id, NavigationAttributes.Stacked);
         }
 
         public object ResolveToView(INavigationController controller)
@@ -36,7 +36,7 @@
             {
                 var index = count - 2;
 
-                controller.ViewStack[index].RestoreParameter = controller.DeactiveView(controller.ViewStack[index].View);
+                controller.ViewStack[index].RestoreParameter = controller.DeactivateView(controller.ViewStack[index].View);
             }
         }
     }

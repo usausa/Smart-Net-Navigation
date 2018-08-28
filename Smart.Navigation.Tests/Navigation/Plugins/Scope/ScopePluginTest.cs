@@ -119,7 +119,7 @@
             navigator.Forward(typeof(Named2Form));
 
             var form2 = (Named2Form)navigator.CurrentView;
-            Assert.Equal(form2.ImporttData, form1.ExportData);
+            Assert.Equal(form2.ImportData, form1.ExportData);
         }
 
         public class Data1Form : MockForm
@@ -183,7 +183,7 @@
         public class Named2Form : MockForm
         {
             [Scope("Data")]
-            public ScopeData ImporttData { get; set; }
+            public ScopeData ImportData { get; set; }
         }
 
         public sealed class ScopeData : IInitializable, IDisposable

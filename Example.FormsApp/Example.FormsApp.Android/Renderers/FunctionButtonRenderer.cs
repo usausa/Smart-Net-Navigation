@@ -1,4 +1,4 @@
-﻿[assembly: Xamarin.Forms.ExportRenderer(typeof(Xamarin.Forms.Button), typeof(Example.FormsApp.Droid.Renderers.CustomButtonRederer))]
+﻿[assembly: Xamarin.Forms.ExportRenderer(typeof(Example.FormsApp.Controls.FunctionButton), typeof(Example.FormsApp.Droid.Renderers.FunctionButtonRenderer))]
 
 namespace Example.FormsApp.Droid.Renderers
 {
@@ -8,9 +8,9 @@ namespace Example.FormsApp.Droid.Renderers
     using Xamarin.Forms;
     using Xamarin.Forms.Platform.Android;
 
-    public class CustomButtonRederer : ButtonRenderer
+    public class FunctionButtonRenderer : ButtonRenderer
     {
-        public CustomButtonRederer(Context context)
+        public FunctionButtonRenderer(Context context)
             : base(context)
         {
         }
@@ -18,6 +18,11 @@ namespace Example.FormsApp.Droid.Renderers
         protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
         {
             base.OnElementChanged(e);
+
+            if (Control != null)
+            {
+                Control.Elevation = 0;
+            }
 
             var fontFamily = e.NewElement.FontFamily?.ToLower();
             if (fontFamily != null && (fontFamily.EndsWith(".otf") || fontFamily.EndsWith(".ttf")))

@@ -23,7 +23,7 @@
             form.Dispose();
         }
 
-        public void ActiveView(object view, object parameter)
+        public void ActivateView(object view, object parameter)
         {
             var form = (MockForm)view;
 
@@ -31,7 +31,7 @@
             form.Focused = parameter;
         }
 
-        public object DeactiveView(object view)
+        public object DeactivateView(object view)
         {
             var form = (MockForm)view;
 

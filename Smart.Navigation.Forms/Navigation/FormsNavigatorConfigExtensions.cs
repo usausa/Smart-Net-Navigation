@@ -6,7 +6,7 @@
 
     using Xamarin.Forms;
 
-    public static class FormsNavigatiorConfigExtensions
+    public static class FormsNavigatorConfigExtensions
     {
         public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config)
         {

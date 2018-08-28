@@ -68,7 +68,7 @@
         }
 
         [Fact]
-        public static void LoadFaiied()
+        public static void LoadFailed()
         {
             var context = new PluginContext();
 

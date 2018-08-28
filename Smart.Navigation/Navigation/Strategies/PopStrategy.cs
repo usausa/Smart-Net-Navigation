@@ -13,7 +13,7 @@
             this.level = level;
         }
 
-        public StragtegyResult Initialize(INavigationController controller)
+        public StrategyResult Initialize(INavigationController controller)
         {
             if ((level < 1) || (level > controller.ViewStack.Count - 1))
             {
@@ -21,7 +21,7 @@
             }
 
             restoreStackInfo = controller.ViewStack[controller.ViewStack.Count - level - 1];
-            return new StragtegyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+            return new StrategyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
         public object ResolveToView(INavigationController controller)
@@ -32,7 +32,7 @@
         public void UpdateStack(INavigationController controller, object toView)
         {
             // Activate restored
-            controller.ActiveView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
+            controller.ActivateView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
             restoreStackInfo.RestoreParameter = null;
 
             // Remove old

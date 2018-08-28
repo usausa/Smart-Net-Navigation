@@ -37,8 +37,8 @@
         {
             if (Navigator is INavigatorComponentSource componentSource)
             {
-                var updateContiner = componentSource.Components.Get<IUpdateContainer>();
-                updateContiner.Attach(canvas);
+                var updateContainer = componentSource.Components.Get<IUpdateContainer>();
+                updateContainer.Attach(canvas);
             }
         }
     }

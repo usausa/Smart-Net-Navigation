@@ -12,7 +12,7 @@
 
         public void Initialize()
         {
-            System.Diagnostics.Debug.WriteLine("*** WizardContext Initilize ***");
+            System.Diagnostics.Debug.WriteLine("*** WizardContext Initialize ***");
         }
 
         public void Dispose()

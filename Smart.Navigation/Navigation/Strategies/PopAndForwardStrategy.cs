@@ -25,7 +25,7 @@
             this.level = level;
         }
 
-        public StragtegyResult Initialize(INavigationController controller)
+        public StrategyResult Initialize(INavigationController controller)
         {
             if (all)
             {
@@ -41,7 +41,7 @@
 
             descriptor = controller.ViewMapper.FindDescriptor(id);
 
-            return new StragtegyResult(id, NavigationAttributes.None);
+            return new StrategyResult(id, NavigationAttributes.None);
         }
 
         public object ResolveToView(INavigationController controller)

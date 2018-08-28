@@ -3,7 +3,7 @@
     using System;
     using System.Reflection;
 
-    public sealed class GroupPopStragety : INavigationStrategy
+    public sealed class GroupPopStrategy : INavigationStrategy
     {
         private readonly bool leaveLast;
 
@@ -11,12 +11,12 @@
 
         private ViewStackInfo restoreStackInfo;
 
-        public GroupPopStragety(bool leaveLast)
+        public GroupPopStrategy(bool leaveLast)
         {
             this.leaveLast = leaveLast;
         }
 
-        public StragtegyResult Initialize(INavigationController controller)
+        public StrategyResult Initialize(INavigationController controller)
         {
             if (controller.ViewStack.Count == 0)
             {
@@ -58,7 +58,7 @@
             }
 
             restoreStackInfo = controller.ViewStack[start - 1];
-            return new StragtegyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+            return new StrategyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
         }
 
         public object ResolveToView(INavigationController controller)
@@ -77,7 +77,7 @@
             controller.ViewStack.RemoveRange(start, controller.ViewStack.Count - start);
 
             // Activate restored
-            controller.ActiveView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
+            controller.ActivateView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
             restoreStackInfo.RestoreParameter = null;
         }
     }

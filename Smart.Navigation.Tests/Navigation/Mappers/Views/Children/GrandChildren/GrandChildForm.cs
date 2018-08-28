@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Mappers.Views.Childs.GrandChilds
+﻿namespace Smart.Navigation.Mappers.Views.Children.GrandChildren
 {
     using Smart.Mock;
 

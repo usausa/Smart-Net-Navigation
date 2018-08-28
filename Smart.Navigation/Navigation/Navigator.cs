@@ -320,14 +320,14 @@
                 navigator.provider.CloseView(view);
             }
 
-            public void ActiveView(object view, object parameter)
+            public void ActivateView(object view, object parameter)
             {
-                navigator.provider.ActiveView(view, parameter);
+                navigator.provider.ActivateView(view, parameter);
             }
 
-            public object DeactiveView(object view)
+            public object DeactivateView(object view)
             {
-                return navigator.provider.DeactiveView(view);
+                return navigator.provider.DeactivateView(view);
             }
         }
     }

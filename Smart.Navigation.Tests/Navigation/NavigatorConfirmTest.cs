@@ -9,7 +9,7 @@
     public class NavigatorConfirmTest
     {
         [Fact]
-        public static void CanceldByEvent()
+        public static void CanceledByEvent()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -26,7 +26,7 @@
         }
 
         [Fact]
-        public static void CanceldByInterface()
+        public static void CanceledByInterface()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -41,7 +41,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorCanceldByAsyncInterface()
+        public static async Task TestNavigatorCanceledByAsyncInterface()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -56,7 +56,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorCanceldByAsyncInterface2()
+        public static async Task TestNavigatorCanceledByAsyncInterface2()
         {
             // prepare
             var navigator = new NavigatorConfig()

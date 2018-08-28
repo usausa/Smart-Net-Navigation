@@ -38,44 +38,44 @@
 
         public static bool GroupPop(this INavigator navigator)
         {
-            return navigator.Navigate(new GroupPopStragety(false), null);
+            return navigator.Navigate(new GroupPopStrategy(false), null);
         }
 
         public static bool GroupPop(this INavigator navigator, INavigationParameter parameter)
         {
-            return navigator.Navigate(new GroupPopStragety(false), parameter);
+            return navigator.Navigate(new GroupPopStrategy(false), parameter);
         }
 
         public static bool GroupPop(this INavigator navigator, bool leaveLast)
         {
-            return navigator.Navigate(new GroupPopStragety(leaveLast), null);
+            return navigator.Navigate(new GroupPopStrategy(leaveLast), null);
         }
 
         public static bool GroupPop(this INavigator navigator, bool leaveLast, INavigationParameter parameter)
         {
-            return navigator.Navigate(new GroupPopStragety(leaveLast), parameter);
+            return navigator.Navigate(new GroupPopStrategy(leaveLast), parameter);
         }
 
         // Async
 
         public static Task<bool> GroupPopAsync(this INavigator navigator)
         {
-            return navigator.NavigateAsync(new GroupPopStragety(false), null);
+            return navigator.NavigateAsync(new GroupPopStrategy(false), null);
         }
 
         public static Task<bool> GroupPopAsync(this INavigator navigator, INavigationParameter parameter)
         {
-            return navigator.NavigateAsync(new GroupPopStragety(false), parameter);
+            return navigator.NavigateAsync(new GroupPopStrategy(false), parameter);
         }
 
         public static Task<bool> GroupPopAsync(this INavigator navigator, bool leaveLast)
         {
-            return navigator.NavigateAsync(new GroupPopStragety(leaveLast), null);
+            return navigator.NavigateAsync(new GroupPopStrategy(leaveLast), null);
         }
 
         public static Task<bool> GroupPopAsync(this INavigator navigator, bool leaveLast, INavigationParameter parameter)
         {
-            return navigator.NavigateAsync(new GroupPopStragety(leaveLast), parameter);
+            return navigator.NavigateAsync(new GroupPopStrategy(leaveLast), parameter);
         }
     }
 }

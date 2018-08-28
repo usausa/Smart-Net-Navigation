@@ -17,8 +17,8 @@
 
         void CloseView(object view);
 
-        void ActiveView(object view, object parameter);
+        void ActivateView(object view, object parameter);
 
-        object DeactiveView(object view);
+        object DeactivateView(object view);
     }
 }

@@ -193,7 +193,7 @@ namespace Example.Views
     }
 }
 
-namespace Example.Views.Childs
+namespace Example.Views.Children
 {
     public class Child1View
     {
@@ -217,10 +217,10 @@ var navigator = new NavigatorConfig()
 
 // navigation
 navigator.Forward("/Parent");
-navigator.Forward("/Childs/Child1");
+navigator.Forward("/Children/Child1");
 navigator.Forward("Child2");
 navigator.Forward("../Parent");
-navigator.Forward("Childs/Child2");
+navigator.Forward("Children/Child2");
 ```
 
 ## Navigation

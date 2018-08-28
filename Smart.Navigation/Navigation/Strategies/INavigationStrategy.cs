@@ -2,7 +2,7 @@
 {
     public interface INavigationStrategy
     {
-        StragtegyResult Initialize(INavigationController controller);
+        StrategyResult Initialize(INavigationController controller);
 
         object ResolveToView(INavigationController controller);
 

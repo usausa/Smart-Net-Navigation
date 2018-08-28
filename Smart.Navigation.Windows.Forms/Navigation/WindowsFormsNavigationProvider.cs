@@ -45,7 +45,7 @@
             control.Dispose();
         }
 
-        public void ActiveView(object view, object parameter)
+        public void ActivateView(object view, object parameter)
         {
             var control = (Control)view;
 
@@ -64,7 +64,7 @@
             }
         }
 
-        public object DeactiveView(object view)
+        public object DeactivateView(object view)
         {
             var control = (Control)view;
 

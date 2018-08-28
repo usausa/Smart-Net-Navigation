@@ -5,9 +5,9 @@
 
     using Smart.Mock;
     using Smart.Navigation.Mappers.Views;
-    using Smart.Navigation.Mappers.Views.Childs;
-    using Smart.Navigation.Mappers.Views.Childs.GrandChilds;
-    using Smart.Navigation.Mappers.Views.OtherChilds;
+    using Smart.Navigation.Mappers.Views.Children;
+    using Smart.Navigation.Mappers.Views.Children.GrandChildren;
+    using Smart.Navigation.Mappers.Views.OtherChildren;
 
     using Xunit;
 
@@ -37,7 +37,7 @@
 
             Assert.Equal(typeof(Parent1Form), navigator.CurrentView.GetType());
 
-            navigator.Forward("/Childs/Child1");
+            navigator.Forward("/Children/Child1");
 
             Assert.Equal(typeof(Child1Form), navigator.CurrentView.GetType());
         }
@@ -52,16 +52,16 @@
             navigator.Forward("Parent1");
             Assert.Equal(typeof(Parent1Form), navigator.CurrentView.GetType());
 
-            navigator.Forward("Childs/Child1");
+            navigator.Forward("Children/Child1");
             Assert.Equal(typeof(Child1Form), navigator.CurrentView.GetType());
 
             navigator.Forward("Child2");
             Assert.Equal(typeof(Child2Form), navigator.CurrentView.GetType());
 
-            navigator.Forward("GrandChilds/GrandChild");
+            navigator.Forward("GrandChildren/GrandChild");
             Assert.Equal(typeof(GrandChildForm), navigator.CurrentView.GetType());
 
-            navigator.Forward("../../OtherChilds/OtherChild");
+            navigator.Forward("../../OtherChildren/OtherChild");
             Assert.Equal(typeof(OtherChildForm), navigator.CurrentView.GetType());
 
             navigator.Forward("../Parent2");
