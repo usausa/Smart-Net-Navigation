@@ -63,7 +63,7 @@
 
         public object CurrentView => CurrentStack?.View;
 
-        public object CurrentTarget => CurrentStack?.View.MapOrDefalut(x => provider.ResolveTarget(x));
+        public object CurrentTarget => CurrentStack?.View.MapOrDefault(x => provider.ResolveTarget(x));
 
         public bool Executing { get; private set; }
 
