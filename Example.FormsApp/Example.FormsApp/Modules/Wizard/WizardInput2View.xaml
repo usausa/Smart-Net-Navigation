@@ -19,7 +19,7 @@
                Text="{Binding Context.Value.Data2}"
                Placeholder="Data2">
             <Entry.Behaviors>
-                <interactivity:SetFocusBehavior/>
+                <interactivity:DefaultFocusBehavior/>
             </Entry.Behaviors>
         </Entry>
         <Button Text="Prev" Style="{StaticResource NavigationButton}"

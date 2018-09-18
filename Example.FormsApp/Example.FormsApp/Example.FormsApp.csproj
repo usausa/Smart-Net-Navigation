@@ -14,11 +14,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.6.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
-    <PackageReference Include="Usa.Smart.Forms" Version="1.2.2" />
-    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="1.2.2" />
+    <PackageReference Include="Usa.Smart.Forms" Version="1.3.0" />
+    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="1.3.0" />
     <PackageReference Include="Usa.Smart.Resolver" Version="1.7.5" />
     <PackageReference Include="Usa.Smart.Resolver.Xamarin" Version="1.7.5" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
   </ItemGroup>
 
   <ItemGroup>

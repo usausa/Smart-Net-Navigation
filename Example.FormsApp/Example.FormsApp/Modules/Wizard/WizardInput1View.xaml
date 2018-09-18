@@ -19,7 +19,7 @@
                Text="{Binding Context.Value.Data1}"
                Placeholder="Data1">
             <Entry.Behaviors>
-                <interactivity:SetFocusBehavior/>
+                <interactivity:DefaultFocusBehavior/>
             </Entry.Behaviors>
         </Entry>
         <Button Text="Cancel" Style="{StaticResource NavigationButton}"
