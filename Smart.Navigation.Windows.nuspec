@@ -13,7 +13,7 @@
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <dependency id="Usa.Smart.Core" version="1.5.8" />
+      <dependency id="Usa.Smart.Core" version="1.6.0" />
       <dependency id="Usa.Smart.Navigation" version="1.1.2" />
     </dependencies>
     <tags>smart navigation wpf mvvm</tags>
