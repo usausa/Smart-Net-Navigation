@@ -14,7 +14,7 @@
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Action<WindowsNavigationProviderOptions> setupAction)
         {
-            if (setupAction == null)
+            if (setupAction is null)
             {
                 throw new ArgumentNullException(nameof(setupAction));
             }
@@ -47,12 +47,12 @@
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container, Action<WindowsNavigationProviderOptions> setupAction)
         {
-            if (container == null)
+            if (container is null)
             {
                 throw new ArgumentNullException(nameof(container));
             }
 
-            if (setupAction == null)
+            if (setupAction is null)
             {
                 throw new ArgumentNullException(nameof(setupAction));
             }

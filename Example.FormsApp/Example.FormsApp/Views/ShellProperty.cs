@@ -177,7 +177,7 @@
         private static void PropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var parent = ((ContentView)bindable).Parent;
-            if (parent == null)
+            if (parent is null)
             {
                 return;
             }
@@ -190,7 +190,7 @@
 
         public static void UpdateShellControl(IShellControl shell, BindableObject bindable)
         {
-            if (bindable == null)
+            if (bindable is null)
             {
                 shell.Title.Value = string.Empty;
                 shell.CanGoHome.Value = false;

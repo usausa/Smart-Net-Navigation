@@ -15,7 +15,7 @@
 
         public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, Action<FormsNavigationProviderOptions> setupAction)
         {
-            if (setupAction == null)
+            if (setupAction is null)
             {
                 throw new ArgumentNullException(nameof(setupAction));
             }
@@ -47,12 +47,12 @@
 
         public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, AbsoluteLayout container, Action<FormsNavigationProviderOptions> setupAction)
         {
-            if (container == null)
+            if (container is null)
             {
                 throw new ArgumentNullException(nameof(container));
             }
 
-            if (setupAction == null)
+            if (setupAction is null)
             {
                 throw new ArgumentNullException(nameof(setupAction));
             }

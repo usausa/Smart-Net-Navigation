@@ -25,7 +25,7 @@
 
             var lastStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
             var group = lastStackInfo.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-            if (group == null)
+            if (group is null)
             {
                 throw new InvalidOperationException("Current view is not grouped.");
             }

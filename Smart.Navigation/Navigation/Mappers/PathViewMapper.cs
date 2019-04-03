@@ -32,7 +32,7 @@
                 if (!descriptors.TryGetValue(normalizePath, out descriptor))
                 {
                     var type = PathToType(normalizePath);
-                    if (type == null)
+                    if (type is null)
                     {
                         throw new InvalidOperationException($"View id is invalid id. id=[{id}]");
                     }

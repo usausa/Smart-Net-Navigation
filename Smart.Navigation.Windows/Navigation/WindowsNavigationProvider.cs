@@ -26,7 +26,7 @@
         public void OpenView(object view)
         {
             var container = resolver.Container;
-            if (container == null)
+            if (container is null)
             {
                 throw new InvalidOperationException("Container is unresolved.");
             }
@@ -51,7 +51,7 @@
         public void CloseView(object view)
         {
             var container = resolver.Container;
-            if (container == null)
+            if (container is null)
             {
                 throw new InvalidOperationException("Container is unresolved.");
             }

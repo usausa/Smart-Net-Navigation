@@ -28,7 +28,7 @@
             descriptor = controller.ViewMapper.FindDescriptor(id);
 
             var group = descriptor.Type.GetCustomAttribute<GroupAttribute>();
-            if (group == null)
+            if (group is null)
             {
                 throw new InvalidOperationException($"View is not grouped. id=[{id}]");
             }
@@ -39,7 +39,7 @@
                 var groupOfStack = controller.ViewStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
                 if ((groupOfStack != null) && Equals(group.Id, groupOfStack.Id))
                 {
-                    if (groups == null)
+                    if (groups is null)
                     {
                         groups = new List<int>();
                     }

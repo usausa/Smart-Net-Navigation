@@ -14,12 +14,12 @@
 
         public static NavigatorConfig UseControlNavigationProvider(this NavigatorConfig config, Control container, Action<WindowsFormsNavigationProviderOptions> setupAction)
         {
-            if (container == null)
+            if (container is null)
             {
                 throw new ArgumentNullException(nameof(container));
             }
 
-            if (setupAction == null)
+            if (setupAction is null)
             {
                 throw new ArgumentNullException(nameof(setupAction));
             }

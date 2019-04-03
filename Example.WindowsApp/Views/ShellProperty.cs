@@ -24,7 +24,7 @@
         private static void PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var parent = ((FrameworkElement)d).Parent as FrameworkElement;
-            if (parent == null)
+            if (parent is null)
             {
                 return;
             }
@@ -37,7 +37,7 @@
 
         public static void UpdateShellControl(IShellControl shell, DependencyObject d)
         {
-            shell.Title.Value = d == null ? string.Empty : GetTitle(d);
+            shell.Title.Value = d is null ? string.Empty : GetTitle(d);
         }
     }
 }

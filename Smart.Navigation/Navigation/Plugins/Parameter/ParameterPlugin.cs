@@ -48,7 +48,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnNavigatingFrom(IPluginContext context, object view, object target)
         {
-            if (target == null)
+            if (target is null)
             {
                 return;
             }
@@ -59,16 +59,18 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnNavigatingTo(IPluginContext context, object view, object target)
         {
-            if (target == null)
+            if (target is null)
             {
                 return;
             }
 
             var parameters = context.LoadOr(GetType(), default(Dictionary<string, object>));
-            if (parameters != null)
+            if (parameters is null)
             {
-                ApplyImportParameters(target, parameters);
+                return;
             }
+
+            ApplyImportParameters(target, parameters);
         }
 
         private Dictionary<string, object> GatherExportParameters(object target)

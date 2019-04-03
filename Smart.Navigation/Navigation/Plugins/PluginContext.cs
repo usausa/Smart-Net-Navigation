@@ -9,7 +9,7 @@
 
         private void Prepare()
         {
-            if (store == null)
+            if (store is null)
             {
                 store = new Dictionary<Type, object>();
             }
@@ -29,7 +29,7 @@
 
         public T LoadOr<T>(Type type, T defaultValue)
         {
-            if (store == null)
+            if (store is null)
             {
                 return defaultValue;
             }
@@ -41,12 +41,12 @@
 
         public T LoadOr<T>(Type type, Func<T> defaultValueFactory)
         {
-            if (defaultValueFactory == null)
+            if (defaultValueFactory is null)
             {
                 throw new ArgumentNullException(nameof(defaultValueFactory));
             }
 
-            if (store == null)
+            if (store is null)
             {
                 return defaultValueFactory();
             }

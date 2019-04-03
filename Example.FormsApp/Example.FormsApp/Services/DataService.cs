@@ -31,10 +31,12 @@
         public void UpdateData(DataEntity entity)
         {
             var current = entities.FirstOrDefault(x => x.Id == entity.Id);
-            if (current != null)
+            if (current is null)
             {
-                current.Name = entity.Name;
+                return;
             }
+
+            current.Name = entity.Name;
         }
     }
 }

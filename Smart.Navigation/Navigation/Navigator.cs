@@ -114,7 +114,7 @@
         {
             var controller = new Controller(this);
             var result = strategy.Initialize(controller);
-            if (result == null)
+            if (result is null)
             {
                 return false;
             }
@@ -135,7 +135,7 @@
         {
             var controller = new Controller(this);
             var result = strategy.Initialize(controller);
-            if (result == null)
+            if (result is null)
             {
                 return false;
             }

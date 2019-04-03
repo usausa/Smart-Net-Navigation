@@ -56,7 +56,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnClose(IPluginContext context, object view, object target)
         {
-            if (target == null)
+            if (target is null)
             {
                 return;
             }
@@ -79,7 +79,7 @@
 
         public override void OnCreate(IPluginContext context, object view, object target)
         {
-            if (target == null)
+            if (target is null)
             {
                 return;
             }

@@ -27,7 +27,7 @@
 
         public static NavigatorConfig UseProvider(this NavigatorConfig config, INavigationProvider provider)
         {
-            if (provider == null)
+            if (provider is null)
             {
                 throw new ArgumentNullException(nameof(provider));
             }
@@ -55,7 +55,7 @@
 
         public static NavigatorConfig UseViewMapper(this NavigatorConfig config, IViewMapper mapper)
         {
-            if (mapper == null)
+            if (mapper is null)
             {
                 throw new ArgumentNullException(nameof(mapper));
             }
@@ -95,7 +95,7 @@
 
         public static NavigatorConfig UseIdViewMapper(this NavigatorConfig config, Action<IIdViewRegister> action)
         {
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -116,7 +116,7 @@
 
         public static void AutoRegister(this IIdViewRegister register, IEnumerable<Type> types)
         {
-            if (types == null)
+            if (types is null)
             {
                 throw new ArgumentNullException(nameof(types));
             }
@@ -132,7 +132,7 @@
 
         public static NavigatorConfig UsePathViewMapper(this NavigatorConfig config, Action<PathViewMapperOptions> action)
         {
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -163,7 +163,7 @@
 
         public static NavigatorConfig UseTypeConstraint(this NavigatorConfig config, ITypeConstraint constraint)
         {
-            if (constraint == null)
+            if (constraint is null)
             {
                 throw new ArgumentNullException(nameof(constraint));
             }
@@ -191,7 +191,7 @@
 
         public static NavigatorConfig UseActivator(this NavigatorConfig config, IActivator activator)
         {
-            if (activator == null)
+            if (activator is null)
             {
                 throw new ArgumentNullException(nameof(activator));
             }
@@ -207,7 +207,7 @@
 
         public static NavigatorConfig UseActivator(this NavigatorConfig config, Func<Type, object> callback)
         {
-            if (callback == null)
+            if (callback is null)
             {
                 throw new ArgumentNullException(nameof(callback));
             }
@@ -229,7 +229,7 @@
 
         public static NavigatorConfig UseConverter(this NavigatorConfig config, IConverter converter)
         {
-            if (converter == null)
+            if (converter is null)
             {
                 throw new ArgumentNullException(nameof(converter));
             }
@@ -263,7 +263,7 @@
 
         public static NavigatorConfig AddPlugin(this NavigatorConfig config, IPlugin plugin)
         {
-            if (plugin == null)
+            if (plugin is null)
             {
                 throw new ArgumentNullException(nameof(plugin));
             }
@@ -287,7 +287,7 @@
 
         public static NavigatorConfig UseDelegateFactory(this NavigatorConfig config, IDelegateFactory delegateFactory)
         {
-            if (delegateFactory == null)
+            if (delegateFactory is null)
             {
                 throw new ArgumentNullException(nameof(delegateFactory));
             }
