@@ -1,8 +1,9 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Interactivity;
+
+    using Microsoft.Xaml.Behaviors;
 
     [TypeConstraint(typeof(Canvas))]
     public class NavigationContainerBehavior : Behavior<Canvas>
