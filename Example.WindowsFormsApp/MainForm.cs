@@ -117,7 +117,7 @@
             functionButtons.Add(Fn12Button);
         }
 
-        private void UpdateFunctionKeys(FunctionKey[] keys)
+        private void UpdateFunctionKeys(IReadOnlyList<FunctionKey> keys)
         {
             enabledFunctions.Clear();
             if (keys != null)

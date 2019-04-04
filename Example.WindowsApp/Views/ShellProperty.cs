@@ -4,8 +4,7 @@
 
     public static class ShellProperty
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.StyleCop.CSharp.Maintainability", "SA1401:FieldsMustBePrivate", Justification = "Ignore")]
-        public static DependencyProperty TitleProperty = DependencyProperty.RegisterAttached(
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.RegisterAttached(
             "Title",
             typeof(string),
             typeof(ShellProperty),

@@ -53,7 +53,6 @@
             return properties;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnClose(IPluginContext context, object view, object target)
         {
             if (target is null)

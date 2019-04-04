@@ -1,5 +1,6 @@
 ﻿namespace Example.WindowsFormsApp
 {
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     public interface IApplicationView
@@ -8,7 +9,7 @@
 
         bool CanGoHome { get; }
 
-        FunctionKey[] FunctionKeys { get; }
+        IReadOnlyList<FunctionKey> FunctionKeys { get; }
 
         void OnFunctionKey(Keys key);
 

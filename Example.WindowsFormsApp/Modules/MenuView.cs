@@ -1,5 +1,6 @@
 ﻿namespace Example.WindowsFormsApp.Modules
 {
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using Smart.Navigation;
@@ -10,7 +11,7 @@
     {
         public override string Title => "Menu";
 
-        public override FunctionKey[] FunctionKeys => new[]
+        public override IReadOnlyList<FunctionKey> FunctionKeys => new[]
         {
             new FunctionKey(Keys.F12, "Exit")
         };

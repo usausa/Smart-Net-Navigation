@@ -6,7 +6,6 @@
 
     public class NavigationContainerBehavior : Behavior<AbsoluteLayout>
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "BindableProperty")]
         public static readonly BindableProperty NavigatorProperty =
             BindableProperty.Create(nameof(Navigator), typeof(INavigator), typeof(NavigationContainerBehavior));
 

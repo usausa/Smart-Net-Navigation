@@ -2,6 +2,8 @@
 
 namespace Example.FormsApp.Droid.Renderers
 {
+    using System;
+
     using Android.Content;
     using Android.Graphics;
 
@@ -24,8 +26,8 @@ namespace Example.FormsApp.Droid.Renderers
                 Control.Elevation = 0;
             }
 
-            var fontFamily = e.NewElement.FontFamily?.ToLower();
-            if (fontFamily != null && (fontFamily.EndsWith(".otf") || fontFamily.EndsWith(".ttf")))
+            var fontFamily = e.NewElement.FontFamily;
+            if (fontFamily != null && (fontFamily.EndsWith(".otf", StringComparison.OrdinalIgnoreCase) || fontFamily.EndsWith(".ttf", StringComparison.OrdinalIgnoreCase)))
             {
                 Control.Typeface = Typeface.CreateFromAsset(Context.Assets, e.NewElement.FontFamily);
             }

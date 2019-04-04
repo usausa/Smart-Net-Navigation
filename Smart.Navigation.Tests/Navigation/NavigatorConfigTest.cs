@@ -148,7 +148,7 @@
 
             var activator = components.TryGet<IActivator>();
             Assert.NotNull(activator);
-            Assert.NotNull(activator.Resolve(typeof(Data)));
+            Assert.NotNull(activator.Resolve(typeof(Model)));
         }
 
         [Fact]
@@ -161,7 +161,7 @@
 
             var activator = components.TryGet<IActivator>();
             Assert.NotNull(activator);
-            Assert.NotNull(activator.Resolve(typeof(Data)));
+            Assert.NotNull(activator.Resolve(typeof(Model)));
         }
 
         [Fact]
@@ -180,7 +180,7 @@
 
             var activator = components.TryGet<IActivator>();
             Assert.NotNull(activator);
-            Assert.NotNull(activator.Resolve(typeof(Data)));
+            Assert.NotNull(activator.Resolve(typeof(Model)));
         }
 
         [Fact]
@@ -341,7 +341,7 @@
         // utilitity
         // ------------------------------------------------------------
 
-        public class Data
+        public class Model
         {
         }
 

@@ -45,7 +45,6 @@
             return properties;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnNavigatingFrom(IPluginContext context, object view, object target)
         {
             if (target is null)
@@ -56,7 +55,6 @@
             context.Save(GetType(), GatherExportParameters(target));
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Framework only")]
         public override void OnNavigatingTo(IPluginContext context, object view, object target)
         {
             if (target is null)

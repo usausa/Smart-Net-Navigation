@@ -58,7 +58,7 @@
 
         private string ResolvePath(string current, string path)
         {
-            if (path.StartsWith(PathHelper.PathSeparatorString))
+            if (path.StartsWith(PathHelper.PathSeparatorString, StringComparison.OrdinalIgnoreCase))
             {
                 return PathHelper.Normalize(path);
             }
