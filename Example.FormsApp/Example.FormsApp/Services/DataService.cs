@@ -25,7 +25,7 @@
 
         public void InsertData(string name)
         {
-            entities.Add(new DataEntity { Id = entities.Count + 1, Name = name } );
+            entities.Add(new DataEntity { Id = entities.Count + 1, Name = name });
         }
 
         public void UpdateData(DataEntity entity)
