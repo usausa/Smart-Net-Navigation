@@ -19,7 +19,7 @@
     <tags>smart navigation windowsforms</tags>
   </metadata>
   <files>
-    <!-- net462 -->
-    <file src="Smart.Navigation.Windows.Forms\bin\Release\net462\Smart.Navigation.Windows.Forms.dll" target="lib\net462" />
+    <!-- net472 -->
+    <file src="Smart.Navigation.Windows.Forms\bin\Release\net472\Smart.Navigation.Windows.Forms.dll" target="lib\net472" />
   </files>
 </package>

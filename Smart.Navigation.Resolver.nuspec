@@ -22,7 +22,7 @@
   <files>
     <!-- netstandard2.0 -->
     <file src="Smart.Navigation.Resolver\bin\Release\netstandard2.0\Smart.Navigation.Resolver.dll" target="lib\netstandard2.0" />
-    <!-- net462 -->
-    <file src="Smart.Navigation.Resolver\bin\Release\net462\Smart.Navigation.Resolver.dll" target="lib\net462" />
+    <!-- net472 -->
+    <file src="Smart.Navigation.Resolver\bin\Release\net472\Smart.Navigation.Resolver.dll" target="lib\net472" />
   </files>
 </package>

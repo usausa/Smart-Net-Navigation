@@ -20,7 +20,7 @@
     <tags>smart navigation wpf mvvm</tags>
   </metadata>
   <files>
-    <!-- net462 -->
-    <file src="Smart.Navigation.Windows\bin\Release\net462\Smart.Navigation.Windows.dll" target="lib\net462" />
+    <!-- net472 -->
+    <file src="Smart.Navigation.Windows\bin\Release\net472\Smart.Navigation.Windows.dll" target="lib\net472" />
   </files>
 </package>
