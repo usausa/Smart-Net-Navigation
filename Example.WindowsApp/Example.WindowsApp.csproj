@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Example.WindowsApp</RootNamespace>
     <AssemblyName>Example.WindowsApp</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -174,22 +174,22 @@
       <Version>4.1.3</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Core">
-      <Version>1.6.0</Version>
+      <Version>1.7.1</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Reactive">
-      <Version>1.2.1</Version>
+      <Version>1.3.0</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Resolver">
       <Version>1.7.6</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows">
-      <Version>1.6.3</Version>
+      <Version>1.7.0</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows.Reactive">
-      <Version>1.6.3</Version>
+      <Version>1.7.0</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Windows.Resolver">
-      <Version>1.6.3</Version>
+      <Version>1.7.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

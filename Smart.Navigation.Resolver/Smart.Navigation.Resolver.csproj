@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
-    <PackageReference Include="Usa.Smart.Core" Version="1.6.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="1.7.1" />
     <PackageReference Include="Usa.Smart.Resolver" Version="1.7.6" />
   </ItemGroup>
 
