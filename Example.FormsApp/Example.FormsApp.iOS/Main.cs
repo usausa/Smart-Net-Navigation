@@ -1,11 +1,16 @@
-﻿namespace Example.FormsApp.iOS
-{
-    using UIKit;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-    public static class Application
+using Foundation;
+using UIKit;
+
+namespace Example.FormsApp.iOS
+{
+    public class Application
     {
         // This is the main entry point of the application.
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
