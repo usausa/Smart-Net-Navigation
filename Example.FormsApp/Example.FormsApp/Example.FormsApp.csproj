@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ProduceAssemblyReference>true</ProduceAssemblyReference>
+    <CodeAnalysisRuleSet>..\..\Smart.Navigation.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -11,7 +12,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Usa.Smart.Core" Version="1.7.1" />
+    <PackageReference Include="Usa.Smart.Forms" Version="1.4.0" />
+    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="1.4.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="1.7.6" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Smart.Navigation.Forms\Smart.Navigation.Forms.csproj" />
+    <ProjectReference Include="..\..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj" />
+    <ProjectReference Include="..\..\Smart.Navigation\Smart.Navigation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Modules\MenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

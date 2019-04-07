@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Modules.Stack.Stack2View"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sr="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:sm="clr-namespace:Smart.Forms.Markup;assembly=Smart.Forms"
+             xmlns:stack="clr-namespace:Example.FormsApp.Modules.Stack;assembly=Example.FormsApp"
+             xmlns:markup="clr-namespace:Example.FormsApp.Markup;assembly=Example.FormsApp"
+             xmlns:shell="clr-namespace:Example.FormsApp.Shell;assembly=Example.FormsApp"
+             BindingContext="{Binding Source={x:Static stack:Stack2ViewModel.DesignInstance}}"
+             sr:BindingContextResolver.Type="{x:Type stack:Stack2ViewModel}"
+             shell:ShellProperty.Title="Stack2"
+             shell:ShellProperty.Function1Enabled="True" shell:ShellProperty.Function1Text="-1"
+             shell:ShellProperty.Function4Enabled="True" shell:ShellProperty.Function4Text="+1">
+
+    <StackLayout Style="{StaticResource PageStack}">
+        <Button Text="Pop" Style="{StaticResource NavigationButton}"
+                Command="{Binding PopCommand}" CommandParameter="{sm:Int32 1}"/>
+        <Button Text="Push" Style="{StaticResource NavigationButton}"
+                Command="{Binding PushCommand}" CommandParameter="{markup:ViewId Stack3}"/>
+    </StackLayout>
+
+</ContentView>

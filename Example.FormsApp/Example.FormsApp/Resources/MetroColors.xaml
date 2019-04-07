@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Example.FormsApp.Resources.MetroColors">
+
+    <!-- Color -->
+
+    <Color x:Key="MetroBlue">#2D89EF</Color>
+    <Color x:Key="MetroBlueBrighter">#4AA6FF</Color>
+    <Color x:Key="MetroBlueDarker">#0E6AD0</Color>
+
+    <Color x:Key="MetroBlueLight">#EFF4FF</Color>
+    <Color x:Key="MetroBlueLightBrighter">#FAFFFF</Color>
+    <Color x:Key="MetroBlueLightDarker">#D0D5E0</Color>
+
+    <Color x:Key="MetroBlueDark">#2B5797</Color>
+    <Color x:Key="MetroBlueDarkBrighter">#4874B4</Color>
+    <Color x:Key="MetroBlueDarkDarker">#0C3878</Color>
+
+    <Color x:Key="MetroTeal">#00ABA9</Color>
+    <Color x:Key="MetroTealBrighter">#1DC8C6</Color>
+    <Color x:Key="MetroTealDarker">#008C8A</Color>
+
+    <Color x:Key="MetroGreen">#00A300</Color>
+    <Color x:Key="MetroGreenBrighter">#1DC01D</Color>
+    <Color x:Key="MetroGreenDarker">#008400</Color>
+
+    <Color x:Key="MetroLightGreen">#99B433</Color>
+    <Color x:Key="MetroLightGreenBrighter">#B6D150</Color>
+    <Color x:Key="MetroLightGreenDarker">#7A9514</Color>
+
+    <Color x:Key="MetroDarkGreen">#1E7145</Color>
+    <Color x:Key="MetroDarkGreenBrighter">#3B8E62</Color>
+    <Color x:Key="MetroDarkGreenDarker">#005226</Color>
+
+    <Color x:Key="MetroRed">#EE1111</Color>
+    <Color x:Key="MetroRedBrighter">#FF2E2E</Color>
+    <Color x:Key="MetroRedDarker">#CF0000</Color>
+
+    <Color x:Key="MetroRedDark">#B91D47</Color>
+    <Color x:Key="MetroRedDarkBrighter">#D63A64</Color>
+    <Color x:Key="MetroRedDarkDarker">#9A0028</Color>
+
+    <Color x:Key="MetroYellow">#FFC40D</Color>
+    <Color x:Key="MetroYellowBrighter">#FFE12A</Color>
+    <Color x:Key="MetroYellowDarker">#E0A500</Color>
+
+    <Color x:Key="MetroOrange">#E3A21A</Color>
+    <Color x:Key="MetroOrangeBrighter">#FFBF37</Color>
+    <Color x:Key="MetroOrangeDarker">#C48300</Color>
+
+    <Color x:Key="MetroOrangeDark">#DA532C</Color>
+    <Color x:Key="MetroOrangeDarkBrighter">#F77049</Color>
+    <Color x:Key="MetroOrangeDarkDarker">#BB340D</Color>
+
+    <Color x:Key="MetroMagenta">#FF0097</Color>
+    <Color x:Key="MetroMagentaBrighter">#FF1DB4</Color>
+    <Color x:Key="MetroMagentaDarker">#E00078</Color>
+
+    <Color x:Key="MetroPurple">#7E3878</Color>
+    <Color x:Key="MetroPurpleBrighter">#9B5595</Color>
+    <Color x:Key="MetroPurpleDarker">#5F1959</Color>
+
+    <Color x:Key="MetroPurpleLight">#9F00A7</Color>
+    <Color x:Key="MetroPurpleLightBrighter">#BC1DC4</Color>
+    <Color x:Key="MetroPurpleLightDarker">#800088</Color>
+
+    <Color x:Key="MetroPurpleDark">#603CBA</Color>
+    <Color x:Key="MetroPurpleDarkBrighter">#7D59D7</Color>
+    <Color x:Key="MetroPurpleDarkDarker">#411D9B</Color>
+
+    <Color x:Key="MetroDarken">#1D1D1D</Color>
+    <Color x:Key="MetroDarkenBrighter">#3B3B3B</Color>
+    <Color x:Key="MetroDarkenDarker">#000000</Color>
+
+    <Color x:Key="MetroLighten">#D5E7EC</Color>
+    <Color x:Key="MetroLightenBrighter">#F1FFFF</Color>
+    <Color x:Key="MetroLightenDarker">#B6C8CD</Color>
+
+    <Color x:Key="MetroGrayDark">#525252</Color>
+    <Color x:Key="MetroGrayDarkBrighter">#707070</Color>
+    <Color x:Key="MetroGrayDarkDarker">#343434</Color>
+
+</ResourceDictionary>
