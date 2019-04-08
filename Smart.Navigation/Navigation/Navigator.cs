@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System;
     using System.Collections.Generic;
@@ -12,9 +12,6 @@
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Strategies;
 
-    /// <summary>
-    ///
-    /// </summary>
     public sealed class Navigator : DisposableObject, INavigator, INavigatorComponentSource
     {
         // ------------------------------------------------------------

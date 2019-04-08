@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Components
+namespace Smart.Navigation.Components
 {
     using System;
 
@@ -11,9 +11,6 @@
             this.callback = callback;
         }
 
-        public object Convert(object value, Type type)
-        {
-            return callback(value, type);
-        }
+        public object Convert(object value, Type type) => callback(value, type);
     }
 }
