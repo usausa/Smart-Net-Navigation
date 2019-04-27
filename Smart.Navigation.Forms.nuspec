@@ -14,8 +14,8 @@
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <dependency id="Xamarin.Forms" version="3.6.0.293080" />
-      <dependency id="Usa.Smart.Core" version="1.7.1" />
+      <dependency id="Xamarin.Forms" version="3.6.0.344457" />
+      <dependency id="Usa.Smart.Core" version="1.7.3" />
       <dependency id="Usa.Smart.Navigation" version="1.2.0" />
     </dependencies>
     <tags>smart navigation xamarin mvvm</tags>

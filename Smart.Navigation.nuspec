@@ -14,7 +14,7 @@
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <dependency id="Usa.Smart.Core" version="1.7.1" />
+      <dependency id="Usa.Smart.Core" version="1.7.3" />
     </dependencies>
     <tags>smart navigation</tags>
   </metadata>

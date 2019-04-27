@@ -127,9 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core">
-      <Version>1.7.1</Version>
+      <Version>1.7.3</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

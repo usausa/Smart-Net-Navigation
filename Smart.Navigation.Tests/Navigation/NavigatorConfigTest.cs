@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System;
     using System.Linq;
@@ -371,6 +371,8 @@
 
         public class DummyDelegateFactory : IDelegateFactory
         {
+            public bool IsCodegenRequired => false;
+
             public Func<int, Array> CreateArrayAllocator(Type type)
             {
                 return null;
