@@ -38,7 +38,7 @@
             base.OnDetachingFrom(bindable);
 
             bindable.BindingContextChanged -= HandleBindingContextChanged;
-            BindingContext = null;
+            AssociatedObject = null;
 
             AttachContainer(null);
         }
