@@ -13,8 +13,8 @@
 
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="1.7.3" />
-    <PackageReference Include="Usa.Smart.Forms" Version="1.5.1" />
-    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="1.5.1" />
+    <PackageReference Include="Usa.Smart.Forms" Version="1.5.2" />
+    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="1.5.2" />
     <PackageReference Include="Usa.Smart.Resolver" Version="1.8.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
