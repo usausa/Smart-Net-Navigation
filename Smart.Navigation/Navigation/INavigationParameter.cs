@@ -16,6 +16,6 @@ namespace Smart.Navigation
 
         bool TryGetValue<T>(string key, out T value);
 
-        bool GetValue<T>(out T value);
+        bool TryGetValue<T>(out T value);
     }
 }

@@ -43,7 +43,7 @@ namespace Smart.Navigation
             return ret;
         }
 
-        public bool GetValue<T>(out T value)
+        public bool TryGetValue<T>(out T value)
         {
             var ret = values.TryGetValue(typeof(T).Name, out var obj);
             value = ret ? (T)obj : default;
