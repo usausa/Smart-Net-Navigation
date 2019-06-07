@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System.Collections.Generic;
 
@@ -34,6 +34,20 @@
         public T GetValueOr<T>(T defaultValue)
         {
             return GetValueOr(typeof(T).Name, defaultValue);
+        }
+
+        public bool TryGetValue<T>(string key, out T value)
+        {
+            var ret = values.TryGetValue(key, out var obj);
+            value = ret ? (T)obj : default;
+            return ret;
+        }
+
+        public bool GetValue<T>(out T value)
+        {
+            var ret = values.TryGetValue(typeof(T).Name, out var obj);
+            value = ret ? (T)obj : default;
+            return ret;
         }
 
         public NavigationParameter SetValue<T>(string key, T value)

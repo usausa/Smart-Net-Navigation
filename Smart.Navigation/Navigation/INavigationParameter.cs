@@ -13,5 +13,9 @@ namespace Smart.Navigation
         T GetValueOr<T>(string key, T defaultValue);
 
         T GetValueOr<T>(T defaultValue);
+
+        bool TryGetValue<T>(string key, out T value);
+
+        bool GetValue<T>(out T value);
     }
 }
