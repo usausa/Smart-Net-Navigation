@@ -2,6 +2,7 @@ namespace Smart.Navigation
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -14,6 +15,12 @@ namespace Smart.Navigation
 
     public sealed class Navigator : DisposableObject, INavigator, INavigatorComponentSource
     {
+        private static readonly PropertyChangedEventArgs StackCountEventArgs = new PropertyChangedEventArgs(nameof(StackedCount));
+        private static readonly PropertyChangedEventArgs CurrentViewIdEventArgs = new PropertyChangedEventArgs(nameof(CurrentViewId));
+        private static readonly PropertyChangedEventArgs CurrentViewEventArgs = new PropertyChangedEventArgs(nameof(CurrentView));
+        private static readonly PropertyChangedEventArgs CurrentTargetEventArgs = new PropertyChangedEventArgs(nameof(CurrentTarget));
+        private static readonly PropertyChangedEventArgs ExecutingEventArgs = new PropertyChangedEventArgs(nameof(Executing));
+
         // ------------------------------------------------------------
         // Event
         // ------------------------------------------------------------
@@ -27,6 +34,8 @@ namespace Smart.Navigation
         public event EventHandler<EventArgs> Exited;
 
         public event EventHandler<EventArgs> ExecutingChanged;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         // ------------------------------------------------------------
         // Member
@@ -89,6 +98,18 @@ namespace Smart.Navigation
         }
 
         // ------------------------------------------------------------
+        // Notification
+        // ------------------------------------------------------------
+
+        private void NotifyCurrentChanged()
+        {
+            PropertyChanged?.Invoke(this, StackCountEventArgs);
+            PropertyChanged?.Invoke(this, CurrentViewIdEventArgs);
+            PropertyChanged?.Invoke(this, CurrentViewEventArgs);
+            PropertyChanged?.Invoke(this, CurrentTargetEventArgs);
+        }
+
+        // ------------------------------------------------------------
         // Navigation
         // ------------------------------------------------------------
 
@@ -104,6 +125,7 @@ namespace Smart.Navigation
 
             viewMapper.CurrentUpdated(null);
 
+            NotifyCurrentChanged();
             Exited?.Invoke(this, EventArgs.Empty);
         }
 
@@ -162,6 +184,7 @@ namespace Smart.Navigation
             {
                 Executing = true;
                 ExecutingChanged?.Invoke(this, EventArgs.Empty);
+                PropertyChanged?.Invoke(this, ExecutingEventArgs);
 
                 var pluginContext = new PluginContext();
                 controller.PluginContext = pluginContext;
@@ -211,12 +234,14 @@ namespace Smart.Navigation
                 (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
 
                 // End post process
+                NotifyCurrentChanged();
                 Navigated?.Invoke(this, args);
             }
             finally
             {
                 Executing = false;
                 ExecutingChanged?.Invoke(this, EventArgs.Empty);
+                PropertyChanged?.Invoke(this, ExecutingEventArgs);
             }
         }
 
