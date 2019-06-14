@@ -1,9 +1,10 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System;
 
     using Xamarin.Forms;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Provider")]
     public class FormsNavigationProvider : INavigationProvider
     {
         private readonly IContainerResolver resolver;

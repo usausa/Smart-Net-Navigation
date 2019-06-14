@@ -1,9 +1,10 @@
-﻿namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies
 {
     using System;
     using System.Collections.Generic;
     using System.Reflection;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Strategy")]
     public sealed class GroupPushStrategy : INavigationStrategy
     {
         private readonly object id;

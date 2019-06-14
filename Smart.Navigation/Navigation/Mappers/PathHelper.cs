@@ -1,13 +1,13 @@
-﻿namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers
 {
     using System;
     using System.Text;
 
-    public static class PathHelper
+    internal static class PathHelper
     {
-        public static readonly char PathSeparatorChar = '/';
+        public const char PathSeparatorChar = '/';
 
-        public static readonly string PathSeparatorString = "/";
+        public const string PathSeparatorString = "/";
 
         public static string GetContainer(string path)
         {

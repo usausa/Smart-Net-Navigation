@@ -1,9 +1,10 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System.Threading.Tasks;
 
     using Smart.Navigation.Strategies;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Extension method")]
     public static class NavigatorExtensions
     {
         // ------------------------------------------------------------

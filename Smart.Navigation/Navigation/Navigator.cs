@@ -79,6 +79,11 @@ namespace Smart.Navigation
 
         public Navigator(INavigatorConfig config)
         {
+            if (config is null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
             components = config.ResolveComponents();
 
             provider = components.Get<INavigationProvider>();
