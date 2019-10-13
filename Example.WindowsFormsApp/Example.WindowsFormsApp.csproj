@@ -205,10 +205,10 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Core">
-      <Version>1.7.3</Version>
+      <Version>1.7.8</Version>
     </PackageReference>
     <PackageReference Include="Usa.Smart.Resolver">
-      <Version>1.8.1</Version>
+      <Version>1.8.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
