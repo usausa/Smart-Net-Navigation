@@ -12,8 +12,6 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FunctionKey.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IApplicationView.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

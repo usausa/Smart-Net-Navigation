@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies
 {
     using System;
     using System.Threading.Tasks;
@@ -396,7 +396,7 @@
         // Mock
         // ------------------------------------------------------------
 
-        public enum Groups
+        public enum Group
         {
             A,
             B,
@@ -411,32 +411,32 @@
         {
         }
 
-        [Group(Groups.A)]
+        [Group(Group.A)]
         public class FormA1 : MockForm
         {
         }
 
-        [Group(Groups.A)]
+        [Group(Group.A)]
         public class FormA2 : MockForm
         {
         }
 
-        [Group(Groups.B)]
+        [Group(Group.B)]
         public class FormB1 : MockForm
         {
         }
 
-        [Group(Groups.B)]
+        [Group(Group.B)]
         public class FormB2 : MockForm
         {
         }
 
-        [Group(Groups.C)]
+        [Group(Group.C)]
         public class FormC1 : MockForm
         {
         }
 
-        [Group(Groups.C)]
+        [Group(Group.C)]
         public class FormC2 : MockForm
         {
         }
