@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <CodeAnalysisRuleSet>..\Smart.Navigation.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Usa.Smart.Core" Version="1.8.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="1.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj" />
+    <ProjectReference Include="..\Smart.Navigation.Windows.Forms\Smart.Navigation.Windows.Forms.csproj" />
+    <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
+  </ItemGroup>
+
+</Project>
