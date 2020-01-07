@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Modules.Wizard.WizardResultView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sr="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:wizard="clr-namespace:Example.FormsApp.Modules.Wizard;assembly=Example.FormsApp"
+             xmlns:markup="clr-namespace:Example.FormsApp.Markup;assembly=Example.FormsApp"
+             xmlns:shell="clr-namespace:Example.FormsApp.Shell;assembly=Example.FormsApp"
+             BindingContext="{Binding Source={x:Static wizard:WizardResultViewModel.DesignInstance}}"
+             sr:BindingContextResolver.Type="{x:Type wizard:WizardResultViewModel}"
+             shell:ShellProperty.Title="WizardResult"
+             shell:ShellProperty.Function1Enabled="True" shell:ShellProperty.Function1Text="◀️"
+             shell:ShellProperty.Function4Enabled="True" shell:ShellProperty.Function4Text="▶️">
+
+    <StackLayout Style="{StaticResource PageStack}">
+        <Label Style="{StaticResource ResultLabel}"
+               Text="{Binding Context.Value.Data1}"/>
+        <Label Style="{StaticResource ResultLabel}"
+               Text="{Binding Context.Value.Data2}"/>
+        <Button Text="Prev" Style="{StaticResource NavigationButton}"
+                Command="{Binding ForwardCommand}" CommandParameter="{markup:ViewId WizardInput2}"/>
+        <Button Text="Complete" Style="{StaticResource NavigationButton}"
+                Command="{Binding ForwardCommand}" CommandParameter="{markup:ViewId Menu}"/>
+    </StackLayout>
+
+</ContentView>

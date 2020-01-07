@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Modules.MenuView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sr="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:modules="clr-namespace:Example.FormsApp.Modules;assembly=Example.FormsApp"
+             xmlns:markup="clr-namespace:Example.FormsApp.Markup;assembly=Example.FormsApp"
+             xmlns:shell="clr-namespace:Example.FormsApp.Shell;assembly=Example.FormsApp"
+             BindingContext="{Binding Source={x:Static modules:MenuViewModel.DesignInstance}}"
+             sr:BindingContextResolver.Type="{x:Type modules:MenuViewModel}"
+             shell:ShellProperty.Title="Menu"
+             shell:ShellProperty.CanGoHome="False">
+
+    <Grid Style="{StaticResource MenuGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Style="{StaticResource NavigationButton}"
+                Text="Multiple id"
+                Command="{Binding ForwardCommand}" CommandParameter="{markup:ViewId EditList}"/>
+        <Button Grid.Row="1" Style="{StaticResource NavigationButton}"
+                Text="Stack"
+                Command="{Binding ForwardCommand}" CommandParameter="{markup:ViewId Stack1}"/>
+        <Button Grid.Row="2" Style="{StaticResource NavigationButton}"
+                Text="Wizard"
+                Command="{Binding ForwardCommand}" CommandParameter="{markup:ViewId WizardInput1}"/>
+
+    </Grid>
+
+</ContentView>

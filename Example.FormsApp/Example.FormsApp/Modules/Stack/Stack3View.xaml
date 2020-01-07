@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="Example.FormsApp.Modules.Stack.Stack3View"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sr="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
+             xmlns:sm="clr-namespace:Smart.Forms.Markup;assembly=Smart.Forms"
+             xmlns:stack="clr-namespace:Example.FormsApp.Modules.Stack;assembly=Example.FormsApp"
+             xmlns:shell="clr-namespace:Example.FormsApp.Shell;assembly=Example.FormsApp"
+             BindingContext="{Binding Source={x:Static stack:Stack3ViewModel.DesignInstance}}"
+             sr:BindingContextResolver.Type="{x:Type stack:Stack3ViewModel}"
+             shell:ShellProperty.Title="Stack3"
+             shell:ShellProperty.Function1Enabled="True" shell:ShellProperty.Function1Text="-1"
+             shell:ShellProperty.Function2Enabled="True" shell:ShellProperty.Function2Text="-2">
+
+    <StackLayout Style="{StaticResource PageStack}">
+        <Button Text="Pop" Style="{StaticResource NavigationButton}"
+            Command="{Binding PopCommand}" CommandParameter="{sm:Int32 1}"/>
+        <Button Text="Pop2" Style="{StaticResource NavigationButton}"
+            Command="{Binding PopCommand}" CommandParameter="{sm:Int32 2}"/>
+    </StackLayout>
+
+</ContentView>
