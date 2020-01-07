@@ -65,15 +65,15 @@ namespace Smart.Navigation.Strategies
 
                 // Deactivate top & Active current
                 exist = true;
-                deactivateStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
-                activateStackInfo = controller.ViewStack[groups[groups.Count - 1]];
+                deactivateStackInfo = controller.ViewStack[^1];
+                activateStackInfo = controller.ViewStack[groups[^1]];
 
                 return new StrategyResult(activateStackInfo.Descriptor.Id, NavigationAttributes.Restore);
             }
 
             if (controller.ViewStack.Count > 0)
             {
-                deactivateStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
+                deactivateStackInfo = controller.ViewStack[^1];
             }
 
             return new StrategyResult(id, NavigationAttributes.Stacked);
@@ -86,7 +86,7 @@ namespace Smart.Navigation.Strategies
                 return controller.CreateView(descriptor.Type);
             }
 
-            return controller.ViewStack[groups[groups.Count - 1]];
+            return controller.ViewStack[groups[^1]];
         }
 
         public void UpdateStack(INavigationController controller, object toView)

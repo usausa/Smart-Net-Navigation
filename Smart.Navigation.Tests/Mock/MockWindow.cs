@@ -1,4 +1,6 @@
-﻿namespace Smart.Mock
+// ReSharper disable MemberCanBeProtected.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+namespace Smart.Mock
 {
     public abstract class MockWindow
     {

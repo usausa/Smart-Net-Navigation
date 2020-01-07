@@ -86,23 +86,29 @@ namespace Smart.Navigation
 
         private static void Cleanup(Element parent)
         {
-            if (parent is VisualElement visualElement)
+            while (true)
             {
-                visualElement.Behaviors.Clear();
-                visualElement.Triggers.Clear();
-            }
-
-            if (parent is Layout layout)
-            {
-                foreach (var child in layout.Children)
+                if (parent is VisualElement visualElement)
                 {
-                    Cleanup(child);
+                    visualElement.Behaviors.Clear();
+                    visualElement.Triggers.Clear();
                 }
-            }
 
-            if (parent is ContentView contentView)
-            {
-                Cleanup(contentView.Content);
+                if (parent is Layout layout)
+                {
+                    foreach (var child in layout.Children)
+                    {
+                        Cleanup(child);
+                    }
+                }
+
+                if (parent is ContentView contentView)
+                {
+                    parent = contentView.Content;
+                    continue;
+                }
+
+                break;
             }
         }
 

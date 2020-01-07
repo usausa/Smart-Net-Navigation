@@ -11,7 +11,7 @@ namespace Smart.Navigation.Components
         {
             private Dictionary<Type, object> map;
 
-            public Dictionary<Type, object> Map => map ?? (map = new Dictionary<Type, object>());
+            public Dictionary<Type, object> Map => map ??= new Dictionary<Type, object>();
 
             public int Counter { get; set; }
         }

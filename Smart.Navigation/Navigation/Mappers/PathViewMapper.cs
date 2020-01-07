@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers
 {
     using System;
     using System.Collections.Generic;
@@ -56,7 +56,7 @@
             throw new InvalidOperationException($"View id is invalid id type. id=[{id}]");
         }
 
-        private string ResolvePath(string current, string path)
+        private static string ResolvePath(string current, string path)
         {
             if (path.StartsWith(PathHelper.PathSeparatorString, StringComparison.OrdinalIgnoreCase))
             {

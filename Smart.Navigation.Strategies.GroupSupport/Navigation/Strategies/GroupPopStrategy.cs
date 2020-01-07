@@ -24,7 +24,7 @@ namespace Smart.Navigation.Strategies
                 throw new InvalidOperationException("View is not stacked.");
             }
 
-            var lastStackInfo = controller.ViewStack[controller.ViewStack.Count - 1];
+            var lastStackInfo = controller.ViewStack[^1];
             var group = lastStackInfo.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
             if (group is null)
             {

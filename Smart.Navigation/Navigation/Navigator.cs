@@ -61,7 +61,7 @@ namespace Smart.Navigation
 
         IComponentContainer INavigatorComponentSource.Components => components;
 
-        private ViewStackInfo CurrentStack => viewStack.Count > 0 ? viewStack[viewStack.Count - 1] : null;
+        private ViewStackInfo CurrentStack => viewStack.Count > 0 ? viewStack[^1] : null;
 
         public int StackedCount => viewStack.Count;
 

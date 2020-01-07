@@ -1,4 +1,7 @@
-﻿namespace Smart.Navigation
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+namespace Smart.Navigation
 {
     using Smart.Mock;
     using Smart.Navigation.Plugins.Scope;

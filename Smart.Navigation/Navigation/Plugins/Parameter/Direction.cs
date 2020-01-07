@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Plugins.Parameter
+namespace Smart.Navigation.Plugins.Parameter
 {
     using System;
 
@@ -7,6 +7,6 @@
     {
         Import = 0x00000001,
         Export = 0x00000002,
-        Both = Import | Export,
+        Both = Import | Export
     }
 }
