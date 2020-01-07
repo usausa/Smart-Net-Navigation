@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies
 {
     using System;
     using System.Threading.Tasks;
@@ -120,7 +120,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static async Task TestNavigatorPopAsync()
+        public static async ValueTask TestNavigatorPopAsync()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -137,7 +137,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorPopAsyncMultiple()
+        public static async ValueTask TestNavigatorPopAsyncMultiple()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -155,7 +155,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorPopAsyncWithParameter()
+        public static async ValueTask TestNavigatorPopAsyncWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -175,7 +175,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorPopAsyncMultipleWithParameter()
+        public static async ValueTask TestNavigatorPopAsyncMultipleWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()

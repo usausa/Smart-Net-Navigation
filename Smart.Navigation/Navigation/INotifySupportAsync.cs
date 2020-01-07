@@ -4,11 +4,11 @@ namespace Smart.Navigation
 
     public interface INotifySupportAsync
     {
-        Task NavigatorNotifyAsync(object parameter);
+        ValueTask NavigatorNotifyAsync(object parameter);
     }
 
     public interface INotifySupportAsync<in T>
     {
-        Task NavigatorNotifyAsync(T parameter);
+        ValueTask NavigatorNotifyAsync(T parameter);
     }
 }

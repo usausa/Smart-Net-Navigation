@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies
 {
     using System.Threading.Tasks;
 
@@ -83,7 +83,7 @@
         // ------------------------------------------------------------
 
         [Fact]
-        public static async Task TestNavigatorPushAsync()
+        public static async ValueTask TestNavigatorPushAsync()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -108,7 +108,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorPushAsyncWithParameter()
+        public static async ValueTask TestNavigatorPushAsyncWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()

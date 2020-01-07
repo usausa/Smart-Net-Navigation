@@ -315,7 +315,7 @@ namespace Smart.Navigation.Strategies
         // ------------------------------------------------------------
 
         [Fact]
-        public static async Task TestNavigatorGropedPushAsyncExistAndNotBring()
+        public static async ValueTask TestNavigatorGropedPushAsyncExistAndNotBring()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -344,7 +344,7 @@ namespace Smart.Navigation.Strategies
         }
 
         [Fact]
-        public static async Task TestNavigatorGropedPushAsyncWithParameter()
+        public static async ValueTask TestNavigatorGropedPushAsyncWithParameter()
         {
             // prepare
             var navigator = new NavigatorConfig()

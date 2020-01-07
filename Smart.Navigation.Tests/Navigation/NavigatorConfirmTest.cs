@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System.Threading.Tasks;
 
@@ -41,7 +41,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorCanceledByAsyncInterface()
+        public static async ValueTask TestNavigatorCanceledByAsyncInterface()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -56,7 +56,7 @@
         }
 
         [Fact]
-        public static async Task TestNavigatorCanceledByAsyncInterface2()
+        public static async ValueTask TestNavigatorCanceledByAsyncInterface2()
         {
             // prepare
             var navigator = new NavigatorConfig()
@@ -84,7 +84,7 @@
 
         public class CancelAsyncForm : MockForm, IConfirmRequestAsync
         {
-            public async Task<bool> CanNavigateAsync(INavigationContext context)
+            public async ValueTask<bool> CanNavigateAsync(INavigationContext context)
             {
                 await Task.Delay(0);
                 return context.Parameter.GetValue<bool>("CanNavigate");
