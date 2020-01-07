@@ -1,9 +1,9 @@
-namespace Example.WindowsFormsApp.Services
+namespace Example.FormsApp.Services
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    using Example.WindowsFormsApp.Models;
+    using Example.FormsApp.Models;
 
     public class DataService
     {

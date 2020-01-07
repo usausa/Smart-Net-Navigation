@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Modules
+namespace Example.WindowsFormsApp.Modules
 {
     using System.Collections.Generic;
     using System.Windows.Forms;
@@ -15,7 +15,7 @@
 
         public INavigator Navigator { get; set; }
 
-        public AppViewBase()
+        protected AppViewBase()
         {
             InitializeComponent();
         }
