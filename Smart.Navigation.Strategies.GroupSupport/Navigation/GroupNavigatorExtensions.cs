@@ -23,12 +23,12 @@ namespace Smart.Navigation
 
         // Async
 
-        public static ValueTask<bool> GroupPushAsync(this INavigator navigator, object id)
+        public static Task<bool> GroupPushAsync(this INavigator navigator, object id)
         {
             return navigator.NavigateAsync(new GroupPushStrategy(id), null);
         }
 
-        public static ValueTask<bool> GroupPushAsync(this INavigator navigator, object id, INavigationParameter parameter)
+        public static Task<bool> GroupPushAsync(this INavigator navigator, object id, INavigationParameter parameter)
         {
             return navigator.NavigateAsync(new GroupPushStrategy(id), parameter);
         }
@@ -59,22 +59,22 @@ namespace Smart.Navigation
 
         // Async
 
-        public static ValueTask<bool> GroupPopAsync(this INavigator navigator)
+        public static Task<bool> GroupPopAsync(this INavigator navigator)
         {
             return navigator.NavigateAsync(new GroupPopStrategy(false), null);
         }
 
-        public static ValueTask<bool> GroupPopAsync(this INavigator navigator, INavigationParameter parameter)
+        public static Task<bool> GroupPopAsync(this INavigator navigator, INavigationParameter parameter)
         {
             return navigator.NavigateAsync(new GroupPopStrategy(false), parameter);
         }
 
-        public static ValueTask<bool> GroupPopAsync(this INavigator navigator, bool leaveLast)
+        public static Task<bool> GroupPopAsync(this INavigator navigator, bool leaveLast)
         {
             return navigator.NavigateAsync(new GroupPopStrategy(leaveLast), null);
         }
 
-        public static ValueTask<bool> GroupPopAsync(this INavigator navigator, bool leaveLast, INavigationParameter parameter)
+        public static Task<bool> GroupPopAsync(this INavigator navigator, bool leaveLast, INavigationParameter parameter)
         {
             return navigator.NavigateAsync(new GroupPopStrategy(leaveLast), parameter);
         }

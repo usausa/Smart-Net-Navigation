@@ -37,6 +37,6 @@ namespace Smart.Navigation
 
         bool Navigate(INavigationStrategy strategy, INavigationParameter parameter);
 
-        ValueTask<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter);
+        Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter);
     }
 }

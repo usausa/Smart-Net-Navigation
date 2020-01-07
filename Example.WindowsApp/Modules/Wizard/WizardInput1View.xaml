@@ -1,0 +1,33 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
+             xmlns:modules="clr-namespace:Example.WindowsApp.Modules"
+             xmlns:wizard="clr-namespace:Example.WindowsApp.Modules.Wizard"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
+             mc:Ignorable="d"
+             x:Class="Example.WindowsApp.Modules.Wizard.WizardInput1View"
+             d:DataContext="{d:DesignInstance Type={x:Type wizard:WizardInput1ViewModel}}"
+             d:DesignHeight="320" d:DesignWidth="480"
+             resolver:DataContextResolver.Type="{x:Type wizard:WizardInput1ViewModel}"
+             views:ShellProperty.Title="WizardInput1">
+
+    <Grid>
+        <TextBox Width="155" Height="23"
+                 Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Text="{Binding Context.Value.Data1}"
+                 TextWrapping="Wrap" />
+        <Button Width="75"
+                Margin="10,38,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Command="{Binding Forward}"
+                CommandParameter="{x:Type modules:MenuView}"
+                Content="Cancel" />
+        <Button Width="75"
+                Margin="90,38,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Command="{Binding Forward}"
+                CommandParameter="{x:Type wizard:WizardInput2View}"
+                Content="Next" />
+    </Grid>
+
+</UserControl>

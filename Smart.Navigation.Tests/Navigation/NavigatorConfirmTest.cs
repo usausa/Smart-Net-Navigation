@@ -84,7 +84,7 @@ namespace Smart.Navigation
 
         public class CancelAsyncForm : MockForm, IConfirmRequestAsync
         {
-            public async ValueTask<bool> CanNavigateAsync(INavigationContext context)
+            public async Task<bool> CanNavigateAsync(INavigationContext context)
             {
                 await Task.Delay(0);
                 return context.Parameter.GetValue<bool>("CanNavigate");

@@ -1,0 +1,29 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
+             xmlns:markup="clr-namespace:Smart.Windows.Markup;assembly=Smart.Windows"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
+             xmlns:stack="clr-namespace:Example.WindowsApp.Modules.Stack"
+             mc:Ignorable="d"
+             x:Class="Example.WindowsApp.Modules.Stack.Stack2View"
+             d:DataContext="{d:DesignInstance Type={x:Type stack:Stack2ViewModel}}"
+             d:DesignHeight="320" d:DesignWidth="480"
+             resolver:DataContextResolver.Type="{x:Type stack:Stack2ViewModel}"
+             views:ShellProperty.Title="Stack2">
+
+    <Grid>
+        <Button Width="75"
+                Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Command="{Binding Pop}"
+                CommandParameter="{markup:Int32 1}"
+                Content="Pop" />
+        <Button Width="75"
+                Margin="90,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Command="{Binding Push}"
+                CommandParameter="{x:Type stack:Stack3View}"
+                Content="Push" />
+    </Grid>
+
+</UserControl>
