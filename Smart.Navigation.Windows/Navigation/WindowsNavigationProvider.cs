@@ -59,8 +59,9 @@ namespace Smart.Navigation
 
             var element = (FrameworkElement)view;
 
-            (view as IDisposable)?.Dispose();
+            (element as IDisposable)?.Dispose();
             (element.DataContext as IDisposable)?.Dispose();
+            element.DataContext = null;
 
             container.Children.Remove(element);
         }

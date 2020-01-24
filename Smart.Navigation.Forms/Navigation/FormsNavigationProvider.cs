@@ -50,6 +50,7 @@ namespace Smart.Navigation
             Cleanup(v);
             (view as IDisposable)?.Dispose();
             (v.BindingContext as IDisposable)?.Dispose();
+            v.BindingContext = null;
 
             container.Children.Remove(v);
         }
