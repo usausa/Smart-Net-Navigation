@@ -14,7 +14,7 @@
     <copyright></copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <dependency id="Xamarin.Forms" version="4.4.0.991265" />
+      <dependency id="Xamarin.Forms" version="4.4.0.991537" />
       <dependency id="Usa.Smart.Core" version="1.8.0" />
       <dependency id="Usa.Smart.Navigation" version="1.4.0" />
     </dependencies>
