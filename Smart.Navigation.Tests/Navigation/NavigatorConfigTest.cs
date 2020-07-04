@@ -378,6 +378,16 @@ namespace Smart.Navigation
                 return null;
             }
 
+            public Func<object> CreateFactory(Type type)
+            {
+                return null;
+            }
+
+            public Func<object[], object> CreateFactory(Type type, Type[] argumentTypes)
+            {
+                return null;
+            }
+
             public Func<object[], object> CreateFactory(ConstructorInfo ci)
             {
                 return null;

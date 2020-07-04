@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp
+namespace Example.WindowsApp
 {
     using System;
     using System.Reactive.Linq;
@@ -21,7 +21,17 @@
 
             Disposables.Add(Observable
                 .FromEvent<EventHandler<EventArgs>, EventArgs>(h => (s, e) => h(e), h => navigator.ExecutingChanged += h, h => navigator.ExecutingChanged -= h)
-                .Subscribe(e => BusyState.IsBusy = navigator.Executing));
+                .Subscribe(e =>
+                {
+                    if (navigator.Executing)
+                    {
+                        BusyState.Require();
+                    }
+                    else
+                    {
+                        BusyState.Release();
+                    }
+                }));
         }
     }
 }
