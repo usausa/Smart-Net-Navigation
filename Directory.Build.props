@@ -5,7 +5,6 @@
     <Deterministic>true</Deterministic>
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     <MSBuildWarningsAsMessages>SA0001;MSB3277</MSBuildWarningsAsMessages>
-    <Version>1.4.1</Version>
   </PropertyGroup>
 
   <PropertyGroup>
