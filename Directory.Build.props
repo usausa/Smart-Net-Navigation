@@ -3,11 +3,22 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <Deterministic>true</Deterministic>
-    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\'))</RepoRoot>
-    <PathMap>$(RepoRoot)=.</PathMap>
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>
     <MSBuildWarningsAsMessages>SA0001;MSB3277</MSBuildWarningsAsMessages>
     <Version>1.4.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>1.4.1</Version>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <MinClientVersion>2.12</MinClientVersion>
+    <Authors>machi_pon</Authors>
+    <Copyright></Copyright>
+    <PackageProjectUrl>https://github.com/usausa/Smart-Net-Navigation</PackageProjectUrl>
+    <PackageLicenseExpression></PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Release'">
@@ -23,6 +34,13 @@
 
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

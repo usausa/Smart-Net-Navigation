@@ -13,13 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 		README.md = README.md
-		Smart.Navigation.Forms.nuspec = Smart.Navigation.Forms.nuspec
-		Smart.Navigation.nuspec = Smart.Navigation.nuspec
-		Smart.Navigation.Resolver.nuspec = Smart.Navigation.Resolver.nuspec
 		Smart.Navigation.ruleset = Smart.Navigation.ruleset
 		Smart.Navigation.sln.DotSettings = Smart.Navigation.sln.DotSettings
-		Smart.Navigation.Windows.Forms.nuspec = Smart.Navigation.Windows.Forms.nuspec
-		Smart.Navigation.Windows.nuspec = Smart.Navigation.Windows.nuspec
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Resolver", "Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj", "{B250D011-1DD5-42ED-98D4-4CF9FEF52F6B}"
@@ -42,19 +37,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1B4B0C6F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Navigation", "Navigation", "{E21DDF71-6ED5-4AB2-8A9D-3CCB1A7E2EA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.Windows", "Smart.Navigation.Windows\Smart.Navigation.Windows.csproj", "{E4FD79CA-F620-409B-B7D7-07C7052302CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Windows", "Smart.Navigation.Windows\Smart.Navigation.Windows.csproj", "{E4FD79CA-F620-409B-B7D7-07C7052302CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart.Navigation.Windows.Forms", "Smart.Navigation.Windows.Forms\Smart.Navigation.Windows.Forms.csproj", "{3E7BA1F2-1AA0-49F4-9B27-3C70620B90A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Windows.Forms", "Smart.Navigation.Windows.Forms\Smart.Navigation.Windows.Forms.csproj", "{3E7BA1F2-1AA0-49F4-9B27-3C70620B90A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.WindowsApp", "Example.WindowsApp\Example.WindowsApp.csproj", "{C7611D56-1F11-4C00-BCB2-DC072889D648}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.WindowsApp", "Example.WindowsApp\Example.WindowsApp.csproj", "{C7611D56-1F11-4C00-BCB2-DC072889D648}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.WindowsFormsApp", "Example.WindowsFormsApp\Example.WindowsFormsApp.csproj", "{9E675CC7-3C9C-4609-B297-5DFAFABCF8A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.WindowsFormsApp", "Example.WindowsFormsApp\Example.WindowsFormsApp.csproj", "{9E675CC7-3C9C-4609-B297-5DFAFABCF8A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.FormsApp.Android", "Example.FormsApp\Example.FormsApp.Android\Example.FormsApp.Android.csproj", "{B842E705-C1DC-47AF-B300-F659CBE6622A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.FormsApp.iOS", "Example.FormsApp\Example.FormsApp.iOS\Example.FormsApp.iOS.csproj", "{09ECD9DE-991F-4F07-9F59-20F7CDAEB53F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.FormsApp", "Example.FormsApp\Example.FormsApp\Example.FormsApp.csproj", "{BAB97B31-C93E-4A45-B7EB-A4D656354408}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.FormsApp", "Example.FormsApp\Example.FormsApp\Example.FormsApp.csproj", "{BAB97B31-C93E-4A45-B7EB-A4D656354408}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

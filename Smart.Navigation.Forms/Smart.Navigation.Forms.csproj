@@ -6,6 +6,14 @@
     <RootNamespace>Smart</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Usa.Smart.Navigation.Forms</PackageId>
+    <Title>Smart.Navigation.Forms .NET</Title>
+    <Description>Smart navigation library wndows forms provider</Description>
+    <Summary>Smart navigation library wndows forms provider</Summary>
+    <PackageTags>smart navigation xamarin mvvm</PackageTags>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="1.8.8" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
