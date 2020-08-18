@@ -16,6 +16,7 @@ namespace Smart.Resolver
             }
 
             config.Bind<PageContextStorage>().ToSelf().InSingletonScope();
+            config.Bind<PageContextKeyManager>().ToSelf().InSingletonScope();
 
             return config;
         }

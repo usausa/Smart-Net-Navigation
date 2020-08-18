@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System;
     using System.Windows.Forms;
@@ -14,6 +14,11 @@
 
         public static NavigatorConfig UseControlNavigationProvider(this NavigatorConfig config, Control container, Action<WindowsFormsNavigationProviderOptions> setupAction)
         {
+            if (config is null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
             if (container is null)
             {
                 throw new ArgumentNullException(nameof(container));

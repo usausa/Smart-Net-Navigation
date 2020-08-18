@@ -13,7 +13,7 @@ namespace Example.FormsApp.Modules.Edit
 
     public class EditListViewModel : AppViewModelBase
     {
-        public static EditListViewModel DesignInstance { get; } = null; // For design
+        public static EditListViewModel DesignInstance => null; // For design
 
         [Inject]
         public DataService DataService { get; set; }

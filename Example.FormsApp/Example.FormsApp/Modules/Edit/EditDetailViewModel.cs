@@ -11,7 +11,7 @@ namespace Example.FormsApp.Modules.Edit
 
     public class EditDetailViewModel : AppViewModelBase
     {
-        public static EditDetailViewModel DesignInstance { get; } = null; // For design
+        public static EditDetailViewModel DesignInstance => null; // For design
 
         private DataEntity entity;
 

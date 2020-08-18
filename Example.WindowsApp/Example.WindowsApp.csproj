@@ -10,10 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="1.8.8" />
     <PackageReference Include="Usa.Smart.Reactive" Version="1.5.1" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="1.9.4" />
-    <PackageReference Include="Usa.Smart.Windows" Version="1.9.5" />
-    <PackageReference Include="Usa.Smart.Windows.Reactive" Version="1.9.5" />
-    <PackageReference Include="Usa.Smart.Windows.Resolver" Version="1.9.5" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="1.10.1" />
+    <PackageReference Include="Usa.Smart.Windows" Version="1.9.8" />
+    <PackageReference Include="Usa.Smart.Windows.Reactive" Version="1.9.8" />
+    <PackageReference Include="Usa.Smart.Windows.Resolver" Version="1.9.8" />
   </ItemGroup>
 
   <ItemGroup>
