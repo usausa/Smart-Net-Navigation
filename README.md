@@ -1,5 +1,7 @@
 # Smart.Navigation .NET - navigation library for .NET
 
+[![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation)](https://www.nuget.org/packages/Usa.Smart.Navigation/)
+
 ## What is this ?
 
 * Navigation by control switching.
@@ -29,13 +31,13 @@ navigator.Forward(ViewId.Menu);
 
 ## NuGet
 
-| Id                                 | Note                       |
-|------------------------------------|----------------------------|
-| Usa.Smart.Navigation               | Core libyrary              |
-| Usa.Smart.Navigation.Resolver      | Smart.Resolver integration |
-| Usa.Smart.Navigation.Forms         | Xamarin.Forms provider     |
-| Usa.Smart.Navigation.Windows       | WPF provider               |
-| Usa.Smart.Navigation.Windows.Forms | Windows Forms provider     |
+| Package | Note |
+|-|-|
+| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation)](https://www.nuget.org/packages/Usa.Smart.Navigation/) | Core libyrary |
+| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Resolver)](https://www.nuget.org/packages/Usa.Smart.Navigation.Resolver/) | Smart.Resolver integration |
+| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Forms)](https://www.nuget.org/packages/Usa.Smart.Navigation.Forms/) | Xamarin.Forms provider |
+| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Windows)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows/) | WPF provider |
+| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Windows.Forms)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows.Forms/) | Windows Forms provider |
 
 ## Supported platform
 
