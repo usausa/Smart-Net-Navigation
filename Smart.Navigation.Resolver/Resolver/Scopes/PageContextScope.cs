@@ -19,7 +19,7 @@ namespace Smart.Resolver.Scopes
             this.name = name;
         }
 
-        public IScope Copy(IComponentContainer components)
+        public IScope Copy(ComponentContainer components)
         {
             return new PageContextScope(name);
         }

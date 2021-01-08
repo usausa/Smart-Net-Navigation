@@ -7,7 +7,6 @@ namespace Smart.Navigation
     using System.Threading.Tasks;
 
     using Smart.ComponentModel;
-    using Smart.Functional;
     using Smart.Navigation.Components;
     using Smart.Navigation.Mappers;
     using Smart.Navigation.Plugins;
@@ -43,7 +42,7 @@ namespace Smart.Navigation
 
         private static readonly NavigationParameter EmptyParameter = new NavigationParameter();
 
-        private readonly IComponentContainer components;
+        private readonly ComponentContainer components;
 
         private readonly List<ViewStackInfo> viewStack = new List<ViewStackInfo>();
 
@@ -59,7 +58,7 @@ namespace Smart.Navigation
         // Property
         // ------------------------------------------------------------
 
-        IComponentContainer INavigatorComponentSource.Components => components;
+        ComponentContainer INavigatorComponentSource.Components => components;
 
         private ViewStackInfo CurrentStack => viewStack.Count > 0 ? viewStack[^1] : null;
 

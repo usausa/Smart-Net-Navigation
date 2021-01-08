@@ -4,6 +4,6 @@
 
     public interface INavigatorConfig
     {
-        IComponentContainer ResolveComponents();
+        ComponentContainer ResolveComponents();
     }
 }

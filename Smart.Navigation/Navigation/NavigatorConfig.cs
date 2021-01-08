@@ -36,7 +36,7 @@
             return this;
         }
 
-        IComponentContainer INavigatorConfig.ResolveComponents()
+        ComponentContainer INavigatorConfig.ResolveComponents()
         {
             return config.ToContainer();
         }
