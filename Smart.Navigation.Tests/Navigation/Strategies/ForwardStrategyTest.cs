@@ -21,7 +21,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(typeof(Form1));
@@ -76,7 +76,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(typeof(Form1));
@@ -120,7 +120,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             await navigator.ForwardAsync(typeof(Form1));

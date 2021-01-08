@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers
 {
     using System;
     using System.Reflection;
@@ -35,7 +35,7 @@
             // prepare
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
-                .UseIdViewMapper(r => { })
+                .UseIdViewMapper(_ => { })
                 .ToNavigator();
 
             // test

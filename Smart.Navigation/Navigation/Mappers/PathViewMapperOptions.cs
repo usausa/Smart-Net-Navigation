@@ -6,7 +6,7 @@
 
     public class PathViewMapperOptions
     {
-        private readonly List<Assembly> assemblies = new List<Assembly>();
+        private readonly List<Assembly> assemblies = new();
 
         public string Root { get; set; }
 
@@ -22,7 +22,7 @@
             for (var i = 0; i < assemblies.Count; i++)
             {
                 var type = assemblies[i].GetType(typeName);
-                if (type != null)
+                if (type is not null)
                 {
                     return type;
                 }

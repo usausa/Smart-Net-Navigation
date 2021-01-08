@@ -25,7 +25,7 @@ namespace Smart.Navigation
                 .ToNavigator();
 
             var eventArgs = new Holder<NavigationEventArgs>();
-            navigator.Navigating += (sender, args) => eventArgs.Value = args;
+            navigator.Navigating += (_, args) => eventArgs.Value = args;
 
             // test
             navigator.Forward(typeof(EventArgs1Window));
@@ -87,8 +87,8 @@ namespace Smart.Navigation
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
                 .ToNavigator();
-            navigator.Navigating += (sender, args) => recorder.Events.Add($"{((Type)args.Context.FromId)?.Name}.Navigating");
-            navigator.Navigated += (sender, args) => recorder.Events.Add($"{((Type)args.Context.ToId).Name}.Navigated");
+            navigator.Navigating += (_, args) => recorder.Events.Add($"{((Type)args.Context.FromId)?.Name}.Navigating");
+            navigator.Navigated += (_, args) => recorder.Events.Add($"{((Type)args.Context.ToId).Name}.Navigated");
 
             // test
             navigator.Forward(typeof(Form1));

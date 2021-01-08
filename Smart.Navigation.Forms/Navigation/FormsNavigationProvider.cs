@@ -115,7 +115,7 @@ namespace Smart.Navigation
 
         private static VisualElement GetFocused(Element parent)
         {
-            if (parent is VisualElement visualElement && visualElement.IsFocused)
+            if (parent is VisualElement { IsFocused: true } visualElement)
             {
                 return visualElement;
             }
@@ -125,7 +125,7 @@ namespace Smart.Navigation
                 foreach (var child in layout.Children)
                 {
                     var focused = GetFocused(child);
-                    if (focused != null)
+                    if (focused is not null)
                     {
                         return focused;
                     }
@@ -135,7 +135,7 @@ namespace Smart.Navigation
             if (parent is ContentView contentView)
             {
                 var focused = GetFocused(contentView.Content);
-                if (focused != null)
+                if (focused is not null)
                 {
                     return focused;
                 }

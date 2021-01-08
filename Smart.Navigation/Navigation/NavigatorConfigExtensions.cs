@@ -72,7 +72,7 @@ namespace Smart.Navigation
 
         public static NavigatorConfig UseDirectViewMapper(this NavigatorConfig config, Type baseType)
         {
-            if (baseType != null)
+            if (baseType is not null)
             {
                 config.Configure(c =>
                 {
@@ -304,7 +304,7 @@ namespace Smart.Navigation
 
         public static Navigator ToNavigator(this INavigatorConfig config)
         {
-            return new Navigator(config);
+            return new(config);
         }
     }
 }

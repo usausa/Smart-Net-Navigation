@@ -17,9 +17,9 @@ namespace Example.WindowsFormsApp
 
         private readonly Navigator navigator;
 
-        private readonly Dictionary<Keys, FunctionKey> enabledFunctions = new Dictionary<Keys, FunctionKey>();
+        private readonly Dictionary<Keys, FunctionKey> enabledFunctions = new();
 
-        private readonly List<Button> functionButtons = new List<Button>();
+        private readonly List<Button> functionButtons = new();
 
         public MainForm()
         {
@@ -37,7 +37,7 @@ namespace Example.WindowsFormsApp
                 .ToNavigator();
             navigator.Exited += OnExited;
             navigator.Navigating += OnNavigating;
-            navigator.Navigated += (sender, args) =>
+            navigator.Navigated += (_, args) =>
             {
                 // for debug
                 System.Diagnostics.Debug.WriteLine(
@@ -119,7 +119,7 @@ namespace Example.WindowsFormsApp
         private void UpdateFunctionKeys(IReadOnlyList<FunctionKey> keys)
         {
             enabledFunctions.Clear();
-            if (keys != null)
+            if (keys is not null)
             {
                 foreach (var key in keys)
                 {

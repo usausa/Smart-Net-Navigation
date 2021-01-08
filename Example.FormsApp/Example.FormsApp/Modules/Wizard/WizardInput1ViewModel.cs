@@ -12,7 +12,7 @@ namespace Example.FormsApp.Modules.Wizard
         public static WizardInput1ViewModel DesignInstance => null; // For design
 
         [Scope]
-        public NotificationValue<WizardContext> Context { get; } = new NotificationValue<WizardContext>();
+        public NotificationValue<WizardContext> Context { get; } = new();
 
         public AsyncCommand<ViewId> ForwardCommand { get; }
 

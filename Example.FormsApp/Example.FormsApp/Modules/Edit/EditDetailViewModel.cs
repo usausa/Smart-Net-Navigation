@@ -18,9 +18,9 @@ namespace Example.FormsApp.Modules.Edit
         [Inject]
         public DataService DataService { get; set; }
 
-        public NotificationValue<bool> Update { get; } = new NotificationValue<bool>();
+        public NotificationValue<bool> Update { get; } = new();
 
-        public NotificationValue<string> Name { get; } = new NotificationValue<string>();
+        public NotificationValue<string> Name { get; } = new();
 
         public EditDetailViewModel(ApplicationState applicationState)
             : base(applicationState)

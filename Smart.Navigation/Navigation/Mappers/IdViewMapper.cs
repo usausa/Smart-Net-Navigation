@@ -6,7 +6,7 @@ namespace Smart.Navigation.Mappers
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "ViewMapper")]
     public sealed class IdViewMapper : IViewMapper, IIdViewRegister
     {
-        private readonly Dictionary<object, ViewDescriptor> descriptors = new Dictionary<object, ViewDescriptor>();
+        private readonly Dictionary<object, ViewDescriptor> descriptors = new();
 
         private readonly ITypeConstraint constraint;
 

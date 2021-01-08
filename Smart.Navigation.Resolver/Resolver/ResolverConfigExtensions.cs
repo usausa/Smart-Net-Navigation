@@ -33,7 +33,7 @@ namespace Smart.Resolver
                 throw new ArgumentNullException(nameof(name));
             }
 
-            return syntax.InScope(c => new PageContextScope(name));
+            return syntax.InScope(_ => new PageContextScope(name));
         }
     }
 }

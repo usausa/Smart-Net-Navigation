@@ -36,7 +36,7 @@ namespace Smart.Navigation.Strategies
                 : controller.ViewStack.FindLastIndex(controller.ViewStack.Count - 2, stack =>
                 {
                     var groupOfStack = stack.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-                    return (groupOfStack != null) && Equals(group.Id, groupOfStack.Id);
+                    return (groupOfStack is not null) && Equals(group.Id, groupOfStack.Id);
                 });
             if (start == -1)
             {

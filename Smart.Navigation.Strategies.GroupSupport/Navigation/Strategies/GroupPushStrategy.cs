@@ -38,13 +38,9 @@ namespace Smart.Navigation.Strategies
             for (var i = 0; i < controller.ViewStack.Count; i++)
             {
                 var groupOfStack = controller.ViewStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-                if ((groupOfStack != null) && Equals(group.Id, groupOfStack.Id))
+                if ((groupOfStack is not null) && Equals(group.Id, groupOfStack.Id))
                 {
-                    if (groups is null)
-                    {
-                        groups = new List<int>();
-                    }
-
+                    groups ??= new List<int>();
                     groups.Add(i);
 
                     if (Equals(controller.ViewStack[i].Descriptor.Id, id))
@@ -100,7 +96,7 @@ namespace Smart.Navigation.Strategies
             }
 
             // Replace stack
-            if (groups != null)
+            if (groups is not null)
             {
                 var count = controller.ViewStack.Count - (exist ? 0 : 1);
 
@@ -126,14 +122,14 @@ namespace Smart.Navigation.Strategies
             }
 
             // Activate restored
-            if (activateStackInfo != null)
+            if (activateStackInfo is not null)
             {
                 controller.ActivateView(activateStackInfo.View, activateStackInfo.RestoreParameter);
                 activateStackInfo.RestoreParameter = null;
             }
 
             // Deactivate old
-            if (deactivateStackInfo != null)
+            if (deactivateStackInfo is not null)
             {
                 deactivateStackInfo.RestoreParameter = controller.DeactivateView(deactivateStackInfo.View);
             }

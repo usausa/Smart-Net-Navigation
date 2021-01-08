@@ -18,7 +18,7 @@ namespace Example.FormsApp.Modules.Edit
         [Inject]
         public DataService DataService { get; set; }
 
-        public ObservableCollection<DataEntity> Items { get; } = new ObservableCollection<DataEntity>();
+        public ObservableCollection<DataEntity> Items { get; } = new();
 
         public AsyncCommand<DataEntity> SelectCommand { get; }
 

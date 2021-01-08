@@ -14,7 +14,7 @@ namespace Smart.Navigation.Components
             public int Counter { get; set; }
         }
 
-        private readonly Dictionary<string, ScopeEntry> entries = new Dictionary<string, ScopeEntry>();
+        private readonly Dictionary<string, ScopeEntry> entries = new();
 
         public void Push(string name)
         {

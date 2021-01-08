@@ -10,7 +10,7 @@
     public class WizardInput2ViewModel : AppViewModelBase
     {
         [Scope]
-        public NotificationValue<WizardContext> Context { get; } = new NotificationValue<WizardContext>();
+        public NotificationValue<WizardContext> Context { get; } = new();
 
         public AsyncCommand<Type> Forward { get; }
 

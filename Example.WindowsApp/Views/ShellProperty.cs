@@ -22,8 +22,7 @@ namespace Example.WindowsApp.Views
 
         private static void PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if ((((FrameworkElement)d).Parent is FrameworkElement parent) &&
-                (parent.DataContext is IShellControl shell))
+            if (((FrameworkElement)d).Parent is FrameworkElement { DataContext: IShellControl shell })
             {
                 UpdateShellControl(shell, d);
             }

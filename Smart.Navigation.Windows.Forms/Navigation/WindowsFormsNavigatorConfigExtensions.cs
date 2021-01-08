@@ -9,7 +9,7 @@ namespace Smart.Navigation
     {
         public static NavigatorConfig UseControlNavigationProvider(this NavigatorConfig config, Control container)
         {
-            return config.UseControlNavigationProvider(container, action => { });
+            return config.UseControlNavigationProvider(container, _ => { });
         }
 
         public static NavigatorConfig UseControlNavigationProvider(this NavigatorConfig config, Control container, Action<WindowsFormsNavigationProviderOptions> setupAction)

@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Plugins
+namespace Smart.Navigation.Plugins
 {
     using System;
     using System.Collections.Generic;
@@ -9,10 +9,7 @@
 
         private void Prepare()
         {
-            if (store is null)
-            {
-                store = new Dictionary<Type, object>();
-            }
+            store ??= new Dictionary<Type, object>();
         }
 
         public void Save<T>(Type type, T value)

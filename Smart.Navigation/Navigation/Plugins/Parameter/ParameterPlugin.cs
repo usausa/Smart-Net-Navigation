@@ -11,7 +11,7 @@ namespace Smart.Navigation.Plugins.Parameter
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Plugin")]
     public class ParameterPlugin : PluginBase
     {
-        private readonly Dictionary<Type, ParameterProperty[]> typeProperties = new Dictionary<Type, ParameterProperty[]>();
+        private readonly Dictionary<Type, ParameterProperty[]> typeProperties = new();
 
         private readonly IDelegateFactory delegateFactory;
 
@@ -33,7 +33,7 @@ namespace Smart.Navigation.Plugins.Parameter
                         Property = x,
                         Attribute = (ParameterAttribute)x.GetCustomAttribute(typeof(ParameterAttribute))
                     })
-                    .Where(x => x.Attribute != null)
+                    .Where(x => x.Attribute is not null)
                     .Select(x => new ParameterProperty(
                         x.Attribute.Name ?? x.Property.Name,
                         delegateFactory.GetExtendedPropertyType(x.Property),
@@ -78,7 +78,7 @@ namespace Smart.Navigation.Plugins.Parameter
 
             foreach (var property in GetTypeProperties(target.GetType()))
             {
-                if (property.Getter != null)
+                if (property.Getter is not null)
                 {
                     parameters.Add(property.Name, property.Getter(target));
                 }
@@ -91,7 +91,7 @@ namespace Smart.Navigation.Plugins.Parameter
         {
             foreach (var property in GetTypeProperties(target.GetType()))
             {
-                if ((property.Setter != null) &&
+                if ((property.Setter is not null) &&
                     parameters.TryGetValue(property.Name, out var value))
                 {
                     property.Setter(target, converter.Convert(value, property.PropertyType));

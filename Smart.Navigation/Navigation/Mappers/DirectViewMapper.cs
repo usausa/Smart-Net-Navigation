@@ -5,7 +5,7 @@
 
     public sealed class DirectViewMapper : IViewMapper
     {
-        private readonly Dictionary<Type, ViewDescriptor> descriptors = new Dictionary<Type, ViewDescriptor>();
+        private readonly Dictionary<Type, ViewDescriptor> descriptors = new();
 
         private readonly ITypeConstraint constraint;
 

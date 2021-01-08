@@ -7,7 +7,7 @@ namespace Example.FormsApp.Services
 
     public class DataService
     {
-        private readonly List<DataEntity> entities = new List<DataEntity>
+        private readonly List<DataEntity> entities = new()
         {
             new DataEntity { Id = 1, Name = "Data-1" },
             new DataEntity { Id = 2, Name = "Data-2" },

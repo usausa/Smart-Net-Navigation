@@ -177,12 +177,7 @@ namespace Example.FormsApp.Shell
         private static void PropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var parent = ((ContentView)bindable).Parent;
-            if (parent is null)
-            {
-                return;
-            }
-
-            if (parent.BindingContext is IShellControl shell)
+            if (parent?.BindingContext is IShellControl shell)
             {
                 UpdateShellControl(shell, bindable);
             }

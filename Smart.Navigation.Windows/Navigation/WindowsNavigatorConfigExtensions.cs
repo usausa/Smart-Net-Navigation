@@ -9,7 +9,7 @@ namespace Smart.Navigation
     {
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config)
         {
-            return config.UseWindowsNavigationProvider(action => { });
+            return config.UseWindowsNavigationProvider(_ => { });
         }
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Action<WindowsNavigationProviderOptions> setupAction)
@@ -47,7 +47,7 @@ namespace Smart.Navigation
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container)
         {
-            return config.UseWindowsNavigationProvider(container, action => { });
+            return config.UseWindowsNavigationProvider(container, _ => { });
         }
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container, Action<WindowsNavigationProviderOptions> setupAction)

@@ -12,7 +12,7 @@
 
     public sealed class NavigatorConfig : INavigatorConfig
     {
-        private readonly ComponentConfig config = new ComponentConfig();
+        private readonly ComponentConfig config = new();
 
         public NavigatorConfig()
         {

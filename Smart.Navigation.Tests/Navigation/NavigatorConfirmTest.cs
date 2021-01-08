@@ -15,7 +15,7 @@ namespace Smart.Navigation
             var navigator = new NavigatorConfig()
                 .UseMockFormProvider()
                 .ToNavigator();
-            navigator.Confirm += (sender, args) =>
+            navigator.Confirm += (_, args) =>
             {
                 args.Cancel = args.Context.Parameter.GetValue<bool>("Cancel");
             };

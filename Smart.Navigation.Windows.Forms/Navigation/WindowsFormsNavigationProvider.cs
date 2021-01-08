@@ -79,7 +79,7 @@ namespace Smart.Navigation
         private static Control GetFocused(Control control)
         {
             var containerControl = control as IContainerControl;
-            while (containerControl != null)
+            while (containerControl is not null)
             {
                 control = containerControl.ActiveControl;
                 containerControl = control as IContainerControl;

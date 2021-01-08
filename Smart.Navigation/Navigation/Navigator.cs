@@ -14,11 +14,11 @@ namespace Smart.Navigation
 
     public sealed class Navigator : DisposableObject, INavigator, INavigatorComponentSource
     {
-        private static readonly PropertyChangedEventArgs StackCountEventArgs = new PropertyChangedEventArgs(nameof(StackedCount));
-        private static readonly PropertyChangedEventArgs CurrentViewIdEventArgs = new PropertyChangedEventArgs(nameof(CurrentViewId));
-        private static readonly PropertyChangedEventArgs CurrentViewEventArgs = new PropertyChangedEventArgs(nameof(CurrentView));
-        private static readonly PropertyChangedEventArgs CurrentTargetEventArgs = new PropertyChangedEventArgs(nameof(CurrentTarget));
-        private static readonly PropertyChangedEventArgs ExecutingEventArgs = new PropertyChangedEventArgs(nameof(Executing));
+        private static readonly PropertyChangedEventArgs StackCountEventArgs = new(nameof(StackedCount));
+        private static readonly PropertyChangedEventArgs CurrentViewIdEventArgs = new(nameof(CurrentViewId));
+        private static readonly PropertyChangedEventArgs CurrentViewEventArgs = new(nameof(CurrentView));
+        private static readonly PropertyChangedEventArgs CurrentTargetEventArgs = new(nameof(CurrentTarget));
+        private static readonly PropertyChangedEventArgs ExecutingEventArgs = new(nameof(Executing));
 
         // ------------------------------------------------------------
         // Event
@@ -40,11 +40,11 @@ namespace Smart.Navigation
         // Member
         // ------------------------------------------------------------
 
-        private static readonly NavigationParameter EmptyParameter = new NavigationParameter();
+        private static readonly NavigationParameter EmptyParameter = new();
 
         private readonly ComponentContainer components;
 
-        private readonly List<ViewStackInfo> viewStack = new List<ViewStackInfo>();
+        private readonly List<ViewStackInfo> viewStack = new();
 
         private readonly INavigationProvider provider;
 
@@ -202,7 +202,7 @@ namespace Smart.Navigation
                 var args = new NavigationEventArgs(navigationContext, fromView, fromTarget, toView, toTarget);
 
                 // Process from view
-                if (fromView != null)
+                if (fromView is not null)
                 {
                     (fromTarget as INavigationEventSupport)?.OnNavigatingFrom(navigationContext);
 
@@ -265,7 +265,7 @@ namespace Smart.Navigation
             }
 
             var handler = Confirm;
-            if (handler != null)
+            if (handler is not null)
             {
                 var args = new ConfirmEventArgs(context);
                 handler(this, args);

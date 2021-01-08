@@ -17,13 +17,13 @@
             public int Counter { get; set; }
         }
 
-        private readonly Dictionary<Type, ScopeProperty[]> typeProperties = new Dictionary<Type, ScopeProperty[]>();
+        private readonly Dictionary<Type, ScopeProperty[]> typeProperties = new();
 
         private readonly IDelegateFactory delegateFactory;
 
         private readonly IActivator activator;
 
-        private readonly Dictionary<string, Reference> store = new Dictionary<string, Reference>();
+        private readonly Dictionary<string, Reference> store = new();
 
         public ScopePlugin(IDelegateFactory delegateFactory, IActivator activator)
         {
@@ -41,7 +41,7 @@
                         Property = x,
                         Attribute = (ScopeAttribute)x.GetCustomAttribute(typeof(ScopeAttribute))
                     })
-                    .Where(x => x.Attribute != null)
+                    .Where(x => x.Attribute is not null)
                     .Select(x => new ScopeProperty(
                         x.Attribute.Name ?? x.Property.Name,
                         x.Attribute.RequestType ?? delegateFactory.GetExtendedPropertyType(x.Property),

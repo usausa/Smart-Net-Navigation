@@ -22,7 +22,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new []
@@ -52,7 +52,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new [0]
@@ -102,7 +102,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       new [1]
@@ -152,7 +152,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       exist [0]
@@ -194,7 +194,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             // A1 B1       exist [1]
@@ -232,7 +232,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(typeof(Form1));
@@ -299,7 +299,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             navigator.Forward(typeof(FormA1));
@@ -352,7 +352,7 @@ namespace Smart.Navigation.Strategies
                 .ToNavigator();
 
             var context = new Holder<INavigationContext>();
-            navigator.Navigating += (sender, args) => { context.Value = args.Context; };
+            navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
             // test
             await navigator.ForwardAsync(typeof(FormA1));

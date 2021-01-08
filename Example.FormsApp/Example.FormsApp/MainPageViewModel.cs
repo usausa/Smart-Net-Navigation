@@ -13,25 +13,25 @@ namespace Example.FormsApp
     {
         public static MainPageViewModel DesignInstance => null; // For design
 
-        public NotificationValue<string> Title { get; } = new NotificationValue<string>();
+        public NotificationValue<string> Title { get; } = new();
 
-        public NotificationValue<bool> CanGoHome { get; } = new NotificationValue<bool>();
+        public NotificationValue<bool> CanGoHome { get; } = new();
 
-        public NotificationValue<string> Function1Text { get; } = new NotificationValue<string>();
+        public NotificationValue<string> Function1Text { get; } = new();
 
-        public NotificationValue<string> Function2Text { get; } = new NotificationValue<string>();
+        public NotificationValue<string> Function2Text { get; } = new();
 
-        public NotificationValue<string> Function3Text { get; } = new NotificationValue<string>();
+        public NotificationValue<string> Function3Text { get; } = new();
 
-        public NotificationValue<string> Function4Text { get; } = new NotificationValue<string>();
+        public NotificationValue<string> Function4Text { get; } = new();
 
-        public NotificationValue<bool> Function1Enabled { get; } = new NotificationValue<bool>();
+        public NotificationValue<bool> Function1Enabled { get; } = new();
 
-        public NotificationValue<bool> Function2Enabled { get; } = new NotificationValue<bool>();
+        public NotificationValue<bool> Function2Enabled { get; } = new();
 
-        public NotificationValue<bool> Function3Enabled { get; } = new NotificationValue<bool>();
+        public NotificationValue<bool> Function3Enabled { get; } = new();
 
-        public NotificationValue<bool> Function4Enabled { get; } = new NotificationValue<bool>();
+        public NotificationValue<bool> Function4Enabled { get; } = new();
 
         public ApplicationState ApplicationState { get; }
 

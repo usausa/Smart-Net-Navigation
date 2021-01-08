@@ -13,15 +13,15 @@ namespace Example.WindowsApp
     {
         public INavigator Navigator { get; }
 
-        public NotificationValue<string> Title { get; } = new NotificationValue<string>();
+        public NotificationValue<string> Title { get; } = new();
 
         public MainWindowViewModel(INavigator navigator)
         {
             Navigator = navigator;
 
             Disposables.Add(Observable
-                .FromEvent<EventHandler<EventArgs>, EventArgs>(h => (s, e) => h(e), h => navigator.ExecutingChanged += h, h => navigator.ExecutingChanged -= h)
-                .Subscribe(e =>
+                .FromEvent<EventHandler<EventArgs>, EventArgs>(h => (_, e) => h(e), h => navigator.ExecutingChanged += h, h => navigator.ExecutingChanged -= h)
+                .Subscribe(_ =>
                 {
                     if (navigator.Executing)
                     {

@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp
+namespace Example.WindowsApp
 {
     using System.Windows;
 
@@ -28,7 +28,7 @@
                 .UseWindowsNavigationProvider()
                 .UseResolver(resolver)
                 .ToNavigator();
-            navigator.Navigated += (sender, args) =>
+            navigator.Navigated += (_, args) =>
             {
                 // for debug
                 System.Diagnostics.Debug.WriteLine(
@@ -50,7 +50,7 @@
                 .UseAssignableBinding()
                 .UsePropertyInjector();
 
-            config.Bind<INavigator>().ToMethod(kernel => navigator).InSingletonScope();
+            config.Bind<INavigator>().ToMethod(_ => navigator).InSingletonScope();
 
             return config.ToResolver();
         }
