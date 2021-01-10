@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation
+namespace Smart.Navigation
 {
     using System;
     using System.Collections.Generic;
@@ -9,6 +9,7 @@
     {
         IViewMapper ViewMapper { get; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Ignore")]
         List<ViewStackInfo> ViewStack { get; }
 
         object CreateView(Type type);

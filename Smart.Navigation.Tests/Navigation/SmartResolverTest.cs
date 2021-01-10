@@ -73,6 +73,7 @@ namespace Smart.Navigation
             void Process();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
         public class ServiceImpl : IService
         {
             public void Process()
