@@ -1,4 +1,4 @@
-namespace Smart.Navigation.Plugins.Resolver
+﻿namespace Smart.Navigation.Plugins.Resolver
 {
     using System.Reflection;
 
@@ -11,7 +11,7 @@ namespace Smart.Navigation.Plugins.Resolver
 
         public ResolverPlugin(IActivator activator)
         {
-            this.storage = (PageContextStorage)activator.Resolve(typeof(PageContextStorage));
+            storage = (PageContextStorage)activator.Resolve(typeof(PageContextStorage));
         }
 
         public override void OnCreate(IPluginContext context, object view, object target)
