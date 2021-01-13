@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Smart.Navigation Rules" Description="Smart.Navigation Rules" ToolsVersion="14.0">
+<RuleSet Name="Smart.Navigation Rules" Description="Smart.Navigation Rules" ToolsVersion="16.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA1005" Action="Hidden" />
