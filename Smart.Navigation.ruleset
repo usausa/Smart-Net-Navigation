@@ -6,38 +6,21 @@
     <Rule Id="SA1009" Action="Hidden" />
     <Rule Id="SA1101" Action="Hidden" />
     <Rule Id="SA1111" Action="Hidden" />
-    <Rule Id="SA1115" Action="Hidden" />
-    <Rule Id="SA1118" Action="Hidden" />
     <Rule Id="SA1121" Action="Hidden" />
     <Rule Id="SA1201" Action="Hidden" />
     <Rule Id="SA1202" Action="Hidden" />
     <Rule Id="SA1204" Action="Hidden" />
     <Rule Id="SA1413" Action="Hidden" />
-    <Rule Id="SA1504" Action="Hidden" />
-    <Rule Id="SA1506" Action="Hidden" />
     <Rule Id="SA1512" Action="Hidden" />
     <Rule Id="SA1515" Action="Hidden" />
     <Rule Id="SA1516" Action="Hidden" />
     <Rule Id="SA1600" Action="Hidden" />
     <Rule Id="SA1601" Action="Hidden" />
     <Rule Id="SA1602" Action="Hidden" />
-    <Rule Id="SA1606" Action="Hidden" />
-    <Rule Id="SA1607" Action="Hidden" />
-    <Rule Id="SA1614" Action="Hidden" />
-    <Rule Id="SA1616" Action="Hidden" />
-    <Rule Id="SA1622" Action="Hidden" />
-    <Rule Id="SA1623" Action="Hidden" />
-    <Rule Id="SA1629" Action="Hidden" />
     <Rule Id="SA1633" Action="Hidden" />
-    <Rule Id="SA1642" Action="Hidden" />
     <Rule Id="SA1649" Action="Hidden" />
-    <Rule Id="SA1652" Action="Hidden" />
   </Rules>
-  <Rules AnalyzerId="Microsoft.NetCore.Analyzers" RuleNamespace="Microsoft.NetCore.Analyzers">
-    <Rule Id="CA1303" Action="Hidden" />
-  </Rules>
-  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
     <Rule Id="CA1720" Action="Hidden" />
-    <Rule Id="CA1710" Action="Hidden" />
   </Rules>
 </RuleSet>

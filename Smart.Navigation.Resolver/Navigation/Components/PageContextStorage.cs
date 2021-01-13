@@ -1,4 +1,4 @@
-namespace Smart.Navigation.Components
+﻿namespace Smart.Navigation.Components
 {
     using System;
     using System.Collections.Generic;

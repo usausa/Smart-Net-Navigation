@@ -1,4 +1,4 @@
-namespace Smart.Navigation
+﻿namespace Smart.Navigation
 {
     using System;
     using System.Linq;
@@ -338,7 +338,7 @@ namespace Smart.Navigation
         }
 
         // ------------------------------------------------------------
-        // utilitity
+        // Utility
         // ------------------------------------------------------------
 
         public class Model

@@ -1,4 +1,4 @@
-namespace Smart.Navigation
+﻿namespace Smart.Navigation
 {
     public interface INavigationParameter
     {
