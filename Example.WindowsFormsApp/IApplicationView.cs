@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp
+namespace Example.WindowsFormsApp
 {
     using System.Collections.Generic;
     using System.Windows.Forms;

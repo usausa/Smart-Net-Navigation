@@ -1,4 +1,4 @@
-﻿namespace Example.FormsApp.Modules
+namespace Example.FormsApp.Modules
 {
     public enum ViewId
     {

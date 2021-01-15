@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Modules
+namespace Example.WindowsApp.Modules
 {
     /// <summary>
     /// MenuView.xaml の相互作用ロジック

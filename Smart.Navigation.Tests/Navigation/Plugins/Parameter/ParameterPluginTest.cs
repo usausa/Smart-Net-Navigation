@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Plugins.Parameter
+namespace Smart.Navigation.Plugins.Parameter
 {
     using Smart.Mock;
 

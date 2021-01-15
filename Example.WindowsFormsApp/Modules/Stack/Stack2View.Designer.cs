@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Modules.Stack
+namespace Example.WindowsFormsApp.Modules.Stack
 {
     partial class Stack2View
     {

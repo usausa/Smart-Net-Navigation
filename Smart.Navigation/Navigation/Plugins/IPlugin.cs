@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Plugins
+namespace Smart.Navigation.Plugins
 {
     public interface IPlugin
     {

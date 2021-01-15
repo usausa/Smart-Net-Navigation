@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Plugins.Scope
+namespace Smart.Navigation.Plugins.Scope
 {
     using System;
 

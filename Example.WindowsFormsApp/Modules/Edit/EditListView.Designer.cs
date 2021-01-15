@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Modules.Edit
+namespace Example.WindowsFormsApp.Modules.Edit
 {
     partial class DataListView
     {

@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp
+namespace Example.WindowsApp
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

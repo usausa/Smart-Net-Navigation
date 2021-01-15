@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Attributes
+namespace Smart.Navigation.Attributes
 {
     using System;
 

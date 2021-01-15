@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Modules.Stack
+namespace Example.WindowsApp.Modules.Stack
 {
     /// <summary>
     /// Stack2View.xaml の相互作用ロジック

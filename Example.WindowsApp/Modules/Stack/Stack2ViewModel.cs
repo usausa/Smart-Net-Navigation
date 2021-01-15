@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Modules.Stack
+namespace Example.WindowsApp.Modules.Stack
 {
     using System;
 

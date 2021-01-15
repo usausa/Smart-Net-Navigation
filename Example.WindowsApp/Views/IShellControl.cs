@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsApp.Views
+namespace Example.WindowsApp.Views
 {
     using Smart.ComponentModel;
 

@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Models
+namespace Example.WindowsFormsApp.Models
 {
     public class DataEntity
     {

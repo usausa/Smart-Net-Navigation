@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Plugins.Resolver
+namespace Smart.Navigation.Plugins.Resolver
 {
     using System.Reflection;
 

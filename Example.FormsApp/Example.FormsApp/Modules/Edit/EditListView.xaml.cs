@@ -1,4 +1,4 @@
-﻿namespace Example.FormsApp.Modules.Edit
+namespace Example.FormsApp.Modules.Edit
 {
     using Smart.Navigation.Attributes;
 

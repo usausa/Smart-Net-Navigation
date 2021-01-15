@@ -1,4 +1,4 @@
-﻿namespace Example.FormsApp.Modules.Stack
+namespace Example.FormsApp.Modules.Stack
 {
     using Smart.Navigation.Attributes;
 

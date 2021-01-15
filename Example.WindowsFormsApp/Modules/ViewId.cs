@@ -1,4 +1,4 @@
-﻿namespace Example.WindowsFormsApp.Modules
+namespace Example.WindowsFormsApp.Modules
 {
     public enum ViewId
     {

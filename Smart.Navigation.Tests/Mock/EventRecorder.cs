@@ -1,4 +1,4 @@
-﻿namespace Smart.Mock
+namespace Smart.Mock
 {
     using System.Collections.Generic;
 

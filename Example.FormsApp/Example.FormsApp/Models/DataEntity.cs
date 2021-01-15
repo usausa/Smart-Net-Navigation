@@ -1,4 +1,4 @@
-﻿namespace Example.FormsApp.Models
+namespace Example.FormsApp.Models
 {
     public class DataEntity
     {

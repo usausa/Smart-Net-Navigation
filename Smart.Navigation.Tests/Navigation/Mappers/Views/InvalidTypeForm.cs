@@ -1,4 +1,4 @@
-﻿namespace Smart.Navigation.Mappers.Views
+namespace Smart.Navigation.Mappers.Views
 {
     public class InvalidTypeForm
     {
