@@ -4,7 +4,6 @@ namespace Smart.Navigation
 
     using Smart.Navigation.Strategies;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Extension method")]
     public static class GroupNavigatorExtensions
     {
         // ------------------------------------------------------------

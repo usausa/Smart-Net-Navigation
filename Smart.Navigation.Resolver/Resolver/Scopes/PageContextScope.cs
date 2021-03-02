@@ -13,7 +13,6 @@ namespace Smart.Resolver.Scopes
 
         private int key;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
         public PageContextScope(string name)
         {
             this.name = name;

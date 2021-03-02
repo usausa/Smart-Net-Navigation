@@ -17,7 +17,6 @@ namespace Smart.Navigation
 
         public AbsoluteLayout AssociatedObject { get; private set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
         protected override void OnAttachedTo(AbsoluteLayout bindable)
         {
             base.OnAttachedTo(bindable);
@@ -34,7 +33,6 @@ namespace Smart.Navigation
             AttachContainer(bindable);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
         protected override void OnDetachingFrom(AbsoluteLayout bindable)
         {
             base.OnDetachingFrom(bindable);

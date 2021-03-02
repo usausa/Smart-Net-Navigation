@@ -154,7 +154,6 @@ namespace Smart.Navigation
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2007:DoNotDirectlyAwaitATask", Justification = "Ignore")]
         async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter)
         {
             var controller = new Controller(this);
@@ -166,7 +165,7 @@ namespace Smart.Navigation
 
             var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
 
-            var confirmResult = await ConfirmNavigationAsync(navigationContext);
+            var confirmResult = await ConfirmNavigationAsync(navigationContext).ConfigureAwait(false);
             if (!confirmResult)
             {
                 return false;
@@ -278,12 +277,11 @@ namespace Smart.Navigation
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2007:DoNotDirectlyAwaitATask", Justification = "Ignore")]
         private async Task<bool> ConfirmNavigationAsync(NavigationContext context)
         {
             if (CurrentTarget is IConfirmRequestAsync confirm)
             {
-                var canNavigate = await confirm.CanNavigateAsync(context);
+                var canNavigate = await confirm.CanNavigateAsync(context).ConfigureAwait(false);
                 if (!canNavigate)
                 {
                     return false;

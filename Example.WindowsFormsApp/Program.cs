@@ -5,9 +5,6 @@ namespace Example.WindowsFormsApp
 
     public static class Program
     {
-        /// <summary>
-        /// アプリケーションのメイン エントリ ポイントです。
-        /// </summary>
         [STAThread]
         public static void Main()
         {
