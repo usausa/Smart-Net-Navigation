@@ -3,6 +3,7 @@ namespace Smart.Navigation.Strategies
     using System;
     using System.Reflection;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
     public sealed class GroupPopStrategy : INavigationStrategy
     {
         private readonly bool leaveLast;

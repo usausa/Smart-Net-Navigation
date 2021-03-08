@@ -2,7 +2,7 @@ namespace Smart.Navigation
 {
     using Xamarin.Forms;
 
-    public class ContainerResolver : IContainerResolver, IUpdateContainer
+    public sealed class ContainerResolver : IContainerResolver, IUpdateContainer
     {
         public AbsoluteLayout Container { get; private set; }
 

@@ -1,6 +1,7 @@
 namespace Smart.Navigation
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     public class NavigationParameter : INavigationParameter
     {
@@ -36,14 +37,14 @@ namespace Smart.Navigation
             return GetValueOr(typeof(T).Name, defaultValue);
         }
 
-        public bool TryGetValue<T>(string key, out T value)
+        public bool TryGetValue<T>(string key, [MaybeNullWhen(false)] out T value)
         {
             var ret = values.TryGetValue(key, out var obj);
             value = ret ? (T)obj : default;
             return ret;
         }
 
-        public bool TryGetValue<T>(out T value)
+        public bool TryGetValue<T>([MaybeNullWhen(false)] out T value)
         {
             var ret = values.TryGetValue(typeof(T).Name, out var obj);
             value = ret ? (T)obj : default;
