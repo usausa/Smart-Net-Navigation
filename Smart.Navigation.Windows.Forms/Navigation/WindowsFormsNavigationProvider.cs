@@ -2,7 +2,6 @@ namespace Smart.Navigation
 {
     using System.Windows.Forms;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Provider")]
     public sealed class WindowsFormsNavigationProvider : INavigationProvider
     {
         private readonly Control container;

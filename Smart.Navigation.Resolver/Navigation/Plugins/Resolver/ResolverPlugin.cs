@@ -8,7 +8,6 @@ namespace Smart.Navigation.Plugins.Resolver
     {
         private readonly PageContextStorage storage;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
         public ResolverPlugin(IActivator activator)
         {
             storage = (PageContextStorage)activator.Resolve(typeof(PageContextStorage));

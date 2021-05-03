@@ -48,7 +48,6 @@ namespace Smart.Navigation.Components
             entries.Remove(name);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
         public object Resolve(string name, int key, Func<object> factory)
         {
             if (entries.TryGetValue(name, out var entry))

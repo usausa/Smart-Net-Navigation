@@ -11,7 +11,6 @@ namespace Smart.Navigation
     using Smart.Navigation.Plugins;
     using Smart.Reflection;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Extension method")]
     public static class NavigatorConfigExtensions
     {
         public static NavigatorConfig UseProvider<TProvider>(this NavigatorConfig config)

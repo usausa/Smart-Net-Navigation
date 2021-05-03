@@ -6,7 +6,6 @@ namespace Smart.Navigation
     using System.Windows.Data;
     using System.Windows.Input;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Provider")]
     public class WindowsNavigationProvider : INavigationProvider
     {
         private readonly IContainerResolver resolver;

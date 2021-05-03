@@ -8,7 +8,6 @@ namespace Smart.Navigation.Plugins.Parameter
     using Smart.Navigation.Components;
     using Smart.Reflection;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Plugin")]
     public class ParameterPlugin : PluginBase
     {
         private readonly Dictionary<Type, ParameterProperty[]> typeProperties = new();

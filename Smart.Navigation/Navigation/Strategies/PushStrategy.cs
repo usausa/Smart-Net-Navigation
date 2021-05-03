@@ -2,7 +2,6 @@ namespace Smart.Navigation.Strategies
 {
     using System.Diagnostics.CodeAnalysis;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Strategy")]
     public sealed class PushStrategy : INavigationStrategy
     {
         private readonly object id;
