@@ -46,7 +46,7 @@ namespace Smart.Navigation
             control.Dispose();
         }
 
-        public void ActivateView(object view, object parameter)
+        public void ActivateView(object view, object? parameter)
         {
             var control = (Control)view;
 
@@ -65,7 +65,7 @@ namespace Smart.Navigation
             }
         }
 
-        public object DeactivateView(object view)
+        public object? DeactivateView(object view)
         {
             var control = (Control)view;
 

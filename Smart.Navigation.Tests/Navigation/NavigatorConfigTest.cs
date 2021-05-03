@@ -41,12 +41,6 @@ namespace Smart.Navigation
             Assert.True(components.TryGet<INavigationProvider>(out _));
         }
 
-        [Fact]
-        public static void ConfigUseProviderByInstanceFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseProvider(null));
-        }
-
         // ------------------------------------------------------------
         // ViewMapper
         // ------------------------------------------------------------
@@ -75,31 +69,6 @@ namespace Smart.Navigation
             Assert.NotNull(viewMapper);
         }
 
-        [Fact]
-        public static void ConfigUseViewMapperFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseViewMapper(null));
-        }
-
-        [Fact]
-        public static void ConfigUseIdViewMapperFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseIdViewMapper(null));
-        }
-
-        [Fact]
-        public static void ConfigUseIdViewMapperAutoRegisterFailed()
-        {
-            Assert.Throws<TargetInvocationException>(
-                () => new NavigatorConfig().UseMockFormProvider().UseIdViewMapper(r => r.AutoRegister(null)).ToNavigator());
-        }
-
-        [Fact]
-        public static void ConfigUsePathViewMapperFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UsePathViewMapper(null));
-        }
-
         // ------------------------------------------------------------
         // TypeConstraint
         // ------------------------------------------------------------
@@ -126,12 +95,6 @@ namespace Smart.Navigation
             Assert.True(components.TryGet<ITypeConstraint>(out _));
         }
 
-        [Fact]
-        public static void ConfigUseTypeConstraintByInstanceFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseTypeConstraint(null));
-        }
-
         // ------------------------------------------------------------
         // Activator
         // ------------------------------------------------------------
@@ -145,43 +108,31 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator.Resolve(typeof(Model)));
+            Assert.NotNull(activator!.Resolve(typeof(Model)));
         }
 
         [Fact]
         public static void ConfigUseActivatorByInstance()
         {
             var config = new NavigatorConfig()
-                .UseActivator(new CallbackActivator(Activator.CreateInstance));
+                .UseActivator(new CallbackActivator(Activator.CreateInstance!));
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator.Resolve(typeof(Model)));
-        }
-
-        [Fact]
-        public static void ConfigUseActivatorByInstanceFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseActivator((IActivator)null));
+            Assert.NotNull(activator!.Resolve(typeof(Model)));
         }
 
         [Fact]
         public static void ConfigUseActivatorByCallback()
         {
             var config = new NavigatorConfig()
-                .UseActivator(Activator.CreateInstance);
+                .UseActivator(Activator.CreateInstance!);
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator.Resolve(typeof(Model)));
-        }
-
-        [Fact]
-        public static void ConfigUseActivatorByCallbackFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseActivator((Func<Type, object>)null));
+            Assert.NotNull(activator!.Resolve(typeof(Model)));
         }
 
         // ------------------------------------------------------------
@@ -197,7 +148,7 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IConverter>(out var converter));
-            Assert.Equal(1, converter.Convert("1", typeof(int)));
+            Assert.Equal(1, converter!.Convert("1", typeof(int)));
         }
 
         [Fact]
@@ -209,7 +160,7 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IConverter>(out var converter));
-            Assert.Equal(1, converter.Convert("1", typeof(int)));
+            Assert.Equal(1, converter!.Convert("1", typeof(int)));
         }
 
         [Fact]
@@ -221,13 +172,7 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IConverter>(out var converter));
-            Assert.Equal(1, converter.Convert("1", typeof(int)));
-        }
-
-        [Fact]
-        public static void ConfigUseConverterByInstanceFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseConverter((IConverter)null));
+            Assert.Equal(1, converter!.Convert("1", typeof(int)));
         }
 
         [Fact]
@@ -239,13 +184,7 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IConverter>(out var converter));
-            Assert.Equal(1, converter.Convert("1", typeof(int)));
-        }
-
-        [Fact]
-        public static void ConfigUseConverterByCallbackFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseConverter((IConverter)null));
+            Assert.Equal(1, converter!.Convert("1", typeof(int)));
         }
 
         // ------------------------------------------------------------
@@ -276,12 +215,6 @@ namespace Smart.Navigation
             Assert.NotNull(plugin);
         }
 
-        [Fact]
-        public static void ConfigAddPluginByInstanceFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().AddPlugin(null));
-        }
-
         // ------------------------------------------------------------
         // IDelegateFactory
         // ------------------------------------------------------------
@@ -310,24 +243,6 @@ namespace Smart.Navigation
             Assert.NotNull(delegateFactory);
         }
 
-        [Fact]
-        public static void ConfigUseAccessorByInstanceFailed()
-        {
-            Assert.Throws<ArgumentNullException>(() => new NavigatorConfig().UseDelegateFactory(null));
-        }
-
-        // ------------------------------------------------------------
-        // Failed
-        // ------------------------------------------------------------
-
-        [Fact]
-        public static void ConfigFailed()
-        {
-            var config = new NavigatorConfig();
-
-            Assert.Throws<ArgumentNullException>(() => config.Configure(null));
-        }
-
         // ------------------------------------------------------------
         // Utility
         // ------------------------------------------------------------
@@ -340,10 +255,10 @@ namespace Smart.Navigation
         {
             public ViewDescriptor FindDescriptor(object id)
             {
-                return null;
+                return new(id, typeof(object));
             }
 
-            public void CurrentUpdated(object id)
+            public void CurrentUpdated(object? id)
             {
             }
         }
@@ -364,240 +279,146 @@ namespace Smart.Navigation
         {
             public bool IsCodegenRequired => false;
 
-            public Func<int, Array> CreateArrayAllocator(Type type)
-            {
-                return null;
-            }
+            public Func<int, Array> CreateArrayAllocator(Type type) =>
+                throw new NotSupportedException();
 
-            public Func<object> CreateFactory(Type type)
-            {
-                return null;
-            }
+            public Func<object> CreateFactory(Type type) =>
+                throw new NotSupportedException();
 
-            public Func<object[], object> CreateFactory(Type type, Type[] argumentTypes)
-            {
-                return null;
-            }
+            public Func<object?[]?, object> CreateFactory(Type type, Type[] argumentTypes) =>
+                throw new NotSupportedException();
 
-            public Func<object[], object> CreateFactory(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?[]?, object> CreateFactory(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object> CreateFactory0(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object> CreateFactory0(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object> CreateFactory1(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object> CreateFactory1(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object> CreateFactory2(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object> CreateFactory2(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object> CreateFactory3(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object> CreateFactory3(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object> CreateFactory4(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object> CreateFactory4(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object> CreateFactory5(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object> CreateFactory5(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object> CreateFactory6(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object> CreateFactory6(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object> CreateFactory7(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object> CreateFactory7(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object> CreateFactory8(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory8(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object> CreateFactory9(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory9(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object, object> CreateFactory10(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory10(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object, object, object> CreateFactory11(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory11(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object, object, object, object> CreateFactory12(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory12(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object> CreateFactory13(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory13(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object> CreateFactory14(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory14(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object> CreateFactory15(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory15(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object> CreateFactory16(ConstructorInfo ci)
-            {
-                return null;
-            }
+            public Func<object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object?, object> CreateFactory16(ConstructorInfo ci) =>
+                throw new NotSupportedException();
 
-            public Func<T> CreateFactory<T>()
-            {
-                return null;
-            }
+            public Func<T> CreateFactory<T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, T> CreateFactory<TP1, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, T> CreateFactory<TP1, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, T> CreateFactory<TP1, TP2, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, T> CreateFactory<TP1, TP2, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, T> CreateFactory<TP1, TP2, TP3, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, T> CreateFactory<TP1, TP2, TP3, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, T> CreateFactory<TP1, TP2, TP3, TP4, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, T> CreateFactory<TP1, TP2, TP3, TP4, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, TP10?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, TP10?, TP11?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, TP10?, TP11?, TP12?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, TP10?, TP11?, TP12?, TP13?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, TP10?, TP11?, TP12?, TP13?, TP14?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, TP10?, TP11?, TP12?, TP13?, TP14?, TP15?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, T>() =>
+                throw new NotSupportedException();
 
-            public Func<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, TP16, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, TP16, T>()
-            {
-                return null;
-            }
+            public Func<TP1?, TP2?, TP3?, TP4?, TP5?, TP6?, TP7?, TP8?, TP9?, TP10?, TP11?, TP12?, TP13?, TP14?, TP15?, TP16?, T> CreateFactory<TP1, TP2, TP3, TP4, TP5, TP6, TP7, TP8, TP9, TP10, TP11, TP12, TP13, TP14, TP15, TP16, T>() =>
+                throw new NotSupportedException();
 
-            public Func<object, object> CreateGetter(PropertyInfo pi)
-            {
-                return null;
-            }
+            public Func<object?, object?> CreateGetter(PropertyInfo pi) =>
+                throw new NotSupportedException();
 
-            public Func<object, object> CreateGetter(PropertyInfo pi, bool extension)
-            {
-                return null;
-            }
+            public Func<object?, object?> CreateGetter(PropertyInfo pi, bool extension) =>
+                throw new NotSupportedException();
 
-            public Action<object, object> CreateSetter(PropertyInfo pi)
-            {
-                return null;
-            }
+            public Action<object?, object?> CreateSetter(PropertyInfo pi) =>
+                throw new NotSupportedException();
 
-            public Action<object, object> CreateSetter(PropertyInfo pi, bool extension)
-            {
-                return null;
-            }
+            public Action<object?, object?> CreateSetter(PropertyInfo pi, bool extension) =>
+                throw new NotSupportedException();
 
-            public Func<T, TMember> CreateGetter<T, TMember>(PropertyInfo pi)
-            {
-                return null;
-            }
+            public Func<T?, TMember?> CreateGetter<T, TMember>(PropertyInfo pi) =>
+                throw new NotSupportedException();
 
-            public Func<T, TMember> CreateGetter<T, TMember>(PropertyInfo pi, bool extension)
-            {
-                return null;
-            }
+            public Func<T?, TMember?> CreateGetter<T, TMember>(PropertyInfo pi, bool extension) =>
+                throw new NotSupportedException();
 
-            public Action<T, TMember> CreateSetter<T, TMember>(PropertyInfo pi)
-            {
-                return null;
-            }
+            public Action<T?, TMember?> CreateSetter<T, TMember>(PropertyInfo pi) =>
+                throw new NotSupportedException();
 
-            public Action<T, TMember> CreateSetter<T, TMember>(PropertyInfo pi, bool extension)
-            {
-                return null;
-            }
+            public Action<T?, TMember?> CreateSetter<T, TMember>(PropertyInfo pi, bool extension) =>
+                throw new NotSupportedException();
 
-            public Type GetExtendedPropertyType(PropertyInfo pi)
-            {
-                return null;
-            }
+            public Type GetExtendedPropertyType(PropertyInfo pi) =>
+                throw new NotSupportedException();
         }
     }
 }

@@ -3,6 +3,7 @@ namespace Smart.Navigation
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -24,17 +25,17 @@ namespace Smart.Navigation
         // Event
         // ------------------------------------------------------------
 
-        public event EventHandler<ConfirmEventArgs> Confirm;
+        public event EventHandler<ConfirmEventArgs>? Confirm;
 
-        public event EventHandler<NavigationEventArgs> Navigating;
+        public event EventHandler<NavigationEventArgs>? Navigating;
 
-        public event EventHandler<NavigationEventArgs> Navigated;
+        public event EventHandler<NavigationEventArgs>? Navigated;
 
-        public event EventHandler<EventArgs> Exited;
+        public event EventHandler<EventArgs>? Exited;
 
-        public event EventHandler<EventArgs> ExecutingChanged;
+        public event EventHandler<EventArgs>? ExecutingChanged;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         // ------------------------------------------------------------
         // Member
@@ -60,15 +61,15 @@ namespace Smart.Navigation
 
         ComponentContainer INavigatorComponentSource.Components => components;
 
-        private ViewStackInfo CurrentStack => viewStack.Count > 0 ? viewStack[^1] : null;
+        private ViewStackInfo? CurrentStack => viewStack.Count > 0 ? viewStack[^1] : null;
 
         public int StackedCount => viewStack.Count;
 
-        public object CurrentViewId => CurrentStack?.Descriptor.Id;
+        public object? CurrentViewId => CurrentStack?.Descriptor.Id;
 
-        public object CurrentView => CurrentStack?.View;
+        public object? CurrentView => CurrentStack?.View;
 
-        public object CurrentTarget => CurrentStack?.View.MapOrDefault(x => provider.ResolveTarget(x));
+        public object? CurrentTarget => CurrentStack?.View.MapOrDefault(x => provider.ResolveTarget(x));
 
         public bool Executing { get; private set; }
 
@@ -78,11 +79,6 @@ namespace Smart.Navigation
 
         public Navigator(INavigatorConfig config)
         {
-            if (config is null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
             components = config.ResolveComponents();
 
             provider = components.Get<INavigationProvider>();
@@ -133,7 +129,7 @@ namespace Smart.Navigation
             Exited?.Invoke(this, EventArgs.Empty);
         }
 
-        bool INavigator.Navigate(INavigationStrategy strategy, INavigationParameter parameter)
+        bool INavigator.Navigate(INavigationStrategy strategy, INavigationParameter? parameter)
         {
             var controller = new Controller(this);
             var result = strategy.Initialize(controller);
@@ -154,7 +150,7 @@ namespace Smart.Navigation
             return true;
         }
 
-        async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter)
+        async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter)
         {
             var controller = new Controller(this);
             var result = strategy.Initialize(controller);
@@ -303,6 +299,7 @@ namespace Smart.Navigation
 
             public List<ViewStackInfo> ViewStack => navigator.viewStack;
 
+            [AllowNull]
             public PluginContext PluginContext { private get; set; }
 
             public Controller(Navigator navigator)
@@ -346,12 +343,12 @@ namespace Smart.Navigation
                 navigator.provider.CloseView(view);
             }
 
-            public void ActivateView(object view, object parameter)
+            public void ActivateView(object view, object? parameter)
             {
                 navigator.provider.ActivateView(view, parameter);
             }
 
-            public object DeactivateView(object view)
+            public object? DeactivateView(object view)
             {
                 return navigator.provider.DeactivateView(view);
             }

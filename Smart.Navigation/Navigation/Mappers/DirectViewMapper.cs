@@ -9,11 +9,6 @@ namespace Smart.Navigation.Mappers
 
         private readonly ITypeConstraint constraint;
 
-        public DirectViewMapper()
-            : this(null)
-        {
-        }
-
         public DirectViewMapper(ITypeConstraint constraint)
         {
             this.constraint = constraint;
@@ -35,7 +30,7 @@ namespace Smart.Navigation.Mappers
             throw new InvalidOperationException($"View id is invalid id type. id=[{id}]");
         }
 
-        public void CurrentUpdated(object id)
+        public void CurrentUpdated(object? id)
         {
         }
     }

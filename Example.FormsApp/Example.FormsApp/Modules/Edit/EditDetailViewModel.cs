@@ -1,5 +1,6 @@
 namespace Example.FormsApp.Modules.Edit
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     using Example.FormsApp.Models;
@@ -11,11 +12,11 @@ namespace Example.FormsApp.Modules.Edit
 
     public class EditDetailViewModel : AppViewModelBase
     {
-        public static EditDetailViewModel DesignInstance => null; // For design
-
+        [AllowNull]
         private DataEntity entity;
 
         [Inject]
+        [AllowNull]
         public DataService DataService { get; set; }
 
         public NotificationValue<bool> Update { get; } = new();

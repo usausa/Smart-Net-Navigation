@@ -1,5 +1,6 @@
 namespace Example.FormsApp.Modules
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     using Example.FormsApp.Shell;
@@ -9,6 +10,7 @@ namespace Example.FormsApp.Modules
 
     public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport, INotifySupportAsync<ShellEvent>
     {
+        [AllowNull]
         public INavigator Navigator { get; set; }
 
         protected ApplicationState ApplicationState { get; }

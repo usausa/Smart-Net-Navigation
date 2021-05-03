@@ -26,13 +26,13 @@ namespace Smart.Navigation.Strategies
 
             // test
             navigator.Forward(typeof(Form1));
-            var form1 = (Form1)navigator.CurrentView;
+            var form1 = (Form1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormA1));
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormA2));
-            var formA2 = (FormA2)navigator.CurrentView;
+            var formA2 = (FormA2)navigator.CurrentView!;
 
             navigator.GroupPop();
 
@@ -62,10 +62,10 @@ namespace Smart.Navigation.Strategies
             navigator.Forward(typeof(Form1));
 
             navigator.GroupPush(typeof(FormA1));
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormA2));
-            var formA2 = (FormA2)navigator.CurrentView;
+            var formA2 = (FormA2)navigator.CurrentView!;
 
             navigator.GroupPop(true);
 

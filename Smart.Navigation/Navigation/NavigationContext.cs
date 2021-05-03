@@ -2,7 +2,7 @@ namespace Smart.Navigation
 {
     public sealed class NavigationContext : INavigationContext
     {
-        public object FromId { get; }
+        public object? FromId { get; }
 
         public object ToId { get; }
 
@@ -10,7 +10,7 @@ namespace Smart.Navigation
 
         public INavigationParameter Parameter { get; }
 
-        public NavigationContext(object fromId, object toId, NavigationAttributes attribute, INavigationParameter parameter)
+        public NavigationContext(object? fromId, object toId, NavigationAttributes attribute, INavigationParameter parameter)
         {
             FromId = fromId;
             ToId = toId;

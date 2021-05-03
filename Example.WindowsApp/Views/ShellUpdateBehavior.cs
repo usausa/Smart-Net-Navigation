@@ -38,21 +38,21 @@ namespace Example.WindowsApp.Views
             base.OnDetaching();
         }
 
-        private void NavigatorOnNavigated(object sender, NavigationEventArgs e)
+        private void NavigatorOnNavigated(object? sender, NavigationEventArgs e)
         {
             UpdateShell(e.ToView);
         }
 
-        private void NavigatorOnExited(object sender, EventArgs e)
+        private void NavigatorOnExited(object? sender, EventArgs e)
         {
             UpdateShell(null);
         }
 
-        private void UpdateShell(object view)
+        private void UpdateShell(object? view)
         {
             if (AssociatedObject.DataContext is IShellControl shell)
             {
-                ShellProperty.UpdateShellControl(shell, (DependencyObject)view);
+                ShellProperty.UpdateShellControl(shell, view as DependencyObject);
             }
         }
     }

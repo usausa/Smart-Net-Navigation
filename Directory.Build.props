@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
-    <!---<Nullable>enable</Nullable>-->
+    <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <Deterministic>true</Deterministic>
     <NoWarn>$(NoWarn),1573,1591,1712</NoWarn>

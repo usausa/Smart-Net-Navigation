@@ -1,6 +1,7 @@
 namespace Example.WindowsFormsApp.Modules
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows.Forms;
 
     using Smart.Navigation;
@@ -11,8 +12,9 @@ namespace Example.WindowsFormsApp.Modules
 
         public virtual bool CanGoHome => false;
 
-        public virtual IReadOnlyList<FunctionKey> FunctionKeys => null;
+        public virtual IReadOnlyList<FunctionKey>? FunctionKeys => null;
 
+        [AllowNull]
         public INavigator Navigator { get; set; }
 
         protected AppViewBase()

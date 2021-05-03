@@ -1,5 +1,6 @@
 namespace Example.WindowsFormsApp.Modules.Edit
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using Example.WindowsFormsApp.Models;
@@ -17,6 +18,7 @@ namespace Example.WindowsFormsApp.Modules.Edit
         public override bool CanGoHome => true;
 
         [Inject]
+        [AllowNull]
         public DataService DataService { get; set; }
 
         public DataListView()

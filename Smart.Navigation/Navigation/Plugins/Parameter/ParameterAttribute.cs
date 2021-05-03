@@ -7,7 +7,7 @@ namespace Smart.Navigation.Plugins.Parameter
     {
         public Directions Direction { get; }
 
-        public string Name { get; }
+        public string? Name { get; }
 
         public ParameterAttribute()
             : this(Directions.Both)

@@ -66,7 +66,7 @@ namespace Smart.Navigation
             container.Children.Remove(element);
         }
 
-        public void ActivateView(object view, object parameter)
+        public void ActivateView(object view, object? parameter)
         {
             var element = (FrameworkElement)view;
 
@@ -90,7 +90,7 @@ namespace Smart.Navigation
             }
         }
 
-        public object DeactivateView(object view)
+        public object? DeactivateView(object view)
         {
             var element = (FrameworkElement)view;
 

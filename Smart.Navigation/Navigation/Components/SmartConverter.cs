@@ -18,7 +18,7 @@ namespace Smart.Navigation.Components
             this.converter = converter;
         }
 
-        public object Convert(object value, Type type)
+        public object? Convert(object? value, Type type)
         {
             return converter.Convert(value, type);
         }

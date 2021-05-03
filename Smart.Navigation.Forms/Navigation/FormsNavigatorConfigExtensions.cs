@@ -15,16 +15,6 @@ namespace Smart.Navigation
 
         public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, Action<FormsNavigationProviderOptions> setupAction)
         {
-            if (config is null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
-            if (setupAction is null)
-            {
-                throw new ArgumentNullException(nameof(setupAction));
-            }
-
             var options = new FormsNavigationProviderOptions();
             setupAction(options);
 
@@ -52,21 +42,6 @@ namespace Smart.Navigation
 
         public static NavigatorConfig UseFormsNavigationProvider(this NavigatorConfig config, AbsoluteLayout container, Action<FormsNavigationProviderOptions> setupAction)
         {
-            if (config is null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
-            if (container is null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-
-            if (setupAction is null)
-            {
-                throw new ArgumentNullException(nameof(setupAction));
-            }
-
             var options = new FormsNavigationProviderOptions();
             setupAction(options);
 

@@ -2,7 +2,7 @@ namespace Smart.Navigation.Strategies
 {
     public interface INavigationStrategy
     {
-        StrategyResult Initialize(INavigationController controller);
+        StrategyResult? Initialize(INavigationController controller);
 
         object ResolveToView(INavigationController controller);
 

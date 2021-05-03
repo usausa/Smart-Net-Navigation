@@ -2,6 +2,7 @@ namespace Smart.Navigation.Strategies
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
@@ -9,22 +10,32 @@ namespace Smart.Navigation.Strategies
     {
         private readonly object id;
 
+        [AllowNull]
         private ViewDescriptor descriptor;
 
-        private List<int> groups;
+        private List<int>? groups;
 
         private bool exist;
 
-        private ViewStackInfo activateStackInfo;
+        private ViewStackInfo? activateStackInfo;
 
-        private ViewStackInfo deactivateStackInfo;
+        private ViewStackInfo? deactivateStackInfo;
+
+        private List<int> PreparedGroups
+        {
+            get
+            {
+                groups ??= new List<int>();
+                return groups;
+            }
+        }
 
         public GroupPushStrategy(object id)
         {
             this.id = id;
         }
 
-        public StrategyResult Initialize(INavigationController controller)
+        public StrategyResult? Initialize(INavigationController controller)
         {
             descriptor = controller.ViewMapper.FindDescriptor(id);
 
@@ -40,8 +51,7 @@ namespace Smart.Navigation.Strategies
                 var groupOfStack = controller.ViewStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
                 if ((groupOfStack is not null) && Equals(group.Id, groupOfStack.Id))
                 {
-                    groups ??= new List<int>();
-                    groups.Add(i);
+                    PreparedGroups.Add(i);
 
                     if (Equals(controller.ViewStack[i].Descriptor.Id, id))
                     {
@@ -62,7 +72,7 @@ namespace Smart.Navigation.Strategies
                 // Deactivate top & Active current
                 exist = true;
                 deactivateStackInfo = controller.ViewStack[^1];
-                activateStackInfo = controller.ViewStack[groups[^1]];
+                activateStackInfo = controller.ViewStack[PreparedGroups[^1]];
 
                 return new StrategyResult(activateStackInfo.Descriptor.Id, NavigationAttributes.Restore);
             }
@@ -82,7 +92,7 @@ namespace Smart.Navigation.Strategies
                 return controller.CreateView(descriptor.Type);
             }
 
-            return controller.ViewStack[groups[^1]];
+            return controller.ViewStack[PreparedGroups[^1]];
         }
 
         public void UpdateStack(INavigationController controller, object toView)

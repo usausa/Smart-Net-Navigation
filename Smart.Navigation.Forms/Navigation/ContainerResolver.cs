@@ -4,7 +4,7 @@ namespace Smart.Navigation
 
     public sealed class ContainerResolver : IContainerResolver, IUpdateContainer
     {
-        public AbsoluteLayout Container { get; private set; }
+        public AbsoluteLayout? Container { get; private set; }
 
         public ContainerResolver()
         {
@@ -15,7 +15,7 @@ namespace Smart.Navigation
             Container = container;
         }
 
-        void IUpdateContainer.Attach(AbsoluteLayout container)
+        void IUpdateContainer.Attach(AbsoluteLayout? container)
         {
             Container = container;
         }

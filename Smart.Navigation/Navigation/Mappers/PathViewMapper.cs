@@ -11,7 +11,7 @@ namespace Smart.Navigation.Mappers
 
         private readonly ITypeConstraint constraint;
 
-        private string lastPath;
+        private string lastPath = string.Empty;
 
         public PathViewMapper(PathViewMapperOptions options, ITypeConstraint constraint)
         {
@@ -66,15 +66,18 @@ namespace Smart.Navigation.Mappers
             return PathHelper.Normalize(PathHelper.GetContainer(current) + path);
         }
 
-        private Type PathToType(string path)
+        private Type? PathToType(string path)
         {
             var typeName = $"{options.Root}{path.Replace(PathHelper.PathSeparatorChar, '.')}{options.Suffix}";
             return options.FindType(typeName);
         }
 
-        public void CurrentUpdated(object id)
+        public void CurrentUpdated(object? id)
         {
-            lastPath = (string)id;
+            if (id is not null)
+            {
+                lastPath = (string)id;
+            }
         }
     }
 }

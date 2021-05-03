@@ -14,16 +14,6 @@ namespace Smart.Navigation
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Action<WindowsNavigationProviderOptions> setupAction)
         {
-            if (config is null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
-            if (setupAction is null)
-            {
-                throw new ArgumentNullException(nameof(setupAction));
-            }
-
             var options = new WindowsNavigationProviderOptions();
             setupAction(options);
 
@@ -52,21 +42,6 @@ namespace Smart.Navigation
 
         public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container, Action<WindowsNavigationProviderOptions> setupAction)
         {
-            if (config is null)
-            {
-                throw new ArgumentNullException(nameof(config));
-            }
-
-            if (container is null)
-            {
-                throw new ArgumentNullException(nameof(container));
-            }
-
-            if (setupAction is null)
-            {
-                throw new ArgumentNullException(nameof(setupAction));
-            }
-
             var options = new WindowsNavigationProviderOptions();
             setupAction(options);
 

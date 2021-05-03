@@ -4,6 +4,6 @@ namespace Smart.Navigation
 
     public interface IContainerResolver
     {
-        Canvas Container { get; }
+        Canvas? Container { get; }
     }
 }

@@ -4,6 +4,6 @@ namespace Smart.Navigation.Mappers
     {
         ViewDescriptor FindDescriptor(object id);
 
-        void CurrentUpdated(object id);
+        void CurrentUpdated(object? id);
     }
 }

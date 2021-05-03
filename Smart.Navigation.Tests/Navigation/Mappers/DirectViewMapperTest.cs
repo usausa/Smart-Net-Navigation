@@ -19,7 +19,7 @@ namespace Smart.Navigation.Mappers
             // test
             navigator.Forward(typeof(Form1));
 
-            Assert.Equal(typeof(Form1), navigator.CurrentView.GetType());
+            Assert.Equal(typeof(Form1), navigator.CurrentView!.GetType());
 
             navigator.Forward(typeof(Form2));
 
@@ -35,7 +35,7 @@ namespace Smart.Navigation.Mappers
                 .ToNavigator();
 
             // test
-            Assert.Throws<InvalidOperationException>(() => navigator.Forward(null));
+            Assert.Throws<InvalidOperationException>(() => navigator.Forward(null!));
         }
 
         [Fact]

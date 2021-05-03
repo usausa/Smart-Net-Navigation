@@ -1,5 +1,7 @@
 namespace Smart.Navigation
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using Smart.Mock;
 
     using Xunit;
@@ -17,12 +19,13 @@ namespace Smart.Navigation
             // test
             navigator.Forward(typeof(AwareForm));
 
-            var awareForm = (AwareForm)navigator.CurrentView;
+            var awareForm = (AwareForm)navigator.CurrentView!;
             Assert.Same(navigator, awareForm.Navigator);
         }
 
         public class AwareForm : MockForm, INavigatorAware
         {
+            [AllowNull]
             public INavigator Navigator { get; set; }
         }
     }

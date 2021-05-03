@@ -9,7 +9,7 @@ namespace Example.WindowsFormsApp
 
         bool CanGoHome { get; }
 
-        IReadOnlyList<FunctionKey> FunctionKeys { get; }
+        IReadOnlyList<FunctionKey>? FunctionKeys { get; }
 
         void OnFunctionKey(Keys key);
 

@@ -9,8 +9,6 @@ namespace Example.FormsApp.Modules.Wizard
 
     public class WizardResultViewModel : AppViewModelBase
     {
-        public static WizardResultViewModel DesignInstance => null; // For design
-
         [Scope]
         public NotificationValue<WizardContext> Context { get; } = new();
 

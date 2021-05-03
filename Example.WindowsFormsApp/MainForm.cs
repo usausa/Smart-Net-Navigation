@@ -47,7 +47,7 @@ namespace Example.WindowsFormsApp
             // Forward
             Show();
             navigator.Forward(ViewId.Menu);
-            ((Control)navigator.CurrentView).Focus();
+            ((Control?)navigator.CurrentView)?.Focus();
         }
 
         private static SmartResolver CreateResolver()
@@ -61,12 +61,12 @@ namespace Example.WindowsFormsApp
             return config.ToResolver();
         }
 
-        private void OnFormClosed(object sender, FormClosedEventArgs e)
+        private void OnFormClosed(object? sender, FormClosedEventArgs e)
         {
             resolver.Dispose();
         }
 
-        private void OnNavigating(object sender, NavigationEventArgs e)
+        private void OnNavigating(object? sender, NavigationEventArgs e)
         {
             var view = e.ToView as IApplicationView;
 
@@ -75,7 +75,7 @@ namespace Example.WindowsFormsApp
             UpdateFunctionKeys(view?.FunctionKeys);
         }
 
-        private void OnExited(object sender, EventArgs e)
+        private void OnExited(object? sender, EventArgs e)
         {
             Close();
         }
@@ -116,7 +116,7 @@ namespace Example.WindowsFormsApp
             functionButtons.Add(Fn12Button);
         }
 
-        private void UpdateFunctionKeys(IReadOnlyList<FunctionKey> keys)
+        private void UpdateFunctionKeys(IReadOnlyList<FunctionKey>? keys)
         {
             enabledFunctions.Clear();
             if (keys is not null)

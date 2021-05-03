@@ -8,23 +8,23 @@ namespace Smart.Navigation
 
     public interface INavigator : INotifyPropertyChanged
     {
-        event EventHandler<ConfirmEventArgs> Confirm;
+        event EventHandler<ConfirmEventArgs>? Confirm;
 
-        event EventHandler<NavigationEventArgs> Navigating;
+        event EventHandler<NavigationEventArgs>? Navigating;
 
-        event EventHandler<NavigationEventArgs> Navigated;
+        event EventHandler<NavigationEventArgs>? Navigated;
 
-        event EventHandler<EventArgs> Exited;
+        event EventHandler<EventArgs>? Exited;
 
-        event EventHandler<EventArgs> ExecutingChanged;
+        event EventHandler<EventArgs>? ExecutingChanged;
 
         int StackedCount { get; }
 
-        object CurrentViewId { get; }
+        object? CurrentViewId { get; }
 
-        object CurrentView { get; }
+        object? CurrentView { get; }
 
-        object CurrentTarget { get; }
+        object? CurrentTarget { get; }
 
         bool Executing { get; }
 
@@ -35,8 +35,8 @@ namespace Smart.Navigation
 
         // Navigate
 
-        bool Navigate(INavigationStrategy strategy, INavigationParameter parameter);
+        bool Navigate(INavigationStrategy strategy, INavigationParameter? parameter);
 
-        Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter parameter);
+        Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter);
     }
 }

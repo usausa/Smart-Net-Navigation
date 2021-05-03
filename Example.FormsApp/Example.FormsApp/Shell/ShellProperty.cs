@@ -183,7 +183,7 @@ namespace Example.FormsApp.Shell
             }
         }
 
-        public static void UpdateShellControl(IShellControl shell, BindableObject bindable)
+        public static void UpdateShellControl(IShellControl shell, BindableObject? bindable)
         {
             if (bindable is null)
             {

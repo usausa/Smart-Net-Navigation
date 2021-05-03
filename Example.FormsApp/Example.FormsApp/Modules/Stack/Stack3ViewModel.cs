@@ -7,8 +7,6 @@ namespace Example.FormsApp.Modules.Stack
 
     public class Stack3ViewModel : AppViewModelBase
     {
-        public static Stack3ViewModel DesignInstance => null; // For design
-
         public AsyncCommand<int> PopCommand { get; }
 
         public Stack3ViewModel(ApplicationState applicationState)

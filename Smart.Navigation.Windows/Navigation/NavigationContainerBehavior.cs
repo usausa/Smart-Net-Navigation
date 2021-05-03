@@ -34,7 +34,7 @@ namespace Smart.Navigation
             base.OnDetaching();
         }
 
-        private void AttachContainer(Canvas canvas)
+        private void AttachContainer(Canvas? canvas)
         {
             if (Navigator is INavigatorComponentSource componentSource)
             {

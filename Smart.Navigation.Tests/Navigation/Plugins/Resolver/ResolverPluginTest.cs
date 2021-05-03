@@ -33,14 +33,14 @@ namespace Smart.Navigation.Plugins.Resolver
 
             navigator.Forward(typeof(Resolver2Form));
 
-            var form2 = (Resolver2Form)navigator.CurrentView;
+            var form2 = (Resolver2Form)navigator.CurrentView!;
             Assert.NotNull(form2.ScopeObject);
             Assert.True(form2.ScopeObject.IsInitialized);
             Assert.False(form2.ScopeObject.IsDisposed);
 
             navigator.Forward(typeof(Resolver3Form));
 
-            var form3 = (Resolver3Form)navigator.CurrentView;
+            var form3 = (Resolver3Form)navigator.CurrentView!;
             Assert.NotNull(form3.ScopeObject);
             Assert.True(form3.ScopeObject.IsInitialized);
             Assert.False(form3.ScopeObject.IsDisposed);
@@ -74,21 +74,21 @@ namespace Smart.Navigation.Plugins.Resolver
 
             navigator.Forward(typeof(Resolver2Form));
 
-            var form2a = (Resolver2Form)navigator.CurrentView;
+            var form2A = (Resolver2Form)navigator.CurrentView!;
 
             navigator.Forward(typeof(Resolver1Form));
 
-            Assert.NotNull(form2a.ScopeObject);
-            Assert.True(form2a.ScopeObject.IsDisposed);
+            Assert.NotNull(form2A.ScopeObject);
+            Assert.True(form2A.ScopeObject.IsDisposed);
 
             navigator.Forward(typeof(Resolver2Form));
 
-            var form2b = (Resolver2Form)navigator.CurrentView;
+            var form2B = (Resolver2Form)navigator.CurrentView!;
 
-            Assert.NotNull(form2b.ScopeObject);
-            Assert.False(form2b.ScopeObject.IsDisposed);
+            Assert.NotNull(form2B.ScopeObject);
+            Assert.False(form2B.ScopeObject.IsDisposed);
 
-            Assert.NotEqual(form2a, form2b);
+            Assert.NotEqual(form2A, form2B);
         }
 
         [Fact]
@@ -113,7 +113,7 @@ namespace Smart.Navigation.Plugins.Resolver
 
             navigator.Push(typeof(Push2Form));
 
-            var form2 = (Push2Form)navigator.CurrentView;
+            var form2 = (Push2Form)navigator.CurrentView!;
             Assert.NotNull(form2.ScopeObject);
             Assert.True(form2.ScopeObject.IsInitialized);
             Assert.False(form2.ScopeObject.IsDisposed);
@@ -124,7 +124,7 @@ namespace Smart.Navigation.Plugins.Resolver
 
             navigator.Push(typeof(Push4Form));
 
-            var form4 = (Push4Form)navigator.CurrentView;
+            var form4 = (Push4Form)navigator.CurrentView!;
             Assert.Equal(form4.ScopeObject, form2.ScopeObject);
             Assert.True(form4.ScopeObject.IsInitialized);
             Assert.False(form4.ScopeObject.IsDisposed);

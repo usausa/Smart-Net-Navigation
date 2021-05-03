@@ -26,11 +26,6 @@ namespace Smart.Navigation
 
         public NavigatorConfig Configure(Action<ComponentConfig> action)
         {
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
-
             action(config);
 
             return this;

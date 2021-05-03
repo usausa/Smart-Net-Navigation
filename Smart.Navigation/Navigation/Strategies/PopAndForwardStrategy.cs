@@ -1,6 +1,7 @@
 namespace Smart.Navigation.Strategies
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Strategy")]
     public sealed class PopAndForwardStrategy : INavigationStrategy
@@ -11,6 +12,7 @@ namespace Smart.Navigation.Strategies
 
         private int level;
 
+        [AllowNull]
         private ViewDescriptor descriptor;
 
         public PopAndForwardStrategy(object id)

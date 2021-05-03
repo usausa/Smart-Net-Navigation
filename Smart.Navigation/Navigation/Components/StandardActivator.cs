@@ -6,7 +6,7 @@ namespace Smart.Navigation.Components
     {
         public object Resolve(Type type)
         {
-            return Activator.CreateInstance(type);
+            return Activator.CreateInstance(type)!;
         }
     }
 }

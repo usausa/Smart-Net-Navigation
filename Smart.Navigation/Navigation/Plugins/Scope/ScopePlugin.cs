@@ -12,9 +12,14 @@ namespace Smart.Navigation.Plugins.Scope
     {
         private sealed class Reference
         {
-            public object Instance { get; set; }
+            public object Instance { get; }
 
             public int Counter { get; set; }
+
+            public Reference(object instance)
+            {
+                Instance = instance;
+            }
         }
 
         private readonly Dictionary<Type, ScopeProperty[]> typeProperties = new();
@@ -39,13 +44,13 @@ namespace Smart.Navigation.Plugins.Scope
                     .Select(x => new
                     {
                         Property = x,
-                        Attribute = (ScopeAttribute)x.GetCustomAttribute(typeof(ScopeAttribute))
+                        Attribute = (ScopeAttribute?)x.GetCustomAttribute(typeof(ScopeAttribute))
                     })
                     .Where(x => x.Attribute is not null)
                     .Select(x => new ScopeProperty(
-                        x.Attribute.Name ?? x.Property.Name,
+                        x.Attribute!.Name ?? x.Property.Name,
                         x.Attribute.RequestType ?? delegateFactory.GetExtendedPropertyType(x.Property),
-                        delegateFactory.CreateSetter(x.Property, true)))
+                        delegateFactory.CreateSetter(x.Property, true)!))
                     .ToArray();
                 typeProperties[type] = properties;
             }
@@ -55,11 +60,6 @@ namespace Smart.Navigation.Plugins.Scope
 
         public override void OnClose(IPluginContext context, object view, object target)
         {
-            if (target is null)
-            {
-                return;
-            }
-
             foreach (var property in GetTypeProperties(target.GetType()))
             {
                 if (store.TryGetValue(property.Name, out var reference))
@@ -78,19 +78,11 @@ namespace Smart.Navigation.Plugins.Scope
 
         public override void OnCreate(IPluginContext context, object view, object target)
         {
-            if (target is null)
-            {
-                return;
-            }
-
             foreach (var property in GetTypeProperties(target.GetType()))
             {
                 if (!store.TryGetValue(property.Name, out var reference))
                 {
-                    reference = new Reference
-                    {
-                        Instance = activator.Resolve(property.RequestType)
-                    };
+                    reference = new Reference(activator.Resolve(property.RequestType));
 
                     (reference.Instance as IInitializable)?.Initialize();
 

@@ -44,11 +44,11 @@ namespace Example.FormsApp.Shell
             UpdateShell(null);
         }
 
-        private void UpdateShell(object view)
+        private void UpdateShell(object? view)
         {
             if (AssociatedObject.BindingContext is IShellControl shell)
             {
-                ShellProperty.UpdateShellControl(shell, (BindableObject)view);
+                ShellProperty.UpdateShellControl(shell, view as BindableObject);
             }
         }
     }

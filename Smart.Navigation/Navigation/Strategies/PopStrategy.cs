@@ -1,12 +1,14 @@
 namespace Smart.Navigation.Strategies
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Strategy")]
     public sealed class PopStrategy : INavigationStrategy
     {
         private readonly int level;
 
+        [AllowNull]
         private ViewStackInfo restoreStackInfo;
 
         public PopStrategy(int level)

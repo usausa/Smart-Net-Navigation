@@ -6,9 +6,9 @@ namespace Smart.Navigation
     {
         public INavigationContext Context { get; }
 
-        public object FromView { get; }
+        public object? FromView { get; }
 
-        public object FromTarget { get; }
+        public object? FromTarget { get; }
 
         public object ToView { get; }
 
@@ -16,8 +16,8 @@ namespace Smart.Navigation
 
         public NavigationEventArgs(
             INavigationContext context,
-            object fromView,
-            object fromTarget,
+            object? fromView,
+            object? fromTarget,
             object toView,
             object toTarget)
         {

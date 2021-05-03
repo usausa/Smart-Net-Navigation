@@ -1,6 +1,7 @@
 namespace Example.WindowsFormsApp.Modules.Edit
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     using Example.WindowsFormsApp.Models;
     using Example.WindowsFormsApp.Services;
@@ -15,6 +16,7 @@ namespace Example.WindowsFormsApp.Modules.Edit
     {
         private bool update;
 
+        [AllowNull]
         private DataEntity entity;
 
         public override string Title => update ? "Data New" : "Data Edit";
@@ -22,6 +24,7 @@ namespace Example.WindowsFormsApp.Modules.Edit
         public override bool CanGoHome => true;
 
         [Inject]
+        [AllowNull]
         public DataService DataService { get; set; }
 
         public DataDetailView()

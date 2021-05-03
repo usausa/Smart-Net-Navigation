@@ -1,5 +1,7 @@
 namespace Example.WindowsFormsApp.Modules.Wizard
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using Smart.Navigation;
     using Smart.Navigation.Attributes;
     using Smart.Navigation.Plugins.Scope;
@@ -12,6 +14,7 @@ namespace Example.WindowsFormsApp.Modules.Wizard
         public override bool CanGoHome => true;
 
         [Scope]
+        [AllowNull]
         public WizardContext Context { get; set; }
 
         public WizardInput2View()

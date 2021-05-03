@@ -1,10 +1,13 @@
 namespace Example.WindowsApp.Modules
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using Smart.Navigation;
     using Smart.Windows.ViewModels;
 
     public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport
     {
+        [AllowNull]
         public INavigator Navigator { get; set; }
 
         protected override void Dispose(bool disposing)

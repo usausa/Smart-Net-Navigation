@@ -1,6 +1,7 @@
 namespace Example.FormsApp.Modules.Edit
 {
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
 
     using Example.FormsApp.Models;
@@ -13,9 +14,8 @@ namespace Example.FormsApp.Modules.Edit
 
     public class EditListViewModel : AppViewModelBase
     {
-        public static EditListViewModel DesignInstance => null; // For design
-
         [Inject]
+        [AllowNull]
         public DataService DataService { get; set; }
 
         public ObservableCollection<DataEntity> Items { get; } = new();

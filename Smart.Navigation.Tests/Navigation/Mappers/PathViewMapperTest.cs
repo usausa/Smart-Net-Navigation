@@ -35,7 +35,7 @@ namespace Smart.Navigation.Mappers
             // test
             navigator.Forward("/Parent1");
 
-            Assert.Equal(typeof(Parent1Form), navigator.CurrentView.GetType());
+            Assert.Equal(typeof(Parent1Form), navigator.CurrentView!.GetType());
 
             navigator.Forward("/Children/Child1");
 
@@ -50,7 +50,7 @@ namespace Smart.Navigation.Mappers
 
             // test
             navigator.Forward("Parent1");
-            Assert.Equal(typeof(Parent1Form), navigator.CurrentView.GetType());
+            Assert.Equal(typeof(Parent1Form), navigator.CurrentView!.GetType());
 
             navigator.Forward("Children/Child1");
             Assert.Equal(typeof(Child1Form), navigator.CurrentView.GetType());

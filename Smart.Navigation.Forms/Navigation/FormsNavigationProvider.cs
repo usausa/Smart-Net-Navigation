@@ -55,7 +55,7 @@ namespace Smart.Navigation
             container.Children.Remove(v);
         }
 
-        public void ActivateView(object view, object parameter)
+        public void ActivateView(object view, object? parameter)
         {
             var v = (View)view;
 
@@ -74,7 +74,7 @@ namespace Smart.Navigation
             }
         }
 
-        public object DeactivateView(object view)
+        public object? DeactivateView(object view)
         {
             var v = (View)view;
 
@@ -113,7 +113,7 @@ namespace Smart.Navigation
             }
         }
 
-        private static VisualElement GetFocused(Element parent)
+        private static VisualElement? GetFocused(Element parent)
         {
             if (parent is VisualElement { IsFocused: true } visualElement)
             {

@@ -10,7 +10,7 @@ namespace Smart.Navigation.Plugins
         {
         }
 
-        public virtual void OnNavigatingFrom(IPluginContext context, object view, object target)
+        public virtual void OnNavigatingFrom(IPluginContext context, object? view, object? target)
         {
         }
 

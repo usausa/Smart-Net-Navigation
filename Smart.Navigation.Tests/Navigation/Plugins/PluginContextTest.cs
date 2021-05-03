@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins
 {
-    using System;
-
     using Xunit;
 
     public static class PluginContextTest
@@ -65,15 +63,6 @@ namespace Smart.Navigation.Plugins
 
             context.Save(typeof(int), 123);
             Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
-        }
-
-        [Fact]
-        public static void LoadFailed()
-        {
-            var context = new PluginContext();
-
-            context.Save(typeof(int), 123);
-            Assert.Throws<ArgumentNullException>(() => context.LoadOr(typeof(string), (Func<string>)null));
         }
     }
 }

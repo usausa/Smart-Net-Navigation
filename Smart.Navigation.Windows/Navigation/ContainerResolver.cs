@@ -4,7 +4,7 @@ namespace Smart.Navigation
 
     public sealed class ContainerResolver : IContainerResolver, IUpdateContainer
     {
-        public Canvas Container { get; private set; }
+        public Canvas? Container { get; private set; }
 
         public ContainerResolver()
         {
@@ -15,7 +15,7 @@ namespace Smart.Navigation
             Container = container;
         }
 
-        void IUpdateContainer.Attach(Canvas container)
+        void IUpdateContainer.Attach(Canvas? container)
         {
             Container = container;
         }

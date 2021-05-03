@@ -28,7 +28,7 @@ namespace Example.WindowsApp.Views
             }
         }
 
-        public static void UpdateShellControl(IShellControl shell, DependencyObject d)
+        public static void UpdateShellControl(IShellControl shell, DependencyObject? d)
         {
             shell.Title.Value = d is null ? string.Empty : GetTitle(d);
         }

@@ -1,6 +1,7 @@
 namespace Smart.Navigation.Strategies
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Ignore")]
@@ -10,6 +11,7 @@ namespace Smart.Navigation.Strategies
 
         private int start;
 
+        [AllowNull]
         private ViewStackInfo restoreStackInfo;
 
         public GroupPopStrategy(bool leaveLast)
@@ -17,7 +19,7 @@ namespace Smart.Navigation.Strategies
             this.leaveLast = leaveLast;
         }
 
-        public StrategyResult Initialize(INavigationController controller)
+        public StrategyResult? Initialize(INavigationController controller)
         {
             if (controller.ViewStack.Count == 0)
             {

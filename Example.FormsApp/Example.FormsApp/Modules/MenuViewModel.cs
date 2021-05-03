@@ -5,8 +5,6 @@ namespace Example.FormsApp.Modules
 
     public class MenuViewModel : AppViewModelBase
     {
-        public static MenuViewModel DesignInstance => null; // For design
-
         public AsyncCommand<ViewId> ForwardCommand { get; }
 
         public MenuViewModel(ApplicationState applicationState)

@@ -27,14 +27,14 @@ namespace Smart.Navigation.Strategies
             // test
             navigator.Forward(typeof(Form1));
 
-            var form1 = (MockForm)navigator.CurrentView;
+            var form1 = (MockForm)navigator.CurrentView!;
             form1.Focused = "text1";
 
             navigator.Push(typeof(Form2));
             navigator.Pop();
 
             Assert.Equal(1, navigator.StackedCount);
-            var form1B = (MockForm)navigator.CurrentView;
+            var form1B = (MockForm)navigator.CurrentView!;
             Assert.Same(form1, form1B);
             Assert.Equal(typeof(Form1), form1B.GetType());
             Assert.True(form1B.IsOpen);
@@ -64,7 +64,7 @@ namespace Smart.Navigation.Strategies
             navigator.Pop(2);
 
             Assert.Equal(1, navigator.StackedCount);
-            var form1 = (MockForm)navigator.CurrentView;
+            var form1 = (MockForm)navigator.CurrentView!;
             Assert.Equal(typeof(Form1), form1.GetType());
             Assert.True(form1.IsOpen);
             Assert.True(form1.IsVisible);

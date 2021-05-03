@@ -2,7 +2,7 @@ namespace Smart.Navigation
 {
     public interface INavigationContext
     {
-        object FromId { get; }
+        object? FromId { get; }
 
         object ToId { get; }
 

@@ -23,7 +23,7 @@ namespace Smart.Mock
             form.Dispose();
         }
 
-        public void ActivateView(object view, object parameter)
+        public void ActivateView(object view, object? parameter)
         {
             var form = (MockForm)view;
 
@@ -31,7 +31,7 @@ namespace Smart.Mock
             form.Focused = parameter;
         }
 
-        public object DeactivateView(object view)
+        public object? DeactivateView(object view)
         {
             var form = (MockForm)view;
 

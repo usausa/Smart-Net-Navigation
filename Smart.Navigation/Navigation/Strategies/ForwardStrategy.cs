@@ -1,10 +1,13 @@
 namespace Smart.Navigation.Strategies
 {
+    using System.Diagnostics.CodeAnalysis;
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Strategy")]
     public sealed class ForwardStrategy : INavigationStrategy
     {
         private readonly object id;
 
+        [AllowNull]
         private ViewDescriptor descriptor;
 
         public ForwardStrategy(object id)

@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentView x:Class="Example.FormsApp.Modules.Edit.EditDetailView"
-             xmlns="http://xamarin.com/schemas/2014/forms"
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sr="clr-namespace:Smart.Forms.Resolver;assembly=Smart.Forms"
-             xmlns:edit="clr-namespace:Example.FormsApp.Modules.Edit;assembly=Example.FormsApp"
              xmlns:shell="clr-namespace:Example.FormsApp.Shell;assembly=Example.FormsApp"
-             BindingContext="{Binding Source={x:Static edit:EditDetailViewModel.DesignInstance}}"
+             xmlns:edit="clr-namespace:Example.FormsApp.Modules.Edit;assembly=Example.FormsApp"
+             x:Class="Example.FormsApp.Modules.Edit.EditDetailView"
+             x:DataType="{x:Type edit:EditDetailViewModel}"
              sr:BindingContextResolver.Type="{x:Type edit:EditDetailViewModel}"
-             shell:ShellProperty.Title="{Binding Update.Value, StringFormat='Edit-{0}', Converter={StaticResource EditModeConverter}}"
-             shell:ShellProperty.Function1Enabled="True" shell:ShellProperty.Function1Text="◀️"
-             shell:ShellProperty.Function4Enabled="{Binding Name.Value, Converter={StaticResource HasTextConverter}}" shell:ShellProperty.Function4Text="✔️">
+             shell:ShellProperty.Function1Text="◀️"
+             shell:ShellProperty.Function4Text="✔️"
+             shell:ShellProperty.Function1Enabled="True"
+             shell:ShellProperty.Function4Enabled="{Binding Name.Value, Converter={StaticResource HasTextConverter}}"
+             shell:ShellProperty.Title="{Binding Update.Value, StringFormat='Edit-{0}', Converter={StaticResource EditModeConverter}}">
 
     <StackLayout Style="{StaticResource PageStack}">
         <Entry Style="{StaticResource DefaultEntry}"
-               Text="{Binding Name.Value}"/>
+               Text="{Binding Name.Value}" />
     </StackLayout>
 
 </ContentView>

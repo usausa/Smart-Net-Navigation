@@ -1,5 +1,6 @@
 namespace Example.WindowsApp
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Windows;
 
     using Example.WindowsApp.Modules;
@@ -13,8 +14,10 @@ namespace Example.WindowsApp
     /// </summary>
     public partial class App
     {
+        [AllowNull]
         private SmartResolver resolver;
 
+        [AllowNull]
         private Navigator navigator;
 
         protected override void OnStartup(StartupEventArgs e)

@@ -31,7 +31,7 @@ namespace Smart.Navigation.Strategies
 
             navigator.GroupPush(typeof(FormB1));
 
-            var formB1 = (FormB1)navigator.CurrentView;
+            var formB1 = (FormB1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormC1));
 
@@ -59,11 +59,11 @@ namespace Smart.Navigation.Strategies
             // B1 A1 A2    D:B1 C:A2
             navigator.Forward(typeof(FormA1));
 
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormB1));
 
-            var formB1 = (FormB1)navigator.CurrentView;
+            var formB1 = (FormB1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormA2));
 
@@ -109,11 +109,11 @@ namespace Smart.Navigation.Strategies
             // A1 B1 B2    D:B1 C:B2
             navigator.Forward(typeof(FormA1));
 
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormB1));
 
-            var formB1 = (FormB1)navigator.CurrentView;
+            var formB1 = (FormB1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormB2));
 
@@ -159,11 +159,11 @@ namespace Smart.Navigation.Strategies
             // B1 A1       D:B1 A:A1
             navigator.Forward(typeof(FormA1));
 
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormB1));
 
-            var formB1 = (FormB1)navigator.CurrentView;
+            var formB1 = (FormB1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormA1));
 
@@ -201,11 +201,11 @@ namespace Smart.Navigation.Strategies
             // A1 B1       -
             navigator.Forward(typeof(FormA1));
 
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             navigator.GroupPush(typeof(FormB1));
 
-            var formB1 = (FormB1)navigator.CurrentView;
+            var formB1 = (FormB1)navigator.CurrentView!;
 
             Assert.False(navigator.GroupPush(typeof(FormB1)));
 
@@ -240,20 +240,20 @@ namespace Smart.Navigation.Strategies
             // group A
             // 1:A1
             navigator.GroupPush(typeof(FormA1));
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             // 1:A1:A2
             navigator.GroupPush(typeof(FormA2));
-            var formA2 = (FormA2)navigator.CurrentView;
+            var formA2 = (FormA2)navigator.CurrentView!;
 
             // group B
             // 1:A1:A2:B1
             navigator.GroupPush(typeof(FormB1));
-            var formB1 = (FormB1)navigator.CurrentView;
+            var formB1 = (FormB1)navigator.CurrentView!;
 
             // 1:A1:A2:B1:B2
             navigator.GroupPush(typeof(FormB2));
-            var formB2 = (FormB2)navigator.CurrentView;
+            var formB2 = (FormB2)navigator.CurrentView!;
 
             // group A
             // 1:B1:B2:A1:A2
@@ -325,11 +325,11 @@ namespace Smart.Navigation.Strategies
             // test
             await navigator.ForwardAsync(typeof(FormA1));
 
-            var formA1 = (FormA1)navigator.CurrentView;
+            var formA1 = (FormA1)navigator.CurrentView!;
 
             await navigator.GroupPushAsync(typeof(FormB1));
 
-            var formB1 = (FormB1)navigator.CurrentView;
+            var formB1 = (FormB1)navigator.CurrentView!;
 
             Assert.False(await navigator.GroupPushAsync(typeof(FormB1)));
 

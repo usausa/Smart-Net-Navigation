@@ -4,6 +4,6 @@ namespace Smart.Navigation
 
     public interface IUpdateContainer
     {
-        void Attach(Canvas container);
+        void Attach(Canvas? container);
     }
 }

@@ -11,8 +11,6 @@ namespace Example.FormsApp
 
     public class MainPageViewModel : ViewModelBase, IShellControl
     {
-        public static MainPageViewModel DesignInstance => null; // For design
-
         public NotificationValue<string> Title { get; } = new();
 
         public NotificationValue<bool> CanGoHome { get; } = new();

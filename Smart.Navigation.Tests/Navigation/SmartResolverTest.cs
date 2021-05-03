@@ -3,6 +3,8 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 namespace Smart.Navigation
 {
+    using System.Diagnostics.CodeAnalysis;
+
     using Smart.Mock;
     using Smart.Navigation.Plugins.Scope;
     using Smart.Resolver;
@@ -30,14 +32,14 @@ namespace Smart.Navigation
             // test
             navigator.Forward(typeof(Form1));
 
-            var form1 = (Form1)navigator.CurrentView;
+            var form1 = (Form1)navigator.CurrentView!;
             Assert.NotNull(form1.Service);
             Assert.NotNull(form1.ScopeObject);
             Assert.NotNull(form1.ScopeObject.Setting);
 
             navigator.Forward(typeof(Form2));
 
-            var form2 = (Form2)navigator.CurrentView;
+            var form2 = (Form2)navigator.CurrentView!;
             Assert.Same(form2.Service, form1.Service);
             Assert.Same(form2.Setting, form1.ScopeObject.Setting);
         }
@@ -47,6 +49,7 @@ namespace Smart.Navigation
             public IService Service { get; }
 
             [Scope]
+            [AllowNull]
             public ScopeObject ScopeObject { get; set; }
 
             public Form1(IService service)

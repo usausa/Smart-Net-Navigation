@@ -17,14 +17,14 @@ namespace Smart.Navigation.Plugins.Parameter
             // test
             navigator.Forward(typeof(Form1));
 
-            var form1 = (Form1)navigator.CurrentView;
+            var form1 = (Form1)navigator.CurrentView!;
             form1.IntParameter = 123;
             form1.StringParameter = "abc";
 
             navigator.Forward(typeof(Form2));
 
             Assert.Equal(1, navigator.StackedCount);
-            var form2 = (Form2)navigator.CurrentView;
+            var form2 = (Form2)navigator.CurrentView!;
             Assert.Equal(123, form2.IntParameter);
             Assert.Equal("abc", form2.StringParameter);
         }
@@ -40,13 +40,13 @@ namespace Smart.Navigation.Plugins.Parameter
             // test
             navigator.Forward(typeof(Form1));
 
-            var form1 = (Form1)navigator.CurrentView;
+            var form1 = (Form1)navigator.CurrentView!;
             form1.IntParameter = 123;
             form1.StringParameter = "abc";
 
             navigator.Push(typeof(OneWayForm));
 
-            var oneWayForm = (OneWayForm)navigator.CurrentView;
+            var oneWayForm = (OneWayForm)navigator.CurrentView!;
             Assert.Equal(123, oneWayForm.IntParameter);
             Assert.Null(oneWayForm.StringParameter);
 
@@ -69,13 +69,13 @@ namespace Smart.Navigation.Plugins.Parameter
             // test
             navigator.Forward(typeof(Named1Form));
 
-            var namedForm1 = (Named1Form)navigator.CurrentView;
+            var namedForm1 = (Named1Form)navigator.CurrentView!;
             namedForm1.Value1 = 123;
             namedForm1.Parameter2 = "abc";
 
             navigator.Forward(typeof(Named2Form));
 
-            var namedForm2 = (Named2Form)navigator.CurrentView;
+            var namedForm2 = (Named2Form)navigator.CurrentView!;
             Assert.Equal(123, namedForm2.Parameter1);
             Assert.Equal("abc", namedForm2.Value2);
         }
@@ -91,13 +91,13 @@ namespace Smart.Navigation.Plugins.Parameter
             // test
             navigator.Forward(typeof(Convert1Form));
 
-            var convertForm1 = (Convert1Form)navigator.CurrentView;
+            var convertForm1 = (Convert1Form)navigator.CurrentView!;
             convertForm1.Value1 = 123;
             convertForm1.Value2 = "456";
 
             navigator.Forward(typeof(Convert2Form));
 
-            var convertForm2 = (Convert2Form)navigator.CurrentView;
+            var convertForm2 = (Convert2Form)navigator.CurrentView!;
             Assert.Equal("123", convertForm2.Value1);
             Assert.Equal(456, convertForm2.Value2);
         }
@@ -108,7 +108,7 @@ namespace Smart.Navigation.Plugins.Parameter
             public int IntParameter { get; set; }
 
             [Parameter]
-            public string StringParameter { get; set; }
+            public string? StringParameter { get; set; }
         }
 
         public class Form2 : MockForm
@@ -117,7 +117,7 @@ namespace Smart.Navigation.Plugins.Parameter
             public int IntParameter { get; set; }
 
             [Parameter]
-            public string StringParameter { get; set; }
+            public string? StringParameter { get; set; }
         }
 
         public class OneWayForm : MockForm
@@ -126,7 +126,7 @@ namespace Smart.Navigation.Plugins.Parameter
             public int IntParameter { get; set; }
 
             [Parameter(Directions.Export)]
-            public string StringParameter { get; set; }
+            public string? StringParameter { get; set; }
         }
 
         public class Named1Form : MockForm
@@ -135,7 +135,7 @@ namespace Smart.Navigation.Plugins.Parameter
             public int Value1 { get; set; }
 
             [Parameter]
-            public string Parameter2 { get; set; }
+            public string? Parameter2 { get; set; }
         }
 
         public class Named2Form : MockForm
@@ -144,7 +144,7 @@ namespace Smart.Navigation.Plugins.Parameter
             public int Parameter1 { get; set; }
 
             [Parameter("Parameter2")]
-            public string Value2 { get; set; }
+            public string? Value2 { get; set; }
         }
 
         public class Convert1Form : MockForm
@@ -153,13 +153,13 @@ namespace Smart.Navigation.Plugins.Parameter
             public int Value1 { get; set; }
 
             [Parameter]
-            public string Value2 { get; set; }
+            public string? Value2 { get; set; }
         }
 
         public class Convert2Form : MockForm
         {
             [Parameter]
-            public string Value1 { get; set; }
+            public string? Value1 { get; set; }
 
             [Parameter]
             public int Value2 { get; set; }

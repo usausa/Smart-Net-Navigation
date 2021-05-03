@@ -9,7 +9,7 @@ namespace Smart.Resolver.Scopes
     {
         private readonly string name;
 
-        private PageContextStorage storage;
+        private PageContextStorage? storage;
 
         private int key;
 

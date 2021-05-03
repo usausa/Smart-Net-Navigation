@@ -16,7 +16,7 @@ namespace Smart.Navigation
             set => SetValue(NavigatorProperty, value);
         }
 
-        public AbsoluteLayout AssociatedObject { get; private set; }
+        public AbsoluteLayout? AssociatedObject { get; private set; }
 
         protected override void OnAttachedTo(AbsoluteLayout bindable)
         {
@@ -53,12 +53,12 @@ namespace Smart.Navigation
         {
             base.OnBindingContextChanged();
 
-            BindingContext = AssociatedObject.BindingContext;
+            BindingContext = AssociatedObject?.BindingContext;
 
             AttachContainer(AssociatedObject);
         }
 
-        private void AttachContainer(AbsoluteLayout layout)
+        private void AttachContainer(AbsoluteLayout? layout)
         {
             if (Navigator is INavigatorComponentSource componentSource)
             {

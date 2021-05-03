@@ -27,7 +27,7 @@ namespace Smart.Navigation.Strategies
             navigator.Forward(typeof(Form1));
 
             Assert.Equal(1, navigator.StackedCount);
-            var form1 = (MockForm)navigator.CurrentView;
+            var form1 = (MockForm)navigator.CurrentView!;
             Assert.Equal(typeof(Form1), form1.GetType());
             Assert.True(form1.IsOpen);
 
@@ -38,7 +38,7 @@ namespace Smart.Navigation.Strategies
             navigator.Forward(typeof(Form2));
 
             Assert.Equal(1, navigator.StackedCount);
-            var form2 = (MockForm)navigator.CurrentView;
+            var form2 = (MockForm)navigator.CurrentView!;
             Assert.Equal(typeof(Form2), form2.GetType());
             Assert.True(form2.IsOpen);
             Assert.False(form1.IsOpen);
@@ -62,7 +62,7 @@ namespace Smart.Navigation.Strategies
             navigator.Forward(typeof(Form3));
 
             Assert.Equal(2, navigator.StackedCount);
-            var form3 = (MockForm)navigator.CurrentView;
+            var form3 = (MockForm)navigator.CurrentView!;
             Assert.Equal(typeof(Form3), form3.GetType());
             Assert.True(form3.IsOpen);
         }

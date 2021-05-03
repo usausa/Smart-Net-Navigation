@@ -31,14 +31,14 @@ namespace Smart.Navigation.Plugins.Parameter
                     .Select(x => new
                     {
                         Property = x,
-                        Attribute = (ParameterAttribute)x.GetCustomAttribute(typeof(ParameterAttribute))
+                        Attribute = (ParameterAttribute?)x.GetCustomAttribute(typeof(ParameterAttribute))
                     })
                     .Where(x => x.Attribute is not null)
                     .Select(x => new ParameterProperty(
-                        x.Attribute.Name ?? x.Property.Name,
+                        x.Attribute!.Name ?? x.Property.Name,
                         delegateFactory.GetExtendedPropertyType(x.Property),
-                        (x.Attribute.Direction & Directions.Export) != 0 ? delegateFactory.CreateGetter(x.Property, true) : null,
-                        (x.Attribute.Direction & Directions.Import) != 0 ? delegateFactory.CreateSetter(x.Property, true) : null))
+                        (x.Attribute!.Direction & Directions.Export) != 0 ? delegateFactory.CreateGetter(x.Property, true) : null,
+                        (x.Attribute!.Direction & Directions.Import) != 0 ? delegateFactory.CreateSetter(x.Property, true) : null))
                     .ToArray();
                 typeProperties[type] = properties;
             }
@@ -46,7 +46,7 @@ namespace Smart.Navigation.Plugins.Parameter
             return properties;
         }
 
-        public override void OnNavigatingFrom(IPluginContext context, object view, object target)
+        public override void OnNavigatingFrom(IPluginContext context, object? view, object? target)
         {
             if (target is null)
             {
@@ -58,12 +58,7 @@ namespace Smart.Navigation.Plugins.Parameter
 
         public override void OnNavigatingTo(IPluginContext context, object view, object target)
         {
-            if (target is null)
-            {
-                return;
-            }
-
-            var parameters = context.LoadOr(GetType(), default(Dictionary<string, object>));
+            var parameters = context.LoadOr(GetType(), default(Dictionary<string, object?>));
             if (parameters is null)
             {
                 return;
@@ -72,9 +67,9 @@ namespace Smart.Navigation.Plugins.Parameter
             ApplyImportParameters(target, parameters);
         }
 
-        private Dictionary<string, object> GatherExportParameters(object target)
+        private Dictionary<string, object?> GatherExportParameters(object target)
         {
-            var parameters = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            var parameters = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var property in GetTypeProperties(target.GetType()))
             {
@@ -87,7 +82,7 @@ namespace Smart.Navigation.Plugins.Parameter
             return parameters;
         }
 
-        private void ApplyImportParameters(object target, IDictionary<string, object> parameters)
+        private void ApplyImportParameters(object target, IDictionary<string, object?> parameters)
         {
             foreach (var property in GetTypeProperties(target.GetType()))
             {

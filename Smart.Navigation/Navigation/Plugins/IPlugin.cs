@@ -6,7 +6,7 @@ namespace Smart.Navigation.Plugins
 
         void OnClose(IPluginContext context, object view, object target);
 
-        void OnNavigatingFrom(IPluginContext context, object view, object target);
+        void OnNavigatingFrom(IPluginContext context, object? view, object? target);
 
         void OnNavigatingTo(IPluginContext context, object view, object target);
 

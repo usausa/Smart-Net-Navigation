@@ -16,11 +16,6 @@ namespace Smart.Navigation.Plugins.Resolver
 
         public override void OnCreate(IPluginContext context, object view, object target)
         {
-            if (target is null)
-            {
-                return;
-            }
-
             foreach (var attribute in target.GetType().GetCustomAttributes<PageContextAttribute>())
             {
                 storage.Push(attribute.Name);
@@ -29,11 +24,6 @@ namespace Smart.Navigation.Plugins.Resolver
 
         public override void OnClose(IPluginContext context, object view, object target)
         {
-            if (target is null)
-            {
-                return;
-            }
-
             foreach (var attribute in target.GetType().GetCustomAttributes<PageContextAttribute>())
             {
                 storage.Pop(attribute.Name);

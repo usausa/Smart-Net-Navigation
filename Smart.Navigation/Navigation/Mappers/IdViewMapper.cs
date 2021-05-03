@@ -37,7 +37,7 @@ namespace Smart.Navigation.Mappers
             return descriptor;
         }
 
-        public void CurrentUpdated(object id)
+        public void CurrentUpdated(object? id)
         {
         }
     }

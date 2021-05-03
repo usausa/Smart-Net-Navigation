@@ -6,7 +6,7 @@ namespace Smart.Navigation
 
         public object View { get; }
 
-        public object RestoreParameter { get; set; }
+        public object? RestoreParameter { get; set; }
 
         public ViewStackInfo(ViewDescriptor descriptor, object view)
         {

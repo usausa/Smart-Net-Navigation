@@ -7,9 +7,9 @@ namespace Smart.Navigation.Components
     {
         private sealed class ScopeEntry
         {
-            private Dictionary<int, object> map;
+            private Dictionary<int, object>? map;
 
-            public Dictionary<int, object> Map => map ??= new Dictionary<int, object>();
+            public Dictionary<int, object> Map => map ??= new();
 
             public int Counter { get; set; }
         }
