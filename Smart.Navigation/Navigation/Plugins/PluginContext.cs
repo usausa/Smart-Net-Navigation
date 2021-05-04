@@ -28,7 +28,7 @@ namespace Smart.Navigation.Plugins
                 return default;
             }
 
-            return PreparedStore.TryGetValue(type, out var value) ? (T?)value : default;
+            return PreparedStore.TryGetValue(type, out var value) ? (T)value! : default;
         }
 
         public T LoadOr<T>(Type type, T defaultValue)
