@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.0.0-beta5" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.0.0-beta6" />
     <PackageReference Include="Usa.Smart.Forms" Version="2.0.0-beta5" />
     <PackageReference Include="Usa.Smart.Forms.Resolver" Version="2.0.0-beta5" />
     <PackageReference Include="Usa.Smart.Resolver" Version="2.0.0-beta3" />
