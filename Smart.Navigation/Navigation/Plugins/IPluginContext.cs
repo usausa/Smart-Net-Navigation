@@ -6,7 +6,7 @@ namespace Smart.Navigation.Plugins
     {
         void Save<T>(Type type, T value);
 
-        T Load<T>(Type type);
+        T? Load<T>(Type type);
 
         T LoadOr<T>(Type type, T defaultValue);
 

@@ -16,12 +16,12 @@ namespace Smart.Navigation
             return GetValue<T>(typeof(T).Name);
         }
 
-        public T GetValueOrDefault<T>(string key)
+        public T? GetValueOrDefault<T>(string key)
         {
-            return values.TryGetValue(key, out var value) ? (T)value! : default!;
+            return values.TryGetValue(key, out var value) ? (T)value! : default;
         }
 
-        public T GetValueOrDefault<T>()
+        public T? GetValueOrDefault<T>()
         {
             return GetValueOrDefault<T>(typeof(T).Name);
         }

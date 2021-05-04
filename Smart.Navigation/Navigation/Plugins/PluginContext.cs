@@ -21,7 +21,7 @@ namespace Smart.Navigation.Plugins
             PreparedStore[type] = value;
         }
 
-        public T Load<T>(Type type)
+        public T? Load<T>(Type type)
         {
             return (T)PreparedStore[type]!;
         }
