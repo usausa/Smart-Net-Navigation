@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -12,9 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.0.0" />
-    <PackageReference Include="Usa.Smart.Forms" Version="2.0.0" />
-    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="2.0.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.0.3" />
+    <PackageReference Include="Usa.Smart.Forms" Version="2.1.1" />
+    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="2.1.1" />
     <PackageReference Include="Usa.Smart.Resolver" Version="2.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />

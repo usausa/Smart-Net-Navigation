@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Converter" Version="2.0.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.0.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.0.3" />
   </ItemGroup>
 
 </Project>

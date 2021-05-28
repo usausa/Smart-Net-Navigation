@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.0.0" />
-    <PackageReference Include="Usa.Smart.Reactive" Version="2.0.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.0.3" />
+    <PackageReference Include="Usa.Smart.Reactive" Version="2.0.2" />
     <PackageReference Include="Usa.Smart.Resolver" Version="2.0.0" />
-    <PackageReference Include="Usa.Smart.Windows" Version="2.0.0" />
-    <PackageReference Include="Usa.Smart.Windows.Reactive" Version="2.0.0" />
-    <PackageReference Include="Usa.Smart.Windows.Resolver" Version="2.0.0" />
+    <PackageReference Include="Usa.Smart.Windows" Version="2.1.1" />
+    <PackageReference Include="Usa.Smart.Windows.Reactive" Version="2.1.1" />
+    <PackageReference Include="Usa.Smart.Windows.Resolver" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>

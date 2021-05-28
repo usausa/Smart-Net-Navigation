@@ -46,7 +46,7 @@ namespace Example.FormsApp.Shell
 
         private void UpdateShell(object? view)
         {
-            if (AssociatedObject.BindingContext is IShellControl shell)
+            if (AssociatedObject?.BindingContext is IShellControl shell)
             {
                 ShellProperty.UpdateShellControl(shell, view as BindableObject);
             }
