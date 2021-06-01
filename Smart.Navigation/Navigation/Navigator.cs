@@ -203,14 +203,14 @@ namespace Smart.Navigation
 
                     foreach (var plugin in plugins)
                     {
-                        plugin.OnNavigatingFrom(pluginContext, fromView, fromTarget);
+                        plugin.OnNavigatingFrom(pluginContext, navigationContext, fromView, fromTarget);
                     }
                 }
 
                 // Process navigating
                 foreach (var plugin in plugins)
                 {
-                    plugin.OnNavigatingTo(pluginContext, toView, toTarget);
+                    plugin.OnNavigatingTo(pluginContext, navigationContext, toView, toTarget);
                 }
 
                 (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
@@ -227,7 +227,7 @@ namespace Smart.Navigation
                 // Process navigated
                 foreach (var plugin in plugins)
                 {
-                    plugin.OnNavigatedTo(pluginContext, toView, toTarget);
+                    plugin.OnNavigatedTo(pluginContext, navigationContext, toView, toTarget);
                 }
 
                 (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);

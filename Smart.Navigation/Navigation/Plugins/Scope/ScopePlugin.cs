@@ -28,7 +28,7 @@ namespace Smart.Navigation.Plugins.Scope
 
         private readonly IActivator activator;
 
-        private readonly Dictionary<string, Reference> store = new();
+        private readonly Dictionary<string, Reference> references = new();
 
         public ScopePlugin(IDelegateFactory delegateFactory, IActivator activator)
         {
@@ -58,35 +58,35 @@ namespace Smart.Navigation.Plugins.Scope
             return properties;
         }
 
-        public override void OnClose(IPluginContext context, object view, object target)
+        public override void OnClose(IPluginContext pluginContext, object view, object target)
         {
             foreach (var property in GetTypeProperties(target.GetType()))
             {
-                if (store.TryGetValue(property.Name, out var reference))
+                if (references.TryGetValue(property.Name, out var reference))
                 {
                     reference.Counter--;
                 }
             }
 
-            foreach (var remove in store.Where(x => x.Value.Counter == 0).ToList())
+            foreach (var remove in references.Where(x => x.Value.Counter == 0).ToList())
             {
                 (remove.Value.Instance as IDisposable)?.Dispose();
 
-                store.Remove(remove.Key);
+                references.Remove(remove.Key);
             }
         }
 
-        public override void OnCreate(IPluginContext context, object view, object target)
+        public override void OnCreate(IPluginContext pluginContext, object view, object target)
         {
             foreach (var property in GetTypeProperties(target.GetType()))
             {
-                if (!store.TryGetValue(property.Name, out var reference))
+                if (!references.TryGetValue(property.Name, out var reference))
                 {
                     reference = new Reference(activator.Resolve(property.RequestType));
 
                     (reference.Instance as IInitializable)?.Initialize();
 
-                    store[property.Name] = reference;
+                    references[property.Name] = reference;
                 }
 
                 reference.Counter++;

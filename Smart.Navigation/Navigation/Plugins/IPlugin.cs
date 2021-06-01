@@ -2,14 +2,14 @@ namespace Smart.Navigation.Plugins
 {
     public interface IPlugin
     {
-        void OnCreate(IPluginContext context, object view, object target);
+        void OnCreate(IPluginContext pluginContext, object view, object target);
 
-        void OnClose(IPluginContext context, object view, object target);
+        void OnClose(IPluginContext pluginContext, object view, object target);
 
-        void OnNavigatingFrom(IPluginContext context, object? view, object? target);
+        void OnNavigatingFrom(IPluginContext pluginContext, INavigationContext navigationContext, object? view, object? target);
 
-        void OnNavigatingTo(IPluginContext context, object view, object target);
+        void OnNavigatingTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object target);
 
-        void OnNavigatedTo(IPluginContext context, object view, object target);
+        void OnNavigatedTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object target);
     }
 }

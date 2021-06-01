@@ -45,19 +45,19 @@ namespace Smart.Navigation.Plugins.Parameter
             return properties;
         }
 
-        public override void OnNavigatingFrom(IPluginContext context, object? view, object? target)
+        public override void OnNavigatingFrom(IPluginContext pluginContext, INavigationContext navigationContext, object? view, object? target)
         {
             if (target is null)
             {
                 return;
             }
 
-            context.Save(GetType(), GatherExportParameters(target));
+            pluginContext.Save(GetType(), GatherExportParameters(target));
         }
 
-        public override void OnNavigatingTo(IPluginContext context, object view, object target)
+        public override void OnNavigatingTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object target)
         {
-            var parameters = context.LoadOr(GetType(), default(Dictionary<string, object?>));
+            var parameters = pluginContext.LoadOr(GetType(), default(Dictionary<string, object?>));
             if (parameters is null)
             {
                 return;
