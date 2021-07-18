@@ -4,7 +4,7 @@ namespace Smart.Navigation.Components
 
     public sealed class StandardActivator : IActivator
     {
-        public object Resolve(Type type)
+        public object Activate(Type type)
         {
             return Activator.CreateInstance(type)!;
         }

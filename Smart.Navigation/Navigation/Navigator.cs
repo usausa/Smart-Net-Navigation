@@ -309,7 +309,7 @@ namespace Smart.Navigation
 
             public object CreateView(Type type)
             {
-                var view = navigator.activator.Resolve(type);
+                var view = navigator.activator.Activate(type);
 
                 var target = navigator.provider.ResolveTarget(view);
 

@@ -4,6 +4,6 @@ namespace Smart.Navigation.Components
 
     public interface IActivator
     {
-        object Resolve(Type type);
+        object Activate(Type type);
     }
 }

@@ -108,7 +108,7 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator!.Resolve(typeof(Model)));
+            Assert.NotNull(activator!.Activate(typeof(Model)));
         }
 
         [Fact]
@@ -120,7 +120,7 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator!.Resolve(typeof(Model)));
+            Assert.NotNull(activator!.Activate(typeof(Model)));
         }
 
         [Fact]
@@ -132,7 +132,7 @@ namespace Smart.Navigation
             var components = ((INavigatorConfig)config).ResolveComponents();
 
             Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator!.Resolve(typeof(Model)));
+            Assert.NotNull(activator!.Activate(typeof(Model)));
         }
 
         // ------------------------------------------------------------

@@ -13,6 +13,6 @@ namespace Smart.Navigation.Components
             this.resolver = resolver;
         }
 
-        public object Resolve(Type type) => resolver.Get(type);
+        public object Activate(Type type) => resolver.Get(type);
     }
 }

@@ -82,7 +82,7 @@ namespace Smart.Navigation.Plugins.Scope
             {
                 if (!references.TryGetValue(property.Name, out var reference))
                 {
-                    reference = new Reference(activator.Resolve(property.RequestType));
+                    reference = new Reference(activator.Activate(property.RequestType));
 
                     (reference.Instance as IInitializable)?.Initialize();
 

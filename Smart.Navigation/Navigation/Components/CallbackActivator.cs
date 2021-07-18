@@ -11,6 +11,6 @@ namespace Smart.Navigation.Components
             this.callback = callback;
         }
 
-        public object Resolve(Type type) => callback(type);
+        public object Activate(Type type) => callback(type);
     }
 }
