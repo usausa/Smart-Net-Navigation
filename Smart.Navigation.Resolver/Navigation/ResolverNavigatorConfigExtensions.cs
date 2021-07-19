@@ -6,9 +6,9 @@ namespace Smart.Navigation
 
     public static class ResolverNavigatorConfigExtensions
     {
-        public static NavigatorConfig UseResolver(this NavigatorConfig config, IResolver resolver)
+        public static NavigatorConfig UseResolver(this NavigatorConfig config, SmartResolver resolver)
         {
-            config.UseActivator(new SmartResolverActivator(resolver));
+            config.UseServiceProvider(new SmartResolverServiceProvider(resolver));
             config.AddPlugin<ResolverPlugin>();
             return config;
         }

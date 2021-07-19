@@ -103,36 +103,36 @@ namespace Smart.Navigation
         public static void ConfigUseActivatorByInterface()
         {
             var config = new NavigatorConfig()
-                .UseActivator<StandardActivator>();
+                .UseServiceProvider<StandardServiceProvider>();
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator!.Activate(typeof(Model)));
+            Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
+            Assert.NotNull(serviceProvider!.GetService(typeof(Model)));
         }
 
         [Fact]
         public static void ConfigUseActivatorByInstance()
         {
             var config = new NavigatorConfig()
-                .UseActivator(new CallbackActivator(Activator.CreateInstance!));
+                .UseServiceProvider(new DelegateServiceProvider(Activator.CreateInstance!));
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator!.Activate(typeof(Model)));
+            Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
+            Assert.NotNull(serviceProvider!.GetService(typeof(Model)));
         }
 
         [Fact]
         public static void ConfigUseActivatorByCallback()
         {
             var config = new NavigatorConfig()
-                .UseActivator(Activator.CreateInstance!);
+                .UseServiceProvider(Activator.CreateInstance);
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 
-            Assert.True(components.TryGet<IActivator>(out var activator));
-            Assert.NotNull(activator!.Activate(typeof(Model)));
+            Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
+            Assert.NotNull(serviceProvider!.GetService(typeof(Model)));
         }
 
         // ------------------------------------------------------------

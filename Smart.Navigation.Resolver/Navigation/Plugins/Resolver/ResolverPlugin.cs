@@ -1,5 +1,6 @@
 namespace Smart.Navigation.Plugins.Resolver
 {
+    using System;
     using System.Reflection;
 
     using Smart.Navigation.Components;
@@ -8,9 +9,9 @@ namespace Smart.Navigation.Plugins.Resolver
     {
         private readonly PageContextStorage storage;
 
-        public ResolverPlugin(IActivator activator)
+        public ResolverPlugin(IServiceProvider serviceProvider)
         {
-            storage = (PageContextStorage)activator.Activate(typeof(PageContextStorage));
+            storage = (PageContextStorage)serviceProvider.GetService(typeof(PageContextStorage))!;
         }
 
         public override void OnCreate(IPluginContext pluginContext, object view, object target)

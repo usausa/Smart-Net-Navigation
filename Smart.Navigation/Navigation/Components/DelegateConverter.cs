@@ -2,11 +2,11 @@ namespace Smart.Navigation.Components
 {
     using System;
 
-    public sealed class CallbackConverter : IConverter
+    public sealed class DelegateConverter : IConverter
     {
         private readonly Func<object?, Type, object?> callback;
 
-        public CallbackConverter(Func<object?, Type, object?> callback)
+        public DelegateConverter(Func<object?, Type, object?> callback)
         {
             this.callback = callback;
         }

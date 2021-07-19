@@ -8,7 +8,6 @@ namespace Smart.Navigation
     using System.Threading.Tasks;
 
     using Smart.ComponentModel;
-    using Smart.Navigation.Components;
     using Smart.Navigation.Mappers;
     using Smart.Navigation.Plugins;
     using Smart.Navigation.Strategies;
@@ -51,7 +50,7 @@ namespace Smart.Navigation
 
         private readonly IViewMapper viewMapper;
 
-        private readonly IActivator activator;
+        private readonly IServiceProvider serviceProvider;
 
         private readonly IPlugin[] plugins;
 
@@ -83,7 +82,7 @@ namespace Smart.Navigation
 
             provider = components.Get<INavigationProvider>();
             viewMapper = components.Get<IViewMapper>();
-            activator = components.Get<IActivator>();
+            serviceProvider = components.Get<IServiceProvider>();
             plugins = components.GetAll<IPlugin>().ToArray();
         }
 
@@ -309,7 +308,11 @@ namespace Smart.Navigation
 
             public object CreateView(Type type)
             {
-                var view = navigator.activator.Activate(type);
+                var view = navigator.serviceProvider.GetService(type);
+                if (view is null)
+                {
+                    throw new InvalidOperationException($"Create view failed. type=[{type.FullName}]");
+                }
 
                 var target = navigator.provider.ResolveTarget(view);
 

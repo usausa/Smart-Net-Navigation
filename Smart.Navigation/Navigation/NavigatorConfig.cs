@@ -17,7 +17,7 @@ namespace Smart.Navigation
         public NavigatorConfig()
         {
             config.Add<IViewMapper, DirectViewMapper>();
-            config.Add<IActivator, StandardActivator>();
+            config.Add<IServiceProvider, StandardServiceProvider>();
             config.Add<IConverter, SmartConverter>();
             config.Add<IDelegateFactory>(DelegateFactory.Default);
             config.Add<IPlugin, ParameterPlugin>();

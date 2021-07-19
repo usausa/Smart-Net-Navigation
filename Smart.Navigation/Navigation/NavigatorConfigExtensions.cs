@@ -139,32 +139,32 @@ namespace Smart.Navigation
             return config;
         }
 
-        public static NavigatorConfig UseActivator<TActivator>(this NavigatorConfig config)
-            where TActivator : IActivator
+        public static NavigatorConfig UseServiceProvider<TServiceProvider>(this NavigatorConfig config)
+            where TServiceProvider : IServiceProvider
         {
             config.Configure(c =>
             {
-                c.RemoveAll<IActivator>();
-                c.Add<IActivator, TActivator>();
+                c.RemoveAll<IServiceProvider>();
+                c.Add<IServiceProvider, TServiceProvider>();
             });
 
             return config;
         }
 
-        public static NavigatorConfig UseActivator(this NavigatorConfig config, IActivator activator)
+        public static NavigatorConfig UseServiceProvider(this NavigatorConfig config, IServiceProvider serviceProvider)
         {
             config.Configure(c =>
             {
-                c.RemoveAll<IActivator>();
-                c.Add(activator);
+                c.RemoveAll<IServiceProvider>();
+                c.Add(serviceProvider);
             });
 
             return config;
         }
 
-        public static NavigatorConfig UseActivator(this NavigatorConfig config, Func<Type, object> callback)
+        public static NavigatorConfig UseServiceProvider(this NavigatorConfig config, Func<Type, object?> callback)
         {
-            return config.UseActivator(new CallbackActivator(callback));
+            return config.UseServiceProvider(new DelegateServiceProvider(callback));
         }
 
         public static NavigatorConfig UseConverter<TConverter>(this NavigatorConfig config)
@@ -192,7 +192,7 @@ namespace Smart.Navigation
 
         public static NavigatorConfig UseConverter(this NavigatorConfig config, Func<object?, Type, object?> callback)
         {
-            return config.UseConverter(new CallbackConverter(callback));
+            return config.UseConverter(new DelegateConverter(callback));
         }
 
         public static NavigatorConfig UseConverter(this NavigatorConfig config, IObjectConverter converter)

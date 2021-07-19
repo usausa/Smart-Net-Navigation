@@ -5,18 +5,17 @@ namespace Smart.Navigation.Plugins.Scope
     using System.Linq;
     using System.Reflection;
 
-    using Smart.Navigation.Components;
     using Smart.Reflection;
 
     public sealed class ScopePlugin : PluginBase
     {
         private sealed class Reference
         {
-            public object Instance { get; }
+            public object? Instance { get; }
 
             public int Counter { get; set; }
 
-            public Reference(object instance)
+            public Reference(object? instance)
             {
                 Instance = instance;
             }
@@ -26,14 +25,14 @@ namespace Smart.Navigation.Plugins.Scope
 
         private readonly IDelegateFactory delegateFactory;
 
-        private readonly IActivator activator;
+        private readonly IServiceProvider serviceProvider;
 
         private readonly Dictionary<string, Reference> references = new();
 
-        public ScopePlugin(IDelegateFactory delegateFactory, IActivator activator)
+        public ScopePlugin(IDelegateFactory delegateFactory, IServiceProvider serviceProvider)
         {
             this.delegateFactory = delegateFactory;
-            this.activator = activator;
+            this.serviceProvider = serviceProvider;
         }
 
         private ScopeProperty[] GetTypeProperties(Type type)
@@ -82,7 +81,7 @@ namespace Smart.Navigation.Plugins.Scope
             {
                 if (!references.TryGetValue(property.Name, out var reference))
                 {
-                    reference = new Reference(activator.Activate(property.RequestType));
+                    reference = new Reference(serviceProvider.GetService(property.RequestType));
 
                     (reference.Instance as IInitializable)?.Initialize();
 
