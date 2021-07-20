@@ -1,6 +1,5 @@
 namespace Smart.Navigation
 {
-    using Smart.Navigation.Components;
     using Smart.Navigation.Plugins.Resolver;
     using Smart.Resolver;
 
@@ -8,7 +7,7 @@ namespace Smart.Navigation
     {
         public static NavigatorConfig UseResolver(this NavigatorConfig config, SmartResolver resolver)
         {
-            config.UseServiceProvider(new SmartResolverServiceProvider(resolver));
+            config.UseServiceProvider(resolver);
             config.AddPlugin<ResolverPlugin>();
             return config;
         }
