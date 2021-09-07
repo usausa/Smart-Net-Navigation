@@ -115,7 +115,7 @@ namespace Smart.Navigation
         public static void ConfigUseActivatorByInstance()
         {
             var config = new NavigatorConfig()
-                .UseServiceProvider(new DelegateServiceProvider(Activator.CreateInstance!));
+                .UseServiceProvider(new DelegateServiceProvider(Activator.CreateInstance));
 
             var components = ((INavigatorConfig)config).ResolveComponents();
 

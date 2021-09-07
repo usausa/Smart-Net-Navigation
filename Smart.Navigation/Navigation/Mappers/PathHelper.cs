@@ -22,7 +22,7 @@ namespace Smart.Navigation.Mappers
                 return PathSeparatorString;
             }
 
-            return path.Substring(0, index + 1);
+            return path[..(index + 1)];
         }
 
         public static string Normalize(string path)
