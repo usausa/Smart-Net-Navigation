@@ -1,0 +1,14 @@
+{
+  "solution": {
+    "path": "Smart.Navigation.sln",
+    "projects": [
+      "Smart.Navigation\\Smart.Navigation.csproj",
+      "Smart.Navigation.Forms\\Smart.Navigation.Forms.csproj",
+      "Smart.Navigation.Resolver\\Smart.Navigation.Resolver.csproj",
+      "Smart.Navigation.Strategies.GroupSupport\\Smart.Navigation.Strategies.GroupSupport.csproj",
+      "Smart.Navigation.Tests\\Smart.Navigation.Tests.csproj",
+      "Smart.Navigation.Windows\\Smart.Navigation.Windows.csproj",
+      "Smart.Navigation.Windows.Forms\\Smart.Navigation.Windows.Forms.csproj",
+    ]
+  }
+}
