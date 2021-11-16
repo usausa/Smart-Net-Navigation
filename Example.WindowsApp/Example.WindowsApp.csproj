@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.0.6" />
-    <PackageReference Include="Usa.Smart.Reactive" Version="2.0.2" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.0.2" />
-    <PackageReference Include="Usa.Smart.Windows" Version="2.2.1" />
-    <PackageReference Include="Usa.Smart.Windows.Reactive" Version="2.2.1" />
-    <PackageReference Include="Usa.Smart.Windows.Resolver" Version="2.2.1" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.0.11" />
+    <PackageReference Include="Usa.Smart.Reactive" Version="2.0.4" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.0.5" />
+    <PackageReference Include="Usa.Smart.Windows" Version="2.2.2" />
+    <PackageReference Include="Usa.Smart.Windows.Reactive" Version="2.2.2" />
+    <PackageReference Include="Usa.Smart.Windows.Resolver" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>
