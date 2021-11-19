@@ -1,7 +1,6 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+public interface IConfirmRequest
 {
-    public interface IConfirmRequest
-    {
-        bool CanNavigate(INavigationContext context);
-    }
+    bool CanNavigate(INavigationContext context);
 }

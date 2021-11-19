@@ -1,39 +1,38 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+
+using Smart.ComponentModel;
+using Smart.Navigation.Components;
+using Smart.Navigation.Mappers;
+using Smart.Navigation.Plugins;
+using Smart.Navigation.Plugins.Parameter;
+using Smart.Navigation.Plugins.Scope;
+using Smart.Reflection;
+
+public sealed class NavigatorConfig : INavigatorConfig
 {
-    using System;
+    private readonly ComponentConfig config = new();
 
-    using Smart.ComponentModel;
-    using Smart.Navigation.Components;
-    using Smart.Navigation.Mappers;
-    using Smart.Navigation.Plugins;
-    using Smart.Navigation.Plugins.Parameter;
-    using Smart.Navigation.Plugins.Scope;
-    using Smart.Reflection;
-
-    public sealed class NavigatorConfig : INavigatorConfig
+    public NavigatorConfig()
     {
-        private readonly ComponentConfig config = new();
+        config.Add<IViewMapper, DirectViewMapper>();
+        config.Add<IServiceProvider, StandardServiceProvider>();
+        config.Add<IConverter, SmartConverter>();
+        config.Add<IDelegateFactory>(DelegateFactory.Default);
+        config.Add<IPlugin, ParameterPlugin>();
+        config.Add<IPlugin, ScopePlugin>();
+    }
 
-        public NavigatorConfig()
-        {
-            config.Add<IViewMapper, DirectViewMapper>();
-            config.Add<IServiceProvider, StandardServiceProvider>();
-            config.Add<IConverter, SmartConverter>();
-            config.Add<IDelegateFactory>(DelegateFactory.Default);
-            config.Add<IPlugin, ParameterPlugin>();
-            config.Add<IPlugin, ScopePlugin>();
-        }
+    public NavigatorConfig Configure(Action<ComponentConfig> action)
+    {
+        action(config);
 
-        public NavigatorConfig Configure(Action<ComponentConfig> action)
-        {
-            action(config);
+        return this;
+    }
 
-            return this;
-        }
-
-        ComponentContainer INavigatorConfig.ResolveComponents()
-        {
-            return config.ToContainer();
-        }
+    ComponentContainer INavigatorConfig.ResolveComponents()
+    {
+        return config.ToContainer();
     }
 }

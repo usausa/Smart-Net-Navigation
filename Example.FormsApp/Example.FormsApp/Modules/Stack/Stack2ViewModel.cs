@@ -1,31 +1,30 @@
-namespace Example.FormsApp.Modules.Stack
+namespace Example.FormsApp.Modules.Stack;
+
+using System.Threading.Tasks;
+
+using Smart.Forms.Input;
+using Smart.Navigation;
+
+public class Stack2ViewModel : AppViewModelBase
 {
-    using System.Threading.Tasks;
+    public AsyncCommand<int> PopCommand { get; }
 
-    using Smart.Forms.Input;
-    using Smart.Navigation;
+    public AsyncCommand<ViewId> PushCommand { get; }
 
-    public class Stack2ViewModel : AppViewModelBase
+    public Stack2ViewModel(ApplicationState applicationState)
+        : base(applicationState)
     {
-        public AsyncCommand<int> PopCommand { get; }
+        PopCommand = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
+        PushCommand = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));
+    }
 
-        public AsyncCommand<ViewId> PushCommand { get; }
+    protected override Task OnNotifyFunction1Async()
+    {
+        return Navigator.PopAsync();
+    }
 
-        public Stack2ViewModel(ApplicationState applicationState)
-            : base(applicationState)
-        {
-            PopCommand = MakeAsyncCommand<int>(x => Navigator.PopAsync(x));
-            PushCommand = MakeAsyncCommand<ViewId>(x => Navigator.PushAsync(x));
-        }
-
-        protected override Task OnNotifyFunction1Async()
-        {
-            return Navigator.PopAsync();
-        }
-
-        protected override Task OnNotifyFunction4Async()
-        {
-            return Navigator.PushAsync(ViewId.Stack3);
-        }
+    protected override Task OnNotifyFunction4Async()
+    {
+        return Navigator.PushAsync(ViewId.Stack3);
     }
 }

@@ -1,13 +1,12 @@
-namespace Example.FormsApp.Modules.Wizard
-{
-    using Smart.Navigation.Attributes;
+namespace Example.FormsApp.Modules.Wizard;
 
-    [View(ViewId.WizardInput2)]
-    public partial class WizardInput2View
+using Smart.Navigation.Attributes;
+
+[View(ViewId.WizardInput2)]
+public partial class WizardInput2View
+{
+    public WizardInput2View()
     {
-        public WizardInput2View()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

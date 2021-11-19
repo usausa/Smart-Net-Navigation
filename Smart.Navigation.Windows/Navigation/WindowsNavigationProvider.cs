@@ -1,103 +1,102 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
+
+public class WindowsNavigationProvider : INavigationProvider
 {
-    using System;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Input;
+    private readonly IContainerResolver resolver;
 
-    public class WindowsNavigationProvider : INavigationProvider
+    private readonly WindowsNavigationProviderOptions options;
+
+    public WindowsNavigationProvider(IContainerResolver resolver, WindowsNavigationProviderOptions options)
     {
-        private readonly IContainerResolver resolver;
+        this.resolver = resolver;
+        this.options = options;
+    }
 
-        private readonly WindowsNavigationProviderOptions options;
+    public object ResolveTarget(object view)
+    {
+        return ((FrameworkElement)view).DataContext;
+    }
 
-        public WindowsNavigationProvider(IContainerResolver resolver, WindowsNavigationProviderOptions options)
+    public void OpenView(object view)
+    {
+        var container = resolver.Container;
+        if (container is null)
         {
-            this.resolver = resolver;
-            this.options = options;
+            throw new InvalidOperationException("Container is unresolved.");
         }
 
-        public object ResolveTarget(object view)
+        var element = (FrameworkElement)view;
+
+        if (options.FitToParent)
         {
-            return ((FrameworkElement)view).DataContext;
+            BindingOperations.SetBinding(
+                element,
+                FrameworkElement.HeightProperty,
+                new Binding { Source = container, Path = new PropertyPath("ActualHeight") });
+            BindingOperations.SetBinding(
+                element,
+                FrameworkElement.WidthProperty,
+                new Binding { Source = container, Path = new PropertyPath("ActualWidth") });
         }
 
-        public void OpenView(object view)
+        container.Children.Add(element);
+    }
+
+    public void CloseView(object view)
+    {
+        var container = resolver.Container;
+        if (container is null)
         {
-            var container = resolver.Container;
-            if (container is null)
+            throw new InvalidOperationException("Container is unresolved.");
+        }
+
+        var element = (FrameworkElement)view;
+
+        (element as IDisposable)?.Dispose();
+        (element.DataContext as IDisposable)?.Dispose();
+        element.DataContext = null;
+
+        container.Children.Remove(element);
+    }
+
+    public void ActivateView(object view, object? parameter)
+    {
+        var element = (FrameworkElement)view;
+
+        element.Visibility = Visibility.Visible;
+
+        var control = (Control)view;
+        if (options.RestoreFocus)
+        {
+            if (parameter is IInputElement focused)
             {
-                throw new InvalidOperationException("Container is unresolved.");
+                focused.Focus();
             }
-
-            var element = (FrameworkElement)view;
-
-            if (options.FitToParent)
+            else
             {
-                BindingOperations.SetBinding(
-                    element,
-                    FrameworkElement.HeightProperty,
-                    new Binding { Source = container, Path = new PropertyPath("ActualHeight") });
-                BindingOperations.SetBinding(
-                    element,
-                    FrameworkElement.WidthProperty,
-                    new Binding { Source = container, Path = new PropertyPath("ActualWidth") });
-            }
-
-            container.Children.Add(element);
-        }
-
-        public void CloseView(object view)
-        {
-            var container = resolver.Container;
-            if (container is null)
-            {
-                throw new InvalidOperationException("Container is unresolved.");
-            }
-
-            var element = (FrameworkElement)view;
-
-            (element as IDisposable)?.Dispose();
-            (element.DataContext as IDisposable)?.Dispose();
-            element.DataContext = null;
-
-            container.Children.Remove(element);
-        }
-
-        public void ActivateView(object view, object? parameter)
-        {
-            var element = (FrameworkElement)view;
-
-            element.Visibility = Visibility.Visible;
-
-            var control = (Control)view;
-            if (options.RestoreFocus)
-            {
-                if (parameter is IInputElement focused)
+                if (!control.Focus())
                 {
-                    focused.Focus();
-                }
-                else
-                {
-                    if (!control.Focus())
-                    {
-                        var fs = FocusManager.GetFocusScope(control);
-                        FocusManager.SetFocusedElement(fs, control);
-                    }
+                    var fs = FocusManager.GetFocusScope(control);
+                    FocusManager.SetFocusedElement(fs, control);
                 }
             }
         }
+    }
 
-        public object? DeactivateView(object view)
-        {
-            var element = (FrameworkElement)view;
+    public object? DeactivateView(object view)
+    {
+        var element = (FrameworkElement)view;
 
-            var parameter = options.RestoreFocus ? FocusManager.GetFocusedElement(element) : null;
+        var parameter = options.RestoreFocus ? FocusManager.GetFocusedElement(element) : null;
 
-            element.Visibility = Visibility.Hidden;
+        element.Visibility = Visibility.Hidden;
 
-            return parameter;
-        }
+        return parameter;
     }
 }

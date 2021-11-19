@@ -1,43 +1,42 @@
-namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers;
+
+using System;
+using System.Collections.Generic;
+
+public sealed class IdViewMapper : IViewMapper, IIdViewRegister
 {
-    using System;
-    using System.Collections.Generic;
+    private readonly Dictionary<object, ViewDescriptor> descriptors = new();
 
-    public sealed class IdViewMapper : IViewMapper, IIdViewRegister
+    private readonly ITypeConstraint constraint;
+
+    public IdViewMapper(IdViewMapperOptions options, ITypeConstraint constraint)
     {
-        private readonly Dictionary<object, ViewDescriptor> descriptors = new();
+        this.constraint = constraint;
 
-        private readonly ITypeConstraint constraint;
+        options.SetupAction(this);
+    }
 
-        public IdViewMapper(IdViewMapperOptions options, ITypeConstraint constraint)
+    public void Register(object id, Type type)
+    {
+        if (!constraint.IsValidType(type))
         {
-            this.constraint = constraint;
-
-            options.SetupAction(this);
+            throw new ArgumentException($"Type is invalid. type=[{type.FullName}]", nameof(type));
         }
 
-        public void Register(object id, Type type)
-        {
-            if (!constraint.IsValidType(type))
-            {
-                throw new ArgumentException($"Type is invalid. type=[{type.FullName}]", nameof(type));
-            }
+        descriptors[id] = new ViewDescriptor(id, type);
+    }
 
-            descriptors[id] = new ViewDescriptor(id, type);
+    public ViewDescriptor FindDescriptor(object id)
+    {
+        if (!descriptors.TryGetValue(id, out var descriptor))
+        {
+            throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
         }
 
-        public ViewDescriptor FindDescriptor(object id)
-        {
-            if (!descriptors.TryGetValue(id, out var descriptor))
-            {
-                throw new InvalidOperationException($"View id is not found in descriptors. id=[{id}]");
-            }
+        return descriptor;
+    }
 
-            return descriptor;
-        }
-
-        public void CurrentUpdated(object? id)
-        {
-        }
+    public void CurrentUpdated(object? id)
+    {
     }
 }

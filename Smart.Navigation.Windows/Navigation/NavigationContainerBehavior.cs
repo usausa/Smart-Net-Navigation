@@ -1,46 +1,45 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System.Windows;
+using System.Windows.Controls;
+
+using Microsoft.Xaml.Behaviors;
+
+[TypeConstraint(typeof(Canvas))]
+public class NavigationContainerBehavior : Behavior<Canvas>
 {
-    using System.Windows;
-    using System.Windows.Controls;
+    public static readonly DependencyProperty NavigatorProperty = DependencyProperty.Register(
+        nameof(Navigator),
+        typeof(INavigator),
+        typeof(NavigationContainerBehavior),
+        new PropertyMetadata(default(INavigator)));
 
-    using Microsoft.Xaml.Behaviors;
-
-    [TypeConstraint(typeof(Canvas))]
-    public class NavigationContainerBehavior : Behavior<Canvas>
+    public INavigator Navigator
     {
-        public static readonly DependencyProperty NavigatorProperty = DependencyProperty.Register(
-            nameof(Navigator),
-            typeof(INavigator),
-            typeof(NavigationContainerBehavior),
-            new PropertyMetadata(default(INavigator)));
+        get => (INavigator)GetValue(NavigatorProperty);
+        set => SetValue(NavigatorProperty, value);
+    }
 
-        public INavigator Navigator
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+
+        AttachContainer(AssociatedObject);
+    }
+
+    protected override void OnDetaching()
+    {
+        AttachContainer(null);
+
+        base.OnDetaching();
+    }
+
+    private void AttachContainer(Canvas? canvas)
+    {
+        if (Navigator is INavigatorComponentSource componentSource)
         {
-            get => (INavigator)GetValue(NavigatorProperty);
-            set => SetValue(NavigatorProperty, value);
-        }
-
-        protected override void OnAttached()
-        {
-            base.OnAttached();
-
-            AttachContainer(AssociatedObject);
-        }
-
-        protected override void OnDetaching()
-        {
-            AttachContainer(null);
-
-            base.OnDetaching();
-        }
-
-        private void AttachContainer(Canvas? canvas)
-        {
-            if (Navigator is INavigatorComponentSource componentSource)
-            {
-                var updateContainer = componentSource.Components.Get<IUpdateContainer>();
-                updateContainer.Attach(canvas);
-            }
+            var updateContainer = componentSource.Components.Get<IUpdateContainer>();
+            updateContainer.Attach(canvas);
         }
     }
 }

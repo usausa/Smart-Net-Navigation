@@ -1,15 +1,14 @@
-namespace Smart.Navigation.Plugins.Resolver
+namespace Smart.Navigation.Plugins.Resolver;
+
+using System;
+
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+public sealed class PageContextAttribute : Attribute
 {
-    using System;
+    public string Name { get; }
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class PageContextAttribute : Attribute
+    public PageContextAttribute(string name)
     {
-        public string Name { get; }
-
-        public PageContextAttribute(string name)
-        {
-            Name = name;
-        }
+        Name = name;
     }
 }

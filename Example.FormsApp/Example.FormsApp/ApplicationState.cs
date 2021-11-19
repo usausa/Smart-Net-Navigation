@@ -1,8 +1,7 @@
-namespace Example.FormsApp
-{
-    using Smart.Forms.ViewModels;
+namespace Example.FormsApp;
 
-    public class ApplicationState : BusyState
-    {
-    }
+using Smart.Forms.ViewModels;
+
+public class ApplicationState : BusyState
+{
 }

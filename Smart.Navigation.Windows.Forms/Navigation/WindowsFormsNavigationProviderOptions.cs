@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    public class WindowsFormsNavigationProviderOptions
-    {
-        public bool FitToParent { get; set; } = true;
+namespace Smart.Navigation;
 
-        public bool RestoreFocus { get; set; } = true;
-    }
+public class WindowsFormsNavigationProviderOptions
+{
+    public bool FitToParent { get; set; } = true;
+
+    public bool RestoreFocus { get; set; } = true;
 }

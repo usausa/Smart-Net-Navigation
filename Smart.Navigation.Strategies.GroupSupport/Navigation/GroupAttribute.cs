@@ -1,15 +1,14 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class GroupAttribute : Attribute
 {
-    using System;
+    public object Id { get; }
 
-    [AttributeUsage(AttributeTargets.Class)]
-    public sealed class GroupAttribute : Attribute
+    public GroupAttribute(object id)
     {
-        public object Id { get; }
-
-        public GroupAttribute(object id)
-        {
-            Id = id;
-        }
+        Id = id;
     }
 }

@@ -1,33 +1,32 @@
-namespace Example.WindowsFormsApp.Modules.Stack
+namespace Example.WindowsFormsApp.Modules.Stack;
+
+using Smart.Navigation;
+using Smart.Navigation.Attributes;
+
+[View(ViewId.Stack2)]
+public partial class Stack2View : AppViewBase
 {
-    using Smart.Navigation;
-    using Smart.Navigation.Attributes;
+    public override string Title => "Stack2View";
 
-    [View(ViewId.Stack2)]
-    public partial class Stack2View : AppViewBase
+    public override bool CanGoHome => true;
+
+    public Stack2View()
     {
-        public override string Title => "Stack2View";
+        InitializeComponent();
+    }
 
-        public override bool CanGoHome => true;
+    public override void OnGoHome()
+    {
+        Navigator.PopAndForward(ViewId.Menu);
+    }
 
-        public Stack2View()
-        {
-            InitializeComponent();
-        }
+    private void OnPopButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Pop();
+    }
 
-        public override void OnGoHome()
-        {
-            Navigator.PopAndForward(ViewId.Menu);
-        }
-
-        private void OnPopButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Pop();
-        }
-
-        private void OnPushButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Push(ViewId.Stack3);
-        }
+    private void OnPushButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Push(ViewId.Stack3);
     }
 }

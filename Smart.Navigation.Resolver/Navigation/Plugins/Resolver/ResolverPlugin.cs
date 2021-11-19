@@ -1,33 +1,32 @@
-namespace Smart.Navigation.Plugins.Resolver
+namespace Smart.Navigation.Plugins.Resolver;
+
+using System;
+using System.Reflection;
+
+using Smart.Navigation.Components;
+
+public sealed class ResolverPlugin : PluginBase
 {
-    using System;
-    using System.Reflection;
+    private readonly PageContextStorage storage;
 
-    using Smart.Navigation.Components;
-
-    public sealed class ResolverPlugin : PluginBase
+    public ResolverPlugin(IServiceProvider serviceProvider)
     {
-        private readonly PageContextStorage storage;
+        storage = (PageContextStorage)serviceProvider.GetService(typeof(PageContextStorage))!;
+    }
 
-        public ResolverPlugin(IServiceProvider serviceProvider)
+    public override void OnCreate(IPluginContext pluginContext, object view, object target)
+    {
+        foreach (var attribute in target.GetType().GetCustomAttributes<PageContextAttribute>())
         {
-            storage = (PageContextStorage)serviceProvider.GetService(typeof(PageContextStorage))!;
+            storage.Push(attribute.Name);
         }
+    }
 
-        public override void OnCreate(IPluginContext pluginContext, object view, object target)
+    public override void OnClose(IPluginContext pluginContext, object view, object target)
+    {
+        foreach (var attribute in target.GetType().GetCustomAttributes<PageContextAttribute>())
         {
-            foreach (var attribute in target.GetType().GetCustomAttributes<PageContextAttribute>())
-            {
-                storage.Push(attribute.Name);
-            }
-        }
-
-        public override void OnClose(IPluginContext pluginContext, object view, object target)
-        {
-            foreach (var attribute in target.GetType().GetCustomAttributes<PageContextAttribute>())
-            {
-                storage.Pop(attribute.Name);
-            }
+            storage.Pop(attribute.Name);
         }
     }
 }

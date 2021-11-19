@@ -1,69 +1,68 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+
+using Xamarin.Forms;
+
+public class NavigationContainerBehavior : Behavior<AbsoluteLayout>
 {
-    using System;
+    public static readonly BindableProperty NavigatorProperty =
+        BindableProperty.Create(nameof(Navigator), typeof(INavigator), typeof(NavigationContainerBehavior));
 
-    using Xamarin.Forms;
-
-    public class NavigationContainerBehavior : Behavior<AbsoluteLayout>
+    public INavigator Navigator
     {
-        public static readonly BindableProperty NavigatorProperty =
-            BindableProperty.Create(nameof(Navigator), typeof(INavigator), typeof(NavigationContainerBehavior));
+        get => (INavigator)GetValue(NavigatorProperty);
+        set => SetValue(NavigatorProperty, value);
+    }
 
-        public INavigator Navigator
+    public AbsoluteLayout? AssociatedObject { get; private set; }
+
+    protected override void OnAttachedTo(AbsoluteLayout bindable)
+    {
+        base.OnAttachedTo(bindable);
+
+        AssociatedObject = bindable;
+
+        if (bindable.BindingContext is not null)
         {
-            get => (INavigator)GetValue(NavigatorProperty);
-            set => SetValue(NavigatorProperty, value);
+            BindingContext = bindable.BindingContext;
         }
 
-        public AbsoluteLayout? AssociatedObject { get; private set; }
+        bindable.BindingContextChanged += HandleBindingContextChanged;
 
-        protected override void OnAttachedTo(AbsoluteLayout bindable)
+        AttachContainer(bindable);
+    }
+
+    protected override void OnDetachingFrom(AbsoluteLayout bindable)
+    {
+        base.OnDetachingFrom(bindable);
+
+        bindable.BindingContextChanged -= HandleBindingContextChanged;
+        AssociatedObject = null;
+
+        AttachContainer(null);
+    }
+
+    private void HandleBindingContextChanged(object sender, EventArgs eventArgs)
+    {
+        OnBindingContextChanged();
+    }
+
+    protected override void OnBindingContextChanged()
+    {
+        base.OnBindingContextChanged();
+
+        BindingContext = AssociatedObject?.BindingContext;
+
+        AttachContainer(AssociatedObject);
+    }
+
+    private void AttachContainer(AbsoluteLayout? layout)
+    {
+        if (Navigator is INavigatorComponentSource componentSource)
         {
-            base.OnAttachedTo(bindable);
-
-            AssociatedObject = bindable;
-
-            if (bindable.BindingContext is not null)
-            {
-                BindingContext = bindable.BindingContext;
-            }
-
-            bindable.BindingContextChanged += HandleBindingContextChanged;
-
-            AttachContainer(bindable);
-        }
-
-        protected override void OnDetachingFrom(AbsoluteLayout bindable)
-        {
-            base.OnDetachingFrom(bindable);
-
-            bindable.BindingContextChanged -= HandleBindingContextChanged;
-            AssociatedObject = null;
-
-            AttachContainer(null);
-        }
-
-        private void HandleBindingContextChanged(object sender, EventArgs eventArgs)
-        {
-            OnBindingContextChanged();
-        }
-
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-
-            BindingContext = AssociatedObject?.BindingContext;
-
-            AttachContainer(AssociatedObject);
-        }
-
-        private void AttachContainer(AbsoluteLayout? layout)
-        {
-            if (Navigator is INavigatorComponentSource componentSource)
-            {
-                var updateContainer = componentSource.Components.Get<IUpdateContainer>();
-                updateContainer.Attach(layout);
-            }
+            var updateContainer = componentSource.Components.Get<IUpdateContainer>();
+            updateContainer.Attach(layout);
         }
     }
 }

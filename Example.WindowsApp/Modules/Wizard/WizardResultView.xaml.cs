@@ -1,13 +1,12 @@
-namespace Example.WindowsApp.Modules.Wizard
+namespace Example.WindowsApp.Modules.Wizard;
+
+/// <summary>
+/// WizardResultView.xaml の相互作用ロジック
+/// </summary>
+public partial class WizardResultView
 {
-    /// <summary>
-    /// WizardResultView.xaml の相互作用ロジック
-    /// </summary>
-    public partial class WizardResultView
+    public WizardResultView()
     {
-        public WizardResultView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

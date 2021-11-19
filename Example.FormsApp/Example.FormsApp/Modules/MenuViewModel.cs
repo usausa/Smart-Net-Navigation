@@ -1,16 +1,15 @@
-namespace Example.FormsApp.Modules
+namespace Example.FormsApp.Modules;
+
+using Smart.Forms.Input;
+using Smart.Navigation;
+
+public class MenuViewModel : AppViewModelBase
 {
-    using Smart.Forms.Input;
-    using Smart.Navigation;
+    public AsyncCommand<ViewId> ForwardCommand { get; }
 
-    public class MenuViewModel : AppViewModelBase
+    public MenuViewModel(ApplicationState applicationState)
+        : base(applicationState)
     {
-        public AsyncCommand<ViewId> ForwardCommand { get; }
-
-        public MenuViewModel(ApplicationState applicationState)
-            : base(applicationState)
-        {
-            ForwardCommand = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
-        }
+        ForwardCommand = MakeAsyncCommand<ViewId>(x => Navigator.ForwardAsync(x));
     }
 }

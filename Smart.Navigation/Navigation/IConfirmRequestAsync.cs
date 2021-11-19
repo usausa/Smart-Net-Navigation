@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    using System.Threading.Tasks;
+namespace Smart.Navigation;
 
-    public interface IConfirmRequestAsync
-    {
-        Task<bool> CanNavigateAsync(INavigationContext context);
-    }
+using System.Threading.Tasks;
+
+public interface IConfirmRequestAsync
+{
+    Task<bool> CanNavigateAsync(INavigationContext context);
 }

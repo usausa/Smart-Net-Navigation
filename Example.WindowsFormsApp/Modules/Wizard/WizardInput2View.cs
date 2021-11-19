@@ -1,47 +1,46 @@
-namespace Example.WindowsFormsApp.Modules.Wizard
+namespace Example.WindowsFormsApp.Modules.Wizard;
+
+using System.Diagnostics.CodeAnalysis;
+
+using Smart.Navigation;
+using Smart.Navigation.Attributes;
+using Smart.Navigation.Plugins.Scope;
+
+[View(ViewId.WizardInput2)]
+public partial class WizardInput2View : AppViewBase
 {
-    using System.Diagnostics.CodeAnalysis;
+    public override string Title => "Input2";
 
-    using Smart.Navigation;
-    using Smart.Navigation.Attributes;
-    using Smart.Navigation.Plugins.Scope;
+    public override bool CanGoHome => true;
 
-    [View(ViewId.WizardInput2)]
-    public partial class WizardInput2View : AppViewBase
+    [Scope]
+    [AllowNull]
+    public WizardContext Context { get; set; }
+
+    public WizardInput2View()
     {
-        public override string Title => "Input2";
+        InitializeComponent();
+    }
 
-        public override bool CanGoHome => true;
+    public override void OnNavigatingTo(INavigationContext context)
+    {
+        Data2Text.Text = Context.Data2;
+    }
 
-        [Scope]
-        [AllowNull]
-        public WizardContext Context { get; set; }
+    public override void OnGoHome()
+    {
+        Navigator.Forward(ViewId.Menu);
+    }
 
-        public WizardInput2View()
-        {
-            InitializeComponent();
-        }
+    private void OnPrevButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.WizardInput1);
+    }
 
-        public override void OnNavigatingTo(INavigationContext context)
-        {
-            Data2Text.Text = Context.Data2;
-        }
+    private void OnNextButtonClick(object sender, System.EventArgs e)
+    {
+        Context.Data2 = Data2Text.Text;
 
-        public override void OnGoHome()
-        {
-            Navigator.Forward(ViewId.Menu);
-        }
-
-        private void OnPrevButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.WizardInput1);
-        }
-
-        private void OnNextButtonClick(object sender, System.EventArgs e)
-        {
-            Context.Data2 = Data2Text.Text;
-
-            Navigator.Forward(ViewId.WizardResult);
-        }
+        Navigator.Forward(ViewId.WizardResult);
     }
 }

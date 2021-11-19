@@ -1,19 +1,18 @@
-namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers;
+
+using System;
+
+public sealed class AssignableTypeConstraint : ITypeConstraint
 {
-    using System;
+    private readonly Type baseType;
 
-    public sealed class AssignableTypeConstraint : ITypeConstraint
+    public AssignableTypeConstraint(Type baseType)
     {
-        private readonly Type baseType;
+        this.baseType = baseType;
+    }
 
-        public AssignableTypeConstraint(Type baseType)
-        {
-            this.baseType = baseType;
-        }
-
-        public bool IsValidType(Type type)
-        {
-            return baseType.IsAssignableFrom(type);
-        }
+    public bool IsValidType(Type type)
+    {
+        return baseType.IsAssignableFrom(type);
     }
 }

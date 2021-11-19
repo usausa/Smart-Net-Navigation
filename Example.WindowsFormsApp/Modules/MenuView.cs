@@ -1,49 +1,48 @@
-namespace Example.WindowsFormsApp.Modules
+namespace Example.WindowsFormsApp.Modules;
+
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+using Smart.Navigation;
+using Smart.Navigation.Attributes;
+
+[View(ViewId.Menu)]
+public partial class MenuView : AppViewBase
 {
-    using System.Collections.Generic;
-    using System.Windows.Forms;
+    public override string Title => "Menu";
 
-    using Smart.Navigation;
-    using Smart.Navigation.Attributes;
-
-    [View(ViewId.Menu)]
-    public partial class MenuView : AppViewBase
+    public override IReadOnlyList<FunctionKey> FunctionKeys => new[]
     {
-        public override string Title => "Menu";
+        new FunctionKey(Keys.F12, "Exit")
+    };
 
-        public override IReadOnlyList<FunctionKey> FunctionKeys => new[]
-        {
-            new FunctionKey(Keys.F12, "Exit")
-        };
+    public MenuView()
+    {
+        InitializeComponent();
+    }
 
-        public MenuView()
+    public override void OnFunctionKey(Keys key)
+    {
+        switch (key)
         {
-            InitializeComponent();
+            case Keys.F12:
+                Navigator.Exit();
+                break;
         }
+    }
 
-        public override void OnFunctionKey(Keys key)
-        {
-            switch (key)
-            {
-                case Keys.F12:
-                    Navigator.Exit();
-                    break;
-            }
-        }
+    private void OnMenuButton1Click(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.EditList);
+    }
 
-        private void OnMenuButton1Click(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.EditList);
-        }
+    private void OnMenuButton2Click(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.Stack1);
+    }
 
-        private void OnMenuButton2Click(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.Stack1);
-        }
-
-        private void OnMenuButton3Click(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.WizardInput1);
-        }
+    private void OnMenuButton3Click(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.WizardInput1);
     }
 }

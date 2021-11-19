@@ -1,13 +1,12 @@
-namespace Example.WindowsApp.Modules.Stack
+namespace Example.WindowsApp.Modules.Stack;
+
+/// <summary>
+/// Stack3View.xaml の相互作用ロジック
+/// </summary>
+public partial class Stack3View
 {
-    /// <summary>
-    /// Stack3View.xaml の相互作用ロジック
-    /// </summary>
-    public partial class Stack3View
+    public Stack3View()
     {
-        public Stack3View()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

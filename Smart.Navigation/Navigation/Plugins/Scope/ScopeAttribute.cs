@@ -1,32 +1,31 @@
-namespace Smart.Navigation.Plugins.Scope
+namespace Smart.Navigation.Plugins.Scope;
+
+using System;
+
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ScopeAttribute : Attribute
 {
-    using System;
+    public string? Name { get; }
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ScopeAttribute : Attribute
+    public Type? RequestType { get; }
+
+    public ScopeAttribute()
     {
-        public string? Name { get; }
+    }
 
-        public Type? RequestType { get; }
+    public ScopeAttribute(string name)
+    {
+        Name = name;
+    }
 
-        public ScopeAttribute()
-        {
-        }
+    public ScopeAttribute(Type requestType)
+    {
+        RequestType = requestType;
+    }
 
-        public ScopeAttribute(string name)
-        {
-            Name = name;
-        }
-
-        public ScopeAttribute(Type requestType)
-        {
-            RequestType = requestType;
-        }
-
-        public ScopeAttribute(string name, Type requestType)
-        {
-            Name = name;
-            RequestType = requestType;
-        }
+    public ScopeAttribute(string name, Type requestType)
+    {
+        Name = name;
+        RequestType = requestType;
     }
 }

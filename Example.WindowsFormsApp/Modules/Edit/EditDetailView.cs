@@ -1,76 +1,75 @@
-namespace Example.WindowsFormsApp.Modules.Edit
+namespace Example.WindowsFormsApp.Modules.Edit;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+using Example.WindowsFormsApp.Models;
+using Example.WindowsFormsApp.Services;
+
+using Smart.Navigation;
+using Smart.Navigation.Attributes;
+using Smart.Resolver.Attributes;
+
+[View(ViewId.EditDetailNew)]
+[View(ViewId.EditDetailUpdate)]
+public partial class DataDetailView : AppViewBase
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
+    private bool update;
 
-    using Example.WindowsFormsApp.Models;
-    using Example.WindowsFormsApp.Services;
+    [AllowNull]
+    private DataEntity entity;
 
-    using Smart.Navigation;
-    using Smart.Navigation.Attributes;
-    using Smart.Resolver.Attributes;
+    public override string Title => update ? "Data New" : "Data Edit";
 
-    [View(ViewId.EditDetailNew)]
-    [View(ViewId.EditDetailUpdate)]
-    public partial class DataDetailView : AppViewBase
+    public override bool CanGoHome => true;
+
+    [Inject]
+    [AllowNull]
+    public DataService DataService { get; set; }
+
+    public DataDetailView()
     {
-        private bool update;
+        InitializeComponent();
+    }
 
-        [AllowNull]
-        private DataEntity entity;
-
-        public override string Title => update ? "Data New" : "Data Edit";
-
-        public override bool CanGoHome => true;
-
-        [Inject]
-        [AllowNull]
-        public DataService DataService { get; set; }
-
-        public DataDetailView()
+    public override void OnNavigatingTo(INavigationContext context)
+    {
+        update = Equals(context.ToId, ViewId.EditDetailUpdate);
+        if (update)
         {
-            InitializeComponent();
+            entity = context.Parameter.GetValue<DataEntity>();
+            NameText.Text = entity.Name;
+        }
+    }
+
+    public override void OnGoHome()
+    {
+        Navigator.Forward(ViewId.Menu);
+    }
+
+    private void OnPrevButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.EditList);
+    }
+
+    private void OnUpdateButtonClick(object sender, System.EventArgs e)
+    {
+        if (String.IsNullOrEmpty(NameText.Text))
+        {
+            NameText.Focus();
+            return;
         }
 
-        public override void OnNavigatingTo(INavigationContext context)
+        if (update)
         {
-            update = Equals(context.ToId, ViewId.EditDetailUpdate);
-            if (update)
-            {
-                entity = context.Parameter.GetValue<DataEntity>();
-                NameText.Text = entity.Name;
-            }
+            entity.Name = NameText.Text;
+            DataService.UpdateData(entity);
+        }
+        else
+        {
+            DataService.InsertData(NameText.Text);
         }
 
-        public override void OnGoHome()
-        {
-            Navigator.Forward(ViewId.Menu);
-        }
-
-        private void OnPrevButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.EditList);
-        }
-
-        private void OnUpdateButtonClick(object sender, System.EventArgs e)
-        {
-            if (String.IsNullOrEmpty(NameText.Text))
-            {
-                NameText.Focus();
-                return;
-            }
-
-            if (update)
-            {
-                entity.Name = NameText.Text;
-                DataService.UpdateData(entity);
-            }
-            else
-            {
-                DataService.InsertData(NameText.Text);
-            }
-
-            Navigator.Forward(ViewId.EditList);
-        }
+        Navigator.Forward(ViewId.EditList);
     }
 }

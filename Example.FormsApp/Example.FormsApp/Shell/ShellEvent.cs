@@ -1,10 +1,9 @@
-namespace Example.FormsApp.Shell
+namespace Example.FormsApp.Shell;
+
+public enum ShellEvent
 {
-    public enum ShellEvent
-    {
-        Function1,
-        Function2,
-        Function3,
-        Function4
-    }
+    Function1,
+    Function2,
+    Function3,
+    Function4
 }

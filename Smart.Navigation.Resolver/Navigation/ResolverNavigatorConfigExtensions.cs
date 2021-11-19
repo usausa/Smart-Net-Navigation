@@ -1,15 +1,14 @@
-namespace Smart.Navigation
-{
-    using Smart.Navigation.Plugins.Resolver;
-    using Smart.Resolver;
+namespace Smart.Navigation;
 
-    public static class ResolverNavigatorConfigExtensions
+using Smart.Navigation.Plugins.Resolver;
+using Smart.Resolver;
+
+public static class ResolverNavigatorConfigExtensions
+{
+    public static NavigatorConfig UseResolver(this NavigatorConfig config, SmartResolver resolver)
     {
-        public static NavigatorConfig UseResolver(this NavigatorConfig config, SmartResolver resolver)
-        {
-            config.UseServiceProvider(resolver);
-            config.AddPlugin<ResolverPlugin>();
-            return config;
-        }
+        config.UseServiceProvider(resolver);
+        config.AddPlugin<ResolverPlugin>();
+        return config;
     }
 }

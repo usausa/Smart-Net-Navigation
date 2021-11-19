@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    using Smart.ComponentModel;
+namespace Smart.Navigation;
 
-    public interface INavigatorComponentSource
-    {
-        ComponentContainer Components { get; }
-    }
+using Smart.ComponentModel;
+
+public interface INavigatorComponentSource
+{
+    ComponentContainer Components { get; }
 }

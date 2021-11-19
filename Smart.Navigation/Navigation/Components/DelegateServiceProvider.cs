@@ -1,16 +1,15 @@
-namespace Smart.Navigation.Components
+namespace Smart.Navigation.Components;
+
+using System;
+
+public sealed class DelegateServiceProvider : IServiceProvider
 {
-    using System;
+    private readonly Func<Type, object?> callback;
 
-    public sealed class DelegateServiceProvider : IServiceProvider
+    public DelegateServiceProvider(Func<Type, object?> callback)
     {
-        private readonly Func<Type, object?> callback;
-
-        public DelegateServiceProvider(Func<Type, object?> callback)
-        {
-            this.callback = callback;
-        }
-
-        public object? GetService(Type serviceType) => callback(serviceType);
+        this.callback = callback;
     }
+
+    public object? GetService(Type serviceType) => callback(serviceType);
 }

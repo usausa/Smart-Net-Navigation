@@ -1,11 +1,10 @@
-namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies;
+
+public interface INavigationStrategy
 {
-    public interface INavigationStrategy
-    {
-        StrategyResult? Initialize(INavigationController controller);
+    StrategyResult? Initialize(INavigationController controller);
 
-        object ResolveToView(INavigationController controller);
+    object ResolveToView(INavigationController controller);
 
-        void UpdateStack(INavigationController controller, object toView);
-    }
+    void UpdateStack(INavigationController controller, object toView);
 }

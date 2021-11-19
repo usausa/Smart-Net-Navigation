@@ -1,25 +1,24 @@
-namespace Example.WindowsApp.Modules.Wizard
+namespace Example.WindowsApp.Modules.Wizard;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+using Smart;
+
+public sealed class WizardContext : IInitializable, IDisposable
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using Smart;
+    [AllowNull]
+    public string Data1 { get; set; }
 
-    public sealed class WizardContext : IInitializable, IDisposable
+    [AllowNull]
+    public string Data2 { get; set; }
+
+    public void Initialize()
     {
-        [AllowNull]
-        public string Data1 { get; set; }
+        System.Diagnostics.Debug.WriteLine("*** WizardContext Initialize ***");
+    }
 
-        [AllowNull]
-        public string Data2 { get; set; }
-
-        public void Initialize()
-        {
-            System.Diagnostics.Debug.WriteLine("*** WizardContext Initialize ***");
-        }
-
-        public void Dispose()
-        {
-            System.Diagnostics.Debug.WriteLine("*** WizardContext Dispose ***");
-        }
+    public void Dispose()
+    {
+        System.Diagnostics.Debug.WriteLine("*** WizardContext Dispose ***");
     }
 }

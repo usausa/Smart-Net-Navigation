@@ -1,46 +1,45 @@
-namespace Example.WindowsFormsApp.Modules.Wizard
+namespace Example.WindowsFormsApp.Modules.Wizard;
+
+using System.Diagnostics.CodeAnalysis;
+
+using Smart.Navigation;
+using Smart.Navigation.Attributes;
+using Smart.Navigation.Plugins.Scope;
+
+[View(ViewId.WizardResult)]
+public partial class WizardResultView : AppViewBase
 {
-    using System.Diagnostics.CodeAnalysis;
+    public override string Title => "Result";
 
-    using Smart.Navigation;
-    using Smart.Navigation.Attributes;
-    using Smart.Navigation.Plugins.Scope;
+    public override bool CanGoHome => true;
 
-    [View(ViewId.WizardResult)]
-    public partial class WizardResultView : AppViewBase
+    [Scope]
+    [AllowNull]
+    public WizardContext Context { get; set; }
+
+    public WizardResultView()
     {
-        public override string Title => "Result";
+        InitializeComponent();
+    }
 
-        public override bool CanGoHome => true;
+    public override void OnNavigatingTo(INavigationContext context)
+    {
+        Data1Label.Text = Context.Data1;
+        Data2Label.Text = Context.Data2;
+    }
 
-        [Scope]
-        [AllowNull]
-        public WizardContext Context { get; set; }
+    public override void OnGoHome()
+    {
+        Navigator.Forward(ViewId.Menu);
+    }
 
-        public WizardResultView()
-        {
-            InitializeComponent();
-        }
+    private void OnPrevButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.WizardInput2);
+    }
 
-        public override void OnNavigatingTo(INavigationContext context)
-        {
-            Data1Label.Text = Context.Data1;
-            Data2Label.Text = Context.Data2;
-        }
-
-        public override void OnGoHome()
-        {
-            Navigator.Forward(ViewId.Menu);
-        }
-
-        private void OnPrevButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.WizardInput2);
-        }
-
-        private void OnNextButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.Menu);
-        }
+    private void OnNextButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.Menu);
     }
 }

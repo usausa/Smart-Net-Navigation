@@ -1,75 +1,74 @@
-namespace Example.FormsApp
+namespace Example.FormsApp;
+
+using System.Reflection;
+
+using Example.FormsApp.Modules;
+using Example.FormsApp.Services;
+
+using Smart.Forms.Components;
+using Smart.Forms.Resolver;
+using Smart.Navigation;
+using Smart.Resolver;
+
+public partial class App
 {
-    using System.Reflection;
+    private readonly Navigator navigator;
 
-    using Example.FormsApp.Modules;
-    using Example.FormsApp.Services;
-
-    using Smart.Forms.Components;
-    using Smart.Forms.Resolver;
-    using Smart.Navigation;
-    using Smart.Resolver;
-
-    public partial class App
+    public App()
     {
-        private readonly Navigator navigator;
+        InitializeComponent();
 
-        public App()
+        // Config Resolver
+        var resolver = CreateResolver();
+        ResolveProvider.Default.UseSmartResolver(resolver);
+
+        // Config Navigator
+        navigator = new NavigatorConfig()
+            .UseFormsNavigationProvider()
+            .UseResolver(resolver)
+            .UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
+            .ToNavigator();
+        navigator.Navigated += (_, args) =>
         {
-            InitializeComponent();
+            // for debug
+            System.Diagnostics.Debug.WriteLine(
+                $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
+        };
 
-            // Config Resolver
-            var resolver = CreateResolver();
-            ResolveProvider.Default.UseSmartResolver(resolver);
+        // Show MainWindow
+        MainPage = resolver.Get<MainPage>();
+    }
 
-            // Config Navigator
-            navigator = new NavigatorConfig()
-                .UseFormsNavigationProvider()
-                .UseResolver(resolver)
-                .UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
-                .ToNavigator();
-            navigator.Navigated += (_, args) =>
-            {
-                // for debug
-                System.Diagnostics.Debug.WriteLine(
-                    $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
-            };
+    private SmartResolver CreateResolver()
+    {
+        var config = new ResolverConfig()
+            .UseAutoBinding()
+            .UseArrayBinding()
+            .UseAssignableBinding()
+            .UsePropertyInjector();
 
-            // Show MainWindow
-            MainPage = resolver.Get<MainPage>();
-        }
+        config.Bind<INavigator>().ToMethod(_ => navigator).InSingletonScope();
 
-        private SmartResolver CreateResolver()
-        {
-            var config = new ResolverConfig()
-                .UseAutoBinding()
-                .UseArrayBinding()
-                .UseAssignableBinding()
-                .UsePropertyInjector();
+        config.Bind<IDialogService>().To<DialogService>().InSingletonScope();
 
-            config.Bind<INavigator>().ToMethod(_ => navigator).InSingletonScope();
+        config.Bind<DataService>().ToSelf().InSingletonScope();
+        config.Bind<ApplicationState>().ToSelf().InSingletonScope();
 
-            config.Bind<IDialogService>().To<DialogService>().InSingletonScope();
+        return config.ToResolver();
+    }
 
-            config.Bind<DataService>().ToSelf().InSingletonScope();
-            config.Bind<ApplicationState>().ToSelf().InSingletonScope();
+    protected override void OnStart()
+    {
+        navigator.Forward(ViewId.Menu);
+    }
 
-            return config.ToResolver();
-        }
+    protected override void OnSleep()
+    {
+        // Handle when your app sleeps
+    }
 
-        protected override void OnStart()
-        {
-            navigator.Forward(ViewId.Menu);
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
+    protected override void OnResume()
+    {
+        // Handle when your app resumes
     }
 }

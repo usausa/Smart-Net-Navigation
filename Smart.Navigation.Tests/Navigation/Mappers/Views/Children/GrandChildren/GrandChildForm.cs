@@ -1,8 +1,7 @@
-namespace Smart.Navigation.Mappers.Views.Children.GrandChildren
-{
-    using Smart.Mock;
+namespace Smart.Navigation.Mappers.Views.Children.GrandChildren;
 
-    public class GrandChildForm : MockForm
-    {
-    }
+using Smart.Mock;
+
+public class GrandChildForm : MockForm
+{
 }

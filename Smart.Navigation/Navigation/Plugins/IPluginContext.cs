@@ -1,15 +1,14 @@
-namespace Smart.Navigation.Plugins
+namespace Smart.Navigation.Plugins;
+
+using System;
+
+public interface IPluginContext
 {
-    using System;
+    void Save<T>(Type type, T value);
 
-    public interface IPluginContext
-    {
-        void Save<T>(Type type, T value);
+    T? Load<T>(Type type);
 
-        T? Load<T>(Type type);
+    T LoadOr<T>(Type type, T defaultValue);
 
-        T LoadOr<T>(Type type, T defaultValue);
-
-        T LoadOr<T>(Type type, Func<T> defaultValueFactory);
-    }
+    T LoadOr<T>(Type type, Func<T> defaultValueFactory);
 }

@@ -1,38 +1,37 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using Smart.Mock;
+
+using Xunit;
+
+public static class NavigatorComponentSourceTest
 {
-    using Smart.Mock;
+    // ------------------------------------------------------------
+    // Provider
+    // ------------------------------------------------------------
 
-    using Xunit;
-
-    public static class NavigatorComponentSourceTest
+    [Fact]
+    public static void NavigatorComponentSource()
     {
-        // ------------------------------------------------------------
-        // Provider
-        // ------------------------------------------------------------
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .Configure(c => c.Add<IDummyComponent, DummyComponent>())
+            .ToNavigator();
 
-        [Fact]
-        public static void NavigatorComponentSource()
+        var componentSource = (INavigatorComponentSource)navigator;
+
+        Assert.NotNull(componentSource.Components.Get<IDummyComponent>());
+    }
+
+    public interface IDummyComponent
+    {
+        void Something();
+    }
+
+    public class DummyComponent : IDummyComponent
+    {
+        public void Something()
         {
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .Configure(c => c.Add<IDummyComponent, DummyComponent>())
-                .ToNavigator();
-
-            var componentSource = (INavigatorComponentSource)navigator;
-
-            Assert.NotNull(componentSource.Components.Get<IDummyComponent>());
-        }
-
-        public interface IDummyComponent
-        {
-            void Something();
-        }
-
-        public class DummyComponent : IDummyComponent
-        {
-            public void Something()
-            {
-            }
         }
     }
 }

@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    using System.Windows.Controls;
+namespace Smart.Navigation;
 
-    public interface IUpdateContainer
-    {
-        void Attach(Canvas? container);
-    }
+using System.Windows.Controls;
+
+public interface IUpdateContainer
+{
+    void Attach(Canvas? container);
 }

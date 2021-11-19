@@ -1,45 +1,44 @@
-namespace Smart.Mock
+namespace Smart.Mock;
+
+using Smart.Navigation;
+
+public sealed class MockFormNavigationProvider : INavigationProvider
 {
-    using Smart.Navigation;
-
-    public sealed class MockFormNavigationProvider : INavigationProvider
+    public object ResolveTarget(object view)
     {
-        public object ResolveTarget(object view)
-        {
-            return view;
-        }
+        return view;
+    }
 
-        public void OpenView(object view)
-        {
-            var form = (MockForm)view;
+    public void OpenView(object view)
+    {
+        var form = (MockForm)view;
 
-            form.Show();
-        }
+        form.Show();
+    }
 
-        public void CloseView(object view)
-        {
-            var form = (MockForm)view;
+    public void CloseView(object view)
+    {
+        var form = (MockForm)view;
 
-            form.Dispose();
-        }
+        form.Dispose();
+    }
 
-        public void ActivateView(object view, object? parameter)
-        {
-            var form = (MockForm)view;
+    public void ActivateView(object view, object? parameter)
+    {
+        var form = (MockForm)view;
 
-            form.IsVisible = true;
-            form.Focused = parameter;
-        }
+        form.IsVisible = true;
+        form.Focused = parameter;
+    }
 
-        public object? DeactivateView(object view)
-        {
-            var form = (MockForm)view;
+    public object? DeactivateView(object view)
+    {
+        var form = (MockForm)view;
 
-            form.IsVisible = false;
-            var parameter = form.Focused;
-            form.Focused = null;
+        form.IsVisible = false;
+        var parameter = form.Focused;
+        form.Focused = null;
 
-            return parameter;
-        }
+        return parameter;
     }
 }

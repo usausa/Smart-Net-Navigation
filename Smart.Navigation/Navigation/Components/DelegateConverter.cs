@@ -1,16 +1,15 @@
-namespace Smart.Navigation.Components
+namespace Smart.Navigation.Components;
+
+using System;
+
+public sealed class DelegateConverter : IConverter
 {
-    using System;
+    private readonly Func<object?, Type, object?> callback;
 
-    public sealed class DelegateConverter : IConverter
+    public DelegateConverter(Func<object?, Type, object?> callback)
     {
-        private readonly Func<object?, Type, object?> callback;
-
-        public DelegateConverter(Func<object?, Type, object?> callback)
-        {
-            this.callback = callback;
-        }
-
-        public object? Convert(object? value, Type type) => callback(value, type);
+        this.callback = callback;
     }
+
+    public object? Convert(object? value, Type type) => callback(value, type);
 }

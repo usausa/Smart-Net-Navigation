@@ -1,59 +1,58 @@
-namespace Example.WindowsApp.Views
+namespace Example.WindowsApp.Views;
+
+using System;
+using System.Windows;
+
+using Microsoft.Xaml.Behaviors;
+
+using Smart.Navigation;
+
+[TypeConstraint(typeof(Window))]
+public sealed class ShellUpdateBehavior : Behavior<Window>
 {
-    using System;
-    using System.Windows;
+    public static readonly DependencyProperty NavigatorProperty = DependencyProperty.Register(
+        nameof(Navigator),
+        typeof(INavigator),
+        typeof(ShellUpdateBehavior),
+        new PropertyMetadata(default(INavigator)));
 
-    using Microsoft.Xaml.Behaviors;
-
-    using Smart.Navigation;
-
-    [TypeConstraint(typeof(Window))]
-    public sealed class ShellUpdateBehavior : Behavior<Window>
+    public INavigator Navigator
     {
-        public static readonly DependencyProperty NavigatorProperty = DependencyProperty.Register(
-            nameof(Navigator),
-            typeof(INavigator),
-            typeof(ShellUpdateBehavior),
-            new PropertyMetadata(default(INavigator)));
+        get => (INavigator)GetValue(NavigatorProperty);
+        set => SetValue(NavigatorProperty, value);
+    }
 
-        public INavigator Navigator
+    protected override void OnAttached()
+    {
+        base.OnAttached();
+
+        Navigator.Navigated += NavigatorOnNavigated;
+        Navigator.Exited += NavigatorOnExited;
+    }
+
+    protected override void OnDetaching()
+    {
+        Navigator.Navigated -= NavigatorOnNavigated;
+        Navigator.Exited -= NavigatorOnExited;
+
+        base.OnDetaching();
+    }
+
+    private void NavigatorOnNavigated(object? sender, NavigationEventArgs e)
+    {
+        UpdateShell(e.ToView);
+    }
+
+    private void NavigatorOnExited(object? sender, EventArgs e)
+    {
+        UpdateShell(null);
+    }
+
+    private void UpdateShell(object? view)
+    {
+        if (AssociatedObject.DataContext is IShellControl shell)
         {
-            get => (INavigator)GetValue(NavigatorProperty);
-            set => SetValue(NavigatorProperty, value);
-        }
-
-        protected override void OnAttached()
-        {
-            base.OnAttached();
-
-            Navigator.Navigated += NavigatorOnNavigated;
-            Navigator.Exited += NavigatorOnExited;
-        }
-
-        protected override void OnDetaching()
-        {
-            Navigator.Navigated -= NavigatorOnNavigated;
-            Navigator.Exited -= NavigatorOnExited;
-
-            base.OnDetaching();
-        }
-
-        private void NavigatorOnNavigated(object? sender, NavigationEventArgs e)
-        {
-            UpdateShell(e.ToView);
-        }
-
-        private void NavigatorOnExited(object? sender, EventArgs e)
-        {
-            UpdateShell(null);
-        }
-
-        private void UpdateShell(object? view)
-        {
-            if (AssociatedObject.DataContext is IShellControl shell)
-            {
-                ShellProperty.UpdateShellControl(shell, view as DependencyObject);
-            }
+            ShellProperty.UpdateShellControl(shell, view as DependencyObject);
         }
     }
 }

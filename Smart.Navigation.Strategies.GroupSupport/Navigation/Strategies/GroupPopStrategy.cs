@@ -1,86 +1,85 @@
-namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+
+public sealed class GroupPopStrategy : INavigationStrategy
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Reflection;
+    private readonly bool leaveLast;
 
-    public sealed class GroupPopStrategy : INavigationStrategy
+    private int start;
+
+    [AllowNull]
+    private ViewStackInfo restoreStackInfo;
+
+    public GroupPopStrategy(bool leaveLast)
     {
-        private readonly bool leaveLast;
+        this.leaveLast = leaveLast;
+    }
 
-        private int start;
-
-        [AllowNull]
-        private ViewStackInfo restoreStackInfo;
-
-        public GroupPopStrategy(bool leaveLast)
+    public StrategyResult? Initialize(INavigationController controller)
+    {
+        if (controller.ViewStack.Count == 0)
         {
-            this.leaveLast = leaveLast;
+            throw new InvalidOperationException("View is not stacked.");
         }
 
-        public StrategyResult? Initialize(INavigationController controller)
+        var lastStackInfo = controller.ViewStack[^1];
+        var group = lastStackInfo.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
+        if (group is null)
         {
-            if (controller.ViewStack.Count == 0)
-            {
-                throw new InvalidOperationException("View is not stacked.");
-            }
-
-            var lastStackInfo = controller.ViewStack[^1];
-            var group = lastStackInfo.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-            if (group is null)
-            {
-                throw new InvalidOperationException("Current view is not grouped.");
-            }
-
-            start = controller.ViewStack.Count == 1
-                ? 0
-                : controller.ViewStack.FindLastIndex(controller.ViewStack.Count - 2, stack =>
-                {
-                    var groupOfStack = stack.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-                    return (groupOfStack is not null) && Equals(group.Id, groupOfStack.Id);
-                });
-            if (start == -1)
-            {
-                start = controller.ViewStack.Count - 1;
-            }
-
-            if (leaveLast)
-            {
-                start = Math.Min(start + 1, controller.ViewStack.Count);
-            }
-
-            if (start == controller.ViewStack.Count)
-            {
-                return null;
-            }
-
-            if (start < 1)
-            {
-                throw new InvalidOperationException($"Pop group is invalid. group=[{group.Id}]");
-            }
-
-            restoreStackInfo = controller.ViewStack[start - 1];
-            return new StrategyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+            throw new InvalidOperationException("Current view is not grouped.");
         }
 
-        public object ResolveToView(INavigationController controller)
-        {
-            return restoreStackInfo.View;
-        }
-
-        public void UpdateStack(INavigationController controller, object toView)
-        {
-            // Remove old
-            for (var i = controller.ViewStack.Count - 1; i >= start; i--)
+        start = controller.ViewStack.Count == 1
+            ? 0
+            : controller.ViewStack.FindLastIndex(controller.ViewStack.Count - 2, stack =>
             {
-                controller.CloseView(controller.ViewStack[i].View);
-            }
-
-            controller.ViewStack.RemoveRange(start, controller.ViewStack.Count - start);
-
-            // Activate restored
-            controller.ActivateView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
-            restoreStackInfo.RestoreParameter = null;
+                var groupOfStack = stack.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
+                return (groupOfStack is not null) && Equals(group.Id, groupOfStack.Id);
+            });
+        if (start == -1)
+        {
+            start = controller.ViewStack.Count - 1;
         }
+
+        if (leaveLast)
+        {
+            start = Math.Min(start + 1, controller.ViewStack.Count);
+        }
+
+        if (start == controller.ViewStack.Count)
+        {
+            return null;
+        }
+
+        if (start < 1)
+        {
+            throw new InvalidOperationException($"Pop group is invalid. group=[{group.Id}]");
+        }
+
+        restoreStackInfo = controller.ViewStack[start - 1];
+        return new StrategyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+    }
+
+    public object ResolveToView(INavigationController controller)
+    {
+        return restoreStackInfo.View;
+    }
+
+    public void UpdateStack(INavigationController controller, object toView)
+    {
+        // Remove old
+        for (var i = controller.ViewStack.Count - 1; i >= start; i--)
+        {
+            controller.CloseView(controller.ViewStack[i].View);
+        }
+
+        controller.ViewStack.RemoveRange(start, controller.ViewStack.Count - start);
+
+        // Activate restored
+        controller.ActivateView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
+        restoreStackInfo.RestoreParameter = null;
     }
 }

@@ -1,14 +1,13 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System.ComponentModel;
+
+public sealed class ConfirmEventArgs : CancelEventArgs
 {
-    using System.ComponentModel;
+    public INavigationContext Context { get; }
 
-    public sealed class ConfirmEventArgs : CancelEventArgs
+    public ConfirmEventArgs(INavigationContext context)
     {
-        public INavigationContext Context { get; }
-
-        public ConfirmEventArgs(INavigationContext context)
-        {
-            Context = context;
-        }
+        Context = context;
     }
 }

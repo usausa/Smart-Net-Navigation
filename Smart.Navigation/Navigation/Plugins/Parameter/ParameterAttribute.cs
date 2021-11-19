@@ -1,33 +1,32 @@
-namespace Smart.Navigation.Plugins.Parameter
+namespace Smart.Navigation.Plugins.Parameter;
+
+using System;
+
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class ParameterAttribute : Attribute
 {
-    using System;
+    public Directions Direction { get; }
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ParameterAttribute : Attribute
+    public string? Name { get; }
+
+    public ParameterAttribute()
+        : this(Directions.Both)
     {
-        public Directions Direction { get; }
+    }
 
-        public string? Name { get; }
+    public ParameterAttribute(string name)
+        : this(Directions.Both, name)
+    {
+    }
 
-        public ParameterAttribute()
-            : this(Directions.Both)
-        {
-        }
+    public ParameterAttribute(Directions direction)
+    {
+        Direction = direction;
+    }
 
-        public ParameterAttribute(string name)
-            : this(Directions.Both, name)
-        {
-        }
-
-        public ParameterAttribute(Directions direction)
-        {
-            Direction = direction;
-        }
-
-        public ParameterAttribute(Directions direction, string name)
-        {
-            Direction = direction;
-            Name = name;
-        }
+    public ParameterAttribute(Directions direction, string name)
+    {
+        Direction = direction;
+        Name = name;
     }
 }

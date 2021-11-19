@@ -1,75 +1,74 @@
-namespace Example.FormsApp.Modules
+namespace Example.FormsApp.Modules;
+
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
+
+using Example.FormsApp.Shell;
+
+using Smart.Forms.ViewModels;
+using Smart.Navigation;
+
+public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport, INotifySupportAsync<ShellEvent>
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Threading.Tasks;
+    [AllowNull]
+    public INavigator Navigator { get; set; }
 
-    using Example.FormsApp.Shell;
+    protected ApplicationState ApplicationState { get; }
 
-    using Smart.Forms.ViewModels;
-    using Smart.Navigation;
-
-    public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport, INotifySupportAsync<ShellEvent>
+    protected override void Dispose(bool disposing)
     {
-        [AllowNull]
-        public INavigator Navigator { get; set; }
+        base.Dispose(disposing);
 
-        protected ApplicationState ApplicationState { get; }
+        System.Diagnostics.Debug.WriteLine($"{GetType()} is Disposed");
+    }
 
-        protected override void Dispose(bool disposing)
+    protected AppViewModelBase(ApplicationState applicationState)
+        : base(applicationState)
+    {
+        ApplicationState = applicationState;
+    }
+
+    public virtual void OnNavigatingFrom(INavigationContext context)
+    {
+    }
+
+    public virtual void OnNavigatingTo(INavigationContext context)
+    {
+    }
+
+    public virtual void OnNavigatedTo(INavigationContext context)
+    {
+    }
+
+    public Task NavigatorNotifyAsync(ShellEvent parameter)
+    {
+        return parameter switch
         {
-            base.Dispose(disposing);
+            ShellEvent.Function1 => OnNotifyFunction1Async(),
+            ShellEvent.Function2 => OnNotifyFunction2Async(),
+            ShellEvent.Function3 => OnNotifyFunction3Async(),
+            ShellEvent.Function4 => OnNotifyFunction4Async(),
+            _ => Task.CompletedTask
+        };
+    }
 
-            System.Diagnostics.Debug.WriteLine($"{GetType()} is Disposed");
-        }
+    protected virtual Task OnNotifyFunction1Async()
+    {
+        return Task.CompletedTask;
+    }
 
-        protected AppViewModelBase(ApplicationState applicationState)
-            : base(applicationState)
-        {
-            ApplicationState = applicationState;
-        }
+    protected virtual Task OnNotifyFunction2Async()
+    {
+        return Task.CompletedTask;
+    }
 
-        public virtual void OnNavigatingFrom(INavigationContext context)
-        {
-        }
+    protected virtual Task OnNotifyFunction3Async()
+    {
+        return Task.CompletedTask;
+    }
 
-        public virtual void OnNavigatingTo(INavigationContext context)
-        {
-        }
-
-        public virtual void OnNavigatedTo(INavigationContext context)
-        {
-        }
-
-        public Task NavigatorNotifyAsync(ShellEvent parameter)
-        {
-            return parameter switch
-            {
-                ShellEvent.Function1 => OnNotifyFunction1Async(),
-                ShellEvent.Function2 => OnNotifyFunction2Async(),
-                ShellEvent.Function3 => OnNotifyFunction3Async(),
-                ShellEvent.Function4 => OnNotifyFunction4Async(),
-                _ => Task.CompletedTask
-            };
-        }
-
-        protected virtual Task OnNotifyFunction1Async()
-        {
-            return Task.CompletedTask;
-        }
-
-        protected virtual Task OnNotifyFunction2Async()
-        {
-            return Task.CompletedTask;
-        }
-
-        protected virtual Task OnNotifyFunction3Async()
-        {
-            return Task.CompletedTask;
-        }
-
-        protected virtual Task OnNotifyFunction4Async()
-        {
-            return Task.CompletedTask;
-        }
+    protected virtual Task OnNotifyFunction4Async()
+    {
+        return Task.CompletedTask;
     }
 }

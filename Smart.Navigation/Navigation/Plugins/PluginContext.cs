@@ -1,54 +1,53 @@
-namespace Smart.Navigation.Plugins
+namespace Smart.Navigation.Plugins;
+
+using System;
+using System.Collections.Generic;
+
+public sealed class PluginContext : IPluginContext
 {
-    using System;
-    using System.Collections.Generic;
+    private Dictionary<Type, object?>? store;
 
-    public sealed class PluginContext : IPluginContext
+    private Dictionary<Type, object?> PreparedStore
     {
-        private Dictionary<Type, object?>? store;
-
-        private Dictionary<Type, object?> PreparedStore
+        get
         {
-            get
-            {
-                store ??= new Dictionary<Type, object?>();
-                return store;
-            }
+            store ??= new Dictionary<Type, object?>();
+            return store;
+        }
+    }
+
+    public void Save<T>(Type type, T value)
+    {
+        PreparedStore[type] = value;
+    }
+
+    public T? Load<T>(Type type)
+    {
+        if (store is null)
+        {
+            return default;
         }
 
-        public void Save<T>(Type type, T value)
+        return PreparedStore.TryGetValue(type, out var value) ? (T)value! : default;
+    }
+
+    public T LoadOr<T>(Type type, T defaultValue)
+    {
+        if (store is null)
         {
-            PreparedStore[type] = value;
+            return defaultValue;
         }
 
-        public T? Load<T>(Type type)
-        {
-            if (store is null)
-            {
-                return default;
-            }
+        return PreparedStore.TryGetValue(type, out var value) ? (T)value! : defaultValue!;
+    }
 
-            return PreparedStore.TryGetValue(type, out var value) ? (T)value! : default;
+    public T LoadOr<T>(Type type, Func<T> defaultValueFactory)
+    {
+        if (store is null)
+        {
+            return defaultValueFactory();
         }
 
-        public T LoadOr<T>(Type type, T defaultValue)
-        {
-            if (store is null)
-            {
-                return defaultValue;
-            }
-
-            return PreparedStore.TryGetValue(type, out var value) ? (T)value! : defaultValue!;
-        }
-
-        public T LoadOr<T>(Type type, Func<T> defaultValueFactory)
-        {
-            if (store is null)
-            {
-                return defaultValueFactory();
-            }
-
-            return PreparedStore.TryGetValue(type, out var value) ? (T)value! : defaultValueFactory();
-        }
+        return PreparedStore.TryGetValue(type, out var value) ? (T)value! : defaultValueFactory();
     }
 }

@@ -1,101 +1,100 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using Smart.Mock;
+using Smart.Resolver;
+
+using Xunit;
+
+public class NavigatorNotifyTest
 {
-    using Smart.Mock;
-    using Smart.Resolver;
+    // ------------------------------------------------------------
+    // View
+    // ------------------------------------------------------------
 
-    using Xunit;
-
-    public class NavigatorNotifyTest
+    [Fact]
+    public static void FormNotify()
     {
-        // ------------------------------------------------------------
-        // View
-        // ------------------------------------------------------------
+        // prepare
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
 
-        [Fact]
-        public static void FormNotify()
+        // test
+        navigator.Forward(typeof(NotifyForm));
+        navigator.Notify(1);
+
+        var notifyForm = (NotifyForm)navigator.CurrentView!;
+        Assert.Equal(1, notifyForm.IntParameter);
+    }
+
+    [Fact]
+    public static void FormNotifyUnsupported()
+    {
+        // prepare
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
+
+        // test
+        navigator.Forward(typeof(UnsupportedForm));
+        navigator.Notify("test");
+        navigator.Notify(1);
+    }
+
+    public class NotifyForm : MockForm, INotifySupport<int>
+    {
+        public int IntParameter { get; private set; }
+
+        public void NavigatorNotify(int parameter)
         {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            // test
-            navigator.Forward(typeof(NotifyForm));
-            navigator.Notify(1);
-
-            var notifyForm = (NotifyForm)navigator.CurrentView!;
-            Assert.Equal(1, notifyForm.IntParameter);
+            IntParameter = parameter;
         }
+    }
 
-        [Fact]
-        public static void FormNotifyUnsupported()
+    public class UnsupportedForm : MockForm
+    {
+    }
+
+    // ------------------------------------------------------------
+    // View
+    // ------------------------------------------------------------
+
+    [Fact]
+    public static void ViewNotify()
+    {
+        // prepare
+        var resolver = new ResolverConfig()
+            .UseAutoBinding()
+            .ToResolver();
+        var navigator = new NavigatorConfig()
+            .UseMockWindowProvider()
+            .UseResolver(resolver)
+            .ToNavigator();
+
+        // test
+        navigator.Forward(typeof(NotifyWindow));
+        navigator.Notify(1);
+
+        var notifyView = (NotifyWindow)navigator.CurrentView!;
+        var notifyViewModel = (NotifyWindowViewModel)notifyView.Context;
+        Assert.Equal(1, notifyViewModel.IntParameter);
+    }
+
+    public class NotifyWindowViewModel : INotifySupport<int>
+    {
+        public int IntParameter { get; private set; }
+
+        public void NavigatorNotify(int parameter)
         {
-            // prepare
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .ToNavigator();
-
-            // test
-            navigator.Forward(typeof(UnsupportedForm));
-            navigator.Notify("test");
-            navigator.Notify(1);
+            IntParameter = parameter;
         }
+    }
 
-        public class NotifyForm : MockForm, INotifySupport<int>
+    public class NotifyWindow : MockWindow
+    {
+        public NotifyWindow(NotifyWindowViewModel vm)
         {
-            public int IntParameter { get; private set; }
-
-            public void NavigatorNotify(int parameter)
-            {
-                IntParameter = parameter;
-            }
-        }
-
-        public class UnsupportedForm : MockForm
-        {
-        }
-
-        // ------------------------------------------------------------
-        // View
-        // ------------------------------------------------------------
-
-        [Fact]
-        public static void ViewNotify()
-        {
-            // prepare
-            var resolver = new ResolverConfig()
-                .UseAutoBinding()
-                .ToResolver();
-            var navigator = new NavigatorConfig()
-                .UseMockWindowProvider()
-                .UseResolver(resolver)
-                .ToNavigator();
-
-            // test
-            navigator.Forward(typeof(NotifyWindow));
-            navigator.Notify(1);
-
-            var notifyView = (NotifyWindow)navigator.CurrentView!;
-            var notifyViewModel = (NotifyWindowViewModel)notifyView.Context;
-            Assert.Equal(1, notifyViewModel.IntParameter);
-        }
-
-        public class NotifyWindowViewModel : INotifySupport<int>
-        {
-            public int IntParameter { get; private set; }
-
-            public void NavigatorNotify(int parameter)
-            {
-                IntParameter = parameter;
-            }
-        }
-
-        public class NotifyWindow : MockWindow
-        {
-            public NotifyWindow(NotifyWindowViewModel vm)
-            {
-                Context = vm;
-            }
+            Context = vm;
         }
     }
 }

@@ -1,9 +1,8 @@
-namespace Smart.Mock
-{
-    using System.Collections.Generic;
+namespace Smart.Mock;
 
-    public class EventRecorder
-    {
-        public IList<string> Events { get; } = new List<string>();
-    }
+using System.Collections.Generic;
+
+public class EventRecorder
+{
+    public IList<string> Events { get; } = new List<string>();
 }

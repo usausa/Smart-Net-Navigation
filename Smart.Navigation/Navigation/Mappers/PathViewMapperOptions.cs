@@ -1,34 +1,33 @@
-namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers;
+
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
+public class PathViewMapperOptions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
+    private readonly List<Assembly> assemblies = new();
 
-    public class PathViewMapperOptions
+    public string Root { get; set; } = string.Empty;
+
+    public string Suffix { get; set; } = string.Empty;
+
+    public void AddAssembly(Assembly assembly)
     {
-        private readonly List<Assembly> assemblies = new();
+        assemblies.Add(assembly);
+    }
 
-        public string Root { get; set; } = string.Empty;
-
-        public string Suffix { get; set; } = string.Empty;
-
-        public void AddAssembly(Assembly assembly)
+    public Type? FindType(string typeName)
+    {
+        for (var i = 0; i < assemblies.Count; i++)
         {
-            assemblies.Add(assembly);
-        }
-
-        public Type? FindType(string typeName)
-        {
-            for (var i = 0; i < assemblies.Count; i++)
+            var type = assemblies[i].GetType(typeName);
+            if (type is not null)
             {
-                var type = assemblies[i].GetType(typeName);
-                if (type is not null)
-                {
-                    return type;
-                }
+                return type;
             }
-
-            return null;
         }
+
+        return null;
     }
 }

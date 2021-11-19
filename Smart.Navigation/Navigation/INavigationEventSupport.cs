@@ -1,11 +1,10 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+public interface INavigationEventSupport
 {
-    public interface INavigationEventSupport
-    {
-        void OnNavigatingFrom(INavigationContext context);
+    void OnNavigatingFrom(INavigationContext context);
 
-        void OnNavigatingTo(INavigationContext context);
+    void OnNavigatingTo(INavigationContext context);
 
-        void OnNavigatedTo(INavigationContext context);
-    }
+    void OnNavigatedTo(INavigationContext context);
 }

@@ -1,7 +1,6 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+public interface INavigatorAware
 {
-    public interface INavigatorAware
-    {
-        INavigator Navigator { get; set; }
-    }
+    INavigator Navigator { get; set; }
 }

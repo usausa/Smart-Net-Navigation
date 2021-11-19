@@ -1,25 +1,24 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+using System.Collections.Generic;
+
+using Smart.Navigation.Mappers;
+
+public interface INavigationController
 {
-    using System;
-    using System.Collections.Generic;
+    IViewMapper ViewMapper { get; }
 
-    using Smart.Navigation.Mappers;
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Ignore")]
+    List<ViewStackInfo> ViewStack { get; }
 
-    public interface INavigationController
-    {
-        IViewMapper ViewMapper { get; }
+    object CreateView(Type type);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "Ignore")]
-        List<ViewStackInfo> ViewStack { get; }
+    void OpenView(object view);
 
-        object CreateView(Type type);
+    void CloseView(object view);
 
-        void OpenView(object view);
+    void ActivateView(object view, object? parameter);
 
-        void CloseView(object view);
-
-        void ActivateView(object view, object? parameter);
-
-        object? DeactivateView(object view);
-    }
+    object? DeactivateView(object view);
 }

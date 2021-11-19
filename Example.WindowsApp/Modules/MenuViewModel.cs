@@ -1,16 +1,15 @@
-namespace Example.WindowsApp.Modules
+namespace Example.WindowsApp.Modules;
+
+using System;
+using Smart.Navigation;
+using Smart.Windows.Input;
+
+public class MenuViewModel : AppViewModelBase
 {
-    using System;
-    using Smart.Navigation;
-    using Smart.Windows.Input;
+    public AsyncCommand<Type> Forward { get; }
 
-    public class MenuViewModel : AppViewModelBase
+    public MenuViewModel(INavigator navigator)
     {
-        public AsyncCommand<Type> Forward { get; }
-
-        public MenuViewModel(INavigator navigator)
-        {
-            Forward = MakeAsyncCommand<Type>(navigator.ForwardAsync);
-        }
+        Forward = MakeAsyncCommand<Type>(navigator.ForwardAsync);
     }
 }

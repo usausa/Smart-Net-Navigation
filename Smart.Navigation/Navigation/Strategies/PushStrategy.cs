@@ -1,46 +1,45 @@
-namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies;
+
+using System.Diagnostics.CodeAnalysis;
+
+public sealed class PushStrategy : INavigationStrategy
 {
-    using System.Diagnostics.CodeAnalysis;
+    private readonly object id;
 
-    public sealed class PushStrategy : INavigationStrategy
+    [AllowNull]
+    private ViewDescriptor descriptor;
+
+    public PushStrategy(object id)
     {
-        private readonly object id;
+        this.id = id;
+    }
 
-        [AllowNull]
-        private ViewDescriptor descriptor;
+    public StrategyResult Initialize(INavigationController controller)
+    {
+        descriptor = controller.ViewMapper.FindDescriptor(id);
 
-        public PushStrategy(object id)
+        return new StrategyResult(id, NavigationAttributes.Stacked);
+    }
+
+    public object ResolveToView(INavigationController controller)
+    {
+        return controller.CreateView(descriptor.Type);
+    }
+
+    public void UpdateStack(INavigationController controller, object toView)
+    {
+        // Stack new
+        controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
+
+        controller.OpenView(toView);
+
+        // Deactive old
+        var count = controller.ViewStack.Count;
+        if (count > 1)
         {
-            this.id = id;
-        }
+            var index = count - 2;
 
-        public StrategyResult Initialize(INavigationController controller)
-        {
-            descriptor = controller.ViewMapper.FindDescriptor(id);
-
-            return new StrategyResult(id, NavigationAttributes.Stacked);
-        }
-
-        public object ResolveToView(INavigationController controller)
-        {
-            return controller.CreateView(descriptor.Type);
-        }
-
-        public void UpdateStack(INavigationController controller, object toView)
-        {
-            // Stack new
-            controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
-
-            controller.OpenView(toView);
-
-            // Deactive old
-            var count = controller.ViewStack.Count;
-            if (count > 1)
-            {
-                var index = count - 2;
-
-                controller.ViewStack[index].RestoreParameter = controller.DeactivateView(controller.ViewStack[index].View);
-            }
+            controller.ViewStack[index].RestoreParameter = controller.DeactivateView(controller.ViewStack[index].View);
         }
     }
 }

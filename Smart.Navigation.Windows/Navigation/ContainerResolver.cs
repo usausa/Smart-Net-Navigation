@@ -1,23 +1,22 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System.Windows.Controls;
+
+public sealed class ContainerResolver : IContainerResolver, IUpdateContainer
 {
-    using System.Windows.Controls;
+    public Canvas? Container { get; private set; }
 
-    public sealed class ContainerResolver : IContainerResolver, IUpdateContainer
+    public ContainerResolver()
     {
-        public Canvas? Container { get; private set; }
+    }
 
-        public ContainerResolver()
-        {
-        }
+    public ContainerResolver(Canvas container)
+    {
+        Container = container;
+    }
 
-        public ContainerResolver(Canvas container)
-        {
-            Container = container;
-        }
-
-        void IUpdateContainer.Attach(Canvas? container)
-        {
-            Container = container;
-        }
+    void IUpdateContainer.Attach(Canvas? container)
+    {
+        Container = container;
     }
 }

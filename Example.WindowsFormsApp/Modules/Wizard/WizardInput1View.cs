@@ -1,47 +1,46 @@
-namespace Example.WindowsFormsApp.Modules.Wizard
+namespace Example.WindowsFormsApp.Modules.Wizard;
+
+using System.Diagnostics.CodeAnalysis;
+
+using Smart.Navigation;
+using Smart.Navigation.Attributes;
+using Smart.Navigation.Plugins.Scope;
+
+[View(ViewId.WizardInput1)]
+public partial class WizardInput1View : AppViewBase
 {
-    using System.Diagnostics.CodeAnalysis;
+    public override string Title => "Input1";
 
-    using Smart.Navigation;
-    using Smart.Navigation.Attributes;
-    using Smart.Navigation.Plugins.Scope;
+    public override bool CanGoHome => true;
 
-    [View(ViewId.WizardInput1)]
-    public partial class WizardInput1View : AppViewBase
+    [Scope]
+    [AllowNull]
+    public WizardContext Context { get; set; }
+
+    public WizardInput1View()
     {
-        public override string Title => "Input1";
+        InitializeComponent();
+    }
 
-        public override bool CanGoHome => true;
+    public override void OnNavigatingTo(INavigationContext context)
+    {
+        Data1Text.Text = Context.Data1;
+    }
 
-        [Scope]
-        [AllowNull]
-        public WizardContext Context { get; set; }
+    public override void OnGoHome()
+    {
+        Navigator.Forward(ViewId.Menu);
+    }
 
-        public WizardInput1View()
-        {
-            InitializeComponent();
-        }
+    private void OnPrevButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.Menu);
+    }
 
-        public override void OnNavigatingTo(INavigationContext context)
-        {
-            Data1Text.Text = Context.Data1;
-        }
+    private void OnNextButtonClick(object sender, System.EventArgs e)
+    {
+        Context.Data1 = Data1Text.Text;
 
-        public override void OnGoHome()
-        {
-            Navigator.Forward(ViewId.Menu);
-        }
-
-        private void OnPrevButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.Menu);
-        }
-
-        private void OnNextButtonClick(object sender, System.EventArgs e)
-        {
-            Context.Data1 = Data1Text.Text;
-
-            Navigator.Forward(ViewId.WizardInput2);
-        }
+        Navigator.Forward(ViewId.WizardInput2);
     }
 }

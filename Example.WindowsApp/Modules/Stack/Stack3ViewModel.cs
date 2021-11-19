@@ -1,15 +1,14 @@
-namespace Example.WindowsApp.Modules.Stack
+namespace Example.WindowsApp.Modules.Stack;
+
+using Smart.Navigation;
+using Smart.Windows.Input;
+
+public class Stack3ViewModel : AppViewModelBase
 {
-    using Smart.Navigation;
-    using Smart.Windows.Input;
+    public AsyncCommand<int> Pop { get; }
 
-    public class Stack3ViewModel : AppViewModelBase
+    public Stack3ViewModel(INavigator navigator)
     {
-        public AsyncCommand<int> Pop { get; }
-
-        public Stack3ViewModel(INavigator navigator)
-        {
-            Pop = MakeAsyncCommand<int>(navigator.PopAsync);
-        }
+        Pop = MakeAsyncCommand<int>(navigator.PopAsync);
     }
 }

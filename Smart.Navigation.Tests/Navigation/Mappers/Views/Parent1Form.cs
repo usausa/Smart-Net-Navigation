@@ -1,8 +1,7 @@
-namespace Smart.Navigation.Mappers.Views
-{
-    using Smart.Mock;
+namespace Smart.Navigation.Mappers.Views;
 
-    public class Parent1Form : MockForm
-    {
-    }
+using Smart.Mock;
+
+public class Parent1Form : MockForm
+{
 }

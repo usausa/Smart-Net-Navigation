@@ -1,360 +1,359 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Threading.Tasks;
+
+using Smart.ComponentModel;
+using Smart.Navigation.Mappers;
+using Smart.Navigation.Plugins;
+using Smart.Navigation.Strategies;
+
+public sealed class Navigator : DisposableObject, INavigator, INavigatorComponentSource
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Threading.Tasks;
+    private static readonly PropertyChangedEventArgs StackCountEventArgs = new(nameof(StackedCount));
+    private static readonly PropertyChangedEventArgs CurrentViewIdEventArgs = new(nameof(CurrentViewId));
+    private static readonly PropertyChangedEventArgs CurrentViewEventArgs = new(nameof(CurrentView));
+    private static readonly PropertyChangedEventArgs CurrentTargetEventArgs = new(nameof(CurrentTarget));
+    private static readonly PropertyChangedEventArgs ExecutingEventArgs = new(nameof(Executing));
 
-    using Smart.ComponentModel;
-    using Smart.Navigation.Mappers;
-    using Smart.Navigation.Plugins;
-    using Smart.Navigation.Strategies;
+    // ------------------------------------------------------------
+    // Event
+    // ------------------------------------------------------------
 
-    public sealed class Navigator : DisposableObject, INavigator, INavigatorComponentSource
+    public event EventHandler<ConfirmEventArgs>? Confirm;
+
+    public event EventHandler<NavigationEventArgs>? Navigating;
+
+    public event EventHandler<NavigationEventArgs>? Navigated;
+
+    public event EventHandler<EventArgs>? Exited;
+
+    public event EventHandler<EventArgs>? ExecutingChanged;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    // ------------------------------------------------------------
+    // Member
+    // ------------------------------------------------------------
+
+    private static readonly NavigationParameter EmptyParameter = new();
+
+    private readonly ComponentContainer components;
+
+    private readonly List<ViewStackInfo> viewStack = new();
+
+    private readonly INavigationProvider provider;
+
+    private readonly IViewMapper viewMapper;
+
+    private readonly IServiceProvider serviceProvider;
+
+    private readonly IPlugin[] plugins;
+
+    // ------------------------------------------------------------
+    // Property
+    // ------------------------------------------------------------
+
+    ComponentContainer INavigatorComponentSource.Components => components;
+
+    private ViewStackInfo? CurrentStack => viewStack.Count > 0 ? viewStack[^1] : null;
+
+    public int StackedCount => viewStack.Count;
+
+    public object? CurrentViewId => CurrentStack?.Descriptor.Id;
+
+    public object? CurrentView => CurrentStack?.View;
+
+    public object? CurrentTarget => CurrentStack?.View.MapOrDefault(x => provider.ResolveTarget(x));
+
+    public bool Executing { get; private set; }
+
+    // ------------------------------------------------------------
+    // Constructor
+    // ------------------------------------------------------------
+
+    public Navigator(INavigatorConfig config)
     {
-        private static readonly PropertyChangedEventArgs StackCountEventArgs = new(nameof(StackedCount));
-        private static readonly PropertyChangedEventArgs CurrentViewIdEventArgs = new(nameof(CurrentViewId));
-        private static readonly PropertyChangedEventArgs CurrentViewEventArgs = new(nameof(CurrentView));
-        private static readonly PropertyChangedEventArgs CurrentTargetEventArgs = new(nameof(CurrentTarget));
-        private static readonly PropertyChangedEventArgs ExecutingEventArgs = new(nameof(Executing));
+        components = config.ResolveComponents();
 
-        // ------------------------------------------------------------
-        // Event
-        // ------------------------------------------------------------
+        provider = components.Get<INavigationProvider>();
+        viewMapper = components.Get<IViewMapper>();
+        serviceProvider = components.Get<IServiceProvider>();
+        plugins = components.GetAll<IPlugin>().ToArray();
+    }
 
-        public event EventHandler<ConfirmEventArgs>? Confirm;
-
-        public event EventHandler<NavigationEventArgs>? Navigating;
-
-        public event EventHandler<NavigationEventArgs>? Navigated;
-
-        public event EventHandler<EventArgs>? Exited;
-
-        public event EventHandler<EventArgs>? ExecutingChanged;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        // ------------------------------------------------------------
-        // Member
-        // ------------------------------------------------------------
-
-        private static readonly NavigationParameter EmptyParameter = new();
-
-        private readonly ComponentContainer components;
-
-        private readonly List<ViewStackInfo> viewStack = new();
-
-        private readonly INavigationProvider provider;
-
-        private readonly IViewMapper viewMapper;
-
-        private readonly IServiceProvider serviceProvider;
-
-        private readonly IPlugin[] plugins;
-
-        // ------------------------------------------------------------
-        // Property
-        // ------------------------------------------------------------
-
-        ComponentContainer INavigatorComponentSource.Components => components;
-
-        private ViewStackInfo? CurrentStack => viewStack.Count > 0 ? viewStack[^1] : null;
-
-        public int StackedCount => viewStack.Count;
-
-        public object? CurrentViewId => CurrentStack?.Descriptor.Id;
-
-        public object? CurrentView => CurrentStack?.View;
-
-        public object? CurrentTarget => CurrentStack?.View.MapOrDefault(x => provider.ResolveTarget(x));
-
-        public bool Executing { get; private set; }
-
-        // ------------------------------------------------------------
-        // Constructor
-        // ------------------------------------------------------------
-
-        public Navigator(INavigatorConfig config)
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
         {
-            components = config.ResolveComponents();
-
-            provider = components.Get<INavigationProvider>();
-            viewMapper = components.Get<IViewMapper>();
-            serviceProvider = components.Get<IServiceProvider>();
-            plugins = components.GetAll<IPlugin>().ToArray();
+            components.Dispose();
         }
 
-        protected override void Dispose(bool disposing)
+        base.Dispose(disposing);
+    }
+
+    // ------------------------------------------------------------
+    // Notification
+    // ------------------------------------------------------------
+
+    private void NotifyCurrentChanged()
+    {
+        PropertyChanged?.Invoke(this, StackCountEventArgs);
+        PropertyChanged?.Invoke(this, CurrentViewIdEventArgs);
+        PropertyChanged?.Invoke(this, CurrentViewEventArgs);
+        PropertyChanged?.Invoke(this, CurrentTargetEventArgs);
+    }
+
+    // ------------------------------------------------------------
+    // Navigation
+    // ------------------------------------------------------------
+
+    public void Exit()
+    {
+        for (var i = viewStack.Count - 1; i >= 0; i--)
         {
-            if (disposing)
+            var view = viewStack[i].View;
+            provider.CloseView(view);
+        }
+
+        viewStack.Clear();
+
+        viewMapper.CurrentUpdated(null);
+
+        NotifyCurrentChanged();
+        Exited?.Invoke(this, EventArgs.Empty);
+    }
+
+    bool INavigator.Navigate(INavigationStrategy strategy, INavigationParameter? parameter)
+    {
+        var controller = new Controller(this);
+        var result = strategy.Initialize(controller);
+        if (result is null)
+        {
+            return false;
+        }
+
+        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+
+        if (!ConfirmNavigation(navigationContext))
+        {
+            return false;
+        }
+
+        NavigateCore(strategy, navigationContext, controller);
+
+        return true;
+    }
+
+    async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter)
+    {
+        var controller = new Controller(this);
+        var result = strategy.Initialize(controller);
+        if (result is null)
+        {
+            return false;
+        }
+
+        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+
+        var confirmResult = await ConfirmNavigationAsync(navigationContext).ConfigureAwait(false);
+        if (!confirmResult)
+        {
+            return false;
+        }
+
+        NavigateCore(strategy, navigationContext, controller);
+
+        return true;
+    }
+
+    private void NavigateCore(INavigationStrategy strategy, INavigationContext navigationContext, Controller controller)
+    {
+        if (Executing)
+        {
+            throw new InvalidOperationException("Navigator is already executing.");
+        }
+
+        try
+        {
+            Executing = true;
+            ExecutingChanged?.Invoke(this, EventArgs.Empty);
+            PropertyChanged?.Invoke(this, ExecutingEventArgs);
+
+            var pluginContext = new PluginContext();
+            controller.PluginContext = pluginContext;
+
+            var fromView = CurrentView;
+            var fromTarget = CurrentTarget;
+
+            var toView = strategy.ResolveToView(controller);
+            var toTarget = provider.ResolveTarget(toView);
+
+            var args = new NavigationEventArgs(navigationContext, fromView, fromTarget, toView, toTarget);
+
+            // Process from view
+            if (fromView is not null)
             {
-                components.Dispose();
+                (fromTarget as INavigationEventSupport)?.OnNavigatingFrom(navigationContext);
+
+                foreach (var plugin in plugins)
+                {
+                    plugin.OnNavigatingFrom(pluginContext, navigationContext, fromView, fromTarget);
+                }
             }
 
-            base.Dispose(disposing);
-        }
-
-        // ------------------------------------------------------------
-        // Notification
-        // ------------------------------------------------------------
-
-        private void NotifyCurrentChanged()
-        {
-            PropertyChanged?.Invoke(this, StackCountEventArgs);
-            PropertyChanged?.Invoke(this, CurrentViewIdEventArgs);
-            PropertyChanged?.Invoke(this, CurrentViewEventArgs);
-            PropertyChanged?.Invoke(this, CurrentTargetEventArgs);
-        }
-
-        // ------------------------------------------------------------
-        // Navigation
-        // ------------------------------------------------------------
-
-        public void Exit()
-        {
-            for (var i = viewStack.Count - 1; i >= 0; i--)
+            // Process navigating
+            foreach (var plugin in plugins)
             {
-                var view = viewStack[i].View;
-                provider.CloseView(view);
+                plugin.OnNavigatingTo(pluginContext, navigationContext, toView, toTarget);
             }
 
-            viewStack.Clear();
+            (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
 
-            viewMapper.CurrentUpdated(null);
+            // End pre process
+            Navigating?.Invoke(this, args);
 
+            // Update stack
+            strategy.UpdateStack(controller, toView);
+
+            // Update view mapper
+            viewMapper.CurrentUpdated(CurrentViewId);
+
+            // Process navigated
+            foreach (var plugin in plugins)
+            {
+                plugin.OnNavigatedTo(pluginContext, navigationContext, toView, toTarget);
+            }
+
+            (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
+
+            // End post process
             NotifyCurrentChanged();
-            Exited?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, args);
         }
-
-        bool INavigator.Navigate(INavigationStrategy strategy, INavigationParameter? parameter)
+        finally
         {
-            var controller = new Controller(this);
-            var result = strategy.Initialize(controller);
-            if (result is null)
+            Executing = false;
+            ExecutingChanged?.Invoke(this, EventArgs.Empty);
+            PropertyChanged?.Invoke(this, ExecutingEventArgs);
+        }
+    }
+
+    // ------------------------------------------------------------
+    // Helper
+    // ------------------------------------------------------------
+
+    private bool ConfirmNavigation(NavigationContext context)
+    {
+        if (CurrentTarget is IConfirmRequest confirm)
+        {
+            var canNavigate = confirm.CanNavigate(context);
+            if (!canNavigate)
             {
                 return false;
             }
+        }
 
-            var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
-
-            if (!ConfirmNavigation(navigationContext))
+        var handler = Confirm;
+        if (handler is not null)
+        {
+            var args = new ConfirmEventArgs(context);
+            handler(this, args);
+            if (args.Cancel)
             {
                 return false;
             }
-
-            NavigateCore(strategy, navigationContext, controller);
-
-            return true;
         }
 
-        async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter)
+        return true;
+    }
+
+    private async Task<bool> ConfirmNavigationAsync(NavigationContext context)
+    {
+        if (CurrentTarget is IConfirmRequestAsync confirm)
         {
-            var controller = new Controller(this);
-            var result = strategy.Initialize(controller);
-            if (result is null)
+            var canNavigate = await confirm.CanNavigateAsync(context).ConfigureAwait(false);
+            if (!canNavigate)
             {
                 return false;
             }
-
-            var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
-
-            var confirmResult = await ConfirmNavigationAsync(navigationContext).ConfigureAwait(false);
-            if (!confirmResult)
-            {
-                return false;
-            }
-
-            NavigateCore(strategy, navigationContext, controller);
-
-            return true;
         }
 
-        private void NavigateCore(INavigationStrategy strategy, INavigationContext navigationContext, Controller controller)
+        return ConfirmNavigation(context);
+    }
+
+    // ------------------------------------------------------------
+    // Controller
+    // ------------------------------------------------------------
+
+    private sealed class Controller : INavigationController
+    {
+        private readonly Navigator navigator;
+
+        public IViewMapper ViewMapper => navigator.viewMapper;
+
+        public List<ViewStackInfo> ViewStack => navigator.viewStack;
+
+        [AllowNull]
+        public PluginContext PluginContext { private get; set; }
+
+        public Controller(Navigator navigator)
         {
-            if (Executing)
-            {
-                throw new InvalidOperationException("Navigator is already executing.");
-            }
-
-            try
-            {
-                Executing = true;
-                ExecutingChanged?.Invoke(this, EventArgs.Empty);
-                PropertyChanged?.Invoke(this, ExecutingEventArgs);
-
-                var pluginContext = new PluginContext();
-                controller.PluginContext = pluginContext;
-
-                var fromView = CurrentView;
-                var fromTarget = CurrentTarget;
-
-                var toView = strategy.ResolveToView(controller);
-                var toTarget = provider.ResolveTarget(toView);
-
-                var args = new NavigationEventArgs(navigationContext, fromView, fromTarget, toView, toTarget);
-
-                // Process from view
-                if (fromView is not null)
-                {
-                    (fromTarget as INavigationEventSupport)?.OnNavigatingFrom(navigationContext);
-
-                    foreach (var plugin in plugins)
-                    {
-                        plugin.OnNavigatingFrom(pluginContext, navigationContext, fromView, fromTarget);
-                    }
-                }
-
-                // Process navigating
-                foreach (var plugin in plugins)
-                {
-                    plugin.OnNavigatingTo(pluginContext, navigationContext, toView, toTarget);
-                }
-
-                (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
-
-                // End pre process
-                Navigating?.Invoke(this, args);
-
-                // Update stack
-                strategy.UpdateStack(controller, toView);
-
-                // Update view mapper
-                viewMapper.CurrentUpdated(CurrentViewId);
-
-                // Process navigated
-                foreach (var plugin in plugins)
-                {
-                    plugin.OnNavigatedTo(pluginContext, navigationContext, toView, toTarget);
-                }
-
-                (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
-
-                // End post process
-                NotifyCurrentChanged();
-                Navigated?.Invoke(this, args);
-            }
-            finally
-            {
-                Executing = false;
-                ExecutingChanged?.Invoke(this, EventArgs.Empty);
-                PropertyChanged?.Invoke(this, ExecutingEventArgs);
-            }
+            this.navigator = navigator;
         }
 
-        // ------------------------------------------------------------
-        // Helper
-        // ------------------------------------------------------------
-
-        private bool ConfirmNavigation(NavigationContext context)
+        public object CreateView(Type type)
         {
-            if (CurrentTarget is IConfirmRequest confirm)
+            var view = navigator.serviceProvider.GetService(type);
+            if (view is null)
             {
-                var canNavigate = confirm.CanNavigate(context);
-                if (!canNavigate)
-                {
-                    return false;
-                }
+                throw new InvalidOperationException($"Create view failed. type=[{type.FullName}]");
             }
 
-            var handler = Confirm;
-            if (handler is not null)
+            var target = navigator.provider.ResolveTarget(view);
+
+            if (target is INavigatorAware aware)
             {
-                var args = new ConfirmEventArgs(context);
-                handler(this, args);
-                if (args.Cancel)
-                {
-                    return false;
-                }
+                aware.Navigator = navigator;
             }
 
-            return true;
+            foreach (var plugin in navigator.plugins)
+            {
+                plugin.OnCreate(PluginContext, view, target);
+            }
+
+            return view;
         }
 
-        private async Task<bool> ConfirmNavigationAsync(NavigationContext context)
+        public void OpenView(object view)
         {
-            if (CurrentTarget is IConfirmRequestAsync confirm)
-            {
-                var canNavigate = await confirm.CanNavigateAsync(context).ConfigureAwait(false);
-                if (!canNavigate)
-                {
-                    return false;
-                }
-            }
-
-            return ConfirmNavigation(context);
+            navigator.provider.OpenView(view);
         }
 
-        // ------------------------------------------------------------
-        // Controller
-        // ------------------------------------------------------------
-
-        private sealed class Controller : INavigationController
+        public void CloseView(object view)
         {
-            private readonly Navigator navigator;
+            var target = navigator.provider.ResolveTarget(view);
 
-            public IViewMapper ViewMapper => navigator.viewMapper;
-
-            public List<ViewStackInfo> ViewStack => navigator.viewStack;
-
-            [AllowNull]
-            public PluginContext PluginContext { private get; set; }
-
-            public Controller(Navigator navigator)
+            foreach (var plugin in navigator.plugins)
             {
-                this.navigator = navigator;
+                plugin.OnClose(PluginContext, view, target);
             }
 
-            public object CreateView(Type type)
-            {
-                var view = navigator.serviceProvider.GetService(type);
-                if (view is null)
-                {
-                    throw new InvalidOperationException($"Create view failed. type=[{type.FullName}]");
-                }
+            navigator.provider.CloseView(view);
+        }
 
-                var target = navigator.provider.ResolveTarget(view);
+        public void ActivateView(object view, object? parameter)
+        {
+            navigator.provider.ActivateView(view, parameter);
+        }
 
-                if (target is INavigatorAware aware)
-                {
-                    aware.Navigator = navigator;
-                }
-
-                foreach (var plugin in navigator.plugins)
-                {
-                    plugin.OnCreate(PluginContext, view, target);
-                }
-
-                return view;
-            }
-
-            public void OpenView(object view)
-            {
-                navigator.provider.OpenView(view);
-            }
-
-            public void CloseView(object view)
-            {
-                var target = navigator.provider.ResolveTarget(view);
-
-                foreach (var plugin in navigator.plugins)
-                {
-                    plugin.OnClose(PluginContext, view, target);
-                }
-
-                navigator.provider.CloseView(view);
-            }
-
-            public void ActivateView(object view, object? parameter)
-            {
-                navigator.provider.ActivateView(view, parameter);
-            }
-
-            public object? DeactivateView(object view)
-            {
-                return navigator.provider.DeactivateView(view);
-            }
+        public object? DeactivateView(object view)
+        {
+            return navigator.provider.DeactivateView(view);
         }
     }
 }

@@ -1,12 +1,11 @@
-namespace Example.WindowsFormsApp.Models
+namespace Example.WindowsFormsApp.Models;
+
+using System.Diagnostics.CodeAnalysis;
+
+public class DataEntity
 {
-    using System.Diagnostics.CodeAnalysis;
+    public int Id { get; set; }
 
-    public class DataEntity
-    {
-        public int Id { get; set; }
-
-        [AllowNull]
-        public string Name { get; set; }
-    }
+    [AllowNull]
+    public string Name { get; set; }
 }

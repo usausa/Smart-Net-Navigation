@@ -1,40 +1,39 @@
-namespace Smart.Resolver.Scopes
+namespace Smart.Resolver.Scopes;
+
+using System;
+
+using Smart.ComponentModel;
+using Smart.Navigation.Components;
+
+public sealed class PageContextScope : IScope
 {
-    using System;
+    private readonly string name;
 
-    using Smart.ComponentModel;
-    using Smart.Navigation.Components;
+    private PageContextStorage? storage;
 
-    public sealed class PageContextScope : IScope
+    private int key;
+
+    public PageContextScope(string name)
     {
-        private readonly string name;
+        this.name = name;
+    }
 
-        private PageContextStorage? storage;
+    public IScope Copy(ComponentContainer components)
+    {
+        return new PageContextScope(name);
+    }
 
-        private int key;
-
-        public PageContextScope(string name)
+    public Func<IResolver, object> Create(Func<object> factory)
+    {
+        return resolver =>
         {
-            this.name = name;
-        }
-
-        public IScope Copy(ComponentContainer components)
-        {
-            return new PageContextScope(name);
-        }
-
-        public Func<IResolver, object> Create(Func<object> factory)
-        {
-            return resolver =>
+            if (storage is null)
             {
-                if (storage is null)
-                {
-                    storage = resolver.Get<PageContextStorage>();
-                    key = resolver.Get<PageContextKeyManager>().Acquire();
-                }
+                storage = resolver.Get<PageContextStorage>();
+                key = resolver.Get<PageContextKeyManager>().Acquire();
+            }
 
-                return storage.Resolve(name, key, factory);
-            };
-        }
+            return storage.Resolve(name, key, factory);
+        };
     }
 }

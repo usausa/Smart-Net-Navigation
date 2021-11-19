@@ -1,61 +1,60 @@
-namespace Example.WindowsApp
+namespace Example.WindowsApp;
+
+using System.Diagnostics.CodeAnalysis;
+using System.Windows;
+
+using Example.WindowsApp.Modules;
+
+using Smart.Navigation;
+using Smart.Resolver;
+using Smart.Windows.Resolver;
+
+/// <summary>
+/// App.xaml の相互作用ロジック
+/// </summary>
+public partial class App
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Windows;
+    [AllowNull]
+    private SmartResolver resolver;
 
-    using Example.WindowsApp.Modules;
+    [AllowNull]
+    private Navigator navigator;
 
-    using Smart.Navigation;
-    using Smart.Resolver;
-    using Smart.Windows.Resolver;
-
-    /// <summary>
-    /// App.xaml の相互作用ロジック
-    /// </summary>
-    public partial class App
+    protected override void OnStartup(StartupEventArgs e)
     {
-        [AllowNull]
-        private SmartResolver resolver;
+        // Config Resolver
+        resolver = CreateResolver();
+        ResolveProvider.Default.UseSmartResolver(resolver);
 
-        [AllowNull]
-        private Navigator navigator;
-
-        protected override void OnStartup(StartupEventArgs e)
+        // Config Navigator
+        navigator = new NavigatorConfig()
+            .UseWindowsNavigationProvider()
+            .UseResolver(resolver)
+            .ToNavigator();
+        navigator.Navigated += (_, args) =>
         {
-            // Config Resolver
-            resolver = CreateResolver();
-            ResolveProvider.Default.UseSmartResolver(resolver);
+            // for debug
+            System.Diagnostics.Debug.WriteLine(
+                $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
+        };
 
-            // Config Navigator
-            navigator = new NavigatorConfig()
-                .UseWindowsNavigationProvider()
-                .UseResolver(resolver)
-                .ToNavigator();
-            navigator.Navigated += (_, args) =>
-            {
-                // for debug
-                System.Diagnostics.Debug.WriteLine(
-                    $"Navigated: [{args.Context.FromId}]->[{args.Context.ToId}] : stacked=[{navigator.StackedCount}]");
-            };
+        // Show MainWindow
+        MainWindow = resolver.Get<MainWindow>();
+        MainWindow.Show();
 
-            // Show MainWindow
-            MainWindow = resolver.Get<MainWindow>();
-            MainWindow.Show();
+        navigator.Forward(typeof(MenuView));
+    }
 
-            navigator.Forward(typeof(MenuView));
-        }
+    private SmartResolver CreateResolver()
+    {
+        var config = new ResolverConfig()
+            .UseAutoBinding()
+            .UseArrayBinding()
+            .UseAssignableBinding()
+            .UsePropertyInjector();
 
-        private SmartResolver CreateResolver()
-        {
-            var config = new ResolverConfig()
-                .UseAutoBinding()
-                .UseArrayBinding()
-                .UseAssignableBinding()
-                .UsePropertyInjector();
+        config.Bind<INavigator>().ToMethod(_ => navigator).InSingletonScope();
 
-            config.Bind<INavigator>().ToMethod(_ => navigator).InSingletonScope();
-
-            return config.ToResolver();
-        }
+        return config.ToResolver();
     }
 }

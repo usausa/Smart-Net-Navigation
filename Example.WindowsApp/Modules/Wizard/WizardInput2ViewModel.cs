@@ -1,22 +1,21 @@
-namespace Example.WindowsApp.Modules.Wizard
+namespace Example.WindowsApp.Modules.Wizard;
+
+using System;
+
+using Smart.ComponentModel;
+using Smart.Navigation;
+using Smart.Navigation.Plugins.Scope;
+using Smart.Windows.Input;
+
+public class WizardInput2ViewModel : AppViewModelBase
 {
-    using System;
+    [Scope]
+    public NotificationValue<WizardContext> Context { get; } = new();
 
-    using Smart.ComponentModel;
-    using Smart.Navigation;
-    using Smart.Navigation.Plugins.Scope;
-    using Smart.Windows.Input;
+    public AsyncCommand<Type> Forward { get; }
 
-    public class WizardInput2ViewModel : AppViewModelBase
+    public WizardInput2ViewModel(INavigator navigator)
     {
-        [Scope]
-        public NotificationValue<WizardContext> Context { get; } = new();
-
-        public AsyncCommand<Type> Forward { get; }
-
-        public WizardInput2ViewModel(INavigator navigator)
-        {
-            Forward = MakeAsyncCommand<Type>(navigator.ForwardAsync);
-        }
+        Forward = MakeAsyncCommand<Type>(navigator.ForwardAsync);
     }
 }

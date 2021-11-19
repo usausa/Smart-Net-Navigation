@@ -1,32 +1,31 @@
-namespace Example.WindowsApp.Modules
+namespace Example.WindowsApp.Modules;
+
+using System.Diagnostics.CodeAnalysis;
+
+using Smart.Navigation;
+using Smart.Windows.ViewModels;
+
+public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport
 {
-    using System.Diagnostics.CodeAnalysis;
+    [AllowNull]
+    public INavigator Navigator { get; set; }
 
-    using Smart.Navigation;
-    using Smart.Windows.ViewModels;
-
-    public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport
+    protected override void Dispose(bool disposing)
     {
-        [AllowNull]
-        public INavigator Navigator { get; set; }
+        base.Dispose(disposing);
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
+        System.Diagnostics.Debug.WriteLine($"{GetType()} is Disposed");
+    }
 
-            System.Diagnostics.Debug.WriteLine($"{GetType()} is Disposed");
-        }
+    public virtual void OnNavigatingFrom(INavigationContext context)
+    {
+    }
 
-        public virtual void OnNavigatingFrom(INavigationContext context)
-        {
-        }
+    public virtual void OnNavigatingTo(INavigationContext context)
+    {
+    }
 
-        public virtual void OnNavigatingTo(INavigationContext context)
-        {
-        }
-
-        public virtual void OnNavigatedTo(INavigationContext context)
-        {
-        }
+    public virtual void OnNavigatedTo(INavigationContext context)
+    {
     }
 }

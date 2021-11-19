@@ -1,13 +1,12 @@
-namespace Example.FormsApp.Modules.Edit
-{
-    using Smart.Navigation.Attributes;
+namespace Example.FormsApp.Modules.Edit;
 
-    [View(ViewId.EditList)]
-    public partial class EditListView
+using Smart.Navigation.Attributes;
+
+[View(ViewId.EditList)]
+public partial class EditListView
+{
+    public EditListView()
     {
-        public EditListView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

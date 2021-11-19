@@ -1,7 +1,6 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+public class FormsNavigationProviderOptions
 {
-    public class FormsNavigationProviderOptions
-    {
-        public bool RestoreFocus { get; set; } = true;
-    }
+    public bool RestoreFocus { get; set; } = true;
 }

@@ -1,13 +1,12 @@
-namespace Example.WindowsApp.Modules
+namespace Example.WindowsApp.Modules;
+
+/// <summary>
+/// MenuView.xaml の相互作用ロジック
+/// </summary>
+public partial class MenuView
 {
-    /// <summary>
-    /// MenuView.xaml の相互作用ロジック
-    /// </summary>
-    public partial class MenuView
+    public MenuView()
     {
-        public MenuView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

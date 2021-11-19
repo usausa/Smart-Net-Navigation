@@ -1,27 +1,26 @@
-namespace Smart.Navigation.Plugins.Parameter
+namespace Smart.Navigation.Plugins.Parameter;
+
+using System;
+
+public sealed class ParameterProperty
 {
-    using System;
+    public string Name { get; }
 
-    public sealed class ParameterProperty
+    public Type PropertyType { get; }
+
+    public Func<object?, object?>? Getter { get; }
+
+    public Action<object?, object?>? Setter { get; }
+
+    public ParameterProperty(
+        string name,
+        Type propertyType,
+        Func<object?, object?>? getter,
+        Action<object?, object?>? setter)
     {
-        public string Name { get; }
-
-        public Type PropertyType { get; }
-
-        public Func<object?, object?>? Getter { get; }
-
-        public Action<object?, object?>? Setter { get; }
-
-        public ParameterProperty(
-            string name,
-            Type propertyType,
-            Func<object?, object?>? getter,
-            Action<object?, object?>? setter)
-        {
-            Name = name;
-            PropertyType = propertyType;
-            Getter = getter;
-            Setter = setter;
-        }
+        Name = name;
+        PropertyType = propertyType;
+        Getter = getter;
+        Setter = setter;
     }
 }

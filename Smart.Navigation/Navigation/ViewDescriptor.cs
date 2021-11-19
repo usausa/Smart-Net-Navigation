@@ -1,17 +1,16 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+
+public sealed class ViewDescriptor
 {
-    using System;
+    public object Id { get; }
 
-    public sealed class ViewDescriptor
+    public Type Type { get; }
+
+    public ViewDescriptor(object id, Type type)
     {
-        public object Id { get; }
-
-        public Type Type { get; }
-
-        public ViewDescriptor(object id, Type type)
-        {
-            Id = id;
-            Type = type;
-        }
+        Id = id;
+        Type = type;
     }
 }

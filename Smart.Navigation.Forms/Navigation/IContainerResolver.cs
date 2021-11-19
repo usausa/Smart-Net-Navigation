@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    using Xamarin.Forms;
+namespace Smart.Navigation;
 
-    public interface IContainerResolver
-    {
-        AbsoluteLayout? Container { get; }
-    }
+using Xamarin.Forms;
+
+public interface IContainerResolver
+{
+    AbsoluteLayout? Container { get; }
 }

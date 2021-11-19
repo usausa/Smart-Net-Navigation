@@ -1,50 +1,49 @@
-namespace Example.WindowsFormsApp.Modules
+namespace Example.WindowsFormsApp.Modules;
+
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
+
+using Smart.Navigation;
+
+public partial class AppViewBase : UserControl, IApplicationView, INavigatorAware, IConfirmRequest, INavigationEventSupport
 {
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Windows.Forms;
+    public virtual string Title => string.Empty;
 
-    using Smart.Navigation;
+    public virtual bool CanGoHome => false;
 
-    public partial class AppViewBase : UserControl, IApplicationView, INavigatorAware, IConfirmRequest, INavigationEventSupport
+    public virtual IReadOnlyList<FunctionKey>? FunctionKeys => null;
+
+    [AllowNull]
+    public INavigator Navigator { get; set; }
+
+    protected AppViewBase()
     {
-        public virtual string Title => string.Empty;
+        InitializeComponent();
+    }
 
-        public virtual bool CanGoHome => false;
+    public virtual void OnFunctionKey(Keys key)
+    {
+    }
 
-        public virtual IReadOnlyList<FunctionKey>? FunctionKeys => null;
+    public virtual void OnGoHome()
+    {
+    }
 
-        [AllowNull]
-        public INavigator Navigator { get; set; }
+    public virtual bool CanNavigate(INavigationContext context)
+    {
+        return true;
+    }
 
-        protected AppViewBase()
-        {
-            InitializeComponent();
-        }
+    public virtual void OnNavigatingFrom(INavigationContext context)
+    {
+    }
 
-        public virtual void OnFunctionKey(Keys key)
-        {
-        }
+    public virtual void OnNavigatingTo(INavigationContext context)
+    {
+    }
 
-        public virtual void OnGoHome()
-        {
-        }
-
-        public virtual bool CanNavigate(INavigationContext context)
-        {
-            return true;
-        }
-
-        public virtual void OnNavigatingFrom(INavigationContext context)
-        {
-        }
-
-        public virtual void OnNavigatingTo(INavigationContext context)
-        {
-        }
-
-        public virtual void OnNavigatedTo(INavigationContext context)
-        {
-        }
+    public virtual void OnNavigatedTo(INavigationContext context)
+    {
     }
 }

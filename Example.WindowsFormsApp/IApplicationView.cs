@@ -1,18 +1,17 @@
-namespace Example.WindowsFormsApp
+namespace Example.WindowsFormsApp;
+
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+public interface IApplicationView
 {
-    using System.Collections.Generic;
-    using System.Windows.Forms;
+    string Title { get; }
 
-    public interface IApplicationView
-    {
-        string Title { get; }
+    bool CanGoHome { get; }
 
-        bool CanGoHome { get; }
+    IReadOnlyList<FunctionKey>? FunctionKeys { get; }
 
-        IReadOnlyList<FunctionKey>? FunctionKeys { get; }
+    void OnFunctionKey(Keys key);
 
-        void OnFunctionKey(Keys key);
-
-        void OnGoHome();
-    }
+    void OnGoHome();
 }

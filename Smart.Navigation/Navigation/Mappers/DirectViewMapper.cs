@@ -1,37 +1,36 @@
-namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers;
+
+using System;
+using System.Collections.Generic;
+
+public sealed class DirectViewMapper : IViewMapper
 {
-    using System;
-    using System.Collections.Generic;
+    private readonly Dictionary<Type, ViewDescriptor> descriptors = new();
 
-    public sealed class DirectViewMapper : IViewMapper
+    private readonly ITypeConstraint constraint;
+
+    public DirectViewMapper(ITypeConstraint constraint)
     {
-        private readonly Dictionary<Type, ViewDescriptor> descriptors = new();
+        this.constraint = constraint;
+    }
 
-        private readonly ITypeConstraint constraint;
-
-        public DirectViewMapper(ITypeConstraint constraint)
+    public ViewDescriptor FindDescriptor(object id)
+    {
+        if (id is Type type && constraint.IsValidType(type))
         {
-            this.constraint = constraint;
-        }
-
-        public ViewDescriptor FindDescriptor(object id)
-        {
-            if (id is Type type && constraint.IsValidType(type))
+            if (!descriptors.TryGetValue(type, out var descriptor))
             {
-                if (!descriptors.TryGetValue(type, out var descriptor))
-                {
-                    descriptor = new ViewDescriptor(type, type);
-                    descriptors[type] = descriptor;
-                }
-
-                return descriptor;
+                descriptor = new ViewDescriptor(type, type);
+                descriptors[type] = descriptor;
             }
 
-            throw new InvalidOperationException($"View id is invalid id type. id=[{id}]");
+            return descriptor;
         }
 
-        public void CurrentUpdated(object? id)
-        {
-        }
+        throw new InvalidOperationException($"View id is invalid id type. id=[{id}]");
+    }
+
+    public void CurrentUpdated(object? id)
+    {
     }
 }

@@ -1,49 +1,48 @@
-namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+public sealed class PopStrategy : INavigationStrategy
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
+    private readonly int level;
 
-    public sealed class PopStrategy : INavigationStrategy
+    [AllowNull]
+    private ViewStackInfo restoreStackInfo;
+
+    public PopStrategy(int level)
     {
-        private readonly int level;
+        this.level = level;
+    }
 
-        [AllowNull]
-        private ViewStackInfo restoreStackInfo;
-
-        public PopStrategy(int level)
+    public StrategyResult Initialize(INavigationController controller)
+    {
+        if ((level < 1) || (level > controller.ViewStack.Count - 1))
         {
-            this.level = level;
+            throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
         }
 
-        public StrategyResult Initialize(INavigationController controller)
-        {
-            if ((level < 1) || (level > controller.ViewStack.Count - 1))
-            {
-                throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
-            }
+        restoreStackInfo = controller.ViewStack[controller.ViewStack.Count - level - 1];
+        return new StrategyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+    }
 
-            restoreStackInfo = controller.ViewStack[controller.ViewStack.Count - level - 1];
-            return new StrategyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+    public object ResolveToView(INavigationController controller)
+    {
+        return restoreStackInfo.View;
+    }
+
+    public void UpdateStack(INavigationController controller, object toView)
+    {
+        // Activate restored
+        controller.ActivateView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
+        restoreStackInfo.RestoreParameter = null;
+
+        // Remove old
+        for (var i = controller.ViewStack.Count - 1; i > controller.ViewStack.Count - level - 1; i--)
+        {
+            controller.CloseView(controller.ViewStack[i].View);
         }
 
-        public object ResolveToView(INavigationController controller)
-        {
-            return restoreStackInfo.View;
-        }
-
-        public void UpdateStack(INavigationController controller, object toView)
-        {
-            // Activate restored
-            controller.ActivateView(restoreStackInfo.View, restoreStackInfo.RestoreParameter);
-            restoreStackInfo.RestoreParameter = null;
-
-            // Remove old
-            for (var i = controller.ViewStack.Count - 1; i > controller.ViewStack.Count - level - 1; i--)
-            {
-                controller.CloseView(controller.ViewStack[i].View);
-            }
-
-            controller.ViewStack.RemoveRange(controller.ViewStack.Count - level, level);
-        }
+        controller.ViewStack.RemoveRange(controller.ViewStack.Count - level, level);
     }
 }

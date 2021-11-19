@@ -1,120 +1,119 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+
+using Xamarin.Forms;
+
+public class FormsNavigationProvider : INavigationProvider
 {
-    using System;
+    private readonly IContainerResolver resolver;
 
-    using Xamarin.Forms;
+    private readonly FormsNavigationProviderOptions options;
 
-    public class FormsNavigationProvider : INavigationProvider
+    public FormsNavigationProvider(IContainerResolver resolver, FormsNavigationProviderOptions options)
     {
-        private readonly IContainerResolver resolver;
+        this.resolver = resolver;
+        this.options = options;
+    }
 
-        private readonly FormsNavigationProviderOptions options;
+    public object ResolveTarget(object view)
+    {
+        return ((View)view).BindingContext;
+    }
 
-        public FormsNavigationProvider(IContainerResolver resolver, FormsNavigationProviderOptions options)
+    public void OpenView(object view)
+    {
+        var container = resolver.Container;
+        if (container is null)
         {
-            this.resolver = resolver;
-            this.options = options;
+            throw new InvalidOperationException("Container is unresolved.");
         }
 
-        public object ResolveTarget(object view)
+        var v = (View)view;
+
+        AbsoluteLayout.SetLayoutFlags(v, AbsoluteLayoutFlags.WidthProportional | AbsoluteLayoutFlags.HeightProportional);
+        AbsoluteLayout.SetLayoutBounds(v, new Rectangle(0, 0, 1, 1));
+        container.Children.Add(v);
+    }
+
+    public void CloseView(object view)
+    {
+        var container = resolver.Container;
+        if (container is null)
         {
-            return ((View)view).BindingContext;
+            throw new InvalidOperationException("Container is unresolved.");
         }
 
-        public void OpenView(object view)
+        var v = (View)view;
+
+        Cleanup(v);
+        (view as IDisposable)?.Dispose();
+        (v.BindingContext as IDisposable)?.Dispose();
+        v.BindingContext = null;
+
+        container.Children.Remove(v);
+    }
+
+    public void ActivateView(object view, object? parameter)
+    {
+        var v = (View)view;
+
+        v.IsVisible = true;
+
+        if (options.RestoreFocus)
         {
-            var container = resolver.Container;
-            if (container is null)
+            if (parameter is VisualElement focused)
             {
-                throw new InvalidOperationException("Container is unresolved.");
+                focused.Focus();
             }
-
-            var v = (View)view;
-
-            AbsoluteLayout.SetLayoutFlags(v, AbsoluteLayoutFlags.WidthProportional | AbsoluteLayoutFlags.HeightProportional);
-            AbsoluteLayout.SetLayoutBounds(v, new Rectangle(0, 0, 1, 1));
-            container.Children.Add(v);
-        }
-
-        public void CloseView(object view)
-        {
-            var container = resolver.Container;
-            if (container is null)
+            else
             {
-                throw new InvalidOperationException("Container is unresolved.");
-            }
-
-            var v = (View)view;
-
-            Cleanup(v);
-            (view as IDisposable)?.Dispose();
-            (v.BindingContext as IDisposable)?.Dispose();
-            v.BindingContext = null;
-
-            container.Children.Remove(v);
-        }
-
-        public void ActivateView(object view, object? parameter)
-        {
-            var v = (View)view;
-
-            v.IsVisible = true;
-
-            if (options.RestoreFocus)
-            {
-                if (parameter is VisualElement focused)
-                {
-                    focused.Focus();
-                }
-                else
-                {
-                    v.Focus();
-                }
+                v.Focus();
             }
         }
+    }
 
-        public object? DeactivateView(object view)
+    public object? DeactivateView(object view)
+    {
+        var v = (View)view;
+
+        var parameter = options.RestoreFocus ? GetFocused(v) : null;
+
+        v.IsVisible = false;
+
+        return parameter;
+    }
+
+    private static void Cleanup(Element parent)
+    {
+        if (parent is VisualElement visualElement)
         {
-            var v = (View)view;
-
-            var parameter = options.RestoreFocus ? GetFocused(v) : null;
-
-            v.IsVisible = false;
-
-            return parameter;
+            visualElement.Behaviors.Clear();
+            visualElement.Triggers.Clear();
         }
 
-        private static void Cleanup(Element parent)
+        foreach (var child in parent.LogicalChildren)
         {
-            if (parent is VisualElement visualElement)
-            {
-                visualElement.Behaviors.Clear();
-                visualElement.Triggers.Clear();
-            }
+            Cleanup(child);
+        }
+    }
 
-            foreach (var child in parent.LogicalChildren)
+    private static VisualElement? GetFocused(Element parent)
+    {
+        if (parent is VisualElement { IsFocused: true } visualElement)
+        {
+            return visualElement;
+        }
+
+        foreach (var child in parent.LogicalChildren)
+        {
+            var focused = GetFocused(child);
+            if (focused is not null)
             {
-                Cleanup(child);
+                return focused;
             }
         }
 
-        private static VisualElement? GetFocused(Element parent)
-        {
-            if (parent is VisualElement { IsFocused: true } visualElement)
-            {
-                return visualElement;
-            }
-
-            foreach (var child in parent.LogicalChildren)
-            {
-                var focused = GetFocused(child);
-                if (focused is not null)
-                {
-                    return focused;
-                }
-            }
-
-            return null;
-        }
+        return null;
     }
 }

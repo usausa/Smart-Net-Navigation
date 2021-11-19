@@ -1,31 +1,30 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+
+public sealed class NavigationEventArgs : EventArgs
 {
-    using System;
+    public INavigationContext Context { get; }
 
-    public sealed class NavigationEventArgs : EventArgs
+    public object? FromView { get; }
+
+    public object? FromTarget { get; }
+
+    public object ToView { get; }
+
+    public object ToTarget { get; }
+
+    public NavigationEventArgs(
+        INavigationContext context,
+        object? fromView,
+        object? fromTarget,
+        object toView,
+        object toTarget)
     {
-        public INavigationContext Context { get; }
-
-        public object? FromView { get; }
-
-        public object? FromTarget { get; }
-
-        public object ToView { get; }
-
-        public object ToTarget { get; }
-
-        public NavigationEventArgs(
-            INavigationContext context,
-            object? fromView,
-            object? fromTarget,
-            object toView,
-            object toTarget)
-        {
-            Context = context;
-            FromView = fromView;
-            FromTarget = fromTarget;
-            ToView = toView;
-            ToTarget = toTarget;
-        }
+        Context = context;
+        FromView = fromView;
+        FromTarget = fromTarget;
+        ToView = toView;
+        ToTarget = toTarget;
     }
 }

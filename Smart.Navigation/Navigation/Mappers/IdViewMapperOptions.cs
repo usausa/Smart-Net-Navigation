@@ -1,14 +1,13 @@
-namespace Smart.Navigation.Mappers
+namespace Smart.Navigation.Mappers;
+
+using System;
+
+public class IdViewMapperOptions
 {
-    using System;
+    public Action<IIdViewRegister> SetupAction { get; }
 
-    public class IdViewMapperOptions
+    public IdViewMapperOptions(Action<IIdViewRegister> setupAction)
     {
-        public Action<IIdViewRegister> SetupAction { get; }
-
-        public IdViewMapperOptions(Action<IIdViewRegister> setupAction)
-        {
-            SetupAction = setupAction;
-        }
+        SetupAction = setupAction;
     }
 }

@@ -1,7 +1,6 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+public interface INotifySupport<in T>
 {
-    public interface INotifySupport<in T>
-    {
-        void NavigatorNotify(T parameter);
-    }
+    void NavigatorNotify(T parameter);
 }

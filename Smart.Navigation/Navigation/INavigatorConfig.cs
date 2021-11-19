@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    using Smart.ComponentModel;
+namespace Smart.Navigation;
 
-    public interface INavigatorConfig
-    {
-        ComponentContainer ResolveComponents();
-    }
+using Smart.ComponentModel;
+
+public interface INavigatorConfig
+{
+    ComponentContainer ResolveComponents();
 }

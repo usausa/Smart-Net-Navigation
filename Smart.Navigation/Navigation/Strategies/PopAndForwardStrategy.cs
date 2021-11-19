@@ -1,70 +1,69 @@
-namespace Smart.Navigation.Strategies
+namespace Smart.Navigation.Strategies;
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+public sealed class PopAndForwardStrategy : INavigationStrategy
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
+    private readonly bool all;
 
-    public sealed class PopAndForwardStrategy : INavigationStrategy
+    private readonly object id;
+
+    private int level;
+
+    [AllowNull]
+    private ViewDescriptor descriptor;
+
+    public PopAndForwardStrategy(object id)
     {
-        private readonly bool all;
+        all = true;
+        this.id = id;
+    }
 
-        private readonly object id;
+    public PopAndForwardStrategy(object id, int level)
+    {
+        all = false;
+        this.id = id;
+        this.level = level;
+    }
 
-        private int level;
-
-        [AllowNull]
-        private ViewDescriptor descriptor;
-
-        public PopAndForwardStrategy(object id)
+    public StrategyResult Initialize(INavigationController controller)
+    {
+        if (all)
         {
-            all = true;
-            this.id = id;
+            level = controller.ViewStack.Count - 1;
         }
-
-        public PopAndForwardStrategy(object id, int level)
+        else
         {
-            all = false;
-            this.id = id;
-            this.level = level;
-        }
-
-        public StrategyResult Initialize(INavigationController controller)
-        {
-            if (all)
+            if ((level < 1) || (level > controller.ViewStack.Count - 1))
             {
-                level = controller.ViewStack.Count - 1;
+                throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
             }
-            else
-            {
-                if ((level < 1) || (level > controller.ViewStack.Count - 1))
-                {
-                    throw new InvalidOperationException($"Pop level is invalid. level=[{level}], stacked=[{controller.ViewStack.Count}]");
-                }
-            }
-
-            descriptor = controller.ViewMapper.FindDescriptor(id);
-
-            return new StrategyResult(id, NavigationAttributes.None);
         }
 
-        public object ResolveToView(INavigationController controller)
+        descriptor = controller.ViewMapper.FindDescriptor(id);
+
+        return new StrategyResult(id, NavigationAttributes.None);
+    }
+
+    public object ResolveToView(INavigationController controller)
+    {
+        return controller.CreateView(descriptor.Type);
+    }
+
+    public void UpdateStack(INavigationController controller, object toView)
+    {
+        // Stack new
+        controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
+
+        controller.OpenView(toView);
+
+        // Remove old
+        for (var i = controller.ViewStack.Count - 2; i >= controller.ViewStack.Count - level - 2; i--)
         {
-            return controller.CreateView(descriptor.Type);
+            controller.CloseView(controller.ViewStack[i].View);
         }
 
-        public void UpdateStack(INavigationController controller, object toView)
-        {
-            // Stack new
-            controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
-
-            controller.OpenView(toView);
-
-            // Remove old
-            for (var i = controller.ViewStack.Count - 2; i >= controller.ViewStack.Count - level - 2; i--)
-            {
-                controller.CloseView(controller.ViewStack[i].View);
-            }
-
-            controller.ViewStack.RemoveRange(controller.ViewStack.Count - level - 2, level + 1);
-        }
+        controller.ViewStack.RemoveRange(controller.ViewStack.Count - level - 2, level + 1);
     }
 }

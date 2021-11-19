@@ -1,12 +1,11 @@
-namespace Smart.Navigation.Components
-{
-    public sealed class PageContextKeyManager
-    {
-        private int next;
+namespace Smart.Navigation.Components;
 
-        public int Acquire()
-        {
-            return next++;
-        }
+public sealed class PageContextKeyManager
+{
+    private int next;
+
+    public int Acquire()
+    {
+        return next++;
     }
 }

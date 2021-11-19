@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    using Xamarin.Forms;
+namespace Smart.Navigation;
 
-    public interface IUpdateContainer
-    {
-        void Attach(AbsoluteLayout? container);
-    }
+using Xamarin.Forms;
+
+public interface IUpdateContainer
+{
+    void Attach(AbsoluteLayout? container);
 }

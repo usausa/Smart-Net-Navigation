@@ -1,68 +1,67 @@
-namespace Smart.Navigation.Plugins
+namespace Smart.Navigation.Plugins;
+
+using Xunit;
+
+public static class PluginContextTest
 {
-    using Xunit;
-
-    public static class PluginContextTest
+    [Fact]
+    public static void LoadStoredValue()
     {
-        [Fact]
-        public static void LoadStoredValue()
-        {
-            var context = new PluginContext();
+        var context = new PluginContext();
 
-            context.Save(typeof(string), "abc");
-            Assert.Equal("abc", context.Load<string>(typeof(string)));
-        }
+        context.Save(typeof(string), "abc");
+        Assert.Equal("abc", context.Load<string>(typeof(string)));
+    }
 
-        [Fact]
-        public static void LoadOrDefault()
-        {
-            var context = new PluginContext();
+    [Fact]
+    public static void LoadOrDefault()
+    {
+        var context = new PluginContext();
 
-            context.Save(typeof(string), "abc");
-            Assert.Equal("abc", context.LoadOr(typeof(string), string.Empty));
-        }
+        context.Save(typeof(string), "abc");
+        Assert.Equal("abc", context.LoadOr(typeof(string), string.Empty));
+    }
 
-        [Fact]
-        public static void LoadOrDefaultNotPrepared()
-        {
-            var context = new PluginContext();
+    [Fact]
+    public static void LoadOrDefaultNotPrepared()
+    {
+        var context = new PluginContext();
 
-            Assert.Equal("abc", context.LoadOr(typeof(string), "abc"));
-        }
+        Assert.Equal("abc", context.LoadOr(typeof(string), "abc"));
+    }
 
-        [Fact]
-        public static void LoadOrDefaultNotContained()
-        {
-            var context = new PluginContext();
+    [Fact]
+    public static void LoadOrDefaultNotContained()
+    {
+        var context = new PluginContext();
 
-            context.Save(typeof(int), 123);
-            Assert.Equal("abc", context.LoadOr(typeof(string), "abc"));
-        }
+        context.Save(typeof(int), 123);
+        Assert.Equal("abc", context.LoadOr(typeof(string), "abc"));
+    }
 
-        [Fact]
-        public static void LoadOrDefaultByFactory()
-        {
-            var context = new PluginContext();
+    [Fact]
+    public static void LoadOrDefaultByFactory()
+    {
+        var context = new PluginContext();
 
-            context.Save(typeof(string), "abc");
-            Assert.Equal("abc", context.LoadOr(typeof(string), () => string.Empty));
-        }
+        context.Save(typeof(string), "abc");
+        Assert.Equal("abc", context.LoadOr(typeof(string), () => string.Empty));
+    }
 
-        [Fact]
-        public static void LoadOrDefaultNotPreparedByFactory()
-        {
-            var context = new PluginContext();
+    [Fact]
+    public static void LoadOrDefaultNotPreparedByFactory()
+    {
+        var context = new PluginContext();
 
-            Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
-        }
+        Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
+    }
 
-        [Fact]
-        public static void LoadOrDefaultNotContainedByFactory()
-        {
-            var context = new PluginContext();
+    [Fact]
+    public static void LoadOrDefaultNotContainedByFactory()
+    {
+        var context = new PluginContext();
 
-            context.Save(typeof(int), 123);
-            Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
-        }
+        context.Save(typeof(int), 123);
+        Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
     }
 }

@@ -1,15 +1,14 @@
-namespace Smart.Navigation.Attributes
+namespace Smart.Navigation.Attributes;
+
+using System;
+
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+public sealed class ViewAttribute : Attribute
 {
-    using System;
+    public object Id { get; }
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public sealed class ViewAttribute : Attribute
+    public ViewAttribute(object id)
     {
-        public object Id { get; }
-
-        public ViewAttribute(object id)
-        {
-            Id = id;
-        }
+        Id = id;
     }
 }

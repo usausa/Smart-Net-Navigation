@@ -1,13 +1,12 @@
-namespace Example.FormsApp.Modules.Wizard
-{
-    using Smart.Navigation.Attributes;
+namespace Example.FormsApp.Modules.Wizard;
 
-    [View(ViewId.WizardResult)]
-    public partial class WizardResultView
+using Smart.Navigation.Attributes;
+
+[View(ViewId.WizardResult)]
+public partial class WizardResultView
+{
+    public WizardResultView()
     {
-        public WizardResultView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

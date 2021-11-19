@@ -1,14 +1,13 @@
-namespace Example.FormsApp.Modules.Edit
-{
-    using Smart.Navigation.Attributes;
+namespace Example.FormsApp.Modules.Edit;
 
-    [View(ViewId.EditDetailNew)]
-    [View(ViewId.EditDetailUpdate)]
-    public partial class EditDetailView
+using Smart.Navigation.Attributes;
+
+[View(ViewId.EditDetailNew)]
+[View(ViewId.EditDetailUpdate)]
+public partial class EditDetailView
+{
+    public EditDetailView()
     {
-        public EditDetailView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

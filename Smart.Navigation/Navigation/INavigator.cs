@@ -1,42 +1,41 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
+
+using Smart.Navigation.Strategies;
+
+public interface INavigator : INotifyPropertyChanged
 {
-    using System;
-    using System.ComponentModel;
-    using System.Threading.Tasks;
+    event EventHandler<ConfirmEventArgs>? Confirm;
 
-    using Smart.Navigation.Strategies;
+    event EventHandler<NavigationEventArgs>? Navigating;
 
-    public interface INavigator : INotifyPropertyChanged
-    {
-        event EventHandler<ConfirmEventArgs>? Confirm;
+    event EventHandler<NavigationEventArgs>? Navigated;
 
-        event EventHandler<NavigationEventArgs>? Navigating;
+    event EventHandler<EventArgs>? Exited;
 
-        event EventHandler<NavigationEventArgs>? Navigated;
+    event EventHandler<EventArgs>? ExecutingChanged;
 
-        event EventHandler<EventArgs>? Exited;
+    int StackedCount { get; }
 
-        event EventHandler<EventArgs>? ExecutingChanged;
+    object? CurrentViewId { get; }
 
-        int StackedCount { get; }
+    object? CurrentView { get; }
 
-        object? CurrentViewId { get; }
+    object? CurrentTarget { get; }
 
-        object? CurrentView { get; }
+    bool Executing { get; }
 
-        object? CurrentTarget { get; }
+    // Exit
 
-        bool Executing { get; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", Justification = "Ignore")]
+    void Exit();
 
-        // Exit
+    // Navigate
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", Justification = "Ignore")]
-        void Exit();
+    bool Navigate(INavigationStrategy strategy, INavigationParameter? parameter);
 
-        // Navigate
-
-        bool Navigate(INavigationStrategy strategy, INavigationParameter? parameter);
-
-        Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter);
-    }
+    Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter);
 }

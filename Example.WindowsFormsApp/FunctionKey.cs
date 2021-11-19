@@ -1,17 +1,16 @@
-namespace Example.WindowsFormsApp
+namespace Example.WindowsFormsApp;
+
+using System.Windows.Forms;
+
+public sealed class FunctionKey
 {
-    using System.Windows.Forms;
+    public Keys Key { get; }
 
-    public sealed class FunctionKey
+    public string Display { get; }
+
+    public FunctionKey(Keys key, string display)
     {
-        public Keys Key { get; }
-
-        public string Display { get; }
-
-        public FunctionKey(Keys key, string display)
-        {
-            Key = key;
-            Display = display;
-        }
+        Key = key;
+        Display = display;
     }
 }

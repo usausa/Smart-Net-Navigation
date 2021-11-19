@@ -1,13 +1,12 @@
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+public interface INavigationContext
 {
-    public interface INavigationContext
-    {
-        object? FromId { get; }
+    object? FromId { get; }
 
-        object ToId { get; }
+    object ToId { get; }
 
-        NavigationAttributes Attribute { get; }
+    NavigationAttributes Attribute { get; }
 
-        INavigationParameter Parameter { get; }
-    }
+    INavigationParameter Parameter { get; }
 }

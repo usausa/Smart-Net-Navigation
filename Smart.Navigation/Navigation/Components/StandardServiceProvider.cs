@@ -1,9 +1,8 @@
-namespace Smart.Navigation.Components
-{
-    using System;
+namespace Smart.Navigation.Components;
 
-    public sealed class StandardServiceProvider : IServiceProvider
-    {
-        public object? GetService(Type serviceType) => Activator.CreateInstance(serviceType);
-    }
+using System;
+
+public sealed class StandardServiceProvider : IServiceProvider
+{
+    public object? GetService(Type serviceType) => Activator.CreateInstance(serviceType);
 }

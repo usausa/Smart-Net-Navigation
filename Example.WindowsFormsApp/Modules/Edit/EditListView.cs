@@ -1,51 +1,50 @@
-namespace Example.WindowsFormsApp.Modules.Edit
+namespace Example.WindowsFormsApp.Modules.Edit;
+
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+
+using Example.WindowsFormsApp.Models;
+using Example.WindowsFormsApp.Services;
+
+using Smart.Navigation;
+using Smart.Navigation.Attributes;
+using Smart.Resolver.Attributes;
+
+[View(ViewId.EditList)]
+public partial class DataListView : AppViewBase
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    public override string Title => "Data List";
 
-    using Example.WindowsFormsApp.Models;
-    using Example.WindowsFormsApp.Services;
+    public override bool CanGoHome => true;
 
-    using Smart.Navigation;
-    using Smart.Navigation.Attributes;
-    using Smart.Resolver.Attributes;
+    [Inject]
+    [AllowNull]
+    public DataService DataService { get; set; }
 
-    [View(ViewId.EditList)]
-    public partial class DataListView : AppViewBase
+    public DataListView()
     {
-        public override string Title => "Data List";
+        InitializeComponent();
+    }
 
-        public override bool CanGoHome => true;
+    public override void OnNavigatingTo(INavigationContext context)
+    {
+        DataListBox.DataSource = DataService.QueryDataList().ToList();
+    }
 
-        [Inject]
-        [AllowNull]
-        public DataService DataService { get; set; }
+    public override void OnGoHome()
+    {
+        Navigator.Forward(ViewId.Menu);
+    }
 
-        public DataListView()
-        {
-            InitializeComponent();
-        }
+    private void OnNewButtonClick(object sender, System.EventArgs e)
+    {
+        Navigator.Forward(ViewId.EditDetailNew);
+    }
 
-        public override void OnNavigatingTo(INavigationContext context)
-        {
-            DataListBox.DataSource = DataService.QueryDataList().ToList();
-        }
-
-        public override void OnGoHome()
-        {
-            Navigator.Forward(ViewId.Menu);
-        }
-
-        private void OnNewButtonClick(object sender, System.EventArgs e)
-        {
-            Navigator.Forward(ViewId.EditDetailNew);
-        }
-
-        private void OnEditButtonClick(object sender, System.EventArgs e)
-        {
-            var parameter = new NavigationParameter();
-            parameter.SetValue((DataEntity)DataListBox.SelectedItem);
-            Navigator.Forward(ViewId.EditDetailUpdate, parameter);
-        }
+    private void OnEditButtonClick(object sender, System.EventArgs e)
+    {
+        var parameter = new NavigationParameter();
+        parameter.SetValue((DataEntity)DataListBox.SelectedItem);
+        Navigator.Forward(ViewId.EditDetailUpdate, parameter);
     }
 }

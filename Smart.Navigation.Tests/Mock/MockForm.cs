@@ -1,44 +1,43 @@
-namespace Smart.Mock
+namespace Smart.Mock;
+
+using System;
+
+public abstract class MockForm : IDisposable
 {
-    using System;
+    public bool IsDisposed { get; private set; }
 
-    public abstract class MockForm : IDisposable
+    public bool IsOpen { get; private set; }
+
+    public bool IsVisible { get; set; }
+
+    public object? Focused { get; set; }
+
+    ~MockForm()
     {
-        public bool IsDisposed { get; private set; }
+        Dispose(false);
+    }
 
-        public bool IsOpen { get; private set; }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        public bool IsVisible { get; set; }
-
-        public object? Focused { get; set; }
-
-        ~MockForm()
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing && !IsDisposed)
         {
-            Dispose(false);
-        }
+            IsDisposed = true;
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            IsOpen = false;
+            IsVisible = false;
         }
+    }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing && !IsDisposed)
-            {
-                IsDisposed = true;
-
-                IsOpen = false;
-                IsVisible = false;
-            }
-        }
-
-        public void Show()
-        {
-            IsOpen = true;
-            IsVisible = true;
-            Focused = this;
-        }
+    public void Show()
+    {
+        IsOpen = true;
+        IsVisible = true;
+        Focused = this;
     }
 }

@@ -1,9 +1,8 @@
-namespace Smart.Navigation
-{
-    using System.Threading.Tasks;
+namespace Smart.Navigation;
 
-    public interface INotifySupportAsync<in T>
-    {
-        Task NavigatorNotifyAsync(T parameter);
-    }
+using System.Threading.Tasks;
+
+public interface INotifySupportAsync<in T>
+{
+    Task NavigatorNotifyAsync(T parameter);
 }
