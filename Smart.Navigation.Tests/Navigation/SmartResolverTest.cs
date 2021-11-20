@@ -1,102 +1,98 @@
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable ClassNeverInstantiated.Global
-// ReSharper disable UnusedAutoPropertyAccessor.Global
-namespace Smart.Navigation
+namespace Smart.Navigation;
+
+using System.Diagnostics.CodeAnalysis;
+
+using Smart.Mock;
+using Smart.Navigation.Plugins.Scope;
+using Smart.Resolver;
+
+using Xunit;
+
+public static class SmartResolverTest
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    using Smart.Mock;
-    using Smart.Navigation.Plugins.Scope;
-    using Smart.Resolver;
-
-    using Xunit;
-
-    public static class SmartResolverTest
+    [Fact]
+    public static void UseSmartResolver()
     {
-        [Fact]
-        public static void UseSmartResolver()
+        // prepare
+        var config = new ResolverConfig();
+        config.UseAutoBinding();
+        config.Bind<IService>().To<ServiceImpl>().InSingletonScope();
+        config.Bind<Setting>().ToSelf().InSingletonScope();
+
+        var resolver = config.ToResolver();
+
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .UseResolver(resolver)
+            .ToNavigator();
+
+        // test
+        navigator.Forward(typeof(Form1));
+
+        var form1 = (Form1)navigator.CurrentView!;
+        Assert.NotNull(form1.Service);
+        Assert.NotNull(form1.ScopeObject);
+        Assert.NotNull(form1.ScopeObject.Setting);
+
+        navigator.Forward(typeof(Form2));
+
+        var form2 = (Form2)navigator.CurrentView!;
+        Assert.Same(form2.Service, form1.Service);
+        Assert.Same(form2.Setting, form1.ScopeObject.Setting);
+    }
+
+    public class Form1 : MockForm
+    {
+        public IService Service { get; }
+
+        [Scope]
+        [AllowNull]
+        public ScopeObject ScopeObject { get; set; }
+
+        public Form1(IService service)
         {
-            // prepare
-            var config = new ResolverConfig();
-            config.UseAutoBinding();
-            config.Bind<IService>().To<ServiceImpl>().InSingletonScope();
-            config.Bind<Setting>().ToSelf().InSingletonScope();
-
-            var resolver = config.ToResolver();
-
-            var navigator = new NavigatorConfig()
-                .UseMockFormProvider()
-                .UseResolver(resolver)
-                .ToNavigator();
-
-            // test
-            navigator.Forward(typeof(Form1));
-
-            var form1 = (Form1)navigator.CurrentView!;
-            Assert.NotNull(form1.Service);
-            Assert.NotNull(form1.ScopeObject);
-            Assert.NotNull(form1.ScopeObject.Setting);
-
-            navigator.Forward(typeof(Form2));
-
-            var form2 = (Form2)navigator.CurrentView!;
-            Assert.Same(form2.Service, form1.Service);
-            Assert.Same(form2.Setting, form1.ScopeObject.Setting);
+            Service = service;
         }
+    }
 
-        public class Form1 : MockForm
+    public class Form2 : MockForm
+    {
+        public IService Service { get; }
+
+        public Setting Setting { get; set; }
+
+        public Form2(IService service, Setting setting)
         {
-            public IService Service { get; }
-
-            [Scope]
-            [AllowNull]
-            public ScopeObject ScopeObject { get; set; }
-
-            public Form1(IService service)
-            {
-                Service = service;
-            }
+            Service = service;
+            Setting = setting;
         }
+    }
 
-        public class Form2 : MockForm
+    public interface IService
+    {
+        void Process();
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
+    public class ServiceImpl : IService
+    {
+        public void Process()
         {
-            public IService Service { get; }
-
-            public Setting Setting { get; set; }
-
-            public Form2(IService service, Setting setting)
-            {
-                Service = service;
-                Setting = setting;
-            }
+            // Method intentionally left empty.
         }
+    }
 
-        public interface IService
+    public class Setting
+    {
+    }
+
+    public class ScopeObject
+    {
+        public Setting Setting { get; }
+
+        public ScopeObject(Setting setting)
         {
-            void Process();
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
-        public class ServiceImpl : IService
-        {
-            public void Process()
-            {
-                // Method intentionally left empty.
-            }
-        }
-
-        public class Setting
-        {
-        }
-
-        public class ScopeObject
-        {
-            public Setting Setting { get; }
-
-            public ScopeObject(Setting setting)
-            {
-                Setting = setting;
-            }
+            Setting = setting;
         }
     }
 }
