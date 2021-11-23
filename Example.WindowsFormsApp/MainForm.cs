@@ -13,9 +13,13 @@ using Smart.Resolver;
 
 public partial class MainForm : Form
 {
+#pragma warning disable CA2213
     private readonly SmartResolver resolver;
+#pragma warning restore CA2213
 
+#pragma warning disable CA2213
     private readonly Navigator navigator;
+#pragma warning restore CA2213
 
     private readonly Dictionary<Keys, FunctionKey> enabledFunctions = new();
 
@@ -63,6 +67,7 @@ public partial class MainForm : Form
 
     private void OnFormClosed(object? sender, FormClosedEventArgs e)
     {
+        navigator.Dispose();
         resolver.Dispose();
     }
 

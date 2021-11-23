@@ -9,9 +9,6 @@ using Smart.Navigation;
 using Smart.Resolver;
 using Smart.Windows.Resolver;
 
-/// <summary>
-/// App.xaml の相互作用ロジック
-/// </summary>
 public partial class App
 {
     [AllowNull]

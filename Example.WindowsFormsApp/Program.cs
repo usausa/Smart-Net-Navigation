@@ -10,6 +10,8 @@ public static class Program
     {
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
+#pragma warning disable CA2000
         Application.Run(new MainForm());
+#pragma warning restore CA2000
     }
 }
