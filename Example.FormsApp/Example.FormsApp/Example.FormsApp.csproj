@@ -12,12 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.0.13" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.0.15" />
     <PackageReference Include="Usa.Smart.Forms" Version="2.2.3" />
     <PackageReference Include="Usa.Smart.Forms.Resolver" Version="2.2.3" />
     <PackageReference Include="Usa.Smart.Resolver" Version="2.0.6" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
   </ItemGroup>
 
   <ItemGroup>
