@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System;
-
 public sealed class ViewDescriptor
 {
     public object Id { get; }

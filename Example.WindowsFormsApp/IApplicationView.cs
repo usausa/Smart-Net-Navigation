@@ -1,6 +1,5 @@
 namespace Example.WindowsFormsApp;
 
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 public interface IApplicationView

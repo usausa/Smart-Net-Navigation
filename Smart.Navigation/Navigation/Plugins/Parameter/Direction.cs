@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins.Parameter;
 
-using System;
-
 [Flags]
 public enum Directions
 {

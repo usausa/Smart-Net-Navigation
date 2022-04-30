@@ -1,8 +1,5 @@
 namespace Example.FormsApp.Modules.Edit;
 
-using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
-
 using Example.FormsApp.Models;
 using Example.FormsApp.Services;
 
@@ -12,12 +9,10 @@ using Smart.Resolver.Attributes;
 
 public class EditDetailViewModel : AppViewModelBase
 {
-    [AllowNull]
-    private DataEntity entity;
+    private DataEntity entity = default!;
 
     [Inject]
-    [AllowNull]
-    public DataService DataService { get; set; }
+    public DataService DataService { get; set; } = default!;
 
     public NotificationValue<bool> Update { get; } = new();
 

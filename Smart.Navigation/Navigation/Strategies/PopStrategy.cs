@@ -1,14 +1,10 @@
 namespace Smart.Navigation.Strategies;
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 public sealed class PopStrategy : INavigationStrategy
 {
     private readonly int level;
 
-    [AllowNull]
-    private ViewStackInfo restoreStackInfo;
+    private ViewStackInfo restoreStackInfo = default!;
 
     public PopStrategy(int level)
     {

@@ -1,7 +1,5 @@
 namespace Example.WindowsApp.Modules.Wizard;
 
-using System;
-
 using Smart.ComponentModel;
 using Smart.Navigation;
 using Smart.Navigation.Plugins.Scope;

@@ -1,6 +1,5 @@
 namespace Example.WindowsFormsApp;
 
-using System;
 using System.Windows.Forms;
 
 public static class Program

@@ -1,8 +1,5 @@
 namespace Smart.Navigation.Mappers;
 
-using System;
-using System.Collections.Generic;
-
 public sealed class DirectViewMapper : IViewMapper
 {
     private readonly Dictionary<Type, ViewDescriptor> descriptors = new();

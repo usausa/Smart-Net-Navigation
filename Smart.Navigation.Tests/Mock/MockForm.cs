@@ -1,7 +1,5 @@
 namespace Smart.Mock;
 
-using System;
-
 public abstract class MockForm : IDisposable
 {
     public bool IsDisposed { get; private set; }

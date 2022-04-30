@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Usa.Smart.Navigation.Forms</PackageId>
-    <Title>Smart.Navigation.Forms .NET</Title>
+    <Title>Smart.Navigation.Forms</Title>
     <Description>Smart navigation library wndows forms provider</Description>
     <Summary>Smart navigation library wndows forms provider</Summary>
     <PackageTags>smart navigation xamarin mvvm</PackageTags>

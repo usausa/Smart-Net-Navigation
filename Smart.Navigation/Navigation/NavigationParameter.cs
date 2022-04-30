@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System.Collections.Generic;
-
 public class NavigationParameter : INavigationParameter
 {
     private readonly Dictionary<string, object?> values = new();

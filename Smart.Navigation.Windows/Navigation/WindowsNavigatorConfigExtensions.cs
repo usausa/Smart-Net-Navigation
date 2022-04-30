@@ -1,6 +1,5 @@
 namespace Smart.Navigation;
 
-using System;
 using System.Windows.Controls;
 
 using Smart.Navigation.Mappers;

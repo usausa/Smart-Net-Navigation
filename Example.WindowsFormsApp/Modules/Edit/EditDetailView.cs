@@ -1,8 +1,5 @@
 namespace Example.WindowsFormsApp.Modules.Edit;
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 using Example.WindowsFormsApp.Models;
 using Example.WindowsFormsApp.Services;
 
@@ -16,16 +13,14 @@ public partial class DataDetailView : AppViewBase
 {
     private bool update;
 
-    [AllowNull]
-    private DataEntity entity;
+    private DataEntity entity = default!;
 
     public override string Title => update ? "Data New" : "Data Edit";
 
     public override bool CanGoHome => true;
 
     [Inject]
-    [AllowNull]
-    public DataService DataService { get; set; }
+    public DataService DataService { get; set; } = default!;
 
     public DataDetailView()
     {

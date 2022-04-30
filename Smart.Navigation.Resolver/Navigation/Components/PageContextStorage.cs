@@ -1,8 +1,5 @@
 namespace Smart.Navigation.Components;
 
-using System;
-using System.Collections.Generic;
-
 public class PageContextStorage
 {
     private sealed class ScopeEntry

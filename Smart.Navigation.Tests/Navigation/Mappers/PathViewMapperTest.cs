@@ -1,6 +1,5 @@
 namespace Smart.Navigation.Mappers;
 
-using System;
 using System.Reflection;
 
 using Smart.Mock;

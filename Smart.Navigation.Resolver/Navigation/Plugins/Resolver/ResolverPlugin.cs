@@ -1,6 +1,5 @@
 namespace Smart.Navigation.Plugins.Resolver;
 
-using System;
 using System.Reflection;
 
 using Smart.Navigation.Components;

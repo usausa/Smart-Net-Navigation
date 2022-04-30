@@ -1,16 +1,12 @@
 namespace Smart.Navigation.Strategies;
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 public sealed class GroupPushStrategy : INavigationStrategy
 {
     private readonly object id;
 
-    [AllowNull]
-    private ViewDescriptor descriptor;
+    private ViewDescriptor descriptor = default!;
 
     private List<int>? groups;
 

@@ -1,8 +1,6 @@
 namespace Example.FormsApp.Modules.Edit;
 
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
 
 using Example.FormsApp.Models;
 using Example.FormsApp.Services;
@@ -15,8 +13,7 @@ using Smart.Resolver.Attributes;
 public class EditListViewModel : AppViewModelBase
 {
     [Inject]
-    [AllowNull]
-    public DataService DataService { get; set; }
+    public DataService DataService { get; set; } = default!;
 
     public ObservableCollection<DataEntity> Items { get; } = new();
 

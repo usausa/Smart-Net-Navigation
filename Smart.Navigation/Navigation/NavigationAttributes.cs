@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System;
-
 [Flags]
 public enum NavigationAttributes
 {

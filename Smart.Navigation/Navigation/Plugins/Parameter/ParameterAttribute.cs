@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins.Parameter;
 
-using System;
-
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class ParameterAttribute : Attribute
 {

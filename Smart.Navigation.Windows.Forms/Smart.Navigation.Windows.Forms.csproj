@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net6.0-windows;netcoreapp3.1</TargetFrameworks>
@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>Usa.Smart.Navigation.Windows.Forms</PackageId>
-    <Title>Smart.Navigation.Windows.Forms .NET</Title>
+    <Title>Smart.Navigation.Windows.Forms</Title>
     <Description>Smart navigation library wndows forms provider</Description>
     <Summary>Smart navigation library wndows forms provider</Summary>
     <PackageTags>smart navigation windowsforms</PackageTags>

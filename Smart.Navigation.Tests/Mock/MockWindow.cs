@@ -1,11 +1,8 @@
 namespace Smart.Mock;
 
-using System.Diagnostics.CodeAnalysis;
-
 public abstract class MockWindow
 {
-    [AllowNull]
-    public object Context { get; set; }
+    public object Context { get; set; } = default!;
 
     public bool IsVisible { get; set; }
 

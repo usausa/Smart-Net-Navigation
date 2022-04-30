@@ -1,8 +1,5 @@
 namespace Smart.Navigation.Plugins.Scope;
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 using Smart.Mock;
 
 using Xunit;
@@ -130,29 +127,25 @@ public class ScopePluginTest
     public class Data2Form : MockForm
     {
         [Scope]
-        [AllowNull]
-        public ScopeData Data { get; set; }
+        public ScopeData Data { get; set; } = default!;
     }
 
     public class Data3Form : MockForm
     {
         [Scope]
-        [AllowNull]
-        public ScopeData Data { get; set; }
+        public ScopeData Data { get; set; } = default!;
     }
 
     public class Object1Form : MockForm
     {
         [Scope(typeof(ScopeObject))]
-        [AllowNull]
-        public IScopeObject Object { get; set; }
+        public IScopeObject Object { get; set; } = default!;
     }
 
     public class Object2Form : MockForm
     {
         [Scope]
-        [AllowNull]
-        public ScopeObject Object { get; set; }
+        public ScopeObject Object { get; set; } = default!;
     }
 
     public class Object3Form : MockForm
@@ -166,8 +159,7 @@ public class ScopePluginTest
     public class Push2Form : MockForm
     {
         [Scope]
-        [AllowNull]
-        public ScopeData Data { get; set; }
+        public ScopeData Data { get; set; } = default!;
     }
 
     public class Push3Form : MockForm
@@ -177,22 +169,19 @@ public class ScopePluginTest
     public class Push4Form : MockForm
     {
         [Scope]
-        [AllowNull]
-        public ScopeData Data { get; set; }
+        public ScopeData Data { get; set; } = default!;
     }
 
     public class Named1Form : MockForm
     {
         [Scope("Data")]
-        [AllowNull]
-        public ScopeData ExportData { get; set; }
+        public ScopeData ExportData { get; set; } = default!;
     }
 
     public class Named2Form : MockForm
     {
         [Scope("Data")]
-        [AllowNull]
-        public ScopeData ImportData { get; set; }
+        public ScopeData ImportData { get; set; } = default!;
     }
 
     public sealed class ScopeData : IInitializable, IDisposable

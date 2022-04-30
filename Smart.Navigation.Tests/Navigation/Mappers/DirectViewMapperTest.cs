@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Mappers;
 
-using System;
-
 using Smart.Mock;
 
 using Xunit;

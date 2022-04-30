@@ -1,8 +1,5 @@
 namespace Smart.Navigation.Strategies;
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 public sealed class PopAndForwardStrategy : INavigationStrategy
 {
     private readonly bool all;
@@ -11,8 +8,7 @@ public sealed class PopAndForwardStrategy : INavigationStrategy
 
     private int level;
 
-    [AllowNull]
-    private ViewDescriptor descriptor;
+    private ViewDescriptor descriptor = default!;
 
     public PopAndForwardStrategy(object id)
     {

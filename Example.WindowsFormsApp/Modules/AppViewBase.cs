@@ -1,7 +1,5 @@
 namespace Example.WindowsFormsApp.Modules;
 
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
 using Smart.Navigation;
@@ -14,8 +12,7 @@ public partial class AppViewBase : UserControl, IApplicationView, INavigatorAwar
 
     public virtual IReadOnlyList<FunctionKey>? FunctionKeys => null;
 
-    [AllowNull]
-    public INavigator Navigator { get; set; }
+    public INavigator Navigator { get; set; } = default!;
 
     protected AppViewBase()
     {

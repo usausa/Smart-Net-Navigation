@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System;
-
 using Smart.Navigation.Mappers;
 
 using Xamarin.Forms;

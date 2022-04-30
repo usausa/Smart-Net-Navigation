@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System.Diagnostics.CodeAnalysis;
-
 using Smart.Mock;
 using Smart.Navigation.Plugins.Scope;
 using Smart.Resolver;
@@ -46,8 +44,7 @@ public static class SmartResolverTest
         public IService Service { get; }
 
         [Scope]
-        [AllowNull]
-        public ScopeObject ScopeObject { get; set; }
+        public ScopeObject ScopeObject { get; set; } = default!;
 
         public Form1(IService service)
         {

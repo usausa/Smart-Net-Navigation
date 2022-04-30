@@ -1,6 +1,5 @@
 namespace Example.WindowsApp;
 
-using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 
 using Example.WindowsApp.Modules;
@@ -11,11 +10,9 @@ using Smart.Windows.Resolver;
 
 public partial class App
 {
-    [AllowNull]
-    private SmartResolver resolver;
+    private SmartResolver resolver = default!;
 
-    [AllowNull]
-    private Navigator navigator;
+    private Navigator navigator = default!;
 
     protected override void OnStartup(StartupEventArgs e)
     {

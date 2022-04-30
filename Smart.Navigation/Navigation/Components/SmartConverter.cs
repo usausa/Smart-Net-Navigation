@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Components;
 
-using System;
-
 using Smart.Converter;
 
 public sealed class SmartConverter : IConverter

@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins;
 
-using System;
-
 public interface IPluginContext
 {
     void Save<T>(Type type, T value);

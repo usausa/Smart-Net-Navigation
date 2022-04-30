@@ -1,6 +1,5 @@
 namespace Example.WindowsApp.Modules;
 
-using System;
 using Smart.Navigation;
 using Smart.Windows.Input;
 

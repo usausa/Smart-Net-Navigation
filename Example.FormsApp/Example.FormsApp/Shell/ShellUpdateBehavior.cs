@@ -1,7 +1,5 @@
 namespace Example.FormsApp.Shell;
 
-using System;
-
 using Smart.Forms.Interactivity;
 using Smart.Navigation;
 

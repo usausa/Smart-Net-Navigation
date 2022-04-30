@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins.Scope;
 
-using System;
-
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class ScopeAttribute : Attribute
 {

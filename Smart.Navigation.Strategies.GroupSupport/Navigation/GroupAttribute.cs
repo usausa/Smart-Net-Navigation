@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System;
-
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class GroupAttribute : Attribute
 {

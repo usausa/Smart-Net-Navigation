@@ -1,8 +1,5 @@
 namespace Example.WindowsFormsApp.Modules.Edit;
 
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-
 using Example.WindowsFormsApp.Models;
 using Example.WindowsFormsApp.Services;
 
@@ -18,8 +15,7 @@ public partial class DataListView : AppViewBase
     public override bool CanGoHome => true;
 
     [Inject]
-    [AllowNull]
-    public DataService DataService { get; set; }
+    public DataService DataService { get; set; } = default!;
 
     public DataListView()
     {

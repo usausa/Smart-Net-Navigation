@@ -1,6 +1,5 @@
 namespace Example.WindowsFormsApp.Modules;
 
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 using Smart.Navigation;

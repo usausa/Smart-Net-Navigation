@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System.Diagnostics.CodeAnalysis;
-
 using Smart.Mock;
 
 using Xunit;
@@ -25,7 +23,6 @@ public class NavigatorAwareTest
 
     public class AwareForm : MockForm, INavigatorAware
     {
-        [AllowNull]
-        public INavigator Navigator { get; set; }
+        public INavigator Navigator { get; set; } = default!;
     }
 }

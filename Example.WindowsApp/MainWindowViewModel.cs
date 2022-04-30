@@ -1,6 +1,5 @@
 namespace Example.WindowsApp;
 
-using System;
 using System.Reactive.Linq;
 
 using Example.WindowsApp.Views;

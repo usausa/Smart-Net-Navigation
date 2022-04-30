@@ -1,13 +1,10 @@
 namespace Smart.Navigation.Strategies;
 
-using System.Diagnostics.CodeAnalysis;
-
 public sealed class PushStrategy : INavigationStrategy
 {
     private readonly object id;
 
-    [AllowNull]
-    private ViewDescriptor descriptor;
+    private ViewDescriptor descriptor = default!;
 
     public PushStrategy(object id)
     {

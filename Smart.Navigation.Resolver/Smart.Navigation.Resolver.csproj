@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net5.0;netcoreapp3.1;netstandard2.1</TargetFrameworks>
@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Usa.Smart.Navigation.Resolver</PackageId>
-    <Title>Smart.Navigation.Resolver .NET</Title>
+    <Title>Smart.Navigation.Resolver</Title>
     <Description>Smart navigation library resolver integration</Description>
     <Summary>Smart navigation library resolver integration</Summary>
     <PackageTags>smart navigation ioc di dependencyinjection</PackageTags>

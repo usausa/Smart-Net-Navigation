@@ -1,8 +1,5 @@
 namespace Smart.Navigation.Strategies;
 
-using System;
-using System.Threading.Tasks;
-
 using Smart.Mock;
 
 using Xunit;

@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Strategies;
 
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 public sealed class GroupPopStrategy : INavigationStrategy
@@ -10,8 +8,7 @@ public sealed class GroupPopStrategy : INavigationStrategy
 
     private int start;
 
-    [AllowNull]
-    private ViewStackInfo restoreStackInfo;
+    private ViewStackInfo restoreStackInfo = default!;
 
     public GroupPopStrategy(bool leaveLast)
     {

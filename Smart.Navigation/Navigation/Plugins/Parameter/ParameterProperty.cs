@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins.Parameter;
 
-using System;
-
 public sealed class ParameterProperty
 {
     public string Name { get; }

@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System.Threading.Tasks;
-
 using Smart.Navigation.Strategies;
 
 public static class NavigatorExtensions

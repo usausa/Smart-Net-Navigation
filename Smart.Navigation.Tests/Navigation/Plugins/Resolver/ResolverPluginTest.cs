@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins.Resolver;
 
-using System;
-
 using Smart.Mock;
 using Smart.Resolver;
 

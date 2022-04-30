@@ -1,7 +1,5 @@
 namespace Example.FormsApp.Modules.Stack;
 
-using System.Threading.Tasks;
-
 using Smart.Forms.Input;
 using Smart.Navigation;
 

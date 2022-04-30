@@ -1,6 +1,5 @@
 namespace Example.WindowsApp.Views;
 
-using System;
 using System.Windows;
 
 using Microsoft.Xaml.Behaviors;

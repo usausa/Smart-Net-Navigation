@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Mappers;
 
-using System;
-
 public sealed class AssignableTypeConstraint : ITypeConstraint
 {
     private readonly Type baseType;

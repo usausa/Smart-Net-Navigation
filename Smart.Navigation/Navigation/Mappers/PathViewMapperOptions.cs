@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Mappers;
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 public class PathViewMapperOptions

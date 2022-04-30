@@ -1,8 +1,5 @@
 namespace Smart.Navigation.Mappers;
 
-using System;
-using System.Collections.Generic;
-
 public sealed class IdViewMapper : IViewMapper, IIdViewRegister
 {
     private readonly Dictionary<object, ViewDescriptor> descriptors = new();

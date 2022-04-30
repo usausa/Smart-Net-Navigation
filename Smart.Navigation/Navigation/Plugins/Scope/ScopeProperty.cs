@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins.Scope;
 
-using System;
-
 public sealed class ScopeProperty
 {
     public string Name { get; }

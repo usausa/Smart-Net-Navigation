@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Attributes;
 
-using System;
-
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public sealed class ViewAttribute : Attribute
 {

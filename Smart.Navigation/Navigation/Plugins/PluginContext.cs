@@ -1,8 +1,5 @@
 namespace Smart.Navigation.Plugins;
 
-using System;
-using System.Collections.Generic;
-
 public sealed class PluginContext : IPluginContext
 {
     private Dictionary<Type, object?>? store;

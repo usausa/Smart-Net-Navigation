@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Components;
 
-using System;
-
 public sealed class DelegateConverter : IConverter
 {
     private readonly Func<object?, Type, object?> callback;

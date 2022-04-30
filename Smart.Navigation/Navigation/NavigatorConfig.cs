@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System;
-
 using Smart.ComponentModel;
 using Smart.Navigation.Components;
 using Smart.Navigation.Mappers;

@@ -1,17 +1,12 @@
 namespace Example.FormsApp.Modules.Wizard;
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-
 using Smart;
 
 public sealed class WizardContext : IInitializable, IDisposable
 {
-    [AllowNull]
-    public string Data1 { get; set; }
+    public string Data1 { get; set; } = default!;
 
-    [AllowNull]
-    public string Data2 { get; set; }
+    public string Data2 { get; set; } = default!;
 
     public void Initialize()
     {

@@ -1,11 +1,6 @@
 namespace Smart.Navigation;
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Smart.ComponentModel;
 using Smart.Navigation.Mappers;
@@ -298,8 +293,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
         public List<ViewStackInfo> ViewStack => navigator.viewStack;
 
-        [AllowNull]
-        public PluginContext PluginContext { private get; set; }
+        public PluginContext PluginContext { private get; set; } = default!;
 
         public Controller(Navigator navigator)
         {

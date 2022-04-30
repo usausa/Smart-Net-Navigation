@@ -1,8 +1,5 @@
 namespace Example.FormsApp.Modules;
 
-using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
-
 using Example.FormsApp.Shell;
 
 using Smart.Forms.ViewModels;
@@ -10,8 +7,7 @@ using Smart.Navigation;
 
 public class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport, INotifySupportAsync<ShellEvent>
 {
-    [AllowNull]
-    public INavigator Navigator { get; set; }
+    public INavigator Navigator { get; set; } = default!;
 
     protected ApplicationState ApplicationState { get; }
 

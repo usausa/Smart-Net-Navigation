@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net6.0-windows;netcoreapp3.1</TargetFrameworks>
@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>Usa.Smart.Navigation.Windows</PackageId>
-    <Title>Smart.Navigation.Windows .NET</Title>
+    <Title>Smart.Navigation.Windows</Title>
     <Description>Smart navigation library wpd provider</Description>
     <Summary>Smart navigation library wpd provider</Summary>
     <PackageTags>smart navigation wpf mvvm</PackageTags>

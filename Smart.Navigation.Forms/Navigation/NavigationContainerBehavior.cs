@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using System;
-
 using Xamarin.Forms;
 
 public class NavigationContainerBehavior : Behavior<AbsoluteLayout>
