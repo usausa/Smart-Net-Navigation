@@ -9,8 +9,8 @@
   <PropertyGroup>
     <PackageId>Usa.Smart.Navigation.Forms</PackageId>
     <Title>Smart.Navigation.Forms</Title>
-    <Description>Smart navigation library wndows forms provider</Description>
-    <Summary>Smart navigation library wndows forms provider</Summary>
+    <Description>Smart navigation library Xamarin.Forms provider</Description>
+    <Summary>Smart navigation library Xamarin.Forms provider</Summary>
     <PackageTags>smart navigation xamarin mvvm</PackageTags>
   </PropertyGroup>
 
