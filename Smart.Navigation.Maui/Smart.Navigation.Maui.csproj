@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <UseMaui>true</UseMaui>
+    <CodeAnalysisRuleSet>..\Smart.Navigation.ruleset</CodeAnalysisRuleSet>
+    <RootNamespace>Smart</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Usa.Smart.Navigation.Maui</PackageId>
+    <Title>Smart.Navigation.Maui</Title>
+    <Description>Smart navigation library MAUI provider</Description>
+    <Summary>Smart navigation library MAUI provider</Summary>
+    <PackageTags>smart navigation maui mvvm</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Usa.Smart.Core" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
+  </ItemGroup>
+
+</Project>
