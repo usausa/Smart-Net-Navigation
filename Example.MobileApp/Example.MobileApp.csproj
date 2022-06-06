@@ -40,9 +40,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <MauiXaml Update="Platforms\Windows\App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
+    <PackageReference Include="Usa.Smart.Core" Version="2.1.0" />
+    <PackageReference Include="Usa.Smart.Maui" Version="0.1.0" />
+    <PackageReference Include="Usa.Smart.Maui.Resolver" Version="0.1.0" />
+    <PackageReference Include="Usa.Smart.Resolver.Extensions.DependencyInjection" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation.Maui\Smart.Navigation.Maui.csproj" />
+    <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj" />
+    <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
   </ItemGroup>
 
 </Project>
