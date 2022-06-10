@@ -41,8 +41,10 @@
 
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="2.1.0" />
-    <PackageReference Include="Usa.Smart.Maui" Version="0.1.0" />
-    <PackageReference Include="Usa.Smart.Maui.Resolver" Version="0.1.0" />
+    <PackageReference Include="Usa.Smart.Maui" Version="0.2.0" />
+    <PackageReference Include="Usa.Smart.Maui.Reactive" Version="0.2.0" />
+    <PackageReference Include="Usa.Smart.Maui.Resolver" Version="0.2.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.1.0" />
     <PackageReference Include="Usa.Smart.Resolver.Extensions.DependencyInjection" Version="2.1.0" />
   </ItemGroup>
 
