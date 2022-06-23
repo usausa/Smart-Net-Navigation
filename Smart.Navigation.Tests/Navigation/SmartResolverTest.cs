@@ -16,13 +16,11 @@ public static class SmartResolverTest
         config.UseAutoBinding();
         config.Bind<IService>().To<ServiceImpl>().InSingletonScope();
         config.Bind<Setting>().ToSelf().InSingletonScope();
+        config.AddNavigator(c => c.UseMockFormProvider());
 
         var resolver = config.ToResolver();
 
-        var navigator = new NavigatorConfig()
-            .UseMockFormProvider()
-            .UseServiceProvider(resolver)
-            .ToNavigator();
+        var navigator = resolver.Get<INavigator>();
 
         // test
         navigator.Forward(typeof(Form1));
