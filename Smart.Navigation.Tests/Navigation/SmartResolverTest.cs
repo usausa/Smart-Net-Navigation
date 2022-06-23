@@ -21,7 +21,7 @@ public static class SmartResolverTest
 
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseResolver(resolver)
+            .UseServiceProvider(resolver)
             .ToNavigator();
 
         // test

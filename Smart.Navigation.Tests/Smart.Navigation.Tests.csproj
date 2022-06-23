@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation.Extensions.DependencyInjection\Smart.Navigation.Extensions.DependencyInjection.csproj" />
     <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj" />
     <ProjectReference Include="..\Smart.Navigation.Strategies.GroupSupport\Smart.Navigation.Strategies.GroupSupport.csproj" />
     <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
