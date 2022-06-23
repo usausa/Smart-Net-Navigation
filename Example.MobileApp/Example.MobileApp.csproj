@@ -44,11 +44,12 @@
     <PackageReference Include="Usa.Smart.Maui" Version="0.3.0" />
     <PackageReference Include="Usa.Smart.Maui.Reactive" Version="0.3.0" />
     <PackageReference Include="Usa.Smart.Maui.Resolver" Version="0.3.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.1.0" />
-    <PackageReference Include="Usa.Smart.Resolver.Extensions.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.2.0" />
+    <PackageReference Include="Usa.Smart.Resolver.Extensions.DependencyInjection" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation.Extensions.DependencyInjection\Smart.Navigation.Extensions.DependencyInjection.csproj" />
     <ProjectReference Include="..\Smart.Navigation.Maui\Smart.Navigation.Maui.csproj" />
     <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj" />
     <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
