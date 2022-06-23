@@ -34,9 +34,9 @@ public partial class MainForm : Form
         // Config Navigator
         navigator = new NavigatorConfig()
             .UseControlNavigationProvider(ContainerPanel)
-            .UseServiceProvider(resolver)
-            .UseResolverPlugin()
             .UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
+            .UseServiceProvider(resolver)
+            .AddResolverPlugin()
             .ToNavigator();
         navigator.Exited += OnExited;
         navigator.Navigating += OnNavigating;

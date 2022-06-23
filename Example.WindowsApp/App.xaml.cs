@@ -24,7 +24,7 @@ public partial class App
         navigator = new NavigatorConfig()
             .UseWindowsNavigationProvider()
             .UseServiceProvider(resolver)
-            .UseResolverPlugin()
+            .AddResolverPlugin()
             .ToNavigator();
         navigator.Navigated += (_, args) =>
         {

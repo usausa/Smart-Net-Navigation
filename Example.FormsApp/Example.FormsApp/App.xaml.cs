@@ -25,9 +25,9 @@ public partial class App
         // Config Navigator
         navigator = new NavigatorConfig()
             .UseFormsNavigationProvider()
-            .UseServiceProvider(resolver)
-            .UseResolverPlugin()
             .UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
+            .UseServiceProvider(resolver)
+            .AddResolverPlugin()
             .ToNavigator();
         navigator.Navigated += (_, args) =>
         {
