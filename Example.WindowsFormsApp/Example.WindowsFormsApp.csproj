@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="2.1.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.1.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
