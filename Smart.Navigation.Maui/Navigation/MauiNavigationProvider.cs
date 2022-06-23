@@ -2,13 +2,13 @@ namespace Smart.Navigation;
 
 using Microsoft.Maui.Layouts;
 
-public class FormsNavigationProvider : INavigationProvider
+public class MauiNavigationProvider : INavigationProvider
 {
     private readonly IContainerResolver resolver;
 
-    private readonly FormsNavigationProviderOptions options;
+    private readonly MauiNavigationProviderOptions options;
 
-    public FormsNavigationProvider(IContainerResolver resolver, FormsNavigationProviderOptions options)
+    public MauiNavigationProvider(IContainerResolver resolver, MauiNavigationProviderOptions options)
     {
         this.resolver = resolver;
         this.options = options;
