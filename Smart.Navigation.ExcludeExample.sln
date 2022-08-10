@@ -42,6 +42,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Windows.Fo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Extensions.DependencyInjection", "Smart.Navigation.Extensions.DependencyInjection\Smart.Navigation.Extensions.DependencyInjection.csproj", "{EC2D34F0-E6A4-4BE7-98DE-9F33D8B43D94}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Maui", "Smart.Navigation.Maui\Smart.Navigation.Maui.csproj", "{5E1650D4-351B-47E7-A392-3A940A3BFB0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -182,6 +184,22 @@ Global
 		{EC2D34F0-E6A4-4BE7-98DE-9F33D8B43D94}.Release|x64.Build.0 = Release|Any CPU
 		{EC2D34F0-E6A4-4BE7-98DE-9F33D8B43D94}.Release|x86.ActiveCfg = Release|Any CPU
 		{EC2D34F0-E6A4-4BE7-98DE-9F33D8B43D94}.Release|x86.Build.0 = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|ARM.Build.0 = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|x64.Build.0 = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Debug|x86.Build.0 = Debug|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|ARM.Build.0 = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|x64.Build.0 = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -199,6 +217,7 @@ Global
 		{E4FD79CA-F620-409B-B7D7-07C7052302CB} = {F6384B79-6894-4004-9A46-7195C36E73D9}
 		{3E7BA1F2-1AA0-49F4-9B27-3C70620B90A2} = {F6384B79-6894-4004-9A46-7195C36E73D9}
 		{EC2D34F0-E6A4-4BE7-98DE-9F33D8B43D94} = {2365021A-C0AE-4A94-A46A-705586EF894B}
+		{5E1650D4-351B-47E7-A392-3A940A3BFB0A} = {2365021A-C0AE-4A94-A46A-705586EF894B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FDB6EE9D-A1DD-4C86-9F8F-D2D37F675F5C}
