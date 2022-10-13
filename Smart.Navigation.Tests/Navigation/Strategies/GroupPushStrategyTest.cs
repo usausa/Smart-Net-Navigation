@@ -312,7 +312,7 @@ public class GroupPushStrategyTest
     // ------------------------------------------------------------
 
     [Fact]
-    public static async ValueTask TestNavigatorGropedPushAsyncExistAndNotBring()
+    public async Task TestNavigatorGropedPushAsyncExistAndNotBring()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -341,7 +341,7 @@ public class GroupPushStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorGropedPushAsyncWithParameter()
+    public async Task TestNavigatorGropedPushAsyncWithParameter()
     {
         // prepare
         var navigator = new NavigatorConfig()

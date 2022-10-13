@@ -117,7 +117,7 @@ public class PopStrategyTest
     // ------------------------------------------------------------
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAsync()
+    public async Task TestNavigatorPopAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -134,7 +134,7 @@ public class PopStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAsyncMultiple()
+    public async Task TestNavigatorPopAsyncMultiple()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -152,7 +152,7 @@ public class PopStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAsyncWithParameter()
+    public async Task TestNavigatorPopAsyncWithParameter()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -172,7 +172,7 @@ public class PopStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAsyncMultipleWithParameter()
+    public async Task TestNavigatorPopAsyncMultipleWithParameter()
     {
         // prepare
         var navigator = new NavigatorConfig()

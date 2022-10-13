@@ -90,7 +90,7 @@ public class ForwardStrategyTest
     // ------------------------------------------------------------
 
     [Fact]
-    public static async ValueTask TestNavigatorForwardAsync()
+    public async Task TestNavigatorForwardAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -110,7 +110,7 @@ public class ForwardStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorForwardAsyncWithParameter()
+    public async Task TestNavigatorForwardAsyncWithParameter()
     {
         // prepare
         var navigator = new NavigatorConfig()

@@ -81,7 +81,7 @@ public class PushStrategyTest
     // ------------------------------------------------------------
 
     [Fact]
-    public static async ValueTask TestNavigatorPushAsync()
+    public async Task TestNavigatorPushAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -106,7 +106,7 @@ public class PushStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPushAsyncWithParameter()
+    public async Task TestNavigatorPushAsyncWithParameter()
     {
         // prepare
         var navigator = new NavigatorConfig()

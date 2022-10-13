@@ -39,7 +39,7 @@ public class NavigatorConfirmTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorCanceledByAsyncInterface()
+    public async Task TestNavigatorCanceledByAsyncInterface()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -54,7 +54,7 @@ public class NavigatorConfirmTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorCanceledByAsyncInterface2()
+    public async Task TestNavigatorCanceledByAsyncInterface2()
     {
         // prepare
         var navigator = new NavigatorConfig()

@@ -160,7 +160,7 @@ public class PopAndForwardStrategyTest
     // ------------------------------------------------------------
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAndForwardAsync()
+    public async Task TestNavigatorPopAndForwardAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -180,7 +180,7 @@ public class PopAndForwardStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAndForwardMultipleAsync()
+    public async Task TestNavigatorPopAndForwardMultipleAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -201,7 +201,7 @@ public class PopAndForwardStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAllAndForwardAsync()
+    public async Task TestNavigatorPopAllAndForwardAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -222,7 +222,7 @@ public class PopAndForwardStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAndForwardWithParameterAsync()
+    public async Task TestNavigatorPopAndForwardWithParameterAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -242,7 +242,7 @@ public class PopAndForwardStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAndForwardMultipleWithParameterAsync()
+    public async Task TestNavigatorPopAndForwardMultipleWithParameterAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
@@ -263,7 +263,7 @@ public class PopAndForwardStrategyTest
     }
 
     [Fact]
-    public static async ValueTask TestNavigatorPopAllAndForwardWithParameterAsync()
+    public async Task TestNavigatorPopAllAndForwardWithParameterAsync()
     {
         // prepare
         var navigator = new NavigatorConfig()
