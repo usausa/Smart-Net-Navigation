@@ -13,7 +13,6 @@
     <PackageReference Include="Usa.Smart.Resolver" Version="2.3.0" />
     <PackageReference Include="Usa.Smart.Windows" Version="2.6.0" />
     <PackageReference Include="Usa.Smart.Windows.Reactive" Version="2.6.0" />
-    <PackageReference Include="Usa.Smart.Windows.Resolver" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
