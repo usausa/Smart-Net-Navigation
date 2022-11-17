@@ -40,7 +40,7 @@ public partial class DataListView : AppViewBase
     private void OnEditButtonClick(object sender, System.EventArgs e)
     {
         var parameter = new NavigationParameter();
-        parameter.SetValue((DataEntity)DataListBox.SelectedItem);
+        parameter.SetValue((DataEntity)DataListBox.SelectedItem!);
         Navigator.Forward(ViewId.EditDetailUpdate, parameter);
     }
 }

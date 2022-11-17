@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows;net6.0-windows;netcoreapp3.1</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <CodeAnalysisRuleSet>..\Smart.Navigation.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.1.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

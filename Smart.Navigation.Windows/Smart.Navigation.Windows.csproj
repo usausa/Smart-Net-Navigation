@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows;net6.0-windows;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <CodeAnalysisRuleSet>..\Smart.Navigation.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.1.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

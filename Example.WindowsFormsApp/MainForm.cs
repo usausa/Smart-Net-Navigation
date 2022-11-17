@@ -133,7 +133,7 @@ public partial class MainForm : Form
 
         foreach (var button in functionButtons)
         {
-            var keyData = (Keys)button.Tag;
+            var keyData = (Keys)button.Tag!;
             if (enabledFunctions.ContainsKey(keyData))
             {
                 var key = enabledFunctions[keyData];
@@ -152,7 +152,7 @@ public partial class MainForm : Form
     {
         if (navigator.CurrentView is IApplicationView view)
         {
-            view.OnFunctionKey((Keys)((Button)sender).Tag);
+            view.OnFunctionKey((Keys)((Button)sender).Tag!);
         }
     }
 

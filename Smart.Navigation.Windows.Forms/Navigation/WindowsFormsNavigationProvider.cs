@@ -75,15 +75,17 @@ public sealed class WindowsFormsNavigationProvider : INavigationProvider
         return parameter;
     }
 
-    private static Control GetFocused(Control control)
+    private static Control? GetFocused(Control control)
     {
-        var containerControl = control as IContainerControl;
+        var target = control;
+
+        var containerControl = target as IContainerControl;
         while (containerControl is not null)
         {
-            control = containerControl.ActiveControl;
-            containerControl = control as IContainerControl;
+            target = containerControl.ActiveControl;
+            containerControl = target as IContainerControl;
         }
 
-        return control;
+        return target;
     }
 }
