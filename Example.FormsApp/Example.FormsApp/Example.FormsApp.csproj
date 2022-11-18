@@ -14,8 +14,6 @@
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="2.2.0" />
     <PackageReference Include="Usa.Smart.Forms" Version="2.6.0" />
-    <PackageReference Include="Usa.Smart.Forms.Resolver" Version="2.4.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
   </ItemGroup>
