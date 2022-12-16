@@ -106,7 +106,7 @@ public static class NavigatorConfigTest
         var components = ((INavigatorConfig)config).ResolveComponents();
 
         Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
-        Assert.NotNull(serviceProvider!.GetService(typeof(Model)));
+        Assert.NotNull(serviceProvider.GetService(typeof(Model)));
     }
 
     [Fact]
@@ -118,7 +118,7 @@ public static class NavigatorConfigTest
         var components = ((INavigatorConfig)config).ResolveComponents();
 
         Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
-        Assert.NotNull(serviceProvider!.GetService(typeof(Model)));
+        Assert.NotNull(serviceProvider.GetService(typeof(Model)));
     }
 
     [Fact]
@@ -130,7 +130,7 @@ public static class NavigatorConfigTest
         var components = ((INavigatorConfig)config).ResolveComponents();
 
         Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
-        Assert.NotNull(serviceProvider!.GetService(typeof(Model)));
+        Assert.NotNull(serviceProvider.GetService(typeof(Model)));
     }
 
     // ------------------------------------------------------------
@@ -146,7 +146,7 @@ public static class NavigatorConfigTest
         var components = ((INavigatorConfig)config).ResolveComponents();
 
         Assert.True(components.TryGet<IConverter>(out var converter));
-        Assert.Equal(1, converter!.Convert("1", typeof(int)));
+        Assert.Equal(1, converter.Convert("1", typeof(int)));
     }
 
     [Fact]
@@ -158,7 +158,7 @@ public static class NavigatorConfigTest
         var components = ((INavigatorConfig)config).ResolveComponents();
 
         Assert.True(components.TryGet<IConverter>(out var converter));
-        Assert.Equal(1, converter!.Convert("1", typeof(int)));
+        Assert.Equal(1, converter.Convert("1", typeof(int)));
     }
 
     [Fact]
@@ -170,7 +170,7 @@ public static class NavigatorConfigTest
         var components = ((INavigatorConfig)config).ResolveComponents();
 
         Assert.True(components.TryGet<IConverter>(out var converter));
-        Assert.Equal(1, converter!.Convert("1", typeof(int)));
+        Assert.Equal(1, converter.Convert("1", typeof(int)));
     }
 
     [Fact]
@@ -182,7 +182,7 @@ public static class NavigatorConfigTest
         var components = ((INavigatorConfig)config).ResolveComponents();
 
         Assert.True(components.TryGet<IConverter>(out var converter));
-        Assert.Equal(1, converter!.Convert("1", typeof(int)));
+        Assert.Equal(1, converter.Convert("1", typeof(int)));
     }
 
     // ------------------------------------------------------------
