@@ -134,9 +134,8 @@ public partial class MainForm : Form
         foreach (var button in functionButtons)
         {
             var keyData = (Keys)button.Tag!;
-            if (enabledFunctions.ContainsKey(keyData))
+            if (enabledFunctions.TryGetValue(keyData, out var key))
             {
-                var key = enabledFunctions[keyData];
                 button.Enabled = true;
                 button.Text = key.Display;
             }
