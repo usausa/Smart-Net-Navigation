@@ -1,6 +1,5 @@
 namespace Example.WindowsFormsApp;
 
-using System.Reflection;
 using System.Windows.Forms;
 
 using Example.WindowsFormsApp.Modules;
@@ -34,7 +33,7 @@ public partial class MainForm : Form
         // Config Navigator
         navigator = new NavigatorConfig()
             .UseControlNavigationProvider(ContainerPanel)
-            .UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
+            .UseIdViewMapper(m => m.AutoRegister(ViewRegistry.ListViews()))
             .UseServiceProvider(resolver)
             .AddResolverPlugin()
             .ToNavigator();
