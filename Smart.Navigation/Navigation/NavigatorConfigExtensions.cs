@@ -100,6 +100,14 @@ public static class NavigatorConfigExtensions
         }
     }
 
+    public static void AutoRegister<T>(this IIdViewRegister register, IEnumerable<KeyValuePair<T, Type>> source)
+    {
+        foreach (var pair in source)
+        {
+            register.Register(pair.Key!, pair.Value);
+        }
+    }
+
     public static NavigatorConfig UsePathViewMapper(this NavigatorConfig config, Action<PathViewMapperOptions> action)
     {
         var options = new PathViewMapperOptions();
