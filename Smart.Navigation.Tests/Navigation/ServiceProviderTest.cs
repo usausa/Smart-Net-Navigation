@@ -19,7 +19,7 @@ public static class ServiceProviderTest
         services.AddTransient<ScopeObject>();
         services.AddTransient<Form1>();
         services.AddTransient<Form2>();
-        services.AddNavigator(config => config.UseMockFormProvider());
+        services.AddNavigator(static config => config.UseMockFormProvider());
         var provider = services.BuildServiceProvider();
 
         var navigator = provider.GetRequiredService<INavigator>();
@@ -70,7 +70,7 @@ public static class ServiceProviderTest
         void Process();
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
     public class ServiceImpl : IService
     {
         public void Process()

@@ -15,7 +15,7 @@ public static class NavigatorComponentSourceTest
     {
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .Configure(c => c.Add<IDummyComponent, DummyComponent>())
+            .Configure(static c => c.Add<IDummyComponent, DummyComponent>())
             .ToNavigator();
 
         var componentSource = (INavigatorComponentSource)navigator;

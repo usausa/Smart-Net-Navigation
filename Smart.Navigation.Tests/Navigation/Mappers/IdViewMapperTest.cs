@@ -15,7 +15,7 @@ public class IdViewMapperTest
         // prepare
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseIdViewMapper(r => r.AutoRegister(new[] { typeof(Form1), typeof(Form2) }))
+            .UseIdViewMapper(static r => r.AutoRegister(new[] { typeof(Form1), typeof(Form2) }))
             .ToNavigator();
 
         // test
@@ -34,7 +34,7 @@ public class IdViewMapperTest
         // prepare
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseIdViewMapper(_ => { })
+            .UseIdViewMapper(static _ => { })
             .ToNavigator();
 
         // test
@@ -45,7 +45,7 @@ public class IdViewMapperTest
     public static void UseIdViewMapperRegisterFailed()
     {
         Assert.Throws<TargetInvocationException>(() =>
-            new NavigatorConfig().UseMockFormProvider().UseIdViewMapper(r => r.Register(1, typeof(string))).ToNavigator());
+            new NavigatorConfig().UseMockFormProvider().UseIdViewMapper(static r => r.Register(1, typeof(string))).ToNavigator());
     }
 
     // ------------------------------------------------------------

@@ -36,7 +36,7 @@ public static class WindowsNavigatorConfigExtensions
 
     public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container)
     {
-        return config.UseWindowsNavigationProvider(container, _ => { });
+        return config.UseWindowsNavigationProvider(container, static _ => { });
     }
 
     public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container, Action<WindowsNavigationProviderOptions> setupAction)

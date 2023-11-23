@@ -16,7 +16,7 @@ public static class WindowsFormsNavigatorConfigExtensions
         var options = new WindowsFormsNavigationProviderOptions();
         setupAction(options);
 
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<ITypeConstraint>();
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));

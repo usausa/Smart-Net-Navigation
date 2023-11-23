@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0</TargetFrameworks>
-    <UseMaui>true</UseMaui>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <CodeAnalysisRuleSet>..\Smart.Navigation.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
   </PropertyGroup>
@@ -16,7 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.2.1" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>

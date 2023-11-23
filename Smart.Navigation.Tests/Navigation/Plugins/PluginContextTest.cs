@@ -45,7 +45,7 @@ public static class PluginContextTest
         var context = new PluginContext();
 
         context.Save(typeof(string), "abc");
-        Assert.Equal("abc", context.LoadOr(typeof(string), () => string.Empty));
+        Assert.Equal("abc", context.LoadOr(typeof(string), static () => string.Empty));
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public static class PluginContextTest
     {
         var context = new PluginContext();
 
-        Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
+        Assert.Equal("abc", context.LoadOr(typeof(string), static () => "abc"));
     }
 
     [Fact]
@@ -62,6 +62,6 @@ public static class PluginContextTest
         var context = new PluginContext();
 
         context.Save(typeof(int), 123);
-        Assert.Equal("abc", context.LoadOr(typeof(string), () => "abc"));
+        Assert.Equal("abc", context.LoadOr(typeof(string), static () => "abc"));
     }
 }

@@ -109,7 +109,7 @@ public class NavigatorEventTest
         // prepare
         var resolver = new ResolverConfig()
             .UseAutoBinding()
-            .Also(config => config.Bind<EventRecorder>().ToSelf().InSingletonScope())
+            .Also(static config => config.Bind<EventRecorder>().ToSelf().InSingletonScope())
             .ToResolver();
         var recorder = resolver.Get<EventRecorder>();
         var navigator = new NavigatorConfig()
@@ -200,7 +200,7 @@ public class NavigatorEventTest
         // prepare
         var resolver = new ResolverConfig()
             .UseAutoBinding()
-            .Also(config => config.Bind<EventRecorder>().ToSelf().InSingletonScope())
+            .Also(static config => config.Bind<EventRecorder>().ToSelf().InSingletonScope())
             .ToResolver();
         var recorder = resolver.Get<EventRecorder>();
         var navigator = new NavigatorConfig()

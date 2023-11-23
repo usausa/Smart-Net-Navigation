@@ -24,12 +24,12 @@ public class ParameterPlugin : PluginBase
         if (!typeProperties.TryGetValue(type, out var properties))
         {
             properties = type.GetProperties()
-                .Select(x => new
+                .Select(static x => new
                 {
                     Property = x,
                     Attribute = (ParameterAttribute?)x.GetCustomAttribute(typeof(ParameterAttribute))
                 })
-                .Where(x => x.Attribute is not null)
+                .Where(static x => x.Attribute is not null)
                 .Select(x => new ParameterProperty(
                     x.Attribute!.Name ?? x.Property.Name,
                     delegateFactory.GetExtendedPropertyType(x.Property),
@@ -78,7 +78,7 @@ public class ParameterPlugin : PluginBase
         return parameters;
     }
 
-    private void ApplyImportParameters(object target, IDictionary<string, object?> parameters)
+    private void ApplyImportParameters(object target, Dictionary<string, object?> parameters)
     {
         foreach (var property in GetTypeProperties(target.GetType()))
         {

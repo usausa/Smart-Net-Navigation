@@ -28,7 +28,7 @@ public interface INavigator : INotifyPropertyChanged
 
     // Exit
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", Justification = "Ignore")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:IdentifiersShouldNotMatchKeywords", Justification = "Ignore")]
     void Exit();
 
     // Navigate

@@ -37,12 +37,12 @@ public sealed class ScopePlugin : PluginBase
         if (!typeProperties.TryGetValue(type, out var properties))
         {
             properties = type.GetProperties()
-                .Select(x => new
+                .Select(static x => new
                 {
                     Property = x,
                     Attribute = (ScopeAttribute?)x.GetCustomAttribute(typeof(ScopeAttribute))
                 })
-                .Where(x => x.Attribute is not null)
+                .Where(static x => x.Attribute is not null)
                 .Select(x => new ScopeProperty(
                     x.Attribute!.Name ?? x.Property.Name,
                     x.Attribute.RequestType ?? delegateFactory.GetExtendedPropertyType(x.Property),
@@ -64,7 +64,7 @@ public sealed class ScopePlugin : PluginBase
             }
         }
 
-        foreach (var remove in references.Where(x => x.Value.Counter == 0).ToList())
+        foreach (var remove in references.Where(static x => x.Value.Counter == 0).ToList())
         {
             (remove.Value.Instance as IDisposable)?.Dispose();
 

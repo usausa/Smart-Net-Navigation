@@ -6,7 +6,7 @@ public static class MauiNavigatorConfigExtensions
 {
     public static NavigatorConfig UseMauiNavigationProvider(this NavigatorConfig config)
     {
-        return config.UseMauiNavigationProvider(_ => { });
+        return config.UseMauiNavigationProvider(static _ => { });
     }
 
     public static NavigatorConfig UseMauiNavigationProvider(this NavigatorConfig config, Action<MauiNavigationProviderOptions> setupAction)
@@ -33,7 +33,7 @@ public static class MauiNavigatorConfigExtensions
 
     public static NavigatorConfig UseMauiNavigationProvider(this NavigatorConfig config, AbsoluteLayout container)
     {
-        return config.UseMauiNavigationProvider(container, _ => { });
+        return config.UseMauiNavigationProvider(container, static _ => { });
     }
 
     public static NavigatorConfig UseMauiNavigationProvider(this NavigatorConfig config, AbsoluteLayout container, Action<MauiNavigationProviderOptions> setupAction)
@@ -41,7 +41,7 @@ public static class MauiNavigatorConfigExtensions
         var options = new MauiNavigationProviderOptions();
         setupAction(options);
 
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(IView)));
         });

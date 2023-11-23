@@ -197,7 +197,7 @@ public static class NavigatorConfigTest
 
         var components = ((INavigatorConfig)config).ResolveComponents();
 
-        var plugin = components.GetAll<IPlugin>().FirstOrDefault(x => x.GetType() == typeof(DummyPlugin));
+        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x.GetType() == typeof(DummyPlugin));
         Assert.NotNull(plugin);
     }
 
@@ -209,7 +209,7 @@ public static class NavigatorConfigTest
 
         var components = ((INavigatorConfig)config).ResolveComponents();
 
-        var plugin = components.GetAll<IPlugin>().FirstOrDefault(x => x.GetType() == typeof(DummyPlugin));
+        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x.GetType() == typeof(DummyPlugin));
         Assert.NotNull(plugin);
     }
 

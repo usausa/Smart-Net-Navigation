@@ -209,7 +209,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig AddPlugin<TPlugin>(this NavigatorConfig config)
         where TPlugin : IPlugin
     {
-        config.Configure(c => c.Add<IPlugin, TPlugin>());
+        config.Configure(static c => c.Add<IPlugin, TPlugin>());
 
         return config;
     }

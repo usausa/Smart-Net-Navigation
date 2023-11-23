@@ -16,7 +16,7 @@ public static class SmartResolverTest
         config.UseAutoBinding();
         config.Bind<IService>().To<ServiceImpl>().InSingletonScope();
         config.Bind<Setting>().ToSelf().InSingletonScope();
-        config.AddNavigator(c => c.UseMockFormProvider());
+        config.AddNavigator(static c => c.UseMockFormProvider());
 
         var resolver = config.ToResolver();
 
@@ -68,7 +68,7 @@ public static class SmartResolverTest
         void Process();
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
     public class ServiceImpl : IService
     {
         public void Process()
