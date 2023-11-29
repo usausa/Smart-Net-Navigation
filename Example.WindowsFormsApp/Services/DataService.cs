@@ -4,13 +4,13 @@ using Example.WindowsFormsApp.Models;
 
 public class DataService
 {
-    private readonly List<DataEntity> entities = new()
-    {
+    private readonly List<DataEntity> entities =
+    [
         new DataEntity { Id = 1, Name = "Data-1" },
         new DataEntity { Id = 2, Name = "Data-2" },
         new DataEntity { Id = 3, Name = "Data-3" },
         new DataEntity { Id = 4, Name = "Data-4" }
-    };
+    ];
 
     public IEnumerable<DataEntity> QueryDataList()
     {

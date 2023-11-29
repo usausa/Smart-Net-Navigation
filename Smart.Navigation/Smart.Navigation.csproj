@@ -10,7 +10,6 @@
     <PackageId>Usa.Smart.Navigation</PackageId>
     <Title>Smart.Navigation</Title>
     <Description>Smart navigation library</Description>
-    <Summary>Smart navigation library</Summary>
     <PackageTags>smart navigation</PackageTags>
   </PropertyGroup>
 

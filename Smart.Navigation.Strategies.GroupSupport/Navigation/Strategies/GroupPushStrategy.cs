@@ -20,7 +20,7 @@ public sealed class GroupPushStrategy : INavigationStrategy
     {
         get
         {
-            groups ??= new List<int>();
+            groups ??= [];
             return groups;
         }
     }

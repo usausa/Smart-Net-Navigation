@@ -10,7 +10,6 @@
     <PackageId>Usa.Smart.Navigation.Resolver</PackageId>
     <Title>Smart.Navigation.Resolver</Title>
     <Description>Smart navigation library resolver integration</Description>
-    <Summary>Smart navigation library resolver integration</Summary>
     <PackageTags>smart navigation ioc di dependencyinjection</PackageTags>
   </PropertyGroup>
 

@@ -113,14 +113,12 @@ public sealed class Generator : IIncrementalGenerator
         }
 
         if ((methodSymbol.ReturnType is not INamedTypeSymbol returnTypeSymbol) ||
-            (returnTypeSymbol.TypeArguments.Length != 1) ||
             (returnTypeSymbol.ConstructedFrom.ToDisplayString() != "System.Collections.Generic.IEnumerable<T>"))
         {
             return null;
         }
 
         if ((returnTypeSymbol.TypeArguments[0] is not INamedTypeSymbol keyValueTypeSymbol) ||
-            (keyValueTypeSymbol.TypeArguments.Length != 2) ||
             (keyValueTypeSymbol.ConstructedFrom.ToDisplayString() != "System.Collections.Generic.KeyValuePair<TKey, TValue>"))
         {
             return null;

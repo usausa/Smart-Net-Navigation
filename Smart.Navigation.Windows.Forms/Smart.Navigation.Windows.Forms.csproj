@@ -11,7 +11,6 @@
     <PackageId>Usa.Smart.Navigation.Windows.Forms</PackageId>
     <Title>Smart.Navigation.Windows.Forms</Title>
     <Description>Smart navigation library wndows forms provider</Description>
-    <Summary>Smart navigation library wndows forms provider</Summary>
     <PackageTags>smart navigation windowsforms</PackageTags>
   </PropertyGroup>
 

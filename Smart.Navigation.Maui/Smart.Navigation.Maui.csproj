@@ -10,7 +10,6 @@
     <PackageId>Usa.Smart.Navigation.Maui</PackageId>
     <Title>Smart.Navigation.Maui</Title>
     <Description>Smart navigation library MAUI provider</Description>
-    <Summary>Smart navigation library MAUI provider</Summary>
     <PackageTags>smart navigation maui mvvm</PackageTags>
   </PropertyGroup>
 

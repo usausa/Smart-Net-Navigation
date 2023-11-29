@@ -2,7 +2,7 @@ namespace Smart.Navigation.Mappers;
 
 public class PathViewMapper : IViewMapper
 {
-    private readonly Dictionary<string, ViewDescriptor> descriptors = new();
+    private readonly Dictionary<string, ViewDescriptor> descriptors = [];
 
     private readonly PathViewMapperOptions options;
 

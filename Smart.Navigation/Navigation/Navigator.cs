@@ -39,7 +39,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     private readonly ComponentContainer components;
 
-    private readonly List<ViewStackInfo> viewStack = new();
+    private readonly List<ViewStackInfo> viewStack = [];
 
     private readonly INavigationProvider provider;
 

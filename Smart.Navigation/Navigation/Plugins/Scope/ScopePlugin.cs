@@ -18,13 +18,13 @@ public sealed class ScopePlugin : PluginBase
         }
     }
 
-    private readonly Dictionary<Type, ScopeProperty[]> typeProperties = new();
+    private readonly Dictionary<Type, ScopeProperty[]> typeProperties = [];
 
     private readonly IDelegateFactory delegateFactory;
 
     private readonly IServiceProvider serviceProvider;
 
-    private readonly Dictionary<string, Reference> references = new();
+    private readonly Dictionary<string, Reference> references = [];
 
     public ScopePlugin(IDelegateFactory delegateFactory, IServiceProvider serviceProvider)
     {

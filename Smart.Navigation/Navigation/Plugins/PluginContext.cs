@@ -8,7 +8,7 @@ public sealed class PluginContext : IPluginContext
     {
         get
         {
-            store ??= new Dictionary<Type, object?>();
+            store ??= [];
             return store;
         }
     }

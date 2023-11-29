@@ -11,7 +11,6 @@
     <PackageId>Usa.Smart.Navigation.Windows</PackageId>
     <Title>Smart.Navigation.Windows</Title>
     <Description>Smart navigation library wpd provider</Description>
-    <Summary>Smart navigation library wpd provider</Summary>
     <PackageTags>smart navigation wpf mvvm</PackageTags>
   </PropertyGroup>
 

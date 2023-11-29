@@ -2,7 +2,7 @@ namespace Smart.Navigation.Mappers;
 
 public sealed class IdViewMapper : IViewMapper, IIdViewRegister
 {
-    private readonly Dictionary<object, ViewDescriptor> descriptors = new();
+    private readonly Dictionary<object, ViewDescriptor> descriptors = [];
 
     private readonly ITypeConstraint constraint;
 

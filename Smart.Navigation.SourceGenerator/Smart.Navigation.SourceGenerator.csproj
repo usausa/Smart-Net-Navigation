@@ -20,7 +20,6 @@
     <PackageId>Usa.Smart.Navigation.SourceGenerator</PackageId>
     <Title>Smart.Navigation.SourceGenerator</Title>
     <Description>Smart navigation library source generator</Description>
-    <Summary>Smart navigation library source generator</Summary>
     <PackageTags>smart navigation</PackageTags>
   </PropertyGroup>
 

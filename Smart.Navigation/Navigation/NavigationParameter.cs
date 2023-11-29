@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 public class NavigationParameter : INavigationParameter
 {
-    private readonly Dictionary<string, object?> values = new();
+    private readonly Dictionary<string, object?> values = [];
 
     public T GetValue<T>(string key)
     {

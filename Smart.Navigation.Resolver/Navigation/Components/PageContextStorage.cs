@@ -6,12 +6,12 @@ public class PageContextStorage
     {
         private Dictionary<int, object>? map;
 
-        public Dictionary<int, object> Map => map ??= new();
+        public Dictionary<int, object> Map => map ??= [];
 
         public int Counter { get; set; }
     }
 
-    private readonly Dictionary<string, ScopeEntry> entries = new();
+    private readonly Dictionary<string, ScopeEntry> entries = [];
 
     public void Push(string name)
     {

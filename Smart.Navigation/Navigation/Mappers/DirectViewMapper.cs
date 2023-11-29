@@ -2,7 +2,7 @@ namespace Smart.Navigation.Mappers;
 
 public sealed class DirectViewMapper : IViewMapper
 {
-    private readonly Dictionary<Type, ViewDescriptor> descriptors = new();
+    private readonly Dictionary<Type, ViewDescriptor> descriptors = [];
 
     private readonly ITypeConstraint constraint;
 

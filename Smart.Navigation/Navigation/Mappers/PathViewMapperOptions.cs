@@ -4,7 +4,7 @@ using System.Reflection;
 
 public class PathViewMapperOptions
 {
-    private readonly List<Assembly> assemblies = new();
+    private readonly List<Assembly> assemblies = [];
 
     public string Root { get; set; } = string.Empty;
 

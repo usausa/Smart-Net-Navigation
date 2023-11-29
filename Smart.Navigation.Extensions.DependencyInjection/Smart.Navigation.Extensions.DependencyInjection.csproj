@@ -10,7 +10,6 @@
     <PackageId>Usa.Smart.Navigation.Extensions.DependencyInjection</PackageId>
     <Title>Usa.Smart.Navigation.Extensions.DependencyInjection</Title>
     <Description>Smart navigation library depenency injection extensions</Description>
-    <Summary>Smart navigation library depenency injection extensions</Summary>
     <PackageTags>smart navigation ioc di dependencyinjection</PackageTags>
   </PropertyGroup>
 

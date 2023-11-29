@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Smart.Navigation Rules" Description="Smart.Navigation Rules" ToolsVersion="16.0">
+<RuleSet Name="Smart.Navigation Rules" Description="Smart.Navigation Rules" ToolsVersion="17.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
     <Rule Id="SA1005" Action="Hidden" />
     <Rule Id="SA1009" Action="Hidden" />
+    <!-- https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3687 -->
+    <Rule Id="SA1010" Action="Hidden" />
     <Rule Id="SA1101" Action="Hidden" />
     <Rule Id="SA1111" Action="Hidden" />
     <Rule Id="SA1121" Action="Hidden" />

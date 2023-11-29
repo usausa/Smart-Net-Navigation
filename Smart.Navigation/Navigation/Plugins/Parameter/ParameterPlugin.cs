@@ -7,7 +7,7 @@ using Smart.Reflection;
 
 public class ParameterPlugin : PluginBase
 {
-    private readonly Dictionary<Type, ParameterProperty[]> typeProperties = new();
+    private readonly Dictionary<Type, ParameterProperty[]> typeProperties = [];
 
     private readonly IDelegateFactory delegateFactory;
 

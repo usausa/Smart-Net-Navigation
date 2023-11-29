@@ -18,9 +18,9 @@ public partial class MainForm : Form
     private readonly Navigator navigator;
 #pragma warning restore CA2213
 
-    private readonly Dictionary<Keys, FunctionKey> enabledFunctions = new();
+    private readonly Dictionary<Keys, FunctionKey> enabledFunctions = [];
 
-    private readonly List<Button> functionButtons = new();
+    private readonly List<Button> functionButtons = [];
 
     public MainForm()
     {
