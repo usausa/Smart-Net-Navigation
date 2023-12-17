@@ -8,7 +8,7 @@ using Example.WindowsFormsApp.Services;
 using Smart.Navigation;
 using Smart.Resolver;
 
-public partial class MainForm : Form
+public sealed partial class MainForm : Form
 {
 #pragma warning disable CA2213
     private readonly SmartResolver resolver;

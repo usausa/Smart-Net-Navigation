@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Mappers;
 
-public class PathViewMapper : IViewMapper
+public sealed class PathViewMapper : IViewMapper
 {
     private readonly Dictionary<string, ViewDescriptor> descriptors = [];
 

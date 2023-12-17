@@ -2,9 +2,7 @@ namespace Smart.Navigation.Strategies;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class PushStrategyTest
+public sealed class PushStrategyTest
 {
     // ------------------------------------------------------------
     // Navigate
@@ -136,15 +134,15 @@ public class PushStrategyTest
         Form3
     }
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
     }
 
-    public class Form3 : MockForm
+    public sealed class Form3 : MockForm
     {
     }
 }

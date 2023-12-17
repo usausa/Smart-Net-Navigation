@@ -7,7 +7,7 @@
 namespace System.Runtime.CompilerServices
 {
     // For compatibility
-    public class IsExternalInit
+    public sealed class IsExternalInit
     {
     }
 }

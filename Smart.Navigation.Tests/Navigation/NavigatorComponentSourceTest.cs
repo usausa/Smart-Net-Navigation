@@ -2,8 +2,6 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-using Xunit;
-
 public static class NavigatorComponentSourceTest
 {
     // ------------------------------------------------------------
@@ -28,7 +26,7 @@ public static class NavigatorComponentSourceTest
         void Something();
     }
 
-    public class DummyComponent : IDummyComponent
+    public sealed class DummyComponent : IDummyComponent
     {
         public void Something()
         {

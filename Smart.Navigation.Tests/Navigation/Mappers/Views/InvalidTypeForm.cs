@@ -1,5 +1,5 @@
 namespace Smart.Navigation.Mappers.Views;
 
-public class InvalidTypeForm
+public sealed class InvalidTypeForm
 {
 }

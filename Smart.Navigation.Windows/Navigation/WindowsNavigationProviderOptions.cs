@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-public class WindowsNavigationProviderOptions
+public sealed class WindowsNavigationProviderOptions
 {
     public bool FitToParent { get; set; } = true;
 

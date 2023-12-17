@@ -8,7 +8,7 @@ using Smart.Navigation.Attributes;
 using Smart.Resolver.Attributes;
 
 [View(ViewId.EditList)]
-public partial class DataListView : AppViewBase
+public sealed partial class DataListView : AppViewBase
 {
     public override string Title => "Data List";
 

@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Mappers;
 
-public class IdViewMapperOptions
+public sealed class IdViewMapperOptions
 {
     public Action<IIdViewRegister> SetupAction { get; }
 

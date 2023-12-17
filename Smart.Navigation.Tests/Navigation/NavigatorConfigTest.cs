@@ -9,8 +9,6 @@ using Smart.Navigation.Mappers;
 using Smart.Navigation.Plugins;
 using Smart.Reflection;
 
-using Xunit;
-
 public static class NavigatorConfigTest
 {
     // ------------------------------------------------------------
@@ -197,7 +195,7 @@ public static class NavigatorConfigTest
 
         var components = ((INavigatorConfig)config).ResolveComponents();
 
-        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x.GetType() == typeof(DummyPlugin));
+        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x is DummyPlugin);
         Assert.NotNull(plugin);
     }
 
@@ -209,7 +207,7 @@ public static class NavigatorConfigTest
 
         var components = ((INavigatorConfig)config).ResolveComponents();
 
-        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x.GetType() == typeof(DummyPlugin));
+        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x is DummyPlugin);
         Assert.NotNull(plugin);
     }
 
@@ -245,11 +243,11 @@ public static class NavigatorConfigTest
     // Utility
     // ------------------------------------------------------------
 
-    public class Model
+    public sealed class Model
     {
     }
 
-    public class DummyViewMapper : IViewMapper
+    public sealed class DummyViewMapper : IViewMapper
     {
         public ViewDescriptor FindDescriptor(object id)
         {
@@ -261,7 +259,7 @@ public static class NavigatorConfigTest
         }
     }
 
-    public class DummyTypeConstraint : ITypeConstraint
+    public sealed class DummyTypeConstraint : ITypeConstraint
     {
         public bool IsValidType(Type type)
         {
@@ -269,11 +267,11 @@ public static class NavigatorConfigTest
         }
     }
 
-    public class DummyPlugin : PluginBase
+    public sealed class DummyPlugin : PluginBase
     {
     }
 
-    public class DummyDelegateFactory : IDelegateFactory
+    public sealed class DummyDelegateFactory : IDelegateFactory
     {
         public bool IsCodegenRequired => false;
 

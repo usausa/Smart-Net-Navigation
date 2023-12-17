@@ -2,9 +2,7 @@ namespace Smart.Navigation.Strategies;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class GroupPopStrategyTest
+public sealed class GroupPopStrategyTest
 {
     // ------------------------------------------------------------
     // Navigate
@@ -268,41 +266,41 @@ public class GroupPopStrategyTest
         C
     }
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
     }
 
-    public class Form2 : MockForm
-    {
-    }
-
-    [Group(Group.A)]
-    public class FormA1 : MockForm
+    public sealed class Form2 : MockForm
     {
     }
 
     [Group(Group.A)]
-    public class FormA2 : MockForm
+    public sealed class FormA1 : MockForm
+    {
+    }
+
+    [Group(Group.A)]
+    public sealed class FormA2 : MockForm
     {
     }
 
     [Group(Group.B)]
-    public class FormB1 : MockForm
+    public sealed class FormB1 : MockForm
     {
     }
 
     [Group(Group.B)]
-    public class FormB2 : MockForm
+    public sealed class FormB2 : MockForm
     {
     }
 
     [Group(Group.C)]
-    public class FormC1 : MockForm
+    public sealed class FormC1 : MockForm
     {
     }
 
     [Group(Group.C)]
-    public class FormC2 : MockForm
+    public sealed class FormC2 : MockForm
     {
     }
 }

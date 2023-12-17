@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-public class WindowsNavigationProvider : INavigationProvider
+public sealed class WindowsNavigationProvider : INavigationProvider
 {
     private readonly IContainerResolver resolver;
 

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using Microsoft.Xaml.Behaviors;
 
 [TypeConstraint(typeof(Canvas))]
-public class NavigationContainerBehavior : Behavior<Canvas>
+public sealed class NavigationContainerBehavior : Behavior<Canvas>
 {
     public static readonly DependencyProperty NavigatorProperty = DependencyProperty.Register(
         nameof(Navigator),

@@ -2,6 +2,6 @@ namespace Smart.Navigation.Mappers.Views.OtherChildren;
 
 using Smart.Mock;
 
-public class OtherChildForm : MockForm
+public sealed class OtherChildForm : MockForm
 {
 }

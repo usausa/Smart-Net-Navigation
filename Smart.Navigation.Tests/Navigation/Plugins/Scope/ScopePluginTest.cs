@@ -2,9 +2,7 @@ namespace Smart.Navigation.Plugins.Scope;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class ScopePluginTest
+public sealed class ScopePluginTest
 {
     [Fact]
     public static void Scope()
@@ -120,65 +118,65 @@ public class ScopePluginTest
         Assert.Equal(form2.ImportData, form1.ExportData);
     }
 
-    public class Data1Form : MockForm
+    public sealed class Data1Form : MockForm
     {
     }
 
-    public class Data2Form : MockForm
-    {
-        [Scope]
-        public ScopeData Data { get; set; } = default!;
-    }
-
-    public class Data3Form : MockForm
+    public sealed class Data2Form : MockForm
     {
         [Scope]
         public ScopeData Data { get; set; } = default!;
     }
 
-    public class Object1Form : MockForm
+    public sealed class Data3Form : MockForm
+    {
+        [Scope]
+        public ScopeData Data { get; set; } = default!;
+    }
+
+    public sealed class Object1Form : MockForm
     {
         [Scope(typeof(ScopeObject))]
         public IScopeObject Object { get; set; } = default!;
     }
 
-    public class Object2Form : MockForm
+    public sealed class Object2Form : MockForm
     {
         [Scope]
         public ScopeObject Object { get; set; } = default!;
     }
 
-    public class Object3Form : MockForm
+    public sealed class Object3Form : MockForm
     {
     }
 
-    public class Push1Form : MockForm
+    public sealed class Push1Form : MockForm
     {
     }
 
-    public class Push2Form : MockForm
-    {
-        [Scope]
-        public ScopeData Data { get; set; } = default!;
-    }
-
-    public class Push3Form : MockForm
-    {
-    }
-
-    public class Push4Form : MockForm
+    public sealed class Push2Form : MockForm
     {
         [Scope]
         public ScopeData Data { get; set; } = default!;
     }
 
-    public class Named1Form : MockForm
+    public sealed class Push3Form : MockForm
+    {
+    }
+
+    public sealed class Push4Form : MockForm
+    {
+        [Scope]
+        public ScopeData Data { get; set; } = default!;
+    }
+
+    public sealed class Named1Form : MockForm
     {
         [Scope("Data")]
         public ScopeData ExportData { get; set; } = default!;
     }
 
-    public class Named2Form : MockForm
+    public sealed class Named2Form : MockForm
     {
         [Scope("Data")]
         public ScopeData ImportData { get; set; } = default!;
@@ -206,7 +204,7 @@ public class ScopePluginTest
         int Value { get; set; }
     }
 
-    public class ScopeObject : IScopeObject
+    public sealed class ScopeObject : IScopeObject
     {
         public int Value { get; set; }
     }

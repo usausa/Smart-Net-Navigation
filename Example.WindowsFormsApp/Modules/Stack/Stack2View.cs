@@ -4,7 +4,7 @@ using Smart.Navigation;
 using Smart.Navigation.Attributes;
 
 [View(ViewId.Stack2)]
-public partial class Stack2View : AppViewBase
+public sealed partial class Stack2View : AppViewBase
 {
     public override string Title => "Stack2View";
 

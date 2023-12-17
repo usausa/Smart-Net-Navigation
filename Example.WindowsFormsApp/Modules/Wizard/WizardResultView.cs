@@ -5,7 +5,7 @@ using Smart.Navigation.Attributes;
 using Smart.Navigation.Plugins.Scope;
 
 [View(ViewId.WizardResult)]
-public partial class WizardResultView : AppViewBase
+public sealed partial class WizardResultView : AppViewBase
 {
     public override string Title => "Result";
 

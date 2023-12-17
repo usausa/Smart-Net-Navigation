@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-public class NavigationContainerBehavior : Behavior<AbsoluteLayout>
+public sealed class NavigationContainerBehavior : Behavior<AbsoluteLayout>
 {
     public static readonly BindableProperty NavigatorProperty =
         BindableProperty.Create(nameof(Navigator), typeof(INavigator), typeof(NavigationContainerBehavior));

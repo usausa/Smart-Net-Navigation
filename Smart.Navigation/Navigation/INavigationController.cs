@@ -6,8 +6,9 @@ public interface INavigationController
 {
     IViewMapper ViewMapper { get; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1002:DoNotExposeGenericLists", Justification = "Ignore")]
+#pragma warning disable CA1002
     List<ViewStackInfo> ViewStack { get; }
+#pragma warning restore CA1002
 
     object CreateView(Type type);
 

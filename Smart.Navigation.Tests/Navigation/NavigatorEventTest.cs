@@ -3,9 +3,7 @@ namespace Smart.Navigation;
 using Smart.Mock;
 using Smart.Resolver;
 
-using Xunit;
-
-public class NavigatorEventTest
+public sealed class NavigatorEventTest
 {
     // ------------------------------------------------------------
     // EventArgs
@@ -50,15 +48,15 @@ public class NavigatorEventTest
         Assert.Equal(typeof(EventArgs2WindowViewModel), eventArgs.Value.ToTarget.GetType());
     }
 
-    public class EventArgs1WindowViewModel
+    public sealed class EventArgs1WindowViewModel
     {
     }
 
-    public class EventArgs2WindowViewModel
+    public sealed class EventArgs2WindowViewModel
     {
     }
 
-    public class EventArgs1Window : MockWindow
+    public sealed class EventArgs1Window : MockWindow
     {
         public EventArgs1Window(EventArgs1WindowViewModel vm)
         {
@@ -66,7 +64,7 @@ public class NavigatorEventTest
         }
     }
 
-    public class EventArgs2Window : MockWindow
+    public sealed class EventArgs2Window : MockWindow
     {
         public EventArgs2Window(EventArgs2WindowViewModel vm)
         {
@@ -132,15 +130,15 @@ public class NavigatorEventTest
         Assert.Equal("Event2Form.OnNavigatedTo", recorder.Events[2]);
     }
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
     }
 
-    public class Event1Form : MockForm, INavigationEventSupport
+    public sealed class Event1Form : MockForm, INavigationEventSupport
     {
         private readonly EventRecorder recorder;
 
@@ -165,7 +163,7 @@ public class NavigatorEventTest
         }
     }
 
-    public class Event2Form : MockForm, INavigationEventSupport
+    public sealed class Event2Form : MockForm, INavigationEventSupport
     {
         private readonly EventRecorder recorder;
 
@@ -223,7 +221,7 @@ public class NavigatorEventTest
         Assert.Equal("Event2WindowViewModel.OnNavigatedTo", recorder.Events[2]);
     }
 
-    public class Event1WindowViewModel : INavigationEventSupport
+    public sealed class Event1WindowViewModel : INavigationEventSupport
     {
         private readonly EventRecorder recorder;
 
@@ -248,7 +246,7 @@ public class NavigatorEventTest
         }
     }
 
-    public class Event2WindowViewModel : INavigationEventSupport
+    public sealed class Event2WindowViewModel : INavigationEventSupport
     {
         private readonly EventRecorder recorder;
 
@@ -273,7 +271,7 @@ public class NavigatorEventTest
         }
     }
 
-    public class Event1Window : MockWindow
+    public sealed class Event1Window : MockWindow
     {
         public Event1Window(Event1WindowViewModel vm)
         {
@@ -281,7 +279,7 @@ public class NavigatorEventTest
         }
     }
 
-    public class Event2Window : MockWindow
+    public sealed class Event2Window : MockWindow
     {
         public Event2Window(Event2WindowViewModel vm)
         {

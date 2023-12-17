@@ -2,9 +2,7 @@ namespace Smart.Navigation.Mappers;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class DirectViewMapperTest
+public sealed class DirectViewMapperTest
 {
     [Fact]
     public static void DirectViewMapper()
@@ -52,11 +50,11 @@ public class DirectViewMapperTest
     // Mock
     // ------------------------------------------------------------
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
     }
 }

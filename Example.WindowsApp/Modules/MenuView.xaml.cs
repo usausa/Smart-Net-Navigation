@@ -1,6 +1,6 @@
 namespace Example.WindowsApp.Modules;
 
-public partial class MenuView
+public sealed partial class MenuView
 {
     public MenuView()
     {

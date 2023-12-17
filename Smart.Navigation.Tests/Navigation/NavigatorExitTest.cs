@@ -2,9 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class NavigatorExitTest
+public sealed class NavigatorExitTest
 {
     [Fact]
     public static void Exit()
@@ -55,15 +53,15 @@ public class NavigatorExitTest
         Assert.False(form3.IsOpen);
     }
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
     }
 
-    public class Form3 : MockForm
+    public sealed class Form3 : MockForm
     {
     }
 }

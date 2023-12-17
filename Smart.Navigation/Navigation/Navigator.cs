@@ -209,7 +209,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
             (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
 
-            // End pre process
+            // End pre-process
             Navigating?.Invoke(this, args);
 
             // Update stack

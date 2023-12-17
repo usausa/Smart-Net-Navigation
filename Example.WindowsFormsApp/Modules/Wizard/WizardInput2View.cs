@@ -5,7 +5,7 @@ using Smart.Navigation.Attributes;
 using Smart.Navigation.Plugins.Scope;
 
 [View(ViewId.WizardInput2)]
-public partial class WizardInput2View : AppViewBase
+public sealed partial class WizardInput2View : AppViewBase
 {
     public override string Title => "Input2";
 

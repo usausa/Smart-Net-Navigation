@@ -8,7 +8,7 @@ using Smart.Navigation;
 using Smart.Resolver;
 using Smart.Windows.Resolver;
 
-public partial class App
+public sealed partial class App
 {
     private SmartResolver resolver = default!;
 

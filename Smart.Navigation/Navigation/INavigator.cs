@@ -28,8 +28,9 @@ public interface INavigator : INotifyPropertyChanged
 
     // Exit
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:IdentifiersShouldNotMatchKeywords", Justification = "Ignore")]
+#pragma warning disable CA1716
     void Exit();
+#pragma warning restore CA1716
 
     // Navigate
 

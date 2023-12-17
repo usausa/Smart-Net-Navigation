@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-public class NavigationParameter : INavigationParameter
+public sealed class NavigationParameter : INavigationParameter
 {
     private readonly Dictionary<string, object?> values = [];
 

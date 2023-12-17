@@ -2,9 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class NavigatorAwareTest
+public sealed class NavigatorAwareTest
 {
     [Fact]
     public static void NavigatorAware()
@@ -21,7 +19,7 @@ public class NavigatorAwareTest
         Assert.Same(navigator, awareForm.Navigator);
     }
 
-    public class AwareForm : MockForm, INavigatorAware
+    public sealed class AwareForm : MockForm, INavigatorAware
     {
         public INavigator Navigator { get; set; } = default!;
     }

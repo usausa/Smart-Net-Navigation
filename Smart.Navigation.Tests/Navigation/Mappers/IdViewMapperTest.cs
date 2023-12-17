@@ -5,9 +5,7 @@ using System.Reflection;
 using Smart.Mock;
 using Smart.Navigation.Attributes;
 
-using Xunit;
-
-public class IdViewMapperTest
+public sealed class IdViewMapperTest
 {
     [Fact]
     public static void UseIdViewMapper()
@@ -59,12 +57,12 @@ public class IdViewMapperTest
     }
 
     [View(ViewId.Form1)]
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
     }
 
     [View(ViewId.Form2)]
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
     }
 }

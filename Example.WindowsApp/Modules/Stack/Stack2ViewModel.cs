@@ -3,7 +3,7 @@ namespace Example.WindowsApp.Modules.Stack;
 using Smart.Navigation;
 using Smart.Windows.Input;
 
-public class Stack2ViewModel : AppViewModelBase
+public sealed class Stack2ViewModel : AppViewModelBase
 {
     public AsyncCommand<int> Pop { get; }
 

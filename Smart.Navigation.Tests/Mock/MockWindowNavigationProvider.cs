@@ -2,7 +2,7 @@ namespace Smart.Mock;
 
 using Smart.Navigation;
 
-public class MockWindowNavigationProvider : INavigationProvider
+public sealed class MockWindowNavigationProvider : INavigationProvider
 {
     public object ResolveTarget(object view)
     {

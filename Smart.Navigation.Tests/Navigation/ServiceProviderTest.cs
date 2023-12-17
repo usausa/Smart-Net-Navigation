@@ -5,8 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Smart.Mock;
 using Smart.Navigation.Plugins.Scope;
 
-using Xunit;
-
 public static class ServiceProviderTest
 {
     [Fact]
@@ -14,7 +12,7 @@ public static class ServiceProviderTest
     {
         // prepare
         var services = new ServiceCollection();
-        services.AddSingleton<IService, ServiceImpl>();
+        services.AddSingleton<IService, ServiceImplement>();
         services.AddSingleton<Setting>();
         services.AddTransient<ScopeObject>();
         services.AddTransient<Form1>();
@@ -39,7 +37,7 @@ public static class ServiceProviderTest
         Assert.Same(form2.Setting, form1.ScopeObject.Setting);
     }
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
         public IService Service { get; }
 
@@ -52,7 +50,7 @@ public static class ServiceProviderTest
         }
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
         public IService Service { get; }
 
@@ -70,8 +68,7 @@ public static class ServiceProviderTest
         void Process();
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
-    public class ServiceImpl : IService
+    public sealed class ServiceImplement : IService
     {
         public void Process()
         {
@@ -79,11 +76,11 @@ public static class ServiceProviderTest
         }
     }
 
-    public class Setting
+    public sealed class Setting
     {
     }
 
-    public class ScopeObject
+    public sealed class ScopeObject
     {
         public Setting Setting { get; }
 

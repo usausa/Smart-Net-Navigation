@@ -2,9 +2,7 @@ namespace Smart.Navigation.Strategies;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class PopAndForwardStrategyTest
+public sealed class PopAndForwardStrategyTest
 {
     // ------------------------------------------------------------
     // Navigate
@@ -319,19 +317,19 @@ public class PopAndForwardStrategyTest
     // Mock
     // ------------------------------------------------------------
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
     }
 
-    public class Form3 : MockForm
+    public sealed class Form3 : MockForm
     {
     }
 
-    public class Form4 : MockForm
+    public sealed class Form4 : MockForm
     {
     }
 }

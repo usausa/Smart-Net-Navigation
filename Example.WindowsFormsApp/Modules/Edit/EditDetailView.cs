@@ -9,7 +9,7 @@ using Smart.Resolver.Attributes;
 
 [View(ViewId.EditDetailNew)]
 [View(ViewId.EditDetailUpdate)]
-public partial class DataDetailView : AppViewBase
+public sealed partial class DataDetailView : AppViewBase
 {
     private bool update;
 
@@ -42,12 +42,12 @@ public partial class DataDetailView : AppViewBase
         Navigator.Forward(ViewId.Menu);
     }
 
-    private void OnPrevButtonClick(object sender, System.EventArgs e)
+    private void OnPrevButtonClick(object sender, EventArgs e)
     {
         Navigator.Forward(ViewId.EditList);
     }
 
-    private void OnUpdateButtonClick(object sender, System.EventArgs e)
+    private void OnUpdateButtonClick(object sender, EventArgs e)
     {
         if (String.IsNullOrEmpty(NameText.Text))
         {

@@ -2,7 +2,7 @@ namespace Example.WindowsFormsApp.Services;
 
 using Example.WindowsFormsApp.Models;
 
-public class DataService
+public sealed class DataService
 {
     private readonly List<DataEntity> entities =
     [

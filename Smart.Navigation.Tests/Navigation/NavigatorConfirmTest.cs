@@ -2,9 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class NavigatorConfirmTest
+public sealed class NavigatorConfirmTest
 {
     [Fact]
     public static void CanceledByEvent()
@@ -68,11 +66,11 @@ public class NavigatorConfirmTest
         Assert.True(await navigator.ForwardAsync(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", true)));
     }
 
-    public class ToForm : MockForm
+    public sealed class ToForm : MockForm
     {
     }
 
-    public class CancelForm : MockForm, IConfirmRequest
+    public sealed class CancelForm : MockForm, IConfirmRequest
     {
         public bool CanNavigate(INavigationContext context)
         {
@@ -80,7 +78,7 @@ public class NavigatorConfirmTest
         }
     }
 
-    public class CancelAsyncForm : MockForm, IConfirmRequestAsync
+    public sealed class CancelAsyncForm : MockForm, IConfirmRequestAsync
     {
         public async Task<bool> CanNavigateAsync(INavigationContext context)
         {

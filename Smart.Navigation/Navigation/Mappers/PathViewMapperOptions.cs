@@ -2,7 +2,7 @@ namespace Smart.Navigation.Mappers;
 
 using System.Reflection;
 
-public class PathViewMapperOptions
+public sealed class PathViewMapperOptions
 {
     private readonly List<Assembly> assemblies = [];
 

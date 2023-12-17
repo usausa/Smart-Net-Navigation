@@ -5,7 +5,7 @@ using Smart.Navigation;
 using Smart.Navigation.Plugins.Scope;
 using Smart.Windows.Input;
 
-public class WizardInput2ViewModel : AppViewModelBase
+public sealed class WizardInput2ViewModel : AppViewModelBase
 {
     [Scope]
     public NotificationValue<WizardContext> Context { get; } = new();

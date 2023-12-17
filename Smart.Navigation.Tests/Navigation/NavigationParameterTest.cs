@@ -1,7 +1,5 @@
 namespace Smart.Navigation;
 
-using Xunit;
-
 public static class NavigationParameterTest
 {
     [Fact]

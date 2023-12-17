@@ -2,9 +2,7 @@ namespace Smart.Navigation.Plugins.Parameter;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class ParameterPluginTest
+public sealed class ParameterPluginTest
 {
     [Fact]
     public static void Parameter()
@@ -102,7 +100,7 @@ public class ParameterPluginTest
         Assert.Equal(456, convertForm2.Value2);
     }
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
         [Parameter]
         public int IntParameter { get; set; }
@@ -111,7 +109,7 @@ public class ParameterPluginTest
         public string? StringParameter { get; set; }
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
         [Parameter]
         public int IntParameter { get; set; }
@@ -120,7 +118,7 @@ public class ParameterPluginTest
         public string? StringParameter { get; set; }
     }
 
-    public class OneWayForm : MockForm
+    public sealed class OneWayForm : MockForm
     {
         [Parameter(Directions.Import)]
         public int IntParameter { get; set; }
@@ -129,7 +127,7 @@ public class ParameterPluginTest
         public string? StringParameter { get; set; }
     }
 
-    public class Named1Form : MockForm
+    public sealed class Named1Form : MockForm
     {
         [Parameter("Parameter1")]
         public int Value1 { get; set; }
@@ -138,7 +136,7 @@ public class ParameterPluginTest
         public string? Parameter2 { get; set; }
     }
 
-    public class Named2Form : MockForm
+    public sealed class Named2Form : MockForm
     {
         [Parameter]
         public int Parameter1 { get; set; }
@@ -147,7 +145,7 @@ public class ParameterPluginTest
         public string? Value2 { get; set; }
     }
 
-    public class Convert1Form : MockForm
+    public sealed class Convert1Form : MockForm
     {
         [Parameter]
         public int Value1 { get; set; }
@@ -156,7 +154,7 @@ public class ParameterPluginTest
         public string? Value2 { get; set; }
     }
 
-    public class Convert2Form : MockForm
+    public sealed class Convert2Form : MockForm
     {
         [Parameter]
         public string? Value1 { get; set; }

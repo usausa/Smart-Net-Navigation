@@ -2,9 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-using Xunit;
-
-public class NavigatorDisposeTest
+public sealed class NavigatorDisposeTest
 {
     [Fact]
     public static void NavigatorDispose()

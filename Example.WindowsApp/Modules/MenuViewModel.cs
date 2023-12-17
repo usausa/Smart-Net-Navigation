@@ -3,7 +3,7 @@ namespace Example.WindowsApp.Modules;
 using Smart.Navigation;
 using Smart.Windows.Input;
 
-public class MenuViewModel : AppViewModelBase
+public sealed class MenuViewModel : AppViewModelBase
 {
     public AsyncCommand<Type> Forward { get; }
 

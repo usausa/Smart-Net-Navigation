@@ -6,7 +6,7 @@ using Smart.Navigation;
 using Smart.Navigation.Attributes;
 
 [View(ViewId.Menu)]
-public partial class MenuView : AppViewBase
+public sealed partial class MenuView : AppViewBase
 {
     public override string Title => "Menu";
 

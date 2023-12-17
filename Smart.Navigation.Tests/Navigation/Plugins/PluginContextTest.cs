@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Plugins;
 
-using Xunit;
-
 public static class PluginContextTest
 {
     [Fact]

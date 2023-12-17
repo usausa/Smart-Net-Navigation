@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 using Microsoft.Maui.Layouts;
 
-public class MauiNavigationProvider : INavigationProvider
+public sealed class MauiNavigationProvider : INavigationProvider
 {
     private readonly IContainerResolver resolver;
 

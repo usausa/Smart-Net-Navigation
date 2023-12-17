@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-public class MauiNavigationProviderOptions
+public sealed class MauiNavigationProviderOptions
 {
     public bool RestoreFocus { get; set; } = true;
 }

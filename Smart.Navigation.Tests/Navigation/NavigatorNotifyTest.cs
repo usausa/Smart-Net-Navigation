@@ -3,9 +3,7 @@ namespace Smart.Navigation;
 using Smart.Mock;
 using Smart.Resolver;
 
-using Xunit;
-
-public class NavigatorNotifyTest
+public sealed class NavigatorNotifyTest
 {
     // ------------------------------------------------------------
     // View
@@ -41,7 +39,7 @@ public class NavigatorNotifyTest
         navigator.Notify(1);
     }
 
-    public class NotifyForm : MockForm, INotifySupport<int>
+    public sealed class NotifyForm : MockForm, INotifySupport<int>
     {
         public int IntParameter { get; private set; }
 
@@ -51,7 +49,7 @@ public class NavigatorNotifyTest
         }
     }
 
-    public class UnsupportedForm : MockForm
+    public sealed class UnsupportedForm : MockForm
     {
     }
 
@@ -80,7 +78,7 @@ public class NavigatorNotifyTest
         Assert.Equal(1, notifyViewModel.IntParameter);
     }
 
-    public class NotifyWindowViewModel : INotifySupport<int>
+    public sealed class NotifyWindowViewModel : INotifySupport<int>
     {
         public int IntParameter { get; private set; }
 
@@ -90,7 +88,7 @@ public class NavigatorNotifyTest
         }
     }
 
-    public class NotifyWindow : MockWindow
+    public sealed class NotifyWindow : MockWindow
     {
         public NotifyWindow(NotifyWindowViewModel vm)
         {

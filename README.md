@@ -139,13 +139,13 @@ public enum ViewId
 }
 
 [View(ViewId.ViewList)]
-public class ViewList
+public sealed class ViewList
 {
 }
 
 [View(ViewId.ViewDetailNew)]
 [View(ViewId.ViewDetailUpdate)]
-public class ViewDetail
+public sealed class ViewDetail
 {
 }
 
@@ -190,18 +190,18 @@ NavigatorConfig UsePathViewMapper(Action<PathViewMapperOptions> action)
 // Usage
 namespace Example.Views
 {
-    public class ParentView
+    public sealed class ParentView
     {
     }
 }
 
 namespace Example.Views.Children
 {
-    public class Child1View
+    public sealed class Child1View
     {
     }
 
-    public class Child2View
+    public sealed class Child2View
     {
     }
 }
@@ -532,13 +532,13 @@ public interface INavigatorAware
 Previous parameter is set next.
 
 ```csharp
-public class View1
+public sealed class View1
 {
     [Parameter]
     public int IntParameter { get; set; }
 }
 
-public class View2
+public sealed class View2
 {
     [Parameter]
     public int IntParameter { get; set; }
@@ -571,17 +571,17 @@ public sealed class ScopeData : IInitializable, IDisposable
 ...
 }
 
-public class Data1View
+public sealed class Data1View
 {
 }
 
-public class Data2View
+public sealed class Data2View
 {
     [Scope]
     public ScopeData Data { get; set; }
 }
 
-public class Data3View
+public sealed class Data3View
 {
     [Scope]
     public ScopeData Data { get; set; }

@@ -1,6 +1,6 @@
 namespace Example.WindowsFormsApp.Models;
 
-public class DataEntity
+public sealed class DataEntity
 {
     public int Id { get; set; }
 

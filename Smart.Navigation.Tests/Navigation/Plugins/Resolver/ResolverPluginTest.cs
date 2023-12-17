@@ -3,9 +3,7 @@ namespace Smart.Navigation.Plugins.Resolver;
 using Smart.Mock;
 using Smart.Resolver;
 
-using Xunit;
-
-public class ResolverPluginTest
+public sealed class ResolverPluginTest
 {
     private const string ScopeName = nameof(ScopeName);
 
@@ -143,12 +141,12 @@ public class ResolverPluginTest
         Assert.True(form4.ScopeObject.IsDisposed);
     }
 
-    public class Resolver1Form : MockForm
+    public sealed class Resolver1Form : MockForm
     {
     }
 
     [PageContext(ScopeName)]
-    public class Resolver2Form : MockForm
+    public sealed class Resolver2Form : MockForm
     {
         public ScopeObject ScopeObject { get; }
 
@@ -159,7 +157,7 @@ public class ResolverPluginTest
     }
 
     [PageContext(ScopeName)]
-    public class Resolver3Form : MockForm
+    public sealed class Resolver3Form : MockForm
     {
         public ScopeObject ScopeObject { get; }
 
@@ -169,12 +167,12 @@ public class ResolverPluginTest
         }
     }
 
-    public class Push1Form : MockForm
+    public sealed class Push1Form : MockForm
     {
     }
 
     [PageContext(ScopeName)]
-    public class Push2Form : MockForm
+    public sealed class Push2Form : MockForm
     {
         public ScopeObject ScopeObject { get; }
 
@@ -184,12 +182,12 @@ public class ResolverPluginTest
         }
     }
 
-    public class Push3Form : MockForm
+    public sealed class Push3Form : MockForm
     {
     }
 
     [PageContext(ScopeName)]
-    public class Push4Form : MockForm
+    public sealed class Push4Form : MockForm
     {
         public ScopeObject ScopeObject { get; }
 

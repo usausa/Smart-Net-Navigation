@@ -4,8 +4,6 @@ using Smart.Mock;
 using Smart.Navigation.Plugins.Scope;
 using Smart.Resolver;
 
-using Xunit;
-
 public static class SmartResolverTest
 {
     [Fact]
@@ -14,7 +12,7 @@ public static class SmartResolverTest
         // prepare
         var config = new ResolverConfig();
         config.UseAutoBinding();
-        config.Bind<IService>().To<ServiceImpl>().InSingletonScope();
+        config.Bind<IService>().To<ServiceImplement>().InSingletonScope();
         config.Bind<Setting>().ToSelf().InSingletonScope();
         config.AddNavigator(static c => c.UseMockFormProvider());
 
@@ -37,7 +35,7 @@ public static class SmartResolverTest
         Assert.Same(form2.Setting, form1.ScopeObject.Setting);
     }
 
-    public class Form1 : MockForm
+    public sealed class Form1 : MockForm
     {
         public IService Service { get; }
 
@@ -50,7 +48,7 @@ public static class SmartResolverTest
         }
     }
 
-    public class Form2 : MockForm
+    public sealed class Form2 : MockForm
     {
         public IService Service { get; }
 
@@ -68,8 +66,7 @@ public static class SmartResolverTest
         void Process();
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Ignore")]
-    public class ServiceImpl : IService
+    public sealed class ServiceImplement : IService
     {
         public void Process()
         {
@@ -77,11 +74,11 @@ public static class SmartResolverTest
         }
     }
 
-    public class Setting
+    public sealed class Setting
     {
     }
 
-    public class ScopeObject
+    public sealed class ScopeObject
     {
         public Setting Setting { get; }
 

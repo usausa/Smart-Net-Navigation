@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Components;
 
-public class PageContextStorage
+public sealed class PageContextStorage
 {
     private sealed class ScopeEntry
     {

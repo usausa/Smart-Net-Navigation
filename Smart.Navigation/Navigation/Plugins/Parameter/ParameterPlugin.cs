@@ -5,7 +5,7 @@ using System.Reflection;
 using Smart.Navigation.Components;
 using Smart.Reflection;
 
-public class ParameterPlugin : PluginBase
+public sealed class ParameterPlugin : PluginBase
 {
     private readonly Dictionary<Type, ParameterProperty[]> typeProperties = [];
 
