@@ -63,7 +63,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     public object? CurrentView => CurrentStack?.View;
 
-    public object? CurrentTarget => CurrentStack?.View.MapOrDefault(x => provider.ResolveTarget(x));
+    public object? CurrentTarget => CurrentStack?.View.MapOrDefault(provider.ResolveTarget);
 
     public bool Executing { get; private set; }
 
