@@ -13,7 +13,7 @@ public sealed class IdViewMapperTest
         // prepare
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseIdViewMapper(static r => r.AutoRegister(new[] { typeof(Form1), typeof(Form2) }))
+            .UseIdViewMapper(static r => r.AutoRegister([typeof(Form1), typeof(Form2)]))
             .ToNavigator();
 
         // test
