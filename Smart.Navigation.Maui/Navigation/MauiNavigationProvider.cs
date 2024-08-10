@@ -50,6 +50,8 @@ public sealed class MauiNavigationProvider : INavigationProvider
         v.BindingContext = null;
 
         container.Children.Remove(v);
+
+        Disconnect(v);
     }
 
     public void ActivateView(object view, object? parameter)
@@ -93,6 +95,19 @@ public sealed class MauiNavigationProvider : INavigationProvider
         foreach (var child in parent.GetVisualChildren())
         {
             Cleanup(child);
+        }
+    }
+
+    private static void Disconnect(IVisualTreeElement parent)
+    {
+        if (parent is VisualElement visualElement)
+        {
+            visualElement.Handler?.DisconnectHandler();
+        }
+
+        foreach (var child in parent.GetVisualChildren())
+        {
+            Disconnect(child);
         }
     }
 
