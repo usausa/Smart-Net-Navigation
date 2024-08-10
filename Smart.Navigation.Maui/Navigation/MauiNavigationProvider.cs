@@ -88,7 +88,6 @@ public sealed class MauiNavigationProvider : INavigationProvider
         {
             visualElement.Behaviors.Clear();
             visualElement.Triggers.Clear();
-            visualElement.Handler?.DisconnectHandler();
         }
 
         foreach (var child in parent.GetVisualChildren())
