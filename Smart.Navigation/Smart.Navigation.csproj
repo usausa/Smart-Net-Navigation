@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Converter" Version="2.3.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.3.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.3.8" />
   </ItemGroup>
 
 </Project>
