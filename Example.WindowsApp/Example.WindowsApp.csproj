@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="2.3.8" />
     <PackageReference Include="Usa.Smart.Reactive" Version="2.3.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.4.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.5.0" />
     <PackageReference Include="Usa.Smart.Windows" Version="2.7.0" />
     <PackageReference Include="Usa.Smart.Windows.Reactive" Version="2.7.0" />
   </ItemGroup>

@@ -15,7 +15,7 @@ public static class ResolverConfigExtensions
         return config;
     }
 
-    public static IBindingNamedWithSyntax InPageContextScope(this IBindingInSyntax syntax, string name)
+    public static IBindingConstraintWithSyntax InPageContextScope(this IBindingInSyntax syntax, string name)
     {
         return syntax.InScope(_ => new PageContextScope(name));
     }
