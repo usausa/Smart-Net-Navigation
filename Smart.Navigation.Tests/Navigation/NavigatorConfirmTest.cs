@@ -11,7 +11,7 @@ public sealed class NavigatorConfirmTest
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
-        navigator.Confirm += (_, args) =>
+        navigator.Confirm += static (_, args) =>
         {
             args.Cancel = args.Context.Parameter.GetValue<bool>("Cancel");
         };

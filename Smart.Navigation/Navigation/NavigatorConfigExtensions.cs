@@ -176,7 +176,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig UseConverter<TConverter>(this NavigatorConfig config)
         where TConverter : IConverter
     {
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<IConverter>();
             c.Add<IConverter, TConverter>();
@@ -209,7 +209,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig AddPlugin<TPlugin>(this NavigatorConfig config)
         where TPlugin : IPlugin
     {
-        config.Configure(c => c.Add<IPlugin, TPlugin>());
+        config.Configure(static c => c.Add<IPlugin, TPlugin>());
 
         return config;
     }
