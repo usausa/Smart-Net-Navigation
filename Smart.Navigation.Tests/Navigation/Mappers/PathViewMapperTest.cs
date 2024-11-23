@@ -14,7 +14,7 @@ public sealed class PathViewMapperTest
     {
         return new NavigatorConfig()
             .UseMockFormProvider()
-            .UsePathViewMapper(option =>
+            .UsePathViewMapper(static option =>
             {
                 option.Root = "Smart.Navigation.Mappers.Views";
                 option.Suffix = "Form";

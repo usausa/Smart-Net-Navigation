@@ -14,7 +14,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig UseProvider<TProvider>(this NavigatorConfig config)
         where TProvider : INavigationProvider
     {
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<INavigationProvider>();
             c.Add<INavigationProvider, TProvider>();
@@ -37,7 +37,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig UseViewMapper<TViewMapper>(this NavigatorConfig config)
         where TViewMapper : IViewMapper
     {
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<IViewMapper>();
             c.Add<IViewMapper, TViewMapper>();
@@ -125,7 +125,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig UseTypeConstraint<TTypeConstraint>(this NavigatorConfig config)
         where TTypeConstraint : ITypeConstraint
     {
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<ITypeConstraint>();
             c.Add<ITypeConstraint, TTypeConstraint>();
@@ -148,7 +148,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig UseServiceProvider<TServiceProvider>(this NavigatorConfig config)
         where TServiceProvider : IServiceProvider
     {
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<IServiceProvider>();
             c.Add<IServiceProvider, TServiceProvider>();
@@ -209,7 +209,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig AddPlugin<TPlugin>(this NavigatorConfig config)
         where TPlugin : IPlugin
     {
-        config.Configure(static c => c.Add<IPlugin, TPlugin>());
+        config.Configure(c => c.Add<IPlugin, TPlugin>());
 
         return config;
     }
@@ -224,7 +224,7 @@ public static class NavigatorConfigExtensions
     public static NavigatorConfig UseDelegateFactory<TDelegateFactory>(this NavigatorConfig config)
         where TDelegateFactory : IDelegateFactory
     {
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<IDelegateFactory>();
             c.Add<IDelegateFactory, TDelegateFactory>();

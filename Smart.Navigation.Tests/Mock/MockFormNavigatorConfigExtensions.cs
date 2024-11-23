@@ -7,7 +7,7 @@ public static class MockFormNavigatorConfigExtensions
 {
     public static NavigatorConfig UseMockFormProvider(this NavigatorConfig config)
     {
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<ITypeConstraint>();
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(MockForm)));

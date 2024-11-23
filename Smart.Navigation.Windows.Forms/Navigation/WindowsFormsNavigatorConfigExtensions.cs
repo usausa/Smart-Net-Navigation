@@ -8,7 +8,7 @@ public static class WindowsFormsNavigatorConfigExtensions
 {
     public static NavigatorConfig UseControlNavigationProvider(this NavigatorConfig config, Control container)
     {
-        return config.UseControlNavigationProvider(container, _ => { });
+        return config.UseControlNavigationProvider(container, static _ => { });
     }
 
     public static NavigatorConfig UseControlNavigationProvider(this NavigatorConfig config, Control container, Action<WindowsFormsNavigationProviderOptions> setupAction)

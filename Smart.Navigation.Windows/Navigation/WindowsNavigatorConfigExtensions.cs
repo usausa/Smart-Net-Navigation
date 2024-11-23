@@ -8,7 +8,7 @@ public static class WindowsNavigatorConfigExtensions
 {
     public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config)
     {
-        return config.UseWindowsNavigationProvider(_ => { });
+        return config.UseWindowsNavigationProvider(static _ => { });
     }
 
     public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Action<WindowsNavigationProviderOptions> setupAction)
@@ -44,7 +44,7 @@ public static class WindowsNavigatorConfigExtensions
         var options = new WindowsNavigationProviderOptions();
         setupAction(options);
 
-        config.Configure(c =>
+        config.Configure(static c =>
         {
             c.RemoveAll<ITypeConstraint>();
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));

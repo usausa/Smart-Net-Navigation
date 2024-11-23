@@ -42,7 +42,7 @@ public sealed class IdViewMapperTest
     [Fact]
     public static void UseIdViewMapperRegisterFailed()
     {
-        Assert.Throws<TargetInvocationException>(() =>
+        Assert.Throws<TargetInvocationException>(static () =>
             new NavigatorConfig().UseMockFormProvider().UseIdViewMapper(static r => r.Register(1, typeof(string))).ToNavigator());
     }
 
