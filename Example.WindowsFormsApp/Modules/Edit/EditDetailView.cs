@@ -1,5 +1,7 @@
 namespace Example.WindowsFormsApp.Modules.Edit;
 
+using System.ComponentModel;
+
 using Example.WindowsFormsApp.Models;
 using Example.WindowsFormsApp.Services;
 
@@ -19,6 +21,7 @@ public sealed partial class DataDetailView : AppViewBase
 
     public override bool CanGoHome => true;
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Inject]
     public DataService DataService { get; set; } = default!;
 

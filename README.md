@@ -1,6 +1,6 @@
 # Smart.Navigation .NET - navigation library for .NET
 
-[![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation)](https://www.nuget.org/packages/Usa.Smart.Navigation/)
+[![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation/)
 
 ## What is this ?
 
@@ -33,11 +33,11 @@ navigator.Forward(ViewId.Menu);
 
 | Package | Note |
 |-|-|
-| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation)](https://www.nuget.org/packages/Usa.Smart.Navigation/) | Core libyrary |
-| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Resolver)](https://www.nuget.org/packages/Usa.Smart.Navigation.Resolver/) | Smart.Resolver integration |
-| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Forms)](https://www.nuget.org/packages/Usa.Smart.Navigation.Forms/) | Xamarin.Forms provider |
-| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Windows)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows/) | WPF provider |
-| [![NuGet Badge](https://buildstats.info/nuget/Usa.Smart.Navigation.Windows.Forms)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows.Forms/) | Windows Forms provider |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation/) | Core libyrary |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Resolver.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Resolver/) | Smart.Resolver integration |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Maui.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Maui/) | MAUI provider |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Windows.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows/) | WPF provider |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Windows.Forms.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows.Forms/) | Windows Forms provider |
 
 ## Supported platform
 

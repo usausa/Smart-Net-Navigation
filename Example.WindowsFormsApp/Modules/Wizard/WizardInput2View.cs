@@ -1,5 +1,7 @@
 namespace Example.WindowsFormsApp.Modules.Wizard;
 
+using System.ComponentModel;
+
 using Smart.Navigation;
 using Smart.Navigation.Attributes;
 using Smart.Navigation.Plugins.Scope;
@@ -11,6 +13,7 @@ public sealed partial class WizardInput2View : AppViewBase
 
     public override bool CanGoHome => true;
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Scope]
     public WizardContext Context { get; set; } = default!;
 
@@ -29,12 +32,12 @@ public sealed partial class WizardInput2View : AppViewBase
         Navigator.Forward(ViewId.Menu);
     }
 
-    private void OnPrevButtonClick(object sender, System.EventArgs e)
+    private void OnPrevButtonClick(object sender, EventArgs e)
     {
         Navigator.Forward(ViewId.WizardInput1);
     }
 
-    private void OnNextButtonClick(object sender, System.EventArgs e)
+    private void OnNextButtonClick(object sender, EventArgs e)
     {
         Context.Data2 = Data2Text.Text;
 

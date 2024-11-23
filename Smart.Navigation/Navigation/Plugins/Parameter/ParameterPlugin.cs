@@ -27,7 +27,7 @@ public sealed class ParameterPlugin : PluginBase
                 .Select(static x => new
                 {
                     Property = x,
-                    Attribute = (ParameterAttribute?)x.GetCustomAttribute(typeof(ParameterAttribute))
+                    Attribute = x.GetCustomAttribute<ParameterAttribute>()
                 })
                 .Where(static x => x.Attribute is not null)
                 .Select(x => new ParameterProperty(

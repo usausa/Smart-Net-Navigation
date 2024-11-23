@@ -40,7 +40,7 @@ public sealed class ScopePlugin : PluginBase
                 .Select(static x => new
                 {
                     Property = x,
-                    Attribute = (ScopeAttribute?)x.GetCustomAttribute(typeof(ScopeAttribute))
+                    Attribute = x.GetCustomAttribute<ScopeAttribute>()
                 })
                 .Where(static x => x.Attribute is not null)
                 .Select(x => new ScopeProperty(

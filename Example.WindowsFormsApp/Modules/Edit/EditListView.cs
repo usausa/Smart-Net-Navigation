@@ -1,5 +1,7 @@
 namespace Example.WindowsFormsApp.Modules.Edit;
 
+using System.ComponentModel;
+
 using Example.WindowsFormsApp.Models;
 using Example.WindowsFormsApp.Services;
 
@@ -14,6 +16,7 @@ public sealed partial class DataListView : AppViewBase
 
     public override bool CanGoHome => true;
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [Inject]
     public DataService DataService { get; set; } = default!;
 
@@ -32,12 +35,12 @@ public sealed partial class DataListView : AppViewBase
         Navigator.Forward(ViewId.Menu);
     }
 
-    private void OnNewButtonClick(object sender, System.EventArgs e)
+    private void OnNewButtonClick(object sender, EventArgs e)
     {
         Navigator.Forward(ViewId.EditDetailNew);
     }
 
-    private void OnEditButtonClick(object sender, System.EventArgs e)
+    private void OnEditButtonClick(object sender, EventArgs e)
     {
         var parameter = new NavigationParameter();
         parameter.SetValue((DataEntity)DataListBox.SelectedItem!);

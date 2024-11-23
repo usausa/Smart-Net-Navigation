@@ -2,6 +2,8 @@ namespace Smart.Navigation.Components;
 
 public sealed class PageContextStorage
 {
+#pragma warning disable IDE0032
+    // ReSharper disable once ReplaceWithFieldKeyword
     private sealed class ScopeEntry
     {
         private Dictionary<int, object>? map;
@@ -10,6 +12,7 @@ public sealed class PageContextStorage
 
         public int Counter { get; set; }
     }
+#pragma warning restore IDE0032
 
     private readonly Dictionary<string, ScopeEntry> entries = [];
 
