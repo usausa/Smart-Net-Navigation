@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		README.md = README.md
 		Smart.Navigation.sln.DotSettings = Smart.Navigation.sln.DotSettings
+		test.runsettings = test.runsettings
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Tests", "Smart.Navigation.Tests\Smart.Navigation.Tests.csproj", "{FF6118E7-0B09-44AC-A79E-B593CD0F6F50}"
