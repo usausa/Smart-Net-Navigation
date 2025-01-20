@@ -23,7 +23,6 @@
     <PackageReference Include="xunit.v3" Version="1.0.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.0.1" />
   </ItemGroup>
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.Navigation.Extensions.DependencyInjection\Smart.Navigation.Extensions.DependencyInjection.csproj" />
