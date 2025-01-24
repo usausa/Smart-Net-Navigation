@@ -12,14 +12,16 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
+  <Import Project="..\Smart.Navigation.Generator\build\Smart.Navigation.props" />
+
   <ItemGroup>
     <PackageReference Include="Usa.Smart.Core" Version="2.4.0" />
     <PackageReference Include="Usa.Smart.Resolver" Version="2.6.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Smart.Navigation.Generator\Smart.Navigation.Generator.csproj"  OutputItemType="analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Smart.Navigation.Resolver\Smart.Navigation.Resolver.csproj" />
-    <ProjectReference Include="..\Smart.Navigation.SourceGenerator\Smart.Navigation.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Smart.Navigation.Windows.Forms\Smart.Navigation.Windows.Forms.csproj" />
     <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
   </ItemGroup>

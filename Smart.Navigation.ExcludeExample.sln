@@ -43,7 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Resolver",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Maui", "Smart.Navigation.Maui\Smart.Navigation.Maui.csproj", "{40883B8D-3180-4C89-AB06-1451503A3329}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.SourceGenerator", "Smart.Navigation.SourceGenerator\Smart.Navigation.SourceGenerator.csproj", "{01871EE8-7BD5-492A-8212-23914C8788AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart.Navigation.Generator", "Smart.Navigation.Generator\Smart.Navigation.Generator.csproj", "{01871EE8-7BD5-492A-8212-23914C8788AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
