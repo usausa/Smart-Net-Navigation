@@ -92,7 +92,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
         return Results.Success(new SourceModel(
             ns,
-            containingType.Name,
+            containingType.GetClassName(),
             containingType.IsValueType,
             methodSymbol.DeclaredAccessibility,
             methodSymbol.Name,
