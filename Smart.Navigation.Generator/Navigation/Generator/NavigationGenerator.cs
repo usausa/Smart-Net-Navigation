@@ -57,11 +57,8 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
     private static Result<SourceModel> GetSourceModel(GeneratorAttributeSyntaxContext context)
     {
-        var syntax = (MethodDeclarationSyntax)context.TargetNode;
-        if (context.SemanticModel.GetDeclaredSymbol(syntax) is not { } methodSymbol)
-        {
-            return Results.Error<SourceModel>(null);
-        }
+        var syntax = context.TargetNode;
+        var methodSymbol = (IMethodSymbol)context.TargetSymbol;
 
         // Validate method style
         if (!methodSymbol.IsStatic || !methodSymbol.IsPartialDefinition)
@@ -106,11 +103,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
     private static Result<EquatableArray<ViewIdModel>> GetViewIdModel(GeneratorAttributeSyntaxContext context)
     {
-        var classSyntax = (ClassDeclarationSyntax)context.TargetNode;
-        if (ModelExtensions.GetDeclaredSymbol(context.SemanticModel, classSyntax) is not ITypeSymbol classSymbol)
-        {
-            return Results.Error<EquatableArray<ViewIdModel>>(null);
-        }
+        var classSymbol = (ITypeSymbol)context.TargetSymbol;
 
         return Results.Success(new EquatableArray<ViewIdModel>(
             classSymbol.GetAttributes()
