@@ -16,6 +16,7 @@
     <ItemGroup>
       <TfmSpecificPackageFile Include="..\Smart.Navigation.props" PackagePath="build" />
       <TfmSpecificPackageFile Include="$(OutputPath)\Smart.Navigation.Generator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+      <TfmSpecificPackageFile Include="$(PKGSourceGenerateHelper)\lib\netstandard2.0\SourceGenerateHelper.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     </ItemGroup>
   </Target>
 
@@ -27,6 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SourceGenerateHelper" Version="0.4.0" GeneratePathProperty="true" PrivateAssets="all" />
     <PackageReference Include="Usa.Smart.Converter" Version="2.4.0" />
     <PackageReference Include="Usa.Smart.Core" Version="2.4.0" />
   </ItemGroup>

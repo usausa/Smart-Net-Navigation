@@ -8,8 +8,9 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-using Smart.Navigation.Generator.Helpers;
 using Smart.Navigation.Generator.Models;
+
+using SourceGenerateHelper;
 
 [Generator]
 public sealed class NavigationGenerator : IIncrementalGenerator
@@ -122,23 +123,23 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
     private static void Execute(SourceProductionContext context, ImmutableArray<Result<SourceModel>> viewSources, ImmutableArray<Result<EquatableArray<ViewIdModel>>> viewIds)
     {
-        foreach (var info in viewSources.SelectPart(static x => x.Error))
+        foreach (var info in viewSources.SelectError())
         {
             context.ReportDiagnostic(info);
         }
-        foreach (var info in viewIds.SelectPart(static x => x.Error))
+        foreach (var info in viewIds.SelectError())
         {
             context.ReportDiagnostic(info);
         }
 
         var viewMap = viewIds
-            .SelectPart(static x => x.Value)
+            .SelectValue()
             .SelectMany(static x => x.ToArray())
             .GroupBy(static x => x.ViewIdClassFullName)
             .ToDictionary(static x => x.Key, static x => x.ToList());
 
         var builder = new SourceBuilder();
-        foreach (var viewSource in viewSources.SelectPart(static x => x.Value))
+        foreach (var viewSource in viewSources.SelectValue())
         {
             context.CancellationToken.ThrowIfCancellationRequested();
 
