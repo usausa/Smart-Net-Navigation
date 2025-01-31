@@ -94,9 +94,9 @@ public sealed class NavigationGenerator : IIncrementalGenerator
             containingType.IsValueType,
             methodSymbol.DeclaredAccessibility,
             methodSymbol.Name,
-            returnTypeSymbol.ToDisplayString(),
-            keyValueTypeSymbol.ToDisplayString(),
-            keyValueTypeSymbol.TypeArguments[0].ToDisplayString()));
+            returnTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+            keyValueTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+            keyValueTypeSymbol.TypeArguments[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)));
     }
 
     private static bool IsViewIdTargetSyntax(SyntaxNode node) =>
@@ -110,8 +110,8 @@ public sealed class NavigationGenerator : IIncrementalGenerator
             classSymbol.GetAttributes()
                 .Where(static x => x.AttributeClass!.ToDisplayString() == ViewAttributeName)
                 .Select(attribute => new ViewIdModel(
-                    classSymbol.ToDisplayString(),
-                    attribute.ConstructorArguments[0].Type!.ToDisplayString(),
+                    classSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                    attribute.ConstructorArguments[0].Type!.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     attribute.ConstructorArguments[0].ToCSharpString(),
                     attribute.ConstructorArguments[0].Value!.ToString()))
                 .ToArray()));
