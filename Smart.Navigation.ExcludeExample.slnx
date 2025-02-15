@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/Navigation/" />
+  <Folder Name="/Navigation/Core/">
+    <Project Path="Smart.Navigation.Extensions.DependencyInjection/Smart.Navigation.Extensions.DependencyInjection.csproj" />
+    <Project Path="Smart.Navigation.Generator/Smart.Navigation.Generator.csproj" />
+    <Project Path="Smart.Navigation.Resolver/Smart.Navigation.Resolver.csproj" />
+    <Project Path="Smart.Navigation/Smart.Navigation.csproj" />
+  </Folder>
+  <Folder Name="/Navigation/Providers/">
+    <Project Path="Smart.Navigation.Maui/Smart.Navigation.Maui.csproj" />
+    <Project Path="Smart.Navigation.Windows.Forms/Smart.Navigation.Windows.Forms.csproj" />
+    <Project Path="Smart.Navigation.Windows/Smart.Navigation.Windows.csproj" />
+  </Folder>
+  <Folder Name="/Navigation/Strategies/">
+    <Project Path="Smart.Navigation.Strategies.GroupSupport/Smart.Navigation.Strategies.GroupSupport.csproj" />
+  </Folder>
+  <Folder Name="/Navigation/Tests/">
+    <Project Path="Smart.Navigation.Tests/Smart.Navigation.Tests.csproj" />
+  </Folder>
+</Solution>
