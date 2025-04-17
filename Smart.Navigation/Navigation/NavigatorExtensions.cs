@@ -26,7 +26,6 @@ public static class NavigatorExtensions
         if (navigator.CurrentTarget is INotifySupport<T> notifySupport)
         {
             notifySupport.NavigatorNotify(parameter);
-            return Task.CompletedTask;
         }
 
         return Task.CompletedTask;
