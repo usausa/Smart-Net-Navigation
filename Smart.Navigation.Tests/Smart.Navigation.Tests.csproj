@@ -16,11 +16,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.4.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.6.0" />
-    <PackageReference Include="xunit.v3" Version="1.1.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.4.1" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.6.1" />
+    <PackageReference Include="xunit.v3" Version="2.0.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
