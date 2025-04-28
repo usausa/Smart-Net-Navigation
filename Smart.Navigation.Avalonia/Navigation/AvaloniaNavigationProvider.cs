@@ -1,3 +1,6 @@
+using Avalonia.Data;
+using Avalonia.Layout;
+
 namespace Smart.Navigation;
 
 using Avalonia;
@@ -32,8 +35,9 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
 
         var element = (Control)view;
 
-        element.Width = container.Bounds.Width;
-        element.Height = container.Bounds.Height;
+        element.Bind(Layoutable.WidthProperty, new Binding("Bounds.Width") { Source = container });
+        element.Bind(Layoutable.HeightProperty, new Binding("Bounds.Height") { Source = container });
+
         container.Children.Add(element);
     }
 

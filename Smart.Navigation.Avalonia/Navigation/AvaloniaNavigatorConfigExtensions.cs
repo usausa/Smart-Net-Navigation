@@ -6,12 +6,12 @@ using Smart.Navigation.Mappers;
 
 public static class AvaloniaNavigatorConfigExtensions
 {
-    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config)
+    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config)
     {
-        return config.UseWindowsNavigationProvider(static _ => { });
+        return config.UseAvaloniaNavigationProvider(static _ => { });
     }
 
-    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Action<AvaloniaNavigationProviderOptions> setupAction)
+    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Action<AvaloniaNavigationProviderOptions> setupAction)
     {
         var options = new AvaloniaNavigationProviderOptions();
         setupAction(options);
@@ -34,12 +34,12 @@ public static class AvaloniaNavigatorConfigExtensions
         return config.UseProvider<AvaloniaNavigationProvider>();
     }
 
-    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container)
+    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Canvas container)
     {
-        return config.UseWindowsNavigationProvider(container, static _ => { });
+        return config.UseAvaloniaNavigationProvider(container, static _ => { });
     }
 
-    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container, Action<AvaloniaNavigationProviderOptions> setupAction)
+    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Canvas container, Action<AvaloniaNavigationProviderOptions> setupAction)
     {
         var options = new AvaloniaNavigationProviderOptions();
         setupAction(options);
