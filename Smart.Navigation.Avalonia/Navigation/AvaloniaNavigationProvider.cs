@@ -1,11 +1,10 @@
-using Avalonia.Data;
-using Avalonia.Layout;
-
 namespace Smart.Navigation;
 
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Input;
+using Avalonia.Layout;
 using Avalonia.VisualTree;
 
 public sealed class AvaloniaNavigationProvider : INavigationProvider
