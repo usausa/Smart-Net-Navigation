@@ -38,6 +38,7 @@ navigator.Forward(ViewId.Menu);
 | [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Maui.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Maui/) | MAUI provider |
 | [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Windows.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows/) | WPF provider |
 | [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Windows.Forms.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows.Forms/) | Windows Forms provider |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Avalonia.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Avalonia/) | Avalonia provider |
 
 ## Supported platform
 
