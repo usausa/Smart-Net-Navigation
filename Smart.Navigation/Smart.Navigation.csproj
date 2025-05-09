@@ -28,9 +28,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SourceGenerateHelper" Version="1.1.0" GeneratePathProperty="true" PrivateAssets="all" />
+    <PackageReference Include="SourceGenerateHelper" Version="1.2.1" GeneratePathProperty="true" PrivateAssets="all" />
     <PackageReference Include="Usa.Smart.Converter" Version="2.4.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.4.1" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.4.2" />
   </ItemGroup>
 
   <ItemGroup>
