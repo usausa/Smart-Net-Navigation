@@ -24,10 +24,6 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <Canvas>
-        <i:Interaction.Behaviors>
-            <navigation:NavigationContainerBehavior Navigator="{Binding Navigator, Mode=OneTime}" />
-        </i:Interaction.Behaviors>
-    </Canvas>
+    <Canvas navigation:NavigationContainer.Navigator="{Binding Navigator, Mode=OneTime}" />
 
 </Window>
