@@ -14,7 +14,7 @@ public sealed class WindowsFormsNavigationProvider : INavigationProvider
         this.options = options;
     }
 
-    public object? ResolveTarget(object view)
+    public object ResolveTarget(object view)
     {
         return view;
     }
