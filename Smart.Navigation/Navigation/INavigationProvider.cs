@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 public interface INavigationProvider
 {
-    object ResolveTarget(object view);
+    object? ResolveTarget(object view);
 
     void OpenView(object view);
 

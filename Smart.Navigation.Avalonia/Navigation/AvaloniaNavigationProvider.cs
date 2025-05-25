@@ -19,9 +19,9 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
         this.options = options;
     }
 
-    public object ResolveTarget(object view)
+    public object? ResolveTarget(object view)
     {
-        return ((Control)view).DataContext!;
+        return ((Control)view).DataContext;
     }
 
     public void OpenView(object view)

@@ -17,7 +17,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider
         this.options = options;
     }
 
-    public object ResolveTarget(object view)
+    public object? ResolveTarget(object view)
     {
         return ((FrameworkElement)view).DataContext;
     }

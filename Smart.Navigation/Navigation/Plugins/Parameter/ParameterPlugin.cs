@@ -52,7 +52,7 @@ public sealed class ParameterPlugin : PluginBase
         pluginContext.Save(GetType(), GatherExportParameters(target));
     }
 
-    public override void OnNavigatingTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object target)
+    public override void OnNavigatingTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object? target)
     {
         var parameters = pluginContext.LoadOr(GetType(), default(Dictionary<string, object?>));
         if (parameters is null)
@@ -60,7 +60,10 @@ public sealed class ParameterPlugin : PluginBase
             return;
         }
 
-        ApplyImportParameters(target, parameters);
+        if (target is not null)
+        {
+            ApplyImportParameters(target, parameters);
+        }
     }
 
     private Dictionary<string, object?> GatherExportParameters(object target)

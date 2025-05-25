@@ -14,7 +14,7 @@ public sealed class MauiNavigationProvider : INavigationProvider
         this.options = options;
     }
 
-    public object ResolveTarget(object view)
+    public object? ResolveTarget(object view)
     {
         return ((View)view).BindingContext;
     }

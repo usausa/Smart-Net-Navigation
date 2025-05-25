@@ -4,7 +4,7 @@ using Smart.Navigation;
 
 public sealed class MockWindowNavigationProvider : INavigationProvider
 {
-    public object ResolveTarget(object view)
+    public object? ResolveTarget(object view)
     {
         return ((MockWindow)view).Context;
     }

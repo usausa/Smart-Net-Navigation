@@ -74,8 +74,8 @@ public sealed class NavigatorNotifyTest
         navigator.Notify(1);
 
         var notifyView = (NotifyWindow)navigator.CurrentView!;
-        var notifyViewModel = (NotifyWindowViewModel)notifyView.Context;
-        Assert.Equal(1, notifyViewModel.IntParameter);
+        var notifyViewModel = (NotifyWindowViewModel?)notifyView.Context;
+        Assert.Equal(1, notifyViewModel?.IntParameter);
     }
 
     public sealed class NotifyWindowViewModel : INotifySupport<int>

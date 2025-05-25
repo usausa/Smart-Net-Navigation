@@ -54,8 +54,13 @@ public sealed class ScopePlugin : PluginBase
         return properties;
     }
 
-    public override void OnClose(IPluginContext pluginContext, object view, object target)
+    public override void OnClose(IPluginContext pluginContext, object view, object? target)
     {
+        if (target is null)
+        {
+            return;
+        }
+
         foreach (var property in GetTypeProperties(target.GetType()))
         {
             if (references.TryGetValue(property.Name, out var reference))
@@ -72,8 +77,13 @@ public sealed class ScopePlugin : PluginBase
         }
     }
 
-    public override void OnCreate(IPluginContext pluginContext, object view, object target)
+    public override void OnCreate(IPluginContext pluginContext, object view, object? target)
     {
+        if (target is null)
+        {
+            return;
+        }
+
         foreach (var property in GetTypeProperties(target.GetType()))
         {
             if (!references.TryGetValue(property.Name, out var reference))

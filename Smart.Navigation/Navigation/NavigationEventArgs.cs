@@ -10,14 +10,14 @@ public sealed class NavigationEventArgs : EventArgs
 
     public object ToView { get; }
 
-    public object ToTarget { get; }
+    public object? ToTarget { get; }
 
     public NavigationEventArgs(
         INavigationContext context,
         object? fromView,
         object? fromTarget,
         object toView,
-        object toTarget)
+        object? toTarget)
     {
         Context = context;
         FromView = fromView;

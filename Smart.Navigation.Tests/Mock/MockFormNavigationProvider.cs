@@ -4,9 +4,9 @@ using Smart.Navigation;
 
 public sealed class MockFormNavigationProvider : INavigationProvider
 {
-    public object ResolveTarget(object view)
+    public object? ResolveTarget(object view)
     {
-        return view;
+        return null;
     }
 
     public void OpenView(object view)
