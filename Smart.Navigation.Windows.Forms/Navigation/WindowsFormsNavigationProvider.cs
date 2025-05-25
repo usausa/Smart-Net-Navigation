@@ -16,7 +16,7 @@ public sealed class WindowsFormsNavigationProvider : INavigationProvider
 
     public object? ResolveTarget(object view)
     {
-        return null;
+        return view;
     }
 
     public void OpenView(object view)
