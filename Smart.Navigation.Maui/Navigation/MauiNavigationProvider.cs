@@ -51,7 +51,10 @@ public sealed class MauiNavigationProvider : INavigationProvider
 
         container.Children.Remove(v);
 
-        Disconnect(v);
+        if (options.DisconnectHandler)
+        {
+            Disconnect(v);
+        }
     }
 
     public void ActivateView(object view, object? parameter)
