@@ -10,7 +10,7 @@ public sealed class WizardResultViewModel : AppViewModelBase
     [Scope]
     public NotificationValue<WizardContext> Context { get; } = new();
 
-    public AsyncCommand<Type> Forward { get; }
+    public IObserveCommand Forward { get; }
 
     public WizardResultViewModel(INavigator navigator)
     {

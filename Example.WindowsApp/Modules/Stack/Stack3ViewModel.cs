@@ -5,7 +5,7 @@ using Smart.Windows.Input;
 
 public sealed class Stack3ViewModel : AppViewModelBase
 {
-    public AsyncCommand<int> Pop { get; }
+    public IObserveCommand Pop { get; }
 
     public Stack3ViewModel(INavigator navigator)
     {

@@ -3,7 +3,7 @@ namespace Example.WindowsApp.Modules;
 using Smart.Navigation;
 using Smart.Windows.ViewModels;
 
-public abstract class AppViewModelBase : ViewModelBase, INavigatorAware, INavigationEventSupport
+public abstract class AppViewModelBase : ExtendViewModelBase, INavigatorAware, INavigationEventSupport
 {
     public INavigator Navigator { get; set; } = default!;
 

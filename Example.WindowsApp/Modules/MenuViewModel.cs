@@ -5,7 +5,7 @@ using Smart.Windows.Input;
 
 public sealed class MenuViewModel : AppViewModelBase
 {
-    public AsyncCommand<Type> Forward { get; }
+    public IObserveCommand Forward { get; }
 
     public MenuViewModel(INavigator navigator)
     {

@@ -4,9 +4,9 @@ using System.Windows;
 
 using Example.WindowsApp.Modules;
 
+using Smart.Mvvm.Resolver;
 using Smart.Navigation;
 using Smart.Resolver;
-using Smart.Windows.Resolver;
 
 public sealed partial class App
 {

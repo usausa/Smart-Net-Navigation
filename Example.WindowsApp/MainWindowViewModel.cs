@@ -8,7 +8,7 @@ using Smart.ComponentModel;
 using Smart.Navigation;
 using Smart.Windows.ViewModels;
 
-public sealed class MainWindowViewModel : ViewModelBase, IShellControl
+public sealed class MainWindowViewModel : ExtendViewModelBase, IShellControl
 {
     public INavigator Navigator { get; }
 

@@ -2,17 +2,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:si="clr-namespace:Smart.Windows.Interactivity;assembly=Smart.Windows.Behaviors"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:s="http://smart/windows"
+        xmlns:navigation="clr-namespace:Smart.Navigation;assembly=Smart.Navigation.Windows"
         xmlns:local="clr-namespace:Example.WindowsApp"
         xmlns:views="clr-namespace:Example.WindowsApp.Views"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:navigation="clr-namespace:Smart.Navigation;assembly=Smart.Navigation.Windows" xmlns:resolver="clr-namespace:Smart.Windows.Resolver;assembly=Smart.Windows"
+        xmlns:si="clr-namespace:Smart.Windows.Interactivity;assembly=Smart.Windows.Behaviors"
         mc:Ignorable="d"
-        Title="{Binding Title.Value}"
         x:Class="Example.WindowsApp.MainWindow"
-        Width="496" Height="359"
-        ResizeMode="CanMinimize"
+        s:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
         d:DataContext="{d:DesignInstance Type={x:Type local:MainWindowViewModel}}"
-        resolver:DataContextResolver.Type="{x:Type local:MainWindowViewModel}">
+        Width="496"
+        Height="359"
+        Title="{Binding Title.Value}"
+        ResizeMode="CanMinimize">
 
     <i:Interaction.Behaviors>
         <views:ShellUpdateBehavior Navigator="{Binding Navigator, Mode=OneTime}" />
