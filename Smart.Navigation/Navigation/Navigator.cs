@@ -139,35 +139,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             return false;
         }
 
-        NavigateCore(strategy, navigationContext, controller);
-
-        return true;
-    }
-
-    async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter)
-    {
-        var controller = new Controller(this);
-        var result = strategy.Initialize(controller);
-        if (result is null)
-        {
-            return false;
-        }
-
-        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
-
-        var confirmResult = await ConfirmNavigationAsync(navigationContext).ConfigureAwait(false);
-        if (!confirmResult)
-        {
-            return false;
-        }
-
-        NavigateCore(strategy, navigationContext, controller);
-
-        return true;
-    }
-
-    private void NavigateCore(INavigationStrategy strategy, INavigationContext navigationContext, Controller controller)
-    {
         if (Executing)
         {
             throw new InvalidOperationException("Navigator is already executing.");
@@ -236,6 +207,118 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
         }
+
+        return true;
+    }
+
+    async Task<bool> INavigator.NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter)
+    {
+        var controller = new Controller(this);
+        var result = strategy.Initialize(controller);
+        if (result is null)
+        {
+            return false;
+        }
+
+        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+
+#pragma warning disable CA1849
+        // ReSharper disable once MethodHasAsyncOverload
+        if (!ConfirmNavigation(navigationContext))
+        {
+            return false;
+        }
+#pragma warning restore CA1849
+
+        var confirmResult = await ConfirmNavigationAsync(navigationContext).ConfigureAwait(true);
+        if (!confirmResult)
+        {
+            return false;
+        }
+
+        if (Executing)
+        {
+            throw new InvalidOperationException("Navigator is already executing.");
+        }
+
+        try
+        {
+            Executing = true;
+            ExecutingChanged?.Invoke(this, EventArgs.Empty);
+            PropertyChanged?.Invoke(this, ExecutingEventArgs);
+
+            var pluginContext = new PluginContext();
+            controller.PluginContext = pluginContext;
+
+            var fromView = CurrentView;
+            var fromTarget = CurrentTarget;
+
+            var toView = strategy.ResolveToView(controller);
+            var toTarget = provider.ResolveTarget(toView);
+
+            var args = new NavigationEventArgs(navigationContext, fromView, fromTarget, toView, toTarget);
+
+            // Process from view
+            if (fromView is not null)
+            {
+                (fromTarget as INavigationEventSupport)?.OnNavigatingFrom(navigationContext);
+                if (fromTarget is INavigationEventSupportAsync fromEventSupport)
+                {
+                    await fromEventSupport.OnNavigatingFromAsync(navigationContext).ConfigureAwait(true);
+                }
+
+                foreach (var plugin in plugins)
+                {
+                    plugin.OnNavigatingFrom(pluginContext, navigationContext, fromView, fromTarget);
+                }
+            }
+
+            // Process navigating
+            foreach (var plugin in plugins)
+            {
+                plugin.OnNavigatingTo(pluginContext, navigationContext, toView, toTarget);
+            }
+
+            var toEventSupport = toTarget as INavigationEventSupportAsync;
+            (toTarget as INavigationEventSupport)?.OnNavigatingTo(navigationContext);
+            if (toEventSupport is not null)
+            {
+                await toEventSupport.OnNavigatingToAsync(navigationContext).ConfigureAwait(true);
+            }
+
+            // End pre-process
+            Navigating?.Invoke(this, args);
+
+            // Update stack
+            strategy.UpdateStack(controller, toView);
+
+            // Update view mapper
+            viewMapper.CurrentUpdated(CurrentViewId);
+
+            // Process navigated
+            foreach (var plugin in plugins)
+            {
+                plugin.OnNavigatedTo(pluginContext, navigationContext, toView, toTarget);
+            }
+
+            (toTarget as INavigationEventSupport)?.OnNavigatedTo(navigationContext);
+            if (toEventSupport is not null)
+            {
+                await toEventSupport.OnNavigatedToAsync(navigationContext).ConfigureAwait(true);
+            }
+
+            // End post process
+            NotifyCurrentChanged();
+            Navigated?.Invoke(this, args);
+        }
+        finally
+        {
+            Executing = false;
+            ExecutingChanged?.Invoke(this, EventArgs.Empty);
+            PropertyChanged?.Invoke(this, ExecutingEventArgs);
+        }
+
+        return true;
     }
 
     // ------------------------------------------------------------
@@ -271,7 +354,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
     {
         if (CurrentTarget is IConfirmRequestAsync confirm)
         {
-            var canNavigate = await confirm.CanNavigateAsync(context).ConfigureAwait(false);
+            var canNavigate = await confirm.CanNavigateAsync(context).ConfigureAwait(true);
             if (!canNavigate)
             {
                 return false;
