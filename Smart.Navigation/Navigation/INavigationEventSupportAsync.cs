@@ -2,9 +2,9 @@ namespace Smart.Navigation;
 
 public interface INavigationEventSupportAsync
 {
-    ValueTask OnNavigatingFromAsync(INavigationContext context);
+    Task OnNavigatingFromAsync(INavigationContext context);
 
-    ValueTask OnNavigatingToAsync(INavigationContext context);
+    Task OnNavigatingToAsync(INavigationContext context);
 
-    ValueTask OnNavigatedToAsync(INavigationContext context);
+    Task OnNavigatedToAsync(INavigationContext context);
 }

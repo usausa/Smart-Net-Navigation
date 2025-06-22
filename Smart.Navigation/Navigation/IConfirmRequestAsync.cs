@@ -2,5 +2,5 @@ namespace Smart.Navigation;
 
 public interface IConfirmRequestAsync
 {
-    ValueTask<bool> CanNavigateAsync(INavigationContext context);
+    Task<bool> CanNavigateAsync(INavigationContext context);
 }
