@@ -108,7 +108,7 @@
   "SpaceBeforeClosingSlash": true,
   "RootElementLineBreakRule": 0,
   "ReorderVSM": 1,
-  "ReorderGridChildren": true,
+  "ReorderGridChildren": false,
   "ReorderCanvasChildren": false,
   "ReorderSetters": 0,
   "FormatMarkupExtension": true,
