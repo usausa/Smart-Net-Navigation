@@ -49,9 +49,9 @@
 
     "s:Behavior.Key",
 
-    "Class",
-
     "BasedOn, TargetType",
+
+    "Class",
 
     "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
     "Style",
