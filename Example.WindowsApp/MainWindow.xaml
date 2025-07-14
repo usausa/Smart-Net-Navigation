@@ -7,7 +7,6 @@
         xmlns:navigation="clr-namespace:Smart.Navigation;assembly=Smart.Navigation.Windows"
         xmlns:local="clr-namespace:Example.WindowsApp"
         xmlns:views="clr-namespace:Example.WindowsApp.Views"
-        xmlns:si="clr-namespace:Smart.Windows.Interactivity;assembly=Smart.Windows.Behaviors"
         mc:Ignorable="d"
         x:Class="Example.WindowsApp.MainWindow"
         s:DataContextResolver.Type="{x:Type local:MainWindowViewModel}"
@@ -23,7 +22,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
-            <si:CancelEventAction Cancel="{Binding BusyState.IsBusy}" />
+            <s:CancelEventAction Cancel="{Binding BusyState.IsBusy}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
