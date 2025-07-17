@@ -54,14 +54,14 @@
 
     "Class",
 
+    "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan",
+    "Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
+    "AbsoluteLayout.LayoutBounds, AbsoluteLayout.LayoutFlags",
+
     "x:DataType",
     "s:DataContextResolver.*",
     "DataContext",
     "d:DataContext",
-
-    "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan",
-    "Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
-    "AbsoluteLayout.LayoutBounds, AbsoluteLayout.LayoutFlags",
 
     "Style",
 
