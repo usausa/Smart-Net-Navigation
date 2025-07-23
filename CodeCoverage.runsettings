@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+
+  <Format>cobertura</Format>
+
+  <IncludeTestAssembly>false</IncludeTestAssembly>
+  <DeterministicReport>true</DeterministicReport>
+
+  <CodeCoverage>
+
+    <Attributes>
+      <Exclude>
+        <Attribute>^System\.Diagnostics\.CodeAnalysis\.ExcludeFromCodeCoverageAttribute$</Attribute>
+        <Attribute>^System\.Diagnostics\.ConditionalAttribute$</Attribute>
+        <Attribute>^System\.Runtime\.CompilerServices\.CompilerGeneratedAttribute$</Attribute>
+      </Exclude>
+    </Attributes>
+
+    <Sources>
+      <Exclude>
+        <Source>.*\\[^\\]*\.g\.cs</Source>
+      </Exclude>
+    </Sources>
+
+    <!--
+    <Functions>
+      <Exclude>
+      </Exclude>
+    </Functions>
+    -->
+
+  </CodeCoverage>
+
+</Configuration>

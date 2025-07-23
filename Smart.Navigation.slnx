@@ -4,13 +4,13 @@
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
     <File Path="Analyzers.ruleset" />
+    <File Path="CodeCoverage.runsettings" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
     <File Path="LICENSE" />
     <File Path="README.md" />
     <File Path="Smart.Navigation.props" />
     <File Path="Smart.Navigation.sln.DotSettings" />
-    <File Path="test.runsettings" />
   </Folder>
   <Folder Name="/Navigation/" />
   <Folder Name="/Navigation/Core/">
