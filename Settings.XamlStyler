@@ -54,6 +54,9 @@
 
     "Class",
 
+    "TargetName",
+    "Property",
+
     "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan",
     "Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
     "AbsoluteLayout.LayoutBounds, AbsoluteLayout.LayoutFlags",
@@ -73,39 +76,37 @@
     "Title",
     "Icon",
 
+    "behaviors:*",
+    "s:*",
+    "effects:*",
+
+    "Platform",
+
     "Orientation",
     "Margin, Padding",
     "HorizontalTextAlignment, VerticalTextAlignment",
     "HorizontalAlignment, VerticalAlignment",
 
-    "Platform",
-
+    "ItemsSource",
     "Source",
     "PageSource, PageIndex, Offset", 
 
-    "TargetName",
-    "Property",
+    "Command, CommandParameter",
 
-    "Color, TextColor, BackgroundColor",
+    "IsEnabled",
+    "Visibility",
 
     "Value",
     "StartPoint, EndPoint",
     "Progress",
 
-    "Storyboard.*, From, To, Duration",
-
-    "Command, CommandParameter",
-
-    "IsEnabled",
-    "IsVisible",
-    "ItemsSource",
-
-    "behaviors:*",
-    "s:*",
-    "effects:*",
+    "Text",
+    "Content",
 
     "FontFamily, FontSize, FontAttributes",
-    "Text",
+    "Color, TextColor, BackgroundColor",
+
+    "Storyboard.*, From, To, Duration",
 
     "*",
     "*:*",
