@@ -134,9 +134,6 @@ public sealed class GroupPushStrategy : INavigationStrategy
         }
 
         // Deactivate old
-        if (deactivateStackInfo is not null)
-        {
-            deactivateStackInfo.RestoreParameter = controller.DeactivateView(deactivateStackInfo.View);
-        }
+        deactivateStackInfo?.RestoreParameter = controller.DeactivateView(deactivateStackInfo.View);
     }
 }
