@@ -29,6 +29,10 @@ navigator = new NavigatorConfig()
 navigator.Forward(ViewId.Menu);
 ```
 
+### Example of use in MAUI project
+
+* [template-maui](https://github.com/usausa/template-maui)
+
 ## NuGet
 
 | Package | Note |
