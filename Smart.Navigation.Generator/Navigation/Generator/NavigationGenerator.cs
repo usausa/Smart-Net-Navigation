@@ -108,7 +108,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
         return Results.Success(new EquatableArray<ViewIdModel>(
             classSymbol.GetAttributes()
-                .Where(static x => x.AttributeClass!.ToDisplayString() == ViewAttributeName)
+                .Where(static x => x.AttributeClass?.ToDisplayString() == ViewAttributeName)
                 .Select(attribute => new ViewIdModel(
                     classSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     attribute.ConstructorArguments[0].Type!.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),

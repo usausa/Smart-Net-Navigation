@@ -50,16 +50,17 @@ public sealed class PageContextStorage
 
     public object Resolve(string name, int key, Func<object> factory)
     {
-        if (entries.TryGetValue(name, out var entry))
+        if (!entries.TryGetValue(name, out var entry))
         {
-            return entry.Map[key];
+            entry = new ScopeEntry();
+            entries[name] = entry;
         }
 
-        entry = new ScopeEntry();
-        entries[name] = entry;
-
-        var component = factory();
-        entry.Map[key] = component;
+        if (!entry.Map.TryGetValue(key, out var component))
+        {
+            component = factory();
+            entry.Map[key] = component;
+        }
 
         return component;
     }
