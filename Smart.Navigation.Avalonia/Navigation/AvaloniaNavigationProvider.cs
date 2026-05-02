@@ -1,5 +1,7 @@
 namespace Smart.Navigation;
 
+using System.Runtime.CompilerServices;
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
@@ -21,7 +23,7 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
 
     public object? ResolveTarget(object view)
     {
-        return ((Control)view).DataContext;
+        return Unsafe.As<Control>(view).DataContext;
     }
 
     public void OpenView(object view)
@@ -32,7 +34,7 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var element = (Control)view;
+        var element = Unsafe.As<Control>(view);
 
         element.Bind(Layoutable.WidthProperty, new Binding("Bounds.Width") { Source = container });
         element.Bind(Layoutable.HeightProperty, new Binding("Bounds.Height") { Source = container });
@@ -48,7 +50,7 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var element = (Control)view;
+        var element = Unsafe.As<Control>(view);
 
         (element as IDisposable)?.Dispose();
         (element.DataContext as IDisposable)?.Dispose();
@@ -59,11 +61,11 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
 
     public void ActivateView(object view, object? parameter)
     {
-        var element = (Control)view;
+        var element = Unsafe.As<Control>(view);
 
         element.IsVisible = true;
 
-        var control = (Control)view;
+        var control = element;
         if (options.RestoreFocus)
         {
             if (parameter is IInputElement focused)
@@ -79,7 +81,7 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
 
     public object? DeactivateView(object view)
     {
-        var element = (Control)view;
+        var element = Unsafe.As<Control>(view);
 
         var parameter = options.RestoreFocus ? GetFocused(element) : null;
 

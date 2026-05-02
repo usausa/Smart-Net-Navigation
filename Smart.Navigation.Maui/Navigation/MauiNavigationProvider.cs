@@ -1,5 +1,7 @@
 namespace Smart.Navigation;
 
+using System.Runtime.CompilerServices;
+
 using Microsoft.Maui.Layouts;
 
 public sealed class MauiNavigationProvider : INavigationProvider
@@ -16,7 +18,7 @@ public sealed class MauiNavigationProvider : INavigationProvider
 
     public object? ResolveTarget(object view)
     {
-        return ((View)view).BindingContext;
+        return Unsafe.As<View>(view).BindingContext;
     }
 
     public void OpenView(object view)
@@ -27,7 +29,7 @@ public sealed class MauiNavigationProvider : INavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var v = (View)view;
+        var v = Unsafe.As<View>(view);
 
         AbsoluteLayout.SetLayoutFlags(v, AbsoluteLayoutFlags.WidthProportional | AbsoluteLayoutFlags.HeightProportional);
         AbsoluteLayout.SetLayoutBounds(v, new Rect(0, 0, 1, 1));
@@ -42,7 +44,7 @@ public sealed class MauiNavigationProvider : INavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var v = (View)view;
+        var v = Unsafe.As<View>(view);
 
         Cleanup(v);
         (view as IDisposable)?.Dispose();
@@ -59,7 +61,7 @@ public sealed class MauiNavigationProvider : INavigationProvider
 
     public void ActivateView(object view, object? parameter)
     {
-        var v = (View)view;
+        var v = Unsafe.As<View>(view);
 
         v.IsVisible = true;
 
@@ -78,7 +80,7 @@ public sealed class MauiNavigationProvider : INavigationProvider
 
     public object? DeactivateView(object view)
     {
-        var v = (View)view;
+        var v = Unsafe.As<View>(view);
 
         var parameter = options.RestoreFocus ? GetFocused(v) : null;
 

@@ -1,5 +1,6 @@
 namespace Smart.Navigation;
 
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,7 +20,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider
 
     public object? ResolveTarget(object view)
     {
-        return ((FrameworkElement)view).DataContext;
+        return Unsafe.As<FrameworkElement>(view).DataContext;
     }
 
     public void OpenView(object view)
@@ -30,7 +31,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var element = (FrameworkElement)view;
+        var element = Unsafe.As<FrameworkElement>(view);
 
         if (options.FitToParent)
         {
@@ -55,7 +56,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var element = (FrameworkElement)view;
+        var element = Unsafe.As<FrameworkElement>(view);
 
         (element as IDisposable)?.Dispose();
         (element.DataContext as IDisposable)?.Dispose();
@@ -66,11 +67,11 @@ public sealed class WindowsNavigationProvider : INavigationProvider
 
     public void ActivateView(object view, object? parameter)
     {
-        var element = (FrameworkElement)view;
+        var element = Unsafe.As<FrameworkElement>(view);
 
         element.Visibility = Visibility.Visible;
 
-        var control = (Control)view;
+        var control = Unsafe.As<Control>(view);
         if (options.RestoreFocus)
         {
             if (parameter is IInputElement focused)
@@ -90,7 +91,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider
 
     public object? DeactivateView(object view)
     {
-        var element = (FrameworkElement)view;
+        var element = Unsafe.As<FrameworkElement>(view);
 
         var parameter = options.RestoreFocus ? FocusManager.GetFocusedElement(element) : null;
 

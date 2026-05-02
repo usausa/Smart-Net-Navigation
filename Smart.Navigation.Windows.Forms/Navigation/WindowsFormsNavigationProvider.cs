@@ -1,5 +1,6 @@
 namespace Smart.Navigation;
 
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 public sealed class WindowsFormsNavigationProvider : INavigationProvider
@@ -21,7 +22,7 @@ public sealed class WindowsFormsNavigationProvider : INavigationProvider
 
     public void OpenView(object view)
     {
-        var control = (Control)view;
+        var control = Unsafe.As<Control>(view);
 
         if (options.FitToParent)
         {
@@ -37,7 +38,7 @@ public sealed class WindowsFormsNavigationProvider : INavigationProvider
 
     public void CloseView(object view)
     {
-        var control = (Control)view;
+        var control = Unsafe.As<Control>(view);
 
         control.Visible = false;
         container.Controls.Remove(control);
@@ -47,7 +48,7 @@ public sealed class WindowsFormsNavigationProvider : INavigationProvider
 
     public void ActivateView(object view, object? parameter)
     {
-        var control = (Control)view;
+        var control = Unsafe.As<Control>(view);
 
         control.Visible = true;
 
@@ -66,7 +67,7 @@ public sealed class WindowsFormsNavigationProvider : INavigationProvider
 
     public object? DeactivateView(object view)
     {
-        var control = (Control)view;
+        var control = Unsafe.As<Control>(view);
 
         var parameter = options.RestoreFocus ? GetFocused(control) : null;
 
