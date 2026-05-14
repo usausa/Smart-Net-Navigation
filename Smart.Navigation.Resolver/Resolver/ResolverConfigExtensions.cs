@@ -2,7 +2,7 @@ namespace Smart.Resolver;
 
 using Smart.Navigation;
 using Smart.Navigation.Components;
-using Smart.Resolver.Configs;
+using Smart.Resolver.Expressions;
 using Smart.Resolver.Scopes;
 
 public static class ResolverConfigExtensions
