@@ -35,4 +35,9 @@ public static class WindowsAnimationKinds
     public const string Push = "Push";
     public const string Pop = "Pop";
     public const string Fade = "Fade";
+    public const string Dialog = "Dialog";
+    public const string Zoom = "Zoom";
+    public const string Drop = "Drop";
+    public const string Flip = "Flip";
+    public const string Rotate = "Rotate";
 }

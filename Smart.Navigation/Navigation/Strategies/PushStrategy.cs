@@ -47,14 +47,18 @@ public sealed class PushStrategy : INavigationStrategy, IAsyncNavigationStrategy
         var count = controller.ViewStack.Count;
         var openTask = controller.OpenViewAsync(toView, parameter);
 
-        Task deactivateTask = Task.CompletedTask;
         if (count > 1)
         {
             var index = count - 2;
-            deactivateTask = controller.DeactivateViewAsync(controller.ViewStack[index].View, parameter)
-                .ContinueWith(t => controller.ViewStack[index].RestoreParameter = t.Result, TaskScheduler.FromCurrentSynchronizationContext());
-        }
+            var deactivateTask = controller.DeactivateViewAsync(controller.ViewStack[index].View, parameter);
 
-        await Task.WhenAll(openTask, deactivateTask).ConfigureAwait(true);
+            await Task.WhenAll(openTask, deactivateTask).ConfigureAwait(true);
+
+            controller.ViewStack[index].RestoreParameter = deactivateTask.Result;
+        }
+        else
+        {
+            await openTask.ConfigureAwait(true);
+        }
     }
 }

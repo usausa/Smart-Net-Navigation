@@ -22,6 +22,11 @@ public static class WindowsNavigatorConfigExtensions
         options.RegisterAnimation(WindowsAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
         options.RegisterAnimation(WindowsAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
         options.RegisterAnimation(WindowsAnimationKinds.Fade, new FadeAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Dialog, new DialogAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Zoom, new ZoomAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Drop, new DropAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Flip, new FlipAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Rotate, new RotateAnimation());
 
         setupAction(options);
 
@@ -59,6 +64,11 @@ public static class WindowsNavigatorConfigExtensions
         options.RegisterAnimation(WindowsAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
         options.RegisterAnimation(WindowsAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
         options.RegisterAnimation(WindowsAnimationKinds.Fade, new FadeAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Dialog, new DialogAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Zoom, new ZoomAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Drop, new DropAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Flip, new FlipAnimation());
+        options.RegisterAnimation(WindowsAnimationKinds.Rotate, new RotateAnimation());
 
         setupAction(options);
 
