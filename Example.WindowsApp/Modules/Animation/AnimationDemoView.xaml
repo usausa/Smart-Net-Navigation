@@ -1,0 +1,33 @@
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:s="http://smart/windows"
+             xmlns:views="clr-namespace:Example.WindowsApp.Views"
+             xmlns:animation="clr-namespace:Example.WindowsApp.Modules.Animation"
+             mc:Ignorable="d"
+             x:Class="Example.WindowsApp.Modules.Animation.AnimationDemoView"
+             s:DataContextResolver.Type="{x:Type animation:AnimationDemoViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type animation:AnimationDemoViewModel}}"
+             d:DesignWidth="480"
+             d:DesignHeight="320"
+             views:ShellProperty.Title="Animation Demo"
+             Background="#FFF0F8FF">
+
+    <Grid>
+        <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="Animation Demo" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Margin="0,8,0,0" HorizontalAlignment="Center">
+                <Run Text="Played: "/>
+                <Run Text="{Binding LastAnimationKind, Mode=OneWay}" FontWeight="Bold"/>
+            </TextBlock>
+        </StackPanel>
+        <Button Width="100"
+                Margin="10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Command="{Binding Back}"
+                Content="Back" />
+    </Grid>
+
+</UserControl>

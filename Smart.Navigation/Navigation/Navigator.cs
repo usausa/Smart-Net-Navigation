@@ -290,7 +290,14 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             Navigating?.Invoke(this, args);
 
             // Update stack
-            strategy.UpdateStack(controller, toView);
+            if (provider is IAsyncNavigationProvider && strategy is IAsyncNavigationStrategy asyncStrategy)
+            {
+                await asyncStrategy.UpdateStackAsync(controller, toView, navigationContext.Parameter).ConfigureAwait(true);
+            }
+            else
+            {
+                strategy.UpdateStack(controller, toView);
+            }
 
             // Update view mapper
             viewMapper.CurrentUpdated(CurrentViewId);
@@ -368,7 +375,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
     // Controller
     // ------------------------------------------------------------
 
-    private sealed class Controller : INavigationController
+    private sealed class Controller : INavigationController, IAsyncNavigationController
     {
         private readonly Navigator navigator;
 
@@ -431,6 +438,33 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         public object? DeactivateView(object view)
         {
             return navigator.provider.DeactivateView(view);
+        }
+
+        public Task OpenViewAsync(object view, INavigationParameter parameter)
+        {
+            return ((IAsyncNavigationProvider)navigator.provider).OpenViewAsync(view, parameter);
+        }
+
+        public Task CloseViewAsync(object view, INavigationParameter parameter)
+        {
+            var target = navigator.provider.ResolveTarget(view);
+
+            foreach (var plugin in navigator.plugins)
+            {
+                plugin.OnClose(PluginContext, view, target);
+            }
+
+            return ((IAsyncNavigationProvider)navigator.provider).CloseViewAsync(view, parameter);
+        }
+
+        public Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
+        {
+            return ((IAsyncNavigationProvider)navigator.provider).ActivateViewAsync(view, state, parameter);
+        }
+
+        public Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
+        {
+            return ((IAsyncNavigationProvider)navigator.provider).DeactivateViewAsync(view, parameter);
         }
     }
 }

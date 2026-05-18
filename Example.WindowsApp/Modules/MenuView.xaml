@@ -7,6 +7,7 @@
              xmlns:modules="clr-namespace:Example.WindowsApp.Modules"
              xmlns:stack="clr-namespace:Example.WindowsApp.Modules.Stack"
              xmlns:wizard="clr-namespace:Example.WindowsApp.Modules.Wizard"
+             xmlns:animation="clr-namespace:Example.WindowsApp.Modules.Animation"
              mc:Ignorable="d"
              x:Class="Example.WindowsApp.Modules.MenuView"
              s:DataContextResolver.Type="{x:Type modules:MenuViewModel}"
@@ -30,6 +31,13 @@
                 Command="{Binding Forward}"
                 CommandParameter="{x:Type wizard:WizardInput1View}"
                 Content="Wizard" />
+        <Button Width="75"
+                Margin="10,60,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Command="{Binding Forward}"
+                CommandParameter="{x:Type animation:AnimationMenuView}"
+                Content="Animation" />
 
     </Grid>
 

@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Strategies;
 
-public sealed class ForwardStrategy : INavigationStrategy
+public sealed class ForwardStrategy : INavigationStrategy, IAsyncNavigationStrategy
 {
     private readonly object id;
 
@@ -39,6 +39,27 @@ public sealed class ForwardStrategy : INavigationStrategy
             controller.CloseView(controller.ViewStack[index].View);
 
             controller.ViewStack.RemoveAt(index);
+        }
+    }
+
+    public async Task UpdateStackAsync(IAsyncNavigationController controller, object toView, INavigationParameter parameter)
+    {
+        controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
+
+        var count = controller.ViewStack.Count;
+        var openTask = controller.OpenViewAsync(toView, parameter);
+
+        Task closeTask = Task.CompletedTask;
+        if (count > 1)
+        {
+            closeTask = controller.CloseViewAsync(controller.ViewStack[count - 2].View, parameter);
+        }
+
+        await Task.WhenAll(openTask, closeTask).ConfigureAwait(true);
+
+        if (count > 1)
+        {
+            controller.ViewStack.RemoveAt(count - 2);
         }
     }
 }

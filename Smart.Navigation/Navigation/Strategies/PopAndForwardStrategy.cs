@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Strategies;
 
-public sealed class PopAndForwardStrategy : INavigationStrategy
+public sealed class PopAndForwardStrategy : INavigationStrategy, IAsyncNavigationStrategy
 {
     private readonly bool all;
 
@@ -61,5 +61,23 @@ public sealed class PopAndForwardStrategy : INavigationStrategy
         }
 
         controller.ViewStack.RemoveRange(controller.ViewStack.Count - level - 2, level + 1);
+    }
+
+    public async Task UpdateStackAsync(IAsyncNavigationController controller, object toView, INavigationParameter parameter)
+    {
+        controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
+
+        var count = controller.ViewStack.Count;
+        var openTask = controller.OpenViewAsync(toView, parameter);
+
+        var closeTasks = new Task[level + 1];
+        for (var i = 0; i <= level; i++)
+        {
+            closeTasks[i] = controller.CloseViewAsync(controller.ViewStack[count - 2 - i].View, parameter);
+        }
+
+        await Task.WhenAll([openTask, .. closeTasks]).ConfigureAwait(true);
+
+        controller.ViewStack.RemoveRange(count - level - 2, level + 1);
     }
 }

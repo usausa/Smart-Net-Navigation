@@ -17,4 +17,6 @@ public interface INavigationParameter
     bool TryGetValue<T>(string key, out T value);
 
     bool TryGetValue<T>(out T value);
+
+    string? AnimationKind { get; }
 }
