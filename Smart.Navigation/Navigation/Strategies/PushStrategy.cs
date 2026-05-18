@@ -54,7 +54,7 @@ public sealed class PushStrategy : INavigationStrategy, IAsyncNavigationStrategy
 
             await Task.WhenAll(openTask, deactivateTask).ConfigureAwait(true);
 
-            controller.ViewStack[index].RestoreParameter = deactivateTask.Result;
+            controller.ViewStack[index].RestoreParameter = await deactivateTask.ConfigureAwait(true);
         }
         else
         {

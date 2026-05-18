@@ -2,6 +2,7 @@ namespace Example.WindowsApp;
 
 using System.Windows;
 
+using Example.WindowsApp.Animation;
 using Example.WindowsApp.Modules;
 
 using Smart.Mvvm.Resolver;
@@ -22,7 +23,14 @@ public sealed partial class App
 
         // Config Navigator
         navigator = new NavigatorConfig()
-            .UseWindowsNavigationProvider()
+            .UseWindowsNavigationProvider(static options =>
+            {
+                options.RegisterAnimation(ExampleAnimationKinds.Dialog, new DialogAnimation());
+                options.RegisterAnimation(ExampleAnimationKinds.Zoom, new ZoomAnimation());
+                options.RegisterAnimation(ExampleAnimationKinds.Drop, new DropAnimation());
+                options.RegisterAnimation(ExampleAnimationKinds.Flip, new FlipAnimation());
+                options.RegisterAnimation(ExampleAnimationKinds.Rotate, new RotateAnimation());
+            })
             .UseServiceProvider(resolver)
             .AddResolverPlugin()
             .ToNavigator();

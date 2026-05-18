@@ -13,38 +13,65 @@
              d:DesignHeight="320"
              views:ShellProperty.Title="Animation Menu">
 
-    <StackPanel Margin="10" Orientation="Vertical">
-        <TextBlock Text="Choose Animation" FontWeight="Bold" Margin="0,0,0,8"/>
-        <Button Width="140" Margin="0,4"
-                HorizontalAlignment="Left"
-                Command="{Binding Navigate}"
-                CommandParameter="Forward"
-                Content="Forward (Slide Right)" />
-        <Button Width="140" Margin="0,4"
-                HorizontalAlignment="Left"
-                Command="{Binding Navigate}"
-                CommandParameter="Back"
-                Content="Back (Slide Left)" />
-        <Button Width="140" Margin="0,4"
-                HorizontalAlignment="Left"
-                Command="{Binding Navigate}"
-                CommandParameter="Push"
-                Content="Push (Slide Up)" />
-        <Button Width="140" Margin="0,4"
-                HorizontalAlignment="Left"
-                Command="{Binding Navigate}"
-                CommandParameter="Pop"
-                Content="Pop (Slide Down)" />
-        <Button Width="140" Margin="0,4"
-                HorizontalAlignment="Left"
-                Command="{Binding Navigate}"
-                CommandParameter="Fade"
-                Content="Fade" />
-        <Button Width="140" Margin="0,4"
-                HorizontalAlignment="Left"
-                Command="{Binding Navigate}"
-                CommandParameter=""
-                Content="No Animation" />
-    </StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10" Orientation="Vertical">
+            <TextBlock Text="Choose Animation" FontWeight="Bold" Margin="0,0,0,8"/>
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Forward"
+                    Content="Forward (Slide L/R Pair)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Back"
+                    Content="Back (Slide R/L Pair)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Push"
+                    Content="Push (Slide Up)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Pop"
+                    Content="Pop (Slide Down)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Fade"
+                    Content="Fade" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Dialog"
+                    Content="Dialog (Scale + Fade from Center)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Zoom"
+                    Content="Zoom (Overshoot + Fade)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Drop"
+                    Content="Drop (Bounce from Top)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Flip"
+                    Content="Flip (Horizontal)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter="Rotate"
+                    Content="Rotate (Spin + Fade)" />
+            <Button Width="200" Margin="0,4"
+                    HorizontalAlignment="Left"
+                    Command="{Binding Navigate}"
+                    CommandParameter=""
+                    Content="No Animation" />
+        </StackPanel>
+    </ScrollViewer>
 
 </UserControl>

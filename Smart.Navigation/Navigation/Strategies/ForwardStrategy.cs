@@ -49,7 +49,7 @@ public sealed class ForwardStrategy : INavigationStrategy, IAsyncNavigationStrat
         var count = controller.ViewStack.Count;
         var openTask = controller.OpenViewAsync(toView, parameter);
 
-        Task closeTask = Task.CompletedTask;
+        var closeTask = Task.CompletedTask;
         if (count > 1)
         {
             closeTask = controller.CloseViewAsync(controller.ViewStack[count - 2].View, parameter);

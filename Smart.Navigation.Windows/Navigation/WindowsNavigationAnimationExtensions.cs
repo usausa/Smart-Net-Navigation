@@ -16,19 +16,4 @@ public static class WindowsNavigationAnimationExtensions
 
     public static NavigationParameter WithFadeAnimation(this NavigationParameter parameter)
         => parameter.WithAnimation(WindowsAnimationKinds.Fade);
-
-    public static NavigationParameter WithDialogAnimation(this NavigationParameter parameter)
-        => parameter.WithAnimation(WindowsAnimationKinds.Dialog);
-
-    public static NavigationParameter WithZoomAnimation(this NavigationParameter parameter)
-        => parameter.WithAnimation(WindowsAnimationKinds.Zoom);
-
-    public static NavigationParameter WithDropAnimation(this NavigationParameter parameter)
-        => parameter.WithAnimation(WindowsAnimationKinds.Drop);
-
-    public static NavigationParameter WithFlipAnimation(this NavigationParameter parameter)
-        => parameter.WithAnimation(WindowsAnimationKinds.Flip);
-
-    public static NavigationParameter WithRotateAnimation(this NavigationParameter parameter)
-        => parameter.WithAnimation(WindowsAnimationKinds.Rotate);
 }
