@@ -12,6 +12,15 @@ public static class MauiNavigatorConfigExtensions
     public static NavigatorConfig UseMauiNavigationProvider(this NavigatorConfig config, Action<MauiNavigationProviderOptions> setupAction)
     {
         var options = new MauiNavigationProviderOptions();
+
+        // Register standard animations
+        options.RegisterAnimation(MauiAnimationKinds.None, NoneMauiAnimation.Instance);
+        options.RegisterAnimation(MauiAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
+        options.RegisterAnimation(MauiAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
+        options.RegisterAnimation(MauiAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
+        options.RegisterAnimation(MauiAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
+        options.RegisterAnimation(MauiAnimationKinds.Fade, new FadeAnimation());
+
         setupAction(options);
 
         config.Configure(c =>
@@ -39,6 +48,15 @@ public static class MauiNavigatorConfigExtensions
     public static NavigatorConfig UseMauiNavigationProvider(this NavigatorConfig config, AbsoluteLayout container, Action<MauiNavigationProviderOptions> setupAction)
     {
         var options = new MauiNavigationProviderOptions();
+
+        // Register standard animations
+        options.RegisterAnimation(MauiAnimationKinds.None, NoneMauiAnimation.Instance);
+        options.RegisterAnimation(MauiAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
+        options.RegisterAnimation(MauiAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
+        options.RegisterAnimation(MauiAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
+        options.RegisterAnimation(MauiAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
+        options.RegisterAnimation(MauiAnimationKinds.Fade, new FadeAnimation());
+
         setupAction(options);
 
         config.Configure(static c =>

@@ -9,7 +9,7 @@ using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.VisualTree;
 
-public sealed class AvaloniaNavigationProvider : INavigationProvider
+public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
@@ -88,6 +88,67 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider
         element.IsVisible = false;
 
         return parameter;
+    }
+
+    public async Task OpenViewAsync(object view, INavigationParameter parameter)
+    {
+        OpenView(view);
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Open).ConfigureAwait(true);
+    }
+
+    public async Task CloseViewAsync(object view, INavigationParameter parameter)
+    {
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Close).ConfigureAwait(true);
+        CloseView(view);
+    }
+
+    public async Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
+    {
+        ActivateView(view, state);
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Activate).ConfigureAwait(true);
+    }
+
+    public async Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
+    {
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Deactivate).ConfigureAwait(true);
+        return DeactivateView(view);
+    }
+
+    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, AvaloniaNavigationAnimationPhase phase)
+    {
+        var element = Unsafe.As<Control>(view);
+        element.IsHitTestVisible = false;
+        try
+        {
+            await PlayAsync(element, parameter, phase).ConfigureAwait(true);
+        }
+        finally
+        {
+            element.IsHitTestVisible = true;
+        }
+    }
+
+    private Task PlayAsync(Control element, INavigationParameter parameter, AvaloniaNavigationAnimationPhase phase)
+    {
+        var key = parameter.AnimationKind;
+        if (key is null || !options.Animations.TryGetValue(key, out var animation))
+        {
+            return Task.CompletedTask;
+        }
+
+        var container = resolver.Container;
+        if (container is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        return animation.PlayAsync(new AvaloniaNavigationAnimationContext
+        {
+            Container = container,
+            View = element,
+            Phase = phase,
+            Parameter = parameter,
+        });
     }
 
     private static IInputElement? GetFocused(Visual parent)

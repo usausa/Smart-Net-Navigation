@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 using Microsoft.Maui.Layouts;
 
-public sealed class MauiNavigationProvider : INavigationProvider
+public sealed class MauiNavigationProvider : INavigationProvider, IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
@@ -87,6 +87,78 @@ public sealed class MauiNavigationProvider : INavigationProvider
         v.IsVisible = false;
 
         return parameter;
+    }
+
+    public async Task OpenViewAsync(object view, INavigationParameter parameter)
+    {
+        OpenView(view);
+        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Open).ConfigureAwait(true);
+    }
+
+    public async Task CloseViewAsync(object view, INavigationParameter parameter)
+    {
+        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Close).ConfigureAwait(true);
+        CloseView(view);
+    }
+
+    public async Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
+    {
+        ActivateView(view, state);
+        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Activate).ConfigureAwait(true);
+    }
+
+    public async Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
+    {
+        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Deactivate).ConfigureAwait(true);
+        return DeactivateView(view);
+    }
+
+    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, MauiNavigationAnimationPhase phase)
+    {
+        var element = Unsafe.As<View>(view);
+        var previousInputTransparent = element.InputTransparent;
+        var layout = element as Layout;
+        var previousCascade = layout?.CascadeInputTransparent ?? false;
+        element.InputTransparent = true;
+        if (layout is not null)
+        {
+            layout.CascadeInputTransparent = true;
+        }
+        try
+        {
+            await PlayAsync(element, parameter, phase).ConfigureAwait(true);
+        }
+        finally
+        {
+            element.InputTransparent = previousInputTransparent;
+            if (layout is not null)
+            {
+                layout.CascadeInputTransparent = previousCascade;
+            }
+        }
+    }
+
+    private Task PlayAsync(View element, INavigationParameter parameter, MauiNavigationAnimationPhase phase)
+    {
+        var key = parameter.AnimationKind;
+        if (key is null || !options.Animations.TryGetValue(key, out var animation))
+        {
+            return Task.CompletedTask;
+        }
+
+        var container = resolver.Container;
+        if (container is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        return animation.PlayAsync(new MauiNavigationAnimationContext
+        {
+            Container = container,
+            View = element,
+            Phase = phase,
+            Parameter = parameter,
+        });
     }
 
     private static void Cleanup(IVisualTreeElement parent)

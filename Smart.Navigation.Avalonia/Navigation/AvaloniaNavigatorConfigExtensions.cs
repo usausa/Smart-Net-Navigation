@@ -14,6 +14,15 @@ public static class AvaloniaNavigatorConfigExtensions
     public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Action<AvaloniaNavigationProviderOptions> setupAction)
     {
         var options = new AvaloniaNavigationProviderOptions();
+
+        // Register standard animations
+        options.RegisterAnimation(AvaloniaAnimationKinds.None, NoneAvaloniaAnimation.Instance);
+        options.RegisterAnimation(AvaloniaAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Fade, new FadeAnimation());
+
         setupAction(options);
 
         config.Configure(c =>
@@ -42,6 +51,15 @@ public static class AvaloniaNavigatorConfigExtensions
     public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Canvas container, Action<AvaloniaNavigationProviderOptions> setupAction)
     {
         var options = new AvaloniaNavigationProviderOptions();
+
+        // Register standard animations
+        options.RegisterAnimation(AvaloniaAnimationKinds.None, NoneAvaloniaAnimation.Instance);
+        options.RegisterAnimation(AvaloniaAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
+        options.RegisterAnimation(AvaloniaAnimationKinds.Fade, new FadeAnimation());
+
         setupAction(options);
 
         config.Configure(static c =>
