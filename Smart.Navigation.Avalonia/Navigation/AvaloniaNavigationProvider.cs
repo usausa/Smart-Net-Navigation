@@ -130,7 +130,7 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavi
 
     private Task PlayAsync(Control element, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
     {
-        var key = parameter.EffectKind;
+        var key = parameter.Effect;
         if (key is null || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;

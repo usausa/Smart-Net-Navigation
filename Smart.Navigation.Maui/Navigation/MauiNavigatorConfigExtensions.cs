@@ -15,12 +15,12 @@ public static class MauiNavigatorConfigExtensions
         var options = new MauiNavigationProviderOptions();
 
         // Register standard effects
-        options.RegisterEffect(MauiEffectKinds.None, NoneMauiEffect.Instance);
-        options.RegisterEffect(MauiEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(MauiEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(MauiEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(MauiEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(MauiEffectKinds.Fade, new FadeEffect());
+        options.RegisterEffect(MauiEffect.None, NoneMauiEffect.Instance);
+        options.RegisterEffect(MauiEffect.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(MauiEffect.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(MauiEffect.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(MauiEffect.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(MauiEffect.Fade, new FadeEffect());
 
         setupAction(options);
 
@@ -51,12 +51,12 @@ public static class MauiNavigatorConfigExtensions
         var options = new MauiNavigationProviderOptions();
 
         // Register standard effects
-        options.RegisterEffect(MauiEffectKinds.None, NoneMauiEffect.Instance);
-        options.RegisterEffect(MauiEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(MauiEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(MauiEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(MauiEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(MauiEffectKinds.Fade, new FadeEffect());
+        options.RegisterEffect(MauiEffect.None, NoneMauiEffect.Instance);
+        options.RegisterEffect(MauiEffect.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(MauiEffect.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(MauiEffect.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(MauiEffect.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(MauiEffect.Fade, new FadeEffect());
 
         setupAction(options);
 

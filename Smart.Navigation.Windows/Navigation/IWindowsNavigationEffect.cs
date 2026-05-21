@@ -27,7 +27,7 @@ public interface IWindowsNavigationEffect
     Task PlayAsync(WindowsNavigationEffectContext context);
 }
 
-public static class WindowsEffectKinds
+public static class WindowsEffect
 {
     public const string None = "None";
     public const string Forward = "Forward";

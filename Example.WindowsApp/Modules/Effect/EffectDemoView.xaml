@@ -25,7 +25,7 @@
             <TextBlock Margin="0,8,0,0"
                        HorizontalAlignment="Center">
                 <Run Text="Played: " />
-                <Run Text="{Binding LastEffectKind, Mode=OneWay}"
+                <Run Text="{Binding LastEffect, Mode=OneWay}"
                      FontWeight="Bold" />
             </TextBlock>
         </StackPanel>

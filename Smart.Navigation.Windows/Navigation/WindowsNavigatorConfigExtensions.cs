@@ -17,12 +17,12 @@ public static class WindowsNavigatorConfigExtensions
         var options = new WindowsNavigationProviderOptions();
 
         // Register standard effects
-        options.RegisterEffect(WindowsEffectKinds.None, NoneWindowsEffect.Instance);
-        options.RegisterEffect(WindowsEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(WindowsEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(WindowsEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(WindowsEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(WindowsEffectKinds.Fade, new FadeEffect());
+        options.RegisterEffect(WindowsEffect.None, NoneWindowsEffect.Instance);
+        options.RegisterEffect(WindowsEffect.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(WindowsEffect.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(WindowsEffect.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(WindowsEffect.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(WindowsEffect.Fade, new FadeEffect());
 
         setupAction(options);
 
@@ -54,12 +54,12 @@ public static class WindowsNavigatorConfigExtensions
         var options = new WindowsNavigationProviderOptions();
 
         // Register standard effects
-        options.RegisterEffect(WindowsEffectKinds.None, NoneWindowsEffect.Instance);
-        options.RegisterEffect(WindowsEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(WindowsEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(WindowsEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(WindowsEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(WindowsEffectKinds.Fade, new FadeEffect());
+        options.RegisterEffect(WindowsEffect.None, NoneWindowsEffect.Instance);
+        options.RegisterEffect(WindowsEffect.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(WindowsEffect.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(WindowsEffect.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(WindowsEffect.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(WindowsEffect.Fade, new FadeEffect());
 
         setupAction(options);
 

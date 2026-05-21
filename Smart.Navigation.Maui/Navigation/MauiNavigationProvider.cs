@@ -140,7 +140,7 @@ public sealed class MauiNavigationProvider : INavigationProvider, IAsyncNavigati
 
     private Task PlayAsync(View element, INavigationParameter parameter, MauiNavigationEffectPhase phase)
     {
-        var key = parameter.EffectKind;
+        var key = parameter.Effect;
         if (key is null || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;

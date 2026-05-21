@@ -26,7 +26,7 @@ public interface IAvaloniaNavigationEffect
     Task PlayAsync(AvaloniaNavigationEffectContext context);
 }
 
-public static class AvaloniaEffectKinds
+public static class AvaloniaEffect
 {
     public const string None = "None";
     public const string Forward = "Forward";

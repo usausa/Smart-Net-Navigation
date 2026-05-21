@@ -24,7 +24,7 @@ public interface IMauiNavigationEffect
     Task PlayAsync(MauiNavigationEffectContext context);
 }
 
-public static class MauiEffectKinds
+public static class MauiEffect
 {
     public const string None = "None";
     public const string Forward = "Forward";

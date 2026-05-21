@@ -18,5 +18,5 @@ public interface INavigationParameter
 
     bool TryGetValue<T>(out T value);
 
-    string? EffectKind { get; }
+    string? Effect { get; }
 }

@@ -5,7 +5,7 @@ using Smart.Windows.Input;
 
 public sealed class EffectDemoViewModel : AppViewModelBase
 {
-    public string? LastEffectKind { get; private set; }
+    public string? LastEffect { get; private set; }
 
     public IObserveCommand Back { get; }
 
@@ -17,7 +17,7 @@ public sealed class EffectDemoViewModel : AppViewModelBase
 
     public override void OnNavigatedTo(INavigationContext context)
     {
-        LastEffectKind = context.Parameter.EffectKind ?? "(none)";
-        RaisePropertyChanged(nameof(LastEffectKind));
+        LastEffect = context.Parameter.Effect ?? "(none)";
+        RaisePropertyChanged(nameof(LastEffect));
     }
 }

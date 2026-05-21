@@ -17,12 +17,12 @@ public static class AvaloniaNavigatorConfigExtensions
         var options = new AvaloniaNavigationProviderOptions();
 
         // Register standard effects
-        options.RegisterEffect(AvaloniaEffectKinds.None, NoneAvaloniaEffect.Instance);
-        options.RegisterEffect(AvaloniaEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(AvaloniaEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(AvaloniaEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(AvaloniaEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(AvaloniaEffectKinds.Fade, new FadeEffect());
+        options.RegisterEffect(AvaloniaEffect.None, NoneAvaloniaEffect.Instance);
+        options.RegisterEffect(AvaloniaEffect.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(AvaloniaEffect.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(AvaloniaEffect.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(AvaloniaEffect.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(AvaloniaEffect.Fade, new FadeEffect());
 
         setupAction(options);
 
@@ -54,12 +54,12 @@ public static class AvaloniaNavigatorConfigExtensions
         var options = new AvaloniaNavigationProviderOptions();
 
         // Register standard effects
-        options.RegisterEffect(AvaloniaEffectKinds.None, NoneAvaloniaEffect.Instance);
-        options.RegisterEffect(AvaloniaEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(AvaloniaEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(AvaloniaEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(AvaloniaEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(AvaloniaEffectKinds.Fade, new FadeEffect());
+        options.RegisterEffect(AvaloniaEffect.None, NoneAvaloniaEffect.Instance);
+        options.RegisterEffect(AvaloniaEffect.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(AvaloniaEffect.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(AvaloniaEffect.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(AvaloniaEffect.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(AvaloniaEffect.Fade, new FadeEffect());
 
         setupAction(options);
 

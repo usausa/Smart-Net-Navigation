@@ -4,7 +4,7 @@ namespace Example.WindowsApp.Animation;
 // the basic kinds (Forward / Back / Push / Pop / Fade / None) only; this class shows
 // how an application can add its own kinds and register the corresponding handlers
 // at provider configuration time.
-internal static class ExampleEffectKinds
+internal static class ExampleEffect
 {
     public const string Dialog = "Dialog";
     public const string Zoom = "Zoom";

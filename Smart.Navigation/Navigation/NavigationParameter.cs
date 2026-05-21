@@ -48,8 +48,6 @@ public sealed class NavigationParameter : INavigationParameter
         return ret;
     }
 
-    public string? EffectKind { get; set; }
-
     public NavigationParameter SetValue<T>(string key, T value)
     {
         values[key] = value;
@@ -60,4 +58,6 @@ public sealed class NavigationParameter : INavigationParameter
     {
         return SetValue(typeof(T).Name, value);
     }
+
+    public string? Effect { get; set; }
 }

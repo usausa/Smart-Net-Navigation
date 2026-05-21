@@ -140,7 +140,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider, IAsyncNavig
 
     private Task PlayAsync(FrameworkElement element, INavigationParameter parameter, WindowsNavigationEffectPhase phase)
     {
-        var key = parameter.EffectKind;
+        var key = parameter.Effect;
         if (key is null || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
