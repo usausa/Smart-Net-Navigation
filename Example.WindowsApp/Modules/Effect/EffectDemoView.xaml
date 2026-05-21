@@ -6,20 +6,20 @@
              xmlns:views="clr-namespace:Example.WindowsApp.Views"
              xmlns:effect="clr-namespace:Example.WindowsApp.Modules.Effect"
              mc:Ignorable="d"
-             x:Class="Example.WindowsApp.Modules.Effect.AnimationDemoView"
-             s:DataContextResolver.Type="{x:Type effect:AnimationDemoViewModel}"
-             d:DataContext="{d:DesignInstance Type={x:Type effect:AnimationDemoViewModel}}"
+             x:Class="Example.WindowsApp.Modules.Effect.EffectDemoView"
+             s:DataContextResolver.Type="{x:Type effect:EffectDemoViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type effect:EffectDemoViewModel}}"
              d:DesignWidth="480"
              d:DesignHeight="320"
              Background="#FFF0F8FF"
-             views:ShellProperty.Title="Animation Demo">
+             views:ShellProperty.Title="Effect Demo">
 
     <Grid>
         <StackPanel Margin="10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <TextBlock HorizontalAlignment="Center"
-                       Text="Animation Demo"
+                       Text="Effect Demo"
                        FontSize="20"
                        FontWeight="Bold" />
             <TextBlock Margin="0,8,0,0"

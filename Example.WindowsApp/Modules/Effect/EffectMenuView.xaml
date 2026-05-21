@@ -6,12 +6,12 @@
              xmlns:views="clr-namespace:Example.WindowsApp.Views"
              xmlns:effect="clr-namespace:Example.WindowsApp.Modules.Effect"
              mc:Ignorable="d"
-             x:Class="Example.WindowsApp.Modules.Effect.AnimationMenuView"
-             s:DataContextResolver.Type="{x:Type effect:AnimationMenuViewModel}"
-             d:DataContext="{d:DesignInstance Type={x:Type effect:AnimationMenuViewModel}}"
+             x:Class="Example.WindowsApp.Modules.Effect.EffectMenuView"
+             s:DataContextResolver.Type="{x:Type effect:EffectMenuViewModel}"
+             d:DataContext="{d:DesignInstance Type={x:Type effect:EffectMenuViewModel}}"
              d:DesignWidth="480"
              d:DesignHeight="320"
-             views:ShellProperty.Title="Animation Menu">
+             views:ShellProperty.Title="Effect Menu">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical"

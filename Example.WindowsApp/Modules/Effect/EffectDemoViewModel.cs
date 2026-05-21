@@ -3,16 +3,16 @@ namespace Example.WindowsApp.Modules.Effect;
 using Smart.Navigation;
 using Smart.Windows.Input;
 
-public sealed class AnimationDemoViewModel : AppViewModelBase
+public sealed class EffectDemoViewModel : AppViewModelBase
 {
     public string? LastEffectKind { get; private set; }
 
     public IObserveCommand Back { get; }
 
-    public AnimationDemoViewModel(INavigator navigator)
+    public EffectDemoViewModel(INavigator navigator)
     {
         Back = MakeAsyncCommand(() =>
-            navigator.ForwardAsync(typeof(AnimationMenuView), new NavigationParameter().WithBackEffect()));
+            navigator.ForwardAsync(typeof(EffectMenuView), new NavigationParameter().WithBackEffect()));
     }
 
     public override void OnNavigatedTo(INavigationContext context)
