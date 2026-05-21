@@ -103,28 +103,28 @@ public sealed class WindowsNavigationProvider : INavigationProvider, IAsyncNavig
     public async Task OpenViewAsync(object view, INavigationParameter parameter)
     {
         OpenView(view);
-        await PlayWithGuardAsync(view, parameter, WindowsNavigationAnimationPhase.Open).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, WindowsNavigationEffectPhase.Open).ConfigureAwait(true);
     }
 
     public async Task CloseViewAsync(object view, INavigationParameter parameter)
     {
-        await PlayWithGuardAsync(view, parameter, WindowsNavigationAnimationPhase.Close).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, WindowsNavigationEffectPhase.Close).ConfigureAwait(true);
         CloseView(view);
     }
 
     public async Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
     {
         ActivateView(view, state);
-        await PlayWithGuardAsync(view, parameter, WindowsNavigationAnimationPhase.Activate).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, WindowsNavigationEffectPhase.Activate).ConfigureAwait(true);
     }
 
     public async Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
     {
-        await PlayWithGuardAsync(view, parameter, WindowsNavigationAnimationPhase.Deactivate).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, WindowsNavigationEffectPhase.Deactivate).ConfigureAwait(true);
         return DeactivateView(view);
     }
 
-    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, WindowsNavigationAnimationPhase phase)
+    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, WindowsNavigationEffectPhase phase)
     {
         var element = Unsafe.As<FrameworkElement>(view);
         element.IsHitTestVisible = false;
@@ -138,10 +138,10 @@ public sealed class WindowsNavigationProvider : INavigationProvider, IAsyncNavig
         }
     }
 
-    private Task PlayAsync(FrameworkElement element, INavigationParameter parameter, WindowsNavigationAnimationPhase phase)
+    private Task PlayAsync(FrameworkElement element, INavigationParameter parameter, WindowsNavigationEffectPhase phase)
     {
-        var key = parameter.AnimationKind;
-        if (key is null || !options.Animations.TryGetValue(key, out var animation))
+        var key = parameter.EffectKind;
+        if (key is null || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }
@@ -152,7 +152,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider, IAsyncNavig
             return Task.CompletedTask;
         }
 
-        return animation.PlayAsync(new WindowsNavigationAnimationContext
+        return effect.PlayAsync(new WindowsNavigationEffectContext
         {
             Container = container,
             View = element,

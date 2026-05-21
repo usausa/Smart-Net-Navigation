@@ -4,12 +4,12 @@ public sealed class AvaloniaNavigationProviderOptions
 {
     public bool RestoreFocus { get; set; } = true;
 
-    public IDictionary<string, IAvaloniaNavigationAnimation> Animations { get; } =
-        new Dictionary<string, IAvaloniaNavigationAnimation>(StringComparer.Ordinal);
+    public IDictionary<string, IAvaloniaNavigationEffect> Effects { get; } =
+        new Dictionary<string, IAvaloniaNavigationEffect>(StringComparer.Ordinal);
 
-    public AvaloniaNavigationProviderOptions RegisterAnimation(string key, IAvaloniaNavigationAnimation animation)
+    public AvaloniaNavigationProviderOptions RegisterEffect(string key, IAvaloniaNavigationEffect effect)
     {
-        Animations[key] = animation;
+        Effects[key] = effect;
         return this;
     }
 }

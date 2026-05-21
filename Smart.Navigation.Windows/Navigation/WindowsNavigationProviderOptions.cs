@@ -6,12 +6,12 @@ public sealed class WindowsNavigationProviderOptions
 
     public bool RestoreFocus { get; set; } = true;
 
-    public IDictionary<string, IWindowsNavigationAnimation> Animations { get; } =
-        new Dictionary<string, IWindowsNavigationAnimation>(StringComparer.Ordinal);
+    public IDictionary<string, IWindowsNavigationEffect> Effects { get; } =
+        new Dictionary<string, IWindowsNavigationEffect>(StringComparer.Ordinal);
 
-    public WindowsNavigationProviderOptions RegisterAnimation(string key, IWindowsNavigationAnimation animation)
+    public WindowsNavigationProviderOptions RegisterEffect(string key, IWindowsNavigationEffect effect)
     {
-        Animations[key] = animation;
+        Effects[key] = effect;
         return this;
     }
 }

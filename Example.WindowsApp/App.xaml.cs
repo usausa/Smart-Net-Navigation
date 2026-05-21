@@ -25,11 +25,11 @@ public sealed partial class App
         navigator = new NavigatorConfig()
             .UseWindowsNavigationProvider(static options =>
             {
-                options.RegisterAnimation(ExampleAnimationKinds.Dialog, new DialogAnimation());
-                options.RegisterAnimation(ExampleAnimationKinds.Zoom, new ZoomAnimation());
-                options.RegisterAnimation(ExampleAnimationKinds.Drop, new DropAnimation());
-                options.RegisterAnimation(ExampleAnimationKinds.Flip, new FlipAnimation());
-                options.RegisterAnimation(ExampleAnimationKinds.Rotate, new RotateAnimation());
+                options.RegisterEffect(ExampleEffectKinds.Dialog, new DialogEffect());
+                options.RegisterEffect(ExampleEffectKinds.Zoom, new ZoomEffect());
+                options.RegisterEffect(ExampleEffectKinds.Drop, new DropEffect());
+                options.RegisterEffect(ExampleEffectKinds.Flip, new FlipEffect());
+                options.RegisterEffect(ExampleEffectKinds.Rotate, new RotateEffect());
             })
             .UseServiceProvider(resolver)
             .AddResolverPlugin()

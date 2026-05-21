@@ -2,6 +2,7 @@ namespace Smart.Navigation;
 
 using System.Windows.Controls;
 
+using Smart.Navigation.Effects;
 using Smart.Navigation.Mappers;
 
 public static class WindowsNavigatorConfigExtensions
@@ -15,13 +16,13 @@ public static class WindowsNavigatorConfigExtensions
     {
         var options = new WindowsNavigationProviderOptions();
 
-        // Register standard animations
-        options.RegisterAnimation(WindowsAnimationKinds.None, NoneWindowsAnimation.Instance);
-        options.RegisterAnimation(WindowsAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
-        options.RegisterAnimation(WindowsAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
-        options.RegisterAnimation(WindowsAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
-        options.RegisterAnimation(WindowsAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
-        options.RegisterAnimation(WindowsAnimationKinds.Fade, new FadeAnimation());
+        // Register standard effects
+        options.RegisterEffect(WindowsEffectKinds.None, NoneWindowsEffect.Instance);
+        options.RegisterEffect(WindowsEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(WindowsEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(WindowsEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(WindowsEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(WindowsEffectKinds.Fade, new FadeEffect());
 
         setupAction(options);
 
@@ -52,13 +53,13 @@ public static class WindowsNavigatorConfigExtensions
     {
         var options = new WindowsNavigationProviderOptions();
 
-        // Register standard animations
-        options.RegisterAnimation(WindowsAnimationKinds.None, NoneWindowsAnimation.Instance);
-        options.RegisterAnimation(WindowsAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
-        options.RegisterAnimation(WindowsAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
-        options.RegisterAnimation(WindowsAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
-        options.RegisterAnimation(WindowsAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
-        options.RegisterAnimation(WindowsAnimationKinds.Fade, new FadeAnimation());
+        // Register standard effects
+        options.RegisterEffect(WindowsEffectKinds.None, NoneWindowsEffect.Instance);
+        options.RegisterEffect(WindowsEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(WindowsEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(WindowsEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(WindowsEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(WindowsEffectKinds.Fade, new FadeEffect());
 
         setupAction(options);
 

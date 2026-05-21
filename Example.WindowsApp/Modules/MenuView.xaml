@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:s="http://smart/windows"
              xmlns:views="clr-namespace:Example.WindowsApp.Views"
+             xmlns:effect="clr-namespace:Example.WindowsApp.Modules.Effect"
              xmlns:modules="clr-namespace:Example.WindowsApp.Modules"
              xmlns:stack="clr-namespace:Example.WindowsApp.Modules.Stack"
              xmlns:wizard="clr-namespace:Example.WindowsApp.Modules.Wizard"
-             xmlns:animation="clr-namespace:Example.WindowsApp.Modules.Animation"
              mc:Ignorable="d"
              x:Class="Example.WindowsApp.Modules.MenuView"
              s:DataContextResolver.Type="{x:Type modules:MenuViewModel}"
@@ -36,7 +36,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Command="{Binding Forward}"
-                CommandParameter="{x:Type animation:AnimationMenuView}"
+                CommandParameter="{x:Type effect:AnimationMenuView}"
                 Content="Animation" />
 
     </Grid>

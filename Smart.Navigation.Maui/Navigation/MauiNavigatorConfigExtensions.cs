@@ -1,5 +1,6 @@
 namespace Smart.Navigation;
 
+using Smart.Navigation.Effects;
 using Smart.Navigation.Mappers;
 
 public static class MauiNavigatorConfigExtensions
@@ -13,13 +14,13 @@ public static class MauiNavigatorConfigExtensions
     {
         var options = new MauiNavigationProviderOptions();
 
-        // Register standard animations
-        options.RegisterAnimation(MauiAnimationKinds.None, NoneMauiAnimation.Instance);
-        options.RegisterAnimation(MauiAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
-        options.RegisterAnimation(MauiAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
-        options.RegisterAnimation(MauiAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
-        options.RegisterAnimation(MauiAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
-        options.RegisterAnimation(MauiAnimationKinds.Fade, new FadeAnimation());
+        // Register standard effects
+        options.RegisterEffect(MauiEffectKinds.None, NoneMauiEffect.Instance);
+        options.RegisterEffect(MauiEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(MauiEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(MauiEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(MauiEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(MauiEffectKinds.Fade, new FadeEffect());
 
         setupAction(options);
 
@@ -49,13 +50,13 @@ public static class MauiNavigatorConfigExtensions
     {
         var options = new MauiNavigationProviderOptions();
 
-        // Register standard animations
-        options.RegisterAnimation(MauiAnimationKinds.None, NoneMauiAnimation.Instance);
-        options.RegisterAnimation(MauiAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
-        options.RegisterAnimation(MauiAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
-        options.RegisterAnimation(MauiAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
-        options.RegisterAnimation(MauiAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
-        options.RegisterAnimation(MauiAnimationKinds.Fade, new FadeAnimation());
+        // Register standard effects
+        options.RegisterEffect(MauiEffectKinds.None, NoneMauiEffect.Instance);
+        options.RegisterEffect(MauiEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(MauiEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(MauiEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(MauiEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(MauiEffectKinds.Fade, new FadeEffect());
 
         setupAction(options);
 

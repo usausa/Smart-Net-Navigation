@@ -2,6 +2,7 @@ namespace Smart.Navigation;
 
 using Avalonia.Controls;
 
+using Smart.Navigation.Effects;
 using Smart.Navigation.Mappers;
 
 public static class AvaloniaNavigatorConfigExtensions
@@ -15,13 +16,13 @@ public static class AvaloniaNavigatorConfigExtensions
     {
         var options = new AvaloniaNavigationProviderOptions();
 
-        // Register standard animations
-        options.RegisterAnimation(AvaloniaAnimationKinds.None, NoneAvaloniaAnimation.Instance);
-        options.RegisterAnimation(AvaloniaAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Fade, new FadeAnimation());
+        // Register standard effects
+        options.RegisterEffect(AvaloniaEffectKinds.None, NoneAvaloniaEffect.Instance);
+        options.RegisterEffect(AvaloniaEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(AvaloniaEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(AvaloniaEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(AvaloniaEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(AvaloniaEffectKinds.Fade, new FadeEffect());
 
         setupAction(options);
 
@@ -52,13 +53,13 @@ public static class AvaloniaNavigatorConfigExtensions
     {
         var options = new AvaloniaNavigationProviderOptions();
 
-        // Register standard animations
-        options.RegisterAnimation(AvaloniaAnimationKinds.None, NoneAvaloniaAnimation.Instance);
-        options.RegisterAnimation(AvaloniaAnimationKinds.Forward, new SlideHorizontalAnimation(fromRight: true));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Back, new SlideHorizontalAnimation(fromRight: false));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Push, new SlideVerticalAnimation(fromBottom: true));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Pop, new SlideVerticalAnimation(fromBottom: false));
-        options.RegisterAnimation(AvaloniaAnimationKinds.Fade, new FadeAnimation());
+        // Register standard effects
+        options.RegisterEffect(AvaloniaEffectKinds.None, NoneAvaloniaEffect.Instance);
+        options.RegisterEffect(AvaloniaEffectKinds.Forward, new SlideHorizontalEffect(fromRight: true));
+        options.RegisterEffect(AvaloniaEffectKinds.Back, new SlideHorizontalEffect(fromRight: false));
+        options.RegisterEffect(AvaloniaEffectKinds.Push, new SlideVerticalEffect(fromBottom: true));
+        options.RegisterEffect(AvaloniaEffectKinds.Pop, new SlideVerticalEffect(fromBottom: false));
+        options.RegisterEffect(AvaloniaEffectKinds.Fade, new FadeEffect());
 
         setupAction(options);
 

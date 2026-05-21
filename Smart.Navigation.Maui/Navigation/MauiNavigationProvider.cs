@@ -92,28 +92,28 @@ public sealed class MauiNavigationProvider : INavigationProvider, IAsyncNavigati
     public async Task OpenViewAsync(object view, INavigationParameter parameter)
     {
         OpenView(view);
-        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Open).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, MauiNavigationEffectPhase.Open).ConfigureAwait(true);
     }
 
     public async Task CloseViewAsync(object view, INavigationParameter parameter)
     {
-        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Close).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, MauiNavigationEffectPhase.Close).ConfigureAwait(true);
         CloseView(view);
     }
 
     public async Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
     {
         ActivateView(view, state);
-        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Activate).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, MauiNavigationEffectPhase.Activate).ConfigureAwait(true);
     }
 
     public async Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
     {
-        await PlayWithGuardAsync(view, parameter, MauiNavigationAnimationPhase.Deactivate).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, MauiNavigationEffectPhase.Deactivate).ConfigureAwait(true);
         return DeactivateView(view);
     }
 
-    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, MauiNavigationAnimationPhase phase)
+    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, MauiNavigationEffectPhase phase)
     {
         var element = Unsafe.As<View>(view);
         var previousInputTransparent = element.InputTransparent;
@@ -138,10 +138,10 @@ public sealed class MauiNavigationProvider : INavigationProvider, IAsyncNavigati
         }
     }
 
-    private Task PlayAsync(View element, INavigationParameter parameter, MauiNavigationAnimationPhase phase)
+    private Task PlayAsync(View element, INavigationParameter parameter, MauiNavigationEffectPhase phase)
     {
-        var key = parameter.AnimationKind;
-        if (key is null || !options.Animations.TryGetValue(key, out var animation))
+        var key = parameter.EffectKind;
+        if (key is null || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }
@@ -152,7 +152,7 @@ public sealed class MauiNavigationProvider : INavigationProvider, IAsyncNavigati
             return Task.CompletedTask;
         }
 
-        return animation.PlayAsync(new MauiNavigationAnimationContext
+        return effect.PlayAsync(new MauiNavigationEffectContext
         {
             Container = container,
             View = element,

@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Navigation\Animations\" />
+  </ItemGroup>
+
 </Project>

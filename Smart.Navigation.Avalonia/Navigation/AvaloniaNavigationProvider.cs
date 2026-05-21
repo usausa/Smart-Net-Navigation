@@ -93,28 +93,28 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavi
     public async Task OpenViewAsync(object view, INavigationParameter parameter)
     {
         OpenView(view);
-        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Open).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationEffectPhase.Open).ConfigureAwait(true);
     }
 
     public async Task CloseViewAsync(object view, INavigationParameter parameter)
     {
-        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Close).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationEffectPhase.Close).ConfigureAwait(true);
         CloseView(view);
     }
 
     public async Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
     {
         ActivateView(view, state);
-        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Activate).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationEffectPhase.Activate).ConfigureAwait(true);
     }
 
     public async Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
     {
-        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationAnimationPhase.Deactivate).ConfigureAwait(true);
+        await PlayWithGuardAsync(view, parameter, AvaloniaNavigationEffectPhase.Deactivate).ConfigureAwait(true);
         return DeactivateView(view);
     }
 
-    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, AvaloniaNavigationAnimationPhase phase)
+    private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
     {
         var element = Unsafe.As<Control>(view);
         element.IsHitTestVisible = false;
@@ -128,10 +128,10 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavi
         }
     }
 
-    private Task PlayAsync(Control element, INavigationParameter parameter, AvaloniaNavigationAnimationPhase phase)
+    private Task PlayAsync(Control element, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
     {
-        var key = parameter.AnimationKind;
-        if (key is null || !options.Animations.TryGetValue(key, out var animation))
+        var key = parameter.EffectKind;
+        if (key is null || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }
@@ -142,7 +142,7 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavi
             return Task.CompletedTask;
         }
 
-        return animation.PlayAsync(new AvaloniaNavigationAnimationContext
+        return effect.PlayAsync(new AvaloniaNavigationEffectContext
         {
             Container = container,
             View = element,

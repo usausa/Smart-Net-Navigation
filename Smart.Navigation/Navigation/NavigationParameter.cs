@@ -48,7 +48,7 @@ public sealed class NavigationParameter : INavigationParameter
         return ret;
     }
 
-    public string? AnimationKind { get; set; }
+    public string? EffectKind { get; set; }
 
     public NavigationParameter SetValue<T>(string key, T value)
     {
