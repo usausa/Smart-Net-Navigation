@@ -59,5 +59,13 @@ public sealed class NavigationParameter : INavigationParameter
         return SetValue(typeof(T).Name, value);
     }
 
-    public string? Effect { get; set; }
+    private string? effect;
+
+    public string? Effect => effect;
+
+    public NavigationParameter WithEffect(string value)
+    {
+        effect = value;
+        return this;
+    }
 }
