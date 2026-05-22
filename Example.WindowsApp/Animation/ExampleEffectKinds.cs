@@ -6,7 +6,8 @@ namespace Example.WindowsApp.Animation;
 // at provider configuration time.
 internal static class ExampleEffect
 {
-    public const string Dialog = "Dialog";
+    public const string DialogOpen = "DialogOpen";
+    public const string DialogClose = "DialogClose";
     public const string Zoom = "Zoom";
     public const string Drop = "Drop";
     public const string Flip = "Flip";

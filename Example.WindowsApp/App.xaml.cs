@@ -4,6 +4,7 @@ using System.Windows;
 
 using Example.WindowsApp.Animation;
 using Example.WindowsApp.Modules;
+using Example.WindowsApp.Plugins;
 
 using Smart.Mvvm.Resolver;
 using Smart.Navigation;
@@ -25,7 +26,8 @@ public sealed partial class App
         navigator = new NavigatorConfig()
             .UseWindowsNavigationProvider(static options =>
             {
-                options.RegisterEffect(ExampleEffect.Dialog, new DialogEffect());
+                options.RegisterEffect(ExampleEffect.DialogOpen, new DialogOpenEffect());
+                options.RegisterEffect(ExampleEffect.DialogClose, new DialogCloseEffect());
                 options.RegisterEffect(ExampleEffect.Zoom, new ZoomEffect());
                 options.RegisterEffect(ExampleEffect.Drop, new DropEffect());
                 options.RegisterEffect(ExampleEffect.Flip, new FlipEffect());
@@ -33,6 +35,7 @@ public sealed partial class App
             })
             .UseServiceProvider(resolver)
             .AddResolverPlugin()
+            .AddPlugin(new DialogEffectPlugin())
             .ToNavigator();
         navigator.Navigated += (_, args) =>
         {

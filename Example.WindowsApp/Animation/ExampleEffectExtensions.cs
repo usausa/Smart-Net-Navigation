@@ -4,8 +4,11 @@ using Smart.Navigation;
 
 internal static class ExampleEffectExtensions
 {
-    public static NavigationParameter WithDialogEffect(this NavigationParameter parameter)
-        => parameter.WithEffect(ExampleEffect.Dialog);
+    public static NavigationParameter WithDialogOpenEffect(this NavigationParameter parameter)
+        => parameter.WithEffect(ExampleEffect.DialogOpen);
+
+    public static NavigationParameter WithDialogCloseEffect(this NavigationParameter parameter)
+        => parameter.WithEffect(ExampleEffect.DialogClose);
 
     public static NavigationParameter WithZoomEffect(this NavigationParameter parameter)
         => parameter.WithEffect(ExampleEffect.Zoom);

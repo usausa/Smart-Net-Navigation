@@ -13,79 +13,80 @@
              d:DesignHeight="320"
              views:ShellProperty.Title="Effect Menu">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Orientation="Vertical"
-                    Margin="10">
-            <TextBlock Margin="0,0,0,8"
-                       Text="Choose Animation"
-                       FontWeight="Bold" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Section: Choose Animation -->
+        <TextBlock Grid.Row="0"
+                   Margin="0,0,0,6"
+                   Text="Choose Animation"
+                   FontWeight="Bold" />
+
+        <UniformGrid Grid.Row="1"
+                     Columns="3"
+                     VerticalAlignment="Top">
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Forward"
-                    Content="Forward (Slide L/R Pair)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Forward" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Back"
-                    Content="Back (Slide R/L Pair)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Back" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Push"
-                    Content="Push (Slide Up)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Push" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Pop"
-                    Content="Pop (Slide Down)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Pop" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Fade"
                     Content="Fade" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
-                    Command="{Binding Navigate}"
-                    CommandParameter="Dialog"
-                    Content="Dialog (Scale + Fade from Center)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Zoom"
-                    Content="Zoom (Overshoot + Fade)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Zoom" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Drop"
-                    Content="Drop (Bounce from Top)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Drop" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Flip"
-                    Content="Flip (Horizontal)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Flip" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Rotate"
-                    Content="Rotate (Spin + Fade)" />
-            <Button Width="200"
-                    Margin="0,4"
-                    HorizontalAlignment="Left"
+                    Content="Rotate" />
+            <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter=""
                     Content="No Animation" />
+        </UniformGrid>
+
+        <!-- Separator -->
+        <Separator Grid.Row="2" Margin="0,8" />
+
+        <!-- Section: Plugin Auto-Effect -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Vertical">
+            <TextBlock Margin="0,0,0,4"
+                       Text="Plugin Auto-Effect Demo"
+                       FontWeight="Bold" />
+            <Button HorizontalAlignment="Left"
+                    MinWidth="160"
+                    Margin="3"
+                    Command="{Binding NavigateDialog}"
+                    Content="Dialog (Auto by Plugin)" />
         </StackPanel>
-    </ScrollViewer>
+    </Grid>
 
 </UserControl>
