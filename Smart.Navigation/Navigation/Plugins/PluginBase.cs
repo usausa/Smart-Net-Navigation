@@ -10,6 +10,13 @@ public abstract class PluginBase : IPlugin
     {
     }
 
+    public virtual void OnPrepareParameter(
+        IPluginContext pluginContext,
+        INavigationContext navigationContext,
+        IMutableNavigationParameter parameter)
+    {
+    }
+
     public virtual void OnNavigatingFrom(IPluginContext pluginContext, INavigationContext navigationContext, object? view, object? target)
     {
     }

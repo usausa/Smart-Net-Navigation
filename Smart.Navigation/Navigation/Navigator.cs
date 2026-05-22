@@ -35,8 +35,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
     // Member
     // ------------------------------------------------------------
 
-    private static readonly NavigationParameter EmptyParameter = new();
-
     private readonly ComponentContainer components;
 
     private readonly List<ViewStackInfo> viewStack = [];
@@ -132,7 +130,14 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             return false;
         }
 
-        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+        var workingParameter = EnsureMutable(parameter);
+        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, workingParameter);
+
+        var pluginContext = new PluginContext();
+        foreach (var plugin in plugins)
+        {
+            plugin.OnPrepareParameter(pluginContext, navigationContext, workingParameter);
+        }
 
         if (!ConfirmNavigation(navigationContext))
         {
@@ -150,7 +155,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
 
-            var pluginContext = new PluginContext();
             controller.PluginContext = pluginContext;
 
             var fromView = CurrentView;
@@ -220,7 +224,14 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             return false;
         }
 
-        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, parameter ?? EmptyParameter);
+        var workingParameter = EnsureMutable(parameter);
+        var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, workingParameter);
+
+        var pluginContext = new PluginContext();
+        foreach (var plugin in plugins)
+        {
+            plugin.OnPrepareParameter(pluginContext, navigationContext, workingParameter);
+        }
 
 #pragma warning disable CA1849
         // ReSharper disable once MethodHasAsyncOverload
@@ -247,7 +258,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
 
-            var pluginContext = new PluginContext();
             controller.PluginContext = pluginContext;
 
             var fromView = CurrentView;
@@ -332,8 +342,19 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
     // Helper
     // ------------------------------------------------------------
 
-    private bool ConfirmNavigation(NavigationContext context)
+    private static NavigationParameter EnsureMutable(INavigationParameter? parameter)
     {
+        return parameter switch
+        {
+            null => new NavigationParameter(),
+            NavigationParameter np => np,
+            _ => throw new InvalidOperationException(
+                "Custom INavigationParameter implementations are not supported when plugin parameter preparation is enabled. " +
+                "Use NavigationParameter or null.")
+        };
+    }
+
+    private bool ConfirmNavigation(NavigationContext context)    {
         if (CurrentTarget is IConfirmRequest confirm)
         {
             var canNavigate = confirm.CanNavigate(context);
