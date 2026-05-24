@@ -59,9 +59,11 @@ public sealed class NavigationParameter : IMutableNavigationParameter
         return SetValue(typeof(T).Name, value);
     }
 
+#pragma warning disable IDE0032
     private string? effect;
 
     public string? Effect => effect;
+#pragma warning restore IDE0032
 
     public NavigationParameter WithEffect(string value)
     {

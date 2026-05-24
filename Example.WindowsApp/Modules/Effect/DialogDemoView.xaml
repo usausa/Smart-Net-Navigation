@@ -22,11 +22,6 @@
                        Text="Dialog Demo"
                        FontSize="20"
                        FontWeight="Bold" />
-            <TextBlock Margin="0,8,0,0"
-                       HorizontalAlignment="Center"
-                       TextWrapping="Wrap"
-                       MaxWidth="360"
-                       Text="この画面は IDialogView を実装しています。&#10;DialogEffectPlugin により Effect 指定なしで Dialog アニメーションが自動適用されます。" />
             <TextBlock Margin="0,12,0,0"
                        HorizontalAlignment="Center">
                 <Run Text="Applied Effect: " />

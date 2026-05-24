@@ -28,8 +28,8 @@
                    FontWeight="Bold" />
 
         <UniformGrid Grid.Row="1"
-                     Columns="3"
-                     VerticalAlignment="Top">
+                     VerticalAlignment="Top"
+                     Columns="3">
             <Button Margin="3"
                     Command="{Binding Navigate}"
                     CommandParameter="Forward"
@@ -73,7 +73,8 @@
         </UniformGrid>
 
         <!-- Separator -->
-        <Separator Grid.Row="2" Margin="0,8" />
+        <Separator Grid.Row="2"
+                   Margin="0,8" />
 
         <!-- Section: Plugin Auto-Effect -->
         <StackPanel Grid.Row="3"
@@ -81,9 +82,9 @@
             <TextBlock Margin="0,0,0,4"
                        Text="Plugin Auto-Effect Demo"
                        FontWeight="Bold" />
-            <Button HorizontalAlignment="Left"
-                    MinWidth="160"
+            <Button MinWidth="160"
                     Margin="3"
+                    HorizontalAlignment="Left"
                     Command="{Binding NavigateDialog}"
                     Content="Dialog (Auto by Plugin)" />
         </StackPanel>

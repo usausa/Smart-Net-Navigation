@@ -354,7 +354,8 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         };
     }
 
-    private bool ConfirmNavigation(NavigationContext context)    {
+    private bool ConfirmNavigation(NavigationContext context)
+    {
         if (CurrentTarget is IConfirmRequest confirm)
         {
             var canNavigate = confirm.CanNavigate(context);
@@ -396,7 +397,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
     // Controller
     // ------------------------------------------------------------
 
-    private sealed class Controller : INavigationController, IAsyncNavigationController
+    private sealed class Controller : IAsyncNavigationController
     {
         private readonly Navigator navigator;
 
