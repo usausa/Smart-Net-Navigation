@@ -1,9 +1,12 @@
 namespace Smart.Navigation.Plugins.Scope;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 using Smart.Reflection;
 
+[RequiresUnreferencedCode("ScopePlugin uses reflection to scan properties with [Scope] attribute. This may not work with trimming.")]
+[RequiresDynamicCode("ScopePlugin uses dynamic delegate creation which may not work in AOT environments.")]
 public sealed class ScopePlugin : PluginBase
 {
     private sealed class Reference

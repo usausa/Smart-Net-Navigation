@@ -1,5 +1,9 @@
 namespace Smart.Navigation.Mappers;
 
+using System.Diagnostics.CodeAnalysis;
+
+[RequiresDynamicCode("PathViewMapper uses dynamic type resolution via Assembly.GetType which is not AOT compatible. Use IdViewMapper or DirectViewMapper instead.")]
+[RequiresUnreferencedCode("PathViewMapper uses Assembly.GetType which may not work with trimming. Use IdViewMapper or DirectViewMapper instead.")]
 public sealed class PathViewMapper : IViewMapper
 {
     private readonly Dictionary<string, ViewDescriptor> descriptors = [];

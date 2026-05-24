@@ -1,7 +1,10 @@
 namespace Smart.Navigation.Mappers;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
+[RequiresDynamicCode("PathViewMapperOptions uses Assembly.GetType for dynamic type resolution which is not AOT compatible.")]
+[RequiresUnreferencedCode("PathViewMapperOptions uses Assembly.GetType which may not work with trimming.")]
 public sealed class PathViewMapperOptions
 {
     private readonly List<Assembly> assemblies = [];

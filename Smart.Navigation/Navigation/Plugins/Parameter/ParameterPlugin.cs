@@ -1,10 +1,13 @@
 namespace Smart.Navigation.Plugins.Parameter;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 using Smart.Navigation.Components;
 using Smart.Reflection;
 
+[RequiresUnreferencedCode("ParameterPlugin uses reflection to scan properties with [Parameter] attribute. This may not work with trimming.")]
+[RequiresDynamicCode("ParameterPlugin uses dynamic delegate creation which may not work in AOT environments.")]
 public sealed class ParameterPlugin : PluginBase
 {
     private readonly Dictionary<Type, ParameterProperty[]> typeProperties = [];

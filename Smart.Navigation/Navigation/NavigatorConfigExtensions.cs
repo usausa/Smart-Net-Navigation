@@ -1,5 +1,6 @@
 namespace Smart.Navigation;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 using Smart.Converter;
@@ -89,6 +90,7 @@ public static class NavigatorConfigExtensions
         return config.UseViewMapper<IdViewMapper>();
     }
 
+    [RequiresUnreferencedCode("AutoRegister uses reflection to scan custom attributes on types. This may not work with trimming. Use the Source Generator generated registration code instead.")]
     public static void AutoRegister(this IIdViewRegister register, IEnumerable<Type> types)
     {
         foreach (var type in types)
@@ -108,6 +110,8 @@ public static class NavigatorConfigExtensions
         }
     }
 
+    [RequiresDynamicCode("UsePathViewMapper uses PathViewMapper which relies on dynamic type resolution not compatible with AOT. Use UseIdViewMapper or UseDirectViewMapper instead.")]
+    [RequiresUnreferencedCode("UsePathViewMapper uses PathViewMapper which relies on Assembly.GetType and may not work with trimming. Use UseIdViewMapper or UseDirectViewMapper instead.")]
     public static NavigatorConfig UsePathViewMapper(this NavigatorConfig config, Action<PathViewMapperOptions> action)
     {
         var options = new PathViewMapperOptions();
