@@ -31,9 +31,10 @@ internal sealed class SlideVerticalEffect : IAvaloniaNavigationEffect
         {
             AvaloniaNavigationEffectPhase.Open => (fromBottom ? height : -height, 0d),
             AvaloniaNavigationEffectPhase.Close => (0d, fromBottom ? height : -height),
-            _ => (0d, 0d),
+            _ => (0d, 0d)
         };
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (from == to)
         {
             return;
@@ -52,14 +53,14 @@ internal sealed class SlideVerticalEffect : IAvaloniaNavigationEffect
                 new KeyFrame
                 {
                     Cue = new Cue(0d),
-                    Setters = { new Setter(TranslateTransform.YProperty, from) },
+                    Setters = { new Setter(TranslateTransform.YProperty, from) }
                 },
                 new KeyFrame
                 {
                     Cue = new Cue(1d),
-                    Setters = { new Setter(TranslateTransform.YProperty, to) },
-                },
-            },
+                    Setters = { new Setter(TranslateTransform.YProperty, to) }
+                }
+            }
         };
 
         await animation.RunAsync(transform).ConfigureAwait(true);

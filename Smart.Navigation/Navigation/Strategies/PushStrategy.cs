@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Strategies;
 
-public sealed class PushStrategy : INavigationStrategy, IAsyncNavigationStrategy
+public sealed class PushStrategy : IAsyncNavigationStrategy
 {
     private readonly object id;
 

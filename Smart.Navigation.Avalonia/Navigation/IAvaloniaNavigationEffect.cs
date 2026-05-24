@@ -7,7 +7,7 @@ public enum AvaloniaNavigationEffectPhase
     Open,
     Close,
     Activate,
-    Deactivate,
+    Deactivate
 }
 
 public sealed class AvaloniaNavigationEffectContext

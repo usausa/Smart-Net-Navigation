@@ -6,10 +6,10 @@ public sealed class DataService
 {
     private readonly List<DataEntity> entities =
     [
-        new DataEntity { Id = 1, Name = "Data-1" },
-        new DataEntity { Id = 2, Name = "Data-2" },
-        new DataEntity { Id = 3, Name = "Data-3" },
-        new DataEntity { Id = 4, Name = "Data-4" }
+        new() { Id = 1, Name = "Data-1" },
+        new() { Id = 2, Name = "Data-2" },
+        new() { Id = 3, Name = "Data-3" },
+        new() { Id = 4, Name = "Data-4" }
     ];
 
     public IEnumerable<DataEntity> QueryDataList()

@@ -23,15 +23,11 @@ internal sealed class FadeEffect : IMauiNavigationEffect
                 await element.FadeToAsync(1, duration).ConfigureAwait(true);
                 element.Opacity = 1;
                 break;
-
             case MauiNavigationEffectPhase.Close:
             case MauiNavigationEffectPhase.Deactivate:
                 element.Opacity = 1;
                 await element.FadeToAsync(0, duration).ConfigureAwait(true);
                 element.Opacity = 1;
-                break;
-
-            default:
                 break;
         }
     }

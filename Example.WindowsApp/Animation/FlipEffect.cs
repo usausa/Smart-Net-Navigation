@@ -21,9 +21,10 @@ internal sealed class FlipEffect : IWindowsNavigationEffect
         {
             WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (0d, 1d),
             WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (1d, 0d),
-            _ => (1d, 1d),
+            _ => (1d, 1d)
         };
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (from == to)
         {
             return Task.CompletedTask;
@@ -36,7 +37,7 @@ internal sealed class FlipEffect : IWindowsNavigationEffect
         var tcs = new TaskCompletionSource();
         var anim = new DoubleAnimation(from, to, new Duration(duration))
         {
-            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut },
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
         };
         anim.Completed += (_, _) =>
         {

@@ -26,9 +26,10 @@ internal sealed class SlideVerticalEffect : IWindowsNavigationEffect
         {
             WindowsNavigationEffectPhase.Open => (fromBottom ? height : -height, 0d),
             WindowsNavigationEffectPhase.Close => (0d, fromBottom ? height : -height),
-            _ => (0d, 0d),
+            _ => (0d, 0d)
         };
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (from == to)
         {
             return Task.CompletedTask;
@@ -37,7 +38,7 @@ internal sealed class SlideVerticalEffect : IWindowsNavigationEffect
         var tcs = new TaskCompletionSource();
         var anim = new DoubleAnimation(from, to, new Duration(duration))
         {
-            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
         };
         anim.Completed += (_, _) =>
         {

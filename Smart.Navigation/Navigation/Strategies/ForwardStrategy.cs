@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Strategies;
 
-public sealed class ForwardStrategy : INavigationStrategy, IAsyncNavigationStrategy
+public sealed class ForwardStrategy : IAsyncNavigationStrategy
 {
     private readonly object id;
 

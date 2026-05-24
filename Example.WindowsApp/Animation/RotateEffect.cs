@@ -24,13 +24,16 @@ internal sealed class RotateEffect : IWindowsNavigationEffect
         {
             WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (-angle, 0d, 0d, 1d),
             WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (0d, angle, 1d, 0d),
-            _ => (0d, 0d, 1d, 1d),
+            _ => (0d, 0d, 1d, 1d)
         };
 
-        if (fromAngle == toAngle && fromOpacity == toOpacity)
+        // ReSharper disable CompareOfFloatsByEqualityOperator
+        if ((fromAngle == toAngle) && (fromOpacity == toOpacity))
         {
             return Task.CompletedTask;
         }
+        // ReSharper restore CompareOfFloatsByEqualityOperator
+
 
         var rotate = new RotateTransform(fromAngle);
         context.View.RenderTransform = rotate;

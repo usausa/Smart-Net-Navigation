@@ -24,13 +24,15 @@ internal sealed class ZoomEffect : IWindowsNavigationEffect
         {
             WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (overshoot, 1d, 0d, 1d),
             WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (1d, overshoot, 1d, 0d),
-            _ => (1d, 1d, 1d, 1d),
+            _ => (1d, 1d, 1d, 1d)
         };
 
-        if (fromScale == toScale && fromOpacity == toOpacity)
+        // ReSharper disable CompareOfFloatsByEqualityOperator
+        if ((fromScale == toScale) && (fromOpacity == toOpacity))
         {
             return Task.CompletedTask;
         }
+        // ReSharper restore CompareOfFloatsByEqualityOperator
 
         var scale = new ScaleTransform(fromScale, fromScale);
         context.View.RenderTransform = scale;

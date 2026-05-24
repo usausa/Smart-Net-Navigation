@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Strategies;
 
-public sealed class PopAndForwardStrategy : INavigationStrategy, IAsyncNavigationStrategy
+public sealed class PopAndForwardStrategy : IAsyncNavigationStrategy
 {
     private readonly bool all;
 

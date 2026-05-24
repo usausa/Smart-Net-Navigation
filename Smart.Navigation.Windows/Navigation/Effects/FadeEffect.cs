@@ -20,9 +20,10 @@ internal sealed class FadeEffect : IWindowsNavigationEffect
         {
             WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (0d, 1d),
             WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (1d, 0d),
-            _ => (1d, 1d),
+            _ => (1d, 1d)
         };
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (from == to)
         {
             return Task.CompletedTask;

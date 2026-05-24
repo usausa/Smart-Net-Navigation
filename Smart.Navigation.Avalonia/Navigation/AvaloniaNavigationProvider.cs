@@ -10,7 +10,7 @@ using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.VisualTree;
 
-public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavigationProvider
+public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
@@ -150,7 +150,7 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavi
             Container = container,
             View = element,
             Phase = phase,
-            Parameter = parameter,
+            Parameter = parameter
         });
     }
 

@@ -5,7 +5,7 @@ public enum MauiNavigationEffectPhase
     Open,
     Close,
     Activate,
-    Deactivate,
+    Deactivate
 }
 
 public sealed class MauiNavigationEffectContext

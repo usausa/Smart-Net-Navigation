@@ -29,12 +29,13 @@ internal sealed class DropEffect : IWindowsNavigationEffect
             {
                 Bounces = 2,
                 Bounciness = 2,
-                EasingMode = EasingMode.EaseOut,
+                EasingMode = EasingMode.EaseOut
             }),
             WindowsNavigationEffectPhase.Close => (0d, -height, new CubicEase { EasingMode = EasingMode.EaseIn }),
-            _ => (0d, 0d, null!),
+            _ => (0d, 0d, null!)
         };
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (from == to)
         {
             return Task.CompletedTask;
@@ -46,7 +47,7 @@ internal sealed class DropEffect : IWindowsNavigationEffect
         var tcs = new TaskCompletionSource();
         var anim = new DoubleAnimation(from, to, new Duration(duration))
         {
-            EasingFunction = easing,
+            EasingFunction = easing
         };
         anim.Completed += (_, _) =>
         {

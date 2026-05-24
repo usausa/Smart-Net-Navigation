@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 using Microsoft.Maui.Layouts;
 
-public sealed class MauiNavigationProvider : INavigationProvider, IAsyncNavigationProvider
+public sealed class MauiNavigationProvider : IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
@@ -157,7 +157,7 @@ public sealed class MauiNavigationProvider : INavigationProvider, IAsyncNavigati
             Container = container,
             View = element,
             Phase = phase,
-            Parameter = parameter,
+            Parameter = parameter
         });
     }
 

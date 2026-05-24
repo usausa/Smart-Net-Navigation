@@ -21,9 +21,10 @@ internal sealed class FadeEffect : IAvaloniaNavigationEffect
         {
             AvaloniaNavigationEffectPhase.Open or AvaloniaNavigationEffectPhase.Activate => (0d, 1d),
             AvaloniaNavigationEffectPhase.Close or AvaloniaNavigationEffectPhase.Deactivate => (1d, 0d),
-            _ => (1d, 1d),
+            _ => (1d, 1d)
         };
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (from == to)
         {
             return;
@@ -38,14 +39,14 @@ internal sealed class FadeEffect : IAvaloniaNavigationEffect
                 new KeyFrame
                 {
                     Cue = new Cue(0d),
-                    Setters = { new Setter(Visual.OpacityProperty, from) },
+                    Setters = { new Setter(Visual.OpacityProperty, from) }
                 },
                 new KeyFrame
                 {
                     Cue = new Cue(1d),
-                    Setters = { new Setter(Visual.OpacityProperty, to) },
-                },
-            },
+                    Setters = { new Setter(Visual.OpacityProperty, to) }
+                }
+            }
         };
 
         await animation.RunAsync(context.View).ConfigureAwait(true);

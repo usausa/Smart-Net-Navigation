@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
-public sealed class WindowsNavigationProvider : INavigationProvider, IAsyncNavigationProvider
+public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
@@ -157,7 +157,7 @@ public sealed class WindowsNavigationProvider : INavigationProvider, IAsyncNavig
             Container = container,
             View = element,
             Phase = phase,
-            Parameter = parameter,
+            Parameter = parameter
         });
     }
 }

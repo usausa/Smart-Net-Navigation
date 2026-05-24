@@ -8,7 +8,7 @@ public enum WindowsNavigationEffectPhase
     Open,
     Close,
     Activate,
-    Deactivate,
+    Deactivate
 }
 
 public sealed class WindowsNavigationEffectContext

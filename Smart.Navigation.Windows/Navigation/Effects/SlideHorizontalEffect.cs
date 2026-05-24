@@ -28,9 +28,10 @@ internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
         {
             WindowsNavigationEffectPhase.Open => (fromRight ? width : -width, 0d),
             WindowsNavigationEffectPhase.Close => (0d, fromRight ? -width : width),
-            _ => (0d, 0d),
+            _ => (0d, 0d)
         };
 
+        // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (from == to)
         {
             return Task.CompletedTask;
@@ -39,7 +40,7 @@ internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
         var tcs = new TaskCompletionSource();
         var anim = new DoubleAnimation(from, to, new Duration(duration))
         {
-            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
         };
         anim.Completed += (_, _) =>
         {
