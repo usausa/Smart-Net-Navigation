@@ -120,10 +120,7 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
         var layout = element as Layout;
         var previousCascade = layout?.CascadeInputTransparent ?? false;
         element.InputTransparent = true;
-        if (layout is not null)
-        {
-            layout.CascadeInputTransparent = true;
-        }
+        layout?.CascadeInputTransparent = true;
         try
         {
             await PlayAsync(element, parameter, phase).ConfigureAwait(true);
@@ -131,10 +128,7 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
         finally
         {
             element.InputTransparent = previousInputTransparent;
-            if (layout is not null)
-            {
-                layout.CascadeInputTransparent = previousCascade;
-            }
+            layout?.CascadeInputTransparent = previousCascade;
         }
     }
 
