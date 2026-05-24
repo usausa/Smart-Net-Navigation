@@ -55,7 +55,7 @@ internal sealed class DialogCloseEffect : IWindowsNavigationEffect
 internal static class DialogEffectHelper
 {
     internal static Task PlayScaleFadeAsync(
-        System.Windows.FrameworkElement view,
+        FrameworkElement view,
         double fromScale, double toScale,
         double fromOpacity, double toOpacity,
         TimeSpan duration)
