@@ -1,11 +1,11 @@
 namespace Smart.Navigation.Effects;
 
-using Smart.Navigation;
-
 using global::Avalonia.Animation;
 using global::Avalonia.Animation.Easings;
 using global::Avalonia.Media;
 using global::Avalonia.Styling;
+
+using Smart.Navigation;
 
 internal sealed class SlideHorizontalEffect : IAvaloniaNavigationEffect
 {

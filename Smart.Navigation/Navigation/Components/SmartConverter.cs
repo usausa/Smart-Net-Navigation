@@ -1,7 +1,11 @@
 namespace Smart.Navigation.Components;
 
+using System.Diagnostics.CodeAnalysis;
+
 using Smart.Converter;
 
+[RequiresUnreferencedCode("SmartConverter uses IObjectConverter.Convert which relies on reflection to discover types at runtime.")]
+[RequiresDynamicCode("SmartConverter uses IObjectConverter.Convert which uses MakeGenericType/MakeGenericMethod at runtime.")]
 public sealed class SmartConverter : IConverter
 {
     private readonly IObjectConverter converter;

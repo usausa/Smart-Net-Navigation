@@ -12,7 +12,7 @@ using Smart.Reflection;
 
 public static class NavigatorConfigExtensions
 {
-    public static NavigatorConfig UseProvider<TProvider>(this NavigatorConfig config)
+    public static NavigatorConfig UseProvider<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TProvider>(this NavigatorConfig config)
         where TProvider : INavigationProvider
     {
         config.Configure(static c =>
@@ -35,7 +35,7 @@ public static class NavigatorConfigExtensions
         return config;
     }
 
-    public static NavigatorConfig UseViewMapper<TViewMapper>(this NavigatorConfig config)
+    public static NavigatorConfig UseViewMapper<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewMapper>(this NavigatorConfig config)
         where TViewMapper : IViewMapper
     {
         config.Configure(static c =>
@@ -126,7 +126,7 @@ public static class NavigatorConfigExtensions
         return config.UseViewMapper<PathViewMapper>();
     }
 
-    public static NavigatorConfig UseTypeConstraint<TTypeConstraint>(this NavigatorConfig config)
+    public static NavigatorConfig UseTypeConstraint<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTypeConstraint>(this NavigatorConfig config)
         where TTypeConstraint : ITypeConstraint
     {
         config.Configure(static c =>
@@ -149,7 +149,7 @@ public static class NavigatorConfigExtensions
         return config;
     }
 
-    public static NavigatorConfig UseServiceProvider<TServiceProvider>(this NavigatorConfig config)
+    public static NavigatorConfig UseServiceProvider<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TServiceProvider>(this NavigatorConfig config)
         where TServiceProvider : IServiceProvider
     {
         config.Configure(static c =>
@@ -177,7 +177,7 @@ public static class NavigatorConfigExtensions
         return config.UseServiceProvider(new DelegateServiceProvider(callback));
     }
 
-    public static NavigatorConfig UseConverter<TConverter>(this NavigatorConfig config)
+    public static NavigatorConfig UseConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TConverter>(this NavigatorConfig config)
         where TConverter : IConverter
     {
         config.Configure(static c =>
@@ -205,12 +205,14 @@ public static class NavigatorConfigExtensions
         return config.UseConverter(new DelegateConverter(callback));
     }
 
+    [RequiresUnreferencedCode("UseConverter with IObjectConverter uses SmartConverter which relies on reflection to discover types at runtime.")]
+    [RequiresDynamicCode("UseConverter with IObjectConverter uses SmartConverter which uses MakeGenericType/MakeGenericMethod at runtime.")]
     public static NavigatorConfig UseConverter(this NavigatorConfig config, IObjectConverter converter)
     {
         return config.UseConverter(new SmartConverter(converter));
     }
 
-    public static NavigatorConfig AddPlugin<TPlugin>(this NavigatorConfig config)
+    public static NavigatorConfig AddPlugin<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TPlugin>(this NavigatorConfig config)
         where TPlugin : IPlugin
     {
         config.Configure(static c => c.Add<IPlugin, TPlugin>());
@@ -225,7 +227,7 @@ public static class NavigatorConfigExtensions
         return config;
     }
 
-    public static NavigatorConfig UseDelegateFactory<TDelegateFactory>(this NavigatorConfig config)
+    public static NavigatorConfig UseDelegateFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TDelegateFactory>(this NavigatorConfig config)
         where TDelegateFactory : IDelegateFactory
     {
         config.Configure(static c =>

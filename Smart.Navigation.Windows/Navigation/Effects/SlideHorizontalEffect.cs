@@ -1,9 +1,10 @@
 namespace Smart.Navigation.Effects;
 
-using Smart.Navigation;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+
+using Smart.Navigation;
 
 internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
 {

@@ -6,7 +6,6 @@ using System.Windows.Media.Animation;
 
 using Smart.Navigation;
 
-/// <summary>ダイアログオープン用エフェクト（スケールアップ + フェードイン）。</summary>
 internal sealed class DialogOpenEffect : IWindowsNavigationEffect
 {
     private readonly double minScale;
@@ -29,7 +28,6 @@ internal sealed class DialogOpenEffect : IWindowsNavigationEffect
     }
 }
 
-/// <summary>ダイアログクローズ用エフェクト（スケールダウン + フェードアウト）。</summary>
 internal sealed class DialogCloseEffect : IWindowsNavigationEffect
 {
     private readonly double minScale;
@@ -56,8 +54,10 @@ internal static class DialogEffectHelper
 {
     internal static Task PlayScaleFadeAsync(
         FrameworkElement view,
-        double fromScale, double toScale,
-        double fromOpacity, double toOpacity,
+        double fromScale,
+        double toScale,
+        double fromOpacity,
+        double toOpacity,
         TimeSpan duration)
     {
         var scale = new ScaleTransform(fromScale, fromScale);

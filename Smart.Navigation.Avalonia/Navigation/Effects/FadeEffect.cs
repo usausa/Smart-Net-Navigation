@@ -1,10 +1,10 @@
 namespace Smart.Navigation.Effects;
 
-using Smart.Navigation;
-
 using global::Avalonia;
 using global::Avalonia.Animation;
 using global::Avalonia.Styling;
+
+using Smart.Navigation;
 
 internal sealed class FadeEffect : IAvaloniaNavigationEffect
 {

@@ -1,5 +1,7 @@
 namespace Smart.Resolver;
 
+using System.Diagnostics.CodeAnalysis;
+
 using Smart.Navigation;
 using Smart.Navigation.Components;
 using Smart.Resolver.Expressions;
@@ -20,6 +22,8 @@ public static class ResolverConfigExtensions
         return syntax.InScope(_ => new PageContextScope(name));
     }
 
+    [RequiresUnreferencedCode("AddNavigator uses NavigatorConfig() which relies on reflection-based plugins. Use explicit configuration for AOT-compatible setup.")]
+    [RequiresDynamicCode("AddNavigator uses NavigatorConfig() which uses dynamic delegate creation. Use explicit configuration for AOT-compatible setup.")]
     public static ResolverConfig AddNavigator(this ResolverConfig config, Action<NavigatorConfig> action)
     {
         config.Bind<INavigator>().ToMethod(resolver =>

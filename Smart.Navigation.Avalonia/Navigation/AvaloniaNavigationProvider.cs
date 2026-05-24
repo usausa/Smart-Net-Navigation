@@ -1,5 +1,6 @@
 namespace Smart.Navigation;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 using Avalonia;
@@ -26,6 +27,8 @@ public sealed class AvaloniaNavigationProvider : INavigationProvider, IAsyncNavi
         return Unsafe.As<Control>(view).DataContext;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Avalonia.Data.Binding is used intentionally for runtime binding. Compile with CompiledBindings for AOT scenarios.")]
+    [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "Avalonia.Data.Binding is used intentionally for runtime binding. Compile with CompiledBindings for AOT scenarios.")]
     public void OpenView(object view)
     {
         var container = resolver.Container;

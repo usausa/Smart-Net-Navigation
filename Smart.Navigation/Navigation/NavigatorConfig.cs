@@ -1,5 +1,7 @@
 namespace Smart.Navigation;
 
+using System.Diagnostics.CodeAnalysis;
+
 using Smart.ComponentModel;
 using Smart.Navigation.Components;
 using Smart.Navigation.Mappers;
@@ -12,6 +14,8 @@ public sealed class NavigatorConfig : INavigatorConfig
 {
     private readonly ComponentConfig config = new();
 
+    [RequiresUnreferencedCode("Default NavigatorConfig uses StandardServiceProvider, ParameterPlugin and ScopePlugin which rely on reflection. Use explicit configuration for AOT-compatible setup.")]
+    [RequiresDynamicCode("Default NavigatorConfig uses ParameterPlugin and ScopePlugin which use dynamic delegate creation. Use explicit configuration for AOT-compatible setup.")]
     public NavigatorConfig()
     {
         config.Add<IViewMapper, DirectViewMapper>();

@@ -52,22 +52,36 @@ public sealed class CommonParameterPluginTest
         }
     }
 
-    private sealed class ToForm : MockForm { }
+#pragma warning disable CA1812
+    // ReSharper disable once UnusedType.Local
+    private sealed class ToForm : MockForm
+    {
+    }
+#pragma warning restore CA1812
 
+#pragma warning disable CA1812
+    // ReSharper disable once UnusedType.Local
     private sealed class ConfirmForm : MockForm, INavigationEventSupport
     {
         public string? InjectedValue { get; private set; }
 
-        public void OnNavigatingFrom(INavigationContext context) { }
+        public void OnNavigatingFrom(INavigationContext context)
+        {
+        }
 
         public void OnNavigatingTo(INavigationContext context)
         {
             InjectedValue = context.Parameter.GetValueOrDefault<string>("session");
         }
 
-        public void OnNavigatedTo(INavigationContext context) { }
+        public void OnNavigatedTo(INavigationContext context)
+        {
+        }
     }
+#pragma warning restore CA1812
 
+#pragma warning disable CA1812
+    // ReSharper disable once UnusedType.Local
     private sealed class ConfirmCancelForm : MockForm, IConfirmRequest
     {
         public bool CanNavigate(INavigationContext context)
@@ -75,11 +89,8 @@ public sealed class CommonParameterPluginTest
             // Verify that OnPrepareParameter values are visible during Confirm
             return context.Parameter.GetValueOrDefault<string>("session") == "expected";
         }
-
-        public void OnNavigatingFrom(INavigationContext context) { }
-        public void OnNavigatingTo(INavigationContext context) { }
-        public void OnNavigatedTo(INavigationContext context) { }
     }
+#pragma warning restore CA1812
 
     // ------------------------------------------------------------
     // Tests
@@ -254,11 +265,24 @@ public sealed class CommonParameterPluginTest
     // Direct IPlugin implementation (no PluginBase) — verifies default interface method
     private sealed class DirectIPluginImpl : IPlugin
     {
-        public void OnCreate(IPluginContext pluginContext, object view, object? target) { }
-        public void OnClose(IPluginContext pluginContext, object view, object? target) { }
-        public void OnNavigatingFrom(IPluginContext pluginContext, INavigationContext navigationContext, object? view, object? target) { }
-        public void OnNavigatingTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object? target) { }
-        public void OnNavigatedTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object? target) { }
-        // OnPrepareParameter intentionally NOT overridden — uses default interface method
+        public void OnCreate(IPluginContext pluginContext, object view, object? target)
+        {
+        }
+
+        public void OnClose(IPluginContext pluginContext, object view, object? target)
+        {
+        }
+
+        public void OnNavigatingFrom(IPluginContext pluginContext, INavigationContext navigationContext, object? view, object? target)
+        {
+        }
+
+        public void OnNavigatingTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object? target)
+        {
+        }
+
+        public void OnNavigatedTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object? target)
+        {
+        }
     }
 }

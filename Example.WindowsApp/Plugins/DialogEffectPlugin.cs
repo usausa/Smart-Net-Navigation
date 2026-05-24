@@ -6,12 +6,6 @@ using Example.WindowsApp.Views;
 using Smart.Navigation;
 using Smart.Navigation.Plugins;
 
-/// <summary>
-/// ダイアログ画面への遷移・遷移元に自動的に Dialog エフェクトを設定するプラグイン。
-/// IDialogView を実装している View が遷移先または遷移元の場合、
-/// 呼び出し元で Effect を明示しなくても Dialog アニメーションが再生される。
-/// すでに Effect が設定されている場合は上書きしない。
-/// </summary>
 internal sealed class DialogEffectPlugin : PluginBase
 {
     private static readonly Type DialogViewType = typeof(IDialogView);
