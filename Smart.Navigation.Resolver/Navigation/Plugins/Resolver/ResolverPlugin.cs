@@ -1,9 +1,11 @@
 namespace Smart.Navigation.Plugins.Resolver;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 using Smart.Navigation.Components;
 
+[RequiresUnreferencedCode("ResolverPlugin uses reflection to scan custom attributes on types. This may not work with trimming.")]
 public sealed class ResolverPlugin : PluginBase
 {
     private readonly PageContextStorage storage;
