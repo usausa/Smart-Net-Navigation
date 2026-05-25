@@ -44,11 +44,13 @@ public sealed class ForwardStrategy : IAsyncNavigationStrategy
 
     public async Task UpdateStackAsync(IAsyncNavigationController controller, object toView, INavigationParameter parameter)
     {
+        // Stack new
         controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
 
         var count = controller.ViewStack.Count;
         var openTask = controller.OpenViewAsync(toView, parameter);
 
+        // Remove old
         var closeTask = Task.CompletedTask;
         if (count > 1)
         {

@@ -2,10 +2,7 @@ namespace Smart.Navigation.Plugins;
 
 public interface IPlugin
 {
-    void OnPrepareParameter(IPluginContext pluginContext, INavigationContext navigationContext, IMutableNavigationParameter parameter)
-    {
-        // TODO 既存実装互換のため default interface method として no-op を提供
-    }
+    void OnPrepareParameter(IPluginContext pluginContext, INavigationContext navigationContext, INavigationParameterPrepare parameter);
 
     void OnCreate(IPluginContext pluginContext, object view, object? target);
 

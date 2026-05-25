@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-public sealed class NavigationParameter : IMutableNavigationParameter
+public sealed class NavigationParameter : INavigationParameterPrepare
 {
     private readonly Dictionary<string, object?> values = [];
 
@@ -71,8 +71,11 @@ public sealed class NavigationParameter : IMutableNavigationParameter
         return this;
     }
 
-    // Explicit IMutableNavigationParameter implementations (covariant return workaround)
-    IMutableNavigationParameter IMutableNavigationParameter.SetValue<T>(string key, T value) => SetValue(key, value);
-    IMutableNavigationParameter IMutableNavigationParameter.SetValue<T>(T value) => SetValue(value);
-    IMutableNavigationParameter IMutableNavigationParameter.WithEffect(string value) => WithEffect(value);
+    // INavigationParameterSetup
+
+    void INavigationParameterPrepare.SetValue<T>(string key, T value) => SetValue(key, value);
+
+    void INavigationParameterPrepare.SetValue<T>(T value) => SetValue(value);
+
+    void INavigationParameterPrepare.WithEffect(string value) => WithEffect(value);
 }

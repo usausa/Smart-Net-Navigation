@@ -42,11 +42,13 @@ public sealed class PushStrategy : IAsyncNavigationStrategy
 
     public async Task UpdateStackAsync(IAsyncNavigationController controller, object toView, INavigationParameter parameter)
     {
+        // Stack new
         controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
 
         var count = controller.ViewStack.Count;
         var openTask = controller.OpenViewAsync(toView, parameter);
 
+        // Deactive old
         if (count > 1)
         {
             var index = count - 2;

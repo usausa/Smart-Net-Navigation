@@ -13,7 +13,7 @@ internal sealed class DialogEffectPlugin : PluginBase
     public override void OnPrepareParameter(
         IPluginContext pluginContext,
         INavigationContext navigationContext,
-        IMutableNavigationParameter parameter)
+        INavigationParameterPrepare parameter)
     {
         if (parameter.Effect is not null)
         {

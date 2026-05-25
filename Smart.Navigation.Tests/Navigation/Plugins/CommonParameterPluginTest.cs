@@ -10,11 +10,11 @@ public sealed class CommonParameterPluginTest
 
     private sealed class InjectingPlugin : PluginBase
     {
-        private readonly Action<IMutableNavigationParameter> inject;
+        private readonly Action<INavigationParameterPrepare> inject;
 
         public bool PrepareParameterCalled { get; private set; }
 
-        public InjectingPlugin(Action<IMutableNavigationParameter> inject)
+        public InjectingPlugin(Action<INavigationParameterPrepare> inject)
         {
             this.inject = inject;
         }
@@ -22,7 +22,7 @@ public sealed class CommonParameterPluginTest
         public override void OnPrepareParameter(
             IPluginContext pluginContext,
             INavigationContext navigationContext,
-            IMutableNavigationParameter parameter)
+            INavigationParameterPrepare parameter)
         {
             PrepareParameterCalled = true;
             inject(parameter);
@@ -34,7 +34,7 @@ public sealed class CommonParameterPluginTest
         public override void OnPrepareParameter(
             IPluginContext pluginContext,
             INavigationContext navigationContext,
-            IMutableNavigationParameter parameter)
+            INavigationParameterPrepare parameter)
         {
             // Save a value in PluginContext during OnPrepareParameter
             pluginContext.Save(typeof(string), "saved-value");
@@ -48,7 +48,7 @@ public sealed class CommonParameterPluginTest
         {
             // Read the saved value and inject it into parameter (for verification)
             var saved = pluginContext.Load<string>(typeof(string));
-            ((IMutableNavigationParameter)navigationContext.Parameter).SetValue("relay", saved);
+            ((INavigationParameterPrepare)navigationContext.Parameter).SetValue("relay", saved);
         }
     }
 
@@ -265,6 +265,10 @@ public sealed class CommonParameterPluginTest
     // Direct IPlugin implementation (no PluginBase) — verifies default interface method
     private sealed class DirectIPluginImpl : IPlugin
     {
+        public void OnPrepareParameter(IPluginContext pluginContext, INavigationContext navigationContext, INavigationParameterPrepare parameter)
+        {
+        }
+
         public void OnCreate(IPluginContext pluginContext, object view, object? target)
         {
         }

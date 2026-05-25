@@ -65,11 +65,13 @@ public sealed class PopAndForwardStrategy : IAsyncNavigationStrategy
 
     public async Task UpdateStackAsync(IAsyncNavigationController controller, object toView, INavigationParameter parameter)
     {
+        // Stack new
         controller.ViewStack.Add(new ViewStackInfo(descriptor, toView));
 
         var count = controller.ViewStack.Count;
         var openTask = controller.OpenViewAsync(toView, parameter);
 
+        // Remove old
         var closeTasks = new Task[level + 1];
         for (var i = 0; i <= level; i++)
         {

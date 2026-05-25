@@ -44,9 +44,11 @@ public sealed class PopStrategy : IAsyncNavigationStrategy
 
     public async Task UpdateStackAsync(IAsyncNavigationController controller, object toView, INavigationParameter parameter)
     {
+        // Activate restored
         var activateTask = controller.ActivateViewAsync(restoreStackInfo.View, restoreStackInfo.RestoreParameter, parameter);
         restoreStackInfo.RestoreParameter = null;
 
+        // Remove old
         var closeTasks = new Task[level];
         for (var i = 0; i < level; i++)
         {

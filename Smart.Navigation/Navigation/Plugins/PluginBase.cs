@@ -2,18 +2,15 @@ namespace Smart.Navigation.Plugins;
 
 public abstract class PluginBase : IPlugin
 {
+    public virtual void OnPrepareParameter(IPluginContext pluginContext, INavigationContext navigationContext, INavigationParameterPrepare parameter)
+    {
+    }
+
     public virtual void OnCreate(IPluginContext pluginContext, object view, object? target)
     {
     }
 
     public virtual void OnClose(IPluginContext pluginContext, object view, object? target)
-    {
-    }
-
-    public virtual void OnPrepareParameter(
-        IPluginContext pluginContext,
-        INavigationContext navigationContext,
-        IMutableNavigationParameter parameter)
     {
     }
 
