@@ -15,26 +15,25 @@ internal sealed class DialogEffectPlugin : PluginBase
         INavigationContext navigationContext,
         IMutableNavigationParameter parameter)
     {
-        // すでに Effect が設定されている場合は何もしない
         if (parameter.Effect is not null)
         {
             return;
         }
 
+        // Open effect
         var toType = navigationContext.ToId as Type;
-        var fromType = navigationContext.FromId as Type;
-
         var toIsDialog = toType is not null && DialogViewType.IsAssignableFrom(toType);
-        var fromIsDialog = fromType is not null && DialogViewType.IsAssignableFrom(fromType);
-
         if (toIsDialog)
         {
-            // ダイアログ画面へ遷移 → オープンエフェクト
             parameter.WithEffect(ExampleEffect.DialogOpen);
+            return;
         }
-        else if (fromIsDialog)
+
+        // Close efec
+        var fromType = navigationContext.FromId as Type;
+        var fromIsDialog = fromType is not null && DialogViewType.IsAssignableFrom(fromType);
+        if (fromIsDialog)
         {
-            // ダイアログ画面から遷移 → クローズエフェクト
             parameter.WithEffect(ExampleEffect.DialogClose);
         }
     }

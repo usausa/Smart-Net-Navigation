@@ -11,11 +11,7 @@ public sealed class EffectMenuViewModel : AppViewModelBase
 
     public EffectMenuViewModel(INavigator navigator)
     {
-        Navigate = MakeAsyncCommand<string>(kind =>
-            navigator.ForwardAsync(typeof(EffectDemoView), new NavigationParameter().WithEffect(kind)));
-
-        // Effect 指定なし — DialogEffectPlugin が自動で Dialog エフェクトを設定する
-        NavigateDialog = MakeAsyncCommand(() =>
-            navigator.ForwardAsync(typeof(DialogDemoView)));
+        Navigate = MakeAsyncCommand<string>(x => navigator.ForwardAsync(typeof(EffectDemoView), new NavigationParameter().WithEffect(x)));
+        NavigateDialog = MakeAsyncCommand(() => navigator.ForwardAsync(typeof(DialogDemoView)));
     }
 }

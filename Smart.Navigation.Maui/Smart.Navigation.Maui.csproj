@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
@@ -21,10 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Smart.Navigation\Smart.Navigation.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Navigation\Animations\" />
   </ItemGroup>
 
 </Project>

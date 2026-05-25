@@ -29,10 +29,10 @@ public interface IWindowsNavigationEffect
 
 public static class WindowsEffect
 {
-    public const string None = "None";
-    public const string Forward = "Forward";
-    public const string Back = "Back";
-    public const string Push = "Push";
-    public const string Pop = "Pop";
-    public const string Fade = "Fade";
+    public const string None = nameof(None);
+    public const string Forward = nameof(Forward);
+    public const string Back = nameof(Back);
+    public const string Push = nameof(Push);
+    public const string Pop = nameof(Pop);
+    public const string Fade = nameof(Fade);
 }

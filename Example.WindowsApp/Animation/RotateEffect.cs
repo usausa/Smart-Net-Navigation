@@ -34,7 +34,6 @@ internal sealed class RotateEffect : IWindowsNavigationEffect
         }
         // ReSharper restore CompareOfFloatsByEqualityOperator
 
-
         var rotate = new RotateTransform(fromAngle);
         context.View.RenderTransform = rotate;
         context.View.RenderTransformOrigin = new Point(0.5d, 0.5d);
