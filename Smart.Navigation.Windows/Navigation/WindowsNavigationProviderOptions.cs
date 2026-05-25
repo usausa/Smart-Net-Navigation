@@ -6,8 +6,7 @@ public sealed class WindowsNavigationProviderOptions
 
     public bool RestoreFocus { get; set; } = true;
 
-    public IDictionary<string, IWindowsNavigationEffect> Effects { get; } =
-        new Dictionary<string, IWindowsNavigationEffect>(StringComparer.Ordinal);
+    public IDictionary<string, IWindowsNavigationEffect> Effects { get; } = new Dictionary<string, IWindowsNavigationEffect>(StringComparer.Ordinal);
 
     public WindowsNavigationProviderOptions RegisterEffect(string key, IWindowsNavigationEffect effect)
     {

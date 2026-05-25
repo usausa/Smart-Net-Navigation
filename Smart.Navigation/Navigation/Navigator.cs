@@ -464,6 +464,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
         public Task OpenViewAsync(object view, INavigationParameter parameter)
         {
+            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).OpenViewAsync(view, parameter);
         }
 
@@ -476,16 +477,19 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
                 plugin.OnClose(PluginContext, view, target);
             }
 
+            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).CloseViewAsync(view, parameter);
         }
 
         public Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
         {
+            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).ActivateViewAsync(view, state, parameter);
         }
 
         public Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
         {
+            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).DeactivateViewAsync(view, parameter);
         }
     }
