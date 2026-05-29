@@ -2,10 +2,17 @@ namespace Smart.Navigation.Plugins;
 
 using Smart.Mock;
 
-public sealed class CommonParameterPluginTest
+public sealed class ParameterPluginTest
 {
+#pragma warning disable CA1812
+    // ReSharper disable once UnusedType.Local
+    private sealed class ToForm : MockForm
+    {
+    }
+#pragma warning restore CA1812
+
     // ------------------------------------------------------------
-    // Helper plugin implementations
+    // Tests
     // ------------------------------------------------------------
 
     private sealed class InjectingPlugin : PluginBase
@@ -28,73 +35,6 @@ public sealed class CommonParameterPluginTest
             inject(parameter);
         }
     }
-
-    private sealed class PluginContextRelayPlugin : PluginBase
-    {
-        public override void OnPrepareParameter(
-            IPluginContext pluginContext,
-            INavigationContext navigationContext,
-            INavigationParameterPrepare parameter)
-        {
-            // Save a value in PluginContext during OnPrepareParameter
-            pluginContext.Save(typeof(string), "saved-value");
-        }
-
-        public override void OnNavigatingTo(
-            IPluginContext pluginContext,
-            INavigationContext navigationContext,
-            object view,
-            object? target)
-        {
-            // Read the saved value and inject it into parameter (for verification)
-            var saved = pluginContext.Load<string>(typeof(string));
-            ((INavigationParameterPrepare)navigationContext.Parameter).SetValue("relay", saved);
-        }
-    }
-
-#pragma warning disable CA1812
-    // ReSharper disable once UnusedType.Local
-    private sealed class ToForm : MockForm
-    {
-    }
-#pragma warning restore CA1812
-
-#pragma warning disable CA1812
-    // ReSharper disable once UnusedType.Local
-    private sealed class ConfirmForm : MockForm, INavigationEventSupport
-    {
-        public string? InjectedValue { get; private set; }
-
-        public void OnNavigatingFrom(INavigationContext context)
-        {
-        }
-
-        public void OnNavigatingTo(INavigationContext context)
-        {
-            InjectedValue = context.Parameter.GetValueOrDefault<string>("session");
-        }
-
-        public void OnNavigatedTo(INavigationContext context)
-        {
-        }
-    }
-#pragma warning restore CA1812
-
-#pragma warning disable CA1812
-    // ReSharper disable once UnusedType.Local
-    private sealed class ConfirmCancelForm : MockForm, IConfirmRequest
-    {
-        public bool CanNavigate(INavigationContext context)
-        {
-            // Verify that OnPrepareParameter values are visible during Confirm
-            return context.Parameter.GetValueOrDefault<string>("session") == "expected";
-        }
-    }
-#pragma warning restore CA1812
-
-    // ------------------------------------------------------------
-    // Tests
-    // ------------------------------------------------------------
 
     [Fact]
     public void NullParameterInjectedByPlugin()
@@ -185,27 +125,6 @@ public sealed class CommonParameterPluginTest
     }
 
     [Fact]
-    public void PluginContextSharedBetweenPrepareAndNavigatingTo()
-    {
-        // arrange
-        var plugin = new PluginContextRelayPlugin();
-        var navigator = new NavigatorConfig()
-            .UseMockFormProvider()
-            .AddPlugin(plugin)
-            .ToNavigator();
-
-        INavigationParameter? capturedParameter = null;
-        navigator.Navigated += (_, args) => capturedParameter = args.Context.Parameter;
-
-        // act
-        navigator.Forward(typeof(ToForm));
-
-        // assert
-        Assert.NotNull(capturedParameter);
-        Assert.Equal("saved-value", capturedParameter.GetValue<string>("relay"));
-    }
-
-    [Fact]
     public void PrepareParameterCalledEvenWhenConfirmCancels()
     {
         // arrange
@@ -247,46 +166,51 @@ public sealed class CommonParameterPluginTest
         Assert.True(sessionVisibleInConfirm);
     }
 
-    [Fact]
-    public void DirectIPluginImplementationCompileAndWork()
-    {
-        // Verify that a class implementing IPlugin directly (without PluginBase) works
-        // because OnPrepareParameter has a default interface method implementation.
-        var navigator = new NavigatorConfig()
-            .UseMockFormProvider()
-            .AddPlugin(new DirectIPluginImpl())
-            .ToNavigator();
+    // ------------------------------------------------------------
+    //
+    // ------------------------------------------------------------
 
-        // Should not throw
-        var result = navigator.Forward(typeof(ToForm));
-        Assert.True(result);
+    private sealed class PluginContextRelayPlugin : PluginBase
+    {
+        public override void OnPrepareParameter(
+            IPluginContext pluginContext,
+            INavigationContext navigationContext,
+            INavigationParameterPrepare parameter)
+        {
+            // Save a value in PluginContext during OnPrepareParameter
+            pluginContext.Save(typeof(string), "saved-value");
+        }
+
+        public override void OnNavigatingTo(
+            IPluginContext pluginContext,
+            INavigationContext navigationContext,
+            object view,
+            object? target)
+        {
+            // Read the saved value and inject it into parameter (for verification)
+            var saved = pluginContext.Load<string>(typeof(string));
+            ((INavigationParameterPrepare)navigationContext.Parameter).SetValue("relay", saved);
+        }
     }
 
-    // Direct IPlugin implementation (no PluginBase) — verifies default interface method
-    private sealed class DirectIPluginImpl : IPlugin
+    [Fact]
+    public void PluginContextSharedBetweenPrepareAndNavigatingTo()
     {
-        public void OnPrepareParameter(IPluginContext pluginContext, INavigationContext navigationContext, INavigationParameterPrepare parameter)
-        {
-        }
+        // arrange
+        var plugin = new PluginContextRelayPlugin();
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .AddPlugin(plugin)
+            .ToNavigator();
 
-        public void OnCreate(IPluginContext pluginContext, object view, object? target)
-        {
-        }
+        INavigationParameter? capturedParameter = null;
+        navigator.Navigated += (_, args) => capturedParameter = args.Context.Parameter;
 
-        public void OnClose(IPluginContext pluginContext, object view, object? target)
-        {
-        }
+        // act
+        navigator.Forward(typeof(ToForm));
 
-        public void OnNavigatingFrom(IPluginContext pluginContext, INavigationContext navigationContext, object? view, object? target)
-        {
-        }
-
-        public void OnNavigatingTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object? target)
-        {
-        }
-
-        public void OnNavigatedTo(IPluginContext pluginContext, INavigationContext navigationContext, object view, object? target)
-        {
-        }
+        // assert
+        Assert.NotNull(capturedParameter);
+        Assert.Equal("saved-value", capturedParameter.GetValue<string>("relay"));
     }
 }
