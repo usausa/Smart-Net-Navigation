@@ -14,7 +14,7 @@ internal sealed class SlideHorizontalEffect : IMauiNavigationEffect
         duration = durationMilliseconds;
     }
 
-    public async Task PlayAsync(MauiNavigationEffectContext context)
+    public async Task EffectAsync(MauiNavigationEffectContext context)
     {
         var width = context.Container.Width;
         if (width <= 0)

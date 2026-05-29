@@ -19,7 +19,7 @@ internal sealed class SlideVerticalEffect : IAvaloniaNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(250);
     }
 
-    public async Task PlayAsync(AvaloniaNavigationEffectContext context)
+    public async Task EffectAsync(AvaloniaNavigationEffectContext context)
     {
         var height = context.Container.Bounds.Height;
         if (height <= 0)

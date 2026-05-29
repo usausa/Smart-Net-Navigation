@@ -18,7 +18,7 @@ internal sealed class ZoomEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(240);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         var (fromScale, toScale, fromOpacity, toOpacity) = context.Phase switch
         {

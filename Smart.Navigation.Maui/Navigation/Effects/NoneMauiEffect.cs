@@ -6,5 +6,5 @@ internal sealed class NoneMauiEffect : IMauiNavigationEffect
 {
     public static readonly NoneMauiEffect Instance = new();
 
-    public Task PlayAsync(MauiNavigationEffectContext context) => Task.CompletedTask;
+    public Task EffectAsync(MauiNavigationEffectContext context) => Task.CompletedTask;
 }

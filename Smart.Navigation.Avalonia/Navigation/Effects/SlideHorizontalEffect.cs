@@ -19,7 +19,7 @@ internal sealed class SlideHorizontalEffect : IAvaloniaNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(250);
     }
 
-    public async Task PlayAsync(AvaloniaNavigationEffectContext context)
+    public async Task EffectAsync(AvaloniaNavigationEffectContext context)
     {
         var width = context.Container.Bounds.Width;
         if (width <= 0)

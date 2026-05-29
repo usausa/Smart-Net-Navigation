@@ -18,7 +18,7 @@ internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(250);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         var width = context.Container.ActualWidth;
         var transform = new TranslateTransform();

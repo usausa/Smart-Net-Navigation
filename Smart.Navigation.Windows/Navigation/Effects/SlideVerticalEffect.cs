@@ -16,7 +16,7 @@ internal sealed class SlideVerticalEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(250);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         var height = context.Container.ActualHeight;
         var transform = new TranslateTransform();

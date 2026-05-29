@@ -17,7 +17,7 @@ internal sealed class DialogOpenEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(220);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         if (context.Phase is not (WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate))
         {
@@ -39,7 +39,7 @@ internal sealed class DialogCloseEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(220);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         if (context.Phase is not (WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate))
         {

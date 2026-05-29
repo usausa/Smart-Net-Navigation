@@ -14,7 +14,7 @@ internal sealed class FadeEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(200);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         var (from, to) = context.Phase switch
         {

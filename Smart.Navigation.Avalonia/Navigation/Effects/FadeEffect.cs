@@ -15,7 +15,7 @@ internal sealed class FadeEffect : IAvaloniaNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(200);
     }
 
-    public async Task PlayAsync(AvaloniaNavigationEffectContext context)
+    public async Task EffectAsync(AvaloniaNavigationEffectContext context)
     {
         var (from, to) = context.Phase switch
         {

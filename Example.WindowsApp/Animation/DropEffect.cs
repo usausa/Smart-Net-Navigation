@@ -15,7 +15,7 @@ internal sealed class DropEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(450);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         var height = context.Container.ActualHeight;
         if (height <= 0d)

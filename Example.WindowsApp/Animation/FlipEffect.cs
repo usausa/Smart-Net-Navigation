@@ -15,7 +15,7 @@ internal sealed class FlipEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(300);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         var (from, to) = context.Phase switch
         {

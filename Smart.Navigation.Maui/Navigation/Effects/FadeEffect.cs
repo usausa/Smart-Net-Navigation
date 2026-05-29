@@ -11,7 +11,7 @@ internal sealed class FadeEffect : IMauiNavigationEffect
         duration = durationMilliseconds;
     }
 
-    public async Task PlayAsync(MauiNavigationEffectContext context)
+    public async Task EffectAsync(MauiNavigationEffectContext context)
     {
         var element = context.View;
 

@@ -123,7 +123,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
         element.IsHitTestVisible = false;
         try
         {
-            await PlayAsync(element, parameter, phase).ConfigureAwait(true);
+            await EffectAsync(element, parameter, phase).ConfigureAwait(true);
         }
         finally
         {
@@ -131,7 +131,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
         }
     }
 
-    private Task PlayAsync(Control element, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
+    private Task EffectAsync(Control element, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
     {
         var key = parameter.Effect;
         if (key is null || !options.Effects.TryGetValue(key, out var effect))
@@ -145,7 +145,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
             return Task.CompletedTask;
         }
 
-        return effect.PlayAsync(new AvaloniaNavigationEffectContext
+        return effect.EffectAsync(new AvaloniaNavigationEffectContext
         {
             Container = container,
             View = element,

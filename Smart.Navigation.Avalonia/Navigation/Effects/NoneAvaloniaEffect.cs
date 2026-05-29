@@ -6,5 +6,5 @@ internal sealed class NoneAvaloniaEffect : IAvaloniaNavigationEffect
 {
     public static readonly NoneAvaloniaEffect Instance = new();
 
-    public Task PlayAsync(AvaloniaNavigationEffectContext context) => Task.CompletedTask;
+    public Task EffectAsync(AvaloniaNavigationEffectContext context) => Task.CompletedTask;
 }

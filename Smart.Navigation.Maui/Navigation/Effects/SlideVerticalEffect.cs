@@ -14,7 +14,7 @@ internal sealed class SlideVerticalEffect : IMauiNavigationEffect
         duration = durationMilliseconds;
     }
 
-    public async Task PlayAsync(MauiNavigationEffectContext context)
+    public async Task EffectAsync(MauiNavigationEffectContext context)
     {
         var height = context.Container.Height;
         if (height <= 0)

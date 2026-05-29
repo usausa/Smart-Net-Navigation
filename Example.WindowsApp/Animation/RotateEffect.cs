@@ -18,7 +18,7 @@ internal sealed class RotateEffect : IWindowsNavigationEffect
         this.duration = duration ?? TimeSpan.FromMilliseconds(380);
     }
 
-    public Task PlayAsync(WindowsNavigationEffectContext context)
+    public Task EffectAsync(WindowsNavigationEffectContext context)
     {
         var (fromAngle, toAngle, fromOpacity, toOpacity) = context.Phase switch
         {
