@@ -130,14 +130,8 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             return false;
         }
 
-        var workingParameter = EnsureMutable(parameter);
+        var workingParameter = parameter ?? new NavigationParameter();
         var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, workingParameter);
-
-        var pluginContext = new PluginContext();
-        foreach (var plugin in plugins)
-        {
-            plugin.OnPrepareParameter(pluginContext, navigationContext, workingParameter);
-        }
 
         if (!ConfirmNavigation(navigationContext))
         {
@@ -147,6 +141,15 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         if (Executing)
         {
             throw new InvalidOperationException("Navigator is already executing.");
+        }
+
+        var pluginContext = new PluginContext();
+        if (workingParameter is INavigationParameterPrepare prepareParameter)
+        {
+            foreach (var plugin in plugins)
+            {
+                plugin.OnPrepareParameter(pluginContext, navigationContext, prepareParameter);
+            }
         }
 
         try
@@ -224,14 +227,8 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             return false;
         }
 
-        var workingParameter = EnsureMutable(parameter);
+        var workingParameter = parameter ?? new NavigationParameter();
         var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, workingParameter);
-
-        var pluginContext = new PluginContext();
-        foreach (var plugin in plugins)
-        {
-            plugin.OnPrepareParameter(pluginContext, navigationContext, workingParameter);
-        }
 
 #pragma warning disable CA1849
         // ReSharper disable once MethodHasAsyncOverload
@@ -250,6 +247,15 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         if (Executing)
         {
             throw new InvalidOperationException("Navigator is already executing.");
+        }
+
+        var pluginContext = new PluginContext();
+        if (workingParameter is INavigationParameterPrepare prepareParameter)
+        {
+            foreach (var plugin in plugins)
+            {
+                plugin.OnPrepareParameter(pluginContext, navigationContext, prepareParameter);
+            }
         }
 
         try
@@ -300,7 +306,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             Navigating?.Invoke(this, args);
 
             // Update stack
-            if (provider is IAsyncNavigationProvider && strategy is IAsyncNavigationStrategy asyncStrategy)
+            if ((provider is IAsyncNavigationProvider) && (strategy is IAsyncNavigationStrategy asyncStrategy))
             {
                 await asyncStrategy.UpdateStackAsync(controller, toView, navigationContext.Parameter).ConfigureAwait(true);
             }
@@ -341,18 +347,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
     // ------------------------------------------------------------
     // Helper
     // ------------------------------------------------------------
-
-    private static NavigationParameter EnsureMutable(INavigationParameter? parameter)
-    {
-        return parameter switch
-        {
-            null => new NavigationParameter(),
-            NavigationParameter np => np,
-            _ => throw new InvalidOperationException(
-                "Custom INavigationParameter implementations are not supported when plugin parameter preparation is enabled. " +
-                "Use NavigationParameter or null.")
-        };
-    }
 
     private bool ConfirmNavigation(NavigationContext context)
     {
@@ -464,7 +458,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
         public Task OpenViewAsync(object view, INavigationParameter parameter)
         {
-            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).OpenViewAsync(view, parameter);
         }
 
@@ -477,19 +470,16 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
                 plugin.OnClose(PluginContext, view, target);
             }
 
-            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).CloseViewAsync(view, parameter);
         }
 
         public Task ActivateViewAsync(object view, object? state, INavigationParameter parameter)
         {
-            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).ActivateViewAsync(view, state, parameter);
         }
 
         public Task<object?> DeactivateViewAsync(object view, INavigationParameter parameter)
         {
-            // TODO fallback
             return ((IAsyncNavigationProvider)navigator.provider).DeactivateViewAsync(view, parameter);
         }
     }

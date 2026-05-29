@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-using global::Avalonia.Controls;
+using Avalonia.Controls;
 
 public sealed class AvaloniaNavigationEffectContext
 {

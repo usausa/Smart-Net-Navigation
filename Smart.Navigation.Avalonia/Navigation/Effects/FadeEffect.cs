@@ -1,8 +1,8 @@
 namespace Smart.Navigation.Effects;
 
-using global::Avalonia;
-using global::Avalonia.Animation;
-using global::Avalonia.Styling;
+using Avalonia;
+using Avalonia.Animation;
+using Avalonia.Styling;
 
 using Smart.Navigation;
 
