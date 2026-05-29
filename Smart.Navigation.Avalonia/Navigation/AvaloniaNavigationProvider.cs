@@ -22,10 +22,18 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
         this.options = options;
     }
 
+    // ------------------------------------------------------------
+    // Resolve
+    // ------------------------------------------------------------
+
     public object? ResolveTarget(object view)
     {
         return Unsafe.As<Control>(view).DataContext;
     }
+
+    // ------------------------------------------------------------
+    // Sync
+    // ------------------------------------------------------------
 
     [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Avalonia.Data.Binding is used intentionally for runtime binding. Compile with CompiledBindings for AOT scenarios.")]
     [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "Avalonia.Data.Binding is used intentionally for runtime binding. Compile with CompiledBindings for AOT scenarios.")]
@@ -93,6 +101,10 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
         return parameter;
     }
 
+    // ------------------------------------------------------------
+    // Async
+    // ------------------------------------------------------------
+
     public async Task OpenViewAsync(object view, INavigationParameter parameter)
     {
         OpenView(view);
@@ -120,6 +132,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
     private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
     {
         var element = Unsafe.As<Control>(view);
+
         element.IsHitTestVisible = false;
         try
         {
@@ -134,7 +147,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
     private Task EffectAsync(Control element, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
     {
         var key = parameter.Effect;
-        if (key is null || !options.Effects.TryGetValue(key, out var effect))
+        if ((key is null) || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }
@@ -153,6 +166,10 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
             Parameter = parameter
         });
     }
+
+    // ------------------------------------------------------------
+    // Helper
+    // ------------------------------------------------------------
 
     private static IInputElement? GetFocused(Visual parent)
     {

@@ -18,10 +18,18 @@ public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
         this.options = options;
     }
 
+    // ------------------------------------------------------------
+    // Resolve
+    // ------------------------------------------------------------
+
     public object? ResolveTarget(object view)
     {
         return Unsafe.As<FrameworkElement>(view).DataContext;
     }
+
+    // ------------------------------------------------------------
+    // Sync
+    // ------------------------------------------------------------
 
     public void OpenView(object view)
     {
@@ -100,6 +108,10 @@ public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
         return parameter;
     }
 
+    // ------------------------------------------------------------
+    // Async
+    // ------------------------------------------------------------
+
     public async Task OpenViewAsync(object view, INavigationParameter parameter)
     {
         OpenView(view);
@@ -127,6 +139,7 @@ public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
     private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, WindowsNavigationEffectPhase phase)
     {
         var element = Unsafe.As<FrameworkElement>(view);
+
         element.IsHitTestVisible = false;
         try
         {
@@ -141,7 +154,7 @@ public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
     private Task EffectAsync(FrameworkElement element, INavigationParameter parameter, WindowsNavigationEffectPhase phase)
     {
         var key = parameter.Effect;
-        if (key is null || !options.Effects.TryGetValue(key, out var effect))
+        if ((key is null) || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }

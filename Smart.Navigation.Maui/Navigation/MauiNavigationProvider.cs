@@ -16,10 +16,18 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
         this.options = options;
     }
 
+    // ------------------------------------------------------------
+    // Resolve
+    // ------------------------------------------------------------
+
     public object? ResolveTarget(object view)
     {
         return Unsafe.As<View>(view).BindingContext;
     }
+
+    // ------------------------------------------------------------
+    // Sync
+    // ------------------------------------------------------------
 
     public void OpenView(object view)
     {
@@ -89,6 +97,10 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
         return parameter;
     }
 
+    // ------------------------------------------------------------
+    // Async
+    // ------------------------------------------------------------
+
     public async Task OpenViewAsync(object view, INavigationParameter parameter)
     {
         OpenView(view);
@@ -116,9 +128,11 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
     private async Task PlayWithGuardAsync(object view, INavigationParameter parameter, MauiNavigationEffectPhase phase)
     {
         var element = Unsafe.As<View>(view);
-        var previousInputTransparent = element.InputTransparent;
         var layout = element as Layout;
+
+        var previousInputTransparent = element.InputTransparent;
         var previousCascade = layout?.CascadeInputTransparent ?? false;
+
         element.InputTransparent = true;
         layout?.CascadeInputTransparent = true;
         try
@@ -135,7 +149,7 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
     private Task EffectAsync(View element, INavigationParameter parameter, MauiNavigationEffectPhase phase)
     {
         var key = parameter.Effect;
-        if (key is null || !options.Effects.TryGetValue(key, out var effect))
+        if ((key is null) || !options.Effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }
@@ -154,6 +168,10 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
             Parameter = parameter
         });
     }
+
+    // ------------------------------------------------------------
+    // Helper
+    // ------------------------------------------------------------
 
     private static void Cleanup(IVisualTreeElement parent)
     {
