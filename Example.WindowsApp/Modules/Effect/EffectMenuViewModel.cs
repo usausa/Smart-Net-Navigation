@@ -12,6 +12,6 @@ public sealed class EffectMenuViewModel : AppViewModelBase
     public EffectMenuViewModel(INavigator navigator)
     {
         Navigate = MakeAsyncCommand<string>(x => navigator.ForwardAsync(typeof(EffectDemoView), new NavigationParameter().WithEffect(x)));
-        NavigateDialog = MakeAsyncCommand(() => navigator.ForwardAsync(typeof(DialogDemoView)));
+        NavigateDialog = MakeAsyncCommand(() => navigator.ForwardAsync(typeof(EffectDialogView)));
     }
 }
