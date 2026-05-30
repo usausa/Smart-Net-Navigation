@@ -5,22 +5,24 @@
 ## What is this ?
 
 * Navigation by control switching.
-* Navigationg to view by id.
+* Navigation to view by id.
 * Multiplatform support.
-* MVVM support with WPF and Xamarin.Forms provider.
+* MVVM support with WPF and MAUI provider.
 * Parameter support between target.
 * Stacked navigation support.
 * Lifecycle event support.
 * Cancel event support.
 * Plugin support.
+* Animation effect support.
 * Library integration support.
+* Source Generator support.
 
 ### Usage example
 
 ```csharp
 // Config Navigator
 navigator = new NavigatorConfig()
-    .UseFormsNavigationProvider()
+    .UseMauiNavigationProvider()
     .UseResolver(resolver)
     .UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
     .ToNavigator();
@@ -37,8 +39,9 @@ navigator.Forward(ViewId.Menu);
 
 | Package | Note |
 |-|-|
-| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation/) | Core libyrary |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation/) | Core library (includes Source Generator) |
 | [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Resolver.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Resolver/) | Smart.Resolver integration |
+| [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Extensions.DependencyInjection.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Extensions.DependencyInjection/) | Microsoft.Extensions.DependencyInjection integration |
 | [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Maui.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Maui/) | MAUI provider |
 | [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Windows.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows/) | WPF provider |
 | [![NuGet](https://img.shields.io/nuget/v/Usa.Smart.Navigation.Windows.Forms.svg)](https://www.nuget.org/packages/Usa.Smart.Navigation.Windows.Forms/) | Windows Forms provider |
@@ -74,13 +77,13 @@ navigator = new NavigatorConfig()
 </ContentControl>
 ```
 
-### Xamarin.Forms
+### MAUI
 
 ``ContentView`` is a container and ``View`` is a view.
 
 ```csharp
 navigator = new NavigatorConfig()
-    .UseFormsNavigationProvider()
+    .UseMauiNavigationProvider()
     .ToNavigator();
 ```
 
@@ -339,34 +342,53 @@ public interface INavigator
     int StackedCount { get; }
 
     // Current view id
-    object CurrentViewId { get; }
+    object? CurrentViewId { get; }
 
     // Current view instance
-    object CurrentView { get; }
+    object? CurrentView { get; }
 
     // Current target(DataContext/BindingContext or view itself) instance
-    object CurrentTarget { get; }
+    object? CurrentTarget { get; }
 
     // Navigating status
     bool Executing { get; }
+
+    // Exit navigator
+    void Exit();
+
+    // Navigate with strategy
+    bool Navigate(INavigationStrategy strategy, INavigationParameter? parameter);
+
+    Task<bool> NavigateAsync(INavigationStrategy strategy, INavigationParameter? parameter);
 }
 ```
 
 ## Event
 
-### INavigationEventSupport
+### INavigationEventSupport/INavigationEventSupportAsync
 
 ```csharp
 public interface INavigationEventSupport
 {
-    // From page event berfore stack changed
+    // From page event before stack changed
     void OnNavigatingFrom(INavigationContext context);
 
-    // To page event berfore stack changed
+    // To page event before stack changed
     void OnNavigatingTo(INavigationContext context);
 
     // To page event after stack changed
     void OnNavigatedTo(INavigationContext context);
+}
+```
+
+```csharp
+public interface INavigationEventSupportAsync
+{
+    Task OnNavigatingFromAsync(INavigationContext context);
+
+    Task OnNavigatingToAsync(INavigationContext context);
+
+    Task OnNavigatedToAsync(INavigationContext context);
 }
 ```
 
@@ -385,7 +407,7 @@ public interface INavigationContext
 }
 ```
 
-``INavigationParameter`` is navigation parameteter store.
+``INavigationParameter`` is navigation parameter store.
 
 ```csharp
 public interface INavigationParameter
@@ -401,6 +423,19 @@ public interface INavigationParameter
     T GetValueOr<T>(string key, T defaultValue);
 
     T GetValueOr<T>(T defaultValue);
+}
+```
+
+``INavigationParameterPrepare`` extends ``INavigationParameter`` for setting values.
+
+```csharp
+public interface INavigationParameterPrepare : INavigationParameter
+{
+    void SetValue<T>(string key, T value);
+
+    void SetValue<T>(T value);
+
+    void WithEffect(string value);
 }
 ```
 
@@ -652,6 +687,19 @@ public interface IPluginContext
 
 ## Library integration
 
+### Microsoft.Extensions.DependencyInjection
+
+``Usa.Smart.Navigation.Extensions.DependencyInjection`` provides an extension for ``IServiceCollection``.
+
+```csharp
+// Usage
+services.AddNavigator(config =>
+{
+    config.UseSomeProvider();
+    config.UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes));
+});
+```
+
 ### IActivator
 
 * Interface is used for object creation.
@@ -693,10 +741,35 @@ public interface IConverter
 }
 ```
 
+## Source Generator
+
+`Usa.Smart.Navigation` includes a Source Generator that automatically generates view mapper registration code from `[ViewSource]` and `[View]` attributes.
+
+```csharp
+// Declare the source class with [ViewSource]
+[ViewSource]
+public partial class ViewMapper
+{
+}
+
+// Annotate views with [View]
+[View(ViewId.Menu)]
+public sealed class MenuView
+{
+}
+
+[View(ViewId.Detail)]
+public sealed class DetailView
+{
+}
+
+// config (generated mapper is used automatically)
+var navigator = new NavigatorConfig()
+    .UseSomeProvider()
+    .UseIdViewMapper(m => ViewMapper.Register(m))
+    .ToNavigator();
+```
+
 ## Link
 
 * [Smart.Resolver](https://github.com/usausa/Smart-Net-Resolver)
-
-## Future
-
-* Animation support required (・ω・)?
