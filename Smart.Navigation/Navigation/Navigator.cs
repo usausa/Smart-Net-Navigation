@@ -133,6 +133,15 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         var workingParameter = parameter ?? new NavigationParameter();
         var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, workingParameter);
 
+        var pluginContext = new PluginContext();
+        if (workingParameter is INavigationParameterPrepare prepareParameter)
+        {
+            foreach (var plugin in plugins)
+            {
+                plugin.OnPrepareParameter(pluginContext, navigationContext, prepareParameter);
+            }
+        }
+
         if (!ConfirmNavigation(navigationContext))
         {
             return false;
@@ -141,15 +150,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         if (Executing)
         {
             throw new InvalidOperationException("Navigator is already executing.");
-        }
-
-        var pluginContext = new PluginContext();
-        if (workingParameter is INavigationParameterPrepare prepareParameter)
-        {
-            foreach (var plugin in plugins)
-            {
-                plugin.OnPrepareParameter(pluginContext, navigationContext, prepareParameter);
-            }
         }
 
         try
@@ -230,6 +230,15 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         var workingParameter = parameter ?? new NavigationParameter();
         var navigationContext = new NavigationContext(CurrentViewId, result.ToId, result.Attribute, workingParameter);
 
+        var pluginContext = new PluginContext();
+        if (workingParameter is INavigationParameterPrepare prepareParameter)
+        {
+            foreach (var plugin in plugins)
+            {
+                plugin.OnPrepareParameter(pluginContext, navigationContext, prepareParameter);
+            }
+        }
+
 #pragma warning disable CA1849
         // ReSharper disable once MethodHasAsyncOverload
         if (!ConfirmNavigation(navigationContext))
@@ -247,15 +256,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         if (Executing)
         {
             throw new InvalidOperationException("Navigator is already executing.");
-        }
-
-        var pluginContext = new PluginContext();
-        if (workingParameter is INavigationParameterPrepare prepareParameter)
-        {
-            foreach (var plugin in plugins)
-            {
-                plugin.OnPrepareParameter(pluginContext, navigationContext, prepareParameter);
-            }
         }
 
         try
