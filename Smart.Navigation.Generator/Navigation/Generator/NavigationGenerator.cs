@@ -84,7 +84,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
         }
 
         var containingType = methodSymbol.ContainingType;
-        var ns = string.IsNullOrEmpty(containingType.ContainingNamespace.Name)
+        var ns = String.IsNullOrEmpty(containingType.ContainingNamespace.Name)
             ? string.Empty
             : containingType.ContainingNamespace.ToDisplayString();
 
@@ -217,7 +217,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
     {
         var buffer = new StringBuilder();
 
-        if (!string.IsNullOrEmpty(ns))
+        if (!String.IsNullOrEmpty(ns))
         {
             buffer.Append(ns.Replace('.', '_'));
             buffer.Append('_');
