@@ -134,7 +134,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
         var viewMap = viewIds
             .SelectValue()
-            .SelectMany(static x => x.AsArray())
+            .SelectMany(static x => x)
             .GroupBy(static x => x.ViewIdClassFullName)
             .ToDictionary(static x => x.Key, static x => x.ToList());
 
