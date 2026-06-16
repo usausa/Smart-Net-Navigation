@@ -353,7 +353,7 @@ public interface INavigator
     // Navigating status
     bool Executing { get; }
 
-    // Exit navigator
+    // Exit navigator (forced: closes all views immediately, bypasses Confirm pipeline)
     void Exit();
 
     // Navigate with strategy

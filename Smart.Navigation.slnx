@@ -33,6 +33,7 @@
     <Project Path="Smart.Navigation.Strategies.GroupSupport/Smart.Navigation.Strategies.GroupSupport.csproj" />
   </Folder>
   <Folder Name="/Navigation/Tests/">
+    <Project Path="Smart.Navigation.Generator.Tests/Smart.Navigation.Generator.Tests.csproj" />
     <Project Path="Smart.Navigation.Tests/Smart.Navigation.Tests.csproj" />
   </Folder>
   <Folder Name="/Example/">
