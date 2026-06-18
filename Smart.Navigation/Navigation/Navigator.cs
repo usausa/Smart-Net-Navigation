@@ -239,14 +239,6 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             }
         }
 
-#pragma warning disable CA1849
-        // ReSharper disable once MethodHasAsyncOverload
-        if (!ConfirmNavigation(navigationContext))
-        {
-            return false;
-        }
-#pragma warning restore CA1849
-
         var confirmResult = await ConfirmNavigationAsync(navigationContext).ConfigureAwait(true);
         if (!confirmResult)
         {
@@ -350,7 +342,12 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     private bool ConfirmNavigation(NavigationContext context)
     {
-        if (CurrentTarget is IConfirmRequest confirm)
+        return ConfirmNavigation(context, CurrentTarget);
+    }
+
+    private bool ConfirmNavigation(NavigationContext context, object? currentTarget)
+    {
+        if (currentTarget is IConfirmRequest confirm)
         {
             var canNavigate = confirm.CanNavigate(context);
             if (!canNavigate)
@@ -375,7 +372,8 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     private async Task<bool> ConfirmNavigationAsync(NavigationContext context)
     {
-        if (CurrentTarget is IConfirmRequestAsync confirm)
+        var currentTarget = CurrentTarget;
+        if (currentTarget is IConfirmRequestAsync confirm)
         {
             var canNavigate = await confirm.CanNavigateAsync(context).ConfigureAwait(true);
             if (!canNavigate)
@@ -384,7 +382,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             }
         }
 
-        return ConfirmNavigation(context);
+        return ConfirmNavigation(context, currentTarget);
     }
 
     // ------------------------------------------------------------
