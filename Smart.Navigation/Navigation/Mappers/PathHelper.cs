@@ -36,7 +36,10 @@ internal static class PathHelper
             }
             else if (dirs[i] == "..")
             {
-                length--;
+                if ((length > 1) || ((length == 1) && (dirs[0].Length != 0)))
+                {
+                    length--;
+                }
             }
             else
             {

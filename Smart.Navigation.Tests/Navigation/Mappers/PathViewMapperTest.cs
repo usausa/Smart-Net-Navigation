@@ -83,6 +83,21 @@ public sealed class PathViewMapperTest
         Assert.Equal(descriptor1, descriptor2);
     }
 
+    [Theory]
+    [InlineData("/../Parent1")]
+    [InlineData("../../Parent1")]
+    [InlineData("/Children/../../../Parent1")]
+    public static void UsePathViewMapperRootOverflow(string path)
+    {
+        // prepare
+        var navigator = CreateNavigator();
+
+        // test
+        navigator.Forward(path);
+
+        Assert.Equal(typeof(Parent1Form), navigator.CurrentView!.GetType());
+    }
+
     // ------------------------------------------------------------
     // Failed
     // ------------------------------------------------------------

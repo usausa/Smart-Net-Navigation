@@ -66,6 +66,22 @@ public sealed class NavigatorConfirmTest
         Assert.True(await navigator.ForwardAsync(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", true)));
     }
 
+    [Fact]
+    public async Task ConfirmEventCalledOnceByAsyncNavigation()
+    {
+        // prepare
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
+        var count = 0;
+        navigator.Confirm += (_, _) => count++;
+
+        // test
+        await navigator.ForwardAsync(typeof(ToForm));
+
+        Assert.Equal(1, count);
+    }
+
     public sealed class ToForm : MockForm
     {
     }
