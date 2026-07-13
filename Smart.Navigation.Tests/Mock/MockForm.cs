@@ -10,11 +10,6 @@ public abstract class MockForm : IDisposable
 
     public object? Focused { get; set; }
 
-    ~MockForm()
-    {
-        Dispose(false);
-    }
-
     public void Dispose()
     {
         Dispose(true);
