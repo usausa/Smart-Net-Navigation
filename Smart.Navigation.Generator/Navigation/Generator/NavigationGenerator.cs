@@ -44,9 +44,14 @@ public sealed class NavigationGenerator : IIncrementalGenerator
             .Where(static x => x is not null)
             .Collect();
 
-        context.RegisterImplementationSourceOutput(
-            sourceProvider.Combine(viewProvider),
-            static (context, provider) => Execute(context, provider.Left, provider.Right));
+        context.RegisterSourceOutput(sourceProvider, static (context, sources) => ReportDiagnostics(context, sources));
+        context.RegisterSourceOutput(viewProvider, static (context, views) => ReportDiagnostics(context, views));
+
+        var models = sourceProvider
+            .Combine(viewProvider)
+            .SelectMany(static (pair, token) => JoinSourcesWithViews(pair.Left, pair.Right, token));
+
+        context.RegisterImplementationSourceOutput(models, static (context, model) => Execute(context, model));
     }
 
     // ------------------------------------------------------------
@@ -117,43 +122,55 @@ public sealed class NavigationGenerator : IIncrementalGenerator
                 .ToArray()));
     }
 
+    private static ImmutableArray<ViewSourceModel> JoinSourcesWithViews(
+        ImmutableArray<Result<SourceModel>> sourceResults,
+        ImmutableArray<Result<EquatableArray<ViewIdModel>>> viewResults,
+        CancellationToken token)
+    {
+        token.ThrowIfCancellationRequested();
+
+        var viewMap = viewResults
+            .SelectValue()
+            .SelectMany(static x => x)
+            .GroupBy(static x => x.ViewIdClassFullName)
+            .ToDictionary(static x => x.Key, static x => x.ToArray());
+
+        token.ThrowIfCancellationRequested();
+
+        var builder = ImmutableArray.CreateBuilder<ViewSourceModel>();
+        foreach (var source in sourceResults.SelectValue())
+        {
+            if (viewMap.TryGetValue(source.ViewIdClassFullName, out var views))
+            {
+                builder.Add(new ViewSourceModel(source, new EquatableArray<ViewIdModel>(views)));
+            }
+        }
+
+        return builder.ToImmutable();
+    }
+
     // ------------------------------------------------------------
     // Generator
     // ------------------------------------------------------------
 
-    private static void Execute(SourceProductionContext context, ImmutableArray<Result<SourceModel>> viewSources, ImmutableArray<Result<EquatableArray<ViewIdModel>>> viewIds)
+    private static void ReportDiagnostics<T>(SourceProductionContext context, ImmutableArray<Result<T>> results)
+        where T : IEquatable<T>
     {
-        foreach (var info in viewSources.SelectError())
+        foreach (var info in results.SelectError())
         {
             context.ReportDiagnostic(info);
         }
-        foreach (var info in viewIds.SelectError())
-        {
-            context.ReportDiagnostic(info);
-        }
+    }
 
-        var viewMap = viewIds
-            .SelectValue()
-            .SelectMany(static x => x)
-            .GroupBy(static x => x.ViewIdClassFullName)
-            .ToDictionary(static x => x.Key, static x => x.ToList());
+    private static void Execute(SourceProductionContext context, ViewSourceModel model)
+    {
+        context.CancellationToken.ThrowIfCancellationRequested();
 
         var builder = new SourceBuilder();
-        foreach (var viewSource in viewSources.SelectValue())
-        {
-            context.CancellationToken.ThrowIfCancellationRequested();
+        BuildSource(builder, model.Source, model.Views);
 
-            if (viewMap.TryGetValue(viewSource.ViewIdClassFullName, out var viewList))
-            {
-                builder.Clear();
-
-                BuildSource(builder, viewSource, viewList);
-
-                var filename = MakeFilename(viewSource.Namespace, viewSource.ClassName, viewSource.MethodName);
-                var source = builder.ToString();
-                context.AddSource(filename, SourceText.From(source, Encoding.UTF8));
-            }
-        }
+        var filename = MakeFilename(model.Source.Namespace, model.Source.ClassName, model.Source.MethodName);
+        context.AddSource(filename, SourceText.From(builder.ToString(), Encoding.UTF8));
     }
 
     private static void BuildSource(SourceBuilder builder, SourceModel source, IEnumerable<ViewIdModel> viewIds)
