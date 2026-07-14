@@ -15,8 +15,8 @@
   <Import Project="..\Smart.Navigation.props" />
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.11.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.11.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.13.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.13.0" />
   </ItemGroup>
 
   <ItemGroup>
