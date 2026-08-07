@@ -37,7 +37,7 @@
     <Project Path="Smart.Navigation.Tests/Smart.Navigation.Tests.csproj" />
   </Folder>
   <Folder Name="/Example/">
-    <Project Path="Example.WindowsApp/Example.WindowsApp.csproj" />
+    <Project Path="Example.WindowsApp/Example.WindowsApp.csproj" DefaultStartup="true" />
     <Project Path="Example.WindowsFormsApp/Example.WindowsFormsApp.csproj" />
   </Folder>
 </Solution>
