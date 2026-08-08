@@ -17,8 +17,8 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.9.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.13.0" />
-    <PackageReference Include="Usa.Smart.Resolver" Version="2.13.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.15.0" />
+    <PackageReference Include="Usa.Smart.Resolver" Version="2.14.0" />
     <PackageReference Include="xunit.v3.mtp-v2" Version="3.2.2" />
   </ItemGroup>
 

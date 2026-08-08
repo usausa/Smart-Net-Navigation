@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="12.1.0" />
-    <PackageReference Include="Usa.Smart.Core" Version="2.13.0" />
+    <PackageReference Include="Avalonia" Version="12.1.1" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.15.0" />
   </ItemGroup>
 
   <ItemGroup>
