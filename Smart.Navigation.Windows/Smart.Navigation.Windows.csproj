@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net10.0-windows;net9.0-windows;net8.0-windows</TargetFrameworks>
@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Usa.Smart.Core" Version="2.15.0" />
+    <PackageReference Include="Usa.Smart.Core" Version="2.16.0" />
   </ItemGroup>
 
   <ItemGroup>

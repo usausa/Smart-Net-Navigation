@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "Smart.Navigation.SourceGenerator": {
+    "Smart.Navigation.Generator": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "..\\Example.WindowsFormsApp\\Example.WindowsFormsApp.csproj"
+      "targetProject": "..\Example.WindowsFormsApp\Example.WindowsFormsApp.csproj"
     }
   }
 }

@@ -3,11 +3,12 @@
 // ReSharper disable ArrangeNamespaceBody
 // ReSharper disable CheckNamespace
 #pragma warning disable IDE0130
+#pragma warning disable CA1812
 #pragma warning disable IDE0161
 namespace System.Runtime.CompilerServices
 {
     // For compatibility
-    public sealed class IsExternalInit
+    internal sealed class IsExternalInit
     {
     }
 }
