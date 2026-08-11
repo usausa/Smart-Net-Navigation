@@ -1,12 +1,10 @@
 namespace Smart.Navigation.Generator;
 
 using System.Collections.Immutable;
-using System.Text;
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
 
 using Smart.Navigation.Generator.Models;
 
@@ -169,8 +167,9 @@ public sealed class NavigationGenerator : IIncrementalGenerator
         var builder = new SourceBuilder();
         BuildSource(builder, model.Source, model.Views);
 
-        var filename = MakeFilename(model.Source.Namespace, model.Source.ClassName, model.Source.MethodName);
-        context.AddSource(filename, SourceText.From(builder.ToString(), Encoding.UTF8));
+        context.AddSource(
+            HintNameBuilder.Build(model.Source.Namespace, model.Source.ClassName, model.Source.MethodName),
+            builder);
     }
 
     private static void BuildSource(SourceBuilder builder, SourceModel source, IEnumerable<ViewIdModel> viewIds)
@@ -224,27 +223,5 @@ public sealed class NavigationGenerator : IIncrementalGenerator
         builder.EndScope();
 
         builder.EndScope();
-    }
-
-    // ------------------------------------------------------------
-    // Helper
-    // ------------------------------------------------------------
-
-    private static string MakeFilename(string ns, string className, string methodName)
-    {
-        var buffer = new StringBuilder();
-
-        if (!String.IsNullOrEmpty(ns))
-        {
-            buffer.Append(ns.Replace('.', '_'));
-            buffer.Append('_');
-        }
-
-        buffer.Append(className.Replace('<', '[').Replace('>', ']'));
-        buffer.Append('_');
-        buffer.Append(methodName);
-        buffer.Append(".g.cs");
-
-        return buffer.ToString();
     }
 }

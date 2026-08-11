@@ -16,7 +16,7 @@
   <Target Name="PackBuildOutputs" DependsOnTargets="SatelliteDllsProjectOutputGroup;DebugSymbolsProjectOutputGroup">
     <ItemGroup>
       <TfmSpecificPackageFile Include="..\Smart.Navigation.props" PackagePath="build" />
-      <TfmSpecificPackageFile Include="..\Smart.Navigation.Generator\bin\$(Configuration)\netstandard2.0\\Smart.Navigation.Generator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+      <TfmSpecificPackageFile Include="..\Smart.Navigation.Generator\bin\$(Configuration)\netstandard2.0\Smart.Navigation.Generator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
       <TfmSpecificPackageFile Include="$(PKGSourceGenerateHelper)\lib\netstandard2.0\SourceGenerateHelper.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     </ItemGroup>
   </Target>
@@ -29,9 +29,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SourceGenerateHelper" Version="1.18.0" GeneratePathProperty="true" PrivateAssets="all" />
+    <PackageReference Include="SourceGenerateHelper" Version="1.20.0" GeneratePathProperty="true" PrivateAssets="all" />
     <PackageReference Include="Usa.Smart.Converter" Version="2.15.0" />
     <PackageReference Include="Usa.Smart.Core" Version="2.16.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <!-- Build order only. PackBuildOutputs reads the generator's bin directory directly, so packing
+         this project on its own fails unless the generator happened to be built first. This makes
+         the ordering explicit. ReferenceOutputAssembly keeps the generator off this project's
+         compile references, PrivateAssets keeps it out of the package dependencies. -->
+    <ProjectReference Include="..\Smart.Navigation.Generator\Smart.Navigation.Generator.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
+  </ItemGroup>
 </Project>
