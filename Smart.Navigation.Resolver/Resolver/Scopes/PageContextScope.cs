@@ -16,22 +16,21 @@ public sealed class PageContextScope : IScope
         this.name = name;
     }
 
+    public bool TransferDisposal() => false;
+
     public IScope Copy(ComponentContainer components)
     {
         return new PageContextScope(name);
     }
 
-    public Func<IResolver, object> Create(Func<object> factory)
+    public Func<IResolver, object> Create(IResolver resolver, Func<IResolver, object> factory)
     {
-        return resolver =>
+        if (storage is null)
         {
-            if (storage is null)
-            {
-                storage = resolver.Get<PageContextStorage>();
-                key = resolver.Get<PageContextKeyManager>().Acquire();
-            }
+            storage = resolver.Get<PageContextStorage>();
+            key = resolver.Get<PageContextKeyManager>().Acquire();
+        }
 
-            return storage.Resolve(name, key, factory);
-        };
+        return r => storage.Resolve(name, key, () => factory(r));
     }
 }
