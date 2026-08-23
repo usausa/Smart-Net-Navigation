@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsRoslynComponent>true</IsRoslynComponent>
     <IsPackable>false</IsPackable>
+    <DebugType>embedded</DebugType>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <CodeAnalysisRuleSet>..\Analyzers.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
@@ -12,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="5.9.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.9.0" PrivateAssets="all" />
-    <PackageReference Include="SourceGenerateHelper" Version="1.21.0" GeneratePathProperty="true" PrivateAssets="all" />
+    <PackageReference Include="SourceGenerateHelper" Version="1.22.0" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
 
   <PropertyGroup>

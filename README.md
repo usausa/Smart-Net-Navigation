@@ -700,20 +700,13 @@ services.AddNavigator(config =>
 });
 ```
 
-### IActivator
+### IServiceProvider
 
-* Interface is used for object creation.
-* Default implementation is ``Activator.CreateInstance()``.
-* Customizable by creating the following implementation.
+* Interface is used for service resolution. It is also used by the scope plugin.
+* Default implementation uses ``Activator.CreateInstance()``.
+* Customizable by ``UseServiceProvider()``.
 
-```csharp
-public interface IActivator
-{
-    object Resolve(Type type);
-}
-```
-
-``Usa.Smart.Navigation.Resolver`` provides an implementation of ``IActivator`` using ``Usa.Smart.Resolver``.
+``Usa.Smart.Navigation.Resolver`` provides an implementation using ``Usa.Smart.Resolver``.
 
 ```csharp
 // Usage
