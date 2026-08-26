@@ -20,6 +20,7 @@ public sealed class NavigatorConfig : INavigatorConfig
     {
         config.Add<IViewMapper, DirectViewMapper>();
         config.Add<IServiceProvider, StandardServiceProvider>();
+        config.Add<IActivator, ServiceProviderActivator>();
         config.Add<IConverter, SmartConverter>();
         config.Add<IDelegateFactory>(DelegateFactory.Default);
         config.Add<IPlugin, ParameterPlugin>();

@@ -3,6 +3,7 @@ namespace Smart.Navigation.Plugins.Scope;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
+using Smart.Navigation.Components;
 using Smart.Reflection;
 
 [RequiresUnreferencedCode("ScopePlugin uses reflection to scan properties with [Scope] attribute. This may not work with trimming.")]
@@ -25,32 +26,43 @@ public sealed class ScopePlugin : PluginBase
 
     private readonly IDelegateFactory delegateFactory;
 
-    private readonly IServiceProvider serviceProvider;
+    private readonly IActivator activator;
 
     private readonly Dictionary<string, Reference> references = [];
 
-    public ScopePlugin(IDelegateFactory delegateFactory, IServiceProvider serviceProvider)
+    public ScopePlugin(IDelegateFactory delegateFactory, IActivator activator)
     {
         this.delegateFactory = delegateFactory;
-        this.serviceProvider = serviceProvider;
+        this.activator = activator;
     }
 
     private ScopeProperty[] GetTypeProperties(Type type)
     {
         if (!typeProperties.TryGetValue(type, out var properties))
         {
+#pragma warning disable IDE0028
             properties = type.GetProperties()
                 .Select(static x => new
                 {
                     Property = x,
-                    Attribute = x.GetCustomAttribute<ScopeAttribute>()
+                    Attribute = x.GetCustomAttributes().OfType<IScopeRequest>().FirstOrDefault()
                 })
                 .Where(static x => x.Attribute is not null)
-                .Select(x => new ScopeProperty(
-                    x.Attribute!.Name ?? x.Property.Name,
-                    x.Attribute.RequestType ?? delegateFactory.GetExtendedPropertyType(x.Property),
-                    delegateFactory.CreateSetter(x.Property, true)!))
+                .Select(x =>
+                {
+                    var requestType = x.Attribute!.RequestType ?? delegateFactory.GetExtendedPropertyType(x.Property);
+                    if (requestType.IsInterface || requestType.IsAbstract)
+                    {
+                        throw new InvalidOperationException($"Scope request type must be a concrete class. Use [Scope(typeof(Implementation))] for an interface typed property. type=[{type.FullName}], property=[{x.Property.Name}], requestType=[{requestType.FullName}]");
+                    }
+
+                    return new ScopeProperty(
+                        x.Attribute.Name ?? x.Property.Name,
+                        requestType,
+                        delegateFactory.CreateSetter(x.Property, true)!);
+                })
                 .ToArray();
+#pragma warning restore IDE0028
             typeProperties[type] = properties;
         }
 
@@ -91,7 +103,7 @@ public sealed class ScopePlugin : PluginBase
         {
             if (!references.TryGetValue(property.Name, out var reference))
             {
-                reference = new Reference(serviceProvider.GetService(property.RequestType));
+                reference = new Reference(activator.Create(property.RequestType));
 
                 (reference.Instance as IInitializable)?.Initialize();
 

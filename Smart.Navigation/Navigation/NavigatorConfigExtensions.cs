@@ -177,6 +177,34 @@ public static class NavigatorConfigExtensions
         return config.UseServiceProvider(new DelegateServiceProvider(callback));
     }
 
+    public static NavigatorConfig UseActivator<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TActivator>(this NavigatorConfig config)
+        where TActivator : IActivator
+    {
+        config.Configure(static c =>
+        {
+            c.RemoveAll<IActivator>();
+            c.Add<IActivator, TActivator>();
+        });
+
+        return config;
+    }
+
+    public static NavigatorConfig UseActivator(this NavigatorConfig config, IActivator activator)
+    {
+        config.Configure(c =>
+        {
+            c.RemoveAll<IActivator>();
+            c.Add(activator);
+        });
+
+        return config;
+    }
+
+    public static NavigatorConfig UseActivator(this NavigatorConfig config, Func<Type, object?> callback)
+    {
+        return config.UseActivator(new DelegateActivator(callback));
+    }
+
     public static NavigatorConfig UseConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TConverter>(this NavigatorConfig config)
         where TConverter : IConverter
     {

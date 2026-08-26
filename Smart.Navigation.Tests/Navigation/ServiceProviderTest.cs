@@ -37,6 +37,42 @@ public static class ServiceProviderTest
         Assert.Same(form2.Setting, form1.ScopeObject.Setting);
     }
 
+    [Fact]
+    public static void UseActivatorUtilitiesActivator()
+    {
+        // prepare
+        var services = new ServiceCollection();
+        services.AddSingleton<IService, ServiceImplement>();
+        services.AddSingleton<Setting>();
+        services.AddNavigator(static (config, provider) =>
+        {
+            config.UseMockFormProvider();
+            config.UseActivator(new ActivatorUtilitiesActivator(provider));
+        });
+        var provider = services.BuildServiceProvider();
+
+        var navigator = provider.GetRequiredService<INavigator>();
+
+        // test: views and scope objects are constructed without registration
+        navigator.Forward(typeof(Form1));
+
+        var form1 = (Form1)navigator.CurrentView!;
+        Assert.NotNull(form1.Service);
+        Assert.NotNull(form1.ScopeObject);
+        Assert.NotNull(form1.ScopeObject.Setting);
+
+        navigator.Forward(typeof(Form2));
+
+        var form2 = (Form2)navigator.CurrentView!;
+        Assert.Same(form2.Service, form1.Service);
+        Assert.Same(form2.Setting, form1.ScopeObject.Setting);
+
+        // views are caller owned: the open view is not disposed with the root provider
+        provider.Dispose();
+
+        Assert.False(form2.IsDisposed);
+    }
+
     public sealed class Form1 : MockForm
     {
         public IService Service { get; }

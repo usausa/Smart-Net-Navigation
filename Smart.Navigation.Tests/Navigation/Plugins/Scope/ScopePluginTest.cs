@@ -57,6 +57,52 @@ public sealed class ScopePluginTest
     }
 
     [Fact]
+    public static void ScopeByGenericRequestType()
+    {
+        // prepare
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
+
+        // test
+        navigator.Forward(typeof(GenericObject1Form));
+
+        var form1 = (GenericObject1Form)navigator.CurrentView!;
+        Assert.NotNull(form1.Object);
+
+        navigator.Forward(typeof(Object2Form));
+
+        var form2 = (Object2Form)navigator.CurrentView!;
+        Assert.Equal(form2.Object, form1.Object);
+    }
+
+    [Fact]
+    public static void ScopeRequestTypeMustBeConcrete()
+    {
+        // prepare
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
+
+        // test
+        Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(InterfaceScopeForm)));
+        Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(AbstractScopeForm)));
+    }
+
+    [Fact]
+    public static void ScopeObjectUnresolvedThrows()
+    {
+        // prepare
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .UseServiceProvider(static type => type == typeof(ScopeObject) ? null : Activator.CreateInstance(type))
+            .ToNavigator();
+
+        // test
+        Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(Object2Form)));
+    }
+
+    [Fact]
     public static void ScopeSkipInTheMiddle()
     {
         // prepare
@@ -207,5 +253,27 @@ public sealed class ScopePluginTest
     public sealed class ScopeObject : IScopeObject
     {
         public int Value { get; set; }
+    }
+
+    public sealed class GenericObject1Form : MockForm
+    {
+        [Scope<ScopeObject>]
+        public IScopeObject Object { get; set; } = default!;
+    }
+
+    public sealed class InterfaceScopeForm : MockForm
+    {
+        [Scope]
+        public IScopeObject Object { get; set; } = default!;
+    }
+
+    public abstract class AbstractScopeObject
+    {
+    }
+
+    public sealed class AbstractScopeForm : MockForm
+    {
+        [Scope]
+        public AbstractScopeObject Object { get; set; } = default!;
     }
 }

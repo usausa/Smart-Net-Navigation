@@ -3,6 +3,7 @@ namespace Smart.Navigation;
 using System.ComponentModel;
 
 using Smart.ComponentModel;
+using Smart.Navigation.Components;
 using Smart.Navigation.Mappers;
 using Smart.Navigation.Plugins;
 using Smart.Navigation.Strategies;
@@ -43,7 +44,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     private readonly IViewMapper viewMapper;
 
-    private readonly IServiceProvider serviceProvider;
+    private readonly IActivator activator;
 
     private readonly IPlugin[] plugins;
 
@@ -75,7 +76,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
         provider = components.Get<INavigationProvider>();
         viewMapper = components.Get<IViewMapper>();
-        serviceProvider = components.Get<IServiceProvider>();
+        activator = components.Get<IActivator>();
         plugins = components.GetAll<IPlugin>().ToArray();
     }
 
@@ -406,11 +407,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
         public object CreateView(Type type)
         {
-            var view = navigator.serviceProvider.GetService(type);
-            if (view is null)
-            {
-                throw new InvalidOperationException($"Create view failed. type=[{type.FullName}]");
-            }
+            var view = navigator.activator.Create(type);
 
             var target = navigator.provider.ResolveTarget(view);
 
