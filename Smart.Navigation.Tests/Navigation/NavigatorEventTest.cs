@@ -12,7 +12,7 @@ public sealed class NavigatorEventTest
     [Fact]
     public static void FormEventArgs()
     {
-        // prepare
+        // Arrange
         var resolver = new ResolverConfig()
             .UseAutoBinding()
             .ToResolver();
@@ -24,9 +24,10 @@ public sealed class NavigatorEventTest
         var eventArgs = new Holder<NavigationEventArgs>();
         navigator.Navigating += (_, args) => eventArgs.Value = args;
 
-        // test
+        // Act
         navigator.Forward(typeof(EventArgs1Window));
 
+        // Assert
         Assert.NotNull(eventArgs.Value.Context);
         Assert.Null(eventArgs.Value.FromView);
         Assert.Null(eventArgs.Value.FromTarget);
@@ -35,8 +36,10 @@ public sealed class NavigatorEventTest
         Assert.NotNull(eventArgs.Value.ToTarget);
         Assert.Equal(typeof(EventArgs1WindowViewModel), eventArgs.Value.ToTarget.GetType());
 
+        // Act
         navigator.Forward(typeof(EventArgs2Window));
 
+        // Assert
         Assert.NotNull(eventArgs.Value.Context);
         Assert.NotNull(eventArgs.Value.FromView);
         Assert.Equal(typeof(EventArgs1Window), eventArgs.Value.FromView!.GetType());
@@ -79,7 +82,7 @@ public sealed class NavigatorEventTest
     [Fact]
     public static void FormEvent()
     {
-        // prepare
+        // Arrange
         var recorder = new EventRecorder();
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
@@ -87,16 +90,19 @@ public sealed class NavigatorEventTest
         navigator.Navigating += (_, args) => recorder.Events.Add($"{((Type?)args.Context.FromId)?.Name}.Navigating");
         navigator.Navigated += (_, args) => recorder.Events.Add($"{((Type)args.Context.ToId).Name}.Navigated");
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
+        // Assert
         Assert.Equal(".Navigating", recorder.Events[0]);
         Assert.Equal("Form1.Navigated", recorder.Events[1]);
 
+        // Act
         recorder.Events.Clear();
 
         navigator.Forward(typeof(Form2));
 
+        // Assert
         Assert.Equal("Form1.Navigating", recorder.Events[0]);
         Assert.Equal("Form2.Navigated", recorder.Events[1]);
     }
@@ -104,7 +110,7 @@ public sealed class NavigatorEventTest
     [Fact]
     public static void FormEventSupport()
     {
-        // prepare
+        // Arrange
         var resolver = new ResolverConfig()
             .UseAutoBinding()
             .Also(static config => config.Bind<EventRecorder>().ToSelf().InSingletonScope())
@@ -115,16 +121,19 @@ public sealed class NavigatorEventTest
             .UseServiceProvider(resolver)
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Event1Form));
 
+        // Assert
         Assert.Equal("Event1Form.OnNavigatingTo", recorder.Events[0]);
         Assert.Equal("Event1Form.OnNavigatedTo", recorder.Events[1]);
 
+        // Act
         recorder.Events.Clear();
 
         navigator.Forward(typeof(Event2Form));
 
+        // Assert
         Assert.Equal("Event1Form.OnNavigatingFrom", recorder.Events[0]);
         Assert.Equal("Event2Form.OnNavigatingTo", recorder.Events[1]);
         Assert.Equal("Event2Form.OnNavigatedTo", recorder.Events[2]);
@@ -195,7 +204,7 @@ public sealed class NavigatorEventTest
     [Fact]
     public static void ViewEventSupport()
     {
-        // prepare
+        // Arrange
         var resolver = new ResolverConfig()
             .UseAutoBinding()
             .Also(static config => config.Bind<EventRecorder>().ToSelf().InSingletonScope())
@@ -206,16 +215,19 @@ public sealed class NavigatorEventTest
             .UseServiceProvider(resolver)
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Event1Window));
 
+        // Assert
         Assert.Equal("Event1WindowViewModel.OnNavigatingTo", recorder.Events[0]);
         Assert.Equal("Event1WindowViewModel.OnNavigatedTo", recorder.Events[1]);
 
+        // Act
         recorder.Events.Clear();
 
         navigator.Forward(typeof(Event2Window));
 
+        // Assert
         Assert.Equal("Event1WindowViewModel.OnNavigatingFrom", recorder.Events[0]);
         Assert.Equal("Event2WindowViewModel.OnNavigatingTo", recorder.Events[1]);
         Assert.Equal("Event2WindowViewModel.OnNavigatedTo", recorder.Events[2]);

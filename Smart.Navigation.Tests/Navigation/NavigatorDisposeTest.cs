@@ -7,16 +7,17 @@ public sealed class NavigatorDisposeTest
     [Fact]
     public static void NavigatorDispose()
     {
-        // prepare
+        // Arrange
         var component = new DisposableComponent();
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .Configure(config => config.Add(component))
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Dispose();
 
+        // Assert
         Assert.True(component.IsDisposed);
     }
 

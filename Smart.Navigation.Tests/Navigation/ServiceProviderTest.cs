@@ -10,59 +10,69 @@ public static class ServiceProviderTest
     [Fact]
     public static void UseServiceProvider()
     {
-        // prepare
+        // Arrange
         var services = new ServiceCollection();
         services.AddSingleton<IService, ServiceImplement>();
         services.AddSingleton<Setting>();
         services.AddTransient<ScopeObject>();
         services.AddTransient<Form1>();
         services.AddTransient<Form2>();
-        services.AddNavigator(static config => config.UseMockFormProvider());
+        services.AddNavigator(static (config, provider) =>
+        {
+            config.UseMockFormProvider();
+            config.UseServiceProvider(provider);
+        });
         var provider = services.BuildServiceProvider();
 
         var navigator = provider.GetRequiredService<INavigator>();
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
+        // Assert
         var form1 = (Form1)navigator.CurrentView!;
         Assert.NotNull(form1.Service);
         Assert.NotNull(form1.ScopeObject);
         Assert.NotNull(form1.ScopeObject.Setting);
 
+        // Act
         navigator.Forward(typeof(Form2));
 
+        // Assert
         var form2 = (Form2)navigator.CurrentView!;
         Assert.Same(form2.Service, form1.Service);
         Assert.Same(form2.Setting, form1.ScopeObject.Setting);
     }
 
     [Fact]
-    public static void UseActivatorUtilitiesActivator()
+    public static void UseActivatorUtilities()
     {
-        // prepare
+        // Arrange: views and scope objects are not registered
         var services = new ServiceCollection();
         services.AddSingleton<IService, ServiceImplement>();
         services.AddSingleton<Setting>();
         services.AddNavigator(static (config, provider) =>
         {
             config.UseMockFormProvider();
-            config.UseActivator(new ActivatorUtilitiesActivator(provider));
+            config.UseActivatorUtilities(provider);
         });
         var provider = services.BuildServiceProvider();
 
         var navigator = provider.GetRequiredService<INavigator>();
 
-        // test: views and scope objects are constructed without registration
+        // Act
         navigator.Forward(typeof(Form1));
 
+        // Assert
         var form1 = (Form1)navigator.CurrentView!;
         Assert.NotNull(form1.Service);
         Assert.NotNull(form1.ScopeObject);
         Assert.NotNull(form1.ScopeObject.Setting);
 
+        // Act
         navigator.Forward(typeof(Form2));
 
+        // Assert
         var form2 = (Form2)navigator.CurrentView!;
         Assert.Same(form2.Service, form1.Service);
         Assert.Same(form2.Setting, form1.ScopeObject.Setting);

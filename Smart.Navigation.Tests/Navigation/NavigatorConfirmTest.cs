@@ -7,7 +7,7 @@ public sealed class NavigatorConfirmTest
     [Fact]
     public static void CanceledByEvent()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -16,7 +16,7 @@ public sealed class NavigatorConfirmTest
             args.Cancel = args.Context.Parameter.GetValue<bool>("Cancel");
         };
 
-        // test
+        // Act & Assert
         Assert.False(navigator.Forward(typeof(ToForm), new NavigationParameter().SetValue("Cancel", true)));
         Assert.True(navigator.Forward(typeof(ToForm), new NavigationParameter().SetValue("Cancel", false)));
     }
@@ -24,14 +24,15 @@ public sealed class NavigatorConfirmTest
     [Fact]
     public static void CanceledByInterface()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(CancelForm));
 
+        // Act & Assert
         Assert.False(navigator.Forward(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", false)));
         Assert.True(navigator.Forward(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", true)));
     }
@@ -39,14 +40,15 @@ public sealed class NavigatorConfirmTest
     [Fact]
     public async Task TestNavigatorCanceledByAsyncInterface()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(CancelForm));
 
+        // Act & Assert
         Assert.False(await navigator.ForwardAsync(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", false)));
         Assert.True(await navigator.ForwardAsync(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", true)));
     }
@@ -54,14 +56,15 @@ public sealed class NavigatorConfirmTest
     [Fact]
     public async Task TestNavigatorCanceledByAsyncInterface2()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(CancelAsyncForm));
 
+        // Act & Assert
         Assert.False(await navigator.ForwardAsync(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", false)));
         Assert.True(await navigator.ForwardAsync(typeof(ToForm), new NavigationParameter().SetValue("CanNavigate", true)));
     }
@@ -69,16 +72,17 @@ public sealed class NavigatorConfirmTest
     [Fact]
     public async Task ConfirmEventCalledOnceByAsyncNavigation()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
         var count = 0;
         navigator.Confirm += (_, _) => count++;
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(ToForm));
 
+        // Assert
         Assert.Equal(1, count);
     }
 

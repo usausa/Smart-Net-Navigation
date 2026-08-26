@@ -11,7 +11,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushNewGroup()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -19,7 +19,7 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         // A1 B1       new []
         // A1 B1 C1    D:B1 C:C1
         navigator.Forward(typeof(FormA1));
@@ -30,6 +30,7 @@ public sealed class GroupPushStrategyTest
 
         navigator.GroupPush(typeof(FormC1));
 
+        // Assert
         Assert.Equal(3, navigator.StackedCount);
         Assert.False(formB1.IsVisible);
 
@@ -41,7 +42,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushNewAndBring()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -49,7 +50,7 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         // A1 B1       new [0]
         // B1 A1 A2    D:B1 C:A2
         navigator.Forward(typeof(FormA1));
@@ -62,6 +63,7 @@ public sealed class GroupPushStrategyTest
 
         navigator.GroupPush(typeof(FormA2));
 
+        // Assert
         Assert.Equal(3, navigator.StackedCount);
         Assert.False(formB1.IsVisible);
 
@@ -69,8 +71,10 @@ public sealed class GroupPushStrategyTest
         Assert.Equal(typeof(FormA2), context.Value.ToId);
         Assert.True(context.Value.Attribute.IsStacked());
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.True(formA1.IsVisible);
         Assert.False(formB1.IsVisible);
 
@@ -78,8 +82,10 @@ public sealed class GroupPushStrategyTest
         Assert.Equal(typeof(FormA1), context.Value.ToId);
         Assert.True(context.Value.Attribute.IsRestore());
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.False(formA1.IsOpen);
         Assert.True(formB1.IsVisible);
 
@@ -91,7 +97,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushNewAndNotBring()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -99,7 +105,7 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         // A1 B1       new [1]
         // A1 B1 B2    D:B1 C:B2
         navigator.Forward(typeof(FormA1));
@@ -112,6 +118,7 @@ public sealed class GroupPushStrategyTest
 
         navigator.GroupPush(typeof(FormB2));
 
+        // Assert
         Assert.Equal(3, navigator.StackedCount);
         Assert.False(formB1.IsVisible);
 
@@ -119,8 +126,10 @@ public sealed class GroupPushStrategyTest
         Assert.Equal(typeof(FormB2), context.Value.ToId);
         Assert.True(context.Value.Attribute.IsStacked());
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.False(formA1.IsVisible);
         Assert.True(formB1.IsVisible);
 
@@ -128,8 +137,10 @@ public sealed class GroupPushStrategyTest
         Assert.Equal(typeof(FormB1), context.Value.ToId);
         Assert.True(context.Value.Attribute.IsRestore());
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.True(formA1.IsVisible);
         Assert.False(formB1.IsOpen);
 
@@ -141,7 +152,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushExistAndBring()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -149,7 +160,7 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         // A1 B1       exist [0]
         // B1 A1       D:B1 A:A1
         navigator.Forward(typeof(FormA1));
@@ -162,6 +173,7 @@ public sealed class GroupPushStrategyTest
 
         navigator.GroupPush(typeof(FormA1));
 
+        // Assert
         Assert.Equal(2, navigator.StackedCount);
         Assert.True(formA1.IsVisible);
         Assert.False(formB1.IsVisible);
@@ -170,8 +182,10 @@ public sealed class GroupPushStrategyTest
         Assert.Equal(typeof(FormA1), context.Value.ToId);
         Assert.True(context.Value.Attribute.IsRestore());
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.False(formA1.IsOpen);
         Assert.True(formB1.IsVisible);
 
@@ -183,7 +197,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushExistAndNotBring()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -191,7 +205,7 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         // A1 B1       exist [1]
         // A1 B1       -
         navigator.Forward(typeof(FormA1));
@@ -202,14 +216,18 @@ public sealed class GroupPushStrategyTest
 
         var formB1 = (FormB1)navigator.CurrentView!;
 
+        // Act & Assert
         Assert.False(navigator.GroupPush(typeof(FormB1)));
 
+        // Assert
         Assert.Equal(2, navigator.StackedCount);
         Assert.False(formA1.IsVisible);
         Assert.True(formB1.IsVisible);
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.True(formA1.IsVisible);
         Assert.False(formB1.IsOpen);
 
@@ -221,7 +239,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushUseCase()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -229,7 +247,7 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         // group A
@@ -254,6 +272,7 @@ public sealed class GroupPushStrategyTest
         // 1:B1:B2:A1:A2
         navigator.GroupPush(typeof(FormA1));
 
+        // Assert
         Assert.True(formA2.IsVisible);
         Assert.False(formA1.IsVisible);
         Assert.False(formB2.IsVisible);
@@ -263,24 +282,30 @@ public sealed class GroupPushStrategyTest
         Assert.Equal(typeof(FormA2), context.Value.ToId);
         Assert.True(context.Value.Attribute.IsRestore());
 
+        // Act
         // 1:B1:B2:A1
         navigator.Pop();
 
+        // Assert
         Assert.True(formA1.IsVisible);
         Assert.False(formB2.IsVisible);
         Assert.False(formB1.IsVisible);
 
+        // Act
         // group B
         // 1:A1:B1:B2
         navigator.GroupPush(typeof(FormB1));
 
+        // Assert
         Assert.True(formB2.IsVisible);
         Assert.False(formB1.IsVisible);
         Assert.False(formA1.IsVisible);
 
+        // Act
         // 1:A1:B1
         navigator.Pop();
 
+        // Assert
         Assert.True(formB1.IsVisible);
         Assert.False(formA1.IsVisible);
     }
@@ -288,7 +313,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -296,11 +321,12 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(FormA1));
 
         navigator.GroupPush(typeof(FormB1), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -312,12 +338,12 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public async Task TestNavigatorGropedPushAsyncExistAndNotBring()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(FormA1));
 
         var formA1 = (FormA1)navigator.CurrentView!;
@@ -326,14 +352,18 @@ public sealed class GroupPushStrategyTest
 
         var formB1 = (FormB1)navigator.CurrentView!;
 
+        // Act & Assert
         Assert.False(await navigator.GroupPushAsync(typeof(FormB1)));
 
+        // Assert
         Assert.Equal(2, navigator.StackedCount);
         Assert.False(formA1.IsVisible);
         Assert.True(formB1.IsVisible);
 
+        // Act
         await navigator.PopAsync();
 
+        // Assert
         Assert.True(formA1.IsVisible);
         Assert.False(formB1.IsOpen);
     }
@@ -341,7 +371,7 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public async Task TestNavigatorGropedPushAsyncWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -349,11 +379,12 @@ public sealed class GroupPushStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(FormA1));
 
         await navigator.GroupPushAsync(typeof(FormB1), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -365,12 +396,12 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushFailed()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         navigator.Forward(typeof(Form1));
         Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(typeof(Form2)));
     }
@@ -378,12 +409,12 @@ public sealed class GroupPushStrategyTest
     [Fact]
     public static void GropedPushFailed2()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(typeof(Form1)));
     }
 

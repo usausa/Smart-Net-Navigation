@@ -26,26 +26,29 @@ public sealed class PathViewMapperTest
     [Fact]
     public static void UsePathViewMapperAbsolutePath()
     {
-        // prepare
+        // Arrange
         var navigator = CreateNavigator();
 
-        // test
+        // Act
         navigator.Forward("/Parent1");
 
+        // Assert
         Assert.Equal(typeof(Parent1Form), navigator.CurrentView!.GetType());
 
+        // Act
         navigator.Forward("/Children/Child1");
 
+        // Assert
         Assert.Equal(typeof(Child1Form), navigator.CurrentView.GetType());
     }
 
     [Fact]
     public static void UsePathViewMapperRelativePath()
     {
-        // prepare
+        // Arrange
         var navigator = CreateNavigator();
 
-        // test
+        // Act & Assert
         navigator.Forward("Parent1");
         Assert.Equal(typeof(Parent1Form), navigator.CurrentView!.GetType());
 
@@ -68,7 +71,7 @@ public sealed class PathViewMapperTest
     [Fact]
     public static void Cached()
     {
-        // prepare
+        // Arrange
         var option = new PathViewMapperOptions
         {
             Root = "Smart.Navigation.Mappers.Views",
@@ -77,7 +80,7 @@ public sealed class PathViewMapperTest
         option.AddAssembly(Assembly.GetExecutingAssembly());
         var mapper = new PathViewMapper(option, new AssignableTypeConstraint(typeof(MockForm)));
 
-        // test
+        // Assert
         var descriptor1 = mapper.FindDescriptor("Parent1");
         var descriptor2 = mapper.FindDescriptor("/Parent1");
         Assert.Equal(descriptor1, descriptor2);
@@ -89,12 +92,13 @@ public sealed class PathViewMapperTest
     [InlineData("/Children/../../../Parent1")]
     public static void UsePathViewMapperRootOverflow(string path)
     {
-        // prepare
+        // Arrange
         var navigator = CreateNavigator();
 
-        // test
+        // Act
         navigator.Forward(path);
 
+        // Assert
         Assert.Equal(typeof(Parent1Form), navigator.CurrentView!.GetType());
     }
 
@@ -105,30 +109,30 @@ public sealed class PathViewMapperTest
     [Fact]
     public static void UsePathViewMapperFailedInvalidIdType()
     {
-        // prepare
+        // Arrange
         var navigator = CreateNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(0));
     }
 
     [Fact]
     public static void UsePathViewMapperFailedNotExists()
     {
-        // prepare
+        // Arrange
         var navigator = CreateNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward("/NotExists"));
     }
 
     [Fact]
     public static void UsePathViewMapperFailedInvalidType()
     {
-        // prepare
+        // Arrange
         var navigator = CreateNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward("/InvalidType"));
     }
 }

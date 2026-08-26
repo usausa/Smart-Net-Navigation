@@ -11,7 +11,7 @@ public sealed class PopStrategyTest
     [Fact]
     public static void Pop()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -19,7 +19,7 @@ public sealed class PopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         var form1 = (MockForm)navigator.CurrentView!;
@@ -28,6 +28,7 @@ public sealed class PopStrategyTest
         navigator.Push(typeof(Form2));
         navigator.Pop();
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form1B = (MockForm)navigator.CurrentView!;
         Assert.Same(form1, form1B);
@@ -44,7 +45,7 @@ public sealed class PopStrategyTest
     [Fact]
     public static void PopMultiple()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -52,12 +53,13 @@ public sealed class PopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Push(typeof(Form3));
         navigator.Pop(2);
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form1 = (MockForm)navigator.CurrentView!;
         Assert.Equal(typeof(Form1), form1.GetType());
@@ -72,7 +74,7 @@ public sealed class PopStrategyTest
     [Fact]
     public static void PopWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -80,11 +82,12 @@ public sealed class PopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Pop(new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -92,7 +95,7 @@ public sealed class PopStrategyTest
     [Fact]
     public static void PopMultipleWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -100,12 +103,13 @@ public sealed class PopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Push(typeof(Form3));
         navigator.Pop(2, new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -117,16 +121,17 @@ public sealed class PopStrategyTest
     [Fact]
     public async Task TestNavigatorPopAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PopAsync();
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form1), navigator.CurrentViewId);
     }
@@ -134,17 +139,18 @@ public sealed class PopStrategyTest
     [Fact]
     public async Task TestNavigatorPopAsyncMultiple()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PushAsync(typeof(Form3));
         await navigator.PopAsync(2);
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form1), navigator.CurrentViewId);
     }
@@ -152,7 +158,7 @@ public sealed class PopStrategyTest
     [Fact]
     public async Task TestNavigatorPopAsyncWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -160,11 +166,12 @@ public sealed class PopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PopAsync(new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -172,7 +179,7 @@ public sealed class PopStrategyTest
     [Fact]
     public async Task TestNavigatorPopAsyncMultipleWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -180,12 +187,13 @@ public sealed class PopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PushAsync(typeof(Form3));
         await navigator.PopAsync(2, new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -193,12 +201,12 @@ public sealed class PopStrategyTest
     [Fact]
     public static void PopFailed()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         Assert.Throws<InvalidOperationException>(() => navigator.Pop(2));
@@ -207,12 +215,12 @@ public sealed class PopStrategyTest
     [Fact]
     public static void PopFailed2()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Pop(0));
     }
 

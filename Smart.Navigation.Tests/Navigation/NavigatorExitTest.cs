@@ -7,20 +7,21 @@ public sealed class NavigatorExitTest
     [Fact]
     public static void Exit()
     {
-        // prepare
+        // Arrange
         var called = new Holder<bool>();
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
         navigator.Exited += (_, _) => called.Value = true;
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         var form1 = (Form1)navigator.CurrentView!;
 
         navigator.Exit();
 
+        // Assert
         Assert.True(called.Value);
         Assert.False(form1.IsOpen);
     }
@@ -28,12 +29,12 @@ public sealed class NavigatorExitTest
     [Fact]
     public static void ExitStacked()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         var form1 = (Form1)navigator.CurrentView!;
@@ -48,6 +49,7 @@ public sealed class NavigatorExitTest
 
         navigator.Exit();
 
+        // Assert
         Assert.False(form1.IsOpen);
         Assert.False(form2.IsOpen);
         Assert.False(form3.IsOpen);

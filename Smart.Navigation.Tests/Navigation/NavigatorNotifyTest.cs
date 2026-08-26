@@ -12,15 +12,16 @@ public sealed class NavigatorNotifyTest
     [Fact]
     public static void FormNotify()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(NotifyForm));
         navigator.Notify(1);
 
+        // Assert
         var notifyForm = (NotifyForm)navigator.CurrentView!;
         Assert.Equal(1, notifyForm.IntParameter);
     }
@@ -28,12 +29,12 @@ public sealed class NavigatorNotifyTest
     [Fact]
     public static void FormNotifyUnsupported()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(UnsupportedForm));
         navigator.Notify("test");
         navigator.Notify(1);
@@ -60,7 +61,7 @@ public sealed class NavigatorNotifyTest
     [Fact]
     public static void ViewNotify()
     {
-        // prepare
+        // Arrange
         var resolver = new ResolverConfig()
             .UseAutoBinding()
             .ToResolver();
@@ -69,10 +70,11 @@ public sealed class NavigatorNotifyTest
             .UseServiceProvider(resolver)
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(NotifyWindow));
         navigator.Notify(1);
 
+        // Assert
         var notifyView = (NotifyWindow)navigator.CurrentView!;
         var notifyViewModel = (NotifyWindowViewModel?)notifyView.Context;
         Assert.Equal(1, notifyViewModel?.IntParameter);

@@ -7,71 +7,83 @@ public sealed class ScopePluginTest
     [Fact]
     public static void Scope()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Data1Form));
 
         navigator.Forward(typeof(Data2Form));
 
+        // Assert
         var form2 = (Data2Form)navigator.CurrentView!;
         Assert.NotNull(form2.Data);
         Assert.True(form2.Data.IsInitialized);
         Assert.False(form2.Data.IsDisposed);
 
+        // Act
         navigator.Forward(typeof(Data3Form));
 
+        // Assert
         var form3 = (Data3Form)navigator.CurrentView!;
         Assert.Equal(form3.Data, form2.Data);
         Assert.True(form3.Data.IsInitialized);
         Assert.False(form3.Data.IsDisposed);
 
+        // Act
         navigator.Forward(typeof(Data1Form));
 
+        // Assert
         Assert.True(form3.Data.IsDisposed);
     }
 
     [Fact]
     public static void ScopeByRequestType()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Object1Form));
 
+        // Assert
         var form1 = (Object1Form)navigator.CurrentView!;
         Assert.NotNull(form1.Object);
 
+        // Act
         navigator.Forward(typeof(Object2Form));
 
+        // Assert
         var form2 = (Object2Form)navigator.CurrentView!;
         Assert.Equal(form2.Object, form1.Object);
 
+        // Act
         navigator.Forward(typeof(Object3Form));
     }
 
     [Fact]
     public static void ScopeByGenericRequestType()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(GenericObject1Form));
 
+        // Assert
         var form1 = (GenericObject1Form)navigator.CurrentView!;
         Assert.NotNull(form1.Object);
 
+        // Act
         navigator.Forward(typeof(Object2Form));
 
+        // Assert
         var form2 = (Object2Form)navigator.CurrentView!;
         Assert.Equal(form2.Object, form1.Object);
     }
@@ -79,12 +91,12 @@ public sealed class ScopePluginTest
     [Fact]
     public static void ScopeRequestTypeMustBeConcrete()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(InterfaceScopeForm)));
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(AbstractScopeForm)));
     }
@@ -92,74 +104,88 @@ public sealed class ScopePluginTest
     [Fact]
     public static void ScopeObjectUnresolvedThrows()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .UseServiceProvider(static type => type == typeof(ScopeObject) ? null : Activator.CreateInstance(type))
             .ToNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(Object2Form)));
     }
 
     [Fact]
     public static void ScopeSkipInTheMiddle()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Push1Form));
 
         navigator.Push(typeof(Push2Form));
 
+        // Assert
         var form2 = (Push2Form)navigator.CurrentView!;
         Assert.NotNull(form2.Data);
         Assert.True(form2.Data.IsInitialized);
         Assert.False(form2.Data.IsDisposed);
 
+        // Act
         navigator.Push(typeof(Push3Form));
 
+        // Assert
         Assert.False(form2.Data.IsDisposed);
 
+        // Act
         navigator.Push(typeof(Push4Form));
 
+        // Assert
         var form4 = (Push4Form)navigator.CurrentView!;
         Assert.Equal(form4.Data, form2.Data);
         Assert.True(form4.Data.IsInitialized);
         Assert.False(form4.Data.IsDisposed);
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.False(form4.Data.IsDisposed);
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.False(form4.Data.IsDisposed);
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.True(form4.Data.IsDisposed);
     }
 
     [Fact]
     public static void ScopeNamed()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Named1Form));
 
+        // Assert
         var form1 = (Named1Form)navigator.CurrentView!;
         Assert.NotNull(form1.ExportData);
 
+        // Act
         navigator.Forward(typeof(Named2Form));
 
+        // Assert
         var form2 = (Named2Form)navigator.CurrentView!;
         Assert.Equal(form2.ImportData, form1.ExportData);
     }

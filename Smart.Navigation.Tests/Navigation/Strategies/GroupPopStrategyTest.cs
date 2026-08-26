@@ -11,7 +11,7 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static void GropedPop()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -19,7 +19,7 @@ public sealed class GroupPopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         var form1 = (Form1)navigator.CurrentView!;
 
@@ -31,6 +31,7 @@ public sealed class GroupPopStrategyTest
 
         navigator.GroupPop();
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Same(form1, navigator.CurrentView);
         Assert.True(form1.IsVisible);
@@ -45,7 +46,7 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static void GropedPopLeaveLast()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -53,7 +54,7 @@ public sealed class GroupPopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         navigator.GroupPush(typeof(FormA1));
@@ -64,6 +65,7 @@ public sealed class GroupPopStrategyTest
 
         navigator.GroupPop(true);
 
+        // Assert
         Assert.Equal(2, navigator.StackedCount);
         Assert.Same(formA1, navigator.CurrentView);
         Assert.True(formA1.IsVisible);
@@ -77,22 +79,23 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static void GropedPopLeaveLastNoOperation()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.GroupPush(typeof(FormA1));
 
+        // Act & Assert
         Assert.False(navigator.GroupPop(true));
     }
 
     [Fact]
     public static void GropedPopWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -100,12 +103,13 @@ public sealed class GroupPopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.GroupPush(typeof(FormA1));
         navigator.GroupPush(typeof(FormA2));
         navigator.GroupPop(new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -113,7 +117,7 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static void GropedPopLeaveLastWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -121,12 +125,13 @@ public sealed class GroupPopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.GroupPush(typeof(FormA1));
         navigator.GroupPush(typeof(FormA2));
         navigator.GroupPop(true, new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -138,17 +143,18 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static async Task TestNavigatorGropedPopAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.GroupPushAsync(typeof(FormA1));
         await navigator.GroupPushAsync(typeof(FormA2));
         await navigator.GroupPopAsync();
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form1), navigator.CurrentViewId);
     }
@@ -156,17 +162,18 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static async Task TestNavigatorGropedPopLeaveLastAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.GroupPushAsync(typeof(FormA1));
         await navigator.GroupPushAsync(typeof(FormA2));
         await navigator.GroupPopAsync(true);
 
+        // Assert
         Assert.Equal(2, navigator.StackedCount);
         Assert.Equal(typeof(FormA1), navigator.CurrentViewId);
     }
@@ -174,7 +181,7 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static async Task TestNavigatorGropedPopAsyncWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -182,12 +189,13 @@ public sealed class GroupPopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.GroupPushAsync(typeof(FormA1));
         await navigator.GroupPushAsync(typeof(FormA2));
         await navigator.GroupPopAsync(new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -195,7 +203,7 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static async Task TestNavigatorGropedPopAsyncLeaveLastWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -203,12 +211,13 @@ public sealed class GroupPopStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.GroupPushAsync(typeof(FormA1));
         await navigator.GroupPushAsync(typeof(FormA2));
         await navigator.GroupPopAsync(true, new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -220,24 +229,24 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static void GropedPopFailed1()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.GroupPop());
     }
 
     [Fact]
     public static void GropedPopFailed2()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         navigator.Forward(typeof(Form1));
         Assert.Throws<InvalidOperationException>(() => navigator.GroupPop());
     }
@@ -245,12 +254,12 @@ public sealed class GroupPopStrategyTest
     [Fact]
     public static void GropedPopFailed3()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         navigator.GroupPush(typeof(FormA1));
         Assert.Throws<InvalidOperationException>(() => navigator.GroupPop());
     }

@@ -10,32 +10,35 @@ public sealed class IdViewMapperTest
     [Fact]
     public static void UseIdViewMapper()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .UseIdViewMapper(static r => r.AutoRegister([typeof(Form1), typeof(Form2)]))
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(ViewId.Form1);
 
+        // Assert
         Assert.Equal(typeof(Form1), navigator.CurrentView!.GetType());
 
+        // Act
         navigator.Forward(ViewId.Form2);
 
+        // Assert
         Assert.Equal(typeof(Form2), navigator.CurrentView!.GetType());
     }
 
     [Fact]
     public static void UseIdViewMapperFindFailed()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .UseIdViewMapper(static _ => { })
             .ToNavigator();
 
-        // test
+        // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(ViewId.Form1));
     }
 

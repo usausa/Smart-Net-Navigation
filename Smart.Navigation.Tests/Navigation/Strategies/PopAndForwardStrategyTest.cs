@@ -11,7 +11,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAndForward()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -19,11 +19,12 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.PopAndForward(typeof(Form3));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form3 = (MockForm)navigator.CurrentView!;
         Assert.Equal(typeof(Form3), form3.GetType());
@@ -38,7 +39,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAndForwardMultiple()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -46,12 +47,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Push(typeof(Form3));
         navigator.PopAndForward(typeof(Form4), 2);
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form4 = (MockForm)navigator.CurrentView!;
         Assert.Equal(typeof(Form4), form4.GetType());
@@ -66,7 +68,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAllAndForward()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -74,12 +76,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Push(typeof(Form3));
         navigator.PopAllAndForward(typeof(Form4));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form4 = (MockForm)navigator.CurrentView!;
         Assert.Equal(typeof(Form4), form4.GetType());
@@ -94,7 +97,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAndForwardWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -102,11 +105,12 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.PopAndForward(typeof(Form3), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -114,7 +118,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAndForwardMultipleWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -122,12 +126,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Push(typeof(Form3));
         navigator.PopAndForward(typeof(Form4), 2, new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -135,7 +140,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAllAndForwardWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -143,12 +148,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Push(typeof(Form3));
         navigator.PopAllAndForward(typeof(Form4), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -160,7 +166,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public async Task TestNavigatorPopAndForwardAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -168,11 +174,12 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PopAndForwardAsync(typeof(Form3));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form3), navigator.CurrentViewId);
     }
@@ -180,7 +187,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public async Task TestNavigatorPopAndForwardMultipleAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -188,12 +195,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PushAsync(typeof(Form3));
         await navigator.PopAndForwardAsync(typeof(Form4), 2);
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form4), navigator.CurrentViewId);
     }
@@ -201,7 +209,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public async Task TestNavigatorPopAllAndForwardAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -209,12 +217,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PushAsync(typeof(Form3));
         await navigator.PopAllAndForwardAsync(typeof(Form4));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form4), navigator.CurrentViewId);
     }
@@ -222,7 +231,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public async Task TestNavigatorPopAndForwardWithParameterAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -230,11 +239,12 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PopAndForwardAsync(typeof(Form3), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -242,7 +252,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public async Task TestNavigatorPopAndForwardMultipleWithParameterAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -250,12 +260,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PushAsync(typeof(Form3));
         await navigator.PopAndForwardAsync(typeof(Form4), 2, new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -263,7 +274,7 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public async Task TestNavigatorPopAllAndForwardWithParameterAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -271,12 +282,13 @@ public sealed class PopAndForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
         await navigator.PushAsync(typeof(Form2));
         await navigator.PushAsync(typeof(Form3));
         await navigator.PopAllAndForwardAsync(typeof(Form4), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -288,12 +300,12 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAndForwardFailed2()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         Assert.Throws<InvalidOperationException>(() => navigator.PopAndForward(typeof(Form3), 3));
@@ -302,12 +314,12 @@ public sealed class PopAndForwardStrategyTest
     [Fact]
     public static void PopAndForwardFailed3()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act & Assert
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         Assert.Throws<InvalidOperationException>(() => navigator.PopAndForward(typeof(Form3), 0));

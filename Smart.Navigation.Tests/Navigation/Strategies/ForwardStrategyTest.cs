@@ -11,7 +11,7 @@ public sealed class ForwardStrategyTest
     [Fact]
     public static void Forward()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -19,9 +19,10 @@ public sealed class ForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form1 = (MockForm)navigator.CurrentView!;
         Assert.Equal(typeof(Form1), form1.GetType());
@@ -31,8 +32,10 @@ public sealed class ForwardStrategyTest
         Assert.Equal(typeof(Form1), context.Value.ToId);
         Assert.Equal(NavigationAttributes.None, context.Value.Attribute);
 
+        // Act
         navigator.Forward(typeof(Form2));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form2 = (MockForm)navigator.CurrentView!;
         Assert.Equal(typeof(Form2), form2.GetType());
@@ -47,16 +50,17 @@ public sealed class ForwardStrategyTest
     [Fact]
     public static void ForwardWithStacked()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
         navigator.Push(typeof(Form2));
         navigator.Forward(typeof(Form3));
 
+        // Assert
         Assert.Equal(2, navigator.StackedCount);
         var form3 = (MockForm)navigator.CurrentView!;
         Assert.Equal(typeof(Form3), form3.GetType());
@@ -66,7 +70,7 @@ public sealed class ForwardStrategyTest
     [Fact]
     public static void ForwardWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -74,11 +78,12 @@ public sealed class ForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         navigator.Forward(typeof(Form2), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }
@@ -90,19 +95,22 @@ public sealed class ForwardStrategyTest
     [Fact]
     public async Task TestNavigatorForwardAsync()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form1), navigator.CurrentViewId);
 
+        // Act
         await navigator.ForwardAsync(typeof(Form2));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         Assert.Equal(typeof(Form2), navigator.CurrentViewId);
     }
@@ -110,7 +118,7 @@ public sealed class ForwardStrategyTest
     [Fact]
     public async Task TestNavigatorForwardAsyncWithParameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
@@ -118,11 +126,12 @@ public sealed class ForwardStrategyTest
         var context = new Holder<INavigationContext>();
         navigator.Navigating += (_, args) => { context.Value = args.Context; };
 
-        // test
+        // Act
         await navigator.ForwardAsync(typeof(Form1));
 
         await navigator.ForwardAsync(typeof(Form2), new NavigationParameter().SetValue("test"));
 
+        // Assert
         Assert.NotNull(context.Value);
         Assert.Equal("test", context.Value.Parameter.GetValue<string>());
     }

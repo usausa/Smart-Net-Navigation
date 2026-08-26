@@ -7,14 +7,15 @@ public sealed class NavigatorAwareTest
     [Fact]
     public static void NavigatorAware()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(AwareForm));
 
+        // Assert
         var awareForm = (AwareForm)navigator.CurrentView!;
         Assert.Same(navigator, awareForm.Navigator);
     }

@@ -7,12 +7,12 @@ public sealed class ParameterPluginTest
     [Fact]
     public static void Parameter()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         var form1 = (Form1)navigator.CurrentView!;
@@ -21,6 +21,7 @@ public sealed class ParameterPluginTest
 
         navigator.Forward(typeof(Form2));
 
+        // Assert
         Assert.Equal(1, navigator.StackedCount);
         var form2 = (Form2)navigator.CurrentView!;
         Assert.Equal(123, form2.IntParameter);
@@ -30,12 +31,12 @@ public sealed class ParameterPluginTest
     [Fact]
     public static void ParameterOneWay()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
         var form1 = (Form1)navigator.CurrentView!;
@@ -44,13 +45,16 @@ public sealed class ParameterPluginTest
 
         navigator.Push(typeof(OneWayForm));
 
+        // Assert
         var oneWayForm = (OneWayForm)navigator.CurrentView!;
         Assert.Equal(123, oneWayForm.IntParameter);
         Assert.Null(oneWayForm.StringParameter);
 
+        // Act
         oneWayForm.IntParameter = 987;
         oneWayForm.StringParameter = "xyz";
 
+        // Act & Assert
         navigator.Pop();
         Assert.Equal(123, form1.IntParameter);
         Assert.Equal("xyz", form1.StringParameter);
@@ -59,12 +63,12 @@ public sealed class ParameterPluginTest
     [Fact]
     public static void ParameterNamed()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Named1Form));
 
         var namedForm1 = (Named1Form)navigator.CurrentView!;
@@ -73,6 +77,7 @@ public sealed class ParameterPluginTest
 
         navigator.Forward(typeof(Named2Form));
 
+        // Assert
         var namedForm2 = (Named2Form)navigator.CurrentView!;
         Assert.Equal(123, namedForm2.Parameter1);
         Assert.Equal("abc", namedForm2.Value2);
@@ -81,12 +86,12 @@ public sealed class ParameterPluginTest
     [Fact]
     public static void ParameterConvert()
     {
-        // prepare
+        // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Convert1Form));
 
         var convertForm1 = (Convert1Form)navigator.CurrentView!;
@@ -95,6 +100,7 @@ public sealed class ParameterPluginTest
 
         navigator.Forward(typeof(Convert2Form));
 
+        // Assert
         var convertForm2 = (Convert2Form)navigator.CurrentView!;
         Assert.Equal("123", convertForm2.Value1);
         Assert.Equal(456, convertForm2.Value2);

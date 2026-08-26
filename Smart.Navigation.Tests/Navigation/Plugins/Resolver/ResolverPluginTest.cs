@@ -10,7 +10,7 @@ public sealed class ResolverPluginTest
     [Fact]
     public static void Resolver()
     {
-        // prepare
+        // Arrange
         var config = new ResolverConfig();
         config.UseAutoBinding();
         config.UseInitializeProcessor();
@@ -25,18 +25,21 @@ public sealed class ResolverPluginTest
             .AddResolverPlugin()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Resolver1Form));
 
         navigator.Forward(typeof(Resolver2Form));
 
+        // Assert
         var form2 = (Resolver2Form)navigator.CurrentView!;
         Assert.NotNull(form2.ScopeObject);
         Assert.True(form2.ScopeObject.IsInitialized);
         Assert.False(form2.ScopeObject.IsDisposed);
 
+        // Act
         navigator.Forward(typeof(Resolver3Form));
 
+        // Assert
         var form3 = (Resolver3Form)navigator.CurrentView!;
         Assert.NotNull(form3.ScopeObject);
         Assert.True(form3.ScopeObject.IsInitialized);
@@ -44,15 +47,17 @@ public sealed class ResolverPluginTest
 
         Assert.Equal(form2.ScopeObject, form3.ScopeObject);
 
+        // Act
         navigator.Forward(typeof(Resolver1Form));
 
+        // Assert
         Assert.True(form3.ScopeObject.IsDisposed);
     }
 
     [Fact]
     public static void ResolverTwice()
     {
-        // prepare
+        // Arrange
         var config = new ResolverConfig();
         config.UseAutoBinding();
         config.UseInitializeProcessor();
@@ -67,7 +72,7 @@ public sealed class ResolverPluginTest
             .AddResolverPlugin()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Resolver1Form));
 
         navigator.Forward(typeof(Resolver2Form));
@@ -76,13 +81,16 @@ public sealed class ResolverPluginTest
 
         navigator.Forward(typeof(Resolver1Form));
 
+        // Assert
         Assert.NotNull(form2A.ScopeObject);
         Assert.True(form2A.ScopeObject.IsDisposed);
 
+        // Act
         navigator.Forward(typeof(Resolver2Form));
 
         var form2B = (Resolver2Form)navigator.CurrentView!;
 
+        // Assert
         Assert.NotNull(form2B.ScopeObject);
         Assert.False(form2B.ScopeObject.IsDisposed);
 
@@ -92,7 +100,7 @@ public sealed class ResolverPluginTest
     [Fact]
     public static void ResolverSkipInTheMiddle()
     {
-        // prepare
+        // Arrange
         var config = new ResolverConfig();
         config.UseAutoBinding();
         config.UseInitializeProcessor();
@@ -107,37 +115,48 @@ public sealed class ResolverPluginTest
             .AddResolverPlugin()
             .ToNavigator();
 
-        // test
+        // Act
         navigator.Forward(typeof(Push1Form));
 
         navigator.Push(typeof(Push2Form));
 
+        // Assert
         var form2 = (Push2Form)navigator.CurrentView!;
         Assert.NotNull(form2.ScopeObject);
         Assert.True(form2.ScopeObject.IsInitialized);
         Assert.False(form2.ScopeObject.IsDisposed);
 
+        // Act
         navigator.Push(typeof(Push3Form));
 
+        // Assert
         Assert.False(form2.ScopeObject.IsDisposed);
 
+        // Act
         navigator.Push(typeof(Push4Form));
 
+        // Assert
         var form4 = (Push4Form)navigator.CurrentView!;
         Assert.Equal(form4.ScopeObject, form2.ScopeObject);
         Assert.True(form4.ScopeObject.IsInitialized);
         Assert.False(form4.ScopeObject.IsDisposed);
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.False(form4.ScopeObject.IsDisposed);
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.False(form4.ScopeObject.IsDisposed);
 
+        // Act
         navigator.Pop();
 
+        // Assert
         Assert.True(form4.ScopeObject.IsDisposed);
     }
 

@@ -9,7 +9,7 @@ public static class SmartResolverTest
     [Fact]
     public static void UseSmartResolver()
     {
-        // prepare
+        // Arrange
         var config = new ResolverConfig();
         config.UseAutoBinding();
         config.Bind<IService>().To<ServiceImplement>().InSingletonScope();
@@ -20,16 +20,19 @@ public static class SmartResolverTest
 
         var navigator = resolver.Get<INavigator>();
 
-        // test
+        // Act
         navigator.Forward(typeof(Form1));
 
+        // Assert
         var form1 = (Form1)navigator.CurrentView!;
         Assert.NotNull(form1.Service);
         Assert.NotNull(form1.ScopeObject);
         Assert.NotNull(form1.ScopeObject.Setting);
 
+        // Act
         navigator.Forward(typeof(Form2));
 
+        // Assert
         var form2 = (Form2)navigator.CurrentView!;
         Assert.Same(form2.Service, form1.Service);
         Assert.Same(form2.Setting, form1.ScopeObject.Setting);
