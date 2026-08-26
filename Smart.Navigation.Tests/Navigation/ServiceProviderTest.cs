@@ -17,7 +17,7 @@ public static class ServiceProviderTest
         services.AddTransient<ScopeObject>();
         services.AddTransient<Form1>();
         services.AddTransient<Form2>();
-        services.AddNavigator(static (config, provider) =>
+        services.AddNavigator(static (provider, config) =>
         {
             config.UseMockFormProvider();
             config.UseServiceProvider(provider);
@@ -51,7 +51,7 @@ public static class ServiceProviderTest
         var services = new ServiceCollection();
         services.AddSingleton<IService, ServiceImplement>();
         services.AddSingleton<Setting>();
-        services.AddNavigator(static (config, provider) =>
+        services.AddNavigator(static (provider, config) =>
         {
             config.UseMockFormProvider();
             config.UseActivatorUtilities(provider);
