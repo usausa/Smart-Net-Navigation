@@ -29,7 +29,7 @@ internal sealed class DialogEffectPlugin : PluginBase
             return;
         }
 
-        // Close efec
+        // Close effect
         var fromType = navigationContext.FromId as Type;
         var fromIsDialog = fromType is not null && DialogViewType.IsAssignableFrom(fromType);
         if (fromIsDialog)

@@ -26,6 +26,7 @@ public sealed class ParameterPlugin : PluginBase
     {
         if (!typeProperties.TryGetValue(type, out var properties))
         {
+#pragma warning disable IDE0028
             properties = type.GetProperties()
                 .Select(static x => new
                 {
@@ -39,6 +40,7 @@ public sealed class ParameterPlugin : PluginBase
                     (x.Attribute!.Direction & Directions.Export) != 0 ? delegateFactory.CreateGetter(x.Property, true) : null,
                     (x.Attribute!.Direction & Directions.Import) != 0 ? delegateFactory.CreateSetter(x.Property, true) : null))
                 .ToArray();
+#pragma warning restore IDE0028
             typeProperties[type] = properties;
         }
 

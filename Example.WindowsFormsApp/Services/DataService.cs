@@ -25,6 +25,7 @@ public sealed class DataService
     public void UpdateData(DataEntity entity)
     {
         var current = entities.FirstOrDefault(x => x.Id == entity.Id);
+        // ReSharper disable once UseNullPropagation
         if (current is null)
         {
             return;

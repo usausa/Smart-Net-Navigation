@@ -42,7 +42,7 @@ public sealed class ScopeAttribute<TRequest> : Attribute, IScopeRequest
 
     public Type RequestType => typeof(TRequest);
 
-    Type? IScopeRequest.RequestType => RequestType;
+    Type IScopeRequest.RequestType => RequestType;
 
     public ScopeAttribute()
     {

@@ -645,6 +645,7 @@ navigator.Forward(typeof(Data1View)); // ScopeData disposed
 * Set to property with same name.
 * Even if the name of the property is different, it can be specified by attribute.
 * Supports ``IInitializable`` and ``IDisposable`` lifecycle events.
+* The request type must be a concrete class so that the object can be created by any provider. For an interface typed property, specify the implementation type by attribute: ``[Scope<ScopeObject>] public IScopeObject Object { get; set; }`` (or the non-generic form ``[Scope(typeof(ScopeObject))]``). When no type is specified, the property type is used. An interface or abstract request type, or an unresolved scope object, throws ``InvalidOperationException``.
 
 ### Create custom plugin
 
@@ -689,20 +690,71 @@ public interface IPluginContext
 
 ### Microsoft.Extensions.DependencyInjection
 
-``Usa.Smart.Navigation.Extensions.DependencyInjection`` provides an extension for ``IServiceCollection``.
+``Usa.Smart.Navigation.Extensions.DependencyInjection`` provides an extension for ``IServiceCollection``. The action receives the root ``IServiceProvider`` and **must select how views and scope objects are created**, because the right choice depends on the container.
 
 ```csharp
-// Usage
-services.AddNavigator(config =>
+// The container creates them.
+// For containers that do not track disposable transients (BunnyTail with transient tracking disabled).
+services.AddNavigator(static (config, provider) =>
 {
     config.UseSomeProvider();
+    config.UseServiceProvider(provider);
     config.UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes));
 });
 ```
 
+```csharp
+// They are constructed directly and the container only supplies dependencies.
+// For plain Microsoft.Extensions.DependencyInjection.
+services.AddNavigator(static (config, provider) =>
+{
+    config.UseSomeProvider();
+    config.UseActivatorUtilities(provider);
+    config.UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes));
+});
+```
+
+There is no default because neither choice is safe for the other container. Plain ``Microsoft.Extensions.DependencyInjection`` keeps a reference to every disposable transient it creates until the resolving provider is disposed, while the navigator disposes closed views itself, so letting it create them retains every closed view. Conversely, constructing directly bypasses generated factories and property injection, which a source generated container relies on.
+
+* ``UseServiceProvider()`` sets the provider for both service location and object creation. Views and scope objects must be registered
+* ``UseActivatorUtilities()`` sets the provider for service location and creates objects with ``ActivatorUtilities.CreateInstance()``. Views and scope objects do not need to be registered
+* Either way the provider is also used by plugins that resolve shared services
+
+```csharp
+// A container specific creation API can be wired through UseActivator().
+services.AddNavigator(static (config, provider) =>
+{
+    config.UseSomeProvider();
+    config.UseServiceProvider(provider);
+    config.UseActivator(type => ((ITypeActivator)provider).Activate(type));
+});
+```
+
+### IActivator
+
+* Interface is used for object creation: views and scope objects are created through it.
+* The result is a new caller-owned instance of a concrete type. The navigator disposes closed views, and the scope plugin disposes scope objects, so the activator must not return shared instances.
+* Default implementation is ``ServiceProviderActivator``, which resolves from ``IServiceProvider`` (and throws when the type cannot be resolved).
+* Customizable by ``UseActivator()``.
+
+```csharp
+public interface IActivator
+{
+    object Create(Type type);
+}
+```
+
+```csharp
+// Usage
+navigator = new NavigatorConfig()
+    .UseSomeProvider()
+    .UseActivator(type => CreateSomeObject(type))
+    .ToNavigator();
+```
+
 ### IServiceProvider
 
-* Interface is used for service resolution. It is also used by the scope plugin.
+* Interface is used for service location: plugins that need shared services use it, and it is the source of the default ``IActivator``.
 * Default implementation uses ``Activator.CreateInstance()``.
 * Customizable by ``UseServiceProvider()``.
 

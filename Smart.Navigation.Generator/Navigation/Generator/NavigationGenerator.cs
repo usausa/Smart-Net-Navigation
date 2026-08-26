@@ -109,6 +109,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
     {
         var classSymbol = (ITypeSymbol)context.TargetSymbol;
 
+#pragma warning disable IDE0028
         return Results.Success(new EquatableArray<ViewIdModel>(
             classSymbol.GetAttributes()
                 .Where(static x => x.AttributeClass?.ToDisplayString() == ViewAttributeName)
@@ -118,6 +119,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
                     attribute.ConstructorArguments[0].ToCSharpString(),
                     attribute.ConstructorArguments[0].Value!.ToString()))
                 .ToArray()));
+#pragma warning restore IDE0028
     }
 
     private static ImmutableArray<ViewSourceModel> JoinSourcesWithViews(
