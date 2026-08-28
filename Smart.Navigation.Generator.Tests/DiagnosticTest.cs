@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Generator.Tests;
 
-using Microsoft.CodeAnalysis;
-
 public sealed class DiagnosticTest
 {
     [Fact]
