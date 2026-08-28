@@ -86,6 +86,7 @@ public sealed class ScopePlugin : PluginBase
 
         foreach (var remove in references.Where(static x => x.Value.Counter == 0).ToList())
         {
+            (remove.Value.Instance as IScopeLifecycle)?.OnScopeTerminate();
             (remove.Value.Instance as IDisposable)?.Dispose();
 
             references.Remove(remove.Key);
@@ -106,7 +107,7 @@ public sealed class ScopePlugin : PluginBase
             {
                 reference = new Reference(activator.Create(property.RequestType));
 
-                (reference.Instance as IInitializable)?.Initialize();
+                (reference.Instance as IScopeLifecycle)?.OnScopeInitialize();
 
                 references[key] = reference;
             }

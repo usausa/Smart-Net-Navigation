@@ -35,8 +35,10 @@ public sealed class ScopePluginTest
         // Act
         navigator.Forward(typeof(Data1Form));
 
-        // Assert
+        // Assert: the scope end is notified before the resource cleanup
+        Assert.True(form3.Data.IsTerminated);
         Assert.True(form3.Data.IsDisposed);
+        Assert.True(form3.Data.TerminatedBeforeDispose);
     }
 
     [Fact]
@@ -293,15 +295,25 @@ public sealed class ScopePluginTest
         public ScopeData ImportData { get; set; } = default!;
     }
 
-    public sealed class ScopeData : IInitializable, IDisposable
+    public sealed class ScopeData : IScopeLifecycle, IDisposable
     {
         public bool IsInitialized { get; private set; }
 
+        public bool IsTerminated { get; private set; }
+
         public bool IsDisposed { get; private set; }
 
-        public void Initialize()
+        public bool TerminatedBeforeDispose { get; private set; }
+
+        public void OnScopeInitialize()
         {
             IsInitialized = true;
+        }
+
+        public void OnScopeTerminate()
+        {
+            IsTerminated = true;
+            TerminatedBeforeDispose = !IsDisposed;
         }
 
         public void Dispose()
