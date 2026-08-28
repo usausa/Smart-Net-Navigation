@@ -149,34 +149,6 @@ public static class NavigatorConfigExtensions
         return config;
     }
 
-    public static NavigatorConfig UseServiceProvider<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TServiceProvider>(this NavigatorConfig config)
-        where TServiceProvider : IServiceProvider
-    {
-        config.Configure(static c =>
-        {
-            c.RemoveAll<IServiceProvider>();
-            c.Add<IServiceProvider, TServiceProvider>();
-        });
-
-        return config;
-    }
-
-    public static NavigatorConfig UseServiceProvider(this NavigatorConfig config, IServiceProvider serviceProvider)
-    {
-        config.Configure(c =>
-        {
-            c.RemoveAll<IServiceProvider>();
-            c.Add(serviceProvider);
-        });
-
-        return config;
-    }
-
-    public static NavigatorConfig UseServiceProvider(this NavigatorConfig config, Func<Type, object?> callback)
-    {
-        return config.UseServiceProvider(new DelegateServiceProvider(callback));
-    }
-
     public static NavigatorConfig UseActivator<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TActivator>(this NavigatorConfig config)
         where TActivator : IActivator
     {
@@ -198,6 +170,11 @@ public static class NavigatorConfigExtensions
         });
 
         return config;
+    }
+
+    public static NavigatorConfig UseActivator(this NavigatorConfig config, IServiceProvider serviceProvider)
+    {
+        return config.UseActivator(new ServiceProviderActivator(serviceProvider));
     }
 
     public static NavigatorConfig UseActivator(this NavigatorConfig config, Func<Type, object?> callback)

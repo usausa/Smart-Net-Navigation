@@ -30,7 +30,7 @@ public static class ResolverConfigExtensions
         {
             var navigatorConfig = new NavigatorConfig();
 
-            navigatorConfig.UseServiceProvider(resolver);
+            navigatorConfig.UseActivator(resolver);
 
             action(resolver, navigatorConfig);
 

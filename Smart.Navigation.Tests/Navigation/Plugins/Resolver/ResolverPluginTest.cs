@@ -21,8 +21,8 @@ public sealed class ResolverPluginTest
 
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseServiceProvider(resolver)
-            .AddResolverPlugin()
+            .UseActivator(resolver)
+            .AddResolverPlugin(resolver)
             .ToNavigator();
 
         // Act
@@ -68,8 +68,8 @@ public sealed class ResolverPluginTest
 
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseServiceProvider(resolver)
-            .AddResolverPlugin()
+            .UseActivator(resolver)
+            .AddResolverPlugin(resolver)
             .ToNavigator();
 
         // Act
@@ -111,8 +111,8 @@ public sealed class ResolverPluginTest
 
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseServiceProvider(resolver)
-            .AddResolverPlugin()
+            .UseActivator(resolver)
+            .AddResolverPlugin(resolver)
             .ToNavigator();
 
         // Act

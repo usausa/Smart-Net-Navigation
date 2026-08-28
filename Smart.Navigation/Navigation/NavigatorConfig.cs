@@ -14,13 +14,12 @@ public sealed class NavigatorConfig : INavigatorConfig
 {
     private readonly ComponentConfig config = new();
 
-    [RequiresUnreferencedCode("Default NavigatorConfig uses StandardServiceProvider, ParameterPlugin and ScopePlugin which rely on reflection. Use explicit configuration for AOT-compatible setup.")]
+    [RequiresUnreferencedCode("Default NavigatorConfig uses StandardActivator, ParameterPlugin and ScopePlugin which rely on reflection. Use explicit configuration for AOT-compatible setup.")]
     [RequiresDynamicCode("Default NavigatorConfig uses ParameterPlugin and ScopePlugin which use dynamic delegate creation. Use explicit configuration for AOT-compatible setup.")]
     public NavigatorConfig()
     {
         config.Add<IViewMapper, DirectViewMapper>();
-        config.Add<IServiceProvider, StandardServiceProvider>();
-        config.Add<IActivator, ServiceProviderActivator>();
+        config.Add<IActivator, StandardActivator>();
         config.Add<IConverter, SmartConverter>();
         config.Add<IDelegateFactory>(DelegateFactory.Default);
         config.Add<IPlugin, ParameterPlugin>();

@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
         {
             var config = new NavigatorConfig();
 
-            config.UseServiceProvider(p);
+            config.UseActivator(p);
 
             action(p, config);
 

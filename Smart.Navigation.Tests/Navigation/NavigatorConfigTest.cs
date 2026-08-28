@@ -99,36 +99,36 @@ public static class NavigatorConfigTest
     public static void ConfigUseActivatorByInterface()
     {
         var config = new NavigatorConfig()
-            .UseServiceProvider<StandardServiceProvider>();
+            .UseActivator<StandardActivator>();
 
         var components = ((INavigatorConfig)config).ResolveComponents();
 
-        Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
-        Assert.NotNull(serviceProvider.GetService(typeof(Model)));
+        Assert.True(components.TryGet<IActivator>(out var activator));
+        Assert.NotNull(activator.Create(typeof(Model)));
     }
 
     [Fact]
     public static void ConfigUseActivatorByInstance()
     {
         var config = new NavigatorConfig()
-            .UseServiceProvider(new DelegateServiceProvider(Activator.CreateInstance));
+            .UseActivator(new DelegateActivator(Activator.CreateInstance));
 
         var components = ((INavigatorConfig)config).ResolveComponents();
 
-        Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
-        Assert.NotNull(serviceProvider.GetService(typeof(Model)));
+        Assert.True(components.TryGet<IActivator>(out var activator));
+        Assert.NotNull(activator.Create(typeof(Model)));
     }
 
     [Fact]
     public static void ConfigUseActivatorByCallback()
     {
         var config = new NavigatorConfig()
-            .UseServiceProvider(Activator.CreateInstance);
+            .UseActivator(Activator.CreateInstance);
 
         var components = ((INavigatorConfig)config).ResolveComponents();
 
-        Assert.True(components.TryGet<IServiceProvider>(out var serviceProvider));
-        Assert.NotNull(serviceProvider.GetService(typeof(Model)));
+        Assert.True(components.TryGet<IActivator>(out var activator));
+        Assert.NotNull(activator.Create(typeof(Model)));
     }
 
     // ------------------------------------------------------------

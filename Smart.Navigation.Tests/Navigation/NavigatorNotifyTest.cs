@@ -67,7 +67,7 @@ public sealed class NavigatorNotifyTest
             .ToResolver();
         var navigator = new NavigatorConfig()
             .UseMockWindowProvider()
-            .UseServiceProvider(resolver)
+            .UseActivator(resolver)
             .ToNavigator();
 
         // Act

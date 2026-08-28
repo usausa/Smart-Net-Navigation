@@ -33,8 +33,8 @@ public sealed partial class App
                 options.RegisterEffect(ExampleEffect.Flip, new FlipEffect());
                 options.RegisterEffect(ExampleEffect.Rotate, new RotateEffect());
             })
-            .UseServiceProvider(resolver)
-            .AddResolverPlugin()
+            .UseActivator(resolver)
+            .AddResolverPlugin(resolver)
             .AddPlugin(new DialogEffectPlugin())
             .ToNavigator();
         navigator.Navigated += (_, args) =>

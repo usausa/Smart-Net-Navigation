@@ -109,7 +109,7 @@ public sealed class ScopePluginTest
         // Arrange
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseServiceProvider(static type => type == typeof(ScopeObject) ? null : Activator.CreateInstance(type))
+            .UseActivator(static type => type == typeof(ScopeObject) ? null : Activator.CreateInstance(type))
             .ToNavigator();
 
         // Act & Assert

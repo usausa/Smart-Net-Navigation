@@ -10,9 +10,9 @@ public sealed class ResolverPlugin : PluginBase
 {
     private readonly PageContextStorage storage;
 
-    public ResolverPlugin(IServiceProvider serviceProvider)
+    public ResolverPlugin(PageContextStorage storage)
     {
-        storage = (PageContextStorage)serviceProvider.GetService(typeof(PageContextStorage))!;
+        this.storage = storage;
     }
 
     public override void OnCreate(IPluginContext pluginContext, object view, object? target)

@@ -18,7 +18,7 @@ public sealed class NavigatorEventTest
             .ToResolver();
         var navigator = new NavigatorConfig()
             .UseMockWindowProvider()
-            .UseServiceProvider(resolver)
+            .UseActivator(resolver)
             .ToNavigator();
 
         var eventArgs = new Holder<NavigationEventArgs>();
@@ -118,7 +118,7 @@ public sealed class NavigatorEventTest
         var recorder = resolver.Get<EventRecorder>();
         var navigator = new NavigatorConfig()
             .UseMockFormProvider()
-            .UseServiceProvider(resolver)
+            .UseActivator(resolver)
             .ToNavigator();
 
         // Act
@@ -212,7 +212,7 @@ public sealed class NavigatorEventTest
         var recorder = resolver.Get<EventRecorder>();
         var navigator = new NavigatorConfig()
             .UseMockWindowProvider()
-            .UseServiceProvider(resolver)
+            .UseActivator(resolver)
             .ToNavigator();
 
         // Act

@@ -34,8 +34,8 @@ public sealed partial class MainForm : Form
         navigator = new NavigatorConfig()
             .UseControlNavigationProvider(ContainerPanel)
             .UseIdViewMapper(m => m.AutoRegister(ViewRegistry.ListViews()))
-            .UseServiceProvider(resolver)
-            .AddResolverPlugin()
+            .UseActivator(resolver)
+            .AddResolverPlugin(resolver)
             .ToNavigator();
         navigator.Exited += OnExited;
         navigator.Navigating += OnNavigating;
