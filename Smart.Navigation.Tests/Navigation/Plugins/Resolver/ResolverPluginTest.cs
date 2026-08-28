@@ -94,7 +94,7 @@ public sealed class ResolverPluginTest
         Assert.NotNull(form2B.ScopeObject);
         Assert.False(form2B.ScopeObject.IsDisposed);
 
-        Assert.NotEqual(form2A, form2B);
+        Assert.NotSame(form2A.ScopeObject, form2B.ScopeObject);
     }
 
     [Fact]
