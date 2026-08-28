@@ -28,7 +28,7 @@ public sealed class ScopePlugin : PluginBase
 
     private readonly IActivator activator;
 
-    private readonly Dictionary<string, Reference> references = [];
+    private readonly Dictionary<(string Name, Type RequestType), Reference> references = [];
 
     public ScopePlugin(IDelegateFactory delegateFactory, IActivator activator)
     {
@@ -78,7 +78,7 @@ public sealed class ScopePlugin : PluginBase
 
         foreach (var property in GetTypeProperties(target.GetType()))
         {
-            if (references.TryGetValue(property.Name, out var reference))
+            if (references.TryGetValue((property.Name, property.RequestType), out var reference))
             {
                 reference.Counter--;
             }
@@ -101,13 +101,14 @@ public sealed class ScopePlugin : PluginBase
 
         foreach (var property in GetTypeProperties(target.GetType()))
         {
-            if (!references.TryGetValue(property.Name, out var reference))
+            var key = (property.Name, property.RequestType);
+            if (!references.TryGetValue(key, out var reference))
             {
                 reference = new Reference(activator.Create(property.RequestType));
 
                 (reference.Instance as IInitializable)?.Initialize();
 
-                references[property.Name] = reference;
+                references[key] = reference;
             }
 
             reference.Counter++;

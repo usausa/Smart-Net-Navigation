@@ -190,8 +190,47 @@ public sealed class ScopePluginTest
         Assert.Equal(form2.ImportData, form1.ExportData);
     }
 
+    [Fact]
+    public static void ScopeNameSharedByDifferentTypes()
+    {
+        // Arrange
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
+
+        // Act
+        navigator.Forward(typeof(SharedDataForm));
+
+        // Assert
+        var formData = (SharedDataForm)navigator.CurrentView!;
+        Assert.NotNull(formData.Shared);
+        Assert.False(formData.Shared.IsDisposed);
+
+        // Act: the same property name with a different request type
+        navigator.Forward(typeof(SharedObjectForm));
+
+        // Assert: the entry is keyed by name and type, so the types are not mixed
+        var formObject = (SharedObjectForm)navigator.CurrentView!;
+        Assert.NotNull(formObject.Shared);
+
+        // Assert: the entries are independent, so the first one ends with its own screen
+        Assert.True(formData.Shared.IsDisposed);
+    }
+
     public sealed class Data1Form : MockForm
     {
+    }
+
+    public sealed class SharedDataForm : MockForm
+    {
+        [Scope]
+        public ScopeData Shared { get; set; } = default!;
+    }
+
+    public sealed class SharedObjectForm : MockForm
+    {
+        [Scope]
+        public ScopeObject Shared { get; set; } = default!;
     }
 
     public sealed class Data2Form : MockForm
