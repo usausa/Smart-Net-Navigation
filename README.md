@@ -23,7 +23,7 @@
 // Config Navigator
 navigator = new NavigatorConfig()
     .UseMauiNavigationProvider()
-    .UseResolver(resolver)
+    .UseActivator(resolver)
     .UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes))
     .ToNavigator();
 
@@ -565,6 +565,35 @@ public interface INavigatorAware
 }
 ```
 
+## Components
+
+### IActivator
+
+* Interface is used for object creation: views and scope objects are created through it.
+* The result is a new caller-owned instance, so the activator must not return shared instances.
+* Default implementation is ``StandardActivator``, which uses ``Activator.CreateInstance()``.
+* Customizable by ``UseActivator()``, which also accepts an ``IServiceProvider`` or a callback.
+
+```csharp
+public interface IActivator
+{
+    object Create(Type type);
+}
+```
+
+### IConverter
+
+* Interface is used for type conversion.
+* Default implementation uses ``Smart.Converter.IObjectConverter``.
+* Customizable by ``UseConverter()``.
+
+```csharp
+public interface IConverter
+{
+    object Convert(object value, Type type);
+}
+```
+
 ## Plugins
 
 ### Parameter plugin
@@ -606,7 +635,7 @@ Assert.Equal(123, view2.IntParameter);
 Inject object that exist between scopes.
 
 ```csharp
-public sealed class ScopeData : IInitializable, IDisposable
+public sealed class ScopeData : IScopeLifecycle, IDisposable
 {
 ...
 }
@@ -644,8 +673,9 @@ navigator.Forward(typeof(Data1View)); // ScopeData disposed
 
 * Set to property with same name.
 * Even if the name of the property is different, it can be specified by attribute.
-* Supports ``IInitializable`` and ``IDisposable`` lifecycle events.
-* The request type must be a concrete class so that the object can be created by any provider. For an interface typed property, specify the implementation type by attribute: ``[Scope<ScopeObject>] public IScopeObject Object { get; set; }`` (or the non-generic form ``[Scope(typeof(ScopeObject))]``). When no type is specified, the property type is used. An interface or abstract request type, or an unresolved scope object, throws ``InvalidOperationException``.
+* The request type defaults to the property type and must be a concrete class, otherwise ``InvalidOperationException``. For an interface typed property specify it by ``[Scope<ScopeObject>]`` or ``[Scope(typeof(ScopeObject))]``.
+* ``IScopeLifecycle`` reports the scope boundary by ``OnScopeInitialize()`` and ``OnScopeTerminate()``. ``IDisposable`` runs after it.
+* Prefer ``OnScopeTerminate()`` over ``IDisposable``, which a tracking container retains past the scope.
 
 ### Create custom plugin
 
@@ -690,100 +720,26 @@ public interface IPluginContext
 
 ### Microsoft.Extensions.DependencyInjection
 
-``Usa.Smart.Navigation.Extensions.DependencyInjection`` provides an extension for ``IServiceCollection``. The action receives the root ``IServiceProvider`` and **must select how views and scope objects are created**, because the right choice depends on the container.
+``Usa.Smart.Navigation.Extensions.DependencyInjection`` provides an extension for ``IServiceCollection``. The container becomes the activator, so views and scope objects must be registered.
 
 ```csharp
-// The container creates them.
-// For containers that do not track disposable transients (BunnyTail with transient tracking disabled).
-services.AddNavigator(static (config, provider) =>
-{
-    config.UseSomeProvider();
-    config.UseServiceProvider(provider);
-    config.UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes));
-});
+services.AddNavigator(static (provider, config) => config.UseSomeProvider());
 ```
 
-```csharp
-// They are constructed directly and the container only supplies dependencies.
-// For plain Microsoft.Extensions.DependencyInjection.
-services.AddNavigator(static (config, provider) =>
-{
-    config.UseSomeProvider();
-    config.UseActivatorUtilities(provider);
-    config.UseIdViewMapper(m => m.AutoRegister(Assembly.GetExecutingAssembly().ExportedTypes));
-});
-```
+The navigator owns what it creates, so a container that tracks disposable transients must not create them.
 
-There is no default because neither choice is safe for the other container. Plain ``Microsoft.Extensions.DependencyInjection`` keeps a reference to every disposable transient it creates until the resolving provider is disposed, while the navigator disposes closed views itself, so letting it create them retains every closed view. Conversely, constructing directly bypasses generated factories and property injection, which a source generated container relies on.
+| Container | Creation |
+|---|---|
+| Tracking disabled, for example BunnyTail with ``TrackTransientDisposables = false`` | Default |
+| Source generated, without registering views | ``config.UseActivator(type => provider.GetRequiredService<ITypeActivator>().Activate(type))`` |
+| Plain ``Microsoft.Extensions.DependencyInjection`` | ``config.UseActivatorUtilities(provider)`` |
 
-* ``UseServiceProvider()`` sets the provider for both service location and object creation. Views and scope objects must be registered
-* ``UseActivatorUtilities()`` sets the provider for service location and creates objects with ``ActivatorUtilities.CreateInstance()``. Views and scope objects do not need to be registered
-* Either way the provider is also used by plugins that resolve shared services
+### Smart.Resolver
+
+``Usa.Smart.Navigation.Resolver`` provides an extension for ``ResolverConfig``, in the same shape as the ``IServiceCollection`` one.
 
 ```csharp
-// A container specific creation API can be wired through UseActivator().
-services.AddNavigator(static (config, provider) =>
-{
-    config.UseSomeProvider();
-    config.UseServiceProvider(provider);
-    config.UseActivator(type => ((ITypeActivator)provider).Activate(type));
-});
-```
-
-### IActivator
-
-* Interface is used for object creation: views and scope objects are created through it.
-* The result is a new caller-owned instance of a concrete type. The navigator disposes closed views, and the scope plugin disposes scope objects, so the activator must not return shared instances.
-* Default implementation is ``ServiceProviderActivator``, which resolves from ``IServiceProvider`` (and throws when the type cannot be resolved).
-* Customizable by ``UseActivator()``.
-
-```csharp
-public interface IActivator
-{
-    object Create(Type type);
-}
-```
-
-```csharp
-// Usage
-navigator = new NavigatorConfig()
-    .UseSomeProvider()
-    .UseActivator(type => CreateSomeObject(type))
-    .ToNavigator();
-```
-
-### IServiceProvider
-
-* Interface is used for service location: plugins that need shared services use it, and it is the source of the default ``IActivator``.
-* Default implementation uses ``Activator.CreateInstance()``.
-* Customizable by ``UseServiceProvider()``.
-
-``Usa.Smart.Navigation.Resolver`` provides an implementation using ``Usa.Smart.Resolver``.
-
-```csharp
-// Usage
-
-// Config Resolver
-var resolver = CreateResolver();
-
-// Config Navigator
-navigator = new NavigatorConfig()
-    .UseSomeProvider()
-    .UseResolver(resolver)
-    .ToNavigator();
-```
-
-### IConverter
-
-* Interface is used for type conversion.
-* Default implementation uses ``Smart.Converter.IObjectConverter``.
-* Customizable by creating the following implementation.
-
-```csharp
-public interface IConverter
-{
-    object Convert(object value, Type type);
-}
+config.AddNavigator(static (resolver, config) => config.UseSomeProvider());
 ```
 
 ## Source Generator
@@ -818,3 +774,4 @@ var navigator = new NavigatorConfig()
 ## Link
 
 * [Smart.Resolver](https://github.com/usausa/Smart-Net-Resolver)
+* [BunnyTail.DependencyInjection](https://github.com/usausa/bunnytail-dependency-injection)
