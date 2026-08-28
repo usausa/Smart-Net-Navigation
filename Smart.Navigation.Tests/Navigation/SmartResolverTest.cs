@@ -14,7 +14,7 @@ public static class SmartResolverTest
         config.UseAutoBinding();
         config.Bind<IService>().To<ServiceImplement>().InSingletonScope();
         config.Bind<Setting>().ToSelf().InSingletonScope();
-        config.AddNavigator(static c => c.UseMockFormProvider());
+        config.AddNavigator(static (_, c) => c.UseMockFormProvider());
 
         var resolver = config.ToResolver();
 

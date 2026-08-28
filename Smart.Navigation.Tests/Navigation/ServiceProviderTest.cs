@@ -8,20 +8,16 @@ using Smart.Navigation.Plugins.Scope;
 public static class ServiceProviderTest
 {
     [Fact]
-    public static void UseServiceProvider()
+    public static void ContainerIsDefaultProvider()
     {
-        // Arrange
+        // Arrange: the container is used without selecting a provider explicitly
         var services = new ServiceCollection();
         services.AddSingleton<IService, ServiceImplement>();
         services.AddSingleton<Setting>();
         services.AddTransient<ScopeObject>();
         services.AddTransient<Form1>();
         services.AddTransient<Form2>();
-        services.AddNavigator(static (provider, config) =>
-        {
-            config.UseMockFormProvider();
-            config.UseServiceProvider(provider);
-        });
+        services.AddNavigator(static (_, config) => config.UseMockFormProvider());
         var provider = services.BuildServiceProvider();
 
         var navigator = provider.GetRequiredService<INavigator>();
@@ -47,7 +43,7 @@ public static class ServiceProviderTest
     [Fact]
     public static void UseActivatorUtilities()
     {
-        // Arrange: views and scope objects are not registered
+        // Arrange: the default provider is overridden inside the action, and views and scope objects are not registered
         var services = new ServiceCollection();
         services.AddSingleton<IService, ServiceImplement>();
         services.AddSingleton<Setting>();

@@ -24,14 +24,15 @@ public static class ResolverConfigExtensions
 
     [RequiresUnreferencedCode("AddNavigator uses NavigatorConfig() which relies on reflection-based plugins. Use explicit configuration for AOT-compatible setup.")]
     [RequiresDynamicCode("AddNavigator uses NavigatorConfig() which uses dynamic delegate creation. Use explicit configuration for AOT-compatible setup.")]
-    public static ResolverConfig AddNavigator(this ResolverConfig config, Action<NavigatorConfig> action)
+    public static ResolverConfig AddNavigator(this ResolverConfig config, Action<IResolver, NavigatorConfig> action)
     {
         config.Bind<INavigator>().ToMethod(resolver =>
         {
             var navigatorConfig = new NavigatorConfig();
-            action(navigatorConfig);
 
             navigatorConfig.UseServiceProvider(resolver);
+
+            action(resolver, navigatorConfig);
 
             return navigatorConfig.ToNavigator();
         }).InSingletonScope();
