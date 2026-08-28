@@ -7,11 +7,13 @@
     <File Path="Analyzers.ruleset" />
     <File Path="CLAUDE.md" />
     <File Path="CodeCoverage.runsettings" />
+    <File Path="Diagnostics.md" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Build.targets" />
     <File Path="LICENSE" />
     <File Path="README.md" />
     <File Path="Smart.Navigation.sln.DotSettings" />
+    <File Path="Smart.Navigation.props" />
     <File Path="Smart.Navigation.targets" />
   </Folder>
   <Folder Name="/Navigation/" />

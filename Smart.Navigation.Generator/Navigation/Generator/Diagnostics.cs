@@ -15,7 +15,7 @@ internal static class Diagnostics
     public static DiagnosticDescriptor InvalidMethodParameter { get; } = new(
         id: "SNV0002",
         title: "Invalid method parameter",
-        messageFormat: "Parameter count must be nothing. method=[{0}]",
+        messageFormat: "Method must not have parameters. method=[{0}]",
         category: "Usage",
         defaultSeverity: DiagnosticSeverity.Error,
         isEnabledByDefault: true);
