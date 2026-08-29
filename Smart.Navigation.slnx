@@ -18,12 +18,14 @@
   </Folder>
   <Folder Name="/Navigation/" />
   <Folder Name="/Navigation/Core/">
-    <Project Path="Smart.Navigation.Extensions.DependencyInjection/Smart.Navigation.Extensions.DependencyInjection.csproj" />
     <Project Path="Smart.Navigation.Generator/Smart.Navigation.Generator.csproj" />
-    <Project Path="Smart.Navigation.Resolver/Smart.Navigation.Resolver.csproj" />
     <Project Path="Smart.Navigation/Smart.Navigation.csproj">
       <BuildDependency Project="Smart.Navigation.Generator/Smart.Navigation.Generator.csproj" />
     </Project>
+  </Folder>
+  <Folder Name="/Navigation/Integration/">
+    <Project Path="Smart.Navigation.Extensions.DependencyInjection/Smart.Navigation.Extensions.DependencyInjection.csproj" />
+    <Project Path="Smart.Navigation.Resolver/Smart.Navigation.Resolver.csproj" />
   </Folder>
   <Folder Name="/Navigation/Providers/">
     <Project Path="Smart.Navigation.Avalonia/Smart.Navigation.Avalonia.csproj" />
