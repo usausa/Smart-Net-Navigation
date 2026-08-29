@@ -3,7 +3,6 @@ namespace Smart.Navigation.Generator;
 using System.Collections.Immutable;
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 using Smart.Navigation.Generator.Models;
