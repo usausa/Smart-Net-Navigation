@@ -145,7 +145,7 @@ public class NavigationGeneratorTest
 
         var generated = GeneratorTestHelper.GetGeneratedSource(source);
 
-        Assert.Contains("yield return new global::System.Collections.Generic.KeyValuePair<global::Test.ViewId, global::System.Type>(Test.ViewId.Form1, typeof(global::Test.Form1));", generated, StringComparison.Ordinal);
+        Assert.Contains("yield return new global::System.Collections.Generic.KeyValuePair<global::Test.ViewId, global::System.Type>(global::Test.ViewId.Form1, typeof(global::Test.Form1));", generated, StringComparison.Ordinal);
     }
 
     //-----------------------------------------------------------------------
@@ -229,8 +229,8 @@ public class NavigationGeneratorTest
 
         var generated = GeneratorTestHelper.GetGeneratedSource(source);
 
-        Assert.Contains("Test.ViewId.New, typeof(global::Test.DetailView)", generated, StringComparison.Ordinal);
-        Assert.Contains("Test.ViewId.Update, typeof(global::Test.DetailView)", generated, StringComparison.Ordinal);
+        Assert.Contains("global::Test.ViewId.New, typeof(global::Test.DetailView)", generated, StringComparison.Ordinal);
+        Assert.Contains("global::Test.ViewId.Update, typeof(global::Test.DetailView)", generated, StringComparison.Ordinal);
         Assert.Equal(2, CountOccurrences(generated, "yield return"));
     }
 
