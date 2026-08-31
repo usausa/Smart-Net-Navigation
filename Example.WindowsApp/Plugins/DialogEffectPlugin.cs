@@ -22,7 +22,7 @@ internal sealed class DialogEffectPlugin : PluginBase
 
         // Open effect
         var toType = navigationContext.ToId as Type;
-        var toIsDialog = toType is not null && DialogViewType.IsAssignableFrom(toType);
+        var toIsDialog = (toType is not null) && DialogViewType.IsAssignableFrom(toType);
         if (toIsDialog)
         {
             parameter.WithEffect(ExampleEffect.DialogOpen);
@@ -31,7 +31,7 @@ internal sealed class DialogEffectPlugin : PluginBase
 
         // Close effect
         var fromType = navigationContext.FromId as Type;
-        var fromIsDialog = fromType is not null && DialogViewType.IsAssignableFrom(fromType);
+        var fromIsDialog = (fromType is not null) && DialogViewType.IsAssignableFrom(fromType);
         if (fromIsDialog)
         {
             parameter.WithEffect(ExampleEffect.DialogClose);

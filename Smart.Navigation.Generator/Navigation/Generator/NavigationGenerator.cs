@@ -115,7 +115,7 @@ public sealed class NavigationGenerator : IIncrementalGenerator
                 .Select(attribute => new ViewIdModel(
                     classSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     attribute.ConstructorArguments[0].Type!.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                    attribute.ConstructorArguments[0].ToCSharpExpression() ?? String.Empty))));
+                    attribute.ConstructorArguments[0].ToCSharpExpression() ?? string.Empty))));
 #pragma warning restore IDE0028
     }
 

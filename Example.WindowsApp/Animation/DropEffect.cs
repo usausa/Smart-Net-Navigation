@@ -32,7 +32,7 @@ internal sealed class DropEffect : IWindowsNavigationEffect
                 EasingMode = EasingMode.EaseOut
             }),
             WindowsNavigationEffectPhase.Close => (0d, -height, new CubicEase { EasingMode = EasingMode.EaseIn }),
-            _ => (0d, 0d, null!)
+            _ => (0d, 0d, null)
         };
 
         // ReSharper disable once CompareOfFloatsByEqualityOperator

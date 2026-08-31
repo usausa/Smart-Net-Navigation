@@ -42,9 +42,9 @@ public sealed class NavigatorEventTest
         // Assert
         Assert.NotNull(eventArgs.Value.Context);
         Assert.NotNull(eventArgs.Value.FromView);
-        Assert.Equal(typeof(EventArgs1Window), eventArgs.Value.FromView!.GetType());
+        Assert.Equal(typeof(EventArgs1Window), eventArgs.Value.FromView.GetType());
         Assert.NotNull(eventArgs.Value.FromTarget);
-        Assert.Equal(typeof(EventArgs1WindowViewModel), eventArgs.Value.FromTarget!.GetType());
+        Assert.Equal(typeof(EventArgs1WindowViewModel), eventArgs.Value.FromTarget.GetType());
         Assert.NotNull(eventArgs.Value.ToView);
         Assert.Equal(typeof(EventArgs2Window), eventArgs.Value.ToView.GetType());
         Assert.NotNull(eventArgs.Value.ToTarget);

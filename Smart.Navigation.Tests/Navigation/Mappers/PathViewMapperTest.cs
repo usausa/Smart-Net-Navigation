@@ -23,6 +23,7 @@ public sealed class PathViewMapperTest
             .ToNavigator();
     }
 
+#pragma warning disable CA2000
     [Fact]
     public static void UsePathViewMapperAbsolutePath()
     {
@@ -41,7 +42,9 @@ public sealed class PathViewMapperTest
         // Assert
         Assert.Equal(typeof(Child1Form), navigator.CurrentView.GetType());
     }
+#pragma warning restore CA2000
 
+#pragma warning disable CA2000
     [Fact]
     public static void UsePathViewMapperRelativePath()
     {
@@ -67,6 +70,7 @@ public sealed class PathViewMapperTest
         navigator.Forward("../Parent2");
         Assert.Equal(typeof(Parent2Form), navigator.CurrentView.GetType());
     }
+#pragma warning restore CA2000
 
     [Fact]
     public static void Cached()
@@ -86,6 +90,7 @@ public sealed class PathViewMapperTest
         Assert.Equal(descriptor1, descriptor2);
     }
 
+#pragma warning disable CA2000
     [Theory]
     [InlineData("/../Parent1")]
     [InlineData("../../Parent1")]
@@ -101,11 +106,13 @@ public sealed class PathViewMapperTest
         // Assert
         Assert.Equal(typeof(Parent1Form), navigator.CurrentView!.GetType());
     }
+#pragma warning restore CA2000
 
     // ------------------------------------------------------------
     // Failed
     // ------------------------------------------------------------
 
+#pragma warning disable CA2000
     [Fact]
     public static void UsePathViewMapperFailedInvalidIdType()
     {
@@ -115,7 +122,9 @@ public sealed class PathViewMapperTest
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(0));
     }
+#pragma warning restore CA2000
 
+#pragma warning disable CA2000
     [Fact]
     public static void UsePathViewMapperFailedNotExists()
     {
@@ -125,7 +134,9 @@ public sealed class PathViewMapperTest
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward("/NotExists"));
     }
+#pragma warning restore CA2000
 
+#pragma warning disable CA2000
     [Fact]
     public static void UsePathViewMapperFailedInvalidType()
     {
@@ -135,4 +146,5 @@ public sealed class PathViewMapperTest
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward("/InvalidType"));
     }
+#pragma warning restore CA2000
 }

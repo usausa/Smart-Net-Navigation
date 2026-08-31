@@ -4,6 +4,7 @@ using Smart.Mock;
 
 public sealed class NavigatorDisposeTest
 {
+#pragma warning disable CA2000
     [Fact]
     public static void NavigatorDispose()
     {
@@ -20,6 +21,7 @@ public sealed class NavigatorDisposeTest
         // Assert
         Assert.True(component.IsDisposed);
     }
+#pragma warning restore CA2000
 
     public sealed class DisposableComponent : IDisposable
     {

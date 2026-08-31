@@ -247,17 +247,21 @@ public sealed class ScopePluginTest
         public ScopeData Data { get; set; } = default!;
     }
 
+#pragma warning disable CA1720
     public sealed class Object1Form : MockForm
     {
         [Scope(typeof(ScopeObject))]
         public IScopeObject Object { get; set; } = default!;
     }
+#pragma warning restore CA1720
 
+#pragma warning disable CA1720
     public sealed class Object2Form : MockForm
     {
         [Scope]
         public ScopeObject Object { get; set; } = default!;
     }
+#pragma warning restore CA1720
 
     public sealed class Object3Form : MockForm
     {
@@ -332,25 +336,31 @@ public sealed class ScopePluginTest
         public int Value { get; set; }
     }
 
+#pragma warning disable CA1720
     public sealed class GenericObject1Form : MockForm
     {
         [Scope<ScopeObject>]
         public IScopeObject Object { get; set; } = default!;
     }
+#pragma warning restore CA1720
 
+#pragma warning disable CA1720
     public sealed class InterfaceScopeForm : MockForm
     {
         [Scope]
         public IScopeObject Object { get; set; } = default!;
     }
+#pragma warning restore CA1720
 
     public abstract class AbstractScopeObject
     {
     }
 
+#pragma warning disable CA1720
     public sealed class AbstractScopeForm : MockForm
     {
         [Scope]
         public AbstractScopeObject Object { get; set; } = default!;
     }
+#pragma warning restore CA1720
 }

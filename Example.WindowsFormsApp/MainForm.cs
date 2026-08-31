@@ -157,7 +157,7 @@ public sealed partial class MainForm : Form
     protected override bool ProcessDialogKey(Keys keyData)
     {
         if (enabledFunctions.ContainsKey(keyData) &&
-            navigator.CurrentView is IApplicationView view)
+            (navigator.CurrentView is IApplicationView view))
         {
             view.OnFunctionKey(keyData);
             return true;
