@@ -28,9 +28,7 @@ public interface INavigator : INotifyPropertyChanged
 
     // Exit
 
-#pragma warning disable CA1716
     void Exit();
-#pragma warning restore CA1716
 
     // Navigate
 
