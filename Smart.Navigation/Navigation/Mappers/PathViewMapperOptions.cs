@@ -20,9 +20,9 @@ public sealed class PathViewMapperOptions
 
     public Type? FindType(string typeName)
     {
-        for (var i = 0; i < assemblies.Count; i++)
+        foreach (var assembly in assemblies)
         {
-            var type = assemblies[i].GetType(typeName);
+            var type = assembly.GetType(typeName);
             if (type is not null)
             {
                 return type;
