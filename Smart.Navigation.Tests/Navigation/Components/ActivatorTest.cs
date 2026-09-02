@@ -48,7 +48,5 @@ public static class ActivatorTest
         public ActivatorScopeData Data { get; set; } = default!;
     }
 
-    public sealed class ActivatorScopeData
-    {
-    }
+    public sealed class ActivatorScopeData;
 }

@@ -50,9 +50,7 @@ public sealed class NavigatorNotifyTest
         }
     }
 
-    public sealed class UnsupportedForm : MockForm
-    {
-    }
+    public sealed class UnsupportedForm : MockForm;
 
     // ------------------------------------------------------------
     // View

@@ -160,9 +160,7 @@ public sealed class ResolverPluginTest
         Assert.True(form4.ScopeObject.IsDisposed);
     }
 
-    public sealed class Resolver1Form : MockForm
-    {
-    }
+    public sealed class Resolver1Form : MockForm;
 
     [PageContext(ScopeName)]
     public sealed class Resolver2Form : MockForm
@@ -186,9 +184,7 @@ public sealed class ResolverPluginTest
         }
     }
 
-    public sealed class Push1Form : MockForm
-    {
-    }
+    public sealed class Push1Form : MockForm;
 
     [PageContext(ScopeName)]
     public sealed class Push2Form : MockForm
@@ -201,9 +197,7 @@ public sealed class ResolverPluginTest
         }
     }
 
-    public sealed class Push3Form : MockForm
-    {
-    }
+    public sealed class Push3Form : MockForm;
 
     [PageContext(ScopeName)]
     public sealed class Push4Form : MockForm

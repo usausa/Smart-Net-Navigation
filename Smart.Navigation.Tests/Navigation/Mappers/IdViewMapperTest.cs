@@ -60,12 +60,8 @@ public sealed class IdViewMapperTest
     }
 
     [View(ViewId.Form1)]
-    public sealed class Form1 : MockForm
-    {
-    }
+    public sealed class Form1 : MockForm;
 
     [View(ViewId.Form2)]
-    public sealed class Form2 : MockForm
-    {
-    }
+    public sealed class Form2 : MockForm;
 }

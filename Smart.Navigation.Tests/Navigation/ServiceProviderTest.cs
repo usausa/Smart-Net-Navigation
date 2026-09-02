@@ -118,9 +118,7 @@ public static class ServiceProviderTest
         }
     }
 
-    public sealed class Setting
-    {
-    }
+    public sealed class Setting;
 
     public sealed class ScopeObject
     {

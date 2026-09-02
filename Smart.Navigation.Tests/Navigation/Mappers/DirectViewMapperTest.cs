@@ -56,11 +56,7 @@ public sealed class DirectViewMapperTest
     // Mock
     // ------------------------------------------------------------
 
-    public sealed class Form1 : MockForm
-    {
-    }
+    public sealed class Form1 : MockForm;
 
-    public sealed class Form2 : MockForm
-    {
-    }
+    public sealed class Form2 : MockForm;
 }

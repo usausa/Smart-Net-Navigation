@@ -77,9 +77,7 @@ public static class SmartResolverTest
         }
     }
 
-    public sealed class Setting
-    {
-    }
+    public sealed class Setting;
 
     public sealed class ScopeObject
     {

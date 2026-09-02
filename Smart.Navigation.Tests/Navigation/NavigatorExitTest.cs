@@ -55,15 +55,9 @@ public sealed class NavigatorExitTest
         Assert.False(form3.IsOpen);
     }
 
-    public sealed class Form1 : MockForm
-    {
-    }
+    public sealed class Form1 : MockForm;
 
-    public sealed class Form2 : MockForm
-    {
-    }
+    public sealed class Form2 : MockForm;
 
-    public sealed class Form3 : MockForm
-    {
-    }
+    public sealed class Form3 : MockForm;
 }

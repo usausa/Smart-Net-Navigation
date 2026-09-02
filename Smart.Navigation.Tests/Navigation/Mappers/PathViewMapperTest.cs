@@ -27,7 +27,9 @@ public sealed class PathViewMapperTest
     public static void UsePathViewMapperAbsolutePath()
     {
         // Arrange
+#pragma warning disable CA2000
         var navigator = CreateNavigator();
+#pragma warning restore CA2000
 
         // Act
         navigator.Forward("/Parent1");
@@ -46,7 +48,9 @@ public sealed class PathViewMapperTest
     public static void UsePathViewMapperRelativePath()
     {
         // Arrange
+#pragma warning disable CA2000
         var navigator = CreateNavigator();
+#pragma warning restore CA2000
 
         // Act & Assert
         navigator.Forward("Parent1");
@@ -93,7 +97,9 @@ public sealed class PathViewMapperTest
     public static void UsePathViewMapperRootOverflow(string path)
     {
         // Arrange
+#pragma warning disable CA2000
         var navigator = CreateNavigator();
+#pragma warning restore CA2000
 
         // Act
         navigator.Forward(path);
@@ -110,7 +116,9 @@ public sealed class PathViewMapperTest
     public static void UsePathViewMapperFailedInvalidIdType()
     {
         // Arrange
+#pragma warning disable CA2000
         var navigator = CreateNavigator();
+#pragma warning restore CA2000
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(0));
@@ -120,7 +128,9 @@ public sealed class PathViewMapperTest
     public static void UsePathViewMapperFailedNotExists()
     {
         // Arrange
+#pragma warning disable CA2000
         var navigator = CreateNavigator();
+#pragma warning restore CA2000
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward("/NotExists"));
@@ -130,7 +140,9 @@ public sealed class PathViewMapperTest
     public static void UsePathViewMapperFailedInvalidType()
     {
         // Arrange
+#pragma warning disable CA2000
         var navigator = CreateNavigator();
+#pragma warning restore CA2000
 
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() => navigator.Forward("/InvalidType"));

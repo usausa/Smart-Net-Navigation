@@ -243,9 +243,7 @@ public static class NavigatorConfigTest
     // Utility
     // ------------------------------------------------------------
 
-    public sealed class Model
-    {
-    }
+    public sealed class Model;
 
     public sealed class DummyViewMapper : IViewMapper
     {
@@ -267,9 +265,7 @@ public static class NavigatorConfigTest
         }
     }
 
-    public sealed class DummyPlugin : PluginBase
-    {
-    }
+    public sealed class DummyPlugin : PluginBase;
 
     public sealed class DummyDelegateFactory : IDelegateFactory
     {

@@ -86,9 +86,7 @@ public sealed class NavigatorConfirmTest
         Assert.Equal(1, count);
     }
 
-    public sealed class ToForm : MockForm
-    {
-    }
+    public sealed class ToForm : MockForm;
 
     public sealed class CancelForm : MockForm, IConfirmRequest
     {

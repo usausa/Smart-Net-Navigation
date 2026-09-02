@@ -51,13 +51,9 @@ public sealed class NavigatorEventTest
         Assert.Equal(typeof(EventArgs2WindowViewModel), eventArgs.Value.ToTarget.GetType());
     }
 
-    public sealed class EventArgs1WindowViewModel
-    {
-    }
+    public sealed class EventArgs1WindowViewModel;
 
-    public sealed class EventArgs2WindowViewModel
-    {
-    }
+    public sealed class EventArgs2WindowViewModel;
 
     public sealed class EventArgs1Window : MockWindow
     {
@@ -139,13 +135,9 @@ public sealed class NavigatorEventTest
         Assert.Equal("Event2Form.OnNavigatedTo", recorder.Events[2]);
     }
 
-    public sealed class Form1 : MockForm
-    {
-    }
+    public sealed class Form1 : MockForm;
 
-    public sealed class Form2 : MockForm
-    {
-    }
+    public sealed class Form2 : MockForm;
 
     public sealed class Event1Form : MockForm, INavigationEventSupport
     {

@@ -220,9 +220,7 @@ public sealed class ScopePluginTest
         Assert.True(formData.Shared.IsDisposed);
     }
 
-    public sealed class Data1Form : MockForm
-    {
-    }
+    public sealed class Data1Form : MockForm;
 
     public sealed class SharedDataForm : MockForm
     {
@@ -260,13 +258,9 @@ public sealed class ScopePluginTest
         public ScopeObject Object { get; set; } = default!;
     }
 
-    public sealed class Object3Form : MockForm
-    {
-    }
+    public sealed class Object3Form : MockForm;
 
-    public sealed class Push1Form : MockForm
-    {
-    }
+    public sealed class Push1Form : MockForm;
 
     public sealed class Push2Form : MockForm
     {
@@ -274,9 +268,7 @@ public sealed class ScopePluginTest
         public ScopeData Data { get; set; } = default!;
     }
 
-    public sealed class Push3Form : MockForm
-    {
-    }
+    public sealed class Push3Form : MockForm;
 
     public sealed class Push4Form : MockForm
     {
@@ -345,9 +337,7 @@ public sealed class ScopePluginTest
         public IScopeObject Object { get; set; } = default!;
     }
 
-    public abstract class AbstractScopeObject
-    {
-    }
+    public abstract class AbstractScopeObject;
 
     public sealed class AbstractScopeForm : MockForm
     {

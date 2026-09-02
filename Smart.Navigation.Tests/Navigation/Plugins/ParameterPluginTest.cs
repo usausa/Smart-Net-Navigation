@@ -6,9 +6,7 @@ public sealed class ParameterPluginTest
 {
 #pragma warning disable CA1812
     // ReSharper disable once UnusedType.Local
-    private sealed class ToForm : MockForm
-    {
-    }
+    private sealed class ToForm : MockForm;
 #pragma warning restore CA1812
 
     // ------------------------------------------------------------

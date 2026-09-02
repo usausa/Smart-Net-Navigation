@@ -140,15 +140,9 @@ public sealed class ForwardStrategyTest
     // Mock
     // ------------------------------------------------------------
 
-    public sealed class Form1 : MockForm
-    {
-    }
+    public sealed class Form1 : MockForm;
 
-    public sealed class Form2 : MockForm
-    {
-    }
+    public sealed class Form2 : MockForm;
 
-    public sealed class Form3 : MockForm
-    {
-    }
+    public sealed class Form3 : MockForm;
 }

@@ -429,41 +429,25 @@ public sealed class GroupPushStrategyTest
         C
     }
 
-    public sealed class Form1 : MockForm
-    {
-    }
+    public sealed class Form1 : MockForm;
 
-    public sealed class Form2 : MockForm
-    {
-    }
+    public sealed class Form2 : MockForm;
 
     [Group(Group.A)]
-    public sealed class FormA1 : MockForm
-    {
-    }
+    public sealed class FormA1 : MockForm;
 
     [Group(Group.A)]
-    public sealed class FormA2 : MockForm
-    {
-    }
+    public sealed class FormA2 : MockForm;
 
     [Group(Group.B)]
-    public sealed class FormB1 : MockForm
-    {
-    }
+    public sealed class FormB1 : MockForm;
 
     [Group(Group.B)]
-    public sealed class FormB2 : MockForm
-    {
-    }
+    public sealed class FormB2 : MockForm;
 
     [Group(Group.C)]
-    public sealed class FormC1 : MockForm
-    {
-    }
+    public sealed class FormC1 : MockForm;
 
     [Group(Group.C)]
-    public sealed class FormC2 : MockForm
-    {
-    }
+    public sealed class FormC2 : MockForm;
 }
