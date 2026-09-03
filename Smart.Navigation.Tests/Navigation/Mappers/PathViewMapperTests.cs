@@ -8,7 +8,7 @@ using Smart.Navigation.Mappers.Views.Children;
 using Smart.Navigation.Mappers.Views.Children.GrandChildren;
 using Smart.Navigation.Mappers.Views.OtherChildren;
 
-public sealed class PathViewMapperTest
+public sealed class PathViewMapperTests
 {
     private static Navigator CreateNavigator()
     {

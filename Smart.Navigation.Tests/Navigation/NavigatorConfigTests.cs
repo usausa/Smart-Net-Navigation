@@ -9,7 +9,7 @@ using Smart.Navigation.Mappers;
 using Smart.Navigation.Plugins;
 using Smart.Reflection;
 
-public static class NavigatorConfigTest
+public static class NavigatorConfigTests
 {
     // ------------------------------------------------------------
     // Provider

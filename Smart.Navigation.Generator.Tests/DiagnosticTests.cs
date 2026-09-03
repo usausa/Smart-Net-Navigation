@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Generator.Tests;
 
-public sealed class DiagnosticTest
+public sealed class DiagnosticTests
 {
     [Fact]
     public void Snv0001NonStaticMethodEmitsDiagnostic()

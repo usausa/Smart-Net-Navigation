@@ -4,7 +4,7 @@ using Smart.Mock;
 using Smart.Navigation.Plugins.Scope;
 using Smart.Resolver;
 
-public static class SmartResolverTest
+public static class SmartResolverTests
 {
     [Fact]
     public static void UseSmartResolver()

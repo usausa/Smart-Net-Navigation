@@ -3,7 +3,7 @@ namespace Smart.Navigation.Plugins.Resolver;
 using Smart.Mock;
 using Smart.Resolver;
 
-public sealed class ResolverPluginTest
+public sealed class ResolverPluginTests
 {
     private const string ScopeName = nameof(ScopeName);
 

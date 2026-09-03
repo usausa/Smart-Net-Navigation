@@ -3,7 +3,7 @@ namespace Smart.Navigation;
 using Smart.Mock;
 using Smart.Resolver;
 
-public sealed class NavigatorNotifyTest
+public sealed class NavigatorNotifyTests
 {
     // ------------------------------------------------------------
     // View

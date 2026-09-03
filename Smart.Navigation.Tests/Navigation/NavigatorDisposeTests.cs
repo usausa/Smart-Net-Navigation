@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-public sealed class NavigatorDisposeTest
+public sealed class NavigatorDisposeTests
 {
 #pragma warning disable CA2000
     [Fact]

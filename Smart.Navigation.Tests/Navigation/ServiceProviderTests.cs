@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Smart.Mock;
 using Smart.Navigation.Plugins.Scope;
 
-public static class ServiceProviderTest
+public static class ServiceProviderTests
 {
     [Fact]
     public static void ContainerIsDefaultProvider()

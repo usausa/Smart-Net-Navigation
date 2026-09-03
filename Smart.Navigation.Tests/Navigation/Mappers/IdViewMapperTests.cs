@@ -5,7 +5,7 @@ using System.Reflection;
 using Smart.Mock;
 using Smart.Navigation.Attributes;
 
-public sealed class IdViewMapperTest
+public sealed class IdViewMapperTests
 {
     [Fact]
     public static void UseIdViewMapper()

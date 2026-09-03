@@ -2,7 +2,7 @@ namespace Smart.Navigation.Generator.Tests;
 
 using Microsoft.CodeAnalysis;
 
-public class NavigationGeneratorTest
+public class NavigationGeneratorTests
 {
     //-----------------------------------------------------------------------
     // Basic

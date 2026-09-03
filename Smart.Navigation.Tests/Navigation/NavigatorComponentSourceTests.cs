@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-public static class NavigatorComponentSourceTest
+public static class NavigatorComponentSourceTests
 {
     // ------------------------------------------------------------
     // Provider

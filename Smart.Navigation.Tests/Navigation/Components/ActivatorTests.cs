@@ -3,7 +3,7 @@ namespace Smart.Navigation.Components;
 using Smart.Mock;
 using Smart.Navigation.Plugins.Scope;
 
-public static class ActivatorTest
+public static class ActivatorTests
 {
     [Fact]
     public static void UseDelegateActivator()

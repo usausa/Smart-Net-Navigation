@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-public sealed class NavigatorAwareTest
+public sealed class NavigatorAwareTests
 {
     [Fact]
     public static void NavigatorAware()

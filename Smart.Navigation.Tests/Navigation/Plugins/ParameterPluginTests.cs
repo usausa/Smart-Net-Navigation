@@ -2,7 +2,7 @@ namespace Smart.Navigation.Plugins;
 
 using Smart.Mock;
 
-public sealed class ParameterPluginTest
+public sealed class ParameterPluginTests
 {
 #pragma warning disable CA1812
     // ReSharper disable once UnusedType.Local

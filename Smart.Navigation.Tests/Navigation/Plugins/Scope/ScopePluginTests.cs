@@ -3,7 +3,7 @@ namespace Smart.Navigation.Plugins.Scope;
 using Smart.Mock;
 
 #pragma warning disable CA1720
-public sealed class ScopePluginTest
+public sealed class ScopePluginTests
 {
     [Fact]
     public static void Scope()

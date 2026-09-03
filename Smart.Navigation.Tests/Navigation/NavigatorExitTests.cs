@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-public sealed class NavigatorExitTest
+public sealed class NavigatorExitTests
 {
     [Fact]
     public static void Exit()

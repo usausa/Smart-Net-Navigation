@@ -2,7 +2,7 @@ namespace Smart.Navigation.Plugins.Parameter;
 
 using Smart.Mock;
 
-public sealed class ParameterPluginTest
+public sealed class ParameterPluginTests
 {
     [Fact]
     public static void Parameter()

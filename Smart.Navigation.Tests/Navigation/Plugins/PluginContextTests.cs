@@ -1,6 +1,6 @@
 namespace Smart.Navigation.Plugins;
 
-public static class PluginContextTest
+public static class PluginContextTests
 {
     [Fact]
     public static void LoadStoredValue()

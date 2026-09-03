@@ -2,7 +2,7 @@ namespace Smart.Navigation.Mappers;
 
 using Smart.Mock;
 
-public sealed class DirectViewMapperTest
+public sealed class DirectViewMapperTests
 {
     [Fact]
     public static void DirectViewMapper()

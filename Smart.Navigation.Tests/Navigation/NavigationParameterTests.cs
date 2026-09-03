@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-public static class NavigationParameterTest
+public static class NavigationParameterTests
 {
     [Fact]
     public static void ParameterGetValueByKey()

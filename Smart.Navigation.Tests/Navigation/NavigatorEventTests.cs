@@ -3,7 +3,7 @@ namespace Smart.Navigation;
 using Smart.Mock;
 using Smart.Resolver;
 
-public sealed class NavigatorEventTest
+public sealed class NavigatorEventTests
 {
     // ------------------------------------------------------------
     // EventArgs

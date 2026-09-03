@@ -2,7 +2,7 @@ namespace Smart.Navigation.Strategies;
 
 using Smart.Mock;
 
-public sealed class GroupPopStrategyTest
+public sealed class GroupPopStrategyTests
 {
     // ------------------------------------------------------------
     // Navigate

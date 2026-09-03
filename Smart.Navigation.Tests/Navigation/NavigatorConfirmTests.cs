@@ -2,7 +2,7 @@ namespace Smart.Navigation;
 
 using Smart.Mock;
 
-public sealed class NavigatorConfirmTest
+public sealed class NavigatorConfirmTests
 {
     [Fact]
     public static void CanceledByEvent()

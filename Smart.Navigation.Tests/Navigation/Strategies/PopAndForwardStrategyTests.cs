@@ -2,7 +2,7 @@ namespace Smart.Navigation.Strategies;
 
 using Smart.Mock;
 
-public sealed class PopAndForwardStrategyTest
+public sealed class PopAndForwardStrategyTests
 {
     // ------------------------------------------------------------
     // Navigate
