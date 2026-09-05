@@ -77,7 +77,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         provider = components.Get<INavigationProvider>();
         viewMapper = components.Get<IViewMapper>();
         activator = components.Get<IActivator>();
-        plugins = components.GetAll<IPlugin>().ToArray();
+        plugins = [.. components.GetAll<IPlugin>()];
     }
 
     protected override void Dispose(bool disposing)
