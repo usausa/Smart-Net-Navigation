@@ -29,8 +29,8 @@ internal sealed class SlideHorizontalEffect : IAvaloniaNavigationEffect
 
         var (from, to) = context.Phase switch
         {
-            AvaloniaNavigationEffectPhase.Open => (fromRight ? width : -width, 0d),
-            AvaloniaNavigationEffectPhase.Close => (0d, fromRight ? -width : width),
+            AvaloniaNavigationEffectPhase.Open or AvaloniaNavigationEffectPhase.Activate => (fromRight ? width : -width, 0d),
+            AvaloniaNavigationEffectPhase.Close or AvaloniaNavigationEffectPhase.Deactivate => (0d, fromRight ? -width : width),
             _ => (0d, 0d)
         };
 

@@ -24,8 +24,8 @@ internal sealed class SlideVerticalEffect : IWindowsNavigationEffect
 
         var (from, to) = context.Phase switch
         {
-            WindowsNavigationEffectPhase.Open => (fromBottom ? height : -height, 0d),
-            WindowsNavigationEffectPhase.Close => (0d, fromBottom ? height : -height),
+            WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (fromBottom ? height : -height, 0d),
+            WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (0d, fromBottom ? height : -height),
             _ => (0d, 0d)
         };
 

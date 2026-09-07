@@ -27,20 +27,17 @@ internal sealed class SlideVerticalEffect : IMauiNavigationEffect
         switch (context.Phase)
         {
             case MauiNavigationEffectPhase.Open:
+            case MauiNavigationEffectPhase.Activate:
                 element.TranslationY = fromBottom ? height : -height;
                 await element.TranslateToAsync(element.TranslationX, 0, duration, Easing.CubicOut).ConfigureAwait(true);
                 element.TranslationY = 0;
                 break;
 
             case MauiNavigationEffectPhase.Close:
+            case MauiNavigationEffectPhase.Deactivate:
                 element.TranslationY = 0;
                 await element.TranslateToAsync(element.TranslationX, fromBottom ? height : -height, duration, Easing.CubicOut).ConfigureAwait(true);
                 element.TranslationY = 0;
-                break;
-
-            case MauiNavigationEffectPhase.Activate:
-            case MauiNavigationEffectPhase.Deactivate:
-            default:
                 break;
         }
     }

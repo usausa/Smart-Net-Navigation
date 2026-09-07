@@ -29,8 +29,8 @@ internal sealed class SlideVerticalEffect : IAvaloniaNavigationEffect
 
         var (from, to) = context.Phase switch
         {
-            AvaloniaNavigationEffectPhase.Open => (fromBottom ? height : -height, 0d),
-            AvaloniaNavigationEffectPhase.Close => (0d, fromBottom ? height : -height),
+            AvaloniaNavigationEffectPhase.Open or AvaloniaNavigationEffectPhase.Activate => (fromBottom ? height : -height, 0d),
+            AvaloniaNavigationEffectPhase.Close or AvaloniaNavigationEffectPhase.Deactivate => (0d, fromBottom ? height : -height),
             _ => (0d, 0d)
         };
 

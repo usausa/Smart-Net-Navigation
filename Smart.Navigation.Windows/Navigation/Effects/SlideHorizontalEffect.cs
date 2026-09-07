@@ -26,8 +26,8 @@ internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
 
         var (from, to) = context.Phase switch
         {
-            WindowsNavigationEffectPhase.Open => (fromRight ? width : -width, 0d),
-            WindowsNavigationEffectPhase.Close => (0d, fromRight ? -width : width),
+            WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (fromRight ? width : -width, 0d),
+            WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (0d, fromRight ? -width : width),
             _ => (0d, 0d)
         };
 

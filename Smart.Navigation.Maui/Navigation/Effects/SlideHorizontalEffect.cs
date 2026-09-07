@@ -27,20 +27,17 @@ internal sealed class SlideHorizontalEffect : IMauiNavigationEffect
         switch (context.Phase)
         {
             case MauiNavigationEffectPhase.Open:
+            case MauiNavigationEffectPhase.Activate:
                 element.TranslationX = fromRight ? width : -width;
                 await element.TranslateToAsync(0, element.TranslationY, duration, Easing.CubicOut).ConfigureAwait(true);
                 element.TranslationX = 0;
                 break;
 
             case MauiNavigationEffectPhase.Close:
+            case MauiNavigationEffectPhase.Deactivate:
                 element.TranslationX = 0;
                 await element.TranslateToAsync(fromRight ? -width : width, element.TranslationY, duration, Easing.CubicOut).ConfigureAwait(true);
                 element.TranslationX = 0;
-                break;
-
-            case MauiNavigationEffectPhase.Activate:
-            case MauiNavigationEffectPhase.Deactivate:
-            default:
                 break;
         }
     }
