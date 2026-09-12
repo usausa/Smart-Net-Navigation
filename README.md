@@ -677,6 +677,56 @@ navigator.Forward(typeof(Data1View)); // ScopeData disposed
 * ``IScopeLifecycle`` reports the scope boundary by ``OnScopeInitialize()`` and ``OnScopeTerminate()``. ``IDisposable`` runs after it.
 * Prefer ``OnScopeTerminate()`` over ``IDisposable``, which a tracking container retains past the scope.
 
+### Hierarchy effect plugin
+
+Effect is selected by the hierarchy level of the view.
+
+```csharp
+[Hierarchy(1)]
+public sealed class MenuView
+{
+}
+
+[Hierarchy(2)]
+public sealed class ListView
+{
+}
+
+[Hierarchy(3)]
+public sealed class DetailView
+{
+}
+
+// config
+var navigator = new NavigatorConfig()
+    .UseSomeProvider()
+    .AddHierarchyEffectPlugin()
+    .ToNavigator();
+
+// Menu(1) -> List(2) : Forward effect
+await navigator.ForwardAsync(typeof(ListView));
+
+// List(2) -> Detail(3) : Forward effect
+await navigator.PushAsync(typeof(DetailView));
+
+// Detail(3) -> List(2) : Back effect
+await navigator.PopAsync();
+```
+
+* Forward effect is used when navigating to a higher level, Back effect when navigating to a lower level. The stack operation does not matter, only the level difference.
+* No effect is set for the same level, a view without the attribute, or the first navigation.
+* Effect specified by ``WithEffect()`` has priority.
+* Effect is played by the async navigation only, as with ``WithEffect()``.
+* Effect keys are changed at registration. Default is ``Forward`` and ``Back``, the standard effects of each provider.
+
+```csharp
+.AddHierarchyEffectPlugin(static options =>
+{
+    options.ForwardEffect = "Zoom";
+    options.BackEffect = "Drop";
+})
+```
+
 ### Create custom plugin
 
 Implement the following interface and register to NavigatorConfig.

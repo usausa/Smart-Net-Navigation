@@ -8,6 +8,7 @@ using Smart.Navigation.Attributes;
 using Smart.Navigation.Components;
 using Smart.Navigation.Mappers;
 using Smart.Navigation.Plugins;
+using Smart.Navigation.Plugins.Hierarchy;
 using Smart.Reflection;
 
 public static class NavigatorConfigExtensions
@@ -230,6 +231,25 @@ public static class NavigatorConfigExtensions
         config.Configure(c => c.Add(plugin));
 
         return config;
+    }
+
+    public static NavigatorConfig AddHierarchyEffectPlugin(this NavigatorConfig config)
+    {
+        return config.AddHierarchyEffectPlugin(static _ => { });
+    }
+
+    public static NavigatorConfig AddHierarchyEffectPlugin(this NavigatorConfig config, Action<HierarchyEffectPluginOptions> setupAction)
+    {
+        var options = new HierarchyEffectPluginOptions();
+        setupAction(options);
+
+        config.Configure(c =>
+        {
+            c.RemoveAll<HierarchyEffectPluginOptions>();
+            c.Add(options);
+        });
+
+        return config.AddPlugin<HierarchyEffectPlugin>();
     }
 
     public static NavigatorConfig UseDelegateFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TDelegateFactory>(this NavigatorConfig config)

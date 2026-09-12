@@ -1,3 +1,4 @@
+// ReSharper disable InconsistentNaming
 namespace Smart.Navigation;
 
 using System.Reflection;
@@ -7,6 +8,7 @@ using Smart.Mock;
 using Smart.Navigation.Components;
 using Smart.Navigation.Mappers;
 using Smart.Navigation.Plugins;
+using Smart.Navigation.Plugins.Hierarchy;
 using Smart.Reflection;
 
 public static class NavigatorConfigTests
@@ -209,6 +211,44 @@ public static class NavigatorConfigTests
 
         var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x is DummyPlugin);
         Assert.NotNull(plugin);
+    }
+
+    [Fact]
+    public static void ConfigAddHierarchyEffectPlugin()
+    {
+        var config = new NavigatorConfig()
+            .UseMockFormProvider()
+            .AddHierarchyEffectPlugin();
+
+        var components = ((INavigatorConfig)config).ResolveComponents();
+
+        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x is HierarchyEffectPlugin);
+        Assert.NotNull(plugin);
+
+        var options = components.Get<HierarchyEffectPluginOptions>();
+        Assert.Equal("Forward", options.ForwardEffect);
+        Assert.Equal("Back", options.BackEffect);
+    }
+
+    [Fact]
+    public static void ConfigAddHierarchyEffectPluginWithOptions()
+    {
+        var config = new NavigatorConfig()
+            .UseMockFormProvider()
+            .AddHierarchyEffectPlugin(static options =>
+            {
+                options.ForwardEffect = "Zoom";
+                options.BackEffect = "Drop";
+            });
+
+        var components = ((INavigatorConfig)config).ResolveComponents();
+
+        var plugin = components.GetAll<IPlugin>().FirstOrDefault(static x => x is HierarchyEffectPlugin);
+        Assert.NotNull(plugin);
+
+        var options = components.Get<HierarchyEffectPluginOptions>();
+        Assert.Equal("Zoom", options.ForwardEffect);
+        Assert.Equal("Drop", options.BackEffect);
     }
 
     // ------------------------------------------------------------
