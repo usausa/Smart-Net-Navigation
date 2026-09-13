@@ -306,6 +306,15 @@ public sealed class HierarchyEffectPluginTests
         Assert.Null(context.Value.Parameter.Effect);
         Assert.Equal("Open:NoLevelForm:", recorder.Events[0]);
 
+        // Act: (none) -> (none)
+        recorder.Events.Clear();
+        await navigator.ForwardAsync(typeof(AnotherNoLevelForm));
+
+        // Assert
+        Assert.Null(context.Value.Parameter.Effect);
+        Assert.Equal("Open:AnotherNoLevelForm:", recorder.Events[0]);
+        Assert.Equal("Close:NoLevelForm:", recorder.Events[1]);
+
         // Act: (none) -> level 2
         recorder.Events.Clear();
         await navigator.ForwardAsync(typeof(Level2Form));
@@ -420,6 +429,8 @@ public sealed class HierarchyEffectPluginTests
     public sealed class Level3Form : MockForm;
 
     public sealed class NoLevelForm : MockForm;
+
+    public sealed class AnotherNoLevelForm : MockForm;
 
     [View(ViewId.Menu)]
     [Hierarchy(1)]
