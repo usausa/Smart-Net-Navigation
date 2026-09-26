@@ -1,6 +1,7 @@
 namespace Smart.Navigation;
 
 using Smart.Mock;
+using Smart.Navigation.Plugins;
 
 public sealed class NavigatorExitTests
 {
@@ -53,6 +54,37 @@ public sealed class NavigatorExitTests
         Assert.False(form1.IsOpen);
         Assert.False(form2.IsOpen);
         Assert.False(form3.IsOpen);
+    }
+
+    [Fact]
+    public static void ExitNotifiesPluginsOfClose()
+    {
+        // Arrange
+        var plugin = new ClosePlugin();
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .AddPlugin(plugin)
+            .ToNavigator();
+
+        // Act
+        navigator.Forward(typeof(Form1));
+        navigator.Push(typeof(Form2));
+        navigator.Push(typeof(Form3));
+
+        navigator.Exit();
+
+        // Assert: closed from the top of the stack
+        Assert.Equal([typeof(Form3), typeof(Form2), typeof(Form1)], plugin.Closed);
+    }
+
+    private sealed class ClosePlugin : PluginBase
+    {
+        public List<Type> Closed { get; } = [];
+
+        public override void OnClose(IPluginContext pluginContext, object view, object? target)
+        {
+            Closed.Add(view.GetType());
+        }
     }
 
     public sealed class Form1 : MockForm;

@@ -108,9 +108,17 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     public void Exit()
     {
+        var pluginContext = new PluginContext();
         for (var i = viewStack.Count - 1; i >= 0; i--)
         {
             var view = viewStack[i].View;
+            var target = provider.ResolveTarget(view);
+
+            foreach (var plugin in plugins)
+            {
+                plugin.OnClose(pluginContext, view, target);
+            }
+
             provider.CloseView(view);
         }
 

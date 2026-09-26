@@ -43,6 +43,35 @@ public sealed class ScopePluginTests
     }
 
     [Fact]
+    public static void ScopeReleasedByExit()
+    {
+        // Arrange
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
+
+        // Act
+        navigator.Forward(typeof(Data2Form));
+
+        var data = ((Data2Form)navigator.CurrentView!).Data;
+
+        navigator.Exit();
+
+        // Assert
+        Assert.True(data.IsTerminated);
+        Assert.True(data.IsDisposed);
+        Assert.True(data.TerminatedBeforeDispose);
+
+        // Act
+        navigator.Forward(typeof(Data2Form));
+
+        // Assert: a new scope is created after exit
+        var form2 = (Data2Form)navigator.CurrentView!;
+        Assert.NotSame(data, form2.Data);
+        Assert.False(form2.Data.IsDisposed);
+    }
+
+    [Fact]
     public static void ScopeByRequestType()
     {
         // Arrange
