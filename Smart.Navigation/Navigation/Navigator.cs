@@ -108,6 +108,8 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     public void Exit()
     {
+        (CurrentTarget as IActivationSupport)?.OnDeactivated();
+
         var pluginContext = new PluginContext();
         for (var i = viewStack.Count - 1; i >= 0; i--)
         {
@@ -167,6 +169,8 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
 
+            (CurrentTarget as IActivationSupport)?.OnDeactivated();
+
             controller.PluginContext = pluginContext;
 
             var fromView = CurrentView;
@@ -220,6 +224,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         finally
         {
             Executing = false;
+            (CurrentTarget as IActivationSupport)?.OnActivated();
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
         }
@@ -264,6 +269,8 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             Executing = true;
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
+
+            (CurrentTarget as IActivationSupport)?.OnDeactivated();
 
             controller.PluginContext = pluginContext;
 
@@ -338,6 +345,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         finally
         {
             Executing = false;
+            (CurrentTarget as IActivationSupport)?.OnActivated();
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
         }

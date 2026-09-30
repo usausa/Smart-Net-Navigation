@@ -15,8 +15,8 @@ public sealed class NavigationGenerator : IIncrementalGenerator
     private const string ViewSourceAttributeName = "Smart.Navigation.Attributes.ViewSourceAttribute";
     private const string ViewAttributeName = "Smart.Navigation.Attributes.ViewAttribute";
 
-    private const string EnumerableName = "System.Collections.Generic.IEnumerable<T>";
-    private const string KeyValuePairName = "System.Collections.Generic.KeyValuePair<TKey, TValue>";
+    private const string EnumerableName = "System.Collections.Generic.IEnumerable`1";
+    private const string KeyValuePairName = "System.Collections.Generic.KeyValuePair`2";
     private const string TypeName = "System.Type";
 
     // ------------------------------------------------------------
@@ -32,6 +32,9 @@ public sealed class NavigationGenerator : IIncrementalGenerator
                 static (context, _) => GetSourceModel(context))
             .Where(static x => x is not null)
             .Collect();
+        var sourceTreeProvider = context.ForAttributeWithMetadataNameSyntaxTrees(
+            ViewSourceAttributeName,
+            static (node, _) => IsSourceTargetSyntax(node));
 
         var viewProvider = context.SyntaxProvider
             .ForAttributeWithMetadataName(
@@ -40,9 +43,16 @@ public sealed class NavigationGenerator : IIncrementalGenerator
                 static (context, _) => GetViewIdModel(context))
             .Where(static x => x is not null)
             .Collect();
+        var viewTreeProvider = context.ForAttributeWithMetadataNameSyntaxTrees(
+            ViewAttributeName,
+            static (node, _) => IsViewIdTargetSyntax(node));
 
-        context.RegisterSourceOutput(sourceProvider, static (context, sources) => ReportDiagnostics(context, sources));
-        context.RegisterSourceOutput(viewProvider, static (context, views) => ReportDiagnostics(context, views));
+        context.RegisterSourceOutput(
+            sourceProvider.Combine(sourceTreeProvider),
+            static (context, pair) => context.ReportDiagnostics(pair.Left.SelectError().Concat(FindHintNameCollisions(pair.Left).Values).Distinct(), pair.Right));
+        context.RegisterSourceOutput(
+            viewProvider.Combine(viewTreeProvider),
+            static (context, pair) => context.ReportDiagnostics(pair.Left.SelectError().Distinct(), pair.Right));
 
         var models = sourceProvider
             .Combine(viewProvider)
@@ -60,45 +70,57 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
     private static Result<SourceModel> GetSourceModel(GeneratorAttributeSyntaxContext context)
     {
-        var syntax = context.TargetNode;
+        var syntax = (MethodDeclarationSyntax)context.TargetNode;
         var methodSymbol = (IMethodSymbol)context.TargetSymbol;
 
         // Validate method style
-        if (!methodSymbol.IsStatic || !methodSymbol.IsPartialDefinition)
+        if (!methodSymbol.IsStatic || !methodSymbol.IsPartialDefinition || (methodSymbol.PartialImplementationPart is not null))
         {
-            return Results.Error<SourceModel>(new DiagnosticInfo(Diagnostics.InvalidMethodDefinition, syntax.GetLocation(), methodSymbol.Name));
-        }
-
-        // Validate argument
-        if (methodSymbol.Parameters.Length != 0)
-        {
-            return Results.Error<SourceModel>(new DiagnosticInfo(Diagnostics.InvalidMethodParameter, syntax.GetLocation(), methodSymbol.Name));
-        }
-
-        // Validate return type
-        if ((methodSymbol.ReturnType is not INamedTypeSymbol returnTypeSymbol) ||
-            (returnTypeSymbol.ConstructedFrom.ToDisplayString() != EnumerableName) ||
-            (returnTypeSymbol.TypeArguments[0] is not INamedTypeSymbol keyValueTypeSymbol) ||
-            (keyValueTypeSymbol.ConstructedFrom.ToDisplayString() != KeyValuePairName) ||
-            (keyValueTypeSymbol.TypeArguments[1].ToDisplayString() != TypeName))
-        {
-            return Results.Error<SourceModel>(new DiagnosticInfo(Diagnostics.InvalidMethodReturnType, syntax.GetLocation(), methodSymbol.Name));
+            return Results.Error<SourceModel>(new DiagnosticInfo(Diagnostics.InvalidMethodDefinition, syntax.Identifier.GetLocation(), methodSymbol.Name));
         }
 
         var containingType = methodSymbol.ContainingType;
         var ns = String.IsNullOrEmpty(containingType.ContainingNamespace.Name)
             ? string.Empty
             : containingType.ContainingNamespace.ToDisplayString();
+        var containingTypes = new EquatableArray<string>(containingType.GetContainingTypes()
+            .Append(containingType)
+            .Select(static x => x.GetPartialDeclaration())
+            .ToArray());
+        var hintName = HintNameBuilder.BuildFromType(containingType, methodSymbol.Name);
+        var signature = methodSymbol.GetImplementationSignature(syntax);
+
+        var methodName = $"{containingType.ToDisplayString()}.{methodSymbol.Name}";
+
+        Result<SourceModel> Fallback(DiagnosticInfo error) =>
+            new(
+                new SourceModel(ns, containingTypes, hintName, signature, string.Empty, string.Empty, IsFallback: true, MethodName: methodName),
+                new EquatableArray<DiagnosticInfo>([error]));
+
+        // Validate argument
+        if (methodSymbol.Parameters.Length != 0)
+        {
+            return Fallback(new DiagnosticInfo(Diagnostics.InvalidMethodParameter, syntax.Identifier.GetLocation(), methodSymbol.Name));
+        }
+
+        // Validate return type
+        if ((methodSymbol.ReturnType is not INamedTypeSymbol returnTypeSymbol) ||
+            !returnTypeSymbol.HasFullyQualifiedMetadataName(EnumerableName) ||
+            (returnTypeSymbol.TypeArguments[0] is not INamedTypeSymbol keyValueTypeSymbol) ||
+            !keyValueTypeSymbol.HasFullyQualifiedMetadataName(KeyValuePairName) ||
+            !keyValueTypeSymbol.TypeArguments[1].HasFullyQualifiedMetadataName(TypeName))
+        {
+            return Fallback(new DiagnosticInfo(Diagnostics.InvalidMethodReturnType, syntax.Identifier.GetLocation(), methodSymbol.Name));
+        }
 
         return Results.Success(new SourceModel(
             ns,
-            containingType.GetClassName(),
-            containingType.IsValueType,
-            methodSymbol.DeclaredAccessibility,
-            methodSymbol.Name,
-            returnTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-            keyValueTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-            keyValueTypeSymbol.TypeArguments[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)));
+            containingTypes,
+            hintName,
+            signature,
+            keyValueTypeSymbol.ToDisplayString(SymbolDisplayFormats.FullyQualifiedNullable),
+            keyValueTypeSymbol.TypeArguments[0].ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+            MethodName: methodName));
     }
 
     private static bool IsViewIdTargetSyntax(SyntaxNode node) =>
@@ -106,17 +128,62 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
     private static Result<EquatableArray<ViewIdModel>> GetViewIdModel(GeneratorAttributeSyntaxContext context)
     {
-        var classSymbol = (ITypeSymbol)context.TargetSymbol;
+        if (!IsReferable((INamedTypeSymbol)context.TargetSymbol))
+        {
+            return new Result<EquatableArray<ViewIdModel>>(
+                EquatableArray<ViewIdModel>.Empty,
+                new EquatableArray<DiagnosticInfo>([new DiagnosticInfo(Diagnostics.InvalidViewClass, ((ClassDeclarationSyntax)context.TargetNode).Identifier.GetLocation(), context.TargetSymbol.ToDisplayString())]));
+        }
 
-#pragma warning disable IDE0028
-        return Results.Success(new EquatableArray<ViewIdModel>(
-            classSymbol.GetAttributes()
-                .Where(static x => x.AttributeClass?.ToDisplayString() == ViewAttributeName)
-                .Select(attribute => new ViewIdModel(
-                    classSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                    attribute.ConstructorArguments[0].Type!.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                    attribute.ConstructorArguments[0].ToCSharpExpression() ?? string.Empty))));
-#pragma warning restore IDE0028
+        var className = context.TargetSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+
+        var views = new List<ViewIdModel>();
+        foreach (var attribute in context.Attributes)
+        {
+            if (attribute.TryGetConstructorArgument(0, out var id) && (id.Type is not null) && (id.ToCSharpExpression() is { } expression))
+            {
+                views.Add(new ViewIdModel(className, id.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat), expression));
+            }
+        }
+
+        return Results.Success(new EquatableArray<ViewIdModel>(views.ToArray()));
+    }
+
+    private static bool IsReferable(INamedTypeSymbol type)
+    {
+        if (type.IsFileLocal)
+        {
+            return false;
+        }
+
+        for (var current = type; current is not null; current = current.ContainingType)
+        {
+            if (current.DeclaredAccessibility is Accessibility.Private or Accessibility.Protected or Accessibility.ProtectedAndInternal)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static Dictionary<string, DiagnosticInfo> FindHintNameCollisions(ImmutableArray<Result<SourceModel>> sources)
+    {
+        var collisions = new Dictionary<string, DiagnosticInfo>(StringComparer.Ordinal);
+        var firsts = new Dictionary<string, SourceModel>(StringComparer.OrdinalIgnoreCase);
+        foreach (var source in sources.SelectValue().OrderBy(static x => x.HintName, StringComparer.Ordinal))
+        {
+            if (!firsts.TryGetValue(source.HintName, out var first))
+            {
+                firsts.Add(source.HintName, source);
+            }
+            else if ((first.HintName != source.HintName) && !collisions.ContainsKey(source.HintName))
+            {
+                collisions.Add(source.HintName, new DiagnosticInfo(Diagnostics.HintNameCollision, (Location?)null, source.MethodName, first.MethodName));
+            }
+        }
+
+        return collisions;
     }
 
     private static ImmutableArray<ViewSourceModel> JoinSourcesWithViews(
@@ -129,18 +196,24 @@ public sealed class NavigationGenerator : IIncrementalGenerator
         var viewMap = viewResults
             .SelectValue()
             .SelectMany(static x => x)
+            .Distinct()
             .GroupBy(static x => x.ViewIdClassFullName)
             .ToDictionary(static x => x.Key, static x => x.ToArray());
 
         token.ThrowIfCancellationRequested();
 
+        var collisions = FindHintNameCollisions(sourceResults);
+        var emitted = new HashSet<string>(StringComparer.Ordinal);
         var builder = ImmutableArray.CreateBuilder<ViewSourceModel>();
         foreach (var source in sourceResults.SelectValue())
         {
-            if (viewMap.TryGetValue(source.ViewIdClassFullName, out var views))
+            if (collisions.ContainsKey(source.HintName) || !emitted.Add(source.HintName))
             {
-                builder.Add(new ViewSourceModel(source, new EquatableArray<ViewIdModel>(views)));
+                continue;
             }
+
+            var views = !source.IsFallback && viewMap.TryGetValue(source.ViewIdClassFullName, out var matched) ? matched : [];
+            builder.Add(new ViewSourceModel(source, new EquatableArray<ViewIdModel>(views)));
         }
 
         return builder.ToImmutable();
@@ -150,15 +223,6 @@ public sealed class NavigationGenerator : IIncrementalGenerator
     // Generator
     // ------------------------------------------------------------
 
-    private static void ReportDiagnostics<T>(SourceProductionContext context, ImmutableArray<Result<T>> results)
-        where T : IEquatable<T>
-    {
-        foreach (var info in results.SelectError())
-        {
-            context.ReportDiagnostic(info);
-        }
-    }
-
     private static void Execute(SourceProductionContext context, ViewSourceModel model)
     {
         context.CancellationToken.ThrowIfCancellationRequested();
@@ -166,15 +230,14 @@ public sealed class NavigationGenerator : IIncrementalGenerator
         var builder = new SourceBuilder();
         BuildSource(builder, model.Source, model.Views);
 
-        context.AddSource(
-            HintNameBuilder.Build(model.Source.Namespace, model.Source.ClassName, model.Source.MethodName),
-            builder);
+        context.AddSource(model.Source.HintName, builder);
     }
 
-    private static void BuildSource(SourceBuilder builder, SourceModel source, IEnumerable<ViewIdModel> viewIds)
+    private static void BuildSource(SourceBuilder builder, SourceModel source, EquatableArray<ViewIdModel> viewIds)
     {
         builder.AutoGenerated();
         builder.EnableNullable();
+        builder.Disable("CS0612, CS0618");
         builder.NewLine();
 
         // namespace
@@ -185,25 +248,36 @@ public sealed class NavigationGenerator : IIncrementalGenerator
         }
 
         // class
-        builder
-            .Indent()
-            .Append("partial ")
-            .Append(source.IsValueType ? "struct " : "class ")
-            .Append(source.ClassName)
-            .NewLine();
-        builder.BeginScope();
+        foreach (var containingType in source.ContainingTypes)
+        {
+            builder
+                .Indent()
+                .Append(containingType)
+                .NewLine();
+            builder.BeginScope();
+        }
 
         // method
         builder
             .Indent()
-            .Append(source.MethodAccessibility.ToText())
-            .Append(" static partial ")
-            .Append(source.ReturnTypeName)
-            .Append(' ')
-            .Append(source.MethodName)
-            .Append("()")
+            .Append(source.Signature)
             .NewLine();
         builder.BeginScope();
+
+        if (source.IsFallback)
+        {
+            builder
+                .Indent()
+                .Append("throw new global::System.InvalidOperationException();")
+                .NewLine();
+        }
+        else if (viewIds.Count == 0)
+        {
+            builder
+                .Indent()
+                .Append("yield break;")
+                .NewLine();
+        }
 
         foreach (var viewId in viewIds)
         {
@@ -221,6 +295,9 @@ public sealed class NavigationGenerator : IIncrementalGenerator
 
         builder.EndScope();
 
-        builder.EndScope();
+        for (var i = 0; i < source.ContainingTypes.Count; i++)
+        {
+            builder.EndScope();
+        }
     }
 }

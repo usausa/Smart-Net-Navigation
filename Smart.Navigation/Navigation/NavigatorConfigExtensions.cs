@@ -96,7 +96,7 @@ public static class NavigatorConfigExtensions
     {
         foreach (var type in types)
         {
-            foreach (var attr in type.GetTypeInfo().GetCustomAttributes<ViewAttribute>())
+            foreach (var attr in type.GetTypeInfo().GetCustomAttributes<ViewAttribute>(false))
             {
                 register.Register(attr.Id, type);
             }

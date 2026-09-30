@@ -313,7 +313,7 @@ public class NavigationGeneratorTests
     //-----------------------------------------------------------------------
 
     [Fact]
-    public void NoMatchingViewDoesNotGenerateSource()
+    public void NoMatchingViewGeneratesEmptySequence()
     {
         const string source =
             """
@@ -337,7 +337,8 @@ public class NavigationGeneratorTests
 
         var generated = GeneratorTestHelper.GetGeneratedSource(source);
 
-        Assert.Equal(string.Empty, generated);
+        Assert.Contains("yield break;", generated, StringComparison.Ordinal);
+        Assert.Empty(GeneratorTestHelper.GetProblemIds(source));
     }
 
     //-----------------------------------------------------------------------

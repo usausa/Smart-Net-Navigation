@@ -30,6 +30,20 @@ public sealed class IdViewMapperTests
     }
 
     [Fact]
+    public static void AutoRegisterReadsOnlyDeclaredAttributes()
+    {
+        // Arrange
+        var registered = new List<Type>();
+        var register = new CollectingRegister(registered);
+
+        // Act
+        register.AutoRegister([typeof(BaseForm), typeof(DerivedForm)]);
+
+        // Assert
+        Assert.Equal([typeof(BaseForm)], registered);
+    }
+
+    [Fact]
     public static void UseIdViewMapperFindFailed()
     {
         // Arrange
@@ -64,4 +78,21 @@ public sealed class IdViewMapperTests
 
     [View(ViewId.Form2)]
     public sealed class Form2 : MockForm;
+
+    [View(ViewId.Form1)]
+    public class BaseForm : MockForm;
+
+    public sealed class DerivedForm : BaseForm;
+
+    private sealed class CollectingRegister : IIdViewRegister
+    {
+        private readonly List<Type> registered;
+
+        public CollectingRegister(List<Type> registered)
+        {
+            this.registered = registered;
+        }
+
+        public void Register(object id, Type type) => registered.Add(type);
+    }
 }
