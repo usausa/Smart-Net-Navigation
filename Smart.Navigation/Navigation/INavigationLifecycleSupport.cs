@@ -1,6 +1,6 @@
 namespace Smart.Navigation;
 
-public interface IActivationSupport
+public interface INavigationLifecycleSupport
 {
     void OnActivated();
 

@@ -19,7 +19,7 @@ public sealed class NavigatorActivationTests
         navigator.Forward(typeof(Activation1Form));
 
         // Assert
-        Assert.Equal(["Activation1Form.OnNavigatingTo", "Activation1Form.OnNavigatedTo", "Activation1Form.OnActivated"], recorder.Events);
+        Assert.Equal(["Activation1Form.OnActivated", "Activation1Form.OnNavigatingTo", "Activation1Form.OnNavigatedTo"], recorder.Events);
 
         // Act
         recorder.Events.Clear();
@@ -28,7 +28,7 @@ public sealed class NavigatorActivationTests
 
         // Assert
         Assert.Equal(
-            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation2Form.OnNavigatingTo", "Activation2Form.OnNavigatedTo", "Activation2Form.OnActivated"],
+            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation2Form.OnActivated", "Activation2Form.OnNavigatingTo", "Activation2Form.OnNavigatedTo"],
             recorder.Events);
     }
 
@@ -42,7 +42,7 @@ public sealed class NavigatorActivationTests
         await navigator.ForwardAsync(typeof(Activation1Form));
 
         // Assert
-        Assert.Equal(["Activation1Form.OnNavigatingTo", "Activation1Form.OnNavigatedTo", "Activation1Form.OnActivated"], recorder.Events);
+        Assert.Equal(["Activation1Form.OnActivated", "Activation1Form.OnNavigatingTo", "Activation1Form.OnNavigatedTo"], recorder.Events);
 
         // Act
         recorder.Events.Clear();
@@ -51,7 +51,7 @@ public sealed class NavigatorActivationTests
 
         // Assert
         Assert.Equal(
-            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation2Form.OnNavigatingTo", "Activation2Form.OnNavigatedTo", "Activation2Form.OnActivated"],
+            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation2Form.OnActivated", "Activation2Form.OnNavigatingTo", "Activation2Form.OnNavigatedTo"],
             recorder.Events);
     }
 
@@ -72,7 +72,7 @@ public sealed class NavigatorActivationTests
 
         // Assert
         Assert.Equal(
-            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation2Form.OnNavigatingTo", "Activation2Form.OnNavigatedTo", "Activation2Form.OnActivated"],
+            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation2Form.OnActivated", "Activation2Form.OnNavigatingTo", "Activation2Form.OnNavigatedTo"],
             recorder.Events);
 
         // Act
@@ -82,7 +82,7 @@ public sealed class NavigatorActivationTests
 
         // Assert
         Assert.Equal(
-            ["Activation2Form.OnDeactivated", "Activation2Form.OnNavigatingFrom", "Activation1Form.OnNavigatingTo", "Activation1Form.OnNavigatedTo", "Activation1Form.OnActivated"],
+            ["Activation2Form.OnDeactivated", "Activation2Form.OnNavigatingFrom", "Activation1Form.OnActivated", "Activation1Form.OnNavigatingTo", "Activation1Form.OnNavigatedTo"],
             recorder.Events);
     }
 
@@ -91,7 +91,7 @@ public sealed class NavigatorActivationTests
     // ------------------------------------------------------------
 
     [Fact]
-    public static void ActivatedBeforeExecutingChanged()
+    public static void ActivationWhileExecuting()
     {
         // Arrange
         var (navigator, recorder) = CreateNavigator();
@@ -104,10 +104,9 @@ public sealed class NavigatorActivationTests
         navigator.Forward(typeof(Activation2Form));
 
         // Assert
-        Assert.Equal("Executing.Start", recorder.Events[0]);
-        Assert.Equal("Activation1Form.OnDeactivated", recorder.Events[1]);
-        Assert.Equal("Activation2Form.OnActivated", recorder.Events[^2]);
-        Assert.Equal("Executing.End", recorder.Events[^1]);
+        Assert.Equal(
+            ["Executing.Start", "Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation2Form.OnActivated", "Activation2Form.OnNavigatingTo", "Activation2Form.OnNavigatedTo", "Executing.End"],
+            recorder.Events);
     }
 
     // ------------------------------------------------------------
@@ -126,8 +125,62 @@ public sealed class NavigatorActivationTests
         Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(ThrowForm)));
 
         // Assert
-        Assert.Equal(["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "Activation1Form.OnActivated"], recorder.Events);
+        Assert.Equal(
+            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "ThrowForm.OnActivated", "ThrowForm.OnDeactivated", "Activation1Form.OnActivated"],
+            recorder.Events);
         Assert.IsType<Activation1Form>(navigator.CurrentView);
+    }
+
+    [Fact]
+    public static async Task ReactivateWhenNavigationFailedAsync()
+    {
+        // Arrange
+        var (navigator, recorder) = CreateNavigator();
+        await navigator.ForwardAsync(typeof(Activation1Form));
+        recorder.Events.Clear();
+
+        // Act
+        await Assert.ThrowsAsync<InvalidOperationException>(() => navigator.ForwardAsync(typeof(ThrowForm)));
+
+        // Assert
+        Assert.Equal(
+            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "ThrowForm.OnActivated", "ThrowForm.OnDeactivated", "Activation1Form.OnActivated"],
+            recorder.Events);
+        Assert.IsType<Activation1Form>(navigator.CurrentView);
+    }
+
+    [Fact]
+    public static void ReactivateWhenNavigatingFromFailed()
+    {
+        // Arrange
+        var (navigator, recorder) = CreateNavigator();
+        navigator.Forward(typeof(ThrowFromForm));
+        recorder.Events.Clear();
+
+        // Act
+        Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(Activation1Form)));
+
+        // Assert
+        Assert.Equal(["ThrowFromForm.OnDeactivated", "ThrowFromForm.OnActivated"], recorder.Events);
+        Assert.IsType<ThrowFromForm>(navigator.CurrentView);
+    }
+
+    [Fact]
+    public static void KeepActivatedWhenNavigatedToFailed()
+    {
+        // Arrange
+        var (navigator, recorder) = CreateNavigator();
+        navigator.Forward(typeof(Activation1Form));
+        recorder.Events.Clear();
+
+        // Act
+        Assert.Throws<InvalidOperationException>(() => navigator.Forward(typeof(ThrowNavigatedForm)));
+
+        // Assert
+        Assert.Equal(
+            ["Activation1Form.OnDeactivated", "Activation1Form.OnNavigatingFrom", "ThrowNavigatedForm.OnActivated", "ThrowNavigatedForm.OnNavigatingTo"],
+            recorder.Events);
+        Assert.IsType<ThrowNavigatedForm>(navigator.CurrentView);
     }
 
     // ------------------------------------------------------------
@@ -166,7 +219,7 @@ public sealed class NavigatorActivationTests
         return (navigator, resolver.Get<EventRecorder>());
     }
 
-    public abstract class ActivationForm : MockForm, INavigationEventSupport, IActivationSupport
+    public abstract class ActivationForm : MockForm, INavigationEventSupport, INavigationLifecycleSupport
     {
         private readonly EventRecorder recorder;
 
@@ -175,11 +228,11 @@ public sealed class NavigatorActivationTests
             this.recorder = recorder;
         }
 
-        public void OnNavigatingFrom(INavigationContext context) => Record(nameof(OnNavigatingFrom));
+        public virtual void OnNavigatingFrom(INavigationContext context) => Record(nameof(OnNavigatingFrom));
 
         public virtual void OnNavigatingTo(INavigationContext context) => Record(nameof(OnNavigatingTo));
 
-        public void OnNavigatedTo(INavigationContext context) => Record(nameof(OnNavigatedTo));
+        public virtual void OnNavigatedTo(INavigationContext context) => Record(nameof(OnNavigatedTo));
 
         public void OnActivated() => Record(nameof(OnActivated));
 
@@ -212,5 +265,25 @@ public sealed class NavigatorActivationTests
         }
 
         public override void OnNavigatingTo(INavigationContext context) => throw new InvalidOperationException("Test");
+    }
+
+    public sealed class ThrowFromForm : ActivationForm
+    {
+        public ThrowFromForm(EventRecorder recorder)
+            : base(recorder)
+        {
+        }
+
+        public override void OnNavigatingFrom(INavigationContext context) => throw new InvalidOperationException("Test");
+    }
+
+    public sealed class ThrowNavigatedForm : ActivationForm
+    {
+        public ThrowNavigatedForm(EventRecorder recorder)
+            : base(recorder)
+        {
+        }
+
+        public override void OnNavigatedTo(INavigationContext context) => throw new InvalidOperationException("Test");
     }
 }

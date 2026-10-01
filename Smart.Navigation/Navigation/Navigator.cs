@@ -108,7 +108,7 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
 
     public void Exit()
     {
-        (CurrentTarget as IActivationSupport)?.OnDeactivated();
+        (CurrentTarget as INavigationLifecycleSupport)?.OnDeactivated();
 
         var pluginContext = new PluginContext();
         for (var i = viewStack.Count - 1; i >= 0; i--)
@@ -163,13 +163,14 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             throw new InvalidOperationException("Navigator is already executing.");
         }
 
+        object? activatedTarget = null;
         try
         {
             Executing = true;
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
 
-            (CurrentTarget as IActivationSupport)?.OnDeactivated();
+            (CurrentTarget as INavigationLifecycleSupport)?.OnDeactivated();
 
             controller.PluginContext = pluginContext;
 
@@ -193,6 +194,9 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             }
 
             // Process navigating
+            activatedTarget = toTarget;
+            (toTarget as INavigationLifecycleSupport)?.OnActivated();
+
             foreach (var plugin in plugins)
             {
                 plugin.OnNavigatingTo(pluginContext, navigationContext, toView, toTarget);
@@ -224,7 +228,11 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         finally
         {
             Executing = false;
-            (CurrentTarget as IActivationSupport)?.OnActivated();
+            if (!ReferenceEquals(activatedTarget, CurrentTarget))
+            {
+                (activatedTarget as INavigationLifecycleSupport)?.OnDeactivated();
+                (CurrentTarget as INavigationLifecycleSupport)?.OnActivated();
+            }
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
         }
@@ -264,13 +272,14 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             throw new InvalidOperationException("Navigator is already executing.");
         }
 
+        object? activatedTarget = null;
         try
         {
             Executing = true;
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
 
-            (CurrentTarget as IActivationSupport)?.OnDeactivated();
+            (CurrentTarget as INavigationLifecycleSupport)?.OnDeactivated();
 
             controller.PluginContext = pluginContext;
 
@@ -298,6 +307,9 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
             }
 
             // Process navigating
+            activatedTarget = toTarget;
+            (toTarget as INavigationLifecycleSupport)?.OnActivated();
+
             foreach (var plugin in plugins)
             {
                 plugin.OnNavigatingTo(pluginContext, navigationContext, toView, toTarget);
@@ -345,7 +357,11 @@ public sealed class Navigator : DisposableObject, INavigator, INavigatorComponen
         finally
         {
             Executing = false;
-            (CurrentTarget as IActivationSupport)?.OnActivated();
+            if (!ReferenceEquals(activatedTarget, CurrentTarget))
+            {
+                (activatedTarget as INavigationLifecycleSupport)?.OnDeactivated();
+                (CurrentTarget as INavigationLifecycleSupport)?.OnActivated();
+            }
             ExecutingChanged?.Invoke(this, EventArgs.Empty);
             PropertyChanged?.Invoke(this, ExecutingEventArgs);
         }
