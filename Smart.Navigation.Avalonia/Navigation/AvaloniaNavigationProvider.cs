@@ -180,7 +180,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
 
     private static void FocusFirst(Canvas container)
     {
-        if ((TopLevel.GetTopLevel(container)?.FocusManager?.GetFocusedElement() is Visual focused) && focused.IsAttachedToVisualTree())
+        if ((TopLevel.GetTopLevel(container)?.FocusManager.GetFocusedElement() is Visual focused) && focused.IsAttachedToVisualTree())
         {
             return;
         }
