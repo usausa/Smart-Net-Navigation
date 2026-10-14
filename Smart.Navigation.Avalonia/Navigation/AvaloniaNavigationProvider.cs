@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Layout;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 
 public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
@@ -62,12 +63,18 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
         }
 
         var element = Unsafe.As<Control>(view);
+        var focusWithin = options.RestoreFocus && element.IsKeyboardFocusWithin;
 
         (element as IDisposable)?.Dispose();
         (element.DataContext as IDisposable)?.Dispose();
         element.DataContext = null;
 
         container.Children.Remove(element);
+
+        if (focusWithin)
+        {
+            Dispatcher.UIThread.Post(() => FocusFirst(container), DispatcherPriority.Loaded);
+        }
     }
 
     public void ActivateView(object view, object? parameter)
@@ -170,6 +177,16 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
     // ------------------------------------------------------------
     // Helper
     // ------------------------------------------------------------
+
+    private static void FocusFirst(Canvas container)
+    {
+        if ((TopLevel.GetTopLevel(container)?.FocusManager?.GetFocusedElement() is Visual focused) && focused.IsAttachedToVisualTree())
+        {
+            return;
+        }
+
+        FocusManager.FindFirstFocusableElement(container)?.Focus();
+    }
 
     private static IInputElement? GetFocused(Visual parent)
     {
