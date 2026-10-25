@@ -4,18 +4,13 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-using Smart.Navigation;
-
-internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
+internal abstract class ForwardBackEffect : IWindowsNavigationEffect
 {
-    private readonly bool fromRight;
+    private readonly ForwardBackEffectOptions options;
 
-    private readonly TimeSpan duration;
-
-    public SlideHorizontalEffect(bool fromRight, TimeSpan? duration = null)
+    protected ForwardBackEffect(ForwardBackEffectOptions? options)
     {
-        this.fromRight = fromRight;
-        this.duration = duration ?? TimeSpan.FromMilliseconds(250);
+        this.options = options ?? new ForwardBackEffectOptions();
     }
 
     public Task EffectAsync(WindowsNavigationEffectContext context)
@@ -26,8 +21,8 @@ internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
 
         var (from, to) = context.Phase switch
         {
-            WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (fromRight ? width : -width, 0d),
-            WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (0d, fromRight ? -width : width),
+            WindowsNavigationEffectPhase.Open or WindowsNavigationEffectPhase.Activate => (EnterFrom(width), 0d),
+            WindowsNavigationEffectPhase.Close or WindowsNavigationEffectPhase.Deactivate => (0d, LeaveTo(width)),
             _ => (0d, 0d)
         };
 
@@ -38,17 +33,21 @@ internal sealed class SlideHorizontalEffect : IWindowsNavigationEffect
         }
 
         var tcs = new TaskCompletionSource();
-        var anim = new DoubleAnimation(from, to, new Duration(duration))
+        var anim = new DoubleAnimation(from, to, new Duration(options.Duration))
         {
             EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
         };
         anim.Completed += (_, _) =>
         {
-            context.View.RenderTransform = null;
+            EffectHelper.Restore(context, static view => view.RenderTransform = null);
             tcs.TrySetResult();
         };
 
         transform.BeginAnimation(TranslateTransform.XProperty, anim);
         return tcs.Task;
     }
+
+    protected abstract double EnterFrom(double width);
+
+    protected abstract double LeaveTo(double width);
 }

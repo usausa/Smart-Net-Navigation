@@ -18,11 +18,11 @@ public static class WindowsNavigatorConfigExtensions
 
         // Register standard effects
         options.RegisterEffect(WindowsEffect.None, NoneWindowsEffect.Instance);
-        options.RegisterEffect(WindowsEffect.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(WindowsEffect.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(WindowsEffect.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(WindowsEffect.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(WindowsEffect.Fade, new FadeEffect());
+        options.RegisterEffect<ForwardEffect>(WindowsEffect.Forward);
+        options.RegisterEffect<BackEffect>(WindowsEffect.Back);
+        options.RegisterEffect<PushEffect>(WindowsEffect.Push);
+        options.RegisterEffect<PopEffect>(WindowsEffect.Pop);
+        options.RegisterEffect<FadeEffect>(WindowsEffect.Fade);
 
         setupAction(options);
 
@@ -55,20 +55,25 @@ public static class WindowsNavigatorConfigExtensions
 
         // Register standard effects
         options.RegisterEffect(WindowsEffect.None, NoneWindowsEffect.Instance);
-        options.RegisterEffect(WindowsEffect.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(WindowsEffect.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(WindowsEffect.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(WindowsEffect.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(WindowsEffect.Fade, new FadeEffect());
+        options.RegisterEffect<ForwardEffect>(WindowsEffect.Forward);
+        options.RegisterEffect<BackEffect>(WindowsEffect.Back);
+        options.RegisterEffect<PushEffect>(WindowsEffect.Push);
+        options.RegisterEffect<PopEffect>(WindowsEffect.Pop);
+        options.RegisterEffect<FadeEffect>(WindowsEffect.Fade);
 
         setupAction(options);
 
-        config.Configure(static c =>
+        config.Configure(c =>
         {
+            c.RemoveAll<IContainerResolver>();
+            c.Add<IContainerResolver>(new ContainerResolver(container));
+
             c.RemoveAll<ITypeConstraint>();
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));
+
+            c.Add(options);
         });
 
-        return config.UseProvider(new WindowsNavigationProvider(new ContainerResolver(container), options));
+        return config.UseProvider<WindowsNavigationProvider>();
     }
 }

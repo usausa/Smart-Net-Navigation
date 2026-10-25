@@ -1,17 +1,17 @@
 namespace Smart.Navigation.Effects;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Windows;
 using System.Windows.Media.Animation;
 
-using Smart.Navigation;
-
+[SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes", Justification = "Created by RegisterEffect<TEffect>().")]
 internal sealed class FadeEffect : IWindowsNavigationEffect
 {
-    private readonly TimeSpan duration;
+    private readonly FadeEffectOptions options;
 
-    public FadeEffect(TimeSpan? duration = null)
+    public FadeEffect(FadeEffectOptions? options = null)
     {
-        this.duration = duration ?? TimeSpan.FromMilliseconds(200);
+        this.options = options ?? new FadeEffectOptions();
     }
 
     public Task EffectAsync(WindowsNavigationEffectContext context)
@@ -30,8 +30,12 @@ internal sealed class FadeEffect : IWindowsNavigationEffect
         }
 
         var tcs = new TaskCompletionSource();
-        var anim = new DoubleAnimation(from, to, new Duration(duration));
-        anim.Completed += (_, _) => tcs.TrySetResult();
+        var anim = new DoubleAnimation(from, to, new Duration(options.Duration));
+        anim.Completed += (_, _) =>
+        {
+            EffectHelper.Restore(context, static view => view.BeginAnimation(UIElement.OpacityProperty, null));
+            tcs.TrySetResult();
+        };
 
         context.View.BeginAnimation(UIElement.OpacityProperty, anim);
         return tcs.Task;

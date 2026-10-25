@@ -6,16 +6,21 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
+using Smart.Navigation.Components;
+
 public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
     private readonly WindowsNavigationProviderOptions options;
 
-    public WindowsNavigationProvider(IContainerResolver resolver, WindowsNavigationProviderOptions options)
+    private readonly Dictionary<string, IWindowsNavigationEffect> effects;
+
+    public WindowsNavigationProvider(IContainerResolver resolver, WindowsNavigationProviderOptions options, IEffectFactory? effectFactory = null)
     {
         this.resolver = resolver;
         this.options = options;
+        effects = options.CreateEffects(effectFactory ?? new StandardEffectFactory());
     }
 
     // ------------------------------------------------------------
@@ -154,7 +159,7 @@ public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
     private Task EffectAsync(FrameworkElement element, INavigationParameter parameter, WindowsNavigationEffectPhase phase)
     {
         var key = parameter.Effect;
-        if ((key is null) || !options.Effects.TryGetValue(key, out var effect))
+        if ((key is null) || !effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }

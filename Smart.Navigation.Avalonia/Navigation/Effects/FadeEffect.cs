@@ -1,18 +1,22 @@
 namespace Smart.Navigation.Effects;
 
+using System.Diagnostics.CodeAnalysis;
+
 using Avalonia;
 using Avalonia.Animation;
+using Avalonia.Data;
 using Avalonia.Styling;
 
 using Smart.Navigation;
 
+[SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes", Justification = "Created by RegisterEffect<TEffect>().")]
 internal sealed class FadeEffect : IAvaloniaNavigationEffect
 {
-    private readonly TimeSpan duration;
+    private readonly FadeEffectOptions options;
 
-    public FadeEffect(TimeSpan? duration = null)
+    public FadeEffect(FadeEffectOptions? options = null)
     {
-        this.duration = duration ?? TimeSpan.FromMilliseconds(200);
+        this.options = options ?? new FadeEffectOptions();
     }
 
     public async Task EffectAsync(AvaloniaNavigationEffectContext context)
@@ -30,10 +34,14 @@ internal sealed class FadeEffect : IAvaloniaNavigationEffect
             return;
         }
 
+        var view = context.View;
+        using var hold = context.Phase is AvaloniaNavigationEffectPhase.Close or AvaloniaNavigationEffectPhase.Deactivate
+            ? view.SetValue(Visual.OpacityProperty, to, BindingPriority.Animation)
+            : null;
+
         var animation = new Animation
         {
-            Duration = duration,
-            FillMode = FillMode.Forward,
+            Duration = options.Duration,
             Children =
             {
                 new KeyFrame
@@ -49,7 +57,6 @@ internal sealed class FadeEffect : IAvaloniaNavigationEffect
             }
         };
 
-        await animation.RunAsync(context.View).ConfigureAwait(true);
-        context.View.Opacity = to;
+        await animation.RunAsync(view).ConfigureAwait(true);
     }
 }

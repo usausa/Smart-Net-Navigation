@@ -18,11 +18,11 @@ public static class AvaloniaNavigatorConfigExtensions
 
         // Register standard effects
         options.RegisterEffect(AvaloniaEffect.None, NoneAvaloniaEffect.Instance);
-        options.RegisterEffect(AvaloniaEffect.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(AvaloniaEffect.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(AvaloniaEffect.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(AvaloniaEffect.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(AvaloniaEffect.Fade, new FadeEffect());
+        options.RegisterEffect<ForwardEffect>(AvaloniaEffect.Forward);
+        options.RegisterEffect<BackEffect>(AvaloniaEffect.Back);
+        options.RegisterEffect<PushEffect>(AvaloniaEffect.Push);
+        options.RegisterEffect<PopEffect>(AvaloniaEffect.Pop);
+        options.RegisterEffect<FadeEffect>(AvaloniaEffect.Fade);
 
         setupAction(options);
 
@@ -55,20 +55,25 @@ public static class AvaloniaNavigatorConfigExtensions
 
         // Register standard effects
         options.RegisterEffect(AvaloniaEffect.None, NoneAvaloniaEffect.Instance);
-        options.RegisterEffect(AvaloniaEffect.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(AvaloniaEffect.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(AvaloniaEffect.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(AvaloniaEffect.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(AvaloniaEffect.Fade, new FadeEffect());
+        options.RegisterEffect<ForwardEffect>(AvaloniaEffect.Forward);
+        options.RegisterEffect<BackEffect>(AvaloniaEffect.Back);
+        options.RegisterEffect<PushEffect>(AvaloniaEffect.Push);
+        options.RegisterEffect<PopEffect>(AvaloniaEffect.Pop);
+        options.RegisterEffect<FadeEffect>(AvaloniaEffect.Fade);
 
         setupAction(options);
 
-        config.Configure(static c =>
+        config.Configure(c =>
         {
+            c.RemoveAll<IContainerResolver>();
+            c.Add<IContainerResolver>(new ContainerResolver(container));
+
             c.RemoveAll<ITypeConstraint>();
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(Control)));
+
+            c.Add(options);
         });
 
-        return config.UseProvider(new AvaloniaNavigationProvider(new ContainerResolver(container), options));
+        return config.UseProvider<AvaloniaNavigationProvider>();
     }
 }

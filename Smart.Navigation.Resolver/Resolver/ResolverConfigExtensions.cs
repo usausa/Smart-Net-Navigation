@@ -31,6 +31,7 @@ public static class ResolverConfigExtensions
             var navigatorConfig = new NavigatorConfig();
 
             navigatorConfig.UseActivator(resolver);
+            navigatorConfig.UseEffectFactory(resolver);
 
             action(resolver, navigatorConfig);
 

@@ -16,11 +16,11 @@ public static class MauiNavigatorConfigExtensions
 
         // Register standard effects
         options.RegisterEffect(MauiEffect.None, NoneMauiEffect.Instance);
-        options.RegisterEffect(MauiEffect.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(MauiEffect.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(MauiEffect.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(MauiEffect.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(MauiEffect.Fade, new FadeEffect());
+        options.RegisterEffect<ForwardEffect>(MauiEffect.Forward);
+        options.RegisterEffect<BackEffect>(MauiEffect.Back);
+        options.RegisterEffect<PushEffect>(MauiEffect.Push);
+        options.RegisterEffect<PopEffect>(MauiEffect.Pop);
+        options.RegisterEffect<FadeEffect>(MauiEffect.Fade);
 
         setupAction(options);
 
@@ -52,19 +52,24 @@ public static class MauiNavigatorConfigExtensions
 
         // Register standard effects
         options.RegisterEffect(MauiEffect.None, NoneMauiEffect.Instance);
-        options.RegisterEffect(MauiEffect.Forward, new SlideHorizontalEffect(fromRight: true));
-        options.RegisterEffect(MauiEffect.Back, new SlideHorizontalEffect(fromRight: false));
-        options.RegisterEffect(MauiEffect.Push, new SlideVerticalEffect(fromBottom: true));
-        options.RegisterEffect(MauiEffect.Pop, new SlideVerticalEffect(fromBottom: false));
-        options.RegisterEffect(MauiEffect.Fade, new FadeEffect());
+        options.RegisterEffect<ForwardEffect>(MauiEffect.Forward);
+        options.RegisterEffect<BackEffect>(MauiEffect.Back);
+        options.RegisterEffect<PushEffect>(MauiEffect.Push);
+        options.RegisterEffect<PopEffect>(MauiEffect.Pop);
+        options.RegisterEffect<FadeEffect>(MauiEffect.Fade);
 
         setupAction(options);
 
-        config.Configure(static c =>
+        config.Configure(c =>
         {
+            c.RemoveAll<IContainerResolver>();
+            c.Add<IContainerResolver>(new ContainerResolver(container));
+
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(IView)));
+
+            c.Add(options);
         });
 
-        return config.UseProvider(new MauiNavigationProvider(new ContainerResolver(container), options));
+        return config.UseProvider<MauiNavigationProvider>();
     }
 }

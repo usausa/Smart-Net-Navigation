@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
             var config = new NavigatorConfig();
 
             config.UseActivator(p);
+            config.UseEffectFactory(p);
 
             action(p, config);
 

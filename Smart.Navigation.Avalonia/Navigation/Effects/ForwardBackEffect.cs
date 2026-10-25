@@ -7,16 +7,13 @@ using Avalonia.Styling;
 
 using Smart.Navigation;
 
-internal sealed class SlideHorizontalEffect : IAvaloniaNavigationEffect
+internal abstract class ForwardBackEffect : IAvaloniaNavigationEffect
 {
-    private readonly bool fromRight;
+    private readonly ForwardBackEffectOptions options;
 
-    private readonly TimeSpan duration;
-
-    public SlideHorizontalEffect(bool fromRight, TimeSpan? duration = null)
+    protected ForwardBackEffect(ForwardBackEffectOptions? options)
     {
-        this.fromRight = fromRight;
-        this.duration = duration ?? TimeSpan.FromMilliseconds(250);
+        this.options = options ?? new ForwardBackEffectOptions();
     }
 
     public async Task EffectAsync(AvaloniaNavigationEffectContext context)
@@ -29,8 +26,8 @@ internal sealed class SlideHorizontalEffect : IAvaloniaNavigationEffect
 
         var (from, to) = context.Phase switch
         {
-            AvaloniaNavigationEffectPhase.Open or AvaloniaNavigationEffectPhase.Activate => (fromRight ? width : -width, 0d),
-            AvaloniaNavigationEffectPhase.Close or AvaloniaNavigationEffectPhase.Deactivate => (0d, fromRight ? -width : width),
+            AvaloniaNavigationEffectPhase.Open or AvaloniaNavigationEffectPhase.Activate => (EnterFrom(width), 0d),
+            AvaloniaNavigationEffectPhase.Close or AvaloniaNavigationEffectPhase.Deactivate => (0d, LeaveTo(width)),
             _ => (0d, 0d)
         };
 
@@ -40,12 +37,12 @@ internal sealed class SlideHorizontalEffect : IAvaloniaNavigationEffect
             return;
         }
 
-        var transform = new TranslateTransform();
-        context.View.RenderTransform = transform;
+        var view = context.View;
+        view.RenderTransform = new TranslateTransform();
 
         var animation = new Animation
         {
-            Duration = duration,
+            Duration = options.Duration,
             FillMode = FillMode.Forward,
             Easing = new CubicEaseOut(),
             Children =
@@ -63,7 +60,11 @@ internal sealed class SlideHorizontalEffect : IAvaloniaNavigationEffect
             }
         };
 
-        await animation.RunAsync(transform).ConfigureAwait(true);
-        context.View.RenderTransform = null;
+        await animation.RunAsync(view).ConfigureAwait(true);
+        view.RenderTransform = null;
     }
+
+    protected abstract double EnterFrom(double width);
+
+    protected abstract double LeaveTo(double width);
 }

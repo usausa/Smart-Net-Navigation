@@ -333,6 +333,18 @@ public interface INavigationStrategy
 }
 ```
 
+## Effect
+
+Effect is played by the async navigation with the key set by ``WithEffect()``.
+
+```csharp
+// Settings of the standard effect (optional)
+services.AddSingleton(new PushPopEffectOptions { Duration = TimeSpan.FromMilliseconds(200) });
+
+// Navigate with effect
+await navigator.ForwardAsync(ViewId.Detail, new NavigationParameter().WithPushEffect());
+```
+
 ## Navigator property
 
 ```csharp
@@ -576,6 +588,19 @@ public interface INavigatorAware
 
 ```csharp
 public interface IActivator
+{
+    object Create(Type type);
+}
+```
+
+### IEffectFactory
+
+* Interface is used for effect creation: effects registered by the type are created through it.
+* Default implementation is ``StandardEffectFactory``, which uses the default values of the constructor arguments.
+* Customizable by ``UseEffectFactory()``, which also accepts an ``IServiceProvider`` to resolve the constructor arguments. ``AddNavigator()`` uses the container.
+
+```csharp
+public interface IEffectFactory
 {
     object Create(Type type);
 }

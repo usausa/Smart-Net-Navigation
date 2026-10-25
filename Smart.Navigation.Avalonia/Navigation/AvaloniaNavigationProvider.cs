@@ -11,16 +11,21 @@ using Avalonia.Layout;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 
+using Smart.Navigation.Components;
+
 public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
     private readonly AvaloniaNavigationProviderOptions options;
 
-    public AvaloniaNavigationProvider(IContainerResolver resolver, AvaloniaNavigationProviderOptions options)
+    private readonly Dictionary<string, IAvaloniaNavigationEffect> effects;
+
+    public AvaloniaNavigationProvider(IContainerResolver resolver, AvaloniaNavigationProviderOptions options, IEffectFactory? effectFactory = null)
     {
         this.resolver = resolver;
         this.options = options;
+        effects = options.CreateEffects(effectFactory ?? new StandardEffectFactory());
     }
 
     // ------------------------------------------------------------
@@ -154,7 +159,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
     private Task EffectAsync(Control element, INavigationParameter parameter, AvaloniaNavigationEffectPhase phase)
     {
         var key = parameter.Effect;
-        if ((key is null) || !options.Effects.TryGetValue(key, out var effect))
+        if ((key is null) || !effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }

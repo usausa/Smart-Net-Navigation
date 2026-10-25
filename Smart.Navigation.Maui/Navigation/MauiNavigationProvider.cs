@@ -4,16 +4,21 @@ using System.Runtime.CompilerServices;
 
 using Microsoft.Maui.Layouts;
 
+using Smart.Navigation.Components;
+
 public sealed class MauiNavigationProvider : IAsyncNavigationProvider
 {
     private readonly IContainerResolver resolver;
 
     private readonly MauiNavigationProviderOptions options;
 
-    public MauiNavigationProvider(IContainerResolver resolver, MauiNavigationProviderOptions options)
+    private readonly Dictionary<string, IMauiNavigationEffect> effects;
+
+    public MauiNavigationProvider(IContainerResolver resolver, MauiNavigationProviderOptions options, IEffectFactory? effectFactory = null)
     {
         this.resolver = resolver;
         this.options = options;
+        effects = options.CreateEffects(effectFactory ?? new StandardEffectFactory());
     }
 
     // ------------------------------------------------------------
@@ -149,7 +154,7 @@ public sealed class MauiNavigationProvider : IAsyncNavigationProvider
     private Task EffectAsync(View element, INavigationParameter parameter, MauiNavigationEffectPhase phase)
     {
         var key = parameter.Effect;
-        if ((key is null) || !options.Effects.TryGetValue(key, out var effect))
+        if ((key is null) || !effects.TryGetValue(key, out var effect))
         {
             return Task.CompletedTask;
         }

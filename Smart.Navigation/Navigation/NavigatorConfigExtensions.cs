@@ -183,6 +183,34 @@ public static class NavigatorConfigExtensions
         return config.UseActivator(new DelegateActivator(callback));
     }
 
+    public static NavigatorConfig UseEffectFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TEffectFactory>(this NavigatorConfig config)
+        where TEffectFactory : IEffectFactory
+    {
+        config.Configure(static c =>
+        {
+            c.RemoveAll<IEffectFactory>();
+            c.Add<IEffectFactory, TEffectFactory>();
+        });
+
+        return config;
+    }
+
+    public static NavigatorConfig UseEffectFactory(this NavigatorConfig config, IEffectFactory effectFactory)
+    {
+        config.Configure(c =>
+        {
+            c.RemoveAll<IEffectFactory>();
+            c.Add(effectFactory);
+        });
+
+        return config;
+    }
+
+    public static NavigatorConfig UseEffectFactory(this NavigatorConfig config, IServiceProvider serviceProvider)
+    {
+        return config.UseEffectFactory(new ServiceProviderEffectFactory(serviceProvider));
+    }
+
     public static NavigatorConfig UseConverter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TConverter>(this NavigatorConfig config)
         where TConverter : IConverter
     {
