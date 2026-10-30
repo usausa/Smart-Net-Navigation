@@ -40,7 +40,6 @@ public sealed class ScopePlugin : PluginBase
     {
         if (!typeProperties.TryGetValue(type, out var properties))
         {
-#pragma warning disable IDE0028
             properties = type.GetProperties()
                 .Select(static x => new
                 {
@@ -62,7 +61,6 @@ public sealed class ScopePlugin : PluginBase
                         delegateFactory.CreateSetter(x.Property, true)!);
                 })
                 .ToArray();
-#pragma warning restore IDE0028
             typeProperties[type] = properties;
         }
 
