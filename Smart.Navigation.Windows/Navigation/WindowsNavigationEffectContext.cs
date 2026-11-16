@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 public sealed class WindowsNavigationEffectContext
 {
-    public required Canvas Container { get; init; }
+    public required Grid Container { get; init; }
 
     public required FrameworkElement View { get; init; }
 

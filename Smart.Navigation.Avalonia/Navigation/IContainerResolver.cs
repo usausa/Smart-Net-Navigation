@@ -4,5 +4,5 @@ using Avalonia.Controls;
 
 public interface IContainerResolver
 {
-    Canvas? Container { get; }
+    Grid? Container { get; }
 }

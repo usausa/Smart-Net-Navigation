@@ -44,12 +44,12 @@ public static class AvaloniaNavigatorConfigExtensions
         return config.UseProvider<AvaloniaNavigationProvider>();
     }
 
-    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Canvas container)
+    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Grid container)
     {
         return config.UseAvaloniaNavigationProvider(container, static _ => { });
     }
 
-    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Canvas container, Action<AvaloniaNavigationProviderOptions> setupAction)
+    public static NavigatorConfig UseAvaloniaNavigationProvider(this NavigatorConfig config, Grid container, Action<AvaloniaNavigationProviderOptions> setupAction)
     {
         var options = new AvaloniaNavigationProviderOptions();
 

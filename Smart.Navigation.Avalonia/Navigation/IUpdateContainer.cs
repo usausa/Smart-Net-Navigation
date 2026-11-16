@@ -4,5 +4,5 @@ using Avalonia.Controls;
 
 public interface IUpdateContainer
 {
-    void Attach(Canvas? container);
+    void Attach(Grid? container);
 }

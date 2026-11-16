@@ -4,5 +4,5 @@ using System.Windows.Controls;
 
 public interface IContainerResolver
 {
-    Canvas? Container { get; }
+    Grid? Container { get; }
 }

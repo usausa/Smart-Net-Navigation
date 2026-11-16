@@ -3,7 +3,6 @@ namespace Smart.Navigation;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 using Smart.Navigation.Components;
@@ -44,21 +43,7 @@ public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var element = Unsafe.As<FrameworkElement>(view);
-
-        if (options.FitToParent)
-        {
-            BindingOperations.SetBinding(
-                element,
-                FrameworkElement.HeightProperty,
-                new Binding { Source = container, Path = new PropertyPath("ActualHeight") });
-            BindingOperations.SetBinding(
-                element,
-                FrameworkElement.WidthProperty,
-                new Binding { Source = container, Path = new PropertyPath("ActualWidth") });
-        }
-
-        container.Children.Add(element);
+        container.Children.Add(Unsafe.As<FrameworkElement>(view));
     }
 
     public void CloseView(object view)
@@ -108,7 +93,7 @@ public sealed class WindowsNavigationProvider : IAsyncNavigationProvider
 
         var parameter = options.RestoreFocus ? FocusManager.GetFocusedElement(element) : null;
 
-        element.Visibility = Visibility.Hidden;
+        element.Visibility = Visibility.Collapsed;
 
         return parameter;
     }

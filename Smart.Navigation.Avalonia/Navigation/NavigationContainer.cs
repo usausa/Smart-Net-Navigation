@@ -6,25 +6,25 @@ using Avalonia.Controls;
 public static class NavigationContainer
 {
     public static readonly AttachedProperty<INavigator?> NavigatorProperty =
-        AvaloniaProperty.RegisterAttached<Canvas, INavigator?>("Navigator", typeof(NavigationContainer));
+        AvaloniaProperty.RegisterAttached<Grid, INavigator?>("Navigator", typeof(NavigationContainer));
 
-    public static INavigator? GetNavigator(Canvas canvas) =>
-        canvas.GetValue(NavigatorProperty);
+    public static INavigator? GetNavigator(Grid grid) =>
+        grid.GetValue(NavigatorProperty);
 
-    public static void SetNavigator(Canvas canvas, INavigator? value) =>
-        canvas.SetValue(NavigatorProperty, value);
+    public static void SetNavigator(Grid grid, INavigator? value) =>
+        grid.SetValue(NavigatorProperty, value);
 
     static NavigationContainer()
     {
-        NavigatorProperty.Changed.AddClassHandler<Canvas>(OnNavigatorChanged);
+        NavigatorProperty.Changed.AddClassHandler<Grid>(OnNavigatorChanged);
     }
 
-    private static void OnNavigatorChanged(Canvas canvas, AvaloniaPropertyChangedEventArgs e)
+    private static void OnNavigatorChanged(Grid grid, AvaloniaPropertyChangedEventArgs e)
     {
         if (e.NewValue is INavigatorComponentSource componentSource)
         {
             var updateContainer = componentSource.Components.Get<IUpdateContainer>();
-            updateContainer.Attach(canvas);
+            updateContainer.Attach(grid);
         }
     }
 }

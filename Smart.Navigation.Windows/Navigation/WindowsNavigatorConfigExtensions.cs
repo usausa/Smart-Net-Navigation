@@ -44,12 +44,12 @@ public static class WindowsNavigatorConfigExtensions
         return config.UseProvider<WindowsNavigationProvider>();
     }
 
-    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container)
+    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Grid container)
     {
         return config.UseWindowsNavigationProvider(container, static _ => { });
     }
 
-    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Canvas container, Action<WindowsNavigationProviderOptions> setupAction)
+    public static NavigatorConfig UseWindowsNavigationProvider(this NavigatorConfig config, Grid container, Action<WindowsNavigationProviderOptions> setupAction)
     {
         var options = new WindowsNavigationProviderOptions();
 

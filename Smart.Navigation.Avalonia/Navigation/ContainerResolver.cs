@@ -4,18 +4,18 @@ using Avalonia.Controls;
 
 public sealed class ContainerResolver : IContainerResolver, IUpdateContainer
 {
-    public Canvas? Container { get; private set; }
+    public Grid? Container { get; private set; }
 
     public ContainerResolver()
     {
     }
 
-    public ContainerResolver(Canvas container)
+    public ContainerResolver(Grid container)
     {
         Container = container;
     }
 
-    void IUpdateContainer.Attach(Canvas? container)
+    void IUpdateContainer.Attach(Grid? container)
     {
         Container = container;
     }

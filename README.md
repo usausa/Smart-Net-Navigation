@@ -62,7 +62,7 @@ navigator = new NavigatorConfig()
 
 ### WPF
 
-``Canvas`` is a container and ``Control`` is a view.
+``Grid`` is a container and ``Control`` is a view.
 
 ```csharp
 navigator = new NavigatorConfig()
@@ -71,7 +71,7 @@ navigator = new NavigatorConfig()
 ```
 
 ```xml
-<Canvas navigation:NavigationContainer.Navigator="{Binding Navigator}" />
+<Grid navigation:NavigationContainer.Navigator="{Binding Navigator}" />
 ```
 
 ### WinUI
@@ -108,7 +108,7 @@ navigator = new NavigatorConfig()
 
 ### Avalonia
 
-``Canvas`` is a container and ``Control`` is a view.
+``Grid`` is a container and ``Control`` is a view.
 
 ```csharp
 navigator = new NavigatorConfig()
@@ -117,7 +117,7 @@ navigator = new NavigatorConfig()
 ```
 
 ```xml
-<Canvas navigation:NavigationContainer.Navigator="{Binding Navigator}" />
+<Grid navigation:NavigationContainer.Navigator="{Binding Navigator}" />
 ```
 
 ### Create custom platform support

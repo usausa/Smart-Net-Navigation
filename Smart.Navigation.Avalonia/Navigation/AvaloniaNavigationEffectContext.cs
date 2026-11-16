@@ -4,7 +4,7 @@ using Avalonia.Controls;
 
 public sealed class AvaloniaNavigationEffectContext
 {
-    public required Canvas Container { get; init; }
+    public required Grid Container { get; init; }
 
     public required Control View { get; init; }
 

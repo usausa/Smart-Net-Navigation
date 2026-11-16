@@ -8,8 +8,6 @@ public sealed class WindowsNavigationProviderOptions
 {
     private readonly Dictionary<string, Func<IEffectFactory, IWindowsNavigationEffect>> effectTypes = [with(StringComparer.Ordinal)];
 
-    public bool FitToParent { get; set; } = true;
-
     public bool RestoreFocus { get; set; } = true;
 
     public IDictionary<string, IWindowsNavigationEffect> Effects { get; } = new Dictionary<string, IWindowsNavigationEffect>(StringComparer.Ordinal);

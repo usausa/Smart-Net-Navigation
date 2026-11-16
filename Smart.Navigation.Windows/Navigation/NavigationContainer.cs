@@ -29,10 +29,10 @@ public sealed class NavigationContainer
             return;
         }
 
-        if ((d is Canvas canvas) && (e.NewValue is INavigatorComponentSource componentSource))
+        if ((d is Grid grid) && (e.NewValue is INavigatorComponentSource componentSource))
         {
             var updateContainer = componentSource.Components.Get<IUpdateContainer>();
-            updateContainer.Attach(canvas);
+            updateContainer.Attach(grid);
         }
     }
 }

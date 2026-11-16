@@ -1,13 +1,10 @@
 namespace Smart.Navigation;
 
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Input;
-using Avalonia.Layout;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 
@@ -41,8 +38,6 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
     // Sync
     // ------------------------------------------------------------
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Avalonia.Data.Binding is used intentionally for runtime binding. Compile with CompiledBindings for AOT scenarios.")]
-    [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "Avalonia.Data.Binding is used intentionally for runtime binding. Compile with CompiledBindings for AOT scenarios.")]
     public void OpenView(object view)
     {
         var container = resolver.Container;
@@ -51,12 +46,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
             throw new InvalidOperationException("Container is unresolved.");
         }
 
-        var element = Unsafe.As<Control>(view);
-
-        element.Bind(Layoutable.WidthProperty, new Binding("Bounds.Width") { Source = container });
-        element.Bind(Layoutable.HeightProperty, new Binding("Bounds.Height") { Source = container });
-
-        container.Children.Add(element);
+        container.Children.Add(Unsafe.As<Control>(view));
     }
 
     public void CloseView(object view)
@@ -183,7 +173,7 @@ public sealed class AvaloniaNavigationProvider : IAsyncNavigationProvider
     // Helper
     // ------------------------------------------------------------
 
-    private static void FocusFirst(Canvas container)
+    private static void FocusFirst(Grid container)
     {
         if ((TopLevel.GetTopLevel(container)?.FocusManager.GetFocusedElement() is Visual focused) && focused.IsAttachedToVisualTree())
         {
