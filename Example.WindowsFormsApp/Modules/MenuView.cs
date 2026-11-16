@@ -10,7 +10,7 @@ public sealed partial class MenuView : AppViewBase
 {
     public override string Title => "Menu";
 
-    public override IReadOnlyList<FunctionKey> FunctionKeys => new[]
+    public override IReadOnlyList<FunctionKey> FunctionKeys { get; } = new[]
     {
         new FunctionKey(Keys.F12, "Exit")
     };

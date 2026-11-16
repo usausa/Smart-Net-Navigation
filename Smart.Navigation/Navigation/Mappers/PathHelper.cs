@@ -15,7 +15,11 @@ internal static class PathHelper
             return PathSeparatorString;
         }
 
+#if NET11_0_OR_GREATER
+        var index = path.LastIndexOf(PathSeparatorChar, StringComparison.Ordinal);
+#else
         var index = path.LastIndexOf(PathSeparatorChar);
+#endif
         if (index < 0)
         {
             return PathSeparatorString;
