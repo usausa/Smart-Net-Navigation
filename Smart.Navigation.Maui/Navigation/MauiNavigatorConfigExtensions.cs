@@ -33,6 +33,7 @@ public static class MauiNavigatorConfigExtensions
             c.Add<IContainerResolver>(resolver);
             c.Add<IUpdateContainer>(resolver);
 
+            c.RemoveAll<ITypeConstraint>();
             c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(View)));
 
             c.Add(options);
@@ -65,7 +66,8 @@ public static class MauiNavigatorConfigExtensions
             c.RemoveAll<IContainerResolver>();
             c.Add<IContainerResolver>(new ContainerResolver(container));
 
-            c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(IView)));
+            c.RemoveAll<ITypeConstraint>();
+            c.Add<ITypeConstraint>(new AssignableTypeConstraint(typeof(View)));
 
             c.Add(options);
         });

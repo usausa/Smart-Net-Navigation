@@ -62,7 +62,7 @@ navigator = new NavigatorConfig()
 
 ### WPF
 
-``ContentControl`` is a container and ``Control`` is a view.
+``Canvas`` is a container and ``Control`` is a view.
 
 ```csharp
 navigator = new NavigatorConfig()
@@ -71,11 +71,7 @@ navigator = new NavigatorConfig()
 ```
 
 ```xml
-<ContentControl>
-    <i:Interaction.Behaviors>
-        <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}"/>
-    </i:Interaction.Behaviors>
-</ContentControl>
+<Canvas navigation:NavigationContainer.Navigator="{Binding Navigator}" />
 ```
 
 ### WinUI
@@ -94,7 +90,7 @@ navigator = new NavigatorConfig()
 
 ### MAUI
 
-``ContentView`` is a container and ``View`` is a view.
+``AbsoluteLayout`` is a container and ``View`` is a view.
 
 ```csharp
 navigator = new NavigatorConfig()
@@ -103,11 +99,25 @@ navigator = new NavigatorConfig()
 ```
 
 ```xml
-<ContentView>
-    <ContentView.Behaviors>
+<AbsoluteLayout>
+    <AbsoluteLayout.Behaviors>
         <navigation:NavigationContainerBehavior Navigator="{Binding Navigator}" />
-    </ContentView.Behaviors>
-</ContentView>
+    </AbsoluteLayout.Behaviors>
+</AbsoluteLayout>
+```
+
+### Avalonia
+
+``Canvas`` is a container and ``Control`` is a view.
+
+```csharp
+navigator = new NavigatorConfig()
+    .UseAvaloniaNavigationProvider()
+    .ToNavigator();
+```
+
+```xml
+<Canvas navigation:NavigationContainer.Navigator="{Binding Navigator}" />
 ```
 
 ### Create custom platform support
@@ -118,7 +128,7 @@ Implement the following interface.
 public interface INavigationProvider
 {
     // Resolve target(DataContext/BindingContext) from view
-    object ResolveTarget(object view);
+    object? ResolveTarget(object view);
 
     // Add view to container
     void OpenView(object view);
@@ -127,10 +137,10 @@ public interface INavigationProvider
     void CloseView(object view);
 
     // Restore view from stack
-    void ActiveView(object view, object parameter);
+    void ActivateView(object view, object? parameter);
 
-    // Deactive view
-    object DeactiveView(object view);
+    // Deactivate view
+    object? DeactivateView(object view);
 }
 ```
 
