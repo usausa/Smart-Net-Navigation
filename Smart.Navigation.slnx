@@ -3,8 +3,8 @@
     <File Path=".editorconfig" />
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
+    <File Path=".globalconfig" />
     <File Path="AGENTS.md" />
-    <File Path="Analyzers.ruleset" />
     <File Path="CodeCoverage.runsettings" />
     <File Path="Diagnostics.md" />
     <File Path="Directory.Build.props" />

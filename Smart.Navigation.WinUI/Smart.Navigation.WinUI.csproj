@@ -6,7 +6,6 @@
     <UseWinUI>true</UseWinUI>
     <IsAotCompatible>true</IsAotCompatible>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CodeAnalysisRuleSet>..\Analyzers.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
   </PropertyGroup>
 

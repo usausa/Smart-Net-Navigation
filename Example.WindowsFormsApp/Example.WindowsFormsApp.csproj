@@ -4,7 +4,6 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net11.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <CodeAnalysisRuleSet>..\Analyzers.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup>

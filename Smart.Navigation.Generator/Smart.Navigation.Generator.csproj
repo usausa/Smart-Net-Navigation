@@ -6,7 +6,6 @@
     <IsPackable>false</IsPackable>
     <DebugType>embedded</DebugType>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <CodeAnalysisRuleSet>..\Analyzers.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
   </PropertyGroup>
 

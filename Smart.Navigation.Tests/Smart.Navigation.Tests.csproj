@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net11.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <CodeAnalysisRuleSet>..\Analyzers.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
   </PropertyGroup>
 

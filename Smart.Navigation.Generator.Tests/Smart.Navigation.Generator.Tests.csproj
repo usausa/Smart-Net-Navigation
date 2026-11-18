@@ -4,7 +4,6 @@
     <TargetFramework>net11.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>Smart.Navigation.Generator.Tests</RootNamespace>
-    <CodeAnalysisRuleSet>..\Analyzers.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup>

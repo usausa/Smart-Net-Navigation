@@ -4,7 +4,6 @@
     <TargetFrameworks>net11.0;net10.0</TargetFrameworks>
     <IsAotCompatible>true</IsAotCompatible>
     <TrimMode>full</TrimMode>
-    <CodeAnalysisRuleSet>..\Analyzers.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Smart</RootNamespace>
   </PropertyGroup>
 
