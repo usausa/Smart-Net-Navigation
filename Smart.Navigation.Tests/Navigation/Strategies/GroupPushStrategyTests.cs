@@ -418,6 +418,24 @@ public sealed class GroupPushStrategyTests
         Assert.Throws<InvalidOperationException>(() => navigator.GroupPush(typeof(Form1)));
     }
 
+    [Fact]
+    public static void GropedPushUsesTheGroupOfTheBaseForm()
+    {
+        // Arrange
+        var navigator = new NavigatorConfig()
+            .UseMockFormProvider()
+            .ToNavigator();
+
+        // Act
+        navigator.Forward(typeof(Form1));
+
+        navigator.GroupPush(typeof(FormA3));
+
+        // Assert
+        Assert.Equal(2, navigator.StackedCount);
+        Assert.IsType<FormA3>(navigator.CurrentView);
+    }
+
     // ------------------------------------------------------------
     // Mock
     // ------------------------------------------------------------
@@ -450,4 +468,9 @@ public sealed class GroupPushStrategyTests
 
     [Group(Group.C)]
     public sealed class FormC2 : MockForm;
+
+    [Group(Group.A)]
+    public class FormBaseA : MockForm;
+
+    public sealed class FormA3 : FormBaseA;
 }

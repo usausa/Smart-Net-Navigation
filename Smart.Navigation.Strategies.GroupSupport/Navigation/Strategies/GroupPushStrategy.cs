@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Strategies;
 
-using System.Reflection;
-
 public sealed class GroupPushStrategy : INavigationStrategy
 {
     private readonly object id;
@@ -34,7 +32,7 @@ public sealed class GroupPushStrategy : INavigationStrategy
     {
         descriptor = controller.ViewMapper.FindDescriptor(id);
 
-        var group = descriptor.Type.GetCustomAttribute<GroupAttribute>();
+        var group = GroupAttributeCache.Resolve(descriptor.Type);
         if (group is null)
         {
             throw new InvalidOperationException($"View is not grouped. id=[{id}]");
@@ -43,7 +41,7 @@ public sealed class GroupPushStrategy : INavigationStrategy
         var current = -1;
         for (var i = 0; i < controller.ViewStack.Count; i++)
         {
-            var groupOfStack = controller.ViewStack[i].Descriptor.Type.GetCustomAttribute<GroupAttribute>();
+            var groupOfStack = GroupAttributeCache.Resolve(controller.ViewStack[i].Descriptor.Type);
             if ((groupOfStack is not null) && Equals(group.Id, groupOfStack.Id))
             {
                 PreparedGroups.Add(i);

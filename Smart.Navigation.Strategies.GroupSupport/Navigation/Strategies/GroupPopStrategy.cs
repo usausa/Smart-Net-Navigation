@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Strategies;
 
-using System.Reflection;
-
 public sealed class GroupPopStrategy : INavigationStrategy
 {
     private readonly bool leaveLast;
@@ -23,7 +21,7 @@ public sealed class GroupPopStrategy : INavigationStrategy
         }
 
         var lastStackInfo = controller.ViewStack[^1];
-        var group = lastStackInfo.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
+        var group = GroupAttributeCache.Resolve(lastStackInfo.Descriptor.Type);
         if (group is null)
         {
             throw new InvalidOperationException("Current view is not grouped.");
@@ -31,11 +29,7 @@ public sealed class GroupPopStrategy : INavigationStrategy
 
         start = controller.ViewStack.Count == 1
             ? 0
-            : controller.ViewStack.FindLastIndex(controller.ViewStack.Count - 2, stack =>
-            {
-                var groupOfStack = stack.Descriptor.Type.GetCustomAttribute<GroupAttribute>();
-                return (groupOfStack is not null) && Equals(group.Id, groupOfStack.Id);
-            });
+            : FindLastIndexOfGroup(controller.ViewStack, controller.ViewStack.Count - 2, group.Id);
         if (start == -1)
         {
             start = controller.ViewStack.Count - 1;
@@ -58,6 +52,20 @@ public sealed class GroupPopStrategy : INavigationStrategy
 
         restoreStackInfo = controller.ViewStack[start - 1];
         return new StrategyResult(restoreStackInfo.Descriptor.Id, NavigationAttributes.Restore);
+    }
+
+    private static int FindLastIndexOfGroup(List<ViewStackInfo> stack, int startIndex, object groupId)
+    {
+        for (var i = startIndex; i >= 0; i--)
+        {
+            var groupOfStack = GroupAttributeCache.Resolve(stack[i].Descriptor.Type);
+            if ((groupOfStack is not null) && Equals(groupId, groupOfStack.Id))
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public object ResolveToView(INavigationController controller)
