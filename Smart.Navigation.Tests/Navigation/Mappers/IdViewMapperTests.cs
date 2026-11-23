@@ -1,7 +1,5 @@
 namespace Smart.Navigation.Mappers;
 
-using System.Reflection;
-
 using Smart.Mock;
 using Smart.Navigation.Attributes;
 
@@ -59,7 +57,7 @@ public sealed class IdViewMapperTests
     [Fact]
     public static void UseIdViewMapperRegisterFailed()
     {
-        Assert.Throws<TargetInvocationException>(static () =>
+        Assert.Throws<ArgumentException>(static () =>
             new NavigatorConfig().UseMockFormProvider().UseIdViewMapper(static r => r.Register(1, typeof(string))).ToNavigator());
     }
 
